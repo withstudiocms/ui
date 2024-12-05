@@ -1,5 +1,5 @@
 name: Feature Request
-description: Suggest an idea/feature for StudioCMS
+description: Suggest an idea/feature for @studiocms/ui
 title: '[Feature Request]: '
 labels: 
  - feat
@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for proposing a new feature for StudioCMS!
+        Thanks for proposing a new feature for `@studiocms/ui`!
   - type: textarea
     id: idea
     attributes:

@@ -1,6 +1,19 @@
 packages:
   - "packages/*"
-  - "package"
-  - "playgrounds/*"
   - "playground"
-  - "www/*"
+  - "docs"
+
+catalog:
+  "@astrojs/node": ^9.0.0
+  "@fontsource-variable/onest": 5.1.0
+  "@iconify-json/heroicons": ^1.2.1
+  "@iconify/utils": ^2.1.33
+  "@types/node": ^20.14.11
+  "@sentry/astro": ^8.42.0
+
+  astro: ^5.0.3
+  typescript: ^5.7.2
+
+catalogs:
+  peers:
+    astro: ^4.5 || ^5.0.0-beta.0

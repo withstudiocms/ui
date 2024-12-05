@@ -1,11 +1,11 @@
 {
   "$schema": "../node_modules/@changesets/config/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "withstudiocms/project-template" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "withstudiocms/ui" }],
   "commit": false,
   "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["playground"]
+  "ignore": ["ui-playground"]
 }

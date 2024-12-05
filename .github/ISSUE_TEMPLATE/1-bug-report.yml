@@ -22,7 +22,7 @@ body:
       label: Package
       description: Which package is the bug report for?
       options:
-        - '@studiocms/package'
+        - '@studiocms/ui'
       default: 0
     validations:
       required: true
