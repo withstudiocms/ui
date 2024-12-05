@@ -10,7 +10,7 @@ type Props<As extends HTMLTag = 'div'> = Omit<Polymorphic<{ as: As }>, 'as'> & {
 
 const { as: As = 'div', class: className, fullWidth, fullHeight, ...props } = Astro.props;
 ---
-<As class="card" {...props} class:list={[fullWidth && "full-w", fullHeight && "full-h", className]}>
+<As class="card" class:list={[fullWidth && "full-w", fullHeight && "full-h", className]} {...props}>
   <div class="card-header">
     <slot name="header" />
   </div>

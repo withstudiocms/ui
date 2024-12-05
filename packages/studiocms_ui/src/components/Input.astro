@@ -1,7 +1,8 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
 import { generateID } from '../utils/generateID';
 
-type Props = {
+interface Props extends HTMLAttributes<'input'> {
 	label?: string;
 	type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
 	placeholder?: string;
@@ -21,10 +22,11 @@ const {
 	isRequired = false,
 	disabled = false,
 	class: className,
+	...props
 } = Astro.props;
 ---
 
-<label for={name} class="input-label" class:list={[disabled && "disabled", className]}>
+<label for={name} class="input-label" class:list={[disabled && "disabled"]}>
   <span class="label">
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
@@ -34,9 +36,11 @@ const {
     id={name}
     type={type}
     class="input"
+		class:list={[className]}
     required={isRequired}
     disabled={disabled}
     value={defaultValue}
+		{...props}
   />
 </label>
 <style>

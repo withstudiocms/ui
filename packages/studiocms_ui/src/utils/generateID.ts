@@ -1,4 +1,4 @@
-function generateID(prefix: string) {
+function generateID(prefix: string): string {
 	return `${prefix}-${Math.random().toString(16).slice(2)}`;
 }
 

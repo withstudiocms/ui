@@ -4,7 +4,7 @@ import Button from '../Button.astro';
 
 type ModalButton = 'cancel' | 'confirm';
 
-type Props = {
+interface Props {
 	id: string;
 	size?: 'sm' | 'md' | 'lg';
 	dismissable?: boolean;

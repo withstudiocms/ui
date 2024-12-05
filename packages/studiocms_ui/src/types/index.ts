@@ -1,4 +1,4 @@
-export type ToastProps = {
+export interface ToastProps {
 	title: string;
 	/**
 	 * This will get passed to the component as unsanitized HTML. DO NOT PUT USER-GENERATED CONTENT HERE!
