@@ -3,13 +3,13 @@ import Icon from '../utils/Icon.astro';
 import { generateID } from '../utils/generateID';
 import Input from './Input.astro';
 
-type Option = {
+interface Option {
 	label: string;
 	value: string;
 	disabled?: boolean;
 };
 
-type Props = {
+interface Props {
 	label?: string;
 	defaultValue?: string;
 	class?: string;

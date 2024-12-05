@@ -2,13 +2,13 @@
 import type { StudioCMSColorway } from '../utils/colors';
 import { generateID } from '../utils/generateID';
 
-type Option = {
+interface Option {
 	label: string;
 	value: string;
 	disabled?: boolean;
 };
 
-type Props = {
+interface Props {
 	label: string;
 	color?: StudioCMSColorway;
 	defaultValue?: string;

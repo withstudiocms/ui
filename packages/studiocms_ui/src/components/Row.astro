@@ -1,13 +1,15 @@
 ---
-type Props = {
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
 	alignCenter?: boolean;
 	gapSize?: 'sm' | 'md' | 'lg';
 };
 
-const { alignCenter, gapSize = 'md' } = Astro.props;
+const { alignCenter, gapSize = 'md', ...props } = Astro.props;
 ---
 
-<div class="row" class:list={[alignCenter && "align", gapSize]}>
+<div class="row" class:list={[alignCenter && "align", gapSize]} {...props}>
   <slot />
 </div>
 <style>

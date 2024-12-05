@@ -17,6 +17,6 @@ const defaultHeaders = headDefaults(title, description, Astro, image, canonicalU
 
 const head = createHead(defaultHeaders, userHeaders || []);
 ---
-{head.map(({ tag: Tag, attrs, content }) => ( 
+{head.map(({ tag: Tag, attrs, content }) => (
   <Tag {...attrs} set:html={content} />
 ))}

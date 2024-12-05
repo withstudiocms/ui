@@ -1,5 +1,5 @@
 ---
-type Props = {
+interface Props {
 	position?:
 		| 'top-left'
 		| 'top-right'
@@ -140,9 +140,12 @@ const {
     }
   }
 
-  document.addEventListener('createtoast', (e: CustomEvent<ToastProps>) => {
+  document.addEventListener('createtoast', (e) => {
     e.stopImmediatePropagation();
-    createToast(e.detail);
+
+    const event = e as CustomEvent<ToastProps>;
+    
+    createToast(event.detail);
   });
 </script>
 <style>

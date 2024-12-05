@@ -3,7 +3,7 @@ import Icon from '../../utils/Icon.astro';
 import type { StudioCMSColorway } from '../../utils/colors';
 import type { HeroIconName } from '../../utils/iconType';
 
-type Option = {
+interface Option {
 	label: string;
 	value: string;
 	disabled?: boolean;
@@ -12,7 +12,7 @@ type Option = {
   href?: string;
 };
 
-type Props = {
+interface Props {
 	options: Option[];
 	disabled?: boolean;
 	id: string;

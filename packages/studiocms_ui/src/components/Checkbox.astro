@@ -3,7 +3,7 @@ import Checkmark from '../icons/Checkmark.astro';
 import type { StudioCMSColorway } from '../utils/colors';
 import { generateID } from '../utils/generateID';
 
-type Props = {
+interface Props {
 	label: string;
 	size?: 'sm' | 'md' | 'lg';
 	color?: StudioCMSColorway;
