@@ -1,0 +1,25 @@
+{
+    "name": "root",
+    "private": true,
+    "packageManager": "pnpm@9.5.0",
+    "engines": {
+      "node": "20.14.0"
+    },
+    "scripts": {
+      "lint": "biome check .",
+      "lint:fix": "biome check --write .",
+      "ci:lint": "biome ci --formatter-enabled=true --organize-imports-enabled=true  --reporter=github",
+      "ci:install": "pnpm install --frozen-lockfile",
+      "ci:version": "pnpm changeset version",
+      "ci:publish": "pnpm changeset publish",
+      "ci:snapshot": "pnpx pkg-pr-new publish --pnpm './packages/*'"
+    },
+    "dependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "@changesets/cli": "^2.27.10",
+        "@changesets/config": "^3.0.4",
+        "@changesets/changelog-github": "^0.5.0",
+        "pkg-pr-new": "^0.0.35",
+        "typescript": "^5.7.2"
+    }
+  }

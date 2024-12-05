@@ -1,0 +1,6 @@
+packages:
+  - "packages/*"
+  - "package"
+  - "playgrounds/*"
+  - "playground"
+  - "www/*"
