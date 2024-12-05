@@ -2,11 +2,11 @@ import starlight from '@astrojs/starlight';
 // import starlightUtils from '@lorenzo_lewis/starlight-utils';
 import { defineConfig } from 'astro/config';
 // import starlightImageZoom from 'starlight-image-zoom';
-import getCoolifyURL from './hostUtils';
+// import getCoolifyURL from './hostUtils';
 import rehypePluginKit from './src/plugins/rehypePluginKit';
 
 // Define the Site URL
-const site = getCoolifyURL(true) || 'https://docs.studiocms.dev/';
+const site = 'https://ui.studiocms.dev/';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
