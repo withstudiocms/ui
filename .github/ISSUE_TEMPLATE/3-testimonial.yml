@@ -1,0 +1,40 @@
+name: Testimonial
+description: Share your experience with StudioCMS/UI
+title: "[Testimonial]: <title>"
+labels: ["testimonial"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this Testimonial submission
+  - type: input
+    id: name
+    attributes:
+      label: "Desired Display Name"
+      description: "Would you like an alternate display name from your GitHub Profile (Optional)"
+      placeholder: "John Doe"
+    validations:
+      required: false
+  - type: input
+    id: handle
+    attributes:
+      label: "Desired Display Handle"
+      description: "Would you like an alternate display handle from your GitHub Profile (Optional)"
+      placeholder: "@JohnDoe"
+    validations:
+      required: false
+  - type: textarea
+    id: message
+    attributes:
+      label: "Your Message? (You can include a screenshot or photo)"
+      description: "Tell us how you feel about @studiocms/ui"
+      placeholder: "Tell us what you think!"
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: "Give consent to having your likeness posted on the StudioCMS UI Website"
+      description: "By checking this box you consent to allow us to use your likeness/name/photo on our https://ui.studiocms.dev website"
+      options:
+      - label: "I consent to having my likeness posted on the StudioCMS UI Website"
+        required: true
