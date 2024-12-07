@@ -33,8 +33,8 @@ body:
       required: true
   - type: checkboxes
     attributes:
-      label: "I Consent to having my likeness posted on the StudioCMS UI Website"
+      label: "Give consent to having your likeness posted on the StudioCMS UI Website"
       description: "By checking this box you consent to allow us to use your likeness/name/photo on our https://ui.studiocms.dev website"
       options:
-      - label: "I Consent"
+      - label: "I consent to having my likeness posted on the StudioCMS UI Website"
         required: true
