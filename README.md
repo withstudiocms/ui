@@ -1,1 +1,1 @@
-# project-template
+# `@StudioCMS/UI`
