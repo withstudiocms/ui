@@ -1,0 +1,99 @@
+---
+title: "Footer"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Footer } from '@studiocms/ui/components';
+
+A footer component with lots of customization options!
+
+:::note
+To see this footer in action, please visit the [landing page](/)! We can't show it in the usual preview
+boxes due to size limitations.
+:::
+
+## Usage
+
+The footer component has four different ways of customization:
+
+1. The `link` prop for adding links in various categories
+2. The `copyright` prop for displaying a copyright or different license information
+3. The `brand` slot, which can be used for logos or different branding texts
+4. The `socials` slot, which you can use for social icons (or anything else of course)
+
+```astro
+---
+import { Footer } from '@studiocms/ui/components';
+---
+
+<Footer
+  links={{
+    'StudioCMS Ecosystem': [
+      { label: 'StudioCMS', href: 'https://studiocms.dev' },
+      { label: 'Apollo', href: 'https://github.com/withstudiocms/apollo' }
+    ],
+    'Resources': [
+      { label: 'Docs', href: '/docs' },
+    ],
+  }}
+  copyright='MIT License © 2024 - StudioCMS'
+>
+  <div slot="brand">
+    Acme, Inc.
+  </div>
+  <div slot="brand">
+    <a href="https://example.com">
+      Homepage
+    </a>
+  </div>
+</Footer>
+```
+
+Here's the example of how we implemented this footer on the StudioCMS UI landing page:
+
+```astro
+---
+import { Footer } from '@studiocms/ui/components';
+// Different imports for icons & logos...
+---
+<!-- Other page content -->
+<Footer
+  class='not-content'
+  links={{
+    'StudioCMS Ecosystem': [
+      { label: 'StudioCMS', href: 'https://studiocms.dev' },
+      { label: 'Apollo', href: 'https://github.com/withstudiocms/apollo' }
+    ],
+    'Resources': [
+      { label: 'Docs', href: '/docs' },
+    ],
+  }}
+  copyright={'MIT License © 2024 - StudioCMS'}
+>
+  <div slot="brand" class="footer-brand">
+    <LogoAdaptive height={48} width={45.76} />
+    <span class="studiocms-footer-text">
+      <span>StudioCMS</span>
+      <span>UI</span>
+    </span>
+  </div>
+  <div slot="socials" class="socials">
+    <a href="https://github.com/withstudiocms">
+      <GitHubLogo width={28} height={28} />
+    </a>
+    <a href="https://chat.studiocms.dev">
+      <DiscordLogo width={32} height={32} />
+    </a>
+    <a href="https://patreon.com/studiocms">
+      <PatreonLogo width={24} height={24} />
+    </a>
+    <a href="https://bsky.app/profile/studiocms.dev">
+      <BlueSkyLogo width={24} height={24} />
+    </a>
+    <a href="https://twitter.com/withstudiocms">
+      <TwitterLogo width={22} height={22} />
+    </a>
+  </div>
+</Footer>
+```

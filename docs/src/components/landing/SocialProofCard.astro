@@ -25,10 +25,7 @@ const { avatar, name, handle, message, image } = Astro.props;
   </div>
   <p class="social-proof-message">{message}</p>
   {image && (
-    <div class="social-proof-image">
-      <Image src={image.path} alt={''} width={image.width} height={image.height} />
-      <Image src={image.path} alt={''} width={image.width} height={image.height} />
-    </div>
+    <Image src={image.path} alt={''} width={image.width} height={image.height} class='social-proof-image' />
   )}
 </div>
 <style>
@@ -66,10 +63,11 @@ const { avatar, name, handle, message, image } = Astro.props;
     font-weight: 300;
     color: hsl(var(--text-muted));
     font-size: .875em;
+    line-height: 1;
   }
 
   .social-proof-message {
-    margin-bottom: 0;
+    margin: 1rem 0 0 0;
   }
 
   .social-proof-image {
@@ -77,23 +75,6 @@ const { avatar, name, handle, message, image } = Astro.props;
     height: auto;
     position: relative;
     margin-top: 1rem;
-  }
-
-  .social-proof-image > img:first-of-type {
     border-radius: .5rem;
-    z-index: 5;
-    position: relative;
-    width: 100%;
-    height: auto;
-  }
-
-  .social-proof-image > img:last-of-type {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    filter: blur(15px);
-    width: 100%;
-    height: auto;
   }
 </style>

@@ -1,32 +1,38 @@
 ---
+import type { StudioCMSColorway } from 'src/utils/colors';
 import Icon from '../../utils/Icon.astro';
 import Button from '../Button.astro';
 
-type ModalButton = 'cancel' | 'confirm';
+interface ButtonType {
+  label: string;
+  color: StudioCMSColorway;
+}
 
 interface Props {
 	id: string;
 	size?: 'sm' | 'md' | 'lg';
 	dismissable?: boolean;
-	buttons?: ModalButton[];
+	cancelButton?: string | ButtonType;
+	actionButton?: string | ButtonType;
 	isForm?: boolean;
 };
 
-const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = Astro.props;
+const { id, size = 'md', dismissable = true, isForm = false, cancelButton, actionButton } = Astro.props;
 ---
 <!-- Should: Be centered on mobile, scroll happens inside, blur bg -->
 <dialog
   popover
   id={id}
   data-dismissable={`${dismissable}`}
-  data-buttons={buttons.join(";")}
+  data-has-action-button={actionButton}
+  data-has-cancel-button={cancelButton}
   class="sui-modal"
   class:list={[size]}
   data-form={`${isForm}`}
 >
   <div class="sui-modal-header">
     <slot name="header" />
-    {(dismissable || buttons.length === 0) && (
+    {(dismissable || (!cancelButton && !actionButton)) && (
       <button class="x-mark-container" id={`${id}-btn-x`}>
         <Icon name="x-mark" width={24} height={24} class={'dismiss-icon'} />
       </button>
@@ -37,14 +43,25 @@ const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = As
       <slot />
     </div>
     <div class="sui-modal-footer">
-      {buttons.includes('cancel') && (
-        <Button id={`${id}-btn-cancel`} color='danger' variant='flat' type={isForm ? 'reset' : 'button'}>
-          Cancel
+      {cancelButton && (
+        <Button
+          id={`${id}-btn-cancel`}
+          color={typeof cancelButton === 'string' ? 'danger' : cancelButton.color} 
+          variant='flat'
+          type={isForm ? 'reset' : 'button'}
+        >
+          {typeof cancelButton === 'string' ? cancelButton : cancelButton.label}
         </Button>
       )}
-      {buttons.includes('confirm') && (
-        <Button id={`${id}-btn-confirm`} type={'submit'} color='primary' variant='solid' type={isForm ? 'submit' : 'button'}>
-          Confirm
+      {actionButton && (
+        <Button 
+          id={`${id}-btn-confirm`} 
+          type={'submit'} 
+          color={typeof actionButton === 'string' ? 'primary' : actionButton.color} 
+          variant='solid' 
+          type={isForm ? 'submit' : 'button'}
+        >
+          {typeof actionButton === 'string' ? actionButton : actionButton.label}
         </Button>
       )}
     </div>

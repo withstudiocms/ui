@@ -1,0 +1,36 @@
+---
+import { Button, Modal } from '@studiocms/ui/components';
+---
+
+<Modal 
+  id='example-modal' 
+  actionButton={{ label: 'Confirm', color: 'danger' }}
+>
+  <h3 slot="header">Delete React?</h3>
+  <p>
+    Are you sure you want to remove React from your project?
+    Just imagine how much harder your life could be with it!
+  </p>
+</Modal>
+<Button color='danger' id='imaginary-delete-button'>
+  Trigger Modal
+</Button>
+<script>
+  import { ModalHelper } from "@studiocms/ui/components";
+
+  new ModalHelper('example-modal', 'imaginary-delete-button');
+</script>
+<!-- CODE_SPLIT -->
+<script>
+  import { ModalHelper, toast } from "@studiocms/ui/components";
+
+  const modal = new ModalHelper('example-modal', 'imaginary-delete-button');
+
+  modal.registerConfirmCallback(() => {
+    toast({
+      type: 'success',
+      title: 'React deleted successfully',
+      description: 'React has successfully been deleted. Check out how to create these toasts in the <a href="/docs/components/toast/">toasts docs!</a>'
+    });
+  });
+</script>

@@ -60,22 +60,25 @@ You can change the modal's size to one of three presets.
       <Modal id="sizes-modal-sm" size="sm">
         <h2 slot="header">Small Modal</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
       <Modal id="sizes-modal-md">
         <h2 slot="header">Medium Content</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
       <Modal id="sizes-modal-lg" size="lg">
         <h2 slot="header">Large Content</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
 
@@ -101,8 +104,9 @@ You can change the modal's size to one of three presets.
     <Modal id="modal" size="sm">
       <h2 slot="header">Small Modal</h2>
       <div>
-        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-        Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
       </div>
     </Modal>
     <Button color="primary" id="modal-trigger">
@@ -129,8 +133,9 @@ You can change whether a modal can be dismissed by clicking outside of it via th
       <Modal id="dismissable-modal" dismissable={false}>
         <h2 slot="header">Non-dismissable</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
 
@@ -148,8 +153,9 @@ You can change whether a modal can be dismissed by clicking outside of it via th
     <Modal id="modal" dismissable={false}>
       <h2 slot="header">Non-dismissable</h2>
       <div>
-        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-        Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+        nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+        aliquam nam consectetur dolorum et unde optio At delectus alias.
       </div>
     </Modal>
     <Button color="primary" id="modal-trigger">
@@ -168,16 +174,17 @@ If a modal has buttons (see below), the `x` button in the top right corner will 
 
 ### Buttons
 
-Modals support both a `Cancel` and a `Confirm` button. You can use both at the same time, or one of them on it's own.
+Modals support both a "cancel" and a "confirm" button.
 
 <Tabs>
   <TabItem label="Preview">
     <PreviewCard>
-      <Modal id="buttons-modal" buttons={['cancel','confirm']} class="not-content">
+      <Modal id="buttons-modal" cancelButton="Cancel" actionButton="Confirm" class="not-content">
         <h2 slot="header">Buttons</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
 
@@ -187,16 +194,17 @@ Modals support both a `Cancel` and a `Confirm` button. You can use both at the s
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "buttons={['cancel','confirm']}"
+    ```astro "cancelButton='Cancel' actionButton='Confirm'"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
 
-    <Modal id="modal" buttons={['cancel','confirm']}>
+    <Modal id="modal" cancelButton="Cancel" actionButton="Confirm">
       <h2 slot="header">Buttons</h2>
       <div>
-        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-        Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
       </div>
     </Modal>
     <Button color="primary" id="modal-trigger">
@@ -212,9 +220,30 @@ Modals support both a `Cancel` and a `Confirm` button. You can use both at the s
   </TabItem>
 </Tabs>
 
-:::note
-The order of the `button` prop array does not influence the order of the buttons on the form.
-:::
+If you want to, instead of passing the label as a string to the prop, you can instead pass an object with the `label`
+and `color` keys defined to change the way the buttons look:
+
+```astro "cancelButton={{ label: 'Cancel', color: 'default' }} actionButton={{ label: 'Confirm', color: 'danger' }}"
+---
+import { Modal, Button } from '@studiocms/ui/components';
+---
+
+<Modal
+  id="modal"
+  cancelButton={{ label: 'Cancel', color: 'default' }}
+  actionButton={{ label: 'Confirm', color: 'danger' }}
+>
+  <h2 slot="header">Buttons</h2>
+  <div>
+    Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+    nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+    aliquam nam consectetur dolorum et unde optio At delectus alias.
+  </div>
+</Modal>
+<Button color="primary" id="modal-trigger">
+  Buttons
+</Button>
+```
 
 ### Registering Callbacks
 

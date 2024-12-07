@@ -1,0 +1,203 @@
+---
+import { Code } from "@astrojs/starlight/components";
+import Icon from "@studiocms/ui/utils/Icon.astro";
+import DropdownExample from '~/components/landing/DropdownExample.astro';
+import dropdownExampleCode from '~/components/landing/DropdownExample.astro?raw';
+import formExampleCode from '~/components/landing/FormExample.astro?raw';
+import ModalExample from '~/components/landing/ModalExample.astro';
+import modalExampleCode from '~/components/landing/ModalExample.astro?raw';
+import FormExample from "./FormExample.astro";
+import PageHeader from "./PageHeader.astro";
+
+const splitCodeBasedOnComment = (code: string): string => {
+    const splitCode = code.split("<!-- CODE_SPLIT -->");
+
+    return splitCode.length > 1 ? splitCode[0].trim() : code.trim();
+}
+---
+
+<section class="showcase not-content">
+    <PageHeader
+        icon="square-3-stack-3d"
+        title="Modular by design"
+        subtitle="StudioCMS UI components are reusable, flexible, and composable, helping you build incredible interfaces with ease."
+    />
+    <div class="showcase-tabs">
+        <button class='showcase-tab active' data-tab-child="form-preview">
+            <Icon name='pencil' width={24} height={24} slot='start-content' />
+            Forms
+        </button>
+        <button class='showcase-tab' data-tab-child="dropdown-preview">
+            <Icon name='square-2-stack' width={24} height={24} slot='start-content' />
+            Dropdowns
+        </button>
+        <button class='showcase-tab' data-tab-child="modal-preview">
+            <Icon name='arrows-pointing-out' width={24} height={24} slot='start-content' />
+            Modals
+        </button>
+    </div>
+    <div class="preview-code-container active" id="form-preview">
+        <div class="preview-container">
+            <FormExample />
+        </div>
+        <Code
+            code={splitCodeBasedOnComment(formExampleCode)}
+            lang={'astro'}
+            class={'preview-code'}
+            frame='code'
+            meta={'title="FormExample.astro"'}
+        />
+    </div>
+    <div class="preview-code-container" id="dropdown-preview">
+        <div class="preview-container">
+            <DropdownExample />
+        </div>
+        <Code
+            code={splitCodeBasedOnComment(dropdownExampleCode)}
+            lang={'astro'}
+            class={'preview-code'}
+            frame='code'
+            meta={'title="DropdownExample.astro"'}
+        />
+    </div>
+    <div class="preview-code-container" id="modal-preview">
+        <div class="preview-container">
+            <ModalExample />
+        </div>
+        <Code
+            code={splitCodeBasedOnComment(modalExampleCode)}
+            lang={'astro'}
+            class={'preview-code'}
+            frame='code'
+            meta={'title="ModalExample.astro"'}
+        />
+    </div>
+</section>
+<script>
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.showcase-tab');
+    
+    const switchTab = (e: MouseEvent) => {
+        const currentActiveTab = document.querySelector<HTMLButtonElement>('.showcase-tab.active');
+
+        if (currentActiveTab) {
+            currentActiveTab.classList.remove('active');
+
+            const activeChildId = currentActiveTab.dataset.tabChild!;
+            const activeChild = document.getElementById(activeChildId)!;
+
+            activeChild.classList.remove('active');
+        }
+
+        const target = (e.target as HTMLButtonElement);
+        target.classList.add('active');
+
+        const childId = target.dataset.tabChild!;
+        const child = document.getElementById(childId)!;
+
+        child.classList.add('active');
+    }
+
+    for (const tab of tabs) {
+        tab.addEventListener('click', switchTab);
+    }
+</script>
+<style>
+    .showcase {
+        padding: 0 10vw;
+    }
+
+    .showcase {
+        margin-top: 4rem !important;
+        padding: 4rem 10vw;
+        width: 100%;
+        background: hsl(var(--background-step-1));
+    }
+
+    .showcase-tabs {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .showcase-tab {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+
+        position: relative;
+
+        /* Move gaps & radii to spacings.css later on */
+        gap: 0.5rem;
+
+        outline: none;
+        border: none;
+
+        font-weight: 400;
+
+        border-radius: 0.5rem;
+
+        transition: all 0.15s ease;
+
+        cursor: pointer;
+
+        /* Default colorway */
+
+        background-color: none;
+        color: hsl(var(--text-normal));
+
+        min-width: fit-content;
+
+        will-change: transform;
+
+        text-decoration: none;
+
+        height: 40px;
+        padding: 0.5rem 0.75rem;
+
+        font-size: 0.875em;
+    }
+
+    .showcase-tab * {
+        pointer-events: none;
+    }
+
+    .showcase-tab:hover {
+        background-color: hsla(var(--default-flat-active));
+    }
+
+    .showcase-tab.active {
+        background-color: hsl(var(--primary-flat-active));
+    }
+
+    .preview-code-container {
+        display: none;
+        flex-direction: row;
+        width: 100%;
+        margin-top: 2rem;
+        gap: 2rem;
+    }
+
+    .preview-code-container.active {
+        display: flex;
+    }
+
+    .preview-code-container > div {
+        width: 100%;
+        max-width: 50%;
+    }
+
+    .preview-container {
+        background-color: hsl(var(--background-base));
+        padding: 2rem;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+<style is:global>
+    .showcase header {
+        margin-top: 0 !important;
+    }
+</style>

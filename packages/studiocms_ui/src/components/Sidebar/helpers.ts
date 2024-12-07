@@ -1,6 +1,6 @@
 class SingleSidebarHelper {
-	sidebar: HTMLElement;
-	sidebarToggle?: HTMLElement | undefined;
+	private sidebar: HTMLElement;
+	private sidebarToggle?: HTMLElement | undefined;
 
 	constructor(toggleID?: string) {
 		const sidebarContainer = document.getElementById('sui-sidebar');
@@ -72,7 +72,7 @@ class SingleSidebarHelper {
 }
 
 class DoubleSidebarHelper {
-	sidebarsContainer: HTMLElement;
+	private sidebarsContainer: HTMLElement;
 
 	constructor() {
 		const sidebarsContainer = document.getElementById('sui-sidebars');

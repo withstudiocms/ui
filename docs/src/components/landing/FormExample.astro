@@ -1,0 +1,40 @@
+---
+import { Button, Card, Checkbox, Input } from '@studiocms/ui/components';
+---
+
+<Card as='form' class='form-card' fullWidth>
+  <span slot='header' class='heading'>Sign up</span>
+  <div class='form-inputs'>
+    <Input label='Username' isRequired />
+    <Input label='Password' type='password' isRequired />
+    <Input label='Confirm Password' type='password' isRequired />
+    <Checkbox
+      color='primary'
+      label='Yes, please do sell my data!'
+      size='sm'
+      isRequired
+      defaultChecked
+    />
+  </div>
+  <Button type='submit' slot='footer' color='primary' fullWidth>
+    Sign up
+  </Button>
+</Card>
+<!-- CODE_SPLIT -->
+<style is:global>
+  .heading {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: .75rem;
+  }
+
+  .form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  .form-card {
+    max-width: 480px !important;
+  }
+</style>

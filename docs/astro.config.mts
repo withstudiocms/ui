@@ -1,4 +1,5 @@
 import starlight from '@astrojs/starlight';
+import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
 // import starlightUtils from '@lorenzo_lewis/starlight-utils';
 import { defineConfig } from 'astro/config';
 // import starlightImageZoom from 'starlight-image-zoom';
@@ -29,6 +30,9 @@ export const locales = {
 
 export default defineConfig({
 	site,
+	experimental: {
+		svg: true
+	},
 	image: {
 		remotePatterns: [{ protocol: 'https' }],
 	},
@@ -41,7 +45,7 @@ export default defineConfig({
 			description: 'The UI library for StudioCMS, available for Astro for all to use.',
 			favicon: '/logo-light.svg',
 			lastUpdated: true,
-			credits: true,
+			credits: false,
 			tagline: 'The UI library for StudioCMS, available for Astro for all to use.',
 			components: {
 				SiteTitle: './src/starlightOverrides/SiteTitle.astro',
@@ -92,6 +96,30 @@ export default defineConfig({
 					attrs: {
 						property: 'twitter:image',
 						content: `${site}og.jpg?v=1`,
+					},
+				},
+				{
+					tag: 'meta',
+					attrs: {
+						property: 'twitter:site',
+						content: 'withstudiocms',
+					},
+				},
+				{
+					tag: 'meta',
+					attrs: {
+						property: 'twitter:creator',
+						content: 'withstudiocms',
+					},
+				},
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'preload',
+						as: 'font',
+						type: 'font/woff2',
+						href: onestWoff2,
+						crossorigin: 'anonymous'
 					},
 				},
 			],

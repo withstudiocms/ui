@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import { Button } from '@studiocms/ui/components';
+import SocialProofCard from '~/components/landing/SocialProofCard.astro';
+import PageHeader from './PageHeader.astro';
+
+const socialProofEntries = await getCollection('socialproof');
+
+const chunkSize = socialProofEntries.length / 3;
+const chunkedSocialProofEntries = [];
+
+for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
+    const chunk = socialProofEntries.slice(i, i + chunkSize);
+    chunkedSocialProofEntries.push(chunk);
+}
+---
+<section class="social-proof not-content">
+    <PageHeader
+        icon="hand-thumb-up"
+        title="Patting ourselves on the back"
+        subtitle="(Until we have actual opinions)"
+    />
+    <div class="social-proof-grid">
+        {chunkedSocialProofEntries.map((entries) => (
+            <div class="social-proof-col">
+                {entries.map((entry) => (
+                    <SocialProofCard
+                        {...entry.data}
+                    />
+                ))}
+            </div>
+        ))}
+    </div>
+    <div class="social-proof-cta">
+        <Button color='primary' as='a' href={'https://github.com/withstudiocms/ui/issues/new?assignees=&labels=testimonial&projects=&template=3-testimonial.yml&title=%5BTestimonial%5D%3A+<title>'}>
+            Submit your own opinion!
+        </Button>
+    </div>
+</section>
+<style>
+    .social-proof-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .social-proof-col {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .social-proof-cta {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-top: 4rem;
+    }
+
+    .social-proof {
+        padding: 0 10vw;
+    }
+</style>

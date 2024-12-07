@@ -1,7 +1,7 @@
 class ModalHelper {
-	public element: HTMLDialogElement;
-	public cancelButton: HTMLButtonElement | undefined;
-	public confirmButton: HTMLButtonElement | undefined;
+	private element: HTMLDialogElement;
+	private cancelButton: HTMLButtonElement | undefined;
+	private confirmButton: HTMLButtonElement | undefined;
 
 	private isForm = false;
 	private modalForm: HTMLFormElement;
@@ -33,21 +33,19 @@ class ModalHelper {
 	}
 
 	private addButtonListeners = (id: string, dismissable: boolean) => {
-		if (dismissable || !this.element.dataset.buttons) {
+		if (dismissable || (!this.element.dataset.hasCancelButton && !this.element.dataset.hasActionButton)) {
 			const xMarkButton = document.getElementById(`${id}-btn-x`) as HTMLButtonElement;
 			xMarkButton.addEventListener('click', this.hide);
 		}
 
-		if (!this.element.dataset.buttons) return;
+		if (!!this.element.dataset.hasCancelButton && !this.element.dataset.hasActionButton) return;
 
-		const usedButtons = this.element.dataset.buttons.split(';');
-
-		if (usedButtons.includes('cancel')) {
+		if (this.element.dataset.hasCancelButton) {
 			this.cancelButton = document.getElementById(`${id}-btn-cancel`) as HTMLButtonElement;
 			this.cancelButton.addEventListener('click', this.hide);
 		}
 
-		if (usedButtons.includes('confirm')) {
+		if (this.element.dataset.hasActionButton) {
 			this.confirmButton = document.getElementById(`${id}-btn-confirm`) as HTMLButtonElement;
 			this.confirmButton.addEventListener('click', this.hide);
 		}

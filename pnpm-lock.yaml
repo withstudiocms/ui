@@ -68,13 +68,19 @@ importers:
         version: 0.9.4(typescript@5.7.2)
       '@astrojs/starlight':
         specifier: hideoo/starlight#hd-astro-v5&path:/packages/starlight
-        version: https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+      '@expressive-code/plugin-line-numbers':
+        specifier: ^0.38.3
+        version: 0.38.3
+      '@fontsource-variable/fira-code':
+        specifier: ^5.1.0
+        version: 5.1.0
       '@fontsource-variable/onest':
         specifier: 5.1.0
         version: 5.1.0
       '@lorenzo_lewis/starlight-utils':
         specifier: ^0.2.0
-        version: 0.2.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: 0.2.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       '@lunariajs/core':
         specifier: https://pkg.pr.new/lunariajs/lunaria/@lunariajs/core@4c8b9b0
         version: https://pkg.pr.new/lunariajs/lunaria/@lunariajs/core@4c8b9b0
@@ -126,6 +132,9 @@ importers:
       p-retry:
         specifier: ^6.2.1
         version: 6.2.1
+      react:
+        specifier: ^18
+        version: 18.3.1
       rehype:
         specifier: ^13.0.2
         version: 13.0.2
@@ -143,10 +152,10 @@ importers:
         version: 0.33.5
       starlight-image-zoom:
         specifier: ^0.9.0
-        version: 0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))
+        version: 0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))
       starlight-package-managers:
         specifier: ^0.8.0
-        version: 0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: 0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       tsm:
         specifier: ^2.3.0
         version: 2.3.0
@@ -298,8 +307,8 @@ packages:
   '@astrojs/sitemap@3.2.1':
     resolution: {integrity: sha512-uxMfO8f7pALq0ADL6Lk68UV6dNYjJ2xGUzyjjVj60JLBs5a6smtlkBYv3tQ0DzoqwS7c9n4FUx5lgv0yPo/fgA==}
 
-  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight':
-    resolution: {path: /packages/starlight, tarball: https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6}
+  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight':
+    resolution: {path: /packages/starlight, tarball: https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881}
     version: 0.29.2
     peerDependencies:
       astro: ^5.0.0
@@ -835,11 +844,17 @@ packages:
   '@expressive-code/plugin-frames@0.38.3':
     resolution: {integrity: sha512-qL2oC6FplmHNQfZ8ZkTR64/wKo9x0c8uP2WDftR/ydwN/yhe1ed7ZWYb8r3dezxsls+tDokCnN4zYR594jbpvg==}
 
+  '@expressive-code/plugin-line-numbers@0.38.3':
+    resolution: {integrity: sha512-QbK9NL44ST9w5ANVEu0a7fkjlq+fXgxyPqiSyFC4Nw/sAXd0MUwT1C8V0qlve4pZYLz53CR9tn4JQQbR0Z1tOg==}
+
   '@expressive-code/plugin-shiki@0.38.3':
     resolution: {integrity: sha512-kqHnglZeesqG3UKrb6e9Fq5W36AZ05Y9tCREmSN2lw8LVTqENIeCIkLDdWtQ5VoHlKqwUEQFTVlRehdwoY7Gmw==}
 
   '@expressive-code/plugin-text-markers@0.38.3':
     resolution: {integrity: sha512-dPK3+BVGTbTmGQGU3Fkj3jZ3OltWUAlxetMHI6limUGCWBCucZiwoZeFM/WmqQa71GyKRzhBT+iEov6kkz2xVA==}
+
+  '@fontsource-variable/fira-code@5.1.0':
+    resolution: {integrity: sha512-fwJbJLvyZ2BhgBSPYCNsrQ6IFQTpRu9GWXY8N20wHTpbhV0Ro5QJihiZV060Ay3kVR6IVH/oSVe/cr7Ube28gg==}
 
   '@fontsource-variable/onest@5.1.0':
     resolution: {integrity: sha512-8jspwmuPWtC2p4gxmjUIQ2JugqCcClFwlD1DEJt+gARgZMm3PI62rYivoKVUDB3Q6hdQxeL5wdzjxCOnzTU5BA==}
@@ -2706,6 +2721,10 @@ packages:
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
 
+  loose-envify@1.4.0:
+    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
+    hasBin: true
+
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
@@ -3207,6 +3226,10 @@ packages:
   range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
     engines: {node: '>= 0.6'}
+
+  react@18.3.1:
+    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
+    engines: {node: '>=0.10.0'}
 
   read-yaml-file@1.1.0:
     resolution: {integrity: sha512-VIMnQi/Z4HT2Fxuwg5KrY174U1VdUIASQVWXXyqtNRtxSr9IYkn1rsI6Tb6HsrHCmB7gVpNwX6JxPTHcH6IoTA==}
@@ -4125,7 +4148,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
+  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
     dependencies:
       '@astrojs/mdx': 4.0.1(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       '@astrojs/sitemap': 3.2.1
@@ -4691,6 +4714,10 @@ snapshots:
     dependencies:
       '@expressive-code/core': 0.38.3
 
+  '@expressive-code/plugin-line-numbers@0.38.3':
+    dependencies:
+      '@expressive-code/core': 0.38.3
+
   '@expressive-code/plugin-shiki@0.38.3':
     dependencies:
       '@expressive-code/core': 0.38.3
@@ -4699,6 +4726,8 @@ snapshots:
   '@expressive-code/plugin-text-markers@0.38.3':
     dependencies:
       '@expressive-code/core': 0.38.3
+
+  '@fontsource-variable/fira-code@5.1.0': {}
 
   '@fontsource-variable/onest@5.1.0': {}
 
@@ -4831,9 +4860,9 @@ snapshots:
 
   '@kwsites/promise-deferred@1.1.1': {}
 
-  '@lorenzo_lewis/starlight-utils@0.2.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
+  '@lorenzo_lewis/starlight-utils@0.2.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
     dependencies:
-      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       astro: 5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
       astro-integration-kit: 0.16.1(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
 
@@ -6857,6 +6886,10 @@ snapshots:
 
   longest-streak@3.1.0: {}
 
+  loose-envify@1.4.0:
+    dependencies:
+      js-tokens: 4.0.0
+
   lru-cache@10.4.3: {}
 
   lru-cache@5.1.1:
@@ -7633,6 +7666,10 @@ snapshots:
 
   range-parser@1.2.1: {}
 
+  react@18.3.1:
+    dependencies:
+      loose-envify: 1.4.0
+
   read-yaml-file@1.1.0:
     dependencies:
       graceful-fs: 4.2.11
@@ -8016,16 +8053,16 @@ snapshots:
 
   sprintf-js@1.0.3: {}
 
-  starlight-image-zoom@0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))):
+  starlight-image-zoom@0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))):
     dependencies:
-      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       rehype-raw: 7.0.0
       unist-util-visit: 5.0.0
       unist-util-visit-parents: 6.0.1
 
-  starlight-package-managers@0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)):
+  starlight-package-managers@0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)):
     dependencies:
-      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/e07dd9318ffcd9b31e589477d40eb63abdb53ef6#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       astro: 5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
 
   statuses@2.0.1: {}

@@ -4,9 +4,11 @@ import type { Props } from '@astrojs/starlight/props';
 
 const { data } = Astro.props.entry;
 ---
-<Default {...Astro.props}>
-	<slot />
-</Default>
+{data.template !== 'splash' && (
+	<Default {...Astro.props}>
+		<slot />
+	</Default>
+)}
 
 { data.type === 'redirect' ? (
 <div id="redirect-link" data-href={data.redirect} />

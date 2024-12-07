@@ -1,0 +1,81 @@
+---
+import Icon from '@studiocms/ui/utils/Icon.astro';
+import AstroLogo from '~/assets/astro.svg';
+import LogoAdaptive from '~/assets/logo-adaptive.svg';
+import SwordsIcon from '~/assets/swords.svg';
+---
+
+<section class="ecosystem not-content">
+    <h2 class="ecosystem-heading">
+        <LogoAdaptive height={48} width={45.76} />
+        <span>Part of the StudioCMS ecosystem</span>
+    </h2>
+    <div class="ecosystem-benefits">
+        <div class="benefit-card">
+            <AstroLogo width={24} height={24} />
+            <h3>Community-built</h3>
+            <p>
+                The StudioCMS project is build for Astro with Astro and the community in mind. 
+                You can be sure that any of our projects will be focused on improving the 
+                ecosystem and giving back to developers.
+            </p>
+        </div>
+        <div class="benefit-card">
+            <SwordsIcon width={24} height={24} />
+            <h3>Community-built</h3>
+            <p>
+                All resources we release as part of the StudioCMS ecosystem are battle-tested 
+                in our own creations, so you can be sure that no matter which of our projects 
+                you are using, they will work like a charm.
+            </p>
+        </div>
+        <div class="benefit-card">
+            <Icon name='user-group' width={24} height={24} />
+            <h3>Community-built</h3>
+            <p>
+                StudioCMS isn't a closed-off project or organization - it is made up of Astro 
+                community members like you! Anyone can make suggestions and contribute in 
+                whichever way they like.
+            </p>
+        </div>
+    </div>
+</section>
+<style>
+    .ecosystem-heading {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 2rem;
+    }
+
+    .ecosystem {
+        margin-top: 4rem !important;
+        padding: 0 10vw;
+        padding-bottom: 4rem !important;
+    }
+
+    .ecosystem-benefits {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    .benefit-card {
+        width: 100%;
+        padding: 2rem;
+        border-radius: 1rem;
+        background-color: hsl(var(--background-step-1));
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .benefit-card h3 {
+        font-size: 1.5em;
+        font-weight: 600;
+    }
+</style>

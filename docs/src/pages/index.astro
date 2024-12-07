@@ -1,17 +1,27 @@
 ---
 import '@studiocms/ui/css/global.css';
 import '@fontsource-variable/onest/index.css';
+import '@fontsource-variable/fira-code/index.css';
 
 import {
-Button,
+    Footer,
     Modal,
-    Toaster,
+    Toaster
 } from '@studiocms/ui/components';
 
 import { getCollection } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import BlueSkyLogo from '~/assets/bsky.svg';
+import DiscordLogo from '~/assets/discord.svg';
+import GitHubLogo from '~/assets/github.svg';
+import LogoAdaptive from '~/assets/logo-adaptive.svg';
+import PatreonLogo from '~/assets/patreon.svg';
+import TwitterLogo from '~/assets/twitter.svg';
+import GitHubIcon from '~/components/icons/GitHubIcon.astro';
+import EcosystemSection from '~/components/landing/EcosystemSection.astro';
 import HeroSection from '~/components/landing/HeroSection.astro';
-import PageHeader from '~/components/landing/PageHeader.astro';
-import SocialProofCard from '~/components/landing/SocialProofCard.astro';
+import ShowcaseSection from '~/components/landing/ShowcaseSection.astro';
+import SocialProofSection from '~/components/landing/SocialProofSection.astro';
 
 const socialProofEntries = await getCollection('socialproof');
 
@@ -22,54 +32,58 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
     const chunk = socialProofEntries.slice(i, i + chunkSize);
     chunkedSocialProofEntries.push(chunk);
 }
-
-console.log(socialProofEntries, chunkedSocialProofEntries);
 ---
 
-<html data-theme="dark">
-    <head>
-        <title>My Astro Site</title>
-    </head>
-    <body>
-        <Toaster />
-        <Modal id='hero-example-modal'>
-            <h2 slot="header">Modal</h2>
-        </Modal>
-        <main>
-            <HeroSection />
-            <section class="social-proof">
-                <PageHeader
-                    icon="hand-thumb-up"
-                    title="Patting ourselves on the back"
-                    subtitle="(Until we have actual opinions)"
-                />
-                <div class="social-proof-grid">
-                    {chunkedSocialProofEntries.map((entries) => (
-                        <div class="social-proof-col">
-                            {entries.map((entry) => (
-                                <SocialProofCard
-                                    {...entry.data}
-                                />
-                            ))}
-                        </div>
-                    ))}
-                </div>
-                <div class="social-proof-cta">
-                    <Button color='primary'>
-                        Submit your own opinion!
-                    </Button>
-                </div>
-            </section>
-            <section class="showcase">
-                <PageHeader
-                    icon="square-3-stack-3d"
-                    title="Modular by design"
-                    subtitle="StudioCMS UI components are reusable, flexible, and composable, helping you build incredible interfaces with ease."
-                />
-            </section>
-        </main>
-    </body>
-</html>
+<StarlightPage frontmatter={{ title: 'StudioCMS UI', template: 'splash' }}>
+    <Toaster />
+    <Modal id='hero-example-modal' actionButton='Okay'>
+        <h2 slot="header">Modal</h2>
+        <p set:html={"Countless stars scattered,<br />across obsidian skies,<br />frosty breath lingers."}></p>
+    </Modal>
+    
+    <HeroSection />
+    <SocialProofSection />
+    <ShowcaseSection />
+    <EcosystemSection />
+    <Footer
+        class='not-content'
+        links={{
+            'StudioCMS Ecosystem': [
+                { label: 'StudioCMS', href: 'https://studiocms.dev' },
+                { label: 'Apollo', href: 'https://github.com/withstudiocms/apollo' }
+            ],
+            'Resources': [
+                { label: 'Docs', href: '/docs' },
+            ],
+        }}
+        copyright={'MIT License \u00A9 2024 - StudioCMS'}
+    >
+        <div slot="brand" class="footer-brand">
+            <LogoAdaptive height={48} width={45.76} />
+            <span class="studiocms-footer-text">
+                <span>StudioCMS</span>
+                <span>UI</span>
+            </span>
+        </div>
+        <div slot="socials" class="socials">
+            <a href="https://github.com/withstudiocms">
+                <GitHubLogo width={28} height={28} />
+            </a>
+            <a href="https://chat.studiocms.dev">
+                <DiscordLogo width={32} height={32} />
+            </a>
+            <a href="https://patreon.com/studiocms">
+                <PatreonLogo width={24} height={24} />
+            </a>
+            <a href="https://bsky.app/profile/studiocms.dev">
+                <BlueSkyLogo width={24} height={24} />
+            </a>
+            <a href="https://twitter.com/withstudiocms">
+                <TwitterLogo width={22} height={22} />
+            </a>
+        </div>
+    </Footer>
+</StarlightPage>
 <style>
     * {
         box-sizing: border-box;
@@ -80,39 +94,72 @@ console.log(socialProofEntries, chunkedSocialProofEntries);
         padding: min(8rem, 10vh) 0;
     }
 
-    .social-proof-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
-
-    .social-proof-col {
+    .footer-brand {
         display: flex;
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .social-proof-cta {
-        display: flex;
-        width: 100%;
+        flex-direction: row;
+        gap: 1.5rem;
         align-items: center;
-        justify-content: center;
-        margin-top: 4rem;
+        white-space: nowrap;
     }
 
-    .social-proof, .showcase {
-        padding: 0 10vw;
+    .studiocms-footer-text {
+        font-size: 2em;
+        font-weight: bold;
     }
 
-    .showcase {
-        margin-top: 4rem;
-        padding: 4rem 10vw;
-        width: 100%;
-        background: hsl(var(--background-step-1));
+    .studiocms-footer-text span:last-of-type {
+        color: hsl(var(--text-muted));
+    }
+
+    .socials {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.25rem;
+    }
+
+    .socials a {
+        color: hsla(var(--text-normal) / .75);
+        transition: all .15s ease;
+    }
+
+    .socials a:hover {
+        color: hsl(var(--text-normal));
     }
 </style>
 <style is:global>
     .showcase header {
         margin-top: 0 !important;
+    }
+
+    main {
+        padding-bottom: 0 !important;
+    }
+
+    main > .content-panel:first-of-type {
+        display: none !important;
+    }
+
+    .content-panel {
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    .sl-container {
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+
+    section {
+        color: hsl(var(--text-normal)) !important;
+    }
+
+    .gutter {
+        width: 6ch !important;
+        text-align: right !important;
+    }
+
+    footer.sl-flex {
+        display: none;
     }
 </style>

@@ -38,10 +38,12 @@ const {
     class="sui-select-label"
     class:list={[disabled && "disabled", className, fullWidth && "full"]}
 >
-    <label class="label" for={`${name}-select-btn`}>
-        {label}
-        <span class="req-star">{isRequired && "*"}</span>
-    </label>
+    {label && (
+        <label class="label" for={`${name}-select-btn`}>
+            {label}
+            <span class="req-star">{isRequired && "*"}</span>
+        </label>
+    )}
     <button
         class="sui-select-button"
         role="combobox"

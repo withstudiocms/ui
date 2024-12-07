@@ -27,9 +27,11 @@ const {
 ---
 
 <label for={name} class="sui-input-label" class:list={[disabled && "disabled"]}>
-  <span class="label">
-    {label} <span class="req-star">{isRequired && "*"}</span>
-  </span>
+  {label && (
+		<span class="label">
+			{label} <span class="req-star">{isRequired && "*"}</span>
+		</span>
+	)}
   <input
     placeholder={placeholder}
     name={name}
