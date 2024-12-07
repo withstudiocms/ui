@@ -6,8 +6,15 @@ on:
     branches:
       - main
 
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 permissions:
+  issues: write
+  repository-projects: read
   contents: write
+  pull-requests: write
+  pages: write
+  id-token: write
 
 jobs:
     format:
@@ -35,7 +42,48 @@ jobs:
             commit_user_name: studiocms-no-reply
             commit_user_email: no-reply@studiocms.dev
             commit_author: StudioCMS <no-reply@studiocms.dev>
-            
+
+    changeset-release:
+      name: Changeset Release
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+        - name: Install Tools & Dependencies
+          uses: ./.github/actions/install
+
+        - name: Create Release Pull Request or Publish to npm
+          id: changesets
+          uses: changesets/action@v1
+          with:
+            setupGitUser: true
+            commit: "👷 [ci]: Version Packages"
+            title: "👷 [ci]: Ready for Release"
+            version: pnpm ci:version
+            publish: pnpm ci:publish
+          env:
+            GITHUB_TOKEN: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+        - name: Add Label to CI PR
+          if: ${{ steps.changesets.outputs.hasChangesets == 'true' }}
+          run: gh pr edit "$PR_URL" --add-label "ci"
+          env:
+            PR_URL: ${{ steps.changesets.outputs.pull_request_url }}
+            GITHUB_TOKEN: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
+
+        - name: Create Sentry release
+          if: steps.changesets.outputs.published == 'true'
+          uses: getsentry/action-release@v1
+          env:
+            SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+            SENTRY_ORG: withstudiocms
+            SENTRY_URL: https://sentry.studiocms.dev/
+          with:
+            environment: production
+            projects: ui-testing
+          
     mergebot:
       if: ${{ github.repository_owner == 'withstudiocms' && github.event_name == 'push' && github.event.commits[0].message != '[ci] lint' && github.event.commits[0].author.username != 'dependabot[bot]' }}
       uses: withstudiocms/automations/.github/workflows/mergebot.yml@main
