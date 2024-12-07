@@ -6,12 +6,12 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this Testimonial submission
+        Thanks for taking the time to fill out this Testimonial submission!
   - type: input
     id: name
     attributes:
       label: "Desired Display Name"
-      description: "Would you like an alternate display name from your GitHub Profile (Optional)"
+      description: "Would you like an alternate display name from your GitHub Profile? (Optional)"
       placeholder: "John Doe"
     validations:
       required: false
@@ -19,7 +19,7 @@ body:
     id: handle
     attributes:
       label: "Desired Display Handle"
-      description: "Would you like an alternate display handle from your GitHub Profile (Optional)"
+      description: "Would you like an alternate display handle from your GitHub Profile? (Optional)"
       placeholder: "@JohnDoe"
     validations:
       required: false
