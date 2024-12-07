@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../.astro/collections/socialproof.schema.json",
+  "avatar": "/socialproof/louis-escher.jpg",
+  "name": "Louis Escher",
+  "handle": "@louisescher.dev",
+  "message": "I fucking hated writing this library"
+}

@@ -24,21 +24,21 @@ interface Props {
 const { options, disabled = false, align = 'center', id, triggerOn = 'left', offset = 0 } = Astro.props;
 ---
 <div 
-  class="dropdown-container"
+  class="sui-dropdown-container"
   class:list={[disabled && 'disabled']}
   data-align={align}
   id={`${id}-container`}
   data-trigger={triggerOn}
-  transition:persist transition:persist-props
+  transition:persist
+  transition:persist-props
 >
-  <div class="dropdown-toggle" id={`${id}-toggle-btn`}>
+  <div class="sui-dropdown-toggle" id={`${id}-toggle-btn`}>
     <slot />
   </div>
-  <ul class="dropdown above" class:list={[align]} role="listbox" id={`${id}-dropdown`} transition:persist transition:persist-props>
+  <ul class="sui-dropdown" class:list={[align]} role="listbox" id={`${id}-dropdown`} transition:persist transition:persist-props>
     {options.map(({ value, disabled, color, label, icon, href }) => (
       <li
-        class="dropdown-option"
-        role="option"
+        class="sui-dropdown-option"
         data-value={value}
         class:list={[disabled && "disabled", icon && "has-icon", color, href && "has-href"]}
       >
@@ -46,7 +46,7 @@ const { options, disabled = false, align = 'center', id, triggerOn = 'left', off
           <Icon width={24} height={24} name={icon} />
         )}
         {href ? (
-          <a href={href} class="dropdown-link">{label}</a>
+          <a href={href} class="sui-dropdown-link">{label}</a>
         ) : (
           <span>{label}</span>
         )}
@@ -55,18 +55,18 @@ const { options, disabled = false, align = 'center', id, triggerOn = 'left', off
   </ul>
 </div>
 <style define:vars={{ offset: `${offset}px` }}>
-  .dropdown-toggle {
+  .sui-dropdown-toggle {
     width: fit-content;
   }
 
-  .dropdown-container {
+  .sui-dropdown-container {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: .25rem;
   }
 
-  .dropdown {
+  .sui-dropdown {
     position: absolute;
     list-style: none;
     margin: 0;
@@ -134,11 +134,11 @@ const { options, disabled = false, align = 'center', id, triggerOn = 'left', off
     }
   }
 
-  .dropdown.initialized {
+  .sui-dropdown.initialized {
     animation: pop-down .15s ease forwards;
   }
 
-  .dropdown.initialized.active {
+  .sui-dropdown.initialized.active {
     display: flex;
     border: 1px solid hsl(var(--border));
     height: auto;
@@ -147,36 +147,36 @@ const { options, disabled = false, align = 'center', id, triggerOn = 'left', off
     animation: pop-up .15s ease forwards;
   }
 
-  .dropdown.initialized.below {
+  .sui-dropdown.initialized.below {
     top: calc(100% + .25rem + var(--offset)) !important;
     bottom: auto;
 
     transform-origin: top center;
   }
 
-  .dropdown.below.start {
+  .sui-dropdown.below.start {
     transform-origin: top left;
   }
 
-  .dropdown.below.end {
+  .sui-dropdown.below.end {
     transform-origin: top right;
   }
 
-  .dropdown.above {
+  .sui-dropdown.above {
     top: auto;
     bottom: calc(100% + .25rem + var(--offset)) !important;
     transform-origin: bottom center;
   }
 
-  .dropdown.above.start {
+  .sui-dropdown.above.start {
     transform-origin: bottom left;
   }
 
-  .dropdown.above.end {
+  .sui-dropdown.above.end {
     transform-origin: bottom right;
   }
 
-  .dropdown-option {
+  .sui-dropdown-option {
     padding: .5rem .75rem;
     cursor: pointer;
     font-size: .975em;
@@ -187,67 +187,68 @@ const { options, disabled = false, align = 'center', id, triggerOn = 'left', off
     align-items: center;
     width: 100%;
     white-space: normal;
+    user-select: none;
   }
 
-  .dropdown-option:hover {
+  .sui-dropdown-option:hover {
     background-color: hsl(var(--background-step-3));
   }
 
-  .dropdown-option.has-href {
+  .sui-dropdown-option.has-href {
     padding: 0;
   }
 
-  .dropdown-link {
+  .sui-dropdown-link {
     padding: .5rem .75rem;
     width: 100%;
   }
 
-  .dropdown-option.primary {
+  .sui-dropdown-option.primary {
     color: hsl(var(--primary-base));
   }
 
-  .dropdown-option.primary:hover {
+  .sui-dropdown-option.primary:hover {
     background-color: hsl(var(--primary-base));
     color: hsl(var(--text-inverted));
   }
 
-  .dropdown-option.success {
+  .sui-dropdown-option.success {
     color: hsl(var(--success-base));
   }
 
-  .dropdown-option.success:hover {
+  .sui-dropdown-option.success:hover {
     background-color: hsl(var(--success-base));
     color: hsl(var(--text-dark));
   }
 
-  .dropdown-option.warning {
+  .sui-dropdown-option.warning {
     color: hsl(var(--warning-base));
   }
 
-  .dropdown-option.warning:hover {
+  .sui-dropdown-option.warning:hover {
     background-color: hsl(var(--warning-base));
     color: hsl(var(--text-dark));
   }
 
-  .dropdown-option.danger {
+  .sui-dropdown-option.danger {
     color: hsl(var(--danger-base));
   }
 
-  .dropdown-option.danger:hover {
+  .sui-dropdown-option.danger:hover {
     background-color: hsl(var(--danger-base));
     color: hsl(var(--text-light));
   }
 
-  .dropdown-option.disabled {
+  .sui-dropdown-option.disabled {
     pointer-events: none;
     color: hsl(var(--text-muted));
   }
 
-  .dropdown-option.end {
+  .sui-dropdown-option.end {
     justify-content: space-between;
   }
 
-  .dropdown-option.has-icon {
+  .sui-dropdown-option.has-icon {
     padding-left: .5rem;
   }
 </style>

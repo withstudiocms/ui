@@ -3,11 +3,11 @@ class SingleSidebarHelper {
 	sidebarToggle?: HTMLElement | undefined;
 
 	constructor(toggleID?: string) {
-		const sidebarContainer = document.getElementById('sidebar');
+		const sidebarContainer = document.getElementById('sui-sidebar');
 
 		if (!sidebarContainer) {
 			throw new Error(
-				`No item with ID 'sidebar' found. Please add the <Sidebar> component to this page.`
+				`No item with ID 'sui-sidebar' found. Please add the <Sidebar> component to this page.`
 			);
 		}
 
@@ -75,7 +75,7 @@ class DoubleSidebarHelper {
 	sidebarsContainer: HTMLElement;
 
 	constructor() {
-		const sidebarsContainer = document.getElementById('sidebars');
+		const sidebarsContainer = document.getElementById('sui-sidebars');
 
 		if (!sidebarsContainer) {
 			throw new Error(

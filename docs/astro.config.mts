@@ -37,7 +37,7 @@ export default defineConfig({
 	},
 	integrations: [
 		starlight({
-			title: 'StudioCMS/UI',
+			title: 'StudioCMS UI',
 			description: 'The UI library for StudioCMS, available for Astro for all to use.',
 			favicon: '/logo-light.svg',
 			lastUpdated: true,

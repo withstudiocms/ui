@@ -25,7 +25,7 @@ const {
 ---
 
 <As
-  class="button"
+  class="sui-button"
   class:list={[
     fullWidth && "full",
     disabled && "disabled",
@@ -44,7 +44,7 @@ const {
 </As>
 <style>
 	/* Default Styles */
-	.button {
+	.sui-button {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -79,53 +79,53 @@ const {
 		text-decoration: none;
 	}
 
-	.button.disabled {
+	.sui-button.disabled {
 		pointer-events: none;
 		opacity: 0.5;
 	}
 
-	.button.outlined {
+	.sui-button.outlined {
 		border-width: 1px;
 		border-style: solid;
 	}
 
-	.button:hover {
+	.sui-button:hover {
 		background-color: hsl(var(--default-hover));
 	}
 
-	.button:active {
+	.sui-button:active {
 		background-color: hsl(var(--default-active));
 		transform: scale(0.95);
 	}
 
-	.button.flat {
+	.sui-button.flat {
 		background: hsla(var(--default-flat));
 	}
 
-	.button.flat:hover {
+	.sui-button.flat:hover {
 		background: hsla(var(--default-flat-hover));
 	}
 
-	.button.flat:active {
+	.sui-button.flat:active {
 		background: hsla(var(--default-flat-active));
 	}
 
 	/* Sizes */
-	.button.sm {
+	.sui-button.sm {
 		height: 32px;
 		padding: 0.5rem 0.75rem;
 
 		font-size: 0.825em;
 	}
 
-	.button.md {
+	.sui-button.md {
 		height: 40px;
 		padding: 0.5rem 0.75rem;
 
 		font-size: 0.875em;
 	}
 
-	.button.lg {
+	.sui-button.lg {
 		height: 48px;
 		padding: 0.75rem 1rem;
 
@@ -133,205 +133,205 @@ const {
 	}
 
 	/* Primary Colorway */
-	.button.primary {
+	.sui-button.primary {
 		background-color: hsl(var(--primary-base));
 		border-color: hsl(var(--primary-base));
 		color: hsl(var(--text-inverted));
 	}
 
-	.button.primary:hover {
+	.sui-button.primary:hover {
 		background-color: hsl(var(--primary-hover));
 	}
 
-	.button.primary:active {
+	.sui-button.primary:active {
 		background-color: hsl(var(--primary-active));
 	}
 
-	.button.primary.outlined {
+	.sui-button.primary.outlined {
 		background-color: hsl(var(--default-base));
 		color: hsl(var(--text-normal));
 	}
 
-	.button.primary.outlined:hover {
+	.sui-button.primary.outlined:hover {
 		background-color: hsl(var(--default-hover));
 	}
 
-	.button.primary.outlined:active {
+	.sui-button.primary.outlined:active {
 		background-color: hsl(var(--default-active));
 	}
 
-	.button.primary.flat {
+	.sui-button.primary.flat {
 		background-color: hsla(var(--primary-flat));
 		color: hsl(259, 96%, 79%);
 	}
 
-	.button.primary.flat:hover {
+	.sui-button.primary.flat:hover {
 		background-color: hsla(var(--primary-flat-hover));
 	}
 
-	.button.primary.flat:active {
+	.sui-button.primary.flat:active {
 		background-color: hsla(var(--primary-flat-active));
 	}
 
 	/* Success Colorway */
-	.button.success {
+	.sui-button.success {
 		background-color: hsl(var(--success-base));
 		border-color: hsl(var(--success-base));
 		color: hsl(var(--text-dark));
 	}
 
-	.button.success:hover {
+	.sui-button.success:hover {
 		background-color: hsl(var(--success-hover));
 	}
 
-	.button.success:active {
+	.sui-button.success:active {
 		background-color: hsl(var(--success-active));
 	}
 
-	.button.success.outlined {
+	.sui-button.success.outlined {
 		background-color: hsl(var(--default-base));
 		color: hsl(var(--text-normal));
 	}
 
-	.button.success.outlined:hover {
+	.sui-button.success.outlined:hover {
 		background-color: hsl(var(--default-hover));
 	}
 
-	.button.success.outlined:active {
+	.sui-button.success.outlined:active {
 		background-color: hsl(var(--default-active));
 	}
 
-	.button.success.flat {
+	.sui-button.success.flat {
 		background-color: hsla(var(--success-flat));
 		color: hsl(var(--success-base));
 	}
 
-	.button.success.flat:hover {
+	.sui-button.success.flat:hover {
 		background-color: hsla(var(--success-flat-hover));
 	}
 
-	.button.success.flat:active {
+	.sui-button.success.flat:active {
 		background-color: hsla(var(--success-flat-active));
 	}
 
 	/* Warning Colorway */
-	.button.warning {
+	.sui-button.warning {
 		background-color: hsl(var(--warning-base));
 		border-color: hsl(var(--warning-base));
 		color: hsl(var(--text-dark));
 	}
 
-	.button.warning:hover {
+	.sui-button.warning:hover {
 		background-color: hsl(var(--warning-hover));
 	}
 
-	.button.warning:active {
+	.sui-button.warning:active {
 		background-color: hsl(var(--warning-active));
 	}
 
-	.button.warning.outlined {
+	.sui-button.warning.outlined {
 		background-color: hsl(var(--default-base));
 		color: hsl(var(--text-normal));
 	}
 
-	.button.warning.outlined:hover {
+	.sui-button.warning.outlined:hover {
 		background-color: hsl(var(--default-hover));
 	}
 
-	.button.warning.outlined:active {
+	.sui-button.warning.outlined:active {
 		background-color: hsl(var(--default-active));
 	}
 
-	.button.warning.flat {
+	.sui-button.warning.flat {
 		background-color: hsla(var(--warning-flat));
 		color: hsl(var(--warning-base));
 	}
 
-	.button.warning.flat:hover {
+	.sui-button.warning.flat:hover {
 		background-color: hsla(var(--warning-flat-hover));
 	}
 
-	.button.warning.flat:active {
+	.sui-button.warning.flat:active {
 		background-color: hsla(var(--warning-flat-active));
 	}
 
 	/* Danger Colorway */
-	.button.danger {
+	.sui-button.danger {
 		background-color: hsl(var(--danger-base));
 		border-color: hsl(var(--danger-base));
 		color: hsl(var(--text-light));
 	}
 
-	.button.danger:hover {
+	.sui-button.danger:hover {
 		background-color: hsl(var(--danger-hover));
 	}
 
-	.button.danger:active {
+	.sui-button.danger:active {
 		background-color: hsl(var(--danger-active));
 	}
 
-	.button.danger.outlined {
+	.sui-button.danger.outlined {
 		background-color: hsl(var(--default-base));
 		color: hsl(var(--text-normal));
 	}
 
-	.button.danger.outlined:hover {
+	.sui-button.danger.outlined:hover {
 		background-color: hsl(var(--default-hover));
 	}
 
-	.button.danger.outlined:active {
+	.sui-button.danger.outlined:active {
 		background-color: hsl(var(--default-active));
 	}
 
-	.button.danger.flat {
+	.sui-button.danger.flat {
 		background-color: hsla(var(--danger-flat));
 		color: hsl(337, 92%, 71%);
 	}
 
-	.button.danger.flat:hover {
+	.sui-button.danger.flat:hover {
 		background-color: hsla(var(--danger-flat-hover));
 	}
 
-	.button.danger.flat:active {
+	.sui-button.danger.flat:active {
 		background-color: hsla(var(--danger-flat-active));
 	}
 
-	.button.full {
+	.sui-button.full {
 		width: 100%;
 	}
 
 	[data-theme="light"] {
-		.button.primary.flat {
+		.sui-button.primary.flat {
 			color: hsl(259, 84%, 45%);
 		}
 
-		.button.success.flat {
+		.sui-button.success.flat {
 			background-color: hsl(var(--success-base), 0.2);
 			color: hsl(143, 59%, 20%);
 		}
 
-		.button.success.flat:hover {
+		.sui-button.success.flat:hover {
 			background-color: hsla(var(--success-flat-hover));
 		}
 
-		.button.success.flat:active {
+		.sui-button.success.flat:active {
 			background-color: hsla(var(--success-flat-active));
 		}
 
-		.button.warning.flat {
+		.sui-button.warning.flat {
 			background-color: hsla(var(--warning-base), 0.2);
 			color: hsl(48, 78%, 20%);
 		}
 
-		.button.warning.flat:hover {
+		.sui-button.warning.flat:hover {
 			background-color: hsla(var(--warning-base), 0.25);
 		}
 
-		.button.warning.flat:active {
+		.sui-button.warning.flat:active {
 			background-color: hsla(var(--warning-base), 0.4);
 		}
 
-		.button.danger.flat {
+		.sui-button.danger.flat {
 			color: hsl(339, 97%, 29%);
 		}
 	}

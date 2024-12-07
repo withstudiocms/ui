@@ -1,11 +1,13 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
 import { generateID } from '../utils/generateID';
 
-interface Props {
+interface Props extends HTMLAttributes<'textarea'> {
 	label?: string;
 	placeholder?: string;
 	isRequired?: boolean;
 	fullWidth?: boolean;
+	fullHeight?: boolean;
 	resize?: boolean;
 	name?: string;
 	disabled?: boolean;
@@ -17,17 +19,20 @@ const {
 	placeholder,
 	isRequired,
 	fullWidth,
+  fullHeight,
 	resize,
 	name = generateID('textarea'),
 	disabled,
 	defaultValue,
+  ...props
 } = Astro.props;
 ---
 <label 
   for={name} 
-  class="textarea-label"
+  class="sui-textarea-label"
   class:list={[
-    fullWidth && "full",
+    fullWidth && "full-width",
+    fullHeight && "full-height",
     resize && "resize",
     disabled && "disabled",
   ]}
@@ -39,38 +44,42 @@ const {
     placeholder={placeholder}
     name={name}
     id={name}
-    class="textarea"
+    class="sui-textarea"
     required={isRequired}
     disabled={disabled}
+    {...props}
     
   >{defaultValue}</textarea>
 </label>
 <style>
-  .textarea-label {
+  .sui-textarea-label {
     display: flex;
     flex-direction: column;
     gap: .25rem;
-    margin-top: .5rem;
     max-width: 80ch;
   }
 
-  .textarea-label.disabled {
+  .sui-textarea-label.disabled {
     opacity: 0.5;
     pointer-events: none;
     color: hsl(var(--text-muted));
   }
 
-  .textarea-label.full {
+  .sui-textarea-label.full-width {
     width: 100%;
     max-width: none;
+  }
+
+  .sui-textarea-label.full-height {
+    height: 100%;
   }
 
   .label {
     font-size: 14px;
   }
 
-  .textarea {
-    padding: .65rem 1rem;
+  .sui-textarea {
+    padding: .65rem;
     border-radius: 8px;
     border: 1px solid hsl(var(--border));
     background: hsl(var(--background-step-2));
@@ -78,18 +87,20 @@ const {
     transition: all .15s ease;
     resize: none;
     min-height: 12ch;
+    width: 100%;
+    height: 100%;
   }
 
-  .textarea:hover {
+  .sui-textarea:hover {
     background: hsl(var(--background-step-3));
   }
 
-  .resize .textarea {
+  .resize .sui-textarea {
     resize: both;
   }
 
-  .textarea:active,
-  .textarea:focus {
+  .sui-textarea:active,
+  .sui-textarea:focus {
     border: 1px solid hsl(var(--primary-base));
     outline: none;
     background: hsl(var(--background-step-2));

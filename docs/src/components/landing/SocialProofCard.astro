@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  avatar: string;
+  name: string;
+  handle: string;
+  message: string;
+  image?: {
+    path: string;
+    width: number;
+    height: number;
+  };
+}
+
+const { avatar, name, handle, message, image } = Astro.props;
+---
+<div class="social-proof-card">
+  <div class="social-proof-author">
+    <Image class="social-proof-author-avatar" src={avatar} alt={handle} width={40} height={40} />
+    <div class="social-proof-author-text">
+      <span class="social-proof-author-name">{name}</span>
+      <span class="social-proof-author-handle">{handle}</span>
+    </div>
+  </div>
+  <p class="social-proof-message">{message}</p>
+  {image && (
+    <div class="social-proof-image">
+      <Image src={image.path} alt={''} width={image.width} height={image.height} />
+      <Image src={image.path} alt={''} width={image.width} height={image.height} />
+    </div>
+  )}
+</div>
+<style>
+  .social-proof-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    border-radius: 1rem;
+    padding: 2rem;
+    background-color: hsl(var(--background-step-1));
+  }
+
+  .social-proof-author {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .social-proof-author-avatar {
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+
+  .social-proof-author-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .social-proof-author-name {
+    font-weight: 500;
+  }
+
+  .social-proof-author-handle {
+    font-weight: 300;
+    color: hsl(var(--text-muted));
+    font-size: .875em;
+  }
+
+  .social-proof-message {
+    margin-bottom: 0;
+  }
+
+  .social-proof-image {
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-top: 1rem;
+  }
+
+  .social-proof-image > img:first-of-type {
+    border-radius: .5rem;
+    z-index: 5;
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .social-proof-image > img:last-of-type {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    filter: blur(15px);
+    width: 100%;
+    height: auto;
+  }
+</style>

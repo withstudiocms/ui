@@ -20,11 +20,11 @@ const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = As
   id={id}
   data-dismissable={`${dismissable}`}
   data-buttons={buttons.join(";")}
-  class="modal"
+  class="sui-modal"
   class:list={[size]}
   data-form={`${isForm}`}
 >
-  <div class="modal-header">
+  <div class="sui-modal-header">
     <slot name="header" />
     {(dismissable || buttons.length === 0) && (
       <button class="x-mark-container" id={`${id}-btn-x`}>
@@ -33,10 +33,10 @@ const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = As
     )}
   </div>
   <form id={`${id}-form-element`}>
-    <div class="modal-body">
+    <div class="sui-modal-body">
       <slot />
     </div>
-    <div class="modal-footer">
+    <div class="sui-modal-footer">
       {buttons.includes('cancel') && (
         <Button id={`${id}-btn-cancel`} color='danger' variant='flat' type={isForm ? 'reset' : 'button'}>
           Cancel
@@ -51,7 +51,7 @@ const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = As
   </form>
 </dialog>
 <style>
-  .modal {
+  .sui-modal {
     border: 1px solid hsl(var(--border));
     border-radius: .5rem;
     padding: 1.5rem;
@@ -59,35 +59,36 @@ const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = As
     animation: hide .25s ease;
     overflow: visible;
     margin: auto;
+    z-index: 50;
   }
 
-  .modal.sm {
+  .sui-modal.sm {
     width: 384px;
   }
 
-  .modal.md {
+  .sui-modal.md {
     width: 448px;
   }
 
-  .modal.lg {
+  .sui-modal.lg {
     width: 608px;
   }
 
-  .modal[open] {
+  .sui-modal[open] {
     animation: show .25s ease-in-out;
   }
 
-  html:has(.modal[open]),
-  body:has(.modal[open]) {
+  html:has(.sui-modal[open]),
+  body:has(.sui-modal[open]) {
     overflow: hidden;
   }
 
-  .modal[open]::backdrop {
+  .sui-modal[open]::backdrop {
     background-color: rgba(0, 0, 0, 0.75);
     animation: backdrop .3s ease-in-out forwards;
   }
 
-  .modal-header:has(*) {
+  .sui-modal-header:has(*) {
     margin-bottom: 1rem;
 
     display: flex;
@@ -115,11 +116,11 @@ const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = As
     background-color: hsl(var(--default-base));
   }
 
-  .modal-footer {
+  .sui-modal-footer {
     display: none;
   }
 
-  .modal-footer:has(*) {
+  .sui-modal-footer:has(*) {
     display: flex;
     flex-direction: row;
     gap: 1rem;

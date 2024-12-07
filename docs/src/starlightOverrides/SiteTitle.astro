@@ -34,9 +34,14 @@ const { siteTitle, siteTitleHref } = Astro.props;
         </>
       )
     }
-    <span class:list={[ config.logo?.replacesTitle && 'sr-only' ]}>
-      {siteTitle} 
-    </span>
+    <div>
+      <span class:list={[ config.logo?.replacesTitle && 'sr-only' ]}>
+        {siteTitle.replace("UI", "")}
+      </span>
+      <span class="muted" class:list={[ config.logo?.replacesTitle && 'sr-only' ]}>
+        UI
+      </span>
+    </div>
   </a>
 
   <a href="/docs/">{Astro.locals.t('site-title.labels.docs')}</a>
@@ -66,13 +71,22 @@ const { siteTitle, siteTitleHref } = Astro.props;
 	}
 
   .site-title > a {
-    display: flex;
-    align-items: center;
-    gap: var(--sl-nav-gap);
     font-size: var(--sl-text-h4);
   }
 
+  .site-title > a:first-of-type {
+    display: flex;
+    align-items: center;
+    color: white;
+  }
 
+  .site-title > a div {
+    padding-inline-end: 0;
+  }
+
+  span.muted {
+    color: var(--sl-color-gray-2);
+  }
 
   @media screen and (max-width: 520px) {
     .site-title a:first-of-type {

@@ -7,32 +7,33 @@ interface Props {
 	description: string;
 	avatar?: string;
 	class?: string;
+  loading?: 'eager' | 'lazy'; 
 };
 
-const { name, description, avatar, class: className } = Astro.props;
+const { name, description, avatar, class: className, loading } = Astro.props;
 ---
-<div class="user-container" class:list={[ className ]}>
-  <div class="avatar-container">
+<div class="sui-user-container" class:list={[ className ]}>
+  <div class="sui-avatar-container">
     {avatar ? (
-      <Image src={avatar} inferSize alt={name} class="avatar-img" />
+      <Image src={avatar} inferSize loading={loading} alt={name} class="sui-avatar-img" />
     ) : (
       <Icon name='user' width={24} height={24} />
     )}
   </div>
-  <div class="text-content">
-    <span class="name">{name}</span>
-    <span class="description">{description}</span>
+  <div class="sui-text-content">
+    <span class="sui-name">{name}</span>
+    <span class="sui-description">{description}</span>
   </div>
 </div>
 <style>
-  .user-container {
+  .sui-user-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 1rem;
   }
 
-  .avatar-container {
+  .sui-avatar-container {
     width: 2.5rem;
     height: 2.5rem;
     background-color: hsl(var(--default-base));
@@ -44,23 +45,23 @@ const { name, description, avatar, class: className } = Astro.props;
     border: 1px solid hsl(var(--border));
   }
 
-  .avatar-img {
+  .sui-avatar-img {
     width: 100%;
     height: auto;
   }
 
-  .text-content {
+  .sui-text-content {
     display: flex;
     flex-direction: column;
     gap: .125rem;
   }
 
-  .name {
+  .sui-name {
     font-size: 1em;
     font-weight: 600;
   }
 
-  .description {
+  .sui-description {
     font-size: .875em;
     font-weight: 400;
     color: hsl(var(--text-muted));

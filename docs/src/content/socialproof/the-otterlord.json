@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../.astro/collections/socialproof.schema.json",
+  "avatar": "/socialproof/the-otterlord.png",
+  "name": "TheOtterlord",
+  "handle": "@otterlord.dev",
+  "message": "Pigeons are surveillance cameras and gulls are their agents of death, trust me"
+}

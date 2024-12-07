@@ -9,30 +9,30 @@ interface Props extends HTMLAttributes<'div'> {
 const { alignCenter, gapSize = 'md', ...props } = Astro.props;
 ---
 
-<div class="row" class:list={[alignCenter && "align", gapSize]} {...props}>
+<div class="sui-row" class:list={[alignCenter && "align", gapSize]} {...props}>
   <slot />
 </div>
 <style>
-	.row {
+	.sui-row {
 		display: flex;
 		flex-direction: row;
 		position: relative;
 		flex-wrap: wrap;
 	}
 
-	.row.align {
+	.sui-row.align {
 		align-items: center;
 	}
 
-	.row.sm {
+	.sui-row.sm {
 		gap: .5rem;
 	}
 
-	.row.md {
+	.sui-row.md {
 		gap: 1rem;
 	}
 
-	.row.lg {
+	.sui-row.lg {
 		gap: 2rem;
 	}
 </style>

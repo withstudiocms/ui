@@ -156,3 +156,40 @@ the entire width of its parent container by setting the `fullWidth` prop to true
 The select element's dropdown can be navigated via tabbing and elements can be selected by hitting the 
 `Enter` key.
 :::
+
+### Placeholder
+
+You can adjust the placeholder shown in the select by passing the `placeholder` prop:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Select
+        label='Select Element'
+        placeholder="Custom Placeholder"
+        options={[
+          { label: "Option 1", value: "f-opt-1-p" },
+          { label: "Option 2", value: "f-opt-2-p" },
+          { label: "Option 3", value: "f-opt-3-p" },
+        ]}
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro
+    ---
+    import { Select } from '@studiocms/ui/components';
+    ---
+
+    <Select
+      label='Select Element'
+      placeholder="Custom Placeholder"
+      options={[
+        { label: "Option 1", value: "opt-1" },
+        { label: "Option 2", value: "opt-2" },
+        { label: "Option 3", value: "opt-3" },
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>

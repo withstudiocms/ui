@@ -158,3 +158,40 @@ the entire width of its parent container by setting the `fullWidth` prop to true
 The searchable select's dropdown can be navigated with the arrow keys to focus an option and hitting 
 `Enter` to select the currently focused option.
 :::
+
+### Placeholder
+
+You can adjust the placeholder shown in the select by passing the `placeholder` prop:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <SearchSelect
+        label='Searchable Select Element'
+        placeholder="Custom Placeholder"
+        options={[
+          { label: "Option 1", value: "f-opt-1-p" },
+          { label: "Option 2", value: "f-opt-2-p" },
+          { label: "Option 3", value: "f-opt-3-p" },
+        ]}
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro
+    ---
+    import { SearchSelect } from '@studiocms/ui/components';
+    ---
+
+    <SearchSelect
+      label='Searchable Select Element'
+      placeholder="Custom Placeholder"
+      options={[
+        { label: "Option 1", value: "opt-1" },
+        { label: "Option 2", value: "opt-2" },
+        { label: "Option 3", value: "opt-3" },
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>

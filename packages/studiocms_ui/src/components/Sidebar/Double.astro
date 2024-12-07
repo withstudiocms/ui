@@ -1,13 +1,13 @@
-<div id="sidebars" class="active inner">
-  <div id="sidebar-outer">
+<div id="sui-sidebars" class="active inner">
+  <div id="sui-sidebar-outer">
     <slot name="outer" />
   </div>
-  <div id="sidebar-inner">
+  <div id="sui-sidebar-inner">
     <slot name="inner" />
   </div>
 </div>
 <style>
-  #sidebars {
+  #sui-sidebars {
     --sidebars-container-width: calc((280px + 1px) * 2);
     display: flex;
     align-items: center;
@@ -19,11 +19,11 @@
     height: 100%;
   }
 
-  #sidebars.active {
+  #sui-sidebars.active {
     transform: translateX(0%);
   }
 
-  #sidebar-outer {
+  #sui-sidebar-outer {
     height: 100%;
     min-width: 280px;
     width: 280px;
@@ -39,7 +39,7 @@
     padding: 1.5rem;
   }
 
-  #sidebar-inner {
+  #sui-sidebar-inner {
     min-width: 280px;
     width: 280px;
     height: 100%;
@@ -56,7 +56,7 @@
   }
 
   @media screen and (max-width: 1200px) {
-    #sidebars {
+    #sui-sidebars {
       --sidebars-container-width: calc(280px + 1px);
     }
 
@@ -64,7 +64,7 @@
       display: block;
     }
 
-    #sidebars.inner {
+    #sui-sidebars.inner {
       #sidebar-outer,
       #sidebar-inner {
         transform: translateX(-100%);
@@ -73,7 +73,7 @@
   }
 
   @media screen and (max-width: 840px) {
-    #sidebars {
+    #sui-sidebars {
       transform: translateX(-100%);
       position: absolute;
       top: 0;
@@ -82,8 +82,8 @@
       width: 100%;
     }
 
-    #sidebar-outer,
-    #sidebar-inner {
+    #sui-sidebar-outer,
+    #sui-sidebar-inner {
       width: 100%;
       flex: 0 0 100%;
     }

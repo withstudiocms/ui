@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../.astro/collections/socialproof.schema.json",
+  "avatar": "/socialproof/matthew-justice.jpg",
+  "name": "Louis Escher",
+  "handle": "@louisescher.dev",
+  "message": "I fucking love toast and fucking hate React, also check out dawnforge #notanad",
+  "image": {
+    "path": "/socialproof/matthew-justice-image.png",
+    "width": 400,
+    "height": 210
+  }
+}

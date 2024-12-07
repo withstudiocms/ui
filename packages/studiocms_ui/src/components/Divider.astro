@@ -5,14 +5,14 @@ interface Props {
 
 const { background = 'background-base' } = Astro.props;
 ---
-<div class="divide-container">
-  <div class="line" />
-  <div class="content" style={`background-color: hsl(var(--${background}));`}>
+<div class="sui-divider-container">
+  <div class="sui-divider-line" />
+  <div class="sui-divider-content" style={`background-color: hsl(var(--${background}));`}>
     <slot />
   </div>
 </div>
 <style>
-  .divide-container {
+  .sui-divider-container {
     display: flex;
     width: 100%;
     align-items: center;
@@ -20,7 +20,7 @@ const { background = 'background-base' } = Astro.props;
     position: relative;
   }
 
-  .line {
+  .sui-divider-line {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -31,7 +31,7 @@ const { background = 'background-base' } = Astro.props;
     z-index: 1;
   }
 
-  .content {
+  .sui-divider-content {
     padding: .25rem .5rem;
     z-index: 2;
     color: hsl(var(--text-muted));

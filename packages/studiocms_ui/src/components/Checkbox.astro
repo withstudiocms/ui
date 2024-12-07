@@ -30,7 +30,7 @@ const iconSizes = {
 };
 ---
 <label 
-  class="checkmark-label"
+  class="sui-checkmark-label"
   for={name}
   class:list={[
     disabled && "disabled",
@@ -38,9 +38,9 @@ const iconSizes = {
     size,
   ]}
 >
-  <div class="checkmark-container">
+  <div class="sui-checkmark-container">
     <Checkmark
-      class={'checkmark'}
+      class={'sui-checkmark'}
       width={iconSizes[size]}
       height={iconSizes[size]}
     />
@@ -51,7 +51,7 @@ const iconSizes = {
       checked={defaultChecked}
       disabled={disabled}
       required={isRequired}
-      class="checkbox"
+      class="sui-checkbox"
     />
   </div>
   <span>
@@ -59,7 +59,7 @@ const iconSizes = {
   </span>
 </label>
 <style>
-  .checkmark-label {
+  .sui-checkmark-label {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -68,13 +68,13 @@ const iconSizes = {
     margin: .25rem 0;
   }
 
-  .checkmark-label.disabled {
+  .sui-checkmark-label.disabled {
     opacity: 0.5;
     pointer-events: none;
     color: hsl(var(--text-muted));
   }
 
-  .checkmark-container {
+  .sui-checkmark-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,54 +85,55 @@ const iconSizes = {
     transition: all .15s ease;
   }
 
-  .checkmark-label:hover .checkmark-container {
+  .sui-checkmark-label:hover .sui-checkmark-container {
     background-color: hsl(var(--default-hover));
   }
 
-  .checkmark-label:active .checkmark-container {
+  .sui-checkmark-label:active .sui-checkmark-container {
     background-color: hsl(var(--default-active));
     scale: 0.9;
   }
 
-  .checkmark-label.sm {
+  .sui-checkmark-label.sm {
     font-size: .875em;
   }
 
-  .checkmark-label.sm .checkmark-container {
+  .sui-checkmark-label.sm .sui-checkmark-container {
     width: 1.25rem;
     height: 1.25rem;
   }
 
-  .checkmark-label.md .checkmark-container {
+  .sui-checkmark-label.md .sui-checkmark-container {
     width: 1.5rem;
     height: 1.5rem;
   }
 
-  .checkmark-label.lg {
+  .sui-checkmark-label.lg {
     font-size: 1.125em;
   }
 
-  .checkmark-label.lg .checkmark-container {
+  .sui-checkmark-label.lg .sui-checkmark-container {
     width: 1.75rem;
     height: 1.75rem;
+    padding: .125rem;
   }
 
-  .primary .checkmark-container:has(.checkbox:checked) {
+  .primary .sui-checkmark-container:has(.sui-checkbox:checked) {
     border-color: hsl(var(--primary-base));
     background-color: hsl(var(--primary-base));
   }
 
-  .success .checkmark-container:has(.checkbox:checked) {
+  .success .sui-checkmark-container:has(.sui-checkbox:checked) {
     border-color: hsl(var(--success-base));
     background-color: hsl(var(--success-base));
   }
 
-  .warning .checkmark-container:has(.checkbox:checked) {
+  .warning .sui-checkmark-container:has(.sui-checkbox:checked) {
     border-color: hsl(var(--warning-base));
     background-color: hsl(var(--warning-base));
   }
 
-  .danger .checkmark-container:has(.checkbox:checked) {
+  .danger .sui-checkmark-container:has(.sui-checkbox:checked) {
     border-color: hsl(var(--danger-base));
     background-color: hsl(var(--danger-base));
   }
@@ -142,7 +143,7 @@ const iconSizes = {
     font-weight: 700;
   }
 
-  .checkbox {
+  .sui-checkbox {
     width: 0;
     height: 0;
     visibility: hidden;
@@ -151,29 +152,29 @@ const iconSizes = {
   }
 </style>
 <style is:global>
-  .checkmark polyline {
+  .sui-checkmark polyline {
     transition: all .15s ease;
     color: hsl(var(--text-normal));
   }
 
-  .primary .checkmark polyline {
+  .primary .sui-checkmark polyline {
     color: hsl(var(--text-inverted));
   }
 
-  .success .checkmark polyline {
+  .success .sui-checkmark polyline {
     color: hsl(var(--text-dark));
   }
 
-  .warning .checkmark polyline {
+  .warning .sui-checkmark polyline {
     color: hsl(var(--text-dark));
   }
 
-  .danger .checkmark polyline {
+  .danger .sui-checkmark polyline {
     color: hsl(var(--text-light));
   }
 
-  .checkmark-container:has(.checkbox:checked) {
-    .checkmark polyline {
+  .sui-checkmark-container:has(.sui-checkbox:checked) {
+    .sui-checkmark polyline {
       stroke-dashoffset: 44;
     }
   }

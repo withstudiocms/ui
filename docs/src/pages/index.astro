@@ -1,14 +1,118 @@
 ---
+import '@studiocms/ui/css/global.css';
+import '@fontsource-variable/onest/index.css';
 
+import {
+Button,
+    Modal,
+    Toaster,
+} from '@studiocms/ui/components';
+
+import { getCollection } from 'astro:content';
+import HeroSection from '~/components/landing/HeroSection.astro';
+import PageHeader from '~/components/landing/PageHeader.astro';
+import SocialProofCard from '~/components/landing/SocialProofCard.astro';
+
+const socialProofEntries = await getCollection('socialproof');
+
+const chunkSize = socialProofEntries.length / 3;
+const chunkedSocialProofEntries = [];
+
+for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
+    const chunk = socialProofEntries.slice(i, i + chunkSize);
+    chunkedSocialProofEntries.push(chunk);
+}
+
+console.log(socialProofEntries, chunkedSocialProofEntries);
 ---
 
-<html>
+<html data-theme="dark">
     <head>
         <title>My Astro Site</title>
     </head>
     <body>
-        <h1>Welcome to Astro!</h1>
-        <p>My Astro site is up and running!</p>
-        <a href="/docs/">Go to the docs</a>
+        <Toaster />
+        <Modal id='hero-example-modal'>
+            <h2 slot="header">Modal</h2>
+        </Modal>
+        <main>
+            <HeroSection />
+            <section class="social-proof">
+                <PageHeader
+                    icon="hand-thumb-up"
+                    title="Patting ourselves on the back"
+                    subtitle="(Until we have actual opinions)"
+                />
+                <div class="social-proof-grid">
+                    {chunkedSocialProofEntries.map((entries) => (
+                        <div class="social-proof-col">
+                            {entries.map((entry) => (
+                                <SocialProofCard
+                                    {...entry.data}
+                                />
+                            ))}
+                        </div>
+                    ))}
+                </div>
+                <div class="social-proof-cta">
+                    <Button color='primary'>
+                        Submit your own opinion!
+                    </Button>
+                </div>
+            </section>
+            <section class="showcase">
+                <PageHeader
+                    icon="square-3-stack-3d"
+                    title="Modular by design"
+                    subtitle="StudioCMS UI components are reusable, flexible, and composable, helping you build incredible interfaces with ease."
+                />
+            </section>
+        </main>
     </body>
 </html>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    main {
+        padding: min(8rem, 10vh) 0;
+    }
+
+    .social-proof-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .social-proof-col {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .social-proof-cta {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-top: 4rem;
+    }
+
+    .social-proof, .showcase {
+        padding: 0 10vw;
+    }
+
+    .showcase {
+        margin-top: 4rem;
+        padding: 4rem 10vw;
+        width: 100%;
+        background: hsl(var(--background-step-1));
+    }
+</style>
+<style is:global>
+    .showcase header {
+        margin-top: 0 !important;
+    }
+</style>

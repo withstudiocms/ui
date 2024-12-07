@@ -1,7 +1,7 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, z } from 'astro:content';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loader';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
-import { z } from 'astro/zod';
+import { glob } from 'astro/loaders';
 
 const baseSchema = z.object({
 	type: z.literal('base').optional().default('base'),
@@ -32,6 +32,18 @@ const customTranslationsSchema = z.object({
 	'contributors.bots': z.string().optional(),
 });
 
+const socialProofSchema = z.object({
+	avatar: z.string(),
+	name: z.string(),
+	handle: z.string(),
+	message: z.string(),
+	image: z.object({
+		path: z.string(),
+		width: z.number(),
+		height: z.number(),
+	}).optional(),
+});
+
 export const collections = {
 	docs: defineCollection({
 		loader: docsLoader(),
@@ -43,4 +55,8 @@ export const collections = {
 			extend: customTranslationsSchema,
 		}),
 	}),
+	socialproof: defineCollection({
+		loader: glob({ pattern: '*.json', base: 'src/content/socialproof' }),
+		schema: socialProofSchema,
+	})
 };
