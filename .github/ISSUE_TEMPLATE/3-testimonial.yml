@@ -12,7 +12,7 @@ body:
     attributes:
       label: "Desired Display Name"
       description: "Would you like an alternate display name from your GitHub Profile (Optional)"
-      playholder: "John Doe"
+      placeholder: "John Doe"
     validations:
       required: false
   - type: input
@@ -36,5 +36,5 @@ body:
       label: "I Consent to having my likeness posted on the StudioCMS UI Website"
       description: "By checking this box you consent to allow us to use your likeness/name/photo on our https://ui.studiocms.dev website"
       options:
-      - label: "I Consent to having my likeness posted on the StudioCMS UI Website"
+      - label: "I Consent"
         required: true
