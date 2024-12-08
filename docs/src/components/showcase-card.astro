@@ -1,5 +1,7 @@
 ---
 import { Image } from 'astro:assets';
+import { THUM_SECRET_KEY } from 'astro:env/server';
+import getThumURL from '~/util/thum.io';
 import MediaCard from './media-card.astro';
 
 interface Props {
@@ -8,11 +10,20 @@ interface Props {
 }
 const { href, title } = Astro.props;
 
-const src = `https://image.thum.io/get/width/800/crop/675/${Astro.props.href}`;
+const thum = getThumURL({
+	url: Astro.props.href,
+	width: 800,
+	crop: 675,
+	auth: {
+		type: 'md5',
+		keyId: '72924',
+		secret: THUM_SECRET_KEY || '',
+	},
+});
 ---
 
 <MediaCard {href}>
-	<Image slot="media" {src} alt="" width={800} inferSize/>
+	<Image slot="media" src={thum} alt="" height={500} width={800} inferSize />
 	<p class="title">{title}</p>
 </MediaCard>
 

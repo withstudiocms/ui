@@ -1,6 +1,6 @@
 import starlight from '@astrojs/starlight';
 import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import starlightImageZoom from 'starlight-image-zoom';
 import rehypePluginKit from './src/plugins/rehypePluginKit';
 
@@ -36,6 +36,11 @@ export default defineConfig({
 	},
 	markdown: {
 		rehypePlugins: rehypePluginKit,
+	},
+	env: {
+		schema: {
+			THUM_SECRET_KEY: envField.string({ access: 'secret', context: 'server', optional: true }),
+		},
 	},
 	integrations: [
 		starlight({

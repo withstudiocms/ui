@@ -52,6 +52,8 @@
     "starlight-package-managers": "^0.8.0",
     "tsm": "^2.3.0",
     "typescript": "^5.7.2",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "md5": "2.3.0",
+    "@types/md5": "^2.1.33"
   }
 }
