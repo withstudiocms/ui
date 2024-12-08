@@ -7,8 +7,8 @@ import SwordsIcon from '~/assets/swords.svg';
 
 <section class="ecosystem not-content">
     <h2 class="ecosystem-heading">
-        <LogoAdaptive height={48} width={45.76} />
-        <span>Part of the StudioCMS ecosystem</span>
+        <LogoAdaptive class="studiocms-logo-header-icon" height={48} width={45.76} />
+        <span>Part of the StudioCMS Ecosystem</span>
     </h2>
     <div class="ecosystem-benefits">
         <div class="benefit-card">
@@ -58,14 +58,21 @@ import SwordsIcon from '~/assets/swords.svg';
         padding-bottom: 4rem !important;
     }
 
+    @media screen and (max-width: 1500px) {
+        .ecosystem {
+            padding: 2rem;
+        }
+    }
+
     .ecosystem-benefits {
         display: flex;
         flex-direction: row;
         gap: 2rem;
+        flex-wrap: wrap;
     }
 
     .benefit-card {
-        width: 100%;
+        width: calc((100% / 3) - (4rem / 3));
         padding: 2rem;
         border-radius: 1rem;
         background-color: hsl(var(--background-step-1));
@@ -77,5 +84,32 @@ import SwordsIcon from '~/assets/swords.svg';
     .benefit-card h3 {
         font-size: 1.5em;
         font-weight: 600;
+    }
+
+    @media screen and (max-width: 1100px) {
+        .benefit-card {
+            width: calc((100% / 2) - (2rem / 2));
+        }
+
+        .benefit-card:last-of-type {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 640px) {
+        .benefit-card {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 655px) {
+        .ecosystem-heading {
+            flex-direction: column;
+        }
+
+        .studiocms-logo-header-icon {
+            width: 96px;
+            height: 91.52px;
+        }
     }
 </style>

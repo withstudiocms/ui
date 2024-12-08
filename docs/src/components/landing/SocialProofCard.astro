@@ -15,7 +15,7 @@ interface Props {
 
 const { avatar, name, handle, message, image } = Astro.props;
 ---
-<div class="social-proof-card">
+<div class="social-proof-card" class:list={[image && "two-spaces"]}>
   <div class="social-proof-author">
     <Image class="social-proof-author-avatar" src={avatar} alt={handle} width={40} height={40} />
     <div class="social-proof-author-text">

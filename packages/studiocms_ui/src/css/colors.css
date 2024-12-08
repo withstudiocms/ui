@@ -48,25 +48,25 @@
 	--text-dark: 0 0% 0%;
 
 	/* Flat colorways since they use variables */
-	--default-flat: var(--default-base) 0.5;
-	--default-flat-hover: var(--default-base) 0.75;
-	--default-flat-active: var(--default-base) 0.85;
+	--default-flat: var(--default-base) / 0.5;
+	--default-flat-hover: var(--default-base) / 0.75;
+	--default-flat-active: var(--default-base) / 0.85;
 
-	--primary-flat: var(--primary-base) 0.1;
-	--primary-flat-hover: var(--primary-base) 0.25;
-	--primary-flat-active: var(--primary-base) 0.35;
+	--primary-flat: var(--primary-base) / 0.1;
+	--primary-flat-hover: var(--primary-base) / 0.25;
+	--primary-flat-active: var(--primary-base) / 0.35;
 
-	--success-flat: var(--success-base) 0.1;
-	--success-flat-hover: var(--success-base) 0.25;
-	--success-flat-active: var(--success-base) 0.35;
+	--success-flat: var(--success-base) / 0.1;
+	--success-flat-hover: var(--success-base) / 0.25;
+	--success-flat-active: var(--success-base) / 0.35;
 
-	--warning-flat: var(--warning-base) 0.1;
-	--warning-flat-hover: var(--warning-base) 0.25;
-	--warning-flat-active: var(--warning-base) 0.35;
+	--warning-flat: var(--warning-base) / 0.1;
+	--warning-flat-hover: var(--warning-base) / 0.25;
+	--warning-flat-active: var(--warning-base) / 0.35;
 
-	--danger-flat: var(--danger-base) 0.1;
-	--danger-flat-hover: var(--danger-base) 0.25;
-	--danger-flat-active: var(--danger-base) 0.35;
+	--danger-flat: var(--danger-base) / 0.1;
+	--danger-flat-hover: var(--danger-base) / 0.25;
+	--danger-flat-active: var(--danger-base) / 0.35;
 }
 
 [data-theme="light"] {

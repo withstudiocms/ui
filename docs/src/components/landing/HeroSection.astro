@@ -68,8 +68,10 @@ import GitHubIcon from '~/components/icons/GitHubIcon.astro';
    </div>
    <div class="hero-text">
       <h1>Why install another Framework just for UI?</h1>
-      <p>StudioCMS UI is an Astro-native UI library.</p>
-      <p>All the components you need, without the bloat of React.</p>
+      <div class="hero-desc">
+         <p>StudioCMS UI is an Astro-native UI library.</p>
+         <p>All the components you need, without the bloat of React.</p>
+      </div>
    </div>
    <div class="theme">
       <ThemeToggle>
@@ -165,10 +167,10 @@ import GitHubIcon from '~/components/icons/GitHubIcon.astro';
       width: 100%;
       margin-top: 6rem !important;
       padding: 0 10vw;
-      height: calc(100vh - 16rem);
+      min-height: calc(100vh - 16rem);
       position: relative;
       display: grid;
-      grid-template-columns: repeat(8, 1ft);
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
       gap: 2rem;
       grid-template-areas: 
          "checkbox  input     input      toggle     modal    modal    selects  selects"
@@ -177,6 +179,92 @@ import GitHubIcon from '~/components/icons/GitHubIcon.astro';
          "docs-cta  docs-cta  github-cta github-cta button   button   radio    radio"
          "user      user      textarea   textarea   textarea textarea radio    radio"
          "toast     toast     textarea   textarea   textarea textarea dropdown dropdown";
+   }
+
+   @media screen and (max-width: 1500px) {
+      .hero {
+         padding: 0 2rem;
+      }
+   }
+
+   @media screen and (max-width: 1280px) {
+      .hero {
+         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+         grid-template-areas: 
+            "checkbox  input     input      toggle     selects  selects"
+            "hero-text hero-text hero-text  hero-text  selects  selects"
+            "hero-text hero-text hero-text  hero-text  divider  divider"
+            "docs-cta  docs-cta  github-cta github-cta radio    radio"
+            "user      user      textarea   textarea   radio    radio"
+            "toast     toast     textarea   textarea   dropdown dropdown"
+            "modal     modal     button     button     theme    theme";
+      }
+   }
+
+   @media screen and (max-width: 1100px) {
+      .hero {
+         grid-template-columns: 1fr 1fr 1fr 1fr;
+         grid-template-areas: 
+            "input     input     checkbox   checkbox"
+            "hero-text hero-text hero-text  hero-text"
+            "hero-text hero-text hero-text  hero-text"
+            "docs-cta  docs-cta  github-cta github-cta"
+            "user      user      textarea   textarea"
+            "toast     toast     textarea   textarea"
+            "divider   divider   divider    divider"
+            "theme     theme     radio      radio"
+            "selects   selects   radio      radio"
+            "selects   selects   toggle     toggle"
+            "modal     modal     dropdown   dropdown"
+            "button    button    dropdown   dropdown";
+      }
+   }
+
+   @media screen and (max-width: 640px) {
+      .hero {
+         grid-template-columns: 1fr 1fr 1fr 1fr;
+         grid-template-areas: 
+            "input     input     checkbox   checkbox"
+            "hero-text hero-text hero-text  hero-text"
+            "hero-text hero-text hero-text  hero-text"
+            "docs-cta  docs-cta  github-cta github-cta"
+            "textarea  textarea  textarea   textarea"
+            "toast     toast     user       user"
+            "divider   divider   divider    divider"
+            "theme     theme     radio      radio"
+            "toggle    toggle    radio      radio"
+            "selects   selects   selects    selects"
+            "modal     modal     dropdown   dropdown"
+            "button    button    dropdown   dropdown";
+      }
+
+      .hero > div {
+         padding: 1rem !important;
+      }
+
+      .hero > div.selects {
+         gap: 1rem;
+      }
+   }
+
+   @media screen and (max-width: 520px) {
+      .hero {
+         grid-template-columns: 1fr 1fr 1fr 1fr;
+         grid-template-areas: 
+            "input      input      checkbox   checkbox"
+            "hero-text  hero-text  hero-text  hero-text"
+            "hero-text  hero-text  hero-text  hero-text"
+            "docs-cta   docs-cta   docs-cta   docs-cta"
+            "github-cta github-cta github-cta github-cta"
+            "textarea   textarea   textarea   textarea"
+            "toast      toast      user       user"
+            "divider    divider    divider    divider"
+            "theme      theme      radio      radio"
+            "selects    selects    radio      radio"
+            "selects    selects    toggle     toggle"
+            "modal      modal      dropdown   dropdown"
+            "button     button     dropdown   dropdown";
+      }
    }
 
    .text {
@@ -226,10 +314,22 @@ import GitHubIcon from '~/components/icons/GitHubIcon.astro';
    }
 
    .hero .hero-text {
+      display: flex !important;
+      flex-direction: column;
       grid-area: hero-text;
-      font-size: 1.5em;
       display: block;
       opacity: 1;
+      align-items: flex-start;
+      justify-content: space-evenly;
+   }
+
+   .hero .hero-text h1 {
+      font-size: 3em;
+      line-height: 1.25;
+   }
+
+   .hero .hero-text .hero-desc {
+      font-size: 1.25em;
    }
 
    .hero .theme {

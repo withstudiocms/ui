@@ -59,14 +59,14 @@ export default defineConfig({
 			},
 			defaultLocale: 'root',
 			locales,
-			social: {
-				github: 'https://github.com/withstudiocms/studiocms',
-				discord: 'https://chat.studiocms.dev',
-				youtube: 'https://www.youtube.com/@StudioCMS',
-				'x.com': 'https://x.com/withstudiocms',
-				blueSky: 'https://bsky.app/profile/studiocms.dev',
-				patreon: 'https://patreon.com/StudioCMS',
-			},
+			// social: {
+			// 	github: 'https://github.com/withstudiocms/studiocms',
+			// 	discord: 'https://chat.studiocms.dev',
+			// 	youtube: 'https://www.youtube.com/@StudioCMS',
+			// 	'x.com': 'https://x.com/withstudiocms',
+			// 	blueSky: 'https://bsky.app/profile/studiocms.dev',
+			// 	patreon: 'https://patreon.com/StudioCMS',
+			// },
 			customCss: [
 				'@studiocms/ui/css/global.css',
 				'./src/styles/sponsorcolors.css',

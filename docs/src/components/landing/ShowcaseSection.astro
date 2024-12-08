@@ -103,14 +103,16 @@ const splitCodeBasedOnComment = (code: string): string => {
 </script>
 <style>
     .showcase {
-        padding: 0 10vw;
-    }
-
-    .showcase {
         margin-top: 4rem !important;
         padding: 4rem 10vw;
         width: 100%;
         background: hsl(var(--background-step-1));
+    }
+
+    @media screen and (max-width: 1500px) {
+        .showcase {
+            padding: 2rem;
+        }
     }
 
     .showcase-tabs {
@@ -143,7 +145,7 @@ const splitCodeBasedOnComment = (code: string): string => {
 
         /* Default colorway */
 
-        background-color: none;
+        background-color: transparent;
         color: hsl(var(--text-normal));
 
         min-width: fit-content;
@@ -163,11 +165,11 @@ const splitCodeBasedOnComment = (code: string): string => {
     }
 
     .showcase-tab:hover {
-        background-color: hsla(var(--default-flat-active));
+        background-color: hsla(var(--default-flat-active)) !important;
     }
 
     .showcase-tab.active {
-        background-color: hsl(var(--primary-flat-active));
+        background-color: hsla(var(--primary-flat-active)) !important;
     }
 
     .preview-code-container {
@@ -194,6 +196,16 @@ const splitCodeBasedOnComment = (code: string): string => {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    @media screen and (max-width: 1100px) {
+        .preview-code-container {
+            flex-direction: column;
+        }
+
+        .preview-code-container > div {
+            max-width: 100%;
+        }
     }
 </style>
 <style is:global>
