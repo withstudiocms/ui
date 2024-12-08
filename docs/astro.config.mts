@@ -52,6 +52,7 @@ export default defineConfig({
 				PageTitle: './src/starlightOverrides/PageTitle.astro',
 				Sidebar: './src/starlightOverrides/Sidebar.astro',
 				Head: './src/starlightOverrides/Head.astro',
+				Header: './src/starlightOverrides/Header.astro',
 			},
 			logo: {
 				dark: '../assets/logo-light.svg',
@@ -59,14 +60,14 @@ export default defineConfig({
 			},
 			defaultLocale: 'root',
 			locales,
-			// social: {
-			// 	github: 'https://github.com/withstudiocms/studiocms',
-			// 	discord: 'https://chat.studiocms.dev',
-			// 	youtube: 'https://www.youtube.com/@StudioCMS',
-			// 	'x.com': 'https://x.com/withstudiocms',
-			// 	blueSky: 'https://bsky.app/profile/studiocms.dev',
-			// 	patreon: 'https://patreon.com/StudioCMS',
-			// },
+			social: {
+				github: 'https://github.com/withstudiocms/studiocms',
+				discord: 'https://chat.studiocms.dev',
+				youtube: 'https://www.youtube.com/@StudioCMS',
+				'x.com': 'https://x.com/withstudiocms',
+				blueSky: 'https://bsky.app/profile/studiocms.dev',
+				patreon: 'https://patreon.com/StudioCMS',
+			},
 			customCss: [
 				'@studiocms/ui/css/global.css',
 				'./src/styles/sponsorcolors.css',

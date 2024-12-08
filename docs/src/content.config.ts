@@ -8,68 +8,62 @@ const baseSchema = z.object({
 	i18nReady: z.boolean().optional().default(false),
 });
 
-const redirectSchema = baseSchema.extend({
-	type: z.literal('redirect'),
-	redirect: z.string(),
-});
-
-const docsCollectionSchema = z.union([baseSchema, redirectSchema]);
-
-const customTranslationsSchema = z.object({
-	'site-title.labels.docs': z.string().optional(),
-	'site-title.labels.main-site': z.string().optional(),
-	'site-title.labels.live-demo': z.string().optional(),
-	'sponsors.sponsoredby': z.string().optional(),
-	'package-catalog.readmore.start': z.string().optional(),
-	'package-catalog.readmore.end': z.string().optional(),
-	'integration-labels.changelog': z.string().optional(),
-	'contributors.core-packages': z.string().optional(),
-	'contributors.ui-library': z.string().optional(),
-	'contributors.devapps': z.string().optional(),
-	'contributors.plugins': z.string().optional(),
-	'contributors.documentation': z.string().optional(),
-	'contributors.website': z.string().optional(),
-	'contributors.bots': z.string().optional(),
-});
-
-const socialProofSchema = z.object({
-	avatar: z.string(),
-	name: z.string(),
-	handle: z.string(),
-	message: z.string(),
-	image: z
-		.object({
-			path: z.string(),
-			width: z.number(),
-			height: z.number(),
-		})
-		.optional(),
-});
-
-const siteShowcaseSchema = z.array(
-	z.object({
+const integrationSchema = baseSchema.extend({
+	type: z.literal('integration'),
+	integration: z.object({
 		name: z.string(),
-		link: z.string(),
-	})
-);
-
-export const collections = {
-	docs: defineCollection({
-		loader: docsLoader(),
-		schema: docsSchema({ extend: docsCollectionSchema }),
+		githubURL: z.string(),
+		released: z.boolean().default(true),
 	}),
-	i18n: defineCollection({
-		loader: i18nLoader(),
-		schema: i18nSchema({
-			extend: customTranslationsSchema,
+});
+
+const docs = defineCollection({
+	loader: docsLoader(),
+	schema: docsSchema({ extend: z.union([baseSchema, integrationSchema]) }),
+});
+
+const i18n = defineCollection({
+	loader: i18nLoader(),
+	schema: i18nSchema({
+		extend: z.object({
+			'site-title.labels.docs': z.string().optional(),
+			'sponsors.sponsoredby': z.string().optional(),
+			'integration-labels.changelog': z.string().optional(),
+			'contributors.ui-library': z.string().optional(),
 		}),
 	}),
-	socialproof: defineCollection({
-		loader: glob({ pattern: '*.json', base: 'src/content/socialproof' }),
-		schema: socialProofSchema,
+});
+
+const socialproof = defineCollection({
+	loader: glob({ pattern: '*.json', base: 'src/content/socialproof' }),
+	schema: z.object({
+		avatar: z.string(),
+		name: z.string(),
+		handle: z.string(),
+		message: z.string(),
+		image: z
+			.object({
+				path: z.string(),
+				width: z.number(),
+				height: z.number(),
+			})
+			.optional(),
 	}),
-	showcase: defineCollection({
-		loader: file('src/content/showcase.json'),
-		schema: siteShowcaseSchema,
-	}),
+});
+
+const showcase = defineCollection({
+	loader: file('src/content/showcase.json'),
+	schema: z.array(
+		z.object({
+			name: z.string(),
+			link: z.string(),
+		})
+	),
+});
+
+export const collections = {
+	docs,
+	i18n,
+	socialproof,
+	showcase,
 };
