@@ -11,12 +11,17 @@
     "url": "https://studiocms.dev"
   },
   "contributors": [
-    "louisescher"
+    "louisescher",
+    "TheOtterlord",
+    "Adammatthiesen",
+    "JusticeMatthew"
   ],
   "keywords": [
-    "astro-studiocms",
-    "cms",
-    "studiocms"
+    "withastro",
+    "astro-ui-library",
+    "astro-components",
+    "studiocms",
+    "ui-library"
   ],
   "homepage": "https://ui.studiocms.dev",
   "publishConfig": {
