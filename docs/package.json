@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "lunaria:build": "tsm ./scripts/lunaria.mts",
-		"make-changelog": "tsm --require=../scripts/filter-warnings.cjs ./scripts/changelog.ts"
+    "make-changelog": "tsm --require=../scripts/filter-warnings.cjs ./scripts/changelog.ts"
   },
   "dependencies": {
     "@11ty/eleventy-fetch": "^5.0.1",
