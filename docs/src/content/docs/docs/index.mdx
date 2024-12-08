@@ -2,6 +2,11 @@
 i18nReady: true
 title: "Getting Started"
 description: Install @studiocms/ui in your own project and make use of our components!
+type: integration
+integration:
+  name: "@studiocms/ui"
+  githubURL: "https://github.com/withstudiocms/ui/tree/next/packages/studiocms_ui"
+  released: false # This line can be removed once the package is released
 ---
 
 import { PackageManagers } from 'starlight-package-managers'
@@ -13,13 +18,19 @@ You can install it from npm:
 
 <PackageManagers type="add" pkg="@studiocms/ui" />
 
-All of these components can be tested in our [UI playground](https://ui-testing.studiocms.dev/).
+All of these components can be tested in our [UI playground](https://ui-testing.studiocms.dev/) or on the docs right here.
+
+:::note
+StudioCMS UI can be used in Astro v5 without any issues. As for Astro v4, we require version `v4.5.0` or higher, with the 
+`experimental.directRenderScript` flag turned on. The library might still work with older versions, however we haven't tested 
+them and thus cannot guarantee that it works in those versions.
+:::
 
 ## Importing Components
 
 All components this library are exported from `@studiocms/ui/components`. You can import and use the components like this:
 
-```astro
+```astro showLinenumbers title="ButtonExample.astro"
 ---
 import { Button } from '@studiocms/ui/components';
 ---
@@ -29,7 +40,7 @@ import { Button } from '@studiocms/ui/components';
 
 Include the styles by importing `@studiocms/ui/css/global.css` in your page layout.
 
-```astro
+```astro showLinenumbers title="Layout.astro"
 ---
 import '@studiocms/ui/css/global.css';
 ---

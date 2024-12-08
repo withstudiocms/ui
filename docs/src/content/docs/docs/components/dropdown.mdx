@@ -27,7 +27,7 @@ A dropdown component that takes care of all the annoying bits for you, with adde
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro
+    ```astro showLinenumbers title="DropdownExample.astro"
     ---
     import { Dropdown, Button } from '@studiocms/ui/components';
     ---
@@ -44,7 +44,7 @@ A dropdown component that takes care of all the annoying bits for you, with adde
       </Button>
     </Dropdown>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     import { DropdownHelper } from '@studiocms/ui/components';
 
     const dropdown = new DropdownHelper('dropdown');
@@ -79,7 +79,7 @@ You can change the dropdowns position by supplying the `align` prop.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "align='start'"
+    ```astro "align='start'" showLinenumbers title="DropdownAlignStartExample.astro"
     ---
     import { Dropdown, Button } from '@studiocms/ui/components';
     ---
@@ -100,7 +100,7 @@ You can change the dropdowns position by supplying the `align` prop.
     
     <!-- Other buttons omitted for simplicity -->
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
     import { DropdownHelper } from '@studiocms/ui/components';
 
@@ -124,7 +124,7 @@ You can tell the dropdown wrapper to only show the dropdown when it's children a
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "triggerOn='right'"
+    ```astro "triggerOn='right'" showLinenumbers title="DropdownRightClickExample.astro"
     ---
     import { Dropdown, Button } from '@studiocms/ui/components';
     ---
@@ -142,7 +142,7 @@ You can tell the dropdown wrapper to only show the dropdown when it's children a
       </Button>
     </Dropdown>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
     import { DropdownHelper } from '@studiocms/ui/components';
 
@@ -159,7 +159,7 @@ You can also tell the dropdown to trigger on both left- & right-click by using t
 
 You can disable a dropdown by passing the `disabled` prop.
 
-```astro "disabled"
+```astro "disabled" showLinenumbers title="DropdownDisabledExample.astro"
 <Dropdown disabled {/* ... */}>
   <!-- ... -->
 </Dropdown>
@@ -191,7 +191,7 @@ No, you read that right. You can customize the options too. You can individually
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro ins={7-14}
+    ```astro ins={7-14} showLinenumbers title="DropdownOptionsExample.astro"
     ---
     import { Dropdown, Button } from '@studiocms/ui/components';
     ---
@@ -213,7 +213,7 @@ No, you read that right. You can customize the options too. You can individually
       </Button>
     </Dropdown>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     import { DropdownHelper } from '@studiocms/ui/components';
 
     const dropdown = new DropdownHelper('dropdown');
@@ -227,7 +227,7 @@ You know how, this entire page, we've been assigning our `DropdownHelper` to a v
 you to acces some built-in functions for programatically toggling, showing and hiding the dropdown. You can even register a callback for when one of the 
 dropdowns options has been clicked!
 
-```ts twoslash
+```ts twoslash showLinenumbers title="Script Tag"
 // @noErrors
 import { DropdownHelper } from '@studiocms/ui/components';
 

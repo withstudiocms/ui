@@ -1,0 +1,407 @@
+---
+import {
+  Button,
+  Checkbox,
+  Divider,
+  Dropdown,
+  Input,
+  RadioGroup,
+  SearchSelect,
+  Select,
+  Textarea,
+  ThemeToggle,
+  Toggle,
+  User
+} from '@studiocms/ui/components';
+
+import Icon from '@studiocms/ui/utils/Icon.astro';
+import GitHubIcon from '~/components/icons/GitHubIcon.astro';
+---
+<section class="hero not-content">
+   <div class="checkbox">
+      <Checkbox
+         label='Checkbox'
+         color='primary'
+         defaultChecked
+      />
+   </div>
+   <div class="input">
+      <Input
+         placeholder='Input'
+      />
+   </div>
+   <div class="toggle">
+      <Toggle
+         label='Toggle'
+         color='primary'
+         defaultChecked
+      />
+   </div>
+   <div class="modal">
+      <Button color='primary' id={'hero-example-modal-trigger'}>
+         Modal
+      </Button>
+      <script>
+         import { ModalHelper } from "@studiocms/ui/components";
+
+         new ModalHelper('hero-example-modal', 'hero-example-modal-trigger');
+      </script>
+   </div>
+   <div class="selects">
+      <Select
+         options={[
+            { label: 'Option 1', value: 'opt-1' },
+            { label: 'Option 2', value: 'opt-2' },
+            { label: 'Option 3', value: 'opt-3' },
+         ]}
+         fullWidth
+      />
+      <SearchSelect
+         options={[
+            { label: 'Option 1', value: 'opt-1-s' },
+            { label: 'Option 2', value: 'opt-2-s' },
+            { label: 'Option 3', value: 'opt-3-s' },
+         ]}
+         fullWidth
+         placeholder='Searchable Select'
+      />
+   </div>
+   <div class="hero-text">
+      <h1>Why install another Framework just for UI?</h1>
+      <div class="hero-desc">
+         <p>StudioCMS UI is an Astro-native UI library.</p>
+         <p>All the components you need, without the bloat of React.</p>
+      </div>
+      <div class="cta-buttons">
+         <Button color='primary' as="a" href={'/docs/'} size='lg'>
+            <Icon name='book-open' slot="start-content" width={24} height={24} />
+            Get started
+         </Button>
+         <Button color='default' as="a" href={'https://github.com/withstudiocms/ui'} style={'color: white;'} size='lg'>
+            <GitHubIcon width={24} height={23.5} class="github-icon" slot={'start-content'} />
+            Star on GitHub
+         </Button>
+      </div>
+   </div>
+   <div class="theme">
+      <ThemeToggle>
+         <Icon name='moon' width={24} height={24} slot="dark" />
+         <Icon name='sun' width={24} height={24} slot="light" />
+      </ThemeToggle>
+   </div>
+   <div class="divider">
+      <Divider background='background-step-1'>Divider</Divider>
+   </div>
+   <div class="button">
+      <Button color='primary'>
+         Button
+      </Button>
+   </div>
+   <div class="radio">
+      <RadioGroup
+         label='Radio Group'
+         color='primary'
+         defaultValue='radio-1'
+         options={[
+            { label: 'Radio 1', value: 'radio-1' },
+            { label: 'Radio 2', value: 'radio-2' },
+            { label: 'Radio 3', value: 'radio-3' },
+         ]}
+      />
+   </div>
+   <div class="user">
+      <User
+         name='User'
+         description='@username'
+      />
+   </div>
+   <div class="textarea">
+      <Textarea 
+         fullWidth
+         fullHeight
+         placeholder={'Countless stars scattered,\nacross obsidian skies,\nfrosty breath lingers.'}
+      />
+   </div>
+   <div class="toast">
+      <Button color='primary' id={'hero-example-toasts-trigger'}>
+         Trigger Toast
+      </Button>
+      <script>
+         import { toast } from "@studiocms/ui/components";
+
+         const trigger = document.getElementById('hero-example-toasts-trigger');
+
+         trigger?.addEventListener('click', () => {
+            toast({
+               title: 'Toast!',
+               type: 'info',
+               description: 'Check out the <a href="/docs/components/toast/">Toaster docs page</a> to find out how to create these!'
+            });
+         });
+      </script>
+   </div>
+   <div class="dropdown">
+      <Dropdown 
+         id='hero-example-dropdown'
+         options={[
+            { label: 'Item 1', value: 'item-1' },
+            { label: 'Item 2', value: 'item-2' },
+            { label: 'Item 3', value: 'item-3' },
+         ]}
+      >
+         <Button color='primary' id={'hero-example-dropdown-trigger'}>
+            Dropdown
+         </Button>
+      </Dropdown>
+      <script>
+         import { DropdownHelper } from "@studiocms/ui/components";
+
+         new DropdownHelper('hero-example-dropdown');
+      </script>
+   </div>
+</section>
+<style>
+   .hero {
+      width: 100%;
+      margin-top: 6rem !important;
+      padding: 0 10vw;
+      min-height: calc(100vh - 16rem);
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 2rem;
+      grid-template-areas: 
+         "checkbox  input     input      toggle     modal    modal    selects  selects"
+         "hero-text hero-text hero-text  hero-text  theme    theme    selects  selects"
+         "hero-text hero-text hero-text  hero-text  divider  divider  divider  divider"
+         "hero-text hero-text hero-text  hero-text  button   button   radio    radio"
+         "user      user      textarea   textarea   textarea textarea radio    radio"
+         "toast     toast     textarea   textarea   textarea textarea dropdown dropdown";
+   }
+
+   .text {
+      font-size: 1.5em;
+      text-align: center;
+      max-width: 40vw;
+      z-index: 10;
+   }
+
+   .hero > div {
+      background-color: hsl(var(--background-step-1));
+      border-radius: 1rem;
+      padding: 2rem;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: .5;
+      transition: all .15s ease;
+   }
+
+   .hero > div:hover, .hero > div:has(*:focus) {
+      opacity: 1;
+   }
+
+   .hero .checkbox {
+      grid-area: checkbox;
+   }
+
+   .hero .input {
+      grid-area: input;
+   }
+
+   .hero .toggle {
+      grid-area: toggle;
+   }
+
+   .hero .modal {
+      grid-area: modal;
+   }
+
+   .hero .selects {
+      grid-area: selects;
+      flex-direction: column;
+      justify-content: space-evenly;
+   }
+
+   .hero .hero-text {
+      display: flex !important;
+      flex-direction: column;
+      grid-area: hero-text;
+      display: block;
+      opacity: 1;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      text-wrap: pretty !important;
+   }
+
+   .hero .hero-text h1 {
+      font-size: 3em;
+      line-height: 1.25;
+      text-wrap: pretty;
+   }
+
+   .hero .hero-text .hero-desc {
+      font-size: 1.25em;
+   }
+
+   .cta-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+   }
+
+   .hero .theme {
+      grid-area: theme;
+   }
+
+   .hero .divider {
+      grid-area: divider;
+   }
+
+   .hero .docs-cta {
+      grid-area: docs-cta;
+      opacity: 1;
+   }
+
+   .hero .github-cta {
+      grid-area: github-cta;
+      opacity: 1;
+   }
+
+   .hero .button {
+      grid-area: button;
+   }
+
+   .hero .radio {
+      grid-area: radio;
+   }
+
+   .hero .dropdown {
+      grid-area: dropdown;
+   }
+
+   .hero .textarea {
+      grid-area: textarea;
+   }
+
+   .hero .toast {
+      grid-area: toast;
+   }
+
+   .hero .user {
+      grid-area: user;
+   }
+
+   .github-icon {
+      width: 24px;
+      height: auto;
+   }
+
+   @media screen and (max-width: 1500px) {
+      .hero {
+         padding: 0 2rem;
+      }
+   }
+
+   @media screen and (max-width: 1280px) {
+      .hero {
+         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+         grid-template-areas: 
+            "checkbox  input     input      toggle     selects  selects"
+            "hero-text hero-text hero-text  hero-text  selects  selects"
+            "hero-text hero-text hero-text  hero-text  divider  divider"
+            "hero-text hero-text hero-text  hero-text radio    radio"
+            "user      user      textarea   textarea   radio    radio"
+            "toast     toast     textarea   textarea   dropdown dropdown"
+            "modal     modal     button     button     theme    theme";
+      }
+   }
+
+   @media screen and (max-width: 1100px) {
+      .hero {
+         grid-template-columns: 1fr 1fr 1fr 1fr;
+         grid-template-areas: 
+            "input     input     checkbox   checkbox"
+            "hero-text hero-text hero-text  hero-text"
+            "hero-text hero-text hero-text  hero-text"
+            "hero-text hero-text hero-text  hero-text"
+            "hero-text hero-text hero-text  hero-text"
+            "user      user      textarea   textarea"
+            "toast     toast     textarea   textarea"
+            "divider   divider   divider    divider"
+            "theme     theme     radio      radio"
+            "selects   selects   radio      radio"
+            "selects   selects   toggle     toggle"
+            "modal     modal     dropdown   dropdown"
+            "button    button    dropdown   dropdown";
+      }
+
+      .hero-text {
+         gap: 1rem;
+      }
+   }
+
+   @media screen and (max-width: 640px) {
+      .hero {
+         grid-template-columns: 1fr 1fr 1fr 1fr;
+         grid-template-areas: 
+            "input     input     checkbox   checkbox"
+            "hero-text hero-text hero-text  hero-text"
+            "hero-text hero-text hero-text  hero-text"
+            "hero-text hero-text hero-text  hero-text"
+            "hero-text hero-text hero-text  hero-text"
+            "textarea  textarea  textarea   textarea"
+            "toast     toast     user       user"
+            "divider   divider   divider    divider"
+            "theme     theme     radio      radio"
+            "toggle    toggle    radio      radio"
+            "selects   selects   selects    selects"
+            "modal     modal     dropdown   dropdown"
+            "button    button    dropdown   dropdown";
+      }
+
+      .hero > div {
+         padding: 1rem !important;
+         opacity: 1;
+      }
+
+      .hero > div.selects {
+         gap: 1rem;
+      }
+
+      .hero-text h1 {
+         font-size: 2.5em !important;
+      }
+
+      .hero-text p {
+         font-size: .975em !important;
+      }
+   }
+
+   @media screen and (max-width: 520px) {
+      .hero {
+         grid-template-columns: 1fr 1fr 1fr 1fr;
+         grid-template-areas: 
+            "input      input      checkbox   checkbox"
+            "hero-text  hero-text  hero-text  hero-text"
+            "hero-text  hero-text  hero-text  hero-text"
+            "hero-text  hero-text  hero-text  hero-text"
+            "hero-text  hero-text  hero-text  hero-text"
+            "textarea   textarea   textarea   textarea"
+            "toast      toast      user       user"
+            "divider    divider    divider    divider"
+            "theme      theme      radio      radio"
+            "toggle     toggle     radio      radio"
+            "selects    selects    selects    selects"
+            "modal      modal      dropdown   dropdown"
+            "button     button     dropdown   dropdown";
+      }
+   }
+</style>
+<style is:global>
+   .sui-text-content span {
+      line-height: 1 !important;
+   }
+</style>

@@ -204,3 +204,8 @@ a {
 .expressive-code span.title {
 	border: none !important;
 }
+
+.gutter {
+	width: 6ch !important;
+	text-align: right !important;
+}

@@ -6,6 +6,7 @@ title: User
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 import { User } from '@studiocms/ui/components';
+import Avatar from '~/assets/avatar.png'
 
 A component to display user info.
 
@@ -18,7 +19,7 @@ A component to display user info.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro
+    ```astro showLinenumbers title="UserExample.astro"
     ---
     import { User } from '@studiocms/ui/components';
     ---
@@ -31,23 +32,22 @@ A component to display user info.
 ### Avatar
 
 You can provide an `avatar` using the same rules as the [`Image`](https://docs.astro.build/en/guides/images/#src-required) component.
-
-import Avatar from '~/assets/avatar.png'
+To change the loading behavior, you can pass the `loading` attribute. It is passed to the `<Image />` component.
 
 <Tabs>
   <TabItem label="Preview">
     <PreviewCard>
-      <User name="John Doe" description="A cool dude" avatar={Avatar} />
+      <User name="John Doe" loading='eager' description="A cool dude" avatar={Avatar} />
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "avatar={ProfileImage}"
+    ```astro "avatar={ProfileImage}" showLinenumbers title="UserAvatarExample.astro"
     ---
     import { User } from '@studiocms/ui/components';
     import ProfileImage from '~/assets/profile.png'
     ---
 
-    <User name="John Doe" description="A cool dude" avatar={ProfileImage} />
+    <User name="John Doe" loading='eager' description="A cool dude" avatar={ProfileImage} />
     ```
   </TabItem>
 </Tabs>

@@ -17,6 +17,7 @@ interface Props {
 	options: Option[];
 	disabled?: boolean;
 	fullWidth?: boolean;
+	placeholder?: string;
 };
 
 const {
@@ -28,21 +29,26 @@ const {
 	options = [],
 	disabled,
 	fullWidth,
+    placeholder
 } = Astro.props;
 ---
 
 <div
     id={`${name}-container`}
-    class="select-label"
+    class="sui-select-label"
     class:list={[disabled && "disabled", className, fullWidth && "full"]}
 >
-    <label class="label" for={`${name}-select-btn`}>
-        {label}
-        <span class="req-star">{isRequired && "*"}</span>
-    </label>
+    {label && (
+        <label class="label" for={`${name}-select-btn`}>
+            {label}
+            <span class="req-star">{isRequired && "*"}</span>
+        </label>
+    )}
     <button
-        class="select-button"
+        class="sui-select-button"
         role="combobox"
+        aria-controls={`${name}-dropdown`}
+        aria-expanded="false"
         id={`${name}-select-btn`}
         type="button"
     >
@@ -50,16 +56,16 @@ const {
             {
                 defaultValue
                     ? options.find((x) => x.value === defaultValue)?.label
-                    : "Select"
+                    : placeholder || "Select"
             }
         </span>
         <Icon name="chevron-up-down" width={24} height={24} />
     </button>
-    <ul class="select-dropdown" role="listbox" id={`${name}-dropdown`}>
+    <ul class="sui-select-dropdown" role="listbox" id={`${name}-dropdown`}>
         {
             options.map((x, i) => (
                 <li
-                    class="select-option"
+                    class="sui-select-option"
                     role="option"
                     value={x.value}
                     class:list={[
@@ -75,7 +81,7 @@ const {
             ))
         }
     </ul>
-    <select class="hidden-select" id={name} name={name} required={isRequired}>
+    <select class="sui-hidden-select" id={name} name={name} required={isRequired}>
         <option value={""}> Select </option>
         {
             options.map((x) => (
@@ -123,12 +129,14 @@ const {
         };
 
         if (active) {
+            button.ariaExpanded = false;
             dropdown.classList.remove("active", "above");
             active = false;
             return;
         }
 
         active = true;
+        button.ariaExpanded = true;
 
         if (
             CustomRect.top >= 0 &&
@@ -213,20 +221,21 @@ const {
         );
 </script>
 <style>
-    .select-label {
+    .sui-select-label {
         width: fit-content;
         display: flex;
         flex-direction: column;
         gap: 0.25rem;
         min-width: 200px;
         position: relative;
+        height: fit-content;
     }
 
-    .select-label.full {
+    .sui-select-label.full, .sui-select-label.full .sui-select-button {
         width: 100%;
     }
 
-    .select-label.disabled {
+    .sui-select-label.disabled {
         opacity: 0.5;
         pointer-events: none;
         color: hsl(var(--text-muted));
@@ -241,7 +250,7 @@ const {
         font-weight: 700;
     }
 
-    .select-button {
+    .sui-select-button {
         padding: 0.5rem 0.75rem 0.5rem 1rem;
         border-radius: 8px;
         border: 1px solid hsl(var(--border));
@@ -256,18 +265,18 @@ const {
         gap: 1rem;
     }
 
-    .select-button:hover {
+    .sui-select-button:hover {
         background: hsl(var(--background-step-3));
     }
 
-    .select-button.active,
-    .select-button:active,
-    .select-button:has(+ .select-dropdown.active) {
+    .sui-select-button.active,
+    .sui-select-button:active,
+    .sui-select-button:has(+ .sui-select-dropdown.active) {
         border: 1px solid hsl(var(--primary-base));
         background: hsl(var(--background-step-2));
     }
 
-    .select-dropdown {
+    .sui-select-dropdown {
         position: absolute;
         width: 100%;
         border: 1px solid hsl(var(--border));
@@ -285,43 +294,43 @@ const {
         box-shadow: 0px 4px 8px hsl(var(--shadow), 0.5);
     }
 
-    .select-dropdown.active {
+    .sui-select-dropdown.active {
         display: flex;
     }
 
-    .select-dropdown.above {
+    .sui-select-dropdown.above {
         top: auto;
         bottom: calc(100% - 18px + 0.25rem);
     }
 
-    .select-option {
+    .sui-select-option {
         padding: 0.5rem;
         cursor: pointer;
         font-size: 0.975em;
         transition: all 0.15s ease;
     }
 
-    .select-option.disabled {
+    .sui-select-option.disabled {
         pointer-events: none;
         color: hsl(var(--text-muted));
     }
 
-    .select-option:hover, .select-option:focus {
+    .sui-select-option:hover, .sui-select-option:focus {
         background-color: hsl(var(--background-step-3));
     }
 
-    .select-option:focus {
+    .sui-select-option:focus {
         outline: none;
         border: none;
     }
 
-    .select-option.selected {
+    .sui-select-option.selected {
         background-color: hsl(var(--primary-base));
         color: hsl(var(--text-inverted));
         cursor: default;
     }
 
-    .hidden-select {
+    .sui-hidden-select {
         height: 0;
         width: 0;
         border: none;

@@ -10,7 +10,7 @@ const { siteTitle, siteTitleHref } = Astro.props;
 <Toaster />
 
 <div class="site-title sl-flex">
-  <a href={siteTitleHref}>
+  <div class="site-title-quicklinks">
     {
       config.logo && logos.dark && (
         <>
@@ -34,16 +34,22 @@ const { siteTitle, siteTitleHref } = Astro.props;
         </>
       )
     }
-    <span class:list={[ config.logo?.replacesTitle && 'sr-only' ]}>
-      {siteTitle} 
-    </span>
-  </a>
-
-  <a href="/docs/">{Astro.locals.t('site-title.labels.docs')}</a>
-</div>
-    
-<div class="external-links">
-  <a href="https://studiocms.dev">{Astro.locals.t('site-title.labels.main-site')}</a>
+    <div class="main-links">
+      <div class="studiocms-link">
+        <a href="https://studiocms.dev" class:list={[ config.logo?.replacesTitle && 'sr-only' ]}>
+          {siteTitle.replace("UI", "")}
+        </a>
+      </div>
+      <div class="studiocms-ui-link">
+        <a href={siteTitleHref} class="muted" class:list={[ config.logo?.replacesTitle && 'sr-only' ]}>
+          UI
+        </a>
+      </div>
+      <div class="docs-link">
+        <a href="/docs/">{Astro.locals.t('site-title.labels.docs')}</a>
+      </div>
+    </div>
+  <div>
 </div>
 
 <style>
@@ -65,28 +71,67 @@ const { siteTitle, siteTitleHref } = Astro.props;
     margin-left: 0;
 	}
 
-  .site-title > a {
-    display: flex;
-    align-items: center;
-    gap: var(--sl-nav-gap);
-    font-size: var(--sl-text-h4);
+  .site-title-quicklinks {
+    margin-left: 0;
   }
 
+  .main-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .675rem;
+  }
 
+  .main-links > div {
+    margin: 0;
+    padding: 0;
+    border: none !important;
+  }
 
-  @media screen and (max-width: 520px) {
-    .site-title a:first-of-type {
-      border-right: 1px solid var(--sl-color-gray-5);
-      padding-right: 1rem;
+  .site-title-quicklinks > div {
+    border: none !important;
+    padding: 0;
+    font-size: 1.5em;
+    margin-left: 0;
+  }
+
+  :root[data-theme="light"] {
+    .studiocms-link a {
+      color: black;
+    }
+  }
+    .studiocms-link a {
+      color: white;
     }
 
-    .site-title a:first-of-type span {
-      display: none;
-    }
+  .docs-link {
+    margin: 0;
+  }
 
-    .site-title a:last-of-type {
-      margin-left: .5rem;
-    }
+  .studiocms-link, .studiocms-ui-link, .docs-link {
+    transition: all .15s ease;
+  }
+
+  .studiocms-link:hover, .studiocms-ui-link:hover, .docs-link:hover {
+    transform: translateY(-.125rem);
+  }
+
+  .site-title > div {
+    display: flex;
+    align-items: center;
+    color: hsl(var(--text-normal));
+  }
+
+  .site-title > div {
+    padding-inline-end: 0;
+  }
+
+  .site-title a:hover {
+    transform: translateY(-0.5rem);
+  }
+
+  a.muted {
+    color: var(--sl-color-gray-2);
   }
 
 	img {
@@ -114,14 +159,17 @@ const { siteTitle, siteTitleHref } = Astro.props;
       align-items: center;
     }
   }
+
   a {
     color: var(--sl-color-text-accent);
     font-weight: 600;
     text-decoration: none;
   }
+
   .external-links > a {
     font-size: var(--sl-text-h6);
   }
+
   a:hover,
   a:focus {
     color: var(--sl-color-white);

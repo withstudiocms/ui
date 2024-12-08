@@ -18,6 +18,7 @@ interface Props {
 	options: Option[];
 	disabled?: boolean;
 	fullWidth?: boolean;
+    placeholder?: string;
 };
 
 const {
@@ -29,29 +30,31 @@ const {
 	options = [],
 	disabled,
 	fullWidth,
+    placeholder
 } = Astro.props;
 ---
 
 <div
     id={`${name}-container`}
-    class="search-select-label"
+    class="sui-search-select-label"
     class:list={[disabled && "disabled", className, fullWidth && "full"]}
 >
-    <label class="label" for={`${name}-search-select-btn`}>
-        {label}
-        <span class="req-star">{isRequired && "*"}</span>
-    </label>
-    <div class="search-input-wrapper" id={`${name}-search-input-wrapper`}>
+    <div class="sui-search-input-wrapper" id={`${name}-search-input-wrapper`}>
         <Input
-            placeholder={options.find((x) => x.value === defaultValue)?.label || "Select"}
+            placeholder={options.find((x) => x.value === defaultValue)?.label || (placeholder || "Select")}
+            role='combobox'
+            aria-controls={`${name}-dropdown`}
+            aria-expanded="false"
+            label={label || ''}
+            isRequired={isRequired || false}
         />
-        <Icon name="chevron-up-down" class="search-select-indicator" width={24} height={24} />
+        <Icon name="chevron-up-down" class="sui-search-select-indicator" width={24} height={24} />
     </div>
-    <ul class="search-select-dropdown" role="listbox" id={`${name}-dropdown`}>
+    <ul class="sui-search-select-dropdown" role="listbox" id={`${name}-dropdown`}>
         {
             options.map((x, i) => (
                 <li
-                    class="search-select-option"
+                    class="sui-search-select-option"
                     role="option"
                     value={x.value}
                     class:list={[
@@ -67,7 +70,7 @@ const {
             ))
         }
     </ul>
-    <select class="hidden-select" id={name} name={name} required={isRequired}>
+    <select class="sui-hidden-select" id={name} name={name} required={isRequired}>
         <option value={""}> Select </option>
         {
             options.map((x) => (
@@ -116,12 +119,14 @@ const {
         };
 
         if (active) {
+            searchInput.ariaExpanded = false;
             dropdown.classList.remove("active", "above");
             active = false;
             return;
         }
 
         active = true;
+        searchInput.ariaExpanded = true;
 
         if (
             CustomRect.top >= 0 &&
@@ -300,7 +305,7 @@ const {
         for (const option of options) {
             const element = document.createElement('li');
             element.classList.add(...[
-                'search-select-option', 
+                'sui-search-select-option', 
                 option.disabled && "disabled",
                 focusIndex === i && 'focused',
             ].filter(Boolean));
@@ -322,7 +327,7 @@ const {
     }
 </script>
 <style is:global>
-    .search-select-label {
+    .sui-search-select-label {
         width: fit-content;
         display: flex;
         flex-direction: column;
@@ -331,11 +336,11 @@ const {
         position: relative;
     }
 
-    .search-select-label.full {
+    .sui-search-select-label.full {
         width: 100%;
     }
 
-    .search-select-label.disabled {
+    .sui-search-select-label.disabled {
         opacity: 0.5;
         pointer-events: none;
         color: hsl(var(--text-muted));
@@ -350,7 +355,7 @@ const {
         font-weight: 700;
     }
 
-    .search-select-dropdown {
+    .sui-search-select-dropdown {
         position: absolute;
         width: 100%;
         border: 1px solid hsl(var(--border));
@@ -368,34 +373,34 @@ const {
         box-shadow: 0px 4px 8px hsl(var(--shadow), 0.5);
     }
 
-    .search-select-dropdown.above {
+    .sui-search-select-dropdown.above {
         top: auto;
         bottom: calc(100% - 18px + 0.25rem);
     }
 
-    .search-select-option, .empty-search-results {
+    .sui-search-select-option, .empty-search-results {
         padding: 0.5rem;
         cursor: pointer;
         font-size: 0.975em;
         transition: all 0.15s ease;
     }
 
-    .search-select-option.disabled {
+    .sui-search-select-option.disabled {
         pointer-events: none;
         color: hsl(var(--text-muted));
     }
 
-    .search-select-option:hover, .search-select-option.focused {
+    .sui-search-select-option:hover, .sui-search-select-option.focused {
         background-color: hsl(var(--background-step-3));
     }
 
-    .search-select-option.selected {
+    .sui-search-select-option.selected {
         background-color: hsl(var(--primary-base));
         color: hsl(var(--text-inverted));
         cursor: default;
     }
 
-    .hidden-select {
+    .sui-hidden-select {
         height: 0;
         width: 0;
         border: none;
@@ -406,25 +411,24 @@ const {
         opacity: 0;
     }
 
-    .search-input-wrapper {
+    .sui-search-input-wrapper {
         width: 100%;
         position: relative;
         height: fit-content;
         cursor: pointer;
     }
 
-    .search-select-indicator {
+    .sui-search-select-indicator {
         position: absolute;
-        top: calc(65% + 1px);
-        transform: translateY(-65%);
-        right: .5rem;
+        bottom: .75rem;
+        right: .75rem;
     }
 
-    .search-input-wrapper:has(input:focus) + .search-select-dropdown {
+    .sui-search-input-wrapper:has(input:focus) + .sui-search-select-dropdown {
         display: flex;
     }
 
-    .search-select-dropdown.active, .search-select-dropdown:has(> li:active) {
+    .sui-search-select-dropdown.active, .sui-search-select-dropdown:has(> li:active) {
         display: flex;
     }
 </style>

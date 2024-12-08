@@ -7,7 +7,7 @@ interface Props extends ComponentProps<typeof Button> {};
 const props = Astro.props;
 ---
 
-<Button id='sui__theme-toggle' {...props}>
+<Button id='sui-theme-toggle' {...props}>
   <div id="dark-content">
     <slot name="dark" />
   </div>
@@ -19,22 +19,25 @@ const props = Astro.props;
 <script>
   import { ThemeHelper } from '../utils/ThemeHelper';
 
-  const themeToggle = document.getElementById('sui__theme-toggle');
+  const themeToggle = document.getElementById('sui-theme-toggle');
   const themeHelper = new ThemeHelper();
   
   themeHelper.registerToggle(themeToggle);
 </script>
 
 <style is:global>
-  #sui__theme-toggle #dark-content, #sui__theme-toggle #light-content {
+  #sui-theme-toggle #dark-content, #sui-theme-toggle #light-content {
     display: none;
+    width: fit-content;
+    height: fit-content;
+    max-height: 100%;
   }
 
-  [data-theme="dark"] #sui__theme-toggle #dark-content {
+  [data-theme="dark"] #sui-theme-toggle #dark-content {
     display: block;
   }
 
-  [data-theme="light"] #sui__theme-toggle #light-content {
+  [data-theme="light"] #sui-theme-toggle #light-content {
     display: block;
   }
 </style>

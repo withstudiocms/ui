@@ -8,6 +8,9 @@ import PreviewCard from '~/components/PreviewCard.astro';
 import ModalScript from '~/components/ModalScript.astro';
 import { Modal, Button, Row } from '@studiocms/ui/components';
 
+:::caution[Helper required]
+This component requires a **helper**. Make sure to read the documentation carefully so you know how to use it.
+:::
 
 A dropdown component that takes care of all the annoying bits for you, with added support for programmatic triggers on top.
 
@@ -26,7 +29,7 @@ A dropdown component that takes care of all the annoying bits for you, with adde
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro
+    ```astro showLinenumbers title="ModalExample.astro"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
@@ -39,7 +42,7 @@ A dropdown component that takes care of all the annoying bits for you, with adde
       Trigger Modal
     </Button>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     import { ModalHelper } from '@studiocms/ui/components';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -57,22 +60,25 @@ You can change the modal's size to one of three presets.
       <Modal id="sizes-modal-sm" size="sm">
         <h2 slot="header">Small Modal</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
       <Modal id="sizes-modal-md">
         <h2 slot="header">Medium Content</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
       <Modal id="sizes-modal-lg" size="lg">
         <h2 slot="header">Large Content</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
 
@@ -90,7 +96,7 @@ You can change the modal's size to one of three presets.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro /size="[a-z]+"/
+    ```astro /size="[a-z]+"/ showLinenumbers title="ModalSizesExample.astro"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
@@ -98,8 +104,9 @@ You can change the modal's size to one of three presets.
     <Modal id="modal" size="sm">
       <h2 slot="header">Small Modal</h2>
       <div>
-        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-        Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
       </div>
     </Modal>
     <Button color="primary" id="modal-trigger">
@@ -108,7 +115,7 @@ You can change the modal's size to one of three presets.
 
     <!-- Other modals and triggers omitted for simplicity -->
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     import { ModalHelper } from '@studiocms/ui/components';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -126,8 +133,9 @@ You can change whether a modal can be dismissed by clicking outside of it via th
       <Modal id="dismissable-modal" dismissable={false}>
         <h2 slot="header">Non-dismissable</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
 
@@ -137,7 +145,7 @@ You can change whether a modal can be dismissed by clicking outside of it via th
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "dismissable={false}"
+    ```astro "dismissable={false}" showLinenumbers title="ModalDismissableExample.astro"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
@@ -145,15 +153,16 @@ You can change whether a modal can be dismissed by clicking outside of it via th
     <Modal id="modal" dismissable={false}>
       <h2 slot="header">Non-dismissable</h2>
       <div>
-        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-        Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+        nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+        aliquam nam consectetur dolorum et unde optio At delectus alias.
       </div>
     </Modal>
     <Button color="primary" id="modal-trigger">
       Non-Dismissable
     </Button>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     import { ModalHelper } from '@studiocms/ui/components';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -165,16 +174,17 @@ If a modal has buttons (see below), the `x` button in the top right corner will 
 
 ### Buttons
 
-Modals support both a `Cancel` and a `Confirm` button. You can use both at the same time, or one of them on it's own.
+Modals support both a "cancel" and a "confirm" button.
 
 <Tabs>
   <TabItem label="Preview">
     <PreviewCard>
-      <Modal id="buttons-modal" buttons={['cancel','confirm']} class="not-content">
+      <Modal id="buttons-modal" cancelButton="Cancel" actionButton="Confirm" class="not-content">
         <h2 slot="header">Buttons</h2>
         <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-          Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
         </div>
       </Modal>
 
@@ -184,23 +194,24 @@ Modals support both a `Cancel` and a `Confirm` button. You can use both at the s
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "buttons={['cancel','confirm']}"
+    ```astro "cancelButton='Cancel' actionButton='Confirm'" showLinenumbers title="ModalButtonsExample.astro"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
 
-    <Modal id="modal" buttons={['cancel','confirm']}>
+    <Modal id="modal" cancelButton="Cancel" actionButton="Confirm">
       <h2 slot="header">Buttons</h2>
       <div>
-        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit nesciunt qui quibusdam quam non totam quia. 
-        Et porro unde et rerum aliquam nam consectetur dolorum et unde optio At delectus alias.
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
       </div>
     </Modal>
     <Button color="primary" id="modal-trigger">
       Buttons
     </Button>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
     import { ModalHelper } from '@studiocms/ui/components';
 
@@ -209,15 +220,36 @@ Modals support both a `Cancel` and a `Confirm` button. You can use both at the s
   </TabItem>
 </Tabs>
 
-:::note
-The order of the `button` prop array does not influence the order of the buttons on the form.
-:::
+If you want to, instead of passing the label as a string to the prop, you can instead pass an object with the `label`
+and `color` keys defined to change the way the buttons look:
+
+```astro "cancelButton={{ label: 'Cancel', color: 'default' }} actionButton={{ label: 'Confirm', color: 'danger' }}" showLinenumbers title="ModalButtonsExample.astro"
+---
+import { Modal, Button } from '@studiocms/ui/components';
+---
+
+<Modal
+  id="modal"
+  cancelButton={{ label: 'Cancel', color: 'default' }}
+  actionButton={{ label: 'Confirm', color: 'danger' }}
+>
+  <h2 slot="header">Buttons</h2>
+  <div>
+    Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+    nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+    aliquam nam consectetur dolorum et unde optio At delectus alias.
+  </div>
+</Modal>
+<Button color="primary" id="modal-trigger">
+  Buttons
+</Button>
+```
 
 ### Registering Callbacks
 
 If you want to implement functionality based on which of the buttons is clicked, you can register a callback on each of them. 
 
-```ts twoslash ins={5-7,9-11}
+```ts twoslash ins={5-7,9-11} showLinenumbers title="Script Tag"
 // @noErrors
 import { ModalHelper } from '@studiocms/ui/components';
 
@@ -239,7 +271,7 @@ This only changes their types, not their text.
 
 By using the `registerConfirmCallback` function, you can retrieve the `FormData` after the `Confirm` button is clicked. Any inputs in the modal will be included.
 
-```ts twoslash "formData"
+```ts twoslash "formData" showLinenumbers title="Script Tag"
 // @noErrors
 import { ModalHelper } from '@studiocms/ui/components';
 
@@ -254,7 +286,7 @@ modal.registerConfirmCallback((formData) => {
 
 You can add multiple triggers to your modal by using the `bindTrigger` function in combination with an element's ID.
 
-```ts twoslash ins={4-5}
+```ts twoslash ins={4-5} showLinenumbers title="Script Tag"
 // @noErrors
 import { ModalHelper } from '@studiocms/ui/components';
 
@@ -267,7 +299,7 @@ modal.bindTrigger('modal-trigger-three');
 
 Similar to [dropdowns](/customizing/studiocms-ui/components/dropdown), modals can be shown and hidden programatically:
 
-```ts twoslash ins={5-6}
+```ts twoslash ins={5-6} showLinenumbers title="Script Tag"
 // @noErrors
 import { ModalHelper } from '@studiocms/ui/components';
 

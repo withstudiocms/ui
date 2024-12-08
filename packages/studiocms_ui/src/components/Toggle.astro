@@ -23,7 +23,7 @@ const {
 } = Astro.props;
 ---
 <label
-  class="toggle-label"
+  class="sui-toggle-label"
   for={name}
   class:list={[
     disabled && "disabled",
@@ -31,8 +31,8 @@ const {
     size,
   ]}
 >
-  <div class="toggle-container">
-    <div class="toggle-switch" />
+  <div class="sui-toggle-container">
+    <div class="sui-toggle-switch" />
     <input
       type="checkbox"
       name={name}
@@ -40,7 +40,7 @@ const {
       checked={defaultChecked}
       disabled={disabled}
       required={isRequired}
-      class="checkbox"
+      class="sui-checkbox"
     />
   </div>
   <span>
@@ -48,7 +48,7 @@ const {
   </span>
 </label>
 <style>
-  .toggle-label {
+  .sui-toggle-label {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -57,17 +57,17 @@ const {
     margin: .25rem 0;
   }
 
-  .toggle-label.disabled {
+  .sui-toggle-label.disabled {
     opacity: 0.5;
     pointer-events: none;
     color: hsl(var(--text-muted));
   }
 
-  .toggle-label:active .toggle-switch {
+  .sui-toggle-label:active .sui-toggle-switch {
     transform: scale(0.85);
   }
 
-  .toggle-container {
+  .sui-toggle-container {
     --toggle-height: 12px;
     --toggle-width: 40px;
     display: flex;
@@ -80,7 +80,7 @@ const {
     border-radius: var(--toggle-height);
   }
 
-  .toggle-switch {
+  .sui-toggle-switch {
     --switch: calc(var(--toggle-height) * 1.75);
     height: var(--switch);
     width: var(--switch);
@@ -92,42 +92,42 @@ const {
     will-change: transform;
   }
 
-  .toggle-container:has(.checkbox:checked) .toggle-switch {
+  .sui-toggle-container:has(.sui-checkbox:checked) .sui-toggle-switch {
     left: calc(100% - var(--switch));
     background-color: hsl(var(--text-normal));
   }
 
-  .toggle-label.sm .toggle-container {
+  .sui-toggle-label.sm .sui-toggle-container {
     --toggle-height: 10px;
     --toggle-width: 32px;
   }
 
-  .toggle-label.sm .toggle-switch {
+  .sui-toggle-label.sm .sui-toggle-switch {
     --switch: calc(var(--toggle-height) * 1.65);
   }
 
-  .toggle-label.lg .toggle-container {
+  .sui-toggle-label.lg .sui-toggle-container {
     --toggle-height: 16px;
     --toggle-width: 48px;
   }
 
-  .toggle-label.lg .toggle-switch {
+  .sui-toggle-label.lg .sui-toggle-switch {
     --switch: calc(var(--toggle-height) * 1.65);
   }
 
-  .toggle-label.primary .toggle-container:has(.checkbox:checked) {
+  .sui-toggle-label.primary .sui-toggle-container:has(.sui-checkbox:checked) {
     background-color: hsl(var(--primary-base));
   }
 
-  .toggle-label.success .toggle-container:has(.checkbox:checked) {
+  .sui-toggle-label.success .sui-toggle-container:has(.sui-checkbox:checked) {
     background-color: hsl(var(--success-base));
   }
 
-  .toggle-label.warning .toggle-container:has(.checkbox:checked) {
+  .sui-toggle-label.warning .sui-toggle-container:has(.sui-checkbox:checked) {
     background-color: hsl(var(--warning-base));
   }
 
-  .toggle-label.danger .toggle-container:has(.checkbox:checked) {
+  .sui-toggle-label.danger .sui-toggle-container:has(.sui-checkbox:checked) {
     background-color: hsl(var(--danger-base));
   }
 
@@ -136,7 +136,7 @@ const {
     font-weight: 700;
   }
 
-  .checkbox {
+  .sui-checkbox {
     width: 0;
     height: 0;
     visibility: hidden;

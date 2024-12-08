@@ -22,14 +22,14 @@ const {
 } = Astro.props;
 ---
 <div 
-  id="toaster" 
+  id="sui-toaster" 
   class:list={[
     closeButton && "closeable",
     position,
   ]},
 >
   <div 
-    id="toast-drawer"
+    id="sui-toast-drawer"
     data-offset={offset}
     data-gap={gap}
     data-duration={duration}
@@ -66,22 +66,22 @@ const {
   }
 
   function createToast(props: ToastProps) {
-    const toastParent = document.getElementById('toast-drawer')! as HTMLDivElement;
+    const toastParent = document.getElementById('sui-toast-drawer')! as HTMLDivElement;
     
     const toastContainer = document.createElement('div');
     const toastID = generateID('toast');
     toastContainer.id = toastID;
-    toastContainer.classList.add('toast-container', props.type, `${props.closeButton || props.persistent && "closeable"}`, `${props.persistent && 'persistent'}`);
+    toastContainer.classList.add('sui-toast-container', props.type, `${props.closeButton || props.persistent && "closeable"}`, `${props.persistent && 'persistent'}`);
 
     const toastHeader = document.createElement('div');
-    toastHeader.classList.add('toast-header');
+    toastHeader.classList.add('sui-toast-header');
 
     const toastHeaderLeftSide = document.createElement('div');
-    toastHeaderLeftSide.classList.add('toast-header-left-side')
+    toastHeaderLeftSide.classList.add('sui-toast-header-left-side')
     
     const toastTitle = document.createElement('span');
     toastTitle.textContent = props.title;
-    toastTitle.classList.add('toast-title');
+    toastTitle.classList.add('sui-toast-title');
 
     let iconString: ValidIconString;
 
@@ -115,14 +115,14 @@ const {
     if (props.description) {
       const toastDesc = document.createElement('span');
       toastDesc.innerHTML = props.description;
-      toastDesc.classList.add('toast-desc');
+      toastDesc.classList.add('sui-toast-desc');
 
       toastContainer.appendChild(toastDesc);
     }
 
     if (!props.persistent) {
       const toastProgressBar = document.createElement('div');
-      toastProgressBar.classList.add('toast-progress-bar');
+      toastProgressBar.classList.add('sui-toast-progress-bar');
       toastProgressBar.style.animationDuration = props.duration ? `${props.duration}ms` : `${toastParent.dataset.duration || 4000}ms`;
 
       toastContainer.appendChild(toastProgressBar);
@@ -149,7 +149,7 @@ const {
   });
 </script>
 <style>
-  #toaster {
+  #sui-toaster {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -157,9 +157,10 @@ const {
     left: 0;
     z-index: 100;
     pointer-events: none;
+    color: hsl(var(--text-normal));
   }
 
-  #toast-drawer {
+  #sui-toast-drawer {
     max-width: 420px;
     width: 100%;
     height: fit-content;
@@ -168,14 +169,14 @@ const {
     flex-direction: column;
   }
 
-  #toaster.top-left #toast-drawer,
-  #toaster.bottom-left #toast-drawer {
+  #sui-toaster.top-left #sui-toast-drawer,
+  #sui-toaster.bottom-left #sui-toast-drawer {
     left: 50%;
     transform: translateX(-50%);
   }
 </style>
 <style is:global>
-  .toast-container {
+  .sui-toast-container {
     pointer-events: all;
     padding: 1rem;
     border-radius: .5rem;
@@ -192,14 +193,14 @@ const {
     z-index: 90;
   }
 
-  .toast-header {
+  .sui-toast-header {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
   }
 
-  .toast-header-left-side {
+  .sui-toast-header-left-side {
     display: flex;
     flex-direction: row;
     gap: .5rem;
@@ -208,23 +209,23 @@ const {
     font-size: 1.125em;
   }
 
-  .toast-header-left-side svg {
+  .sui-toast-header-left-side svg {
     color: hsl(var(--primary-base));
   }
 
-  .toast-container.success .toast-header-left-side svg {
+  .sui-toast-container.success .sui-toast-header-left-side svg {
     color: hsl(var(--success-base));
   }
 
-  .toast-container.warning .toast-header-left-side svg {
+  .sui-toast-container.warning .sui-toast-header-left-side svg {
     color: hsl(var(--warning-base));
   }
 
-  .toast-container.danger .toast-header-left-side svg {
+  .sui-toast-container.danger .sui-toast-header-left-side svg {
     color: hsl(var(--danger-base));
   }
 
-  .toast-progress-bar {
+  .sui-toast-progress-bar {
     position: absolute;
     height: 4px;
     width: 100%;
@@ -234,15 +235,15 @@ const {
     animation: toast-progress forwards linear;
   }
 
-  .toast-container.success .toast-progress-bar {
+  .sui-toast-container.success .sui-toast-progress-bar {
     background-color: hsl(var(--success-base));
   }
 
-  .toast-container.warning .toast-progress-bar {
+  .sui-toast-container.warning .sui-toast-progress-bar {
     background-color: hsl(var(--warning-base));
   }
 
-  .toast-container.danger .toast-progress-bar {
+  .sui-toast-container.danger .sui-toast-progress-bar {
     background-color: hsl(var(--danger-base));
   }
 
@@ -261,23 +262,23 @@ const {
     background-color: hsl(var(--default-base));
   }
 
-  .toast-container.closing {
+  .sui-toast-container.closing {
     animation: toast-closing .25s ease forwards;
   }
 
-  .toast-container.persistent {
+  .sui-toast-container.persistent {
     border: 1px solid hsl(var(--primary-base));
   }
 
-  .toast-container.persistent.success {
+  .sui-toast-container.persistent.success {
     border: 1px solid hsl(var(--success-base));
   }
 
-  .toast-container.persistent.warning {
+  .sui-toast-container.persistent.warning {
     border: 1px solid hsl(var(--warning-base));
   }
 
-  .toast-container.persistent.danger {
+  .sui-toast-container.persistent.danger {
     border: 1px solid hsl(var(--danger-base));
   }
 

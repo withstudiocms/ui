@@ -64,12 +64,12 @@ class ThemeHelper {
   public toggleTheme = (): void => {
     const theme = this.getTheme();
 
-    if (theme === 'dark') {
+    if (theme && theme === 'dark') {
       this.setTheme('light');
       return;
     }
 
-    if (theme === 'light') {
+    if (theme && theme === 'light') {
       this.setTheme('dark');
       return;
     }
@@ -95,7 +95,10 @@ class ThemeHelper {
       return;
     };
 
-    toggle.addEventListener('click', this.toggleTheme);
+    if (!toggle.dataset.suiThemeToggle) {
+      toggle.addEventListener('click', this.toggleTheme);
+      toggle.dataset.suiThemeToggle = 'true';
+    }
   };
 
   /**

@@ -1,8 +1,7 @@
 import starlight from '@astrojs/starlight';
-// import starlightUtils from '@lorenzo_lewis/starlight-utils';
-import { defineConfig } from 'astro/config';
-// import starlightImageZoom from 'starlight-image-zoom';
-// import getCoolifyURL from './hostUtils';
+import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
+import { defineConfig, envField } from 'astro/config';
+import starlightImageZoom from 'starlight-image-zoom';
 import rehypePluginKit from './src/plugins/rehypePluginKit';
 
 // Define the Site URL
@@ -29,25 +28,34 @@ export const locales = {
 
 export default defineConfig({
 	site,
+	experimental: {
+		svg: true,
+	},
 	image: {
 		remotePatterns: [{ protocol: 'https' }],
 	},
 	markdown: {
 		rehypePlugins: rehypePluginKit,
 	},
+	env: {
+		schema: {
+			THUM_SECRET_KEY: envField.string({ access: 'secret', context: 'server', optional: true }),
+		},
+	},
 	integrations: [
 		starlight({
-			title: 'StudioCMS/UI',
+			title: 'StudioCMS UI',
 			description: 'The UI library for StudioCMS, available for Astro for all to use.',
 			favicon: '/logo-light.svg',
 			lastUpdated: true,
-			credits: true,
+			credits: false,
 			tagline: 'The UI library for StudioCMS, available for Astro for all to use.',
 			components: {
 				SiteTitle: './src/starlightOverrides/SiteTitle.astro',
 				PageTitle: './src/starlightOverrides/PageTitle.astro',
 				Sidebar: './src/starlightOverrides/Sidebar.astro',
 				Head: './src/starlightOverrides/Head.astro',
+				Header: './src/starlightOverrides/Header.astro',
 			},
 			logo: {
 				dark: '../assets/logo-light.svg',
@@ -94,9 +102,49 @@ export default defineConfig({
 						content: `${site}og.jpg?v=1`,
 					},
 				},
+				{
+					tag: 'meta',
+					attrs: {
+						property: 'twitter:site',
+						content: 'withstudiocms',
+					},
+				},
+				{
+					tag: 'meta',
+					attrs: {
+						property: 'twitter:creator',
+						content: 'withstudiocms',
+					},
+				},
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'preload',
+						as: 'font',
+						type: 'font/woff2',
+						href: onestWoff2,
+						crossorigin: 'anonymous',
+					},
+				},
 			],
 			sidebar: [
-				{ label: 'Getting Started', link: 'docs/' },
+				{
+					label: 'Getting Started',
+					items: [
+						{
+							label: 'Installation',
+							link: 'docs/',
+						},
+						{
+							label: 'Release Notes',
+							link: 'docs/changelog',
+						},
+						{
+							label: 'Site Showcase',
+							link: 'docs/showcase',
+						},
+					],
+				},
 				{
 					label: 'Components',
 					autogenerate: {
@@ -105,12 +153,7 @@ export default defineConfig({
 					},
 				},
 			],
-			plugins: [
-				// starlightUtils({
-				// 	multiSidebar: { switcherStyle: 'horizontalList' },
-				// }),
-				// starlightImageZoom(),
-			],
+			plugins: [starlightImageZoom()],
 		}),
 	],
 });

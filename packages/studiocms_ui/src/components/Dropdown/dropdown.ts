@@ -1,12 +1,13 @@
 class DropdownHelper {
-	container: HTMLDivElement;
-	toggleEl: HTMLDivElement;
-	dropdown: HTMLUListElement;
+	private container: HTMLDivElement;
+	private toggleEl: HTMLDivElement;
+	private dropdown: HTMLUListElement;
 
-	alignment: 'start' | 'center' | 'end';
-	triggerOn: 'left' | 'right' | 'both';
+	private alignment: 'start' | 'center' | 'end';
+	private triggerOn: 'left' | 'right' | 'both';
+	private fullWidth = false;
+	
 	active = false;
-	fullWidth = false;
 
 	constructor(id: string, fullWidth?: boolean) {
 		this.container = document.getElementById(`${id}-container`) as HTMLDivElement;

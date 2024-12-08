@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  avatar: string;
+  name: string;
+  handle: string;
+  message: string;
+  image?: {
+    path: string;
+    width: number;
+    height: number;
+  };
+}
+
+const { avatar, name, handle, message, image } = Astro.props;
+---
+<div class="social-proof-card" class:list={[image && "two-spaces"]}>
+  <div class="social-proof-author">
+    <Image class="social-proof-author-avatar" src={avatar} alt={handle} width={40} height={40} />
+    <div class="social-proof-author-text">
+      <span class="social-proof-author-name">{name}</span>
+      <span class="social-proof-author-handle">{handle}</span>
+    </div>
+  </div>
+  <p class="social-proof-message">{message}</p>
+  {image && (
+    <Image src={image.path} alt={''} width={image.width} height={image.height} class='social-proof-image' />
+  )}
+</div>
+<style>
+  .social-proof-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    border-radius: 1rem;
+    padding: 2rem;
+    background-color: hsl(var(--background-step-1));
+  }
+
+  .social-proof-author {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .social-proof-author-avatar {
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+
+  .social-proof-author-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .social-proof-author-name {
+    font-weight: 500;
+  }
+
+  .social-proof-author-handle {
+    font-weight: 300;
+    color: hsl(var(--text-muted));
+    font-size: .875em;
+    line-height: 1;
+  }
+
+  .social-proof-message {
+    margin: 1rem 0 0 0;
+  }
+
+  .social-proof-image {
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-top: 1rem;
+    border-radius: .5rem;
+  }
+</style>

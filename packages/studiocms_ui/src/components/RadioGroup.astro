@@ -34,7 +34,7 @@ const {
 ---
 
 <div 
-  class="radio-container"
+  class="sui-radio-container"
   class:list={[
     disabled && "disabled",
     horizontal && "horizontal",
@@ -45,18 +45,18 @@ const {
   <span>
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
-  <div class="radio-inputs">
+  <div class="sui-radio-inputs">
     {options.map(({ label, value, disabled: individuallyDisabled }) => (
       <label
         for={value}
-        class="radio-label"
+        class="sui-radio-label"
         class:list={[ individuallyDisabled && "disabled" ]}
       >
-        <div class="radio-box-container">
-          <div class="radio-box" />
+        <div class="sui-radio-box-container">
+          <div class="sui-radio-box" />
         </div>
         <input 
-          class="radio-toggle" 
+          class="sui-radio-toggle" 
           type="radio" 
           value={value} 
           id={value} 
@@ -71,18 +71,18 @@ const {
   </div>
 </div>
 <style>
-  .radio-container {
+  .sui-radio-container {
     display: flex;
     flex-direction: column;
     gap: .5rem;
   }
 
-  .radio-container.disabled {
+  .sui-radio-container.disabled {
     opacity: 0.5;
     color: hsl(var(--text-muted));
   }
 
-  .radio-label.disabled {
+  .sui-radio-label.disabled {
     opacity: 0.5;
     color: hsl(var(--text-muted));
     pointer-events: none;
@@ -93,17 +93,17 @@ const {
     font-weight: 700;
   }
 
-  .radio-inputs {
+  .sui-radio-inputs {
     display: flex;
     flex-direction: column;
     gap: .75rem;
   }
 
-  .radio-container.horizontal .radio-inputs {
+  .sui-radio-container.horizontal .sui-radio-inputs {
     flex-direction: row;
   }
 
-  .radio-label {
+  .sui-radio-label {
     display: flex;
     flex-direction: row;
     gap: .5rem;
@@ -111,41 +111,41 @@ const {
     align-items: center;
   }
 
-  .radio-label:hover .radio-box {
+  .sui-radio-label:hover .sui-radio-box {
     outline-color: hsl(var(--default-hover));
   }
 
-  .radio-container:not(.disabled) .radio-label:active .radio-box {
+  .sui-radio-container:not(.disabled) .sui-radio-label:active .sui-radio-box {
     outline-color: hsl(var(--default-active));
     scale: 0.9;
   }
 
-  .radio-label:has(.radio-toggle:checked) .radio-box {
+  .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
     background-color: hsl(var(--text-normal));
     outline-color: hsl(var(--text-normal));
   }
 
-  .radio-container.primary .radio-label:has(.radio-toggle:checked) .radio-box {
+  .sui-radio-container.primary .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
     background-color: hsl(var(--primary-base));
     outline-color: hsl(var(--primary-base));
   }
 
-  .radio-container.success .radio-label:has(.radio-toggle:checked) .radio-box {
+  .sui-radio-container.success .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
     background-color: hsl(var(--success-base));
     outline-color: hsl(var(--success-base));
   }
 
-  .radio-container.warning .radio-label:has(.radio-toggle:checked) .radio-box {
+  .sui-radio-container.warning .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
     background-color: hsl(var(--warning-base));
     outline-color: hsl(var(--warning-base));
   }
 
-  .radio-container.danger .radio-label:has(.radio-toggle:checked) .radio-box {
+  .sui-radio-container.danger .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
     background-color: hsl(var(--danger-base));
     outline-color: hsl(var(--danger-base));
   }
 
-  .radio-box-container {
+  .sui-radio-box-container {
     width: 20px;
     height: 20px;
     display: flex;
@@ -155,7 +155,7 @@ const {
     cursor: pointer;
   }
 
-  .radio-box {
+  .sui-radio-box {
     width: 12px;
     height: 12px;
     border-radius: 20px;
@@ -164,7 +164,7 @@ const {
     transition: all .15s ease;
   }
 
-  .radio-toggle {
+  .sui-radio-toggle {
     width: 0;
     height: 0;
     visibility: hidden;

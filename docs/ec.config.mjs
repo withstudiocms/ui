@@ -1,4 +1,5 @@
 import { defineEcConfig } from '@astrojs/starlight/expressive-code';
+import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import { transformerColorizedBrackets } from '@shikijs/colorized-brackets';
 import ecTwoSlash from 'expressive-code-twoslash';
 
@@ -7,6 +8,9 @@ export default defineEcConfig({
 		transformers: [transformerColorizedBrackets()],
 	},
 	themes: ['dark-plus', 'light-plus'],
+	defaultProps: {
+		showLineNumbers: false,
+	},
 	plugins: [
 		ecTwoSlash({
 			twoslashOptions: {
@@ -22,6 +26,7 @@ export default defineEcConfig({
 				},
 			},
 		}),
+		pluginLineNumbers(),
 	],
 	styleOverrides: {
 		frames: {

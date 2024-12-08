@@ -1,0 +1,39 @@
+---
+import Icon from '@studiocms/ui/utils/Icon.astro';
+import type { HeroIconName } from '@studiocms/ui/utils/iconType.js'
+
+interface Props {
+  icon: HeroIconName;
+  title: string;
+  subtitle?: string;
+}
+
+const { icon, title, subtitle } = Astro.props;
+---
+
+<header>
+  <Icon class="page-header-icon" name={icon} width={24} height={24} />
+  <div>
+    <h2>{title}</h2>
+    {subtitle && (<span class="subtitle">{subtitle}</span>)}
+  </div>
+</header>
+<style>
+  header {
+    margin-top: 8rem;
+    margin-bottom: 2rem;
+    width: 65ch;
+    max-width: 100%;
+  }
+
+  .page-header-icon {
+    transform: scale(2);
+    transform-origin: top left;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: 2em;
+    margin-bottom: 1rem;
+  }
+</style>

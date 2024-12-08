@@ -1,0 +1,12 @@
+{
+  "sites": [
+    {
+      "name": "Example",
+      "link": "https://example.com"
+    },
+    {
+      "name": "StudioCMS UI Testing Playground",
+      "link": "https://ui-testing.studiocms.dev"
+    }
+  ]
+}

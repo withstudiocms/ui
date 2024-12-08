@@ -65,7 +65,7 @@ async function setDiscordMessage() {
 	];
 
 	const suffix =
-		'\n\nSee our [Translation Status page](<https://i18n.docs.studiocms.dev>) for more, including open PRs.';
+		'\n\nSee our [Translation Status page](<https://i18n.ui.studiocms.dev>) for more, including open PRs.';
 
 	// Keep the entire message including the suffix within Discord's limits
 	const maxLengthWithoutSuffix = 2000 - suffix.length;

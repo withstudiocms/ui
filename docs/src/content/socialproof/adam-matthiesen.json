@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../.astro/collections/socialproof.schema.json",
+  "avatar": "/socialproof/adam-matthiesen.jpg",
+  "name": "Adam Matthiesen",
+  "handle": "@Adammatthiesen",
+  "message": "The @studiocms/ui library has completely transformed how I build interfaces in Astro. Its thoughtfully designed components are incredibly easy to use, saving me hours of development time while delivering a sleek, professional look. Whether I'm crafting a simple site or a complex dashboard, this library gives me the tools I need to create something exceptional. I can't imagine working on an Astro project without it!"
+}

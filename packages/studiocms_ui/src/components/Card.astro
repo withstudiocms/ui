@@ -10,19 +10,19 @@ type Props<As extends HTMLTag = 'div'> = Omit<Polymorphic<{ as: As }>, 'as'> & {
 
 const { as: As = 'div', class: className, fullWidth, fullHeight, ...props } = Astro.props;
 ---
-<As class="card" class:list={[fullWidth && "full-w", fullHeight && "full-h", className]} {...props}>
-  <div class="card-header">
+<As class="sui-card" class:list={[fullWidth && "full-w", fullHeight && "full-h", className]} {...props}>
+  <div class="sui-card-header">
     <slot name="header" />
   </div>
-  <div class="card-body">
+  <div class="sui-card-body">
     <slot />
   </div>
-  <div class="card-footer">
+  <div class="sui-card-footer">
     <slot name="footer" />
   </div>
 </As>
 <style>
-  .card {
+  .sui-card {
     border: 1px solid hsl(var(--border));
     background-color: hsl(var(--background-base));
     border-radius: .5rem;
@@ -30,32 +30,32 @@ const { as: As = 'div', class: className, fullWidth, fullHeight, ...props } = As
     height: fit-content;
   }
 
-  .card.full-w {
+  .sui-card.full-w {
     width: 100%;
   }
 
-  .card.full-h {
+  .sui-card.full-h {
     height: 100%;
   }
 
-  .card-header:has(*) {
+  .sui-card-header:has(*) {
     padding: 1rem 1rem 0rem 1rem;
     * {
       margin: 0;
     }
   }
 
-  .card-body {
+  .sui-card-body {
     padding: 1rem;
   }
 
-  .card-footer:has(*) {
+  .sui-card-footer:has(*) {
     border-top: 1px solid hsl(var(--border));
     padding: 1rem;
   }
 
   @media screen and (max-width: 840px) {
-    .card {
+    .sui-card {
       width: 100%;
     }
   }

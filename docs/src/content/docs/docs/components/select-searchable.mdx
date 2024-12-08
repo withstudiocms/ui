@@ -27,7 +27,7 @@ A variation of the `<Select />` element that supports arrow keys and filtering.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro
+    ```astro showLinenumbers title="SearchSelectExample.astro"
     ---
     import { SearchSelect } from '@studiocms/ui/components';
     ---
@@ -63,7 +63,7 @@ You can set a default value using the `defaultValue` prop:
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro
+    ```astro showLinenumbers title="SearchSelectDefaultValueExample.astro"
     ---
     import { SearchSelect } from '@studiocms/ui/components';
     ---
@@ -92,7 +92,7 @@ you construct. If no name is set, a random one is generated for the component.
 Additionally, you can either disable the entire select input by using the `disabled` prop, or disable
 individual options by adding `disabled: true` to the option you want to disable:
 
-```astro ins={7-9}
+```astro ins={7-9} showLinenumbers title="SearchSelectFormExample.astro"
 ---
 import { SearchSelect } from '@studiocms/ui/components';
 ---
@@ -136,7 +136,7 @@ the entire width of its parent container by setting the `fullWidth` prop to true
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro
+    ```astro showLinenumbers title="FullWidthSearchSelectExample.astro"
     ---
     import { SearchSelect } from '@studiocms/ui/components';
     ---
@@ -158,3 +158,40 @@ the entire width of its parent container by setting the `fullWidth` prop to true
 The searchable select's dropdown can be navigated with the arrow keys to focus an option and hitting 
 `Enter` to select the currently focused option.
 :::
+
+### Placeholder
+
+You can adjust the placeholder shown in the select by passing the `placeholder` prop:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <SearchSelect
+        label='Searchable Select Element'
+        placeholder="Custom Placeholder"
+        options={[
+          { label: "Option 1", value: "f-opt-1-p" },
+          { label: "Option 2", value: "f-opt-2-p" },
+          { label: "Option 3", value: "f-opt-3-p" },
+        ]}
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="SearchSelectPlaceholderExample.astro"
+    ---
+    import { SearchSelect } from '@studiocms/ui/components';
+    ---
+
+    <SearchSelect
+      label='Searchable Select Element'
+      placeholder="Custom Placeholder"
+      options={[
+        { label: "Option 1", value: "opt-1" },
+        { label: "Option 2", value: "opt-2" },
+        { label: "Option 3", value: "opt-3" },
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>

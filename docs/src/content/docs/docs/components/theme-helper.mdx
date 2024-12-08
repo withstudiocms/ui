@@ -14,7 +14,7 @@ you can provide callbacks for when the theme gets changed!
 :::caution
 The `ThemeHelper` can only be used client-side (in `<script>` tags).
 :::
-```ts title="script.ts" twoslash
+```ts title="script.ts" twoslash showLinenumbers
 // @noErrors
 import { ThemeHelper } from '@studiocms/ui/utils/ThemeHelper.ts';
 
@@ -44,7 +44,7 @@ Using the `ThemeHelper` class, you can listen to theme changes! This is useful w
 whenever the color scheme changes, for example in a `three.js` canvas where you need to change an image
 (*\*cough cough\* our login page \*cough\**).
 
-```ts title="script.ts" twoslash
+```ts title="script.ts" twoslash showLinenumbers
 // @noErrors
 import { ThemeHelper } from '@studiocms/ui/utils/ThemeHelper.ts';
 
@@ -69,12 +69,12 @@ open the navbar and scroll all the way down. After you've changed the theme, che
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```html
+    ```html showLinenumbers
     <span id="theme-listener-output">
       Theme hasn't changed yet.
     </span>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
     import { ThemeHelper, type Theme } from '@studiocms/ui/utils/ThemeHelper.ts';
 
@@ -100,7 +100,7 @@ One of the few things the `ThemeHelper` does not do is saving the users theme pr
 
 As a starting point, here's a barebones example of how to implement this:
 
-```ts twoslash
+```ts twoslash showLinenumbers title="Script Tag"
 // @noErrors
 import { ThemeHelper, type Theme } from '@studiocms/ui/utils/ThemeHelper.ts';
 

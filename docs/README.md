@@ -1,3 +1,3 @@
-# StudioCMS Documentation Website
+# StudioCMS UI Documentation Website
 
-https://docs.studiocms.dev
+https://ui.studiocms.dev

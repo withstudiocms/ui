@@ -1,57 +1,73 @@
 ---
+import type { StudioCMSColorway } from 'src/utils/colors';
 import Icon from '../../utils/Icon.astro';
 import Button from '../Button.astro';
 
-type ModalButton = 'cancel' | 'confirm';
+interface ButtonType {
+  label: string;
+  color: StudioCMSColorway;
+}
 
 interface Props {
 	id: string;
 	size?: 'sm' | 'md' | 'lg';
 	dismissable?: boolean;
-	buttons?: ModalButton[];
+	cancelButton?: string | ButtonType;
+	actionButton?: string | ButtonType;
 	isForm?: boolean;
 };
 
-const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = Astro.props;
+const { id, size = 'md', dismissable = true, isForm = false, cancelButton, actionButton } = Astro.props;
 ---
-<!-- Should: Be centered on mobile, scroll happens inside, blur bg -->
 <dialog
   popover
   id={id}
   data-dismissable={`${dismissable}`}
-  data-buttons={buttons.join(";")}
-  class="modal"
+  data-has-action-button={actionButton}
+  data-has-cancel-button={cancelButton}
+  class="sui-modal"
   class:list={[size]}
   data-form={`${isForm}`}
 >
-  <div class="modal-header">
+  <div class="sui-modal-header">
     <slot name="header" />
-    {(dismissable || buttons.length === 0) && (
+    {(dismissable || (!cancelButton && !actionButton)) && (
       <button class="x-mark-container" id={`${id}-btn-x`}>
         <Icon name="x-mark" width={24} height={24} class={'dismiss-icon'} />
       </button>
     )}
   </div>
   <form id={`${id}-form-element`}>
-    <div class="modal-body">
+    <div class="sui-modal-body">
       <slot />
     </div>
-    <div class="modal-footer">
-      {buttons.includes('cancel') && (
-        <Button id={`${id}-btn-cancel`} color='danger' variant='flat' type={isForm ? 'reset' : 'button'}>
-          Cancel
+    <div class="sui-modal-footer">
+      {cancelButton && (
+        <Button
+          id={`${id}-btn-cancel`}
+          color={typeof cancelButton === 'string' ? 'danger' : cancelButton.color} 
+          variant='flat'
+          type={isForm ? 'reset' : 'button'}
+        >
+          {typeof cancelButton === 'string' ? cancelButton : cancelButton.label}
         </Button>
       )}
-      {buttons.includes('confirm') && (
-        <Button id={`${id}-btn-confirm`} type={'submit'} color='primary' variant='solid' type={isForm ? 'submit' : 'button'}>
-          Confirm
+      {actionButton && (
+        <Button 
+          id={`${id}-btn-confirm`} 
+          type={'submit'} 
+          color={typeof actionButton === 'string' ? 'primary' : actionButton.color} 
+          variant='solid' 
+          type={isForm ? 'submit' : 'button'}
+        >
+          {typeof actionButton === 'string' ? actionButton : actionButton.label}
         </Button>
       )}
     </div>
   </form>
 </dialog>
 <style>
-  .modal {
+  .sui-modal {
     border: 1px solid hsl(var(--border));
     border-radius: .5rem;
     padding: 1.5rem;
@@ -59,35 +75,36 @@ const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = As
     animation: hide .25s ease;
     overflow: visible;
     margin: auto;
+    z-index: 50;
   }
 
-  .modal.sm {
+  .sui-modal.sm {
     width: 384px;
   }
 
-  .modal.md {
+  .sui-modal.md {
     width: 448px;
   }
 
-  .modal.lg {
+  .sui-modal.lg {
     width: 608px;
   }
 
-  .modal[open] {
+  .sui-modal[open] {
     animation: show .25s ease-in-out;
   }
 
-  html:has(.modal[open]),
-  body:has(.modal[open]) {
+  html:has(.sui-modal[open]),
+  body:has(.sui-modal[open]) {
     overflow: hidden;
   }
 
-  .modal[open]::backdrop {
+  .sui-modal[open]::backdrop {
     background-color: rgba(0, 0, 0, 0.75);
     animation: backdrop .3s ease-in-out forwards;
   }
 
-  .modal-header:has(*) {
+  .sui-modal-header:has(*) {
     margin-bottom: 1rem;
 
     display: flex;
@@ -115,11 +132,11 @@ const { id, size = 'md', dismissable = true, isForm = false, buttons = [] } = As
     background-color: hsl(var(--default-base));
   }
 
-  .modal-footer {
+  .sui-modal-footer {
     display: none;
   }
 
-  .modal-footer:has(*) {
+  .sui-modal-footer:has(*) {
     display: flex;
     flex-direction: row;
     gap: 1rem;

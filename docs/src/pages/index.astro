@@ -1,14 +1,155 @@
 ---
+import '@studiocms/ui/css/global.css';
+import '@fontsource-variable/onest/index.css';
+import '@fontsource-variable/fira-code/index.css';
 
+import { Footer, Modal, Toaster } from '@studiocms/ui/components';
+
+import { getCollection } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import BlueSkyLogo from '~/assets/bsky.svg';
+import DiscordLogo from '~/assets/discord.svg';
+import GitHubLogo from '~/assets/github.svg';
+import LogoAdaptive from '~/assets/logo-adaptive.svg';
+import PatreonLogo from '~/assets/patreon.svg';
+import TwitterLogo from '~/assets/twitter.svg';
+import EcosystemSection from '~/components/landing/EcosystemSection.astro';
+import HeroSection from '~/components/landing/HeroSection.astro';
+import ShowcaseSection from '~/components/landing/ShowcaseSection.astro';
+import SocialProofSection from '~/components/landing/SocialProofSection.astro';
+
+const socialProofEntries = await getCollection('socialproof');
+
+const chunkSize = socialProofEntries.length / 3;
+const chunkedSocialProofEntries = [];
+
+for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
+	const chunk = socialProofEntries.slice(i, i + chunkSize);
+	chunkedSocialProofEntries.push(chunk);
+}
 ---
 
-<html>
-    <head>
-        <title>My Astro Site</title>
-    </head>
-    <body>
-        <h1>Welcome to Astro!</h1>
-        <p>My Astro site is up and running!</p>
-        <a href="/docs/">Go to the docs</a>
-    </body>
-</html>
+<StarlightPage frontmatter={{ title: 'StudioCMS UI', template: 'splash' }}>
+    <Toaster />
+    <Modal id='hero-example-modal' actionButton='Okay'>
+        <h2 slot="header">Modal</h2>
+        <p set:html={"Countless stars scattered,<br />across obsidian skies,<br />frosty breath lingers."}></p>
+    </Modal>
+    
+    <HeroSection />
+    <SocialProofSection />
+    <ShowcaseSection />
+    <EcosystemSection />
+    <Footer
+        class='not-content'
+        links={{
+            'StudioCMS Ecosystem': [
+                { label: 'StudioCMS', href: 'https://studiocms.dev' },
+                { label: 'Apollo', href: 'https://github.com/withstudiocms/apollo' }
+            ],
+            'Resources': [
+                { label: 'Docs', href: '/docs' },
+            ],
+        }}
+        copyright={'MIT License \u00A9 2024 - StudioCMS'}
+    >
+        <div slot="brand" class="footer-brand">
+            <LogoAdaptive height={48} width={45.76} />
+            <span class="studiocms-footer-text">
+                <span>StudioCMS</span>
+                <span>UI</span>
+            </span>
+        </div>
+        <div slot="socials" class="socials">
+            <a href="https://github.com/withstudiocms">
+                <GitHubLogo width={28} height={28} />
+            </a>
+            <a href="https://chat.studiocms.dev">
+                <DiscordLogo width={32} height={32} />
+            </a>
+            <a href="https://patreon.com/studiocms">
+                <PatreonLogo width={24} height={24} />
+            </a>
+            <a href="https://bsky.app/profile/studiocms.dev">
+                <BlueSkyLogo width={24} height={24} />
+            </a>
+            <a href="https://twitter.com/withstudiocms">
+                <TwitterLogo width={22} height={22} />
+            </a>
+        </div>
+    </Footer>
+</StarlightPage>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    main {
+        padding: min(8rem, 10vh) 0;
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        align-items: center;
+        white-space: nowrap;
+    }
+
+    .studiocms-footer-text {
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    .studiocms-footer-text span:last-of-type {
+        color: hsl(var(--text-muted));
+    }
+
+    .socials {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.25rem;
+    }
+
+    .socials a {
+        color: hsla(var(--text-normal) / .75);
+        transition: all .15s ease;
+    }
+
+    .socials a:hover {
+        color: hsl(var(--text-normal));
+    }
+</style>
+<style is:global>
+    .showcase header {
+        margin-top: 0 !important;
+    }
+
+    main {
+        padding-bottom: 0 !important;
+    }
+
+    main > .content-panel:first-of-type {
+        display: none !important;
+    }
+
+    .content-panel {
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    .sl-container {
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+
+    section {
+        color: hsl(var(--text-normal)) !important;
+    }
+
+    footer.sl-flex {
+        display: none;
+    }
+</style>
