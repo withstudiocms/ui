@@ -2,6 +2,10 @@
   "sites": [
     {
       "name": "Example",
+      "link": "https://example.com"
+    },
+    {
+      "name": "This Website",
       "link": "https://pr1.ui.studiocms.dev"
     }
   ]
