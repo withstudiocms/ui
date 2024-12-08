@@ -1,0 +1,178 @@
+---
+import { Icon } from '../../utils';
+import type { StudioCMSColorway } from '../../utils/colors';
+import type { HeroIconName } from '../../utils/iconType';
+
+/**
+ * - Look like main page tabs
+ * - tabs for local storage (denoted by ID)
+ * - <Tabs> and <TabItem> similar to starlight
+ * - Transitioning background like on nextui
+ * - Default color options, per-tab color options
+ * - Tab based on button component (icon support, flat colors)
+ */
+
+interface Tab {
+  icon?: HeroIconName;
+  label: string;
+  color: Exclude<StudioCMSColorway, 'default'>;
+  tabId: string;
+}
+
+interface Props {
+  syncKey?: string;
+}
+
+const extractTabInfoWithRegex = (input: string) => {
+  const tabItemRegex = /<sui-tab-item([^>]*)>/g;
+
+  const attributeRegex = /data-([\w-]+)="([^"]*)"/g;
+
+  const tabs: Tab[] = [];
+  let tabMatch: RegExpExecArray | null;
+
+  // biome-ignore lint/suspicious/noAssignInExpressions: Nop
+  while ((tabMatch = tabItemRegex.exec(input)) !== null) {
+    let attributes: { [key: string]: string } = {};
+
+    let attributeMatch: RegExpExecArray | null;
+
+    if (!tabMatch[1]) continue;
+
+    // biome-ignore lint/suspicious/noAssignInExpressions: Nop
+    while ((attributeMatch = attributeRegex.exec(tabMatch[1])) !== null) {
+      if (!attributeMatch[1] || !attributeMatch[2]) continue;
+
+      if (
+        attributeMatch[1] === 'icon' || 
+        attributeMatch[1] === 'label' || 
+        attributeMatch[1] === 'color'
+      ) {
+        attributes[attributeMatch[1]] = attributeMatch[2];
+      }
+
+      if (attributeMatch[1] === 'tab-id') {
+        attributes.tabId = attributeMatch[2];
+      }
+    }
+
+    tabs.push(attributes as unknown as Tab);
+  }
+
+  return tabs;
+};
+
+const markTabAsActive = (tabId: string, html: string): string => {
+  if (!tabId) return html;
+
+  const updatedHtml = html.replace(
+    new RegExp(`(<sui-tab-item[^>]*data-tab-id="${tabId}"[^>]*class=")([^"]*)(")`, 'g'),
+    '$1$2 active$3'
+  );
+
+  return updatedHtml;
+}
+
+// const { syncKey } = Astro.props;
+
+const tabContents = await Astro.slots.render('default');
+
+const tabs = extractTabInfoWithRegex(tabContents);
+
+const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || "", tabContents);
+console.log(finalizedTabContents);
+---
+
+<div class="sui-tabs-container">
+  <div class="sui-tabs-list">
+    {tabs.map((tab, i) => (
+      <button 
+        role="tab"
+        class="sui-tab-header"
+        class:list={[i === 0 && "active"]}
+        data-tab-child={tab.tabId}
+      >
+        {tab.icon && (
+          <Icon name={tab.icon} width={24} height={24} />
+        )}
+        <span>{tab.label}</span>
+      </button>
+    ))}
+  </div>
+  <div class="sui-tabs-content">
+    <Fragment set:html={finalizedTabContents} />
+  </div>
+</div>
+<script>
+  const switchTab = (e: MouseEvent, container: HTMLElement) => {
+    const activeChildren = container.querySelectorAll('.active');
+    
+    for (const child of activeChildren) {
+      child.classList.remove('active');
+    }
+
+    const newActiveTab = e.target as HTMLElement;
+    newActiveTab.classList.add('active');
+
+    const newActiveTabContentId = newActiveTab.dataset.tabChild;
+    const newActiveTabContent = container.querySelector(`sui-tab-item[data-tab-id="${newActiveTabContentId}"]`)!;
+
+    newActiveTabContent.classList.add('active');
+  }
+
+  const initTabs = () => {
+    const tabContainers = document.querySelectorAll<HTMLElement>('.sui-tabs-container');
+
+    for (const container of tabContainers) {
+      const tabHeaders = container.querySelectorAll<HTMLButtonElement>('.sui-tab-header')!;
+
+      for (const tab of tabHeaders) {
+        tab.addEventListener('click', (e) => switchTab(e, container));
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initTabs);
+</script>
+<style>
+  .sui-tabs-list {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .sui-tab-header {
+    margin-top: 0 !important;
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    border-radius: 0.5rem;
+    height: 40px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875em;
+    transition: all .15s ease;
+    cursor: pointer;
+  }
+
+  .sui-tab-header * {
+    pointer-events: none;
+  }
+
+  .sui-tab-header:hover {
+    background-color: hsla(var(--default-flat-active)) !important;
+  }
+
+  .sui-tab-header.active {
+    background-color: hsla(var(--primary-flat-active)) !important;
+  }
+
+  .sui-tabs-content {
+    width: 100%;
+    margin: 0 !important;
+  }
+</style>
