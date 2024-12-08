@@ -3,10 +3,5 @@
   "avatar": "/socialproof/matthew-justice.jpg",
   "name": "Matthew Justice",
   "handle": "@justicematthew",
-  "message": "I fucking love toast and hate React, also check out dawnforge #notanad",
-  "image": {
-    "path": "/socialproof/matthew-justice-image.png",
-    "width": 400,
-    "height": 210
-  }
+  "message": "Look, we've all been there working with Astro. You're building components for your UI, things are getting complex with the interactions and all the accessibility concerns, the struggle is real. You think \"What's the harm installing React? I can use shadcn or NextUI\" and BAM, your project is now bloated with tons of unnecessary JavaScript for basically nothing. \"No more\" I said. Now I install StudioCMS UI."
 }

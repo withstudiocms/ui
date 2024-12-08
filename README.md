@@ -1,4 +1,4 @@
-# `@StudioCMS/UI`
+# `@studiocms/ui`
 
 [![NPM Version](https://img.shields.io/npm/v/@studiocms/ui)](https://npm.im/@studiocms/ui)
 [![Formatted with Biome](https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev/)
@@ -6,7 +6,7 @@
 
 This is the UI library that we use to build StudioCMS.
 
-To see how to get started, checkout the [`@studiocms/ui` README](./packages/studiocms_ui/README.md) or checkout [The Website](https://ui.studiocms.dev)
+To see how to get started, check out [the documentation](https://ui.studiocms.dev).
 
 ## Contributing
 
@@ -14,7 +14,7 @@ We welcome contributions from the community! Whether it's bug reports, feature r
 
 ### Bug Reports and Feature Requests
 
-If you encounter any bugs or have ideas for new features, please [open an issue](https://github.com/withstudiocms/ui/issues/new/choose) on our [GitHub repository](https://github.com/withstudiocms/ui/). When creating a new issue, please provide as much detail as possible, including steps to reproduce the issue (for bugs) and a clear description of the proposed feature.
+If you encounter any bugs or have ideas for new features, please [open an issue](https://github.com/withstudiocms/ui/issues/new/choose) on our [GitHub repository](https://github.com/withstudiocms/ui/). When creating a new issue, please provide as much detail as possible, including steps to reproduce the issue (for bugs) or a clear description of the proposed feature.
 
 ### Code Contributions
 
@@ -39,9 +39,9 @@ We have an active community of developers on the StudioCMS [Discord Server](http
 
 ## Our ToolSet
 
-For an up-to-date list of our main tools check out our [`.prototools`](.prototools) file
+For an up-to-date list of our main tools check out our [`.prototools`](https://github.com/withstudiocms/ui/blob/main/.prototools) file.
 
-For more information about Proto checkout [Proto's Website](https://moonrepo.dev/proto)
+For more information about Proto checkout [Proto's Website](https://moonrepo.dev/proto).
 
 ## Licensing
 

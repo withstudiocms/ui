@@ -38,3 +38,10 @@ import { Button, Card, Checkbox, Input } from '@studiocms/ui/components';
     max-width: 480px !important;
   }
 </style>
+<script>
+  const forms = document.querySelectorAll('form');
+
+  for (const form of forms) {
+    form.addEventListener('submit', (e) => e.preventDefault());
+  }
+</script>

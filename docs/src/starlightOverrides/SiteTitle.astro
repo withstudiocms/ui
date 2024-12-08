@@ -134,21 +134,6 @@ const { siteTitle, siteTitleHref } = Astro.props;
     color: var(--sl-color-gray-2);
   }
 
-  @media screen and (max-width: 520px) {
-    .site-title div:first-of-type {
-      border-right: 1px solid var(--sl-color-gray-5);
-      padding-right: 1rem;
-    }
-
-    .site-title div:first-of-type span {
-      display: none;
-    }
-
-    .site-title a:last-of-type {
-      margin-left: .5rem;
-    }
-  }
-
 	img {
 		height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
 		width: auto;

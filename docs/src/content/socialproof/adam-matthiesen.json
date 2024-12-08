@@ -1,7 +1,7 @@
 {
   "$schema": "../../../.astro/collections/socialproof.schema.json",
-  "avatar": "/socialproof/louis-escher.jpg",
+  "avatar": "/socialproof/adam-matthiesen.jpg",
   "name": "Adam Matthiesen",
-  "handle": "@dontrememebr.dev",
-  "message": "Iaaaaaaaaaaaaaaaaaaaaaaaaa"
+  "handle": "@Adammatthiesen",
+  "message": ""
 }
