@@ -14,7 +14,7 @@ We welcome contributions from the community! Whether it's bug reports, feature r
 
 ### Bug Reports and Feature Requests
 
-If you encounter any bugs or have ideas for new features, please open an issue on our [GitHub repository](https://github.com/withstudiocms/ui). When creating a new issue, please provide as much detail as possible, including steps to reproduce the issue (for bugs) and a clear description of the proposed feature.
+If you encounter any bugs or have ideas for new features, please [open an issue](https://github.com/withstudiocms/ui/issues/new/choose) on our [GitHub repository](https://github.com/withstudiocms/ui/). When creating a new issue, please provide as much detail as possible, including steps to reproduce the issue (for bugs) and a clear description of the proposed feature.
 
 ### Code Contributions
 
