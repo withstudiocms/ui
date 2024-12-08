@@ -3,13 +3,14 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "pnpm make-changelog && astro dev",
+    "start": "pnpm dev",
     "check": "astro check",
-    "build": "astro build",
+    "build": "pnpm make-changelog && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lunaria:build": "tsm ./scripts/lunaria.mts"
+    "lunaria:build": "tsm ./scripts/lunaria.mts",
+		"make-changelog": "tsm --require=../scripts/filter-warnings.cjs ./scripts/changelog.ts"
   },
   "dependencies": {
     "@11ty/eleventy-fetch": "^5.0.1",
@@ -32,9 +33,14 @@
     "hast-util-to-string": "^3.0.1",
     "hastscript": "^9.0.0",
     "html-escaper": "^3.0.3",
+    "mdast": "^3.0.0",
+    "@types/mdast": "^4.0.4",
+    "mdast-util-to-markdown": "^2.1.2",
+    "mdast-util-to-string": "^4.0.0",
     "mdast-util-from-markdown": "^2.0.2",
     "mdast-util-gfm": "^3.0.0",
     "mdast-util-to-hast": "^13.2.0",
+    "unist-util-visit": "^5.0.0",
     "p-retry": "^6.2.1",
     "react": "^18",
     "rehype": "^13.0.2",

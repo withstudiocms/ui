@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import FluidGrid from './fluid-grid.astro';
+import Card from './showcase-card.astro';
+
+const sites = (await getCollection('showcase'))[0].data.filter(({ name }) => name !== 'Example');
+---
+
+<FluidGrid>
+
+	{
+		sites.length > 0 
+		? sites.map(({ link, name }) => (
+			<Card title={name} href={link} />
+		)) 
+		: <p>No sites on the showcase yet! Start using <code>@studiocms/ui</code> and add your site today!</p>
+	}
+
+</FluidGrid>

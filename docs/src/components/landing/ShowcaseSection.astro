@@ -1,19 +1,19 @@
 ---
-import { Code } from "@astrojs/starlight/components";
-import Icon from "@studiocms/ui/utils/Icon.astro";
+import { Code } from '@astrojs/starlight/components';
+import Icon from '@studiocms/ui/utils/Icon.astro';
 import DropdownExample from '~/components/landing/DropdownExample.astro';
 import dropdownExampleCode from '~/components/landing/DropdownExample.astro?raw';
 import formExampleCode from '~/components/landing/FormExample.astro?raw';
 import ModalExample from '~/components/landing/ModalExample.astro';
 import modalExampleCode from '~/components/landing/ModalExample.astro?raw';
-import FormExample from "./FormExample.astro";
-import PageHeader from "./PageHeader.astro";
+import FormExample from './FormExample.astro';
+import PageHeader from './PageHeader.astro';
 
 const splitCodeBasedOnComment = (code: string): string => {
-    const splitCode = code.split("<!-- CODE_SPLIT -->");
+	const splitCode = code.split('<!-- CODE_SPLIT -->');
 
-    return splitCode.length > 1 ? splitCode[0].trim() : code.trim();
-}
+	return splitCode.length > 1 ? splitCode[0].trim() : code.trim();
+};
 ---
 
 <section class="showcase not-content">

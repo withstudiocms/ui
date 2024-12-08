@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import MediaCard from './media-card.astro';
+
+interface Props {
+	href: string;
+	title: string;
+}
+const { href, title } = Astro.props;
+
+const src = `https://image.thum.io/get/width/800/crop/675/${Astro.props.href}`;
+---
+
+<MediaCard {href}>
+	<Image slot="media" {src} alt="" width={800} inferSize/>
+	<p class="title">{title}</p>
+</MediaCard>
+
+<style>
+	.title {
+		padding: 0.75rem 1rem;
+	}
+</style>

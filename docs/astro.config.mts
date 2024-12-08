@@ -31,7 +31,7 @@ export const locales = {
 export default defineConfig({
 	site,
 	experimental: {
-		svg: true
+		svg: true,
 	},
 	image: {
 		remotePatterns: [{ protocol: 'https' }],
@@ -119,12 +119,28 @@ export default defineConfig({
 						as: 'font',
 						type: 'font/woff2',
 						href: onestWoff2,
-						crossorigin: 'anonymous'
+						crossorigin: 'anonymous',
 					},
 				},
 			],
 			sidebar: [
-				{ label: 'Getting Started', link: 'docs/' },
+				{
+					label: 'Getting Started',
+					items: [
+						{
+							label: 'Installation',
+							link: 'docs/',
+						},
+						{
+							label: 'Release Notes',
+							link: 'docs/changelog',
+						},
+						{
+							label: 'Site Showcase',
+							link: 'docs/showcase',
+						},
+					],
+				},
 				{
 					label: 'Components',
 					autogenerate: {

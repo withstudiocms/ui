@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loader';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 
 const baseSchema = z.object({
 	type: z.literal('base').optional().default('base'),
@@ -37,12 +37,21 @@ const socialProofSchema = z.object({
 	name: z.string(),
 	handle: z.string(),
 	message: z.string(),
-	image: z.object({
-		path: z.string(),
-		width: z.number(),
-		height: z.number(),
-	}).optional(),
+	image: z
+		.object({
+			path: z.string(),
+			width: z.number(),
+			height: z.number(),
+		})
+		.optional(),
 });
+
+const siteShowcaseSchema = z.array(
+	z.object({
+		name: z.string(),
+		link: z.string(),
+	})
+);
 
 export const collections = {
 	docs: defineCollection({
@@ -58,5 +67,9 @@ export const collections = {
 	socialproof: defineCollection({
 		loader: glob({ pattern: '*.json', base: 'src/content/socialproof' }),
 		schema: socialProofSchema,
-	})
+	}),
+	showcase: defineCollection({
+		loader: file('src/content/showcase.json'),
+		schema: siteShowcaseSchema,
+	}),
 };
