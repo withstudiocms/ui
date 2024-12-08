@@ -175,7 +175,7 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       typescript:
-        specifier: ^5.7.2
+        specifier: 'catalog:'
         version: 5.7.2
       unist-util-visit:
         specifier: ^5.0.0
