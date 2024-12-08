@@ -8,6 +8,9 @@ export default defineEcConfig({
 		transformers: [transformerColorizedBrackets()],
 	},
 	themes: ['dark-plus', 'light-plus'],
+	defaultProps: {
+		showLineNumbers: false,
+	},
 	plugins: [
 		ecTwoSlash({
 			twoslashOptions: {
@@ -23,7 +26,7 @@ export default defineEcConfig({
 				},
 			},
 		}),
-		// pluginLineNumbers(),
+		pluginLineNumbers(),
 	],
 	styleOverrides: {
 		frames: {

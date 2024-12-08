@@ -18,7 +18,7 @@ A custom radio group component with support for sizes and colors. Form compatibl
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro
+    ```astro showLinenumbers title="RadioGroupExample.astro"
     ---
     import { RadioGroup } from '@studiocms/ui/components';
     ---
@@ -45,7 +45,7 @@ You can change a radio group to be displayed horizontally by using the `horizont
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "horizontal"
+    ```astro "horizontal" showLinenumbers title="RadioGroupHorizontalExample.astro"
     ---
     import { RadioGroup } from '@studiocms/ui/components';
     ---
@@ -73,7 +73,7 @@ You can set a default selected option via the `defaultValue` prop.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "defaultValue='opt-1'"
+    ```astro "defaultValue='opt-1'" showLinenumbers title="RadioGroupDefaultValueExample.astro"
     ---
     import { RadioGroup } from '@studiocms/ui/components';
     ---
@@ -107,7 +107,7 @@ The radio group component supports all default colorways.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "color=\"primary\""
+    ```astro "color=\"primary\"" showLinenumbers title="RadioGroupColorExample.astro"
     ---
     import { RadioGroup } from '@studiocms/ui/components';
     ---
@@ -137,7 +137,7 @@ below shows how to do the latter:
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "disabled: true"
+    ```astro "disabled: true" showLinenumbers title="RadioGroupDisabledExample.astro"
     ---
     import { RadioGroup } from '@studiocms/ui/components';
     ---
@@ -162,7 +162,7 @@ Inputs have full form support. You can use the `isRequired` and `name` attribute
 The first one does what it says it does, while the latter sets the `name` attribute so you can access the input in, for example,
 the `FormData` returned by a submission. Here's an example showing how to set both of them:
 
-```astro "isRequired" "name='required-radio'"
+```astro "isRequired" "name='required-radio'" showLinenumbers title="RadioGroupFormExample.astro"
 ---
 import { RadioGroup } from '@studiocms/ui/components';
 ---

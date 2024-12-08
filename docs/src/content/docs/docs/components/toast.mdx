@@ -23,7 +23,7 @@ This component requires a **helper**. Make sure to read the documentation carefu
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro
+    ```astro showLinenumbers title="ToastExample.astro"
     ---
     import { Toaster, Button } from '@studiocms/ui/components';
     ---
@@ -35,7 +35,7 @@ This component requires a **helper**. Make sure to read the documentation carefu
       Show Toast
     </Button>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
     import { toast } from '@studiocms/ui/components';
 
@@ -55,7 +55,7 @@ This component requires a **helper**. Make sure to read the documentation carefu
 
 You can change where all toasts are displayed via the `position` prop on the `<Toaster />` component:
 
-```astro
+```astro showLinenumbers title="ToastPosition.astro"
 ---
 import { Toaster } from '@studiocms/ui/components';
 ---
@@ -74,7 +74,7 @@ There's two ways to set a toast's duration: via the default on the `<Toaster />`
 
 You can set the default duration like this:
 
-```astro
+```astro showLinenumbers title="ToastDuration.astro"
 ---
 import { Toaster } from '@studiocms/ui/components';
 ---
@@ -84,7 +84,7 @@ import { Toaster } from '@studiocms/ui/components';
 
 Or you can set it individually for every toast like this:
 
-```ts twoslash
+```ts twoslash showLinenumbers title="ToastDuration.ts"
 // @noErrors
 import { toast } from '@studiocms/ui/components';
 
@@ -101,7 +101,7 @@ toast({
 Sometimes, you don't need a toast to expire after a set time. Instead of setting the toast to only expire after 31 days, you can set it
 to be persistent by setting `persistent` to `true`:
 
-```ts twoslash
+```ts twoslash showLinenumbers title="ToastPersistance.ts"
 // @noErrors
 import { toast } from '@studiocms/ui/components';
 
@@ -117,7 +117,7 @@ toast({
 
 Unless a toast is persistent, you can choose to hide the close button by setting the `closeButton` option to `false`:
 
-```ts twoslash
+```ts twoslash showLinenumbers title="ToastCloseButton.ts"
 // @noErrors
 import { toast } from '@studiocms/ui/components';
 
@@ -133,7 +133,7 @@ toast({
 
 You can change how far the toasts are away from the screen's edge by changing the `offset` prop on the `<Toaster />`:
 
-```astro
+```astro showLinenumbers title="ToastOffset.astro"
 ---
 import { Toaster } from '@studiocms/ui/components';
 ---
@@ -144,7 +144,7 @@ import { Toaster } from '@studiocms/ui/components';
 
 You can also change by how much toasts are seperated via the `gap` prop on the `<Toaster />`:
 
-```astro
+```astro showLinenumbers title="ToastGap.astro"
 ---
 import { Toaster } from '@studiocms/ui/components';
 ---

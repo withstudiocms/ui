@@ -1,9 +1,7 @@
 import starlight from '@astrojs/starlight';
 import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
-// import starlightUtils from '@lorenzo_lewis/starlight-utils';
 import { defineConfig } from 'astro/config';
-// import starlightImageZoom from 'starlight-image-zoom';
-// import getCoolifyURL from './hostUtils';
+import starlightImageZoom from 'starlight-image-zoom';
 import rehypePluginKit from './src/plugins/rehypePluginKit';
 
 // Define the Site URL
@@ -150,12 +148,7 @@ export default defineConfig({
 					},
 				},
 			],
-			plugins: [
-				// starlightUtils({
-				// 	multiSidebar: { switcherStyle: 'horizontalList' },
-				// }),
-				// starlightImageZoom(),
-			],
+			plugins: [starlightImageZoom()],
 		}),
 	],
 });

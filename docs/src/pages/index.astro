@@ -3,11 +3,7 @@ import '@studiocms/ui/css/global.css';
 import '@fontsource-variable/onest/index.css';
 import '@fontsource-variable/fira-code/index.css';
 
-import {
-    Footer,
-    Modal,
-    Toaster
-} from '@studiocms/ui/components';
+import { Footer, Modal, Toaster } from '@studiocms/ui/components';
 
 import { getCollection } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
@@ -17,7 +13,6 @@ import GitHubLogo from '~/assets/github.svg';
 import LogoAdaptive from '~/assets/logo-adaptive.svg';
 import PatreonLogo from '~/assets/patreon.svg';
 import TwitterLogo from '~/assets/twitter.svg';
-import GitHubIcon from '~/components/icons/GitHubIcon.astro';
 import EcosystemSection from '~/components/landing/EcosystemSection.astro';
 import HeroSection from '~/components/landing/HeroSection.astro';
 import ShowcaseSection from '~/components/landing/ShowcaseSection.astro';
@@ -29,8 +24,8 @@ const chunkSize = socialProofEntries.length / 3;
 const chunkedSocialProofEntries = [];
 
 for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
-    const chunk = socialProofEntries.slice(i, i + chunkSize);
-    chunkedSocialProofEntries.push(chunk);
+	const chunk = socialProofEntries.slice(i, i + chunkSize);
+	chunkedSocialProofEntries.push(chunk);
 }
 ---
 
@@ -152,11 +147,6 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
 
     section {
         color: hsl(var(--text-normal)) !important;
-    }
-
-    .gutter {
-        width: 6ch !important;
-        text-align: right !important;
     }
 
     footer.sl-flex {

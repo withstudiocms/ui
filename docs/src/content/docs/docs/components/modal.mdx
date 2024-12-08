@@ -29,7 +29,7 @@ A dropdown component that takes care of all the annoying bits for you, with adde
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro
+    ```astro showLinenumbers title="ModalExample.astro"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
@@ -42,7 +42,7 @@ A dropdown component that takes care of all the annoying bits for you, with adde
       Trigger Modal
     </Button>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     import { ModalHelper } from '@studiocms/ui/components';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -96,7 +96,7 @@ You can change the modal's size to one of three presets.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro /size="[a-z]+"/
+    ```astro /size="[a-z]+"/ showLinenumbers title="ModalSizesExample.astro"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
@@ -115,7 +115,7 @@ You can change the modal's size to one of three presets.
 
     <!-- Other modals and triggers omitted for simplicity -->
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     import { ModalHelper } from '@studiocms/ui/components';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -145,7 +145,7 @@ You can change whether a modal can be dismissed by clicking outside of it via th
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "dismissable={false}"
+    ```astro "dismissable={false}" showLinenumbers title="ModalDismissableExample.astro"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
@@ -162,7 +162,7 @@ You can change whether a modal can be dismissed by clicking outside of it via th
       Non-Dismissable
     </Button>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     import { ModalHelper } from '@studiocms/ui/components';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -194,7 +194,7 @@ Modals support both a "cancel" and a "confirm" button.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "cancelButton='Cancel' actionButton='Confirm'"
+    ```astro "cancelButton='Cancel' actionButton='Confirm'" showLinenumbers title="ModalButtonsExample.astro"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
@@ -211,7 +211,7 @@ Modals support both a "cancel" and a "confirm" button.
       Buttons
     </Button>
     ```
-    ```ts twoslash
+    ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
     import { ModalHelper } from '@studiocms/ui/components';
 
@@ -223,7 +223,7 @@ Modals support both a "cancel" and a "confirm" button.
 If you want to, instead of passing the label as a string to the prop, you can instead pass an object with the `label`
 and `color` keys defined to change the way the buttons look:
 
-```astro "cancelButton={{ label: 'Cancel', color: 'default' }} actionButton={{ label: 'Confirm', color: 'danger' }}"
+```astro "cancelButton={{ label: 'Cancel', color: 'default' }} actionButton={{ label: 'Confirm', color: 'danger' }}" showLinenumbers title="ModalButtonsExample.astro"
 ---
 import { Modal, Button } from '@studiocms/ui/components';
 ---
@@ -249,7 +249,7 @@ import { Modal, Button } from '@studiocms/ui/components';
 
 If you want to implement functionality based on which of the buttons is clicked, you can register a callback on each of them. 
 
-```ts twoslash ins={5-7,9-11}
+```ts twoslash ins={5-7,9-11} showLinenumbers title="Script Tag"
 // @noErrors
 import { ModalHelper } from '@studiocms/ui/components';
 
@@ -271,7 +271,7 @@ This only changes their types, not their text.
 
 By using the `registerConfirmCallback` function, you can retrieve the `FormData` after the `Confirm` button is clicked. Any inputs in the modal will be included.
 
-```ts twoslash "formData"
+```ts twoslash "formData" showLinenumbers title="Script Tag"
 // @noErrors
 import { ModalHelper } from '@studiocms/ui/components';
 
@@ -286,7 +286,7 @@ modal.registerConfirmCallback((formData) => {
 
 You can add multiple triggers to your modal by using the `bindTrigger` function in combination with an element's ID.
 
-```ts twoslash ins={4-5}
+```ts twoslash ins={4-5} showLinenumbers title="Script Tag"
 // @noErrors
 import { ModalHelper } from '@studiocms/ui/components';
 
@@ -299,7 +299,7 @@ modal.bindTrigger('modal-trigger-three');
 
 Similar to [dropdowns](/customizing/studiocms-ui/components/dropdown), modals can be shown and hidden programatically:
 
-```ts twoslash ins={5-6}
+```ts twoslash ins={5-6} showLinenumbers title="Script Tag"
 // @noErrors
 import { ModalHelper } from '@studiocms/ui/components';
 

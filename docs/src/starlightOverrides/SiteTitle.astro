@@ -95,9 +95,14 @@ const { siteTitle, siteTitleHref } = Astro.props;
     margin-left: 0;
   }
 
-  .studiocms-link a {
-    color: white;
+  :root[data-theme="light"] {
+    .studiocms-link a {
+      color: black;
+    }
   }
+    .studiocms-link a {
+      color: white;
+    }
 
   .docs-link {
     margin: 0;
