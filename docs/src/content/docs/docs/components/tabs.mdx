@@ -113,3 +113,58 @@ You can add icons and even change the color of the tabs:
     ```
   </TabItem>
 </Tabs>
+
+
+### Syncing & Storage
+
+To keep a users selection saved and even sync multiple different tab containers with each other, you can set a `syncKey`.
+If you want this to work, every tab item needs to have an ID set:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard fullWidth>
+      <SuiTabs syncKey="test">
+        <SuiTabItem label="Tab #1" icon="star" color="warning" id="content1">
+          <Card fullWidth>
+            Content #1
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #2" icon="arrows-right-left" color="success" id="content2">
+          <Card fullWidth>
+            Content #2
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #3" icon="bell" color="danger" id="content3">
+          <Card fullWidth>
+            Content #3
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TabsExample.astro"
+    ---
+    import { Tabs, TabItem, Card } from '@studiocms/ui/components';
+    ---
+
+    <Tabs>
+      <TabItem label="Tab #1">
+        <Card fullWidth>
+          Content #1
+        </Card>
+      </TabItem>
+      <TabItem label="Tab #2">
+        <Card fullWidth>
+          Content #2
+        </Card>
+      </TabItem>
+      <TabItem label="Tab #3">
+        <Card fullWidth>
+          Content #3
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>

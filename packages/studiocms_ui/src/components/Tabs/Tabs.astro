@@ -3,15 +3,6 @@ import { Icon } from '../../utils';
 import type { StudioCMSColorway } from '../../utils/colors';
 import type { HeroIconName } from '../../utils/iconType';
 
-/**
- * - Look like main page tabs
- * - tabs for local storage (denoted by ID)
- * - <Tabs> and <TabItem> similar to starlight
- * - Transitioning background like on nextui
- * - Default color options, per-tab color options
- * - Tab based on button component (icon support, flat colors)
- */
-
 interface Tab {
   icon?: HeroIconName;
   label: string;
@@ -73,16 +64,14 @@ const markTabAsActive = (tabId: string, html: string): string => {
   return updatedHtml;
 }
 
-// const { syncKey } = Astro.props;
+const { syncKey } = Astro.props;
 
 const tabContents = await Astro.slots.render('default');
-
 const tabs = extractTabInfoWithRegex(tabContents);
-
 const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || "", tabContents);
 ---
 
-<div class="sui-tabs-container">
+<div class="sui-tabs-container" data-sync-key={syncKey}>
   <div class="sui-tabs-list">
     {tabs.map((tab, i) => (
       <button 
@@ -103,6 +92,9 @@ const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || "", tabContents);
   </div>
 </div>
 <script>
+  // TODO: Tabs fire custom events if sync key is set with format `key:value` to change all tabs. 
+  // They also store in localstorage which only gets used when the page is loaded.
+
   const switchTab = (e: MouseEvent, container: HTMLElement) => {
     const activeChildren = container.querySelectorAll('.active');
     
