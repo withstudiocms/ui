@@ -16,7 +16,7 @@ export function html(strings: TemplateStringsArray, ...values: (string | string[
 type LunariaInstance = Awaited<ReturnType<typeof createLunaria>>;
 
 function collapsePath(path: string) {
-	const basesToHide = ['src/content/docs/', 'src/content/i18n/'];
+	const basesToHide = ['src/content/docs/docs/', 'src/content/i18n/'];
 
 	for (const base of basesToHide) {
 		const newPath = path.replace(base, '');
@@ -49,16 +49,16 @@ export const Page = (
 export const Meta = html`
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-	<title>StudioCMS Docs Translation Status</title>
+	<title>StudioCMS UI Docs Translation Status</title>
 	<meta
 		name="description"
 		content="Translation progress tracker for the StudioCMS Docs site. See how much has been translated in your language and get involved!"
 	/>
 	<meta property="last-build" content="${new Date(Date.now()).toString()}" />
-	<link rel="canonical" href="https://i18n.docs.studiocms.dev/" />
-	<meta property="og:title" content="StudioCMS Docs Translation Status" />
+	<link rel="canonical" href="https://i18n.ui.studiocms.dev/" />
+	<meta property="og:title" content="StudioCMS UI Docs Translation Status" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://i18n.docs.studiocms.dev/" />
+	<meta property="og:url" content="https://i18n.ui.studiocms.dev/" />
 	<meta
 		property="og:description"
 		content="Translation progress tracker for the StudioCMS Docs site. See how much has been translated in your language and get involved!"
@@ -74,7 +74,7 @@ export const Body = (
 	return html`
 		<main>
 			<div class="limit-to-viewport">
-				<h1>StudioCMS Docs Translation Status</h1>
+				<h1>StudioCMS UI Docs Translation Status</h1>
 				${TitleParagraph} ${StatusByLocale(config, status, lunaria)}
 			</div>
 			${StatusByFile(config, status, lunaria)}
@@ -360,7 +360,7 @@ export const ProgressBar = (
 export const TitleParagraph = html`
 	<p>
 		If you're interested in helping us translate
-		<a href="https://docs.studiocms.dev/">docs.studiocms.dev</a> into one of the languages listed below,
+		<a href="https://ui.studiocms.dev/">ui.studiocms.dev</a> into one of the languages listed below,
 		you've come to the right place! This auto-updating page always lists all the content that could
 		use your help right now.
 	</p>

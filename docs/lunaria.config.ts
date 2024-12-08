@@ -2,11 +2,11 @@ import { defineConfig } from '@lunariajs/core/config';
 
 export default defineConfig({
 	repository: {
-		name: 'withstudiocms/studiocms',
-		rootDir: 'www/docs',
+		name: 'withstudiocms/ui',
+		rootDir: 'docs',
 		hosting: 'github',
 		// TODO: Change to 'main' this once the branch is ready to merge
-		branch: 'issue-0304',
+		branch: 'main',
 	},
 	sourceLocale: {
 		label: 'English',
@@ -30,13 +30,13 @@ export default defineConfig({
 				tag: 'fr',
 			},
 		},
-		// {
-		// 	label: 'Deutsch',
-		// 	lang: 'de',
-		// 	parameters: {
-		// 		tag: 'de',
-		// 	},
-		// },
+		{
+			label: 'Deutsch',
+			lang: 'de',
+			parameters: {
+				tag: 'de',
+			},
+		},
 		// {
 		// 	label: '日本語',
 		// 	lang: 'ja',
@@ -124,11 +124,10 @@ export default defineConfig({
 	],
 	files: [
 		{
-			include: ['src/content/docs/**/*.(md|mdx)'],
-			exclude: ['src/content/docs/typedoc/**/*.(md|mdx)'],
+			include: ['src/content/docs/docs/**/*.(md|mdx)'],
 			pattern: {
-				source: 'src/content/docs/@path',
-				locales: 'src/content/docs/@lang/@path',
+				source: 'src/content/docs/docs/@path',
+				locales: 'src/content/docs/docs/@lang/@path',
 			},
 			type: 'universal',
 		},

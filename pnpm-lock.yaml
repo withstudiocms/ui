@@ -42,6 +42,9 @@ importers:
 
   .:
     dependencies:
+      '@actions/core':
+        specifier: ^1.11.1
+        version: 1.11.1
       '@biomejs/biome':
         specifier: ^1.9.4
         version: 1.9.4
@@ -230,6 +233,18 @@ packages:
   '@11ty/eleventy-fetch@5.0.1':
     resolution: {integrity: sha512-n79UhOAWG7XcJkRIoV8cZBpKgGln6mn+2UgsZkP6Xjgg8BqiMfxlYMJrNobSDdw3utyRAs8w/ZAPXoc18qrvMw==}
     engines: {node: '>=18'}
+
+  '@actions/core@1.11.1':
+    resolution: {integrity: sha512-hXJCSrkwfA46Vd9Z3q4cpEpHB1rL5NG04+/rbqW9d3+CSvtB1tYe8UTpAlixa1vj0m/ULglfEK2UKxMGxCxv5A==}
+
+  '@actions/exec@1.1.1':
+    resolution: {integrity: sha512-+sCcHHbVdk93a0XT19ECtO/gIXoxvdsgQLzb2fE2/5sIZmWQuluYyjPQtrtTHdU1YzTZ7bAPN4sITq2xi1679w==}
+
+  '@actions/http-client@2.2.3':
+    resolution: {integrity: sha512-mx8hyJi/hjFvbPokCg4uRd4ZX78t+YyRPtnKWwIl+RzNaVuFpQHfmlGVfsKEJN8LwTCvL+DfVgAM04XaHkm6bA==}
+
+  '@actions/io@1.1.3':
+    resolution: {integrity: sha512-wi9JjgKLYS7U/z8PPbco+PvTb/nRWjeoFlJ1Qer83k/3C5PHQi28hiVdeE2kHXmIL99mQFawx8qt/JPjZilJ8Q==}
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -867,6 +882,10 @@ packages:
 
   '@expressive-code/plugin-text-markers@0.38.3':
     resolution: {integrity: sha512-dPK3+BVGTbTmGQGU3Fkj3jZ3OltWUAlxetMHI6limUGCWBCucZiwoZeFM/WmqQa71GyKRzhBT+iEov6kkz2xVA==}
+
+  '@fastify/busboy@2.1.1':
+    resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
+    engines: {node: '>=14'}
 
   '@fontsource-variable/fira-code@5.1.0':
     resolution: {integrity: sha512-fwJbJLvyZ2BhgBSPYCNsrQ6IFQTpRu9GWXY8N20wHTpbhV0Ro5QJihiZV060Ay3kVR6IVH/oSVe/cr7Ube28gg==}
@@ -3585,6 +3604,10 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
 
+  tunnel@0.0.6:
+    resolution: {integrity: sha512-1h/Lnq9yajKY2PEbBadPXj3VxsDDu844OnaAo52UVmIzIvwwtBPIuNvkjuzBlTWpfJyUbG3ez0KSBibQkj4ojg==}
+    engines: {node: '>=0.6.11 <=0.7.0 || >=0.7.3'}
+
   twoslash-protocol@0.2.12:
     resolution: {integrity: sha512-5qZLXVYfZ9ABdjqbvPc4RWMr7PrpPaaDSeaYY55vl/w1j6H6kzsWK/urAEIXlzYlyrFmyz1UbwIt+AA0ck+wbg==}
 
@@ -3632,6 +3655,10 @@ packages:
 
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
+
+  undici@5.28.4:
+    resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
+    engines: {node: '>=14.0'}
 
   undici@6.21.0:
     resolution: {integrity: sha512-BUgJXc752Kou3oOIuU1i+yZZypyZRqNPW0vqoMPl8VaoalSfeR0D8/t4iAS3yirs79SSMTxTag+ZC86uswv+Cw==}
@@ -3990,6 +4017,22 @@ snapshots:
       p-queue: 6.6.2
     transitivePeerDependencies:
       - supports-color
+
+  '@actions/core@1.11.1':
+    dependencies:
+      '@actions/exec': 1.1.1
+      '@actions/http-client': 2.2.3
+
+  '@actions/exec@1.1.1':
+    dependencies:
+      '@actions/io': 1.1.3
+
+  '@actions/http-client@2.2.3':
+    dependencies:
+      tunnel: 0.0.6
+      undici: 5.28.4
+
+  '@actions/io@1.1.3': {}
 
   '@ampproject/remapping@2.3.0':
     dependencies:
@@ -4725,6 +4768,8 @@ snapshots:
   '@expressive-code/plugin-text-markers@0.38.3':
     dependencies:
       '@expressive-code/core': 0.38.3
+
+  '@fastify/busboy@2.1.1': {}
 
   '@fontsource-variable/fira-code@5.1.0': {}
 
@@ -8129,6 +8174,8 @@ snapshots:
     dependencies:
       esbuild: 0.15.18
 
+  tunnel@0.0.6: {}
+
   twoslash-protocol@0.2.12: {}
 
   twoslash@0.2.12(typescript@5.7.2):
@@ -8166,6 +8213,10 @@ snapshots:
   undici-types@5.26.5: {}
 
   undici-types@6.19.8: {}
+
+  undici@5.28.4:
+    dependencies:
+      '@fastify/busboy': 2.1.1
 
   undici@6.21.0: {}
 

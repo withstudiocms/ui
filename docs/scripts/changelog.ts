@@ -13,6 +13,7 @@ output.push(
 	'---',
 	'# Warning: This file is generated automatically. Do not edit!',
 	'title: Release Notes',
+	'description: Release notes for the @studiocms/ui package.',
 	'editUrl: false',
 	'---',
 	'',
@@ -26,16 +27,15 @@ const ast: Root = {
 	children: [],
 };
 
-// biome-ignore lint/complexity/noForEach: <explanation>
-changelog.versions.forEach((version) => {
+for (const version of changelog.versions) {
 	const versionChanges: List = { type: 'list', children: [] };
-	// biome-ignore lint/complexity/noForEach: <explanation>
-	semverCategories.forEach((semverCategory) => {
-		// biome-ignore lint/complexity/noForEach: <explanation>
-		version.changes[semverCategory].children.forEach((listItem) => {
+
+	for (const semverCategory of semverCategories) {
+		for (const listItem of version.changes[semverCategory].children) {
 			versionChanges.children.push(listItem);
-		});
-	});
+		}
+	}
+
 	if (version.includes.size) {
 		versionChanges.children.push({
 			type: 'listItem',
@@ -47,15 +47,17 @@ changelog.versions.forEach((version) => {
 			],
 		});
 	}
-	if (!versionChanges.children.length) return;
+
+	if (!versionChanges.children.length) continue;
 
 	ast.children.push({
 		type: 'heading',
 		depth: 2,
 		children: [{ type: 'text', value: version.version }],
 	});
+
 	ast.children.push(versionChanges);
-});
+}
 
 output.push(toMarkdown(ast, { bullet: '-' }));
 
