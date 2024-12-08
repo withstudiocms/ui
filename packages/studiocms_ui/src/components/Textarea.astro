@@ -12,19 +12,19 @@ interface Props extends HTMLAttributes<'textarea'> {
 	name?: string;
 	disabled?: boolean;
 	defaultValue?: string;
-};
+}
 
 const {
 	label,
 	placeholder,
 	isRequired,
 	fullWidth,
-  fullHeight,
+	fullHeight,
 	resize,
 	name = generateID('textarea'),
 	disabled,
 	defaultValue,
-  ...props
+	...props
 } = Astro.props;
 ---
 <label 

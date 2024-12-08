@@ -1,14 +1,14 @@
 ---
-import type { HTMLAttributes } from 'astro/types'
+import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends HTMLAttributes<'footer'> {
-  links: {
-    [label: string]: {
-      label: string;
-      href: string;
-    }[];
-  },
-  copyright: string;
+	links: {
+		[label: string]: {
+			label: string;
+			href: string;
+		}[];
+	};
+	copyright: string;
 }
 
 const { copyright, links, ...props } = Astro.props;

@@ -8,4 +8,4 @@ export interface ToastProps {
 	duration?: number;
 	persistent?: boolean;
 	closeButton?: boolean;
-};
+}

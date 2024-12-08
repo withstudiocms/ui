@@ -7,7 +7,7 @@ interface Option {
 	label: string;
 	value: string;
 	disabled?: boolean;
-};
+}
 
 interface Props {
 	label?: string;
@@ -18,8 +18,8 @@ interface Props {
 	options: Option[];
 	disabled?: boolean;
 	fullWidth?: boolean;
-    placeholder?: string;
-};
+	placeholder?: string;
+}
 
 const {
 	label,
@@ -30,7 +30,7 @@ const {
 	options = [],
 	disabled,
 	fullWidth,
-    placeholder
+	placeholder,
 } = Astro.props;
 ---
 

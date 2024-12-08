@@ -8,9 +8,9 @@ interface Option {
 	value: string;
 	disabled?: boolean;
 	color?: StudioCMSColorway;
-  icon?: HeroIconName;
-  href?: string;
-};
+	icon?: HeroIconName;
+	href?: string;
+}
 
 interface Props {
 	options: Option[];
@@ -18,10 +18,17 @@ interface Props {
 	id: string;
 	align?: 'start' | 'center' | 'end';
 	triggerOn?: 'left' | 'right' | 'both';
-  offset?: number;
-};
+	offset?: number;
+}
 
-const { options, disabled = false, align = 'center', id, triggerOn = 'left', offset = 0 } = Astro.props;
+const {
+	options,
+	disabled = false,
+	align = 'center',
+	id,
+	triggerOn = 'left',
+	offset = 0,
+} = Astro.props;
 ---
 <div 
   class="sui-dropdown-container"

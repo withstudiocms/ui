@@ -33,7 +33,10 @@ class ModalHelper {
 	}
 
 	private addButtonListeners = (id: string, dismissable: boolean) => {
-		if (dismissable || (!this.element.dataset.hasCancelButton && !this.element.dataset.hasActionButton)) {
+		if (
+			dismissable ||
+			(!this.element.dataset.hasCancelButton && !this.element.dataset.hasActionButton)
+		) {
 			const xMarkButton = document.getElementById(`${id}-btn-x`) as HTMLButtonElement;
 			xMarkButton.addEventListener('click', this.hide);
 		}

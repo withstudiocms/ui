@@ -40,7 +40,7 @@ class SingleSidebarHelper {
 		this.sidebarToggle.addEventListener('click', () => {
 			this.sidebar.classList.toggle('active');
 		});
-	}
+	};
 
 	public hideSidebarOnClick = (elementID: string) => {
 		const element = document.getElementById(elementID);

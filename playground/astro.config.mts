@@ -1,12 +1,12 @@
+import node from '@astrojs/node';
 import sentry from '@sentry/astro';
 import { defineConfig } from 'astro/config';
-import node from "@astrojs/node"
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://ui-testing.studiocms.dev',
 	adapter: node({
-		mode: "standalone",
+		mode: 'standalone',
 	}),
 	integrations: [
 		sentry({

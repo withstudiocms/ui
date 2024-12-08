@@ -6,7 +6,7 @@ class DropdownHelper {
 	private alignment: 'start' | 'center' | 'end';
 	private triggerOn: 'left' | 'right' | 'both';
 	private fullWidth = false;
-	
+
 	active = false;
 
 	constructor(id: string, fullWidth?: boolean) {

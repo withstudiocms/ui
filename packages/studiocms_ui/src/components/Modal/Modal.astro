@@ -4,8 +4,8 @@ import Icon from '../../utils/Icon.astro';
 import Button from '../Button.astro';
 
 interface ButtonType {
-  label: string;
-  color: StudioCMSColorway;
+	label: string;
+	color: StudioCMSColorway;
 }
 
 interface Props {
@@ -15,9 +15,16 @@ interface Props {
 	cancelButton?: string | ButtonType;
 	actionButton?: string | ButtonType;
 	isForm?: boolean;
-};
+}
 
-const { id, size = 'md', dismissable = true, isForm = false, cancelButton, actionButton } = Astro.props;
+const {
+	id,
+	size = 'md',
+	dismissable = true,
+	isForm = false,
+	cancelButton,
+	actionButton,
+} = Astro.props;
 ---
 <dialog
   popover

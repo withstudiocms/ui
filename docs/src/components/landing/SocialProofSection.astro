@@ -10,8 +10,8 @@ const chunkSize = socialProofEntries.length / 3;
 const chunkedSocialProofEntries = [];
 
 for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
-    const chunk = socialProofEntries.slice(i, i + chunkSize);
-    chunkedSocialProofEntries.push(chunk);
+	const chunk = socialProofEntries.slice(i, i + chunkSize);
+	chunkedSocialProofEntries.push(chunk);
 }
 ---
 <section class="social-proof not-content">

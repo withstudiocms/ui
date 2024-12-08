@@ -2,15 +2,15 @@
 import { Image } from 'astro:assets';
 
 interface Props {
-  avatar: string;
-  name: string;
-  handle: string;
-  message: string;
-  image?: {
-    path: string;
-    width: number;
-    height: number;
-  };
+	avatar: string;
+	name: string;
+	handle: string;
+	message: string;
+	image?: {
+		path: string;
+		width: number;
+		height: number;
+	};
 }
 
 const { avatar, name, handle, message, image } = Astro.props;

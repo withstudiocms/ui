@@ -2,8 +2,8 @@
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends HTMLAttributes<'svg'> {
-  width?: number;
-  height?: number;
+	width?: number;
+	height?: number;
 }
 
 const { width = 98, height = 96, ...props } = Astro.props;
