@@ -80,7 +80,6 @@ const tabContents = await Astro.slots.render('default');
 const tabs = extractTabInfoWithRegex(tabContents);
 
 const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || "", tabContents);
-console.log(finalizedTabContents);
 ---
 
 <div class="sui-tabs-container">
@@ -89,7 +88,7 @@ console.log(finalizedTabContents);
       <button 
         role="tab"
         class="sui-tab-header"
-        class:list={[i === 0 && "active"]}
+        class:list={[i === 0 && "active", tab.color]}
         data-tab-child={tab.tabId}
       >
         {tab.icon && (
@@ -124,6 +123,10 @@ console.log(finalizedTabContents);
     const tabContainers = document.querySelectorAll<HTMLElement>('.sui-tabs-container');
 
     for (const container of tabContainers) {
+      if (container.dataset.active) continue;
+
+      container.dataset.active = "true";
+
       const tabHeaders = container.querySelectorAll<HTMLButtonElement>('.sui-tab-header')!;
 
       for (const tab of tabHeaders) {
@@ -135,6 +138,10 @@ console.log(finalizedTabContents);
   document.addEventListener('DOMContentLoaded', initTabs);
 </script>
 <style>
+  .sui-tabs-container {
+    width: 100%;
+  }
+
   .sui-tabs-list {
     display: flex;
     flex-direction: row;
@@ -169,6 +176,18 @@ console.log(finalizedTabContents);
 
   .sui-tab-header.active {
     background-color: hsla(var(--primary-flat-active)) !important;
+  }
+
+  .sui-tab-header.success.active {
+    background-color: hsla(var(--success-flat-active)) !important;
+  }
+
+  .sui-tab-header.warning.active {
+    background-color: hsla(var(--warning-flat-active)) !important;
+  }
+
+  .sui-tab-header.danger.active {
+    background-color: hsla(var(--danger-flat-active)) !important;
   }
 
   .sui-tabs-content {

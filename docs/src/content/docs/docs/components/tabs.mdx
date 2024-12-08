@@ -2,17 +2,114 @@
 title: "Tabs"
 ---
 
-```astro
----
-import { Tabs, TabItem } from '@studiocms/ui/components';
----
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs as SuiTabs, TabItem as SuiTabItem, Card } from '@studiocms/ui/components';
+
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Select } from '@studiocms/ui/components';
+
+The tabs you can see on [the StudioCMS UI landing page](https://ui.studiocms.dev), as a component!
+
+## Usage
 
 <Tabs>
-  <TabItem icon="pencil" label="Test">
-    Test
+  <TabItem label="Preview">
+    <PreviewCard fullWidth>
+      <SuiTabs>
+        <SuiTabItem label="Tab #1">
+          <Card fullWidth>
+            Content #1
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #2">
+          <Card fullWidth>
+            Content #2
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #3">
+          <Card fullWidth>
+            Content #3
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
   </TabItem>
-  <TabItem icon="square-2-stack" label="Test 2">
-    Test 2
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TabsExample.astro"
+    ---
+    import { Tabs, TabItem, Card } from '@studiocms/ui/components';
+    ---
+
+    <Tabs>
+      <TabItem label="Tab #1">
+        <Card fullWidth>
+          Content #1
+        </Card>
+      </TabItem>
+      <TabItem label="Tab #2">
+        <Card fullWidth>
+          Content #2
+        </Card>
+      </TabItem>
+      <TabItem label="Tab #3">
+        <Card fullWidth>
+          Content #3
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
   </TabItem>
 </Tabs>
-```
+
+### Customizing the tabs
+
+You can add icons and even change the color of the tabs:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard fullWidth>
+      <SuiTabs>
+        <SuiTabItem label="Tab #1" icon="star" color="warning">
+          <Card fullWidth>
+            Content #1
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #2" icon="arrows-right-left" color="success">
+          <Card fullWidth>
+            Content #2
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #3" icon="bell" color="danger">
+          <Card fullWidth>
+            Content #3
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TabsExample.astro"
+    ---
+    import { Tabs, TabItem, Card } from '@studiocms/ui/components';
+    ---
+
+    <Tabs>
+      <TabItem label="Tab #1">
+        <Card fullWidth>
+          Content #1
+        </Card>
+      </TabItem>
+      <TabItem label="Tab #2">
+        <Card fullWidth>
+          Content #2
+        </Card>
+      </TabItem>
+      <TabItem label="Tab #3">
+        <Card fullWidth>
+          Content #3
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>

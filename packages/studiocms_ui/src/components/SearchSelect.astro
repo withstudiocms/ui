@@ -262,8 +262,6 @@ const {
             e.preventDefault();
             e.stopImmediatePropagation();
 
-            console.log(optionElements, focusIndex);
-
             for (const entry of optionElements) {
                 if (entry.dataset.optionIndex == focusIndex) {
                     entry.click();
