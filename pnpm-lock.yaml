@@ -74,7 +74,7 @@ importers:
         version: 0.9.4(typescript@5.7.2)
       '@astrojs/starlight':
         specifier: hideoo/starlight#hd-astro-v5&path:/packages/starlight
-        version: https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: git+https://git@github.com:hideoo/starlight.git#0521ba2b61c79d7c382f87c026869c32f18a3881&path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       '@expressive-code/plugin-line-numbers':
         specifier: ^0.38.3
         version: 0.38.3
@@ -170,10 +170,10 @@ importers:
         version: 0.33.5
       starlight-image-zoom:
         specifier: ^0.9.0
-        version: 0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))
+        version: 0.9.0(@astrojs/starlight@git+https://git@github.com:hideoo/starlight.git#0521ba2b61c79d7c382f87c026869c32f18a3881&path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))
       starlight-package-managers:
         specifier: ^0.8.0
-        version: 0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: 0.8.0(@astrojs/starlight@git+https://git@github.com:hideoo/starlight.git#0521ba2b61c79d7c382f87c026869c32f18a3881&path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       tsm:
         specifier: ^2.3.0
         version: 2.3.0
@@ -337,8 +337,8 @@ packages:
   '@astrojs/sitemap@3.2.1':
     resolution: {integrity: sha512-uxMfO8f7pALq0ADL6Lk68UV6dNYjJ2xGUzyjjVj60JLBs5a6smtlkBYv3tQ0DzoqwS7c9n4FUx5lgv0yPo/fgA==}
 
-  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight':
-    resolution: {path: /packages/starlight, tarball: https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881}
+  '@astrojs/starlight@git+https://git@github.com:hideoo/starlight.git#0521ba2b61c79d7c382f87c026869c32f18a3881&path:/packages/starlight':
+    resolution: {commit: 0521ba2b61c79d7c382f87c026869c32f18a3881, path: /packages/starlight, repo: git@github.com:hideoo/starlight.git, type: git}
     version: 0.29.2
     peerDependencies:
       astro: ^5.0.0
@@ -4223,7 +4223,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
+  '@astrojs/starlight@git+https://git@github.com:hideoo/starlight.git#0521ba2b61c79d7c382f87c026869c32f18a3881&path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
     dependencies:
       '@astrojs/mdx': 4.0.1(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       '@astrojs/sitemap': 3.2.1
@@ -8148,16 +8148,16 @@ snapshots:
 
   sprintf-js@1.0.3: {}
 
-  starlight-image-zoom@0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))):
+  starlight-image-zoom@0.9.0(@astrojs/starlight@git+https://git@github.com:hideoo/starlight.git#0521ba2b61c79d7c382f87c026869c32f18a3881&path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))):
     dependencies:
-      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+      '@astrojs/starlight': git+https://git@github.com:hideoo/starlight.git#0521ba2b61c79d7c382f87c026869c32f18a3881&path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       rehype-raw: 7.0.0
       unist-util-visit: 5.0.0
       unist-util-visit-parents: 6.0.1
 
-  starlight-package-managers@0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)):
+  starlight-package-managers@0.8.0(@astrojs/starlight@git+https://git@github.com:hideoo/starlight.git#0521ba2b61c79d7c382f87c026869c32f18a3881&path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)):
     dependencies:
-      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+      '@astrojs/starlight': git+https://git@github.com:hideoo/starlight.git#0521ba2b61c79d7c382f87c026869c32f18a3881&path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       astro: 5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
 
   statuses@2.0.1: {}
