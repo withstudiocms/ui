@@ -26,5 +26,3 @@ src/content/docs/typedoc/*
 
 # Eleventy cache
 .cache/
-
-src/content/docs/docs/changelog.md
