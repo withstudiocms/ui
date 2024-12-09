@@ -46,7 +46,6 @@ export default defineConfig({
 		starlight({
 			title: 'StudioCMS UI',
 			description: 'The UI library for StudioCMS, available for Astro for all to use.',
-			favicon: '/logo-light.svg',
 			lastUpdated: true,
 			credits: false,
 			tagline: 'The UI library for StudioCMS, available for Astro for all to use.',
@@ -124,6 +123,32 @@ export default defineConfig({
 						type: 'font/woff2',
 						href: onestWoff2,
 						crossorigin: 'anonymous',
+					},
+				},
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'icon',
+						href: '/favicon.svg',
+						type: 'image/svg+xml',
+					},
+				},
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'icon',
+						href: '/favicon-light.png',
+						type: 'image/png',
+						media: '(prefers-color-scheme: dark)',
+					},
+				},
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'icon',
+						href: '/favicon-dark.png',
+						type: 'image/png',
+						media: '(prefers-color-scheme: light)',
 					},
 				},
 			],

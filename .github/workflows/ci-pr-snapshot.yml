@@ -2,6 +2,8 @@ name: CI - Snapshot Release on PRs
 
 on: 
   pull_request:
+    paths:
+      - 'packages/**'
 
 jobs:
   release:
