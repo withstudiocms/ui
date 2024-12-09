@@ -57,7 +57,8 @@ export default defineConfig({
 				Header: './src/starlightOverrides/Header.astro',
 			},
 			logo: {
-				src: './src/assets/logo-adaptive.svg',
+				dark: '../assets/logo-light.svg',
+				light: '../assets/logo-dark.svg',
 			},
 			defaultLocale: 'root',
 			locales,
