@@ -31,6 +31,10 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "jsr-publish": "pnpm dlx jsr publish",
+    "jsr-test": "pnpm dlx jsr publish --dry-run"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {
