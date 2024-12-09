@@ -55,8 +55,8 @@ importers:
         specifier: 2.27.9
         version: 2.27.9
       '@changesets/config':
-        specifier: 3.0.3
-        version: 3.0.3
+        specifier: 3.0.4
+        version: 3.0.4
       pkg-pr-new:
         specifier: ^0.0.35
         version: 0.0.35
