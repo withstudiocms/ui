@@ -139,7 +139,7 @@ export default defineConfig({
 						rel: 'icon',
 						href: '/favicon-light.png',
 						type: 'image/png',
-						media: '(prefers-color-scheme: light)',
+						media: '(prefers-color-scheme: dark)',
 					},
 				},
 				{
@@ -148,7 +148,7 @@ export default defineConfig({
 						rel: 'icon',
 						href: '/favicon-dark.png',
 						type: 'image/png',
-						media: '(prefers-color-scheme: dark)',
+						media: '(prefers-color-scheme: light)',
 					},
 				},
 			],
