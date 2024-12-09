@@ -1,0 +1,20 @@
+name: "Dependabot Changesets"
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  changesets:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Dependabot Changesets
+        uses: feelepxyz/dependabot-changesets@v1
+        with:
+          github-token: "${{ secrets.STUDIOCMS_SERVICE_TOKEN }}"
+          commit_message: "[changeset] dependabot updates"
+          commit_user_name: "studiocms-no-reply"
+          commit_user_email: "no-reply@studiocms.dev"
