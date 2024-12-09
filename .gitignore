@@ -3,5 +3,3 @@ node_modules
 .npmrc
 
 dist/
-
-docs/src/content/docs/docs/changelog.md
