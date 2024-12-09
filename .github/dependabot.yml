@@ -17,4 +17,4 @@ updates:
     schedule:
       interval: "weekly"
     labels:
-      - "dependencies"
+      - "workflows"
