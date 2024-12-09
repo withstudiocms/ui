@@ -1,20 +1,25 @@
 name: "Dependabot Changesets"
 
-on: pull_request
-
-permissions:
-  contents: write
-  pull-requests: write
+on:
+  pull_request_target:
+    types: [opened, synchronize, labeled]
 
 jobs:
-  changesets:
+  changeset:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - name: Dependabot Changesets
-        uses: feelepxyz/dependabot-changesets@v1
+      - uses: hmarr/debug-action@v3.0.0
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          github-token: "${{ secrets.STUDIOCMS_SERVICE_TOKEN }}"
-          commit_message: "[changeset] dependabot updates"
-          commit_user_name: "studiocms-no-reply"
-          commit_user_email: "no-reply@studiocms.dev"
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Add changeset
+        uses: StafflinePeoplePlus/dependabot-changesets@v0.1.5
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: ui
+          pr-number: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
