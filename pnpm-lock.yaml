@@ -186,9 +186,6 @@ importers:
 
   packages/studiocms_ui:
     dependencies:
-      '@fontsource-variable/onest':
-        specifier: 'catalog:'
-        version: 5.1.0
       '@iconify-json/heroicons':
         specifier: 'catalog:'
         version: 1.2.1
