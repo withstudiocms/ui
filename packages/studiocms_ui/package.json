@@ -41,7 +41,6 @@
     "./types": "./src/types/index.ts"
   },
   "dependencies": {
-    "@fontsource-variable/onest": "catalog:",
     "@iconify/utils": "catalog:",
     "@iconify-json/heroicons": "catalog:"
   },
