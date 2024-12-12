@@ -1,4 +1,5 @@
 ---
+import { generateID } from 'src/utils/generateID';
 import { Icon } from '../../utils';
 import type { StudioCMSColorway } from '../../utils/colors';
 import type { HeroIconName } from '../../utils/iconType';
@@ -12,6 +13,7 @@ interface Tab {
 
 interface Props {
   syncKey?: string;
+  storage?: 'session' | 'persistent';
 }
 
 const extractTabInfoWithRegex = (input: string) => {
@@ -64,21 +66,23 @@ const markTabAsActive = (tabId: string, html: string): string => {
   return updatedHtml;
 }
 
-const { syncKey } = Astro.props;
+const { syncKey, storage = 'session' } = Astro.props;
 
 const tabContents = await Astro.slots.render('default');
 const tabs = extractTabInfoWithRegex(tabContents);
 const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || "", tabContents);
+const containerId = generateID('sui-tabs-container');
 ---
 
-<div class="sui-tabs-container" data-sync-key={syncKey}>
+<div class="sui-tabs-container" id={containerId} data-sync-key={syncKey}>
   <div class="sui-tabs-list">
     {tabs.map((tab, i) => (
       <button 
         role="tab"
         class="sui-tab-header"
-        class:list={[i === 0 && "active", tab.color]}
+        class:list={[i === 0 && "active", tab.color, syncKey && `${syncKey}:${i}`]}
         data-tab-child={tab.tabId}
+        id={syncKey ? `${syncKey}:${i}` : undefined}
       >
         {tab.icon && (
           <Icon name={tab.icon} width={24} height={24} />
@@ -91,39 +95,68 @@ const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || "", tabContents);
     <Fragment set:html={finalizedTabContents} />
   </div>
 </div>
-<script>
-  // TODO: Tabs fire custom events if sync key is set with format `key:value` to change all tabs. 
-  // They also store in localstorage which only gets used when the page is loaded.
+<script is:inline define:vars={{ syncKey, containerId, storage }}>
+  let storageLayer = storage === 'session' ? sessionStorage : localStorage;
 
-  const switchTab = (e: MouseEvent, container: HTMLElement) => {
+  const constructCustomEvent = (tabIndex) => {
+    return new CustomEvent(`sui-tab-switch:${syncKey}`, {
+      detail: {
+        tabIndex
+      }
+    });
+  }
+
+  const switchTab = (e, container) => {
     const activeChildren = container.querySelectorAll('.active');
     
     for (const child of activeChildren) {
       child.classList.remove('active');
     }
 
-    const newActiveTab = e.target as HTMLElement;
+    const newActiveTab = e.target;
     newActiveTab.classList.add('active');
 
     const newActiveTabContentId = newActiveTab.dataset.tabChild;
-    const newActiveTabContent = container.querySelector(`sui-tab-item[data-tab-id="${newActiveTabContentId}"]`)!;
+    const newActiveTabContent = container.querySelector(`sui-tab-item[data-tab-id="${newActiveTabContentId}"]`);
 
     newActiveTabContent.classList.add('active');
+
+    if (syncKey) {
+      const tabIndex = Array.prototype.indexOf.call(newActiveTab.parent.children, newActiveTab);
+      storageLayer.setItem(syncKey, tabIndex);
+
+      document.dispatchEvent(constructCustomEvent(tabIndex));
+    }
   }
 
   const initTabs = () => {
-    const tabContainers = document.querySelectorAll<HTMLElement>('.sui-tabs-container');
+    const container = document.getElementById(containerId);
 
-    for (const container of tabContainers) {
-      if (container.dataset.active) continue;
+    if (container.dataset.active) return;
 
-      container.dataset.active = "true";
+    container.dataset.active = "true";
 
-      const tabHeaders = container.querySelectorAll<HTMLButtonElement>('.sui-tab-header')!;
+    const tabHeaders = container.querySelectorAll('.sui-tab-header');
 
-      for (const tab of tabHeaders) {
-        tab.addEventListener('click', (e) => switchTab(e, container));
+    for (const tab of tabHeaders) {
+      tab.addEventListener('click', (e) => switchTab(e, container));
+    }
+
+    if (syncKey) {
+      // Retrieve the sync key value from localstorage, set the tab.
+      const activeTabIndex = storageLayer.getItem(syncKey);
+
+      if (activeTabIndex) {
+        const activeTab = container.querySelector(`#${syncKey}:${activeTabIndex}`);
+        activeTab.click();
       }
+
+      document.addEventListener(`sui-tab-switch:${syncKey}`, (e) => {
+        const { tabIndex } = e.detail;
+
+        const activeTab = container.querySelector(`#${syncKey}:${tabIndex}`);
+        activeTab.click();
+      });
     }
   }
 
