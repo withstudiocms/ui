@@ -2,14 +2,41 @@
 import type { HTMLAttributes } from 'astro/types';
 import { generateID } from '../utils/generateID';
 
+/**
+ * The props for the input component.
+ */
 interface Props extends HTMLAttributes<'input'> {
+	/**
+	 * The label of the input.
+	 */
 	label?: string;
+	/**
+	 * The type of the input. Defaults to `text`.
+	 */
 	type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
+	/**
+	 * The placeholder of the input.
+	 */
 	placeholder?: string;
+	/**
+	 * Whether the input is required. Defaults to `false`.
+	 */
 	isRequired?: boolean;
+	/**
+	 * The name attribute for the input. Useful for form submission.
+	 */
 	name?: string;
+	/**
+	 * Whether the input is disabled. Defaults to `false`.
+	 */
 	disabled?: boolean;
+	/**
+	 * The default value of the input.
+	 */
 	defaultValue?: string;
+	/**
+	 * Additional classes to apply to the input.
+	 */
 	class?: string;
 }
 

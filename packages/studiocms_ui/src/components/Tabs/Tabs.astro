@@ -28,6 +28,9 @@ interface Props {
    * The variant of the tabs. Defaults to `default`.
    */
   variant?: 'default' | 'starlight';
+  /**
+   * The alignment of the tabs. Defaults to `left`.
+   */
   align?: 'left' | 'center' | 'right';
 }
 
@@ -254,6 +257,7 @@ const containerId = generateID('sui-tabs-container');
 
   .starlight .sui-tabs-list {
     margin-bottom: 1rem;
+    gap: 0;
   }
 
   .starlight .sui-tabs-list::before {

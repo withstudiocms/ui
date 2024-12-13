@@ -1,5 +1,11 @@
 ---
+/**
+ * Props for the Toast component.
+ */
 interface Props {
+  /**
+   * The position of the toaster. All toasts will originate from this position.
+   */
 	position?:
 		| 'top-left'
 		| 'top-right'
@@ -7,9 +13,21 @@ interface Props {
 		| 'bottom-left'
 		| 'bottom-right'
 		| 'bottom-center';
+  /**
+   * The duration of the toast in milliseconds. Defaults to 4000 (4 seconds).
+   */
 	duration?: number;
+  /**
+   * Whether the toast has a close button. Defaults to false.
+   */
 	closeButton?: boolean;
+  /**
+   * The offset of the toaster from the edge of the screen in pixels. Defaults to 32.
+   */
 	offset?: number;
+  /**
+   * The gap between toasts in pixels. Defaults to 8.
+   */
 	gap?: number;
 }
 

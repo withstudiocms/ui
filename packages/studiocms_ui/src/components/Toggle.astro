@@ -2,13 +2,37 @@
 import type { StudioCMSColorway } from '../utils/colors';
 import { generateID } from '../utils/generateID';
 
+/**
+ * The props for the toggle component
+ */
 interface Props {
+  /**
+   * The label of the toggle.
+   */
 	label: string;
+  /**
+   * The size of the toggle. Defaults to `md`.
+   */
 	size?: 'sm' | 'md' | 'lg';
+  /**
+   * The color of the toggle. Defaults to `default`.
+   */
 	color?: StudioCMSColorway;
+  /**
+   * Whether the toggle is checked by default. Defaults to `false`.
+   */
 	defaultChecked?: boolean;
+  /**
+   * Whether the toggle is disabled. Defaults to `false`.
+   */
 	disabled?: boolean;
+  /**
+   * The name of the toggle.
+   */
 	name?: string;
+  /**
+   * Whether the toggle is required. Defaults to `false`.
+   */
 	isRequired?: boolean;
 }
 

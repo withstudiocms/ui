@@ -3,13 +3,37 @@ import Checkmark from '../icons/Checkmark.astro';
 import type { StudioCMSColorway } from '../utils/colors';
 import { generateID } from '../utils/generateID';
 
+/**
+ * The props for the Checkbox component.
+ */
 interface Props {
+  /**
+   * The label of the checkbox.
+   */
 	label: string;
+  /**
+   * The size of the checkbox. Defaults to `md`.
+   */
 	size?: 'sm' | 'md' | 'lg';
+  /**
+   * The color of the checkbox. Defaults to `default`.
+   */
 	color?: StudioCMSColorway;
+  /**
+   * Whether the checkbox is checked by default.
+   */
 	defaultChecked?: boolean;
+  /**
+   * Whether the checkbox is disabled.
+   */
 	disabled?: boolean;
+  /**
+   * The name of the checkbox.
+   */
 	name?: string;
+  /**
+   * Whether the checkbox is required.
+   */
 	isRequired?: boolean;
 }
 

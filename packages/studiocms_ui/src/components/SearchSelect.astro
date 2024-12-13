@@ -3,21 +3,63 @@ import Icon from '../utils/Icon.astro';
 import { generateID } from '../utils/generateID';
 import Input from './Input.astro';
 
+/**
+ * An option in the select dropdown
+ */
 interface Option {
+    /**
+     * The label of the option.
+     */
 	label: string;
+    /**
+     * The value of the option.
+     */
 	value: string;
+    /**
+     * Whether the option is disabled.
+     */
 	disabled?: boolean;
 }
 
+/**
+ * The props for the search select component.
+ */
 interface Props {
+    /**
+     * The label of the search select.
+     */
 	label?: string;
+    /**
+     * The default value of the search select. Needs to be one of the values in the options.
+     */
 	defaultValue?: string;
+    /**
+     * Additional classes to apply to the search select.
+     */
 	class?: string;
+    /**
+     * The name of the search select.
+     */
 	name?: string;
+    /**
+     * Whether the search select is required. Defaults to `false`.
+     */
 	isRequired?: boolean;
+    /**
+     * The options to display in the search select.
+     */
 	options: Option[];
+    /**
+     * Whether the search select is disabled. Defaults to `false`.
+     */
 	disabled?: boolean;
+    /**
+     * Whether the search select should take up the full width of its container.
+     */
 	fullWidth?: boolean;
+    /**
+     * The placeholder of the search select.
+     */
 	placeholder?: string;
 }
 
