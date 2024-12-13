@@ -33,7 +33,7 @@ class ThemeHelper {
 			return theme as T extends true ? 'dark' | 'light' : Theme;
 		}
 
-		if (this.themeManagerElement.dataset.theme !== 'system') {
+		if ((this.themeManagerElement.dataset.theme ?? 'system') !== 'system') {
 			return this.themeManagerElement.dataset.theme as 'dark' | 'light';
 		}
 
