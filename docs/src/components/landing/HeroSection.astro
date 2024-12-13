@@ -378,6 +378,10 @@ import GitHubIcon from '~/components/icons/GitHubIcon.astro';
       .hero-text p {
          font-size: .975em !important;
       }
+
+      .cta-buttons {
+         gap: 1rem;
+      }
    }
 
    @media screen and (max-width: 520px) {
@@ -397,6 +401,18 @@ import GitHubIcon from '~/components/icons/GitHubIcon.astro';
             "selects    selects    selects    selects"
             "modal      modal      dropdown   dropdown"
             "button     button     dropdown   dropdown";
+      }
+   }
+
+   @media screen and (max-width: 460px) {
+      .cta-buttons {
+         flex-direction: column;
+         width: 100%;
+      }
+
+      .cta-buttons a {
+         width: 100%;
+         justify-content: center;
       }
    }
 </style>

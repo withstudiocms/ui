@@ -21,8 +21,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# TypeDoc documentation
-src/content/docs/typedoc/*
+# Changelog documentation
+src/content/docs/docs/changelog.md
 
 # Eleventy cache
 .cache/
