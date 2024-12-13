@@ -2,16 +2,36 @@
 import type { HTMLTag, Polymorphic } from "astro/types";
 import type { StudioCMSColorway } from "../utils/colors";
 
+/**
+ * Props for the button component.
+ */
 type Props<As extends HTMLTag = "button"> = Omit<
   Polymorphic<{ as: As }>,
   "as"
 > & {
+  /**
+   * The polymorphic component to render the button as. Defaults to `button`.
+   */
   as?: As;
+  /**
+   * The size of the button. Defaults to `md`.
+   */
   size?: "sm" | "md" | "lg";
+  /**
+   * Whether the button should be full width. Defaults to `false`.
+   */
   fullWidth?: boolean;
+  /**
+   * The colorway of the button. Defaults to `default`.
+   */
   color?: StudioCMSColorway;
+  /**
+   * The variant of the button. Defaults to `solid`.
+   */
   variant?: "solid" | "outlined" | "flat";
-  class?: string;
+  /**
+   * Whether the button is disabled. Defaults to `false`.
+   */
   disabled?: boolean;
 };
 
@@ -21,9 +41,8 @@ const {
   size = "md",
   fullWidth = false,
   color = "default",
-  variant = "default",
+  variant = "solid",
   as: As = "button",
-  class: className,
   disabled = false,
   ...props
 } = Astro.props;
@@ -34,7 +53,6 @@ const {
   class:list={[
     fullWidth && "full",
     disabled && "disabled",
-    className,
     size,
     color,
     variant,

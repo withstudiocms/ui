@@ -2,21 +2,63 @@
 import Icon from '../utils/Icon.astro';
 import { generateID } from '../utils/generateID';
 
+/**
+ * The props for the select component.
+ */
 interface Option {
+    /**
+     * The label of the option.
+     */
 	label: string;
+    /**
+     * The value of the option.
+     */
 	value: string;
+    /**
+     * Whether the option is disabled. Defaults to `false`.
+     */
 	disabled?: boolean;
 }
 
+/**
+ * The props for the select component.
+ */
 interface Props {
+    /**
+     * The label of the select.
+     */
 	label?: string;
+    /**
+     * The default value of the select.
+     */
 	defaultValue?: string;
+    /**
+     * Additional classes to apply to the select.
+     */
 	class?: string;
+    /**
+     * The name of the select. Required because of the helper.
+     */
 	name?: string;
+    /**
+     * Whether the select is required. Defaults to `false`.
+     */
 	isRequired?: boolean;
+    /**
+     * The options to display in the select.
+     */
 	options: Option[];
+    /**
+     * Whether the select is disabled. Defaults to `false`.
+     */
 	disabled?: boolean;
+    /**
+     * Whether the select is full width. Defaults to `false`.
+     */
 	fullWidth?: boolean;
+    /**
+     * The placeholder of the select. Defaults to `Select`.
+     */
 	placeholder?: string;
 }
 
@@ -29,7 +71,7 @@ const {
 	options = [],
 	disabled,
 	fullWidth,
-	placeholder,
+	placeholder = "Select",
 } = Astro.props;
 ---
 
@@ -56,7 +98,7 @@ const {
             {
                 defaultValue
                     ? options.find((x) => x.value === defaultValue)?.label
-                    : placeholder || "Select"
+                    : placeholder
             }
         </span>
         <Icon name="chevron-up-down" width={24} height={24} />

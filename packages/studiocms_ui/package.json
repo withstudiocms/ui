@@ -34,6 +34,7 @@
   "license": "MIT",
   "type": "module",
   "exports": {
+    ".": "./src/integration.ts",
     "./components": "./src/components.ts",
     "./layouts": "./src/layouts.ts",
     "./css/*": "./src/css/*",

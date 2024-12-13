@@ -2,15 +2,33 @@
 import { Image } from 'astro:assets';
 import Icon from '../utils/Icon.astro';
 
+/**
+ * The props for the User component.
+ */
 interface Props {
+  /**
+   * The name of the user.
+   */
 	name: string;
+  /**
+   * The description of the user. Could be a role, a handle, etc.
+   */
 	description: string;
+  /**
+   * The avatar of the user. Either a URL to an image or an imported image.
+   */
 	avatar?: string;
+  /**
+   * Additional classes to apply to the user container.
+   */
 	class?: string;
+  /**
+   * The loading strategy for the image. Defaults to `lazy`.
+   */
 	loading?: 'eager' | 'lazy';
 }
 
-const { name, description, avatar, class: className, loading } = Astro.props;
+const { name, description, avatar, class: className, loading = 'lazy' } = Astro.props;
 ---
 <div class="sui-user-container" class:list={[ className ]}>
   <div class="sui-avatar-container">

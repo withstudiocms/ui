@@ -1,24 +1,37 @@
 ---
 import type { HTMLTag, Polymorphic } from 'astro/types';
 
+/**
+ * Props for the card component.
+ */
 type Props<As extends HTMLTag = 'div'> = Omit<Polymorphic<{ as: As }>, 'as'> & {
+  /**
+   * The polymorphic component to render the card as. Defaults to `div`.
+   */
 	as?: As;
-	class?: string;
+  /**
+   * Whether the card should be full width. Defaults to `false`.
+   */
 	fullWidth?: boolean;
+  /**
+   * Whether the card should be full height. Defaults to `false`.
+   */
 	fullHeight?: boolean;
+  /**
+   * The variant of the card. Defaults to `default`.
+   */
   variant?: 'default' | 'filled';
 };
 
 const { 
   as: As = 'div',
-  class: className,
   fullWidth,
   fullHeight,
   variant = 'default',
   ...props
 } = Astro.props;
 ---
-<As class="sui-card" class:list={[fullWidth && "full-w", fullHeight && "full-h", className, variant]} {...props}>
+<As class="sui-card" class:list={[fullWidth && "full-w", fullHeight && "full-h", variant]} {...props}>
   <div class="sui-card-header">
     <slot name="header" />
   </div>
@@ -64,7 +77,7 @@ const {
 
   .sui-card-footer:has(*) {
     border-top: 1px solid hsl(var(--border));
-    padding: .5rem 1rem;
+    padding: 1rem;
   }
 
   .filled .sui-card-footer {

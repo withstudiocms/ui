@@ -1,5 +1,6 @@
 import starlight from '@astrojs/starlight';
 import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
+import ui from '@studiocms/ui'
 import { defineConfig, envField } from 'astro/config';
 import starlightImageZoom from 'starlight-image-zoom';
 import rehypePluginKit from './src/plugins/rehypePluginKit';
@@ -43,6 +44,7 @@ export default defineConfig({
 		},
 	},
 	integrations: [
+		ui(),
 		starlight({
 			title: 'StudioCMS UI',
 			description: 'The UI library for StudioCMS, available for Astro for all to use.',
