@@ -116,14 +116,13 @@ const {
                     ]}
                     id={defaultValue === x.value ? `${name}-selected` : ""}
                     data-option-index={i}
-                    tabindex={x.disabled ? -1 : 0}
                 >
                     {x.label}
                 </li>
             ))
         }
     </ul>
-    <select class="sui-hidden-select" id={name} name={name} required={isRequired}>
+    <select class="sui-hidden-select" id={name} name={name} required={isRequired} hidden tabindex="-1">
         <option value={""}> Select </option>
         {
             options.map((x) => (
@@ -148,6 +147,17 @@ const {
 
     let active = false;
 
+    const closeDropdown = () => {
+        dropdown.classList.remove("active", "above");
+        active = false;
+        button.ariaExpanded = false;
+        focusIndex = -1;
+
+        for (const entry of optionElements) {
+            entry.classList.remove('focused');
+        }
+    };
+
     button.addEventListener("click", () => {
         const { bottom, left, right, width, x, y, height } =
             button.getBoundingClientRect();
@@ -171,14 +181,17 @@ const {
         };
 
         if (active) {
-            button.ariaExpanded = false;
-            dropdown.classList.remove("active", "above");
-            active = false;
+            closeDropdown();
             return;
         }
 
         active = true;
         button.ariaExpanded = true;
+
+        // Set focusIndex to currently selected option
+        focusIndex = Array.from(optionElements).findIndex((x) =>
+            x.classList.contains("selected")
+        );
 
         if (
             CustomRect.top >= 0 &&
@@ -191,6 +204,52 @@ const {
             dropdown.classList.add("active");
         } else {
             dropdown.classList.add("active", "above");
+        }
+    });
+
+    let focusIndex = -1;
+
+    const recomputeOptions = () => {
+        for (const entry of optionElements) {
+            if (entry.dataset.optionIndex == focusIndex) {
+                entry.classList.add('focused');
+            } else {
+                entry.classList.remove('focused');
+            }
+        }
+    }
+
+    button.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab' || e.key === 'Escape') {
+            closeDropdown();
+            return;
+        }
+        
+        if (e.key === 'Enter') {
+            let currentlyFocused = container.querySelector('.focused');
+            if (currentlyFocused) {
+                currentlyFocused.classList.remove('focused');
+                currentlyFocused.click();
+
+                // Stop dropdown from immediately reopening
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            }
+
+            return;
+        }
+
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        if (e.key === "ArrowUp" && focusIndex > 0) {
+            focusIndex--;
+            recomputeOptions();
+        }
+
+        if (e.key === "ArrowDown" && focusIndex + 1 < optionElements.length) {
+            focusIndex++;
+            recomputeOptions();
         }
     });
 
@@ -213,22 +272,19 @@ const {
             hiddenSelect.value = opt.value;
 
             valueSpan.textContent = opt.label;
-            dropdown.classList.remove("active", "above");
 
-            active = false;
+            closeDropdown();
         }
 
         option.addEventListener("click", handleSelection);
-        option.addEventListener("keydown", (e) => {
-            if (e.key === 'Enter') {
-                handleSelection(e);
-            }
-        });
     });
 
-    window.addEventListener("scroll", () => {
-        dropdown.classList.remove("active", "above");
-        active = false;
+    window.addEventListener("scroll", closeDropdown);
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && dropdown.classList.contains("active")) {
+            closeDropdown();
+        }
     });
 
     hideOnClickOutside(container);
@@ -241,8 +297,7 @@ const {
                 active === true
             ) {
                 // or use: event.target.closest(selector) === null
-                dropdown.classList.remove("active", "above");
-                active = false;
+                closeDropdown();
             }
         };
 
@@ -298,7 +353,7 @@ const {
         border: 1px solid hsl(var(--border));
         background: hsl(var(--background-step-2));
         color: hsl(var(--text-normal));
-        transition: all 0.15s ease;
+        transition: background border 0.15s ease;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -307,7 +362,11 @@ const {
         gap: 1rem;
     }
 
-    .sui-select-button:hover {
+    .sui-select-button:focus {
+        border: 1px solid hsl(var(--primary-base));
+    }       
+
+    .sui-select-button:hover, .sui-select-button:focus {
         background: hsl(var(--background-step-3));
     }
 
@@ -357,7 +416,7 @@ const {
         color: hsl(var(--text-muted));
     }
 
-    .sui-select-option:hover, .sui-select-option:focus {
+    .sui-select-option:hover, .sui-select-option:focus, .sui-select-option.focused {
         background-color: hsl(var(--background-step-3));
     }
 

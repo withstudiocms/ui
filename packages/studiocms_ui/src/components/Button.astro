@@ -84,7 +84,8 @@ const {
 
     border-radius: 0.5rem;
 
-    transition: all 0.15s ease;
+    transition: transform 0.15s, background-color 0.15s, border-color 0.15s, color 0.15s;
+    transition-timing-function: ease;
 
     cursor: pointer;
 
@@ -160,6 +161,11 @@ const {
     padding: 0.75rem 1rem;
 
     font-size: 1em;
+  }
+
+  .sui-button:focus-visible {
+    outline: 2px solid hsl(var(--text-normal));
+    outline-offset: 2px;
   }
 
   /* Primary Colorway */

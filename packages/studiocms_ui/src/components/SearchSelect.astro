@@ -112,7 +112,7 @@ const {
             ))
         }
     </ul>
-    <select class="sui-hidden-select" id={name} name={name} required={isRequired}>
+    <select class="sui-hidden-select" id={name} name={name} required={isRequired} hidden tabindex="-1">
         <option value={""}> Select </option>
         {
             options.map((x) => (
@@ -458,10 +458,14 @@ const {
         cursor: pointer;
     }
 
+    .sui-search-input-wrapper input {
+        padding-right: 2.5rem;
+    }
+
     .sui-search-select-indicator {
         position: absolute;
-        bottom: .75rem;
-        right: .75rem;
+        bottom: .675rem;
+        right: .675rem;
     }
 
     .sui-search-input-wrapper:has(input:focus) + .sui-search-select-dropdown {
