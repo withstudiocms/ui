@@ -58,14 +58,15 @@ class ThemeHelper {
 	public setTheme = (theme: Theme): void => {
 		this.themeManagerElement.dataset.theme = theme;
 
-		if (theme === 'system') {
-			const resolvedTheme = this.getTheme(true);
-			this.themeManagerElement.classList.add(resolvedTheme);
+		const resolvedTheme = this.getTheme(true);
 
-			return;
+		// Tailwind compatibility, since that uses the selector.
+		this.themeManagerElement.classList.add(resolvedTheme);
+
+		// If starlight is used, we also want to set the theme in local storage.
+		if (typeof localStorage.getItem('starlight-theme') === 'string') {
+			localStorage.setItem('starlight-theme', theme === 'system' ? '' : theme);
 		}
-
-		this.themeManagerElement.classList.add(theme);
 	};
 
 	/**
