@@ -1,10 +1,14 @@
 ---
 i18nReady: true
 title: Card
+sidebar:
+  badge:
+    text: Updated!
+    variant: success
 ---
 
 import { Card } from '@studiocms/ui/components';
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Badge } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 
 A simple card component to wrap other stuff in! 
@@ -32,9 +36,35 @@ A simple card component to wrap other stuff in!
   </TabItem>
 </Tabs>
 
-### Full Width
+### Variants <Badge text="New!" variant="tip" />
 
-You can set the card to fill it's parent container using the `fullWidth` param:
+Instead of just having a bordered card, you can use the `variant` prop to change the card's appearance. Set it to
+`filled` to have a card with a filled background:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Card variant="filled">
+        Content
+      </Card>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro "variant='filled'" showLinenumbers title="FullVariantExample.astro"
+    ---
+    import { Card } from '@studiocms/ui/components';
+    ---
+
+    <Card variant='filled'>
+      Content
+    </Card>
+    ```
+  </TabItem>
+</Tabs>
+
+### Full Width & Full Height
+
+You can set the card to grow to its parent containers width using the `fullWidth` param:
 
 <Tabs>
   <TabItem label="Preview">
@@ -45,13 +75,73 @@ You can set the card to fill it's parent container using the `fullWidth` param:
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "fullWidth" showLinenumbers title="FullWidthCardExample.astro"
+    ```astro "fullWidth" showLinenumbers title="FullVariantExample.astro"
     ---
     import { Card } from '@studiocms/ui/components';
     ---
 
     <Card fullWidth>
       Content
+    </Card>
+    ```
+  </TabItem>
+</Tabs>
+
+Additionally, you can set the card to grow to its parent containers height using the `fullHeight` param:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Card fullHeight>
+        Content
+      </Card>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro "fullHeight" showLinenumbers title="FullHeightCardExample.astro"
+    ---
+    import { Card } from '@studiocms/ui/components';
+    ---
+
+    <Card fullHeight>
+      Content
+    </Card>
+    ```
+  </TabItem>
+</Tabs>
+
+### Header & Footer <Badge text="New!" variant="tip" />
+
+The card component supports a header and footer slot:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Card>
+        <h4 slot='header'>Header Content</h4>
+        <p>
+          Lorem ipsum dolor sit amet. Et nulla cumque et suscipit molestiae est quam eaque et placeat iste est 
+          velit dignissimos aut totam voluptatum qui eveniet nostrum. Aut neque reprehenderit est vero debitis 
+          in inventore voluptas ut dolores facilis et voluptatibus quibusdam aut dolorum sunt non vitae sequi.
+        </p>
+        <span slot='footer'>Footer Content</span>
+      </Card>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro /slot='(?:header|footer)'/ showLinenumbers title="CardSlotsExample.astro"
+    ---
+    import { Card } from '@studiocms/ui/components';
+    ---
+
+    <Card>
+      <h4 slot='header'>Header Content</h4>
+      <p>
+        Lorem ipsum dolor sit amet. Et nulla cumque et suscipit molestiae est quam eaque et placeat iste est 
+        velit dignissimos aut totam voluptatum qui eveniet nostrum. Aut neque reprehenderit est vero debitis 
+        in inventore voluptas ut dolores facilis et voluptatibus quibusdam aut dolorum sunt non vitae sequi.
+      </p>
+      <span slot='footer'>Footer Content</span>
     </Card>
     ```
   </TabItem>
@@ -71,12 +161,12 @@ as whatever you want by passing the `as` attribute. Here's a card that renders a
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "as=\"a\"" showLinenumbers title="CardPolymorphicExample.astro"
+    ```astro "as='a'" showLinenumbers title="CardPolymorphicExample.astro"
     ---
     import { Card } from '@studiocms/ui/components';
     ---
 
-    <Card as="a" href="https://studiocms.dev">
+    <Card as='a' href='https://studiocms.dev'>
       studiocms.dev
     </Card>
     ```

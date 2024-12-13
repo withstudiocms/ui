@@ -35,9 +35,9 @@ A variation of the `<Select />` element that supports arrow keys and filtering.
     <SearchSelect
       label='Searchable Select Element'
       options={[
-        { label: "Option 1", value: "opt-1" },
-        { label: "Option 2", value: "opt-2" },
-        { label: "Option 3", value: "opt-3" },
+        { label: 'Option 1', value: 'opt-1' },
+        { label: 'Option 2', value: 'opt-2' },
+        { label: 'Option 3', value: 'opt-3' },
       ]}
     />
     ```
@@ -63,7 +63,7 @@ You can set a default value using the `defaultValue` prop:
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro showLinenumbers title="SearchSelectDefaultValueExample.astro"
+    ```astro "defaultValue='opt-1'" showLinenumbers title="SearchSelectDefaultValueExample.astro"
     ---
     import { SearchSelect } from '@studiocms/ui/components';
     ---
@@ -72,9 +72,9 @@ You can set a default value using the `defaultValue` prop:
       label='Searchable Select Element'
       defaultValue='opt-1'
       options={[
-        { label: "Option 1", value: "opt-1" },
-        { label: "Option 2", value: "opt-2" },
-        { label: "Option 3", value: "opt-3" },
+        { label: 'Option 1', value: 'opt-1' },
+        { label: 'Option 2', value: 'opt-2' },
+        { label: 'Option 3', value: 'opt-3' },
       ]}
     />
     ```
@@ -102,19 +102,18 @@ import { SearchSelect } from '@studiocms/ui/components';
   defaultValue='opt-1'
   isRequired
   disabled
-  name="searchable-select-element"
+  name='searchable-select-element'
   options={[
     // ...
     { 
-      label: "Option X", 
-      value: "opt-x", 
+      label: 'Option X',
+      value: 'opt-x', 
       disabled: true // [!code ++]
     },
     // ...
   ]}
 />
 ```
-
 
 ### Full Width
 
@@ -136,7 +135,7 @@ the entire width of its parent container by setting the `fullWidth` prop to true
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro showLinenumbers title="FullWidthSearchSelectExample.astro"
+    ```astro "fillWidth" showLinenumbers title="FullWidthSearchSelectExample.astro"
     ---
     import { SearchSelect } from '@studiocms/ui/components';
     ---
@@ -145,9 +144,9 @@ the entire width of its parent container by setting the `fullWidth` prop to true
       label='Searchable Select Element'
       fullWidth
       options={[
-        { label: "Option 1", value: "opt-1" },
-        { label: "Option 2", value: "opt-2" },
-        { label: "Option 3", value: "opt-3" },
+        { label: 'Option 1', value: 'opt-1' },
+        { label: 'Option 2', value: 'opt-2' },
+        { label: 'Option 3', value: 'opt-3' },
       ]}
     />
     ```
@@ -178,18 +177,18 @@ You can adjust the placeholder shown in the select by passing the `placeholder` 
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro showLinenumbers title="SearchSelectPlaceholderExample.astro"
+    ```astro "placeholder='Custom Placeholder'" showLinenumbers title="SearchSelectPlaceholderExample.astro"
     ---
     import { SearchSelect } from '@studiocms/ui/components';
     ---
 
     <SearchSelect
       label='Searchable Select Element'
-      placeholder="Custom Placeholder"
+      placeholder='Custom Placeholder'
       options={[
-        { label: "Option 1", value: "opt-1" },
-        { label: "Option 2", value: "opt-2" },
-        { label: "Option 3", value: "opt-3" },
+        { label: 'Option 1', value: 'opt-1' },
+        { label: 'Option 2', value: 'opt-2' },
+        { label: 'Option 3', value: 'opt-3' },
       ]}
     />
     ```

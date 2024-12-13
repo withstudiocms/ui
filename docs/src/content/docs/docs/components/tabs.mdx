@@ -1,12 +1,15 @@
 ---
 title: "Tabs"
+sidebar:
+  badge:
+    text: New!
+    variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Tabs as SuiTabs, TabItem as SuiTabItem, Card } from '@studiocms/ui/components';
+import { Tabs as SuiTabs, TabItem as SuiTabItem, Card, Divider } from '@studiocms/ui/components';
 
 import PreviewCard from '~/components/PreviewCard.astro';
-import { Select } from '@studiocms/ui/components';
 
 The tabs you can see on [the StudioCMS UI landing page](https://ui.studiocms.dev), as a component!
 
@@ -41,17 +44,17 @@ The tabs you can see on [the StudioCMS UI landing page](https://ui.studiocms.dev
     ---
 
     <Tabs>
-      <TabItem label="Tab #1">
+      <TabItem label='Tab #1'>
         <Card fullWidth>
           Content #1
         </Card>
       </TabItem>
-      <TabItem label="Tab #2">
+      <TabItem label='Tab #2'>
         <Card fullWidth>
           Content #2
         </Card>
       </TabItem>
-      <TabItem label="Tab #3">
+      <TabItem label='Tab #3'>
         <Card fullWidth>
           Content #3
         </Card>
@@ -69,17 +72,72 @@ You can add icons and even change the color of the tabs:
   <TabItem label="Preview">
     <PreviewCard fullWidth>
       <SuiTabs>
-        <SuiTabItem label="Tab #1" icon="star" color="warning">
+        <SuiTabItem label="Yellow + Star" icon="star" color="warning">
+          <Card fullWidth>
+            Yellow + Star
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Green + Arrow" icon="arrows-right-left" color="success">
+          <Card fullWidth>
+            Green + Arrow
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Red + Bell" icon="bell" color="danger">
+          <Card fullWidth>
+            Red + Bell
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro /icon='[A-Za-z-]+' color='[A-Za-z]+'/ showLinenumbers title="TabsCustomizationExample.astro"
+    ---
+    import { Tabs, TabItem, Card } from '@studiocms/ui/components';
+    ---
+
+    <Tabs>
+      <TabItem label='Yellow + Star' icon='star' color='warning'>
+        <Card fullWidth>
+          Yellow + Star
+        </Card>
+      </TabItem>
+      <TabItem label='Green + Arrow' icon='arrows-right-left' color='success'>
+        <Card fullWidth>
+          Green + Arrow
+        </Card>
+      </TabItem>
+      <TabItem label='Red + Bell' icon='bell' color='danger'>
+        <Card fullWidth>
+          Red + Bell
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>
+
+### Variants
+
+For those who don't like the appearance of the tabs in general, you can change the `variant` prop to `starlight`. This
+will give the tabs the appearance of the tabs that Starlight uses, the same look you can see for the preview cards on
+this page.
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard fullWidth>
+      <SuiTabs variant="starlight">
+        <SuiTabItem label="Tab #1">
           <Card fullWidth>
             Content #1
           </Card>
         </SuiTabItem>
-        <SuiTabItem label="Tab #2" icon="arrows-right-left" color="success">
+        <SuiTabItem label="Tab #2">
           <Card fullWidth>
             Content #2
           </Card>
         </SuiTabItem>
-        <SuiTabItem label="Tab #3" icon="bell" color="danger">
+        <SuiTabItem label="Tab #3">
           <Card fullWidth>
             Content #3
           </Card>
@@ -88,23 +146,23 @@ You can add icons and even change the color of the tabs:
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro showLinenumbers title="TabsExample.astro"
+    ```astro "variant='starlight'" showLinenumbers title="TabsVariantsExample.astro"
     ---
     import { Tabs, TabItem, Card } from '@studiocms/ui/components';
     ---
 
-    <Tabs>
-      <TabItem label="Tab #1">
+    <Tabs variant='starlight'>
+      <TabItem label='Tab #1'>
         <Card fullWidth>
           Content #1
         </Card>
       </TabItem>
-      <TabItem label="Tab #2">
+      <TabItem label='Tab #2'>
         <Card fullWidth>
           Content #2
         </Card>
       </TabItem>
-      <TabItem label="Tab #3">
+      <TabItem label='Tab #3'>
         <Card fullWidth>
           Content #3
         </Card>
@@ -114,54 +172,116 @@ You can add icons and even change the color of the tabs:
   </TabItem>
 </Tabs>
 
+### Alignment
 
-### Syncing & Storage
-
-To keep a users selection saved and even sync multiple different tab containers with each other, you can set a `syncKey`.
-If you want this to work, every tab item needs to have an ID set:
+In certain cases, you might want to change the alignment of the tabs. You can do this by setting the `align` prop to 
+`left`, `center` or `right`, with left being the default. Here's an example of the tabs being aligned to the right:
 
 <Tabs>
   <TabItem label="Preview">
     <PreviewCard fullWidth>
-      <SuiTabs syncKey="test">
-        <SuiTabItem label="Tab #1" icon="star" color="warning" id="content1">
+      <SuiTabs align="right">
+        <SuiTabItem label="Tab #1">
           <Card fullWidth>
             Content #1
           </Card>
         </SuiTabItem>
-        <SuiTabItem label="Tab #2" icon="arrows-right-left" color="success" id="content2">
+        <SuiTabItem label="Tab #2">
           <Card fullWidth>
             Content #2
-          </Card>
-        </SuiTabItem>
-        <SuiTabItem label="Tab #3" icon="bell" color="danger" id="content3">
-          <Card fullWidth>
-            Content #3
           </Card>
         </SuiTabItem>
       </SuiTabs>
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro showLinenumbers title="TabsExample.astro"
+    ```astro "align='right'" showLinenumbers title="TabsAlignmentExample.astro"
     ---
     import { Tabs, TabItem, Card } from '@studiocms/ui/components';
     ---
 
-    <Tabs>
-      <TabItem label="Tab #1">
+    <Tabs align='right'>
+      <TabItem label='Tab #1'>
         <Card fullWidth>
           Content #1
         </Card>
       </TabItem>
-      <TabItem label="Tab #2">
+      <TabItem label='Tab #2'>
         <Card fullWidth>
           Content #2
         </Card>
       </TabItem>
-      <TabItem label="Tab #3">
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>
+
+This even works with the `starlight` variant!
+
+### Syncing & Storage
+
+To keep a users selection saved and even sync multiple different tab containers with each other, you can set a `syncKey`.
+By default, this value will be stored in sessionStorage to comply with GDPR guidelines, however if you want to, you can
+set the `storage` prop to `persistent` to store the value in localStorage.
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard fullWidth vertical>
+      <SuiTabs syncKey="sync-example">
+        <SuiTabItem label="Tab #1 (Sync 1)" icon="bolt">
+          <Card fullWidth>
+            Tab Contents #1 (Sync 1)
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #2 (Sync 2)" icon="bolt-slash" color="success">
+          <Card fullWidth>
+            Tab Contents #2 (Sync 2)
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+      <Divider>Different Element</Divider>
+      <SuiTabs syncKey="sync-example">
+        <SuiTabItem label="Tab #3 (Sync 1)" icon="bolt">
+          <Card fullWidth>
+            Tab Contents #3 (Sync 1)
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #4 (Sync 2)" icon="bolt-slash" color="success">
+          <Card fullWidth>
+            Tab Contents #4 (Sync 2)
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro "syncKey='sync-example'" showLinenumbers title="TabsSyncExample.astro"
+    ---
+    import { Tabs, TabItem, Card, Divider } from '@studiocms/ui/components';
+    ---
+
+    <Tabs syncKey='sync-example'>
+      <TabItem label='Tab #1 (Sync 1)' icon='bolt'>
         <Card fullWidth>
-          Content #3
+          Tab Contents #1 (Sync 1)
+        </Card>
+      </TabItem>
+      <TabItem label='Tab #2 (Sync 2)' icon='bolt-slash' color='success'>
+        <Card fullWidth>
+          Tab Contents #2 (Sync 2)
+        </Card>
+      </TabItem>
+    </Tabs>
+    <Divider>Different Element</Divider>
+    <Tabs syncKey='sync-example'>
+      <TabItem label='Tab #3 (Sync 1)' icon='bolt'>
+        <Card fullWidth>
+          Tab Contents #3 (Sync 1)
+        </Card>
+      </TabItem>
+      <TabItem label='Tab #4 (Sync 2)' icon='bolt-slash' color='success'>
+        <Card fullWidth>
+          Tab Contents #4 (Sync 2)
         </Card>
       </TabItem>
     </Tabs>

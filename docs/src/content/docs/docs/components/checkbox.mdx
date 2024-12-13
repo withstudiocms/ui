@@ -43,14 +43,14 @@ There's three different sizes for checkboxes:
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro /size="[a-z]+"/ showLinenumbers title="CheckboxSizesExample.astro"
+    ```astro /size='[a-z]+'/ showLinenumbers title="CheckboxSizesExample.astro"
     ---
     import { Checkbox } from '@studiocms/ui/components';
     ---
 
-    <Checkbox label="Small" color="primary" size="sm" defaultChecked />
-    <Checkbox label="Medium" color="primary" defaultChecked />
-    <Checkbox label="Large" color="primary" size="lg" defaultChecked />
+    <Checkbox label='Small' color='primary' size='sm' defaultChecked />
+    <Checkbox label='Medium' color='primary' defaultChecked />
+    <Checkbox label='Large' color='primary' size='lg' defaultChecked />
     ```
   </TabItem>
 </Tabs>
@@ -72,16 +72,16 @@ The checkbox component supports all default colorways.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro /color="[a-z]+"/ showLinenumbers title="CheckboxColorsExample.astro"
+    ```astro /color='[a-z]+'/ showLinenumbers title="CheckboxColorsExample.astro"
     ---
     import { Checkbox } from '@studiocms/ui/components';
     ---
 
-    <Checkbox label="Default" defaultChecked />
-    <Checkbox label="Primary" color="primary" defaultChecked />
-    <Checkbox label="Success" color="success" defaultChecked />
-    <Checkbox label="Warning" color="warning" defaultChecked />
-    <Checkbox label="Danger" color="danger" defaultChecked />
+    <Checkbox label='Default' defaultChecked />
+    <Checkbox label='Primary' color='primary' defaultChecked />
+    <Checkbox label='Success' color='success' defaultChecked />
+    <Checkbox label='Warning' color='warning' defaultChecked />
+    <Checkbox label='Danger' color='danger' defaultChecked />
     ```
   </TabItem>
 </Tabs>
@@ -106,8 +106,8 @@ the `FormData` returned by a submission. Here's an example showing how to set bo
     ---
 
     <Checkbox 
-      label="Required & Custom Name"
-      color="primary"
+      label='Required & Custom Name'
+      color='primary'
       isRequired
       name='required-checkbox'
     />

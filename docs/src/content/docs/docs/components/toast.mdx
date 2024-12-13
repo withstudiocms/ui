@@ -31,7 +31,7 @@ This component requires a **helper**. Make sure to read the documentation carefu
     <!-- Add this to the root of your page: -->
     <Toaster />
     
-    <Button color="primary" id="trigger">
+    <Button color='primary' id='trigger'>
       Show Toast
     </Button>
     ```
@@ -42,8 +42,8 @@ This component requires a **helper**. Make sure to read the documentation carefu
     const trigger = document.getElementById('usage-trigger')!;
     trigger.addEventListener('click', () => {
       toast({
-        title: "This is a toast!",
-        description: "Hi there!",
+        title: 'This is a toast!',
+        description: 'Hi there!',
         type: 'info',
       });
     });
@@ -55,17 +55,17 @@ This component requires a **helper**. Make sure to read the documentation carefu
 
 You can change where all toasts are displayed via the `position` prop on the `<Toaster />` component:
 
-```astro showLinenumbers title="ToastPosition.astro"
+```astro /position='[a-z-]+'/ showLinenumbers title="ToastPosition.astro"
 ---
 import { Toaster } from '@studiocms/ui/components';
 ---
 
-<Toaster position="top-left" />
-<Toaster position="top-center" />
-<Toaster position="top-right" />
-<Toaster position="bottom-left" />
-<Toaster position="bottom-center" />
-<Toaster position="bottom-right" />
+<Toaster position='top-left' />
+<Toaster position='top-center' />
+<Toaster position='top-right' />
+<Toaster position='bottom-left' />
+<Toaster position='bottom-center' />
+<Toaster position='bottom-right' />
 ```
 
 ### Duration
@@ -74,7 +74,7 @@ There's two ways to set a toast's duration: via the default on the `<Toaster />`
 
 You can set the default duration like this:
 
-```astro showLinenumbers title="ToastDuration.astro"
+```astro "duration={10000}" showLinenumbers title="ToastDuration.astro"
 ---
 import { Toaster } from '@studiocms/ui/components';
 ---
@@ -84,32 +84,32 @@ import { Toaster } from '@studiocms/ui/components';
 
 Or you can set it individually for every toast like this:
 
-```ts twoslash showLinenumbers title="ToastDuration.ts"
+```ts "duration: 10000" twoslash showLinenumbers title="ToastDuration.ts"
 // @noErrors
 import { toast } from '@studiocms/ui/components';
 
 toast({
-  title: "This is a toast!",
-  description: "Hi there!",
+  title: 'This is a toast!',
+  description: 'Hi there!',
   type: 'info',
   duration: 10000
 });
 ```
 
-### Persistance
+### Persistence
 
 Sometimes, you don't need a toast to expire after a set time. Instead of setting the toast to only expire after 31 days, you can set it
 to be persistent by setting `persistent` to `true`:
 
-```ts twoslash showLinenumbers title="ToastPersistance.ts"
+```ts "persistent: true" twoslash showLinenumbers title="ToastPersistence.ts"
 // @noErrors
 import { toast } from '@studiocms/ui/components';
 
 toast({
-  title: "This is a toast!",
-  description: "Hi there!",
+  title: 'This is a toast!',
+  description: 'Hi there!',
   type: 'info',
-  persistent: true,
+  persistent: true
 });
 ```
 
@@ -117,15 +117,15 @@ toast({
 
 Unless a toast is persistent, you can choose to hide the close button by setting the `closeButton` option to `false`:
 
-```ts twoslash showLinenumbers title="ToastCloseButton.ts"
+```ts "closeButton: false" twoslash showLinenumbers title="ToastCloseButton.ts"
 // @noErrors
 import { toast } from '@studiocms/ui/components';
 
 toast({
-  title: "This is a toast!",
-  description: "Hi there!",
+  title: 'This is a toast!',
+  description: 'Hi there!',
   type: 'info',
-  closeButton: false,
+  closeButton: false
 });
 ```
 
@@ -142,7 +142,7 @@ import { Toaster } from '@studiocms/ui/components';
 <Toaster offset={64} />
 ```
 
-You can also change by how much toasts are seperated via the `gap` prop on the `<Toaster />`:
+You can also change by how much toasts are separated via the `gap` prop on the `<Toaster />`:
 
 ```astro showLinenumbers title="ToastGap.astro"
 ---

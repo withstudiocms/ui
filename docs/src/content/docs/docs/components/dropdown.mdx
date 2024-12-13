@@ -39,7 +39,7 @@ A dropdown component that takes care of all the annoying bits for you, with adde
         { label: 'Option 2', value: 'opt-2'},
       ]}
     >
-      <Button color="primary">
+      <Button color='primary'>
         Trigger Dropdown
       </Button>
     </Dropdown>
@@ -90,10 +90,9 @@ You can change the dropdowns position by supplying the `align` prop.
         { label: 'Option 1', value: 'opt-1'},
         { label: 'Option 2', value: 'opt-2'},
       ]}
-
       align='start'
     >
-      <Button color="primary">
+      <Button color='primary'>
         Start-aligned
       </Button>
     </Dropdown>
@@ -137,7 +136,7 @@ You can tell the dropdown wrapper to only show the dropdown when it's children a
       ]}
       triggerOn='right'
     >
-      <Button color="primary">
+      <Button color='primary'>
         Right Click
       </Button>
     </Dropdown>
@@ -184,7 +183,7 @@ No, you read that right. You can customize the options too. You can individually
           { label: 'As Link', value: 'custom-href', href: '/' },
         ]}
       >
-        <Button color="primary">
+        <Button color='primary'>
           Customized Options
         </Button>
       </Dropdown>
@@ -208,7 +207,7 @@ No, you read that right. You can customize the options too. You can individually
         { label: 'As Link', value: 'custom-href', href: '/' },
       ]}
     >
-      <Button color="primary">
+      <Button color='primary'>
         Customized Options
       </Button>
     </Dropdown>
@@ -221,10 +220,10 @@ No, you read that right. You can customize the options too. You can individually
   </TabItem>
 </Tabs>
 
-### Controlling Dropdowns Programatically
+### Controlling Dropdowns Programmatically
 
 You know how, this entire page, we've been assigning our `DropdownHelper` to a variable? There's a reason for that. The DropdownHelper allows
-you to acces some built-in functions for programatically toggling, showing and hiding the dropdown. You can even register a callback for when one of the 
+you to access some built-in functions for programmatically toggling, showing and hiding the dropdown. You can even register a callback for when one of the 
 dropdowns options has been clicked!
 
 ```ts twoslash showLinenumbers title="Script Tag"
