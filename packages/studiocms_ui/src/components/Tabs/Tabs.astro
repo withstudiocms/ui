@@ -172,7 +172,6 @@ const containerId = generateID('sui-tabs-container');
       const activeTabIndex = storageLayer.getItem(syncKey);
 
       if (activeTabIndex) {
-        console.log(container.querySelector);
         const activeTab = container.querySelector(`#${syncKey}-${activeTabIndex}`);
         activeTab.click();
       }
@@ -278,7 +277,7 @@ const containerId = generateID('sui-tabs-container');
 
   .starlight .sui-tab-header.active {
     font-weight: 600;
-    color: hsl(var(--text));
+    color: hsl(var(--text-normal));
   }
 
   .starlight .sui-tab-header.active::after {

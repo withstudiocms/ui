@@ -62,7 +62,7 @@ const iconSizes = {
     size,
   ]}
 >
-  <div class="sui-checkmark-container">
+  <div class="sui-checkmark-container" tabindex="0">
     <Checkmark
       class={'sui-checkmark'}
       width={iconSizes[size]}
@@ -82,6 +82,25 @@ const iconSizes = {
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
 </label>
+<script>
+  const elements = document.querySelectorAll<HTMLDivElement>('.sui-checkmark-container');
+
+  for (const element of elements) {
+    if (element.dataset.initialized) continue;
+    
+    element.dataset.initialized = 'true';
+
+    element.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+
+      const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
+        
+      if (!checkbox) return;
+
+      checkbox.click();
+    });
+  }
+</script>
 <style>
   .sui-checkmark-label {
     display: flex;
@@ -106,7 +125,13 @@ const iconSizes = {
     border: 2px solid hsl(var(--default-base));
     border-radius: .5rem;
     cursor: pointer;
-    transition: all .15s ease;
+    transition: background-color .15s, border .15s, transform .15s;
+    transition-timing-function: ease;
+  }
+
+  .sui-checkmark-container:focus-visible {
+    outline: 2px solid hsl(var(--text-normal));
+    outline-offset: 2px;
   }
 
   .sui-checkmark-label:hover .sui-checkmark-container {

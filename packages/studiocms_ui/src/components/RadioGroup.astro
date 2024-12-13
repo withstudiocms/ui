@@ -87,7 +87,7 @@ const {
   <span>
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
-  <div class="sui-radio-inputs">
+  <div class="sui-radio-inputs" role="radiogroup">
     {options.map(({ label, value, disabled: individuallyDisabled }) => (
       <label
         for={value}
@@ -95,7 +95,7 @@ const {
         class:list={[ individuallyDisabled && "disabled" ]}
       >
         <div class="sui-radio-box-container">
-          <div class="sui-radio-box" />
+          <div class="sui-radio-box" role="radio" tabindex="0" />
         </div>
         <input 
           class="sui-radio-toggle" 
@@ -112,6 +112,42 @@ const {
     ))}
   </div>
 </div>
+<script>
+  const elements = document.querySelectorAll<HTMLDivElement>('.sui-radio-container');
+
+  for (const element of elements) {
+    if (element.dataset.initialized) continue;
+    
+    element.dataset.initialized = 'true';
+
+    const radioBoxes = element.querySelectorAll<HTMLDivElement>('.sui-radio-box');
+
+    let i = 0;
+
+    for (const radioBox of radioBoxes) {
+      radioBox.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+
+        const input = (e.target as HTMLDivElement).parentElement!.parentElement!.querySelector<HTMLInputElement>('.sui-radio-toggle')!;
+
+        if (input.disabled) return;
+
+        input.checked = true;
+      });
+
+      i++;
+    }
+    element.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+
+      const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
+        
+      if (!checkbox) return;
+
+      checkbox.click();
+    });
+  }
+</script>
 <style>
   .sui-radio-container {
     display: flex;
@@ -204,6 +240,10 @@ const {
     outline: 1px solid hsl(var(--default-base));
     outline-offset: 4px;
     transition: all .15s ease;
+  }
+
+  .sui-radio-box:focus-visible {
+    outline-color: hsl(var(--text-normal)) !important;
   }
 
   .sui-radio-toggle {

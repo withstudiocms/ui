@@ -56,7 +56,7 @@ const {
   ]}
 >
   <div class="sui-toggle-container">
-    <div class="sui-toggle-switch" />
+    <div class="sui-toggle-switch" tabindex="0" />
     <input
       type="checkbox"
       name={name}
@@ -71,6 +71,25 @@ const {
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
 </label>
+<script>
+  const elements = document.querySelectorAll<HTMLDivElement>('.sui-toggle-container');
+
+  for (const element of elements) {
+    if (element.dataset.initialized) continue;
+    
+    element.dataset.initialized = 'true';
+
+    element.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+
+      const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
+        
+      if (!checkbox) return;
+
+      checkbox.click();
+    });
+  }
+</script>
 <style>
   .sui-toggle-label {
     display: flex;
@@ -114,6 +133,11 @@ const {
     left: 0;
     transition: all .15s ease;
     will-change: transform;
+  }
+
+  .sui-toggle-switch:focus-visible {
+    outline: 2px solid hsl(var(--text-normal));
+    outline-offset: 2px;
   }
 
   .sui-toggle-container:has(.sui-checkbox:checked) .sui-toggle-switch {

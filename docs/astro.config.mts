@@ -44,7 +44,6 @@ export default defineConfig({
 		},
 	},
 	integrations: [
-		ui(),
 		starlight({
 			title: 'StudioCMS UI',
 			description: 'The UI library for StudioCMS, available for Astro for all to use.',
@@ -182,5 +181,6 @@ export default defineConfig({
 			],
 			plugins: [starlightImageZoom()],
 		}),
+		// ui(),
 	],
 });
