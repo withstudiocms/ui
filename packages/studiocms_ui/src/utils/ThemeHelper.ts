@@ -57,6 +57,15 @@ class ThemeHelper {
 	 */
 	public setTheme = (theme: Theme): void => {
 		this.themeManagerElement.dataset.theme = theme;
+
+		if (theme === 'system') {
+			const resolvedTheme = this.getTheme(true);
+			this.themeManagerElement.classList.add(resolvedTheme);
+
+			return;
+		}
+
+		this.themeManagerElement.classList.add(theme);
 	};
 
 	/**
