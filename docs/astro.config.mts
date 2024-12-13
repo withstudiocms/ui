@@ -63,7 +63,7 @@ export default defineConfig({
 			defaultLocale: 'root',
 			locales,
 			social: {
-				github: 'https://github.com/withstudiocms/studiocms',
+				github: 'https://github.com/withstudiocms/ui',
 				discord: 'https://chat.studiocms.dev',
 				youtube: 'https://www.youtube.com/@StudioCMS',
 				'x.com': 'https://x.com/withstudiocms',

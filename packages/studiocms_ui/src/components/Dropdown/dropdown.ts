@@ -9,6 +9,11 @@ class DropdownHelper {
 
 	active = false;
 
+	/**
+	 * A helper function to interact with dropdowns.
+	 * @param id The ID of the dropdown.
+	 * @param fullWidth Whether the dropdown should be full width. Not needed normally.
+	 */
 	constructor(id: string, fullWidth?: boolean) {
 		this.container = document.getElementById(`${id}-container`) as HTMLDivElement;
 
@@ -49,6 +54,11 @@ class DropdownHelper {
 		this.initialOptClickRegistration();
 	}
 
+	/**
+	 * Registers a click callback for the dropdown options. Whenever one of the options
+	 * is clicked, the callback will be called with the value of the option.
+	 * @param func The callback function.
+	 */
 	public registerClickCallback = (func: (value: string) => void) => {
 		const dropdownOpts = this.dropdown.querySelectorAll('li');
 
@@ -61,7 +71,10 @@ class DropdownHelper {
 			});
 		}
 	};
-
+	
+	/**
+	 * Registers callbacks to hide the dropdown when an option is clicked.
+	 */
 	private initialOptClickRegistration = () => {
 		const dropdownOpts = this.dropdown.querySelectorAll('li');
 
@@ -70,6 +83,9 @@ class DropdownHelper {
 		}
 	};
 
+	/**
+	 * A function to toggle the dropdown.
+	 */
 	public toggle = () => {
 		if (this.active) {
 			this.hide();
@@ -79,6 +95,9 @@ class DropdownHelper {
 		this.show();
 	};
 
+	/**
+	 * A function to hide the dropdown.
+	 */
 	public hide = () => {
 		this.dropdown.classList.remove('active');
 		this.active = false;
@@ -86,6 +105,9 @@ class DropdownHelper {
 		setTimeout(() => this.dropdown.classList.remove('above', 'below'), 200);
 	};
 
+	/**
+	 * A function to show the dropdown.
+	 */
 	public show = () => {
 		const isMobile = window.matchMedia('screen and (max-width: 840px)').matches;
 
@@ -150,6 +172,10 @@ class DropdownHelper {
 		}
 	};
 
+	/**
+	 * A jQuery-like function to hide the dropdown when clicking outside of it.
+	 * @param element The element to hide when clicking outside of it.
+	 */
 	private hideOnClickOutside = (element: HTMLElement) => {
 		const outsideClickListener = (event: MouseEvent) => {
 			if (!event.target) return;

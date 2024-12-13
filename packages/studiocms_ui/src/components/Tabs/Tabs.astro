@@ -11,7 +11,14 @@ interface Tab {
   tabId: string;
 }
 
+/**
+ * The props for the Tabs component.
+ */
 interface Props {
+  /**
+   * The sync key for the tabs. If provided, the active tab will be synced across all instances of the tabs with the same sync key.
+   * Ad
+   */
   syncKey?: string;
   storage?: 'session' | 'persistent';
   variant?: 'default' | 'starlight';

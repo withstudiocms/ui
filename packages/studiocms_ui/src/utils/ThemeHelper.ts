@@ -56,8 +56,14 @@ class ThemeHelper {
 	 * @param theme The new theme. One of `dark`, `light` or `system`.
 	 */
 	public setTheme = (theme: Theme): void => {
+		// Remove current theme from class list first
+		const currentTheme = this.getTheme(true);
+		this.themeManagerElement.classList.remove(currentTheme);
+
+		// Assign the new theme to the dataset
 		this.themeManagerElement.dataset.theme = theme;
 
+		// Resolve the new theme
 		const resolvedTheme = this.getTheme(true);
 
 		// Tailwind compatibility, since that uses the selector.

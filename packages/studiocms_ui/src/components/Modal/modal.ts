@@ -6,6 +6,11 @@ class ModalHelper {
 	private isForm = false;
 	private modalForm: HTMLFormElement;
 
+	/**
+	 * A helper to manage modals.
+	 * @param id The ID of the modal.
+	 * @param triggerID The ID of the element that should trigger the modal.
+	 */
 	constructor(id: string, triggerID?: string) {
 		const element = document.getElementById(id) as HTMLDialogElement;
 
@@ -32,6 +37,11 @@ class ModalHelper {
 		}
 	}
 
+	/**
+	 * A helper function which adds event listeners to the modal buttons to close the modal when clicked.
+	 * @param id The ID of the modal.
+	 * @param dismissable Whether the modal is dismissable.
+	 */
 	private addButtonListeners = (id: string, dismissable: boolean) => {
 		if (
 			dismissable ||
@@ -54,6 +64,9 @@ class ModalHelper {
 		}
 	};
 
+	/**
+	 * A helper function to close the modal when the user clicks outside of it.
+	 */
 	private addDismissiveClickListener = () => {
 		this.element.addEventListener('click', (e: MouseEvent) => {
 			if (!e.target) return;
@@ -69,14 +82,24 @@ class ModalHelper {
 		});
 	};
 
+	/**
+	 * A function to show the modal.
+	 */
 	public show = () => {
 		this.element.showModal();
 	};
 
+	/**
+	 * A function to hide the modal.
+	 */
 	public hide = () => {
 		this.element.close();
 	};
 
+	/**
+	 * A function to add another trigger to show the modal with.
+	 * @param elementID The ID of the element that should trigger the modal when clicked.
+	 */
 	public bindTrigger = (elementID: string) => {
 		const element = document.getElementById(elementID);
 
@@ -87,6 +110,10 @@ class ModalHelper {
 		element.addEventListener('click', this.show);
 	};
 
+	/**
+	 * Registers a callback for the cancel button.
+	 * @param func The callback function.
+	 */
 	public registerCancelCallback = (func: () => void) => {
 		if (!this.cancelButton) {
 			throw new Error('Unable to register cancel callback without a cancel button.');
@@ -100,6 +127,11 @@ class ModalHelper {
 		});
 	};
 
+	/**
+	 * Registers a callback for the confirm button.
+	 * @param func The callback function. If the modal is a form, the function will be called with 
+	 * the form data as the first argument.
+	 */
 	public registerConfirmCallback = (func: (data?: FormData | undefined) => void) => {
 		if (!this.confirmButton) {
 			throw new Error('Unable to register cancel callback without a confirmation button.');

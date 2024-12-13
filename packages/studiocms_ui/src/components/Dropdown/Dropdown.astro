@@ -3,21 +3,63 @@ import Icon from '../../utils/Icon.astro';
 import type { StudioCMSColorway } from '../../utils/colors';
 import type { HeroIconName } from '../../utils/iconType';
 
+/**
+ * An option in the dropdown.
+ */
 interface Option {
+  /**
+   * The label of the option.
+   */
 	label: string;
+  /**
+   * The value of the option, returned by the helper when listened for.
+   */
 	value: string;
+  /**
+   * Whether the option is disabled.
+   */
 	disabled?: boolean;
+  /**
+   * The color of the option.
+   */
 	color?: StudioCMSColorway;
+  /**
+   * The icon to display next to the option.
+   */
 	icon?: HeroIconName;
+  /**
+   * The href to link to when the option is clicked. When given, the option will be rendered as an anchor tag.
+   */
 	href?: string;
 }
 
+/**
+ * The props for the Dropdown component.
+ */
 interface Props {
+  /**
+   * The options to display in the dropdown.
+   */
 	options: Option[];
+  /**
+   * Whether the dropdown is disabled.
+   */
 	disabled?: boolean;
+  /**
+   * The ID of the dropdown. Required because of the helper.
+   */
 	id: string;
+  /**
+   * The alignment of the dropdown, defaults to `center`. Will not work on mobile due to size constraints.
+   */
 	align?: 'start' | 'center' | 'end';
+  /**
+   * The type of click with which the dropdown is clicked. Defaults to `left`.
+   */
 	triggerOn?: 'left' | 'right' | 'both';
+  /**
+   * The offset of the dropdown from the trigger element in pixels.
+   */
 	offset?: number;
 }
 

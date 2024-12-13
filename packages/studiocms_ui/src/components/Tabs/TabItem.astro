@@ -3,9 +3,21 @@ import type { StudioCMSColorway } from '../../utils/colors';
 import { generateID } from '../../utils/generateID';
 import type { HeroIconName } from '../../utils/iconType'
 
+/**
+ * The props for the TabItem component.
+ */
 interface Props {
+  /**
+   * The icon to display next to the tab.
+   */
   icon?: HeroIconName;
+  /**
+   * The label of the tab.
+   */
   label: string;
+  /**
+   * The color of the tab. Defaults to `primary`.
+   */
   color?: Exclude<StudioCMSColorway, 'default'>;
 }
 
