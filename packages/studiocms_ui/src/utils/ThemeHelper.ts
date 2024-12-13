@@ -15,6 +15,7 @@ class ThemeHelper {
 	 */
 	constructor(themeProvider?: HTMLElement) {
 		this.themeManagerElement = themeProvider || document.documentElement;
+		this.themeManagerElement.dataset.theme = this.getTheme(true);
 	}
 
 	/**
