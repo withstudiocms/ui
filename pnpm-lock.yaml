@@ -74,7 +74,7 @@ importers:
         version: 0.9.4(typescript@5.7.2)
       '@astrojs/starlight':
         specifier: hideoo/starlight#hd-astro-v5&path:/packages/starlight
-        version: https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       '@expressive-code/plugin-line-numbers':
         specifier: ^0.38.3
         version: 0.38.3
@@ -170,10 +170,10 @@ importers:
         version: 0.33.5
       starlight-image-zoom:
         specifier: ^0.9.0
-        version: 0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))
+        version: 0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))
       starlight-package-managers:
         specifier: ^0.8.0
-        version: 0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: 0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       tsm:
         specifier: ^2.3.0
         version: 2.3.0
@@ -334,9 +334,9 @@ packages:
   '@astrojs/sitemap@3.2.1':
     resolution: {integrity: sha512-uxMfO8f7pALq0ADL6Lk68UV6dNYjJ2xGUzyjjVj60JLBs5a6smtlkBYv3tQ0DzoqwS7c9n4FUx5lgv0yPo/fgA==}
 
-  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight':
-    resolution: {path: /packages/starlight, tarball: https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881}
-    version: 0.29.2
+  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12#path:/packages/starlight':
+    resolution: {path: /packages/starlight, tarball: https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12}
+    version: 0.29.3
     peerDependencies:
       astro: ^5.0.0
 
@@ -4033,6 +4033,9 @@ packages:
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
+  zod@3.24.1:
+    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -4220,7 +4223,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
+  '@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
     dependencies:
       '@astrojs/mdx': 4.0.1(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       '@astrojs/sitemap': 3.2.1
@@ -7744,7 +7747,7 @@ snapshots:
       quick-lru: 7.0.0
       url-join: 5.0.0
       validate-npm-package-name: 5.0.1
-      zod: 3.23.8
+      zod: 3.24.1
       zod-package-json: 1.0.3
 
   query-string@9.1.1:
@@ -8145,16 +8148,16 @@ snapshots:
 
   sprintf-js@1.0.3: {}
 
-  starlight-image-zoom@0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))):
+  starlight-image-zoom@0.9.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))):
     dependencies:
-      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       rehype-raw: 7.0.0
       unist-util-visit: 5.0.0
       unist-util-visit-parents: 6.0.1
 
-  starlight-package-managers@0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)):
+  starlight-package-managers@0.8.0(@astrojs/starlight@https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)):
     dependencies:
-      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/0521ba2b61c79d7c382f87c026869c32f18a3881#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+      '@astrojs/starlight': https://codeload.github.com/hideoo/starlight/tar.gz/803f8a6b59decc55738506b311f00f7d8a3c8f12#path:/packages/starlight(astro@5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       astro: 5.0.3(@types/node@20.17.9)(jiti@2.3.3)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
 
   statuses@2.0.1: {}
@@ -8609,7 +8612,7 @@ snapshots:
 
   zod-package-json@1.0.3:
     dependencies:
-      zod: 3.23.8
+      zod: 3.24.1
 
   zod-to-json-schema@3.23.5(zod@3.23.8):
     dependencies:
@@ -8621,5 +8624,7 @@ snapshots:
       zod: 3.23.8
 
   zod@3.23.8: {}
+
+  zod@3.24.1: {}
 
   zwitch@2.0.4: {}
