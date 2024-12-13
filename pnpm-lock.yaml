@@ -6,37 +6,9 @@ settings:
 
 catalogs:
   default:
-    '@astrojs/check':
-      specifier: ^0.9.4
-      version: 0.9.4
-    '@astrojs/node':
-      specifier: ^9.0.0
-      version: 9.0.0
-    '@fontsource-variable/onest':
-      specifier: 5.1.0
-      version: 5.1.0
-    '@iconify-json/heroicons':
-      specifier: ^1.2.1
-      version: 1.2.1
-    '@iconify/utils':
-      specifier: ^2.1.33
-      version: 2.1.33
-    '@sentry/astro':
-      specifier: ^8.42.0
-      version: 8.42.0
-    '@types/node':
-      specifier: ^20.14.11
-      version: 20.17.9
-    astro:
-      specifier: ^5.0.3
-      version: 5.0.3
     typescript:
       specifier: ^5.7.2
       version: 5.7.2
-  peers:
-    astro:
-      specifier: ^4.5 || ^5.0.0-beta.0
-      version: 5.0.3
 
 importers:
 
