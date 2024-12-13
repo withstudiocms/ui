@@ -12,6 +12,8 @@ type Props<As extends HTMLTag = 'button'> = Omit<Polymorphic<{ as: As }>, 'as'> 
 	disabled?: boolean;
 };
 
+export type { Props };
+
 const {
 	size = 'md',
 	fullWidth = false,

@@ -1,8 +1,7 @@
 ---
-import type { ComponentProps } from 'astro/types';
-import Button from './Button.astro';
+import Button, { type Props as ButtonProps } from './Button.astro';
 
-interface Props extends ComponentProps<typeof Button> {}
+interface Props extends ButtonProps {}
 
 const props = Astro.props;
 ---
