@@ -25,6 +25,10 @@ const props = Astro.props;
 </script>
 
 <style is:global>
+  #sui-theme-toggle, #sui-theme-toggle * {
+    color: hsl(var(--text-normal));
+  }
+
   #sui-theme-toggle #dark-content, #sui-theme-toggle #light-content {
     display: none;
     width: fit-content;
