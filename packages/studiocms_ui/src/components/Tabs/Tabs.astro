@@ -100,7 +100,7 @@ const containerId = generateID('sui-tabs-container');
 ---
 
 <div class="sui-tabs-container" id={containerId} data-sync-key={syncKey} class:list={[variant, align]}>
-  <div class="sui-tabs-list">
+  <div class="sui-tabs-list" role="tablist">
     {tabs.map((tab, i) => (
       <button 
         role="tab"
