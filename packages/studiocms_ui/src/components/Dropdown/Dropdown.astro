@@ -97,6 +97,7 @@ const {
         data-value={value}
         class:list={[disabled && "disabled", icon && "has-icon", color, href && "has-href"]}
         role="option"
+        aria-selected="false"
       >
         {icon && (
           <Icon width={24} height={24} name={icon} />
