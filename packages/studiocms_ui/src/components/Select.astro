@@ -246,41 +246,54 @@ const {
         e.preventDefault();
         e.stopImmediatePropagation();
 
-        if (e.key === "ArrowUp" && focusIndex > 0 && active) {
+        const neighbor = (offset) => {
+            return optionElements.item((Array.from(optionElements).findIndex((x) => x.classList.contains("selected")) ?? -1) + offset)
+        }
+
+        if (e.key === "ArrowUp" && (focusIndex > 0 || !active)) {
+            if (!active) return neighbor(-1)?.click();
             focusIndex--;
             recomputeOptions();
         }
 
-        if (e.key === "ArrowDown" && focusIndex + 1 < optionElements.length && active) {
+        if (e.key === "ArrowDown" && focusIndex + 1 < optionElements.length) {
+            if (!active) return neighbor(1)?.click();
             focusIndex++;
+            recomputeOptions();
+        }
+
+        if (e.key === 'PageUp') {
+            focusIndex = 0;
+            if (!active) return optionElements.item(focusIndex)?.click();
+            recomputeOptions();
+        }
+        if (e.key === 'PageDown') {
+            focusIndex = optionElements.length - 1;
+            if (!active) return optionElements.item(focusIndex)?.click();
             recomputeOptions();
         }
     });
 
-    optionElements.forEach((option) => {
-        const handleSelection = (e) => {
-            e.stopImmediatePropagation();
-            if (option.id === `${id}-selected` || !id) return;
-
-            const currentlySelected = document.getElementById(`${id}-selected`);
-
-            if (currentlySelected) {
-                currentlySelected.classList.remove("selected");
-                currentlySelected.id = "";
-            }
-
-            option.id = `${id}-selected`;
-            option.classList.add("selected");
-
-            const opt = options[parseInt(option.dataset.optionIndex)];
-            hiddenSelect.value = opt.value;
-
-            valueSpan.textContent = opt.label;
-
-            closeDropdown();
+    const handleSelection = (e, option) => {
+        e.stopImmediatePropagation();
+        if (option.id === `${id}-selected` || !id) return;
+        const currentlySelected = document.getElementById(`${id}-selected`);
+        if (currentlySelected) {
+            currentlySelected.classList.remove("selected");
+            currentlySelected.id = "";
         }
+        option.id = `${id}-selected`;
+        option.classList.add("selected");
+        const opt = options[parseInt(option.dataset.optionIndex)];
+        hiddenSelect.value = opt.value;
+        valueSpan.textContent = opt.label;
+        closeDropdown();
+    }
 
-        option.addEventListener("click", handleSelection);
+    optionElements.forEach((option) => {
+        const handleSelectionForOption = (e) => handleSelection(e, option)
+
+        option.addEventListener("click", handleSelectionForOption);
     });
 
     window.addEventListener("scroll", closeDropdown);
