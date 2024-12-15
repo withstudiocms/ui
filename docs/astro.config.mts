@@ -2,7 +2,6 @@ import starlight from '@astrojs/starlight';
 import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
 import ui from '@studiocms/ui'
 import { defineConfig, envField } from 'astro/config';
-import starlightImageZoom from 'starlight-image-zoom';
 import rehypePluginKit from './src/plugins/rehypePluginKit';
 
 // Define the Site URL
@@ -179,7 +178,6 @@ export default defineConfig({
 					},
 				},
 			],
-			plugins: [starlightImageZoom()],
 		}),
 		// ui(),
 	],
