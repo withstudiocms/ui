@@ -84,7 +84,13 @@ const {
   <div class="sui-dropdown-toggle" id={`${id}-toggle-btn`}>
     <slot />
   </div>
-  <ul class="sui-dropdown" class:list={[align]} role="listbox" id={`${id}-dropdown`} transition:persist transition:persist-props>
+  <ul 
+    class="sui-dropdown" 
+    class:list={[align]}
+    role="listbox" id={`${id}-dropdown`} 
+    transition:persist
+    transition:persist-props
+  >
     {options.map(({ value, disabled, color, label, icon, href }) => (
       <li
         class="sui-dropdown-option"
@@ -240,7 +246,7 @@ const {
     user-select: none;
   }
 
-  .sui-dropdown-option:hover {
+  .sui-dropdown-option:hover, .sui-dropdown-option:focus, .sui-dropdown-option.focused {
     background-color: hsl(var(--background-step-3));
   }
 

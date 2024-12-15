@@ -6,6 +6,7 @@ class DropdownHelper {
 	private alignment: 'start' | 'center' | 'end';
 	private triggerOn: 'left' | 'right' | 'both';
 	private fullWidth = false;
+	private focusIndex = -1;
 
 	active = false;
 
@@ -27,30 +28,11 @@ class DropdownHelper {
 		this.toggleEl = document.getElementById(`${id}-toggle-btn`) as HTMLDivElement;
 		this.dropdown = document.getElementById(`${id}-dropdown`) as HTMLUListElement;
 
-		if (this.triggerOn === 'left') {
-			this.toggleEl.addEventListener('click', this.toggle);
-		} else if (this.triggerOn === 'both') {
-			this.toggleEl.addEventListener('click', this.toggle);
-			this.toggleEl.addEventListener('contextmenu', (e) => {
-				e.preventDefault();
-				this.toggle();
-			});
-		} else {
-			this.toggleEl.addEventListener('contextmenu', (e) => {
-				e.preventDefault();
-				this.toggle();
-			});
-		}
-
 		if (fullWidth) this.fullWidth = true;
-
-		window.addEventListener('scroll', this.hide);
-		document.addEventListener('astro:before-preparation', () => {
-			this.dropdown.classList.remove('initialized');
-		});
 
 		this.hideOnClickOutside(this.container);
 
+		this.initialBehaviorRegistration();
 		this.initialOptClickRegistration();
 	}
 
@@ -71,6 +53,78 @@ class DropdownHelper {
 			});
 		}
 	};
+
+	/**
+	 * Sets up all listeners for the dropdown.
+	 */
+	private initialBehaviorRegistration = () => {
+		window.addEventListener('scroll', this.hide);
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') this.hide();
+		});
+		document.addEventListener('astro:before-preparation', () => {
+			this.dropdown.classList.remove('initialized');
+		});
+
+		if (this.triggerOn === 'left') {
+			this.toggleEl.addEventListener('click', this.toggle);
+		} else if (this.triggerOn === 'both') {
+			this.toggleEl.addEventListener('click', this.toggle);
+			this.toggleEl.addEventListener('contextmenu', (e) => {
+				e.preventDefault();
+				this.toggle();
+			});
+		} else {
+			this.toggleEl.addEventListener('contextmenu', (e) => {
+				e.preventDefault();
+				this.toggle();
+			});
+		}
+
+		this.toggleEl.addEventListener('keydown', (e) => {
+			if (!this.active) return;
+
+			if (e.key === 'Enter') {
+				e.preventDefault();
+
+				const focused = this.dropdown.querySelector('li.focused') as HTMLLIElement;
+
+				if (!focused) {
+					this.hide();
+					return;
+				};
+
+				focused.click();
+			}
+
+			if (e.key === 'ArrowDown') {
+				e.preventDefault();
+
+				this.focusIndex = this.focusIndex === this.dropdown.children.length - 1 ? 0 : this.focusIndex + 1;
+			}
+
+			if (e.key === 'ArrowUp') {
+				e.preventDefault();
+
+				this.focusIndex = this.focusIndex === 0 ? this.dropdown.children.length - 1 : this.focusIndex - 1;
+			}
+
+			if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+				if (this.focusIndex > this.dropdown.children.length - 1) {
+					this.focusIndex = 0;
+				}
+
+				this.dropdown.querySelector('li.focused')?.classList.remove('focused');
+
+				const newFocus = this.dropdown.children[this.focusIndex] as HTMLLIElement;
+
+				if (!newFocus) return;
+
+				newFocus.classList.add('focused');
+				newFocus.focus();
+			}
+		});
+	}
 	
 	/**
 	 * Registers callbacks to hide the dropdown when an option is clicked.
@@ -101,6 +155,9 @@ class DropdownHelper {
 	public hide = () => {
 		this.dropdown.classList.remove('active');
 		this.active = false;
+		this.focusIndex = -1;
+		
+		this.dropdown.querySelector('li.focused')?.classList.remove('focused');
 
 		setTimeout(() => this.dropdown.classList.remove('above', 'below'), 200);
 	};
@@ -167,8 +224,10 @@ class DropdownHelper {
 			CustomRect.right <= (window.innerWidth || document.documentElement.clientWidth)
 		) {
 			this.dropdown.classList.add('active', 'below');
+			this.focusIndex = -1;
 		} else {
 			this.dropdown.classList.add('active', 'above');
+			this.focusIndex = this.dropdown.children.length;
 		}
 	};
 
