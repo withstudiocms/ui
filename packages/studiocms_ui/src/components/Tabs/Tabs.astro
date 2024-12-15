@@ -108,6 +108,7 @@ const containerId = generateID('sui-tabs-container');
         class:list={[i === 0 && "active", tab.color, syncKey && `${syncKey}:${i}`]}
         data-tab-child={tab.tabId}
         id={syncKey ? `${syncKey}-${i}` : undefined}
+        tabindex={i === 0 ? 0 : -1}
       >
         {tab.icon && (
           <Icon name={tab.icon} width={24} height={24} />
@@ -165,6 +166,40 @@ const containerId = generateID('sui-tabs-container');
 
     for (const tab of tabHeaders) {
       tab.addEventListener('click', (e) => switchTab(e, container));
+
+      tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+          const activeTabIndex = Array.prototype.indexOf.call(tab.parentElement.children, tab);
+          const nextTabIndex = e.key === 'ArrowLeft' ? activeTabIndex - 1 : activeTabIndex + 1;
+          
+
+          if (nextTabIndex >= 0 && nextTabIndex < tab.parentElement.children.length) {
+            tab.tabIndex = -1;
+
+            const nextTab = tab.parentElement.children[nextTabIndex];
+
+            nextTab.tabIndex = 0;
+            nextTab.click();
+            nextTab.focus();
+          } else if (nextTabIndex < 0) {
+            tab.tabIndex = -1;
+
+            const lastTab = tab.parentElement.children[tab.parentElement.children.length - 1];
+
+            lastTab.tabIndex = 0;
+            lastTab.click();
+            lastTab.focus();
+          } else {
+            tab.tabIndex = -1;
+
+            const firstTab = tab.parentElement.children[0];
+
+            firstTab.tabIndex = 0;
+            firstTab.click();
+            firstTab.focus();
+          }
+        }
+      });
     }
 
     if (syncKey) {
@@ -199,9 +234,15 @@ const containerId = generateID('sui-tabs-container');
     align-items: center;
     width: 100%;
     overflow-x: auto;
-    overflow-y: hidden;
-    margin-bottom: 2rem;
+    overflow-y: visible;
     position: relative;
+  }
+
+  .default .sui-tabs-list {
+    margin-top: -4px;
+    margin-bottom: calc(2rem - 4px);
+    padding: 4px 4px;
+    margin-left: -4px;
   }
 
   .center .sui-tabs-list {
@@ -228,10 +269,17 @@ const containerId = generateID('sui-tabs-container');
     padding: 0.5rem 0.75rem;
     transition: all .15s ease;
     font-size: 0.875em;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
   }
 
   .sui-tab-header * {
     pointer-events: none;
+  }
+
+  .default .sui-tab-header:focus-visible {
+    outline: 2px solid hsl(var(--text-normal));
+    outline-offset: 2px;
   }
 
   .default .sui-tab-header:hover {
@@ -270,7 +318,6 @@ const containerId = generateID('sui-tabs-container');
   }
 
   .starlight .sui-tab-header {
-    border-radius: 0.5rem;
     padding: 0.25rem 1.25rem;
     color: hsl(var(--text-muted));
   }
@@ -289,6 +336,16 @@ const containerId = generateID('sui-tabs-container');
     bottom: 0;
     left: 0;
     z-index: 15;
+  }
+
+  .starlight .sui-tab-header:focus-visible::after {
+    height: calc(100% - 2px);
+    width: calc(100% - 2px);
+    bottom: 1px;
+    left: 1px;
+    border: 2px solid hsl(var(--primary-base));
+    background-color: transparent;
+    outline: 1px solid hsl(var(--text-normal));
   }
 
   .default .sui-tab-header.active {
