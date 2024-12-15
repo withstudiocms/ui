@@ -12,7 +12,7 @@ interface Props {
 const { background = 'background-base' } = Astro.props;
 ---
 <div class="sui-divider-container">
-  <div class="sui-divider-line" />
+  <hr class="sui-divider-line" />
   <div class="sui-divider-content" style={`background-color: hsl(var(--${background}));`}>
     <slot />
   </div>
@@ -35,6 +35,7 @@ const { background = 'background-base' } = Astro.props;
     height: 1px;
     background-color: hsl(var(--border));
     z-index: 1;
+    border: none;
   }
 
   .sui-divider-content {

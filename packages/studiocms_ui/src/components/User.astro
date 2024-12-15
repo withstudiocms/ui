@@ -35,7 +35,7 @@ const { name, description, avatar, class: className, loading = 'lazy' } = Astro.
     {avatar ? (
       <Image src={avatar} inferSize loading={loading} alt={name} class="sui-avatar-img" />
     ) : (
-      <Icon name='user' width={24} height={24} />
+      <Icon name='user' width={24} height={24} role='img' aria-label={`Placeholder avatar for ${name}`} />
     )}
   </div>
   <div class="sui-text-content">

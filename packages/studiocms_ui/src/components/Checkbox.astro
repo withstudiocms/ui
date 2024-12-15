@@ -62,7 +62,7 @@ const iconSizes = {
     size,
   ]}
 >
-  <div class="sui-checkmark-container" tabindex="0">
+  <div class="sui-checkmark-container" tabindex="0" role="checkbox" aria-checked={defaultChecked}>
     <Checkmark
       class={'sui-checkmark'}
       width={iconSizes[size]}
@@ -84,6 +84,7 @@ const iconSizes = {
 </label>
 <script>
   const elements = document.querySelectorAll<HTMLDivElement>('.sui-checkmark-container');
+  const checkbox = document.querySelectorAll<HTMLInputElement>('.sui-checkbox');
 
   for (const element of elements) {
     if (element.dataset.initialized) continue;
@@ -91,13 +92,25 @@ const iconSizes = {
     element.dataset.initialized = 'true';
 
     element.addEventListener('keydown', (e) => {
-      if (e.key !== 'Enter') return;
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+
+      e.preventDefault();
 
       const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
         
       if (!checkbox) return;
 
       checkbox.click();
+    });
+  }
+
+  for (const box of checkbox) {
+    if (box.dataset.initialized) continue;
+
+    box.dataset.initialized = 'true';
+
+    box.addEventListener('change', (e) => {
+      box.parentElement!.ariaChecked = (e.target as HTMLInputElement).checked ? 'true' : 'false';
     });
   }
 </script>

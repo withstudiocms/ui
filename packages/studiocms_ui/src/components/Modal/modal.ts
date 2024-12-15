@@ -35,6 +35,11 @@ class ModalHelper {
 		if (triggerID) {
 			this.bindTrigger(triggerID);
 		}
+
+		// For debugging purposes: When any element on the page is focused, log the element.
+		document.addEventListener('focus', (e) => {
+			console.log(e.target);
+		}, true);
 	}
 
 	/**
@@ -87,6 +92,7 @@ class ModalHelper {
 	 */
 	public show = () => {
 		this.element.showModal();
+		this.element.focus();
 	};
 
 	/**

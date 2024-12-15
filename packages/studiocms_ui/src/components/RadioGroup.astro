@@ -88,17 +88,22 @@ const {
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
   <div class="sui-radio-inputs" role="radiogroup">
-    {options.map(({ label, value, disabled: individuallyDisabled }) => (
+    {options.map(({ label, value, disabled: individuallyDisabled }, i) => (
       <label
         for={value}
         class="sui-radio-label"
         class:list={[ individuallyDisabled && "disabled" ]}
       >
         <div class="sui-radio-box-container">
-          <div class="sui-radio-box" role="radio" tabindex="0" />
+          <div 
+            class="sui-radio-box" 
+            role="radio" 
+            tabindex={i === 0 ? 0 : -1} 
+            aria-checked={value === defaultValue}
+          />
         </div>
         <input 
-          class="sui-radio-toggle" 
+          class="sui-radio-toggle"
           type="radio" 
           value={value} 
           id={value} 
@@ -126,13 +131,47 @@ const {
 
     for (const radioBox of radioBoxes) {
       radioBox.addEventListener('keydown', (e) => {
-        if (e.key !== 'Enter') return;
+        if (e.key === 'Enter' || e.key === " ") {
+          e.preventDefault();
 
-        const input = (e.target as HTMLDivElement).parentElement!.parentElement!.querySelector<HTMLInputElement>('.sui-radio-toggle')!;
+          const input = (e.target as HTMLDivElement).parentElement!.parentElement!.querySelector<HTMLInputElement>('.sui-radio-toggle')!;
 
-        if (input.disabled) return;
+          if (input.disabled) return;
 
-        input.checked = true;
+          input.checked = true;
+        }
+
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+
+          let nextRadioBox: HTMLDivElement | undefined;
+
+          radioBoxes.forEach((box, index) => {
+            if (box === radioBox) nextRadioBox = radioBoxes[index + 1];
+          });
+
+          if (!nextRadioBox) return;
+
+          radioBox.tabIndex = -1;
+          nextRadioBox.tabIndex = 0;
+          nextRadioBox.focus();
+        }
+
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+
+          let previousRadioBox: HTMLDivElement | undefined;
+
+          radioBoxes.forEach((box, index) => {
+            if (box === radioBox) previousRadioBox = radioBoxes[index - 1];
+          });
+
+          if (!previousRadioBox) return;
+
+          radioBox.tabIndex = -1;
+          previousRadioBox.tabIndex = 0;
+          previousRadioBox.focus();
+        }
       });
 
       i++;
