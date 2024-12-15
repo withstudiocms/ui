@@ -73,8 +73,8 @@ importers:
         specifier: 'catalog:'
         version: 0.9.4(typescript@5.7.2)
       '@astrojs/starlight':
-        specifier: https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5
-        version: https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
+        specifier: 0.30.0
+        version: 0.30.0(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
       '@expressive-code/plugin-line-numbers':
         specifier: ^0.38.3
         version: 0.38.3
@@ -168,12 +168,9 @@ importers:
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
-      starlight-image-zoom:
-        specifier: ^0.9.0
-        version: 0.9.0(@astrojs/starlight@https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)))
       starlight-package-managers:
-        specifier: ^0.8.0
-        version: 0.8.0(@astrojs/starlight@https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
+        specifier: ^0.8.1
+        version: 0.8.1(@astrojs/starlight@0.30.0(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)))
       tsm:
         specifier: ^2.3.0
         version: 2.3.0
@@ -334,9 +331,8 @@ packages:
   '@astrojs/sitemap@3.2.1':
     resolution: {integrity: sha512-uxMfO8f7pALq0ADL6Lk68UV6dNYjJ2xGUzyjjVj60JLBs5a6smtlkBYv3tQ0DzoqwS7c9n4FUx5lgv0yPo/fgA==}
 
-  '@astrojs/starlight@https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5':
-    resolution: {tarball: https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5}
-    version: 0.29.3
+  '@astrojs/starlight@0.30.0':
+    resolution: {integrity: sha512-bRbiIwL1qtRwEysgwFxiY/vxmPvf1qmnVBAL2oa4/2JSmMnUaY7zl8HrLQEdJtq+7GfllrAfjsnMOyLOOClV7w==}
     peerDependencies:
       astro: ^5.0.0
 
@@ -3507,20 +3503,11 @@ packages:
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
 
-  starlight-image-zoom@0.9.0:
-    resolution: {integrity: sha512-XG87T80g5hsT6dvtNk9OKx0gD+M8lsloVTApQYnxdc3JD8lQBfu2kCsrwkyrwXZRtV7JRyd0PDHwx1UFmGmI1g==}
-    version: 0.9.0
-    engines: {node: '>=18'}
+  starlight-package-managers@0.8.1:
+    resolution: {integrity: sha512-a+zGIOdbN7B4T/VaszuvW8585Aau4LSU8HlVCmBCJJwxkrGAUC9lRya4y0md5tOAFyW/gfhUNJZM8qqyMNTe7Q==}
+    engines: {node: '>=18.17.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.22.0'
-
-  starlight-package-managers@0.8.0:
-    resolution: {integrity: sha512-FietpigUue9fViKumtt4978F41QPYkbywk5ysZR3242pzBb0+RLfF/IHA9xjNEEYw5/ZMrcBfXRVt+yoVA1SDA==}
-    version: 0.8.0
-    engines: {node: '>=18.14.1'}
-    peerDependencies:
-      '@astrojs/starlight': '>=0.22.0'
-      astro: '>=4.2.7'
 
   statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
@@ -4216,7 +4203,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.24.1
 
-  '@astrojs/starlight@https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))':
+  '@astrojs/starlight@0.30.0(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))':
     dependencies:
       '@astrojs/mdx': 4.0.2(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
       '@astrojs/sitemap': 3.2.1
@@ -5710,7 +5697,7 @@ snapshots:
 
   '@types/sax@1.2.7':
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 20.17.10
 
   '@types/shimmer@1.2.0': {}
 
@@ -8130,17 +8117,9 @@ snapshots:
 
   sprintf-js@1.0.3: {}
 
-  starlight-image-zoom@0.9.0(@astrojs/starlight@https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))):
+  starlight-package-managers@0.8.1(@astrojs/starlight@0.30.0(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))):
     dependencies:
-      '@astrojs/starlight': https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
-      rehype-raw: 7.0.0
-      unist-util-visit: 5.0.0
-      unist-util-visit-parents: 6.0.1
-
-  starlight-package-managers@0.8.0(@astrojs/starlight@https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)))(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)):
-    dependencies:
-      '@astrojs/starlight': https://gitpkg.now.sh/HiDeoo/starlight/packages/starlight?hd-astro-v5(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
-      astro: 5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)
+      '@astrojs/starlight': 0.30.0(astro@5.0.5(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
 
   statuses@2.0.1: {}
 
