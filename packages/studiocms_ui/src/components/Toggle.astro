@@ -56,7 +56,13 @@ const {
   ]}
 >
   <div class="sui-toggle-container">
-    <div class="sui-toggle-switch" tabindex="0" role="checkbox" aria-checked={defaultChecked} />
+    <div 
+      class="sui-toggle-switch"
+      tabindex="0"
+      role="checkbox"
+      aria-checked={defaultChecked}
+      aria-label={label}
+    />
     <input
       type="checkbox"
       name={name}
@@ -65,9 +71,10 @@ const {
       disabled={disabled}
       required={isRequired}
       class="sui-toggle-checkbox"
+      hidden
     />
   </div>
-  <span>
+  <span id={`label-${name}`}>
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
 </label>

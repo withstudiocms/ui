@@ -90,6 +90,7 @@ const {
     role="listbox" id={`${id}-dropdown`} 
     transition:persist
     transition:persist-props
+    aria-labelledby={`${id}-toggle-btn`}
   >
     {options.map(({ value, disabled, color, label, icon, href }) => (
       <li

@@ -62,7 +62,13 @@ const iconSizes = {
     size,
   ]}
 >
-  <div class="sui-checkmark-container" tabindex="0" role="checkbox" aria-checked={defaultChecked}>
+  <div
+    class="sui-checkmark-container"
+    tabindex="0"
+    role="checkbox"
+    aria-checked={defaultChecked} 
+    aria-labelledby={`label-${name}`}
+    >
     <Checkmark
       class={'sui-checkmark'}
       width={iconSizes[size]}
@@ -76,9 +82,10 @@ const iconSizes = {
       disabled={disabled}
       required={isRequired}
       class="sui-checkbox"
+      hidden
     />
   </div>
-  <span>
+  <span id={`label-${name}`}>
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
 </label>
