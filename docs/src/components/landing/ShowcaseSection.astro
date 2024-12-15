@@ -1,5 +1,6 @@
 ---
 import { Code } from '@astrojs/starlight/components';
+import { TabItem, Tabs } from '@studiocms/ui/components';
 import Icon from '@studiocms/ui/utils/Icon.astro';
 import DropdownExample from '~/components/landing/DropdownExample.astro';
 import dropdownExampleCode from '~/components/landing/DropdownExample.astro?raw';
@@ -22,88 +23,54 @@ const splitCodeBasedOnComment = (code: string): string => {
         title="Modular by design"
         subtitle="StudioCMS UI components are reusable, flexible, and composable, helping you build incredible interfaces with ease."
     />
-    <div class="showcase-tabs">
-        <button class='showcase-tab active' data-tab-child="form-preview">
-            <Icon name='pencil' width={24} height={24} slot='start-content' />
-            Forms
-        </button>
-        <button class='showcase-tab' data-tab-child="dropdown-preview">
-            <Icon name='square-2-stack' width={24} height={24} slot='start-content' />
-            Dropdowns
-        </button>
-        <button class='showcase-tab' data-tab-child="modal-preview">
-            <Icon name='arrows-pointing-out' width={24} height={24} slot='start-content' />
-            Modals
-        </button>
-    </div>
-    <div class="preview-code-container active" id="form-preview">
-        <div class="preview-container">
-            <FormExample />
-        </div>
-        <Code
-            code={splitCodeBasedOnComment(formExampleCode)}
-            lang={'astro'}
-            class={'preview-code'}
-            frame='code'
-            showLineNumbers
-            meta={'title="FormExample.astro"'}
-        />
-    </div>
-    <div class="preview-code-container" id="dropdown-preview">
-        <div class="preview-container">
-            <DropdownExample />
-        </div>
-        <Code
-            code={splitCodeBasedOnComment(dropdownExampleCode)}
-            lang={'astro'}
-            class={'preview-code'}
-            frame='code'
-            showLineNumbers
-            meta={'title="DropdownExample.astro"'}
-        />
-    </div>
-    <div class="preview-code-container" id="modal-preview">
-        <div class="preview-container">
-            <ModalExample />
-        </div>
-        <Code
-            code={splitCodeBasedOnComment(modalExampleCode)}
-            lang={'astro'}
-            class={'preview-code'}
-            frame='code'
-            showLineNumbers
-            meta={'title="ModalExample.astro"'}
-        />
-    </div>
+    <Tabs>
+        <TabItem label='Forms' icon='pencil'>
+            <div class="preview-code-container">
+                <div class="preview-container">
+                    <FormExample />
+                </div>
+                <Code
+                    code={splitCodeBasedOnComment(formExampleCode)}
+                    lang={'astro'}
+                    class={'preview-code'}
+                    frame='code'
+                    showLineNumbers
+                    meta={'title="FormExample.astro"'}
+                />
+            </div>
+        </TabItem>
+        <TabItem label='Dropdowns' icon='square-2-stack'>
+            <div class="preview-code-container">
+                <div class="preview-container">
+                    <DropdownExample />
+                </div>
+                <Code
+                    code={splitCodeBasedOnComment(dropdownExampleCode)}
+                    lang={'astro'}
+                    class={'preview-code'}
+                    frame='code'
+                    showLineNumbers
+                    meta={'title="DropdownExample.astro"'}
+                />
+            </div>
+        </TabItem>
+        <TabItem label='Modals' icon='arrows-pointing-out'>
+            <div class="preview-code-container">
+                <div class="preview-container">
+                    <ModalExample />
+                </div>
+                <Code
+                    code={splitCodeBasedOnComment(modalExampleCode)}
+                    lang={'astro'}
+                    class={'preview-code'}
+                    frame='code'
+                    showLineNumbers
+                    meta={'title="ModalExample.astro"'}
+                />
+            </div>
+        </TabItem>
+    </Tabs>
 </section>
-<script>
-    const tabs = document.querySelectorAll<HTMLButtonElement>('.showcase-tab');
-    
-    const switchTab = (e: MouseEvent) => {
-        const currentActiveTab = document.querySelector<HTMLButtonElement>('.showcase-tab.active');
-
-        if (currentActiveTab) {
-            currentActiveTab.classList.remove('active');
-
-            const activeChildId = currentActiveTab.dataset.tabChild!;
-            const activeChild = document.getElementById(activeChildId)!;
-
-            activeChild.classList.remove('active');
-        }
-
-        const target = (e.target as HTMLButtonElement);
-        target.classList.add('active');
-
-        const childId = target.dataset.tabChild!;
-        const child = document.getElementById(childId)!;
-
-        child.classList.add('active');
-    }
-
-    for (const tab of tabs) {
-        tab.addEventListener('click', switchTab);
-    }
-</script>
 <style>
     .showcase {
         margin-top: 4rem !important;
@@ -118,75 +85,12 @@ const splitCodeBasedOnComment = (code: string): string => {
         }
     }
 
-    .showcase-tabs {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        max-width: 100%;
-        overflow: auto;
-    }
-
-    .showcase-tab {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        text-align: center;
-
-        position: relative;
-
-        /* Move gaps & radii to spacings.css later on */
-        gap: 0.5rem;
-
-        outline: none;
-        border: none;
-
-        font-weight: 400;
-
-        border-radius: 0.5rem;
-
-        transition: all 0.15s ease;
-
-        cursor: pointer;
-
-        /* Default colorway */
-
-        background-color: transparent;
-        color: hsl(var(--text-normal));
-
-        min-width: fit-content;
-
-        will-change: transform;
-
-        text-decoration: none;
-
-        height: 40px;
-        padding: 0.5rem 0.75rem;
-
-        font-size: 0.875em;
-    }
-
-    .showcase-tab * {
-        pointer-events: none;
-    }
-
-    .showcase-tab:hover {
-        background-color: hsla(var(--default-flat-active)) !important;
-    }
-
-    .showcase-tab.active {
-        background-color: hsla(var(--primary-flat-active)) !important;
-    }
-
     .preview-code-container {
-        display: none;
+        display: flex;
         flex-direction: row;
         width: 100%;
         margin-top: 2rem;
         gap: 2rem;
-    }
-
-    .preview-code-container.active {
-        display: flex;
     }
 
     .preview-code-container > div {
