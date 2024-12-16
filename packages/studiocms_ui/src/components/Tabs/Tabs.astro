@@ -84,6 +84,8 @@ const markTabAsActive = (tabId: string, html: string): string => {
   return updatedHtml;
 }
 
+const uniqueId = generateID('sui-tabs-container');
+
 const { 
   syncKey: originalSyncKey, 
   storage = 'session', 
@@ -99,16 +101,16 @@ const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || "", tabContents);
 const containerId = generateID('sui-tabs-container');
 ---
 
-<div class="sui-tabs-container" id={containerId} data-sync-key={syncKey} class:list={[variant, align]}>
+<div class="sui-tabs-container" id={containerId} data-sync-key={syncKey} class:list={[variant, align]} data-unique-id={uniqueId}>
   <div class="sui-tabs-list" role="tablist">
     {tabs.map((tab, i) => (
       <button 
         role="tab"
         class="sui-tab-header"
-        class:list={[i === 0 && "active", tab.color, syncKey && `${syncKey}:${i}`]}
-        data-tab-child={tab.tabId}
         id={syncKey ? `${syncKey}-${i}` : undefined}
         tabindex={i === 0 ? 0 : -1}
+        data-tab-child={tab.tabId}
+        class:list={[i === 0 && "active", tab.color, syncKey && `${syncKey}:${i}`]}
       >
         {tab.icon && (
           <Icon name={tab.icon} width={24} height={24} />
@@ -124,34 +126,37 @@ const containerId = generateID('sui-tabs-container');
 <script is:inline define:vars={{ syncKey, containerId, storage }}>
   let storageLayer = storage === 'session' ? sessionStorage : localStorage;
 
-  const constructCustomEvent = (tabIndex) => {
+  const constructCustomEvent = (tabIndex, uniqueId) => {
     return new CustomEvent(`sui-tab-switch:${syncKey}`, {
       detail: {
-        tabIndex
+        tabIndex,
+        uniqueId
       }
     });
   }
 
-  const switchTab = (e, container) => {
+  const switchTab = (e, container, originatedFromSync = false) => {
     const activeChildren = container.querySelectorAll('.active');
     
     for (const child of activeChildren) {
+      child.tabIndex = -1;
       child.classList.remove('active');
     }
 
     const newActiveTab = e.target;
     newActiveTab.classList.add('active');
+    newActiveTab.tabIndex = 0;
 
     const newActiveTabContentId = newActiveTab.dataset.tabChild;
     const newActiveTabContent = container.querySelector(`sui-tab-item[data-tab-id="${newActiveTabContentId}"]`);
 
     newActiveTabContent.classList.add('active');
 
-    if (syncKey) {
+    if (syncKey && !originatedFromSync) {
       const tabIndex = Array.prototype.indexOf.call(newActiveTab.parentElement.children, newActiveTab);
       storageLayer.setItem(syncKey, tabIndex);
 
-      document.dispatchEvent(constructCustomEvent(tabIndex));
+      document.dispatchEvent(constructCustomEvent(tabIndex, container.dataset.uniqueId));
     }
   }
 
@@ -212,10 +217,13 @@ const containerId = generateID('sui-tabs-container');
       }
 
       document.addEventListener(`sui-tab-switch:${syncKey}`, (e) => {
-        const { tabIndex } = e.detail;
+        const { tabIndex, uniqueId } = e.detail;
 
-        const activeTab = container.querySelector(`#${syncKey}-${tabIndex}`);
-        activeTab.click();
+        if (uniqueId === container.dataset.uniqueId) return;
+
+        const newTab = container.querySelector(`#${syncKey}-${tabIndex}`);
+
+        switchTab({ target: newTab }, container, true);
       });
     }
   }

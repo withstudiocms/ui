@@ -156,6 +156,7 @@ const {
           radioBox.tabIndex = -1;
           nextRadioBox.tabIndex = 0;
           nextRadioBox.focus();
+          nextRadioBox.click();
         }
 
         if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
@@ -172,6 +173,7 @@ const {
           radioBox.tabIndex = -1;
           previousRadioBox.tabIndex = 0;
           previousRadioBox.focus();
+          previousRadioBox.click();
         }
       });
 
