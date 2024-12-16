@@ -88,10 +88,11 @@ const {
     
     const toastContainer = document.createElement('div');
     const toastID = generateID('toast');
-    toastContainer.tabIndex = 1;
+    toastContainer.tabIndex = 0;
     toastContainer.ariaLive = 'polite';
     toastContainer.role = 'alert';
     toastContainer.id = toastID;
+    toastContainer.ariaLabel = props.title;
     toastContainer.classList.add('sui-toast-container', props.type, `${props.closeButton || props.persistent && "closeable"}`, `${props.persistent && 'persistent'}`);
 
     const toastHeader = document.createElement('div');
