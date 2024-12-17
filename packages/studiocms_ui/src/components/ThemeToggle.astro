@@ -1,8 +1,7 @@
 ---
-import type { ComponentProps } from 'astro/types';
-import Button from './Button.astro';
+import Button, { type Props as ButtonProps } from './Button.astro';
 
-interface Props extends ComponentProps<typeof Button> {}
+interface Props extends ButtonProps {}
 
 const props = Astro.props;
 ---
@@ -26,6 +25,10 @@ const props = Astro.props;
 </script>
 
 <style is:global>
+  #sui-theme-toggle, #sui-theme-toggle * {
+    color: hsl(var(--text-normal));
+  }
+
   #sui-theme-toggle #dark-content, #sui-theme-toggle #light-content {
     display: none;
     width: fit-content;

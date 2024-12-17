@@ -19,7 +19,6 @@ html[data-theme="light"] {
 }
 
 body {
-	font-family: "Onest Variable", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	color: hsl(var(--text-normal));
 	background-color: hsl(var(--background-base));

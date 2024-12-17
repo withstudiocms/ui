@@ -6,9 +6,15 @@ class DropdownHelper {
 	private alignment: 'start' | 'center' | 'end';
 	private triggerOn: 'left' | 'right' | 'both';
 	private fullWidth = false;
+	private focusIndex = -1;
 
 	active = false;
 
+	/**
+	 * A helper function to interact with dropdowns.
+	 * @param id The ID of the dropdown.
+	 * @param fullWidth Whether the dropdown should be full width. Not needed normally.
+	 */
 	constructor(id: string, fullWidth?: boolean) {
 		this.container = document.getElementById(`${id}-container`) as HTMLDivElement;
 
@@ -21,6 +27,44 @@ class DropdownHelper {
 
 		this.toggleEl = document.getElementById(`${id}-toggle-btn`) as HTMLDivElement;
 		this.dropdown = document.getElementById(`${id}-dropdown`) as HTMLUListElement;
+
+		if (fullWidth) this.fullWidth = true;
+
+		this.hideOnClickOutside(this.container);
+
+		this.initialBehaviorRegistration();
+		this.initialOptClickRegistration();
+	}
+
+	/**
+	 * Registers a click callback for the dropdown options. Whenever one of the options
+	 * is clicked, the callback will be called with the value of the option.
+	 * @param func The callback function.
+	 */
+	public registerClickCallback = (func: (value: string) => void) => {
+		const dropdownOpts = this.dropdown.querySelectorAll('li');
+
+		for (const opt of dropdownOpts) {
+			opt.removeEventListener('click', this.hide);
+
+			opt.addEventListener('click', () => {
+				func(opt.dataset.value || '');
+				this.hide();
+			});
+		}
+	};
+
+	/**
+	 * Sets up all listeners for the dropdown.
+	 */
+	private initialBehaviorRegistration = () => {
+		window.addEventListener('scroll', this.hide);
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') this.hide();
+		});
+		document.addEventListener('astro:before-preparation', () => {
+			this.dropdown.classList.remove('initialized');
+		});
 
 		if (this.triggerOn === 'left') {
 			this.toggleEl.addEventListener('click', this.toggle);
@@ -37,31 +81,54 @@ class DropdownHelper {
 			});
 		}
 
-		if (fullWidth) this.fullWidth = true;
+		this.toggleEl.addEventListener('keydown', (e) => {
+			if (!this.active) return;
 
-		window.addEventListener('scroll', this.hide);
-		document.addEventListener('astro:before-preparation', () => {
-			this.dropdown.classList.remove('initialized');
+			if (e.key === 'Enter') {
+				e.preventDefault();
+
+				const focused = this.dropdown.querySelector('li.focused') as HTMLLIElement;
+
+				if (!focused) {
+					this.hide();
+					return;
+				};
+
+				focused.click();
+			}
+
+			if (e.key === 'ArrowDown') {
+				e.preventDefault();
+
+				this.focusIndex = this.focusIndex === this.dropdown.children.length - 1 ? 0 : this.focusIndex + 1;
+			}
+
+			if (e.key === 'ArrowUp') {
+				e.preventDefault();
+
+				this.focusIndex = this.focusIndex === 0 ? this.dropdown.children.length - 1 : this.focusIndex - 1;
+			}
+
+			if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+				if (this.focusIndex > this.dropdown.children.length - 1) {
+					this.focusIndex = 0;
+				}
+
+				this.dropdown.querySelector('li.focused')?.classList.remove('focused');
+
+				const newFocus = this.dropdown.children[this.focusIndex] as HTMLLIElement;
+
+				if (!newFocus) return;
+
+				newFocus.classList.add('focused');
+				newFocus.focus();
+			}
 		});
-
-		this.hideOnClickOutside(this.container);
-
-		this.initialOptClickRegistration();
 	}
-
-	public registerClickCallback = (func: (value: string) => void) => {
-		const dropdownOpts = this.dropdown.querySelectorAll('li');
-
-		for (const opt of dropdownOpts) {
-			opt.removeEventListener('click', this.hide);
-
-			opt.addEventListener('click', () => {
-				func(opt.dataset.value || '');
-				this.hide();
-			});
-		}
-	};
-
+	
+	/**
+	 * Registers callbacks to hide the dropdown when an option is clicked.
+	 */
 	private initialOptClickRegistration = () => {
 		const dropdownOpts = this.dropdown.querySelectorAll('li');
 
@@ -70,6 +137,9 @@ class DropdownHelper {
 		}
 	};
 
+	/**
+	 * A function to toggle the dropdown.
+	 */
 	public toggle = () => {
 		if (this.active) {
 			this.hide();
@@ -79,13 +149,22 @@ class DropdownHelper {
 		this.show();
 	};
 
+	/**
+	 * A function to hide the dropdown.
+	 */
 	public hide = () => {
 		this.dropdown.classList.remove('active');
 		this.active = false;
+		this.focusIndex = -1;
+		
+		this.dropdown.querySelector('li.focused')?.classList.remove('focused');
 
 		setTimeout(() => this.dropdown.classList.remove('above', 'below'), 200);
 	};
 
+	/**
+	 * A function to show the dropdown.
+	 */
 	public show = () => {
 		const isMobile = window.matchMedia('screen and (max-width: 840px)').matches;
 
@@ -145,11 +224,17 @@ class DropdownHelper {
 			CustomRect.right <= (window.innerWidth || document.documentElement.clientWidth)
 		) {
 			this.dropdown.classList.add('active', 'below');
+			this.focusIndex = -1;
 		} else {
 			this.dropdown.classList.add('active', 'above');
+			this.focusIndex = this.dropdown.children.length;
 		}
 	};
 
+	/**
+	 * A jQuery-like function to hide the dropdown when clicking outside of it.
+	 * @param element The element to hide when clicking outside of it.
+	 */
 	private hideOnClickOutside = (element: HTMLElement) => {
 		const outsideClickListener = (event: MouseEvent) => {
 			if (!event.target) return;

@@ -8,12 +8,36 @@ interface ButtonType {
 	color: StudioCMSColorway;
 }
 
+/**
+ * The props for the Modal component.
+ */
 interface Props {
+  /**
+   * The ID of the modal. Required due to the helper.
+   */
 	id: string;
+  /**
+   * The size of the modal. Defaults to `md`.
+   */
 	size?: 'sm' | 'md' | 'lg';
+  /**
+   * Whether the modal is dismissable. Defaults to `true`.
+   */
 	dismissable?: boolean;
+  /**
+   * The cancel button of the modal. If a string is given, the button will have the danger color and flat variant, 
+   * and the string will be the label. If ButtonType is given, the button will have the color and variant specified.
+   */
 	cancelButton?: string | ButtonType;
+  /**
+   * The action button of the modal. If a string is given, the button will have the primary color and solid variant, 
+   * and the string will be the label. If ButtonType is given, the button will have the color and variant specified.
+   */
 	actionButton?: string | ButtonType;
+  /**
+   * Whether the modal is a form. Defaults to `false`. When set to true, the modal helpers submit callback will include
+   * the form data.
+   */
 	isForm?: boolean;
 }
 
@@ -34,7 +58,7 @@ const {
   data-has-cancel-button={cancelButton}
   class="sui-modal"
   class:list={[size]}
-  data-form={`${isForm}`}
+  data-form={isForm}
 >
   <div class="sui-modal-header">
     <slot name="header" />
@@ -83,6 +107,7 @@ const {
     overflow: visible;
     margin: auto;
     z-index: 50;
+    max-width: calc(100% - 4rem);
   }
 
   .sui-modal.sm {
@@ -137,6 +162,11 @@ const {
 
   .x-mark-container:hover {
     background-color: hsl(var(--default-base));
+  }
+
+  .x-mark-container:focus-visible {
+    outline: 2px solid hsl(var(--text-normal));
+    outline-offset: 2px;
   }
 
   .sui-modal-footer {

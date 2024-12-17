@@ -1,0 +1,39 @@
+---
+title: From v0.1.0 to v0.2.0
+sidebar:
+  badge:
+    text: New!
+    variant: tip
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Version 0.2.0 of `@studiocms/ui` introduced mostly accessibility improvements and is backwards compatible. 
+
+While there are no breaking changes, **the method of importing the `global.css` stylesheet in the root layout 
+has been deprecated in favor of using the provided integration.**
+
+We recommend doing the following to upgrade your project:
+
+<Steps>
+1.  Remove the `global.css` import from your root layout.
+    ```astro showlinenumbers del={2} title="Layout.astro"
+    ---
+    import '@studiocms/ui/css/global.css';
+    ---
+    ```
+
+2.  Add the following code to your `astro.config.mjs` file:
+    ```ts showLinenumbers title="astro.config.mjs" {2,6}
+    import { defineConfig } from 'astro/config';
+    import ui from '@studiocms/ui';
+
+    export default defineConfig({
+      integrations: [
+        ui()
+      ]
+    });
+    ```
+</Steps>
+
+The integration will automatically add the stylesheet to your page.

@@ -2,6 +2,10 @@ class SingleSidebarHelper {
 	private sidebar: HTMLElement;
 	private sidebarToggle?: HTMLElement | undefined;
 
+	/**
+	 * A helper to manage the sidebar with.
+	 * @param toggleID The ID of the element that should toggle the sidebar.
+	 */
 	constructor(toggleID?: string) {
 		const sidebarContainer = document.getElementById('sui-sidebar');
 
@@ -28,6 +32,10 @@ class SingleSidebarHelper {
 		}
 	}
 
+	/**
+	 * A helper function register an element which should toggle the sidebar.
+	 * @param elementID The ID of the element that should toggle the sidebar.
+	 */
 	public toggleSidebarOnClick = (elementID: string) => {
 		const navToggle = document.getElementById(elementID);
 
@@ -42,6 +50,10 @@ class SingleSidebarHelper {
 		});
 	};
 
+	/**
+	 * A helper function to hide the sidebar when an element is clicked.
+	 * @param elementID The ID of the element that should hide the sidebar.
+	 */
 	public hideSidebarOnClick = (elementID: string) => {
 		const element = document.getElementById(elementID);
 
@@ -52,6 +64,10 @@ class SingleSidebarHelper {
 		element.addEventListener('click', this.hideSidebar);
 	};
 
+	/**
+	 * A helper function to show the sidebar when an element is clicked.
+	 * @param elementID The ID of the element that should show the sidebar.
+	 */
 	public showSidebarOnClick = (elementID: string) => {
 		const element = document.getElementById(elementID);
 
@@ -62,10 +78,16 @@ class SingleSidebarHelper {
 		element.addEventListener('click', this.showSidebar);
 	};
 
+	/**
+	 * A function to hide the sidebar.
+	 */
 	public hideSidebar = () => {
 		this.sidebar.classList.remove('active');
 	};
 
+	/**
+	 * A function to show the sidebar.
+	 */
 	public showSidebar = () => {
 		this.sidebar.classList.add('active');
 	};
@@ -74,6 +96,9 @@ class SingleSidebarHelper {
 class DoubleSidebarHelper {
 	private sidebarsContainer: HTMLElement;
 
+	/**
+	 * A helper to manage the double sidebar with.
+	 */
 	constructor() {
 		const sidebarsContainer = document.getElementById('sui-sidebars');
 
@@ -86,6 +111,10 @@ class DoubleSidebarHelper {
 		this.sidebarsContainer = sidebarsContainer;
 	}
 
+	/**
+	 * A helper function to hide the sidebar when an element is clicked.
+	 * @param elementID The ID of the element that should hide the sidebar.
+	 */
 	public hideSidebarOnClick = (elementID: string) => {
 		const element = document.getElementById(elementID);
 
@@ -96,6 +125,10 @@ class DoubleSidebarHelper {
 		element.addEventListener('click', this.hideSidebar);
 	};
 
+	/**
+	 * A helper function to show the outer sidebar when an element is clicked.
+	 * @param elementID The ID of the element that should show the outer sidebar.
+	 */
 	public showOuterOnClick = (elementID: string) => {
 		const element = document.getElementById(elementID);
 
@@ -106,6 +139,10 @@ class DoubleSidebarHelper {
 		element.addEventListener('click', this.showOuterSidebar);
 	};
 
+	/**
+	 * A helper function to show the inner sidebar when an element is clicked.
+	 * @param elementID The ID of the element that should show the inner sidebar.
+	 */
 	public showInnerOnClick = (elementID: string) => {
 		const element = document.getElementById(elementID);
 
@@ -116,15 +153,24 @@ class DoubleSidebarHelper {
 		element.addEventListener('click', this.showInnerSidebar);
 	};
 
+	/**
+	 * A function to show the inner sidebar.
+	 */
 	public showInnerSidebar = () => {
 		this.sidebarsContainer.classList.add('inner', 'active');
 	};
 
+	/**
+	 * A function to show the outer sidebar.
+	 */
 	public showOuterSidebar = () => {
 		this.sidebarsContainer.classList.add('active');
 		this.sidebarsContainer.classList.remove('inner');
 	};
 
+	/**
+	 * A function to hide the sidebar altogether.
+	 */
 	public hideSidebar = () => {
 		this.sidebarsContainer.classList.remove('inner', 'active');
 	};

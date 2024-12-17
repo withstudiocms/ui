@@ -3,13 +3,37 @@ import Checkmark from '../icons/Checkmark.astro';
 import type { StudioCMSColorway } from '../utils/colors';
 import { generateID } from '../utils/generateID';
 
+/**
+ * The props for the Checkbox component.
+ */
 interface Props {
+  /**
+   * The label of the checkbox.
+   */
 	label: string;
+  /**
+   * The size of the checkbox. Defaults to `md`.
+   */
 	size?: 'sm' | 'md' | 'lg';
+  /**
+   * The color of the checkbox. Defaults to `default`.
+   */
 	color?: StudioCMSColorway;
+  /**
+   * Whether the checkbox is checked by default.
+   */
 	defaultChecked?: boolean;
+  /**
+   * Whether the checkbox is disabled.
+   */
 	disabled?: boolean;
+  /**
+   * The name of the checkbox.
+   */
 	name?: string;
+  /**
+   * Whether the checkbox is required.
+   */
 	isRequired?: boolean;
 }
 
@@ -38,7 +62,13 @@ const iconSizes = {
     size,
   ]}
 >
-  <div class="sui-checkmark-container">
+  <div
+    class="sui-checkmark-container"
+    tabindex="0"
+    role="checkbox"
+    aria-checked={defaultChecked} 
+    aria-labelledby={`label-${name}`}
+    >
     <Checkmark
       class={'sui-checkmark'}
       width={iconSizes[size]}
@@ -52,12 +82,45 @@ const iconSizes = {
       disabled={disabled}
       required={isRequired}
       class="sui-checkbox"
+      hidden
     />
   </div>
-  <span>
+  <span id={`label-${name}`}>
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
 </label>
+<script>
+  const elements = document.querySelectorAll<HTMLDivElement>('.sui-checkmark-container');
+  const checkbox = document.querySelectorAll<HTMLInputElement>('.sui-checkbox');
+
+  for (const element of elements) {
+    if (element.dataset.initialized) continue;
+    
+    element.dataset.initialized = 'true';
+
+    element.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+
+      e.preventDefault();
+
+      const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
+        
+      if (!checkbox) return;
+
+      checkbox.click();
+    });
+  }
+
+  for (const box of checkbox) {
+    if (box.dataset.initialized) continue;
+
+    box.dataset.initialized = 'true';
+
+    box.addEventListener('change', (e) => {
+      box.parentElement!.ariaChecked = (e.target as HTMLInputElement).checked ? 'true' : 'false';
+    });
+  }
+</script>
 <style>
   .sui-checkmark-label {
     display: flex;
@@ -82,7 +145,13 @@ const iconSizes = {
     border: 2px solid hsl(var(--default-base));
     border-radius: .5rem;
     cursor: pointer;
-    transition: all .15s ease;
+    transition: background-color .15s, border .15s, transform .15s;
+    transition-timing-function: ease;
+  }
+
+  .sui-checkmark-container:focus-visible {
+    outline: 2px solid hsl(var(--text-normal));
+    outline-offset: 2px;
   }
 
   .sui-checkmark-label:hover .sui-checkmark-container {

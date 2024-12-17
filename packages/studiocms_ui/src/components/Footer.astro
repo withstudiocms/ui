@@ -1,13 +1,30 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
+interface FooterLink {
+  /**
+   * The label of the link.
+   */
+  label: string;
+  /**
+   * The href of the link.
+   */
+  href: string;
+}
+
+/**
+ * The props for the footer component.
+ */
 interface Props extends HTMLAttributes<'footer'> {
+  /**
+   * The links to display in the footer.
+   */
 	links: {
-		[label: string]: {
-			label: string;
-			href: string;
-		}[];
+		[label: string]: FooterLink[];
 	};
+  /**
+   * The copyright text to display in the footer.
+   */
 	copyright: string;
 }
 

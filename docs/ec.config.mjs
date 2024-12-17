@@ -32,6 +32,7 @@ export default defineEcConfig({
 		frames: {
 			editorActiveTabIndicatorBottomColor: 'var(--sl-color-accent)',
 		},
+		gutterForeground: 'rgba(166, 166, 166, 0.84)',
 		twoSlash: {
 			cursorColor: '#f8f8f2',
 		},

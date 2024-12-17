@@ -2,13 +2,37 @@
 import type { StudioCMSColorway } from '../utils/colors';
 import { generateID } from '../utils/generateID';
 
+/**
+ * The props for the toggle component
+ */
 interface Props {
+  /**
+   * The label of the toggle.
+   */
 	label: string;
+  /**
+   * The size of the toggle. Defaults to `md`.
+   */
 	size?: 'sm' | 'md' | 'lg';
+  /**
+   * The color of the toggle. Defaults to `default`.
+   */
 	color?: StudioCMSColorway;
+  /**
+   * Whether the toggle is checked by default. Defaults to `false`.
+   */
 	defaultChecked?: boolean;
+  /**
+   * Whether the toggle is disabled. Defaults to `false`.
+   */
 	disabled?: boolean;
+  /**
+   * The name of the toggle.
+   */
 	name?: string;
+  /**
+   * Whether the toggle is required. Defaults to `false`.
+   */
 	isRequired?: boolean;
 }
 
@@ -32,7 +56,13 @@ const {
   ]}
 >
   <div class="sui-toggle-container">
-    <div class="sui-toggle-switch" />
+    <div 
+      class="sui-toggle-switch"
+      tabindex="0"
+      role="checkbox"
+      aria-checked={defaultChecked}
+      aria-label={label}
+    />
     <input
       type="checkbox"
       name={name}
@@ -40,13 +70,46 @@ const {
       checked={defaultChecked}
       disabled={disabled}
       required={isRequired}
-      class="sui-checkbox"
+      class="sui-toggle-checkbox"
+      hidden
     />
   </div>
-  <span>
+  <span id={`label-${name}`}>
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
 </label>
+<script>
+  const elements = document.querySelectorAll<HTMLDivElement>('.sui-toggle-container');
+  const toggles = document.querySelectorAll<HTMLInputElement>('.sui-toggle-checkbox');
+
+  for (const element of elements) {
+    if (element.dataset.initialized) continue;
+    
+    element.dataset.initialized = 'true';
+
+    element.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+
+      e.preventDefault();
+
+      const checkbox = element.querySelector<HTMLInputElement>('.sui-toggle-checkbox');
+        
+      if (!checkbox) return;
+
+      checkbox.click();
+    });
+  }
+
+  for (const box of toggles) {
+    if (box.dataset.initialized) continue;
+
+    box.dataset.initialized = 'true';
+
+    box.addEventListener('change', (e) => {
+      (box.previousSibling as HTMLDivElement).ariaChecked = (e.target as HTMLInputElement).checked ? 'true' : 'false';
+    });
+  }
+</script>
 <style>
   .sui-toggle-label {
     display: flex;
@@ -92,7 +155,12 @@ const {
     will-change: transform;
   }
 
-  .sui-toggle-container:has(.sui-checkbox:checked) .sui-toggle-switch {
+  .sui-toggle-switch:focus-visible {
+    outline: 2px solid hsl(var(--text-normal));
+    outline-offset: 2px;
+  }
+
+  .sui-toggle-container:has(.sui-toggle-checkbox:checked) .sui-toggle-switch {
     left: calc(100% - var(--switch));
     background-color: hsl(var(--text-normal));
   }
@@ -115,19 +183,19 @@ const {
     --switch: calc(var(--toggle-height) * 1.65);
   }
 
-  .sui-toggle-label.primary .sui-toggle-container:has(.sui-checkbox:checked) {
+  .sui-toggle-label.primary .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
     background-color: hsl(var(--primary-base));
   }
 
-  .sui-toggle-label.success .sui-toggle-container:has(.sui-checkbox:checked) {
+  .sui-toggle-label.success .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
     background-color: hsl(var(--success-base));
   }
 
-  .sui-toggle-label.warning .sui-toggle-container:has(.sui-checkbox:checked) {
+  .sui-toggle-label.warning .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
     background-color: hsl(var(--warning-base));
   }
 
-  .sui-toggle-label.danger .sui-toggle-container:has(.sui-checkbox:checked) {
+  .sui-toggle-label.danger .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
     background-color: hsl(var(--danger-base));
   }
 
@@ -136,7 +204,7 @@ const {
     font-weight: 700;
   }
 
-  .sui-checkbox {
+  .sui-toggle-checkbox {
     width: 0;
     height: 0;
     visibility: hidden;

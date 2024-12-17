@@ -70,7 +70,7 @@ open the navbar and scroll all the way down. After you've changed the theme, che
   </TabItem>
   <TabItem label="Code">
     ```html showLinenumbers
-    <span id="theme-listener-output">
+    <span id='theme-listener-output'>
       Theme hasn't changed yet.
     </span>
     ```
@@ -107,8 +107,8 @@ import { ThemeHelper, type Theme } from '@studiocms/ui/utils/ThemeHelper.ts';
 const themeHelper = new ThemeHelper();
 
 themeHelper.onThemeChange((newTheme: Theme) => {
-    localStorage.setItem('theme-selection', newTheme);
-})
+  localStorage.setItem('theme-selection', newTheme);
+});
 ```
 
 If you want to go even further, you can store this information in a cookie to retrieve it server-side.

@@ -1,5 +1,9 @@
 ---
 title: "Footer"
+sidebar:
+  badge:
+    text: New!
+    variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -29,23 +33,19 @@ import { Footer } from '@studiocms/ui/components';
 
 <Footer
   links={{
-    'StudioCMS Ecosystem': [
-      { label: 'StudioCMS', href: 'https://studiocms.dev' },
-      { label: 'Apollo', href: 'https://github.com/withstudiocms/apollo' }
-    ],
     'Resources': [
       { label: 'Docs', href: '/docs' },
+      { label: 'Support', href: '/support' },
+    ],
+    'Legal': [
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms of Service', href: '/tos' },
     ],
   }}
-  copyright='MIT License © 2024 - StudioCMS'
+  copyright='MIT License © 2024 - Acme Inc.'
 >
   <div slot="brand">
     Acme, Inc.
-  </div>
-  <div slot="brand">
-    <a href="https://example.com">
-      Homepage
-    </a>
   </div>
 </Footer>
 ```
@@ -59,7 +59,6 @@ import { Footer } from '@studiocms/ui/components';
 ---
 <!-- Other page content -->
 <Footer
-  class='not-content'
   links={{
     'StudioCMS Ecosystem': [
       { label: 'StudioCMS', href: 'https://studiocms.dev' },
@@ -69,29 +68,29 @@ import { Footer } from '@studiocms/ui/components';
       { label: 'Docs', href: '/docs' },
     ],
   }}
-  copyright={'MIT License © 2024 - StudioCMS'}
+  copyright='MIT License © 2024 - StudioCMS'
 >
-  <div slot="brand" class="footer-brand">
+  <div slot='brand' class='footer-brand'>
     <LogoAdaptive height={48} width={45.76} />
-    <span class="studiocms-footer-text">
+    <span class='studiocms-footer-text'>
       <span>StudioCMS</span>
       <span>UI</span>
     </span>
   </div>
-  <div slot="socials" class="socials">
-    <a href="https://github.com/withstudiocms">
+  <div slot='socials' class='socials'>
+    <a href='https://github.com/withstudiocms'>
       <GitHubLogo width={28} height={28} />
     </a>
-    <a href="https://chat.studiocms.dev">
+    <a href='https://chat.studiocms.dev'>
       <DiscordLogo width={32} height={32} />
     </a>
-    <a href="https://patreon.com/studiocms">
+    <a href='https://patreon.com/studiocms'>
       <PatreonLogo width={24} height={24} />
     </a>
-    <a href="https://bsky.app/profile/studiocms.dev">
+    <a href='https://bsky.app/profile/studiocms.dev'>
       <BlueSkyLogo width={24} height={24} />
     </a>
-    <a href="https://twitter.com/withstudiocms">
+    <a href='https://twitter.com/withstudiocms'>
       <TwitterLogo width={22} height={22} />
     </a>
   </div>

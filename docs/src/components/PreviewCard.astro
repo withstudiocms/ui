@@ -2,11 +2,16 @@
 type Props = {
 	vertical?: boolean;
 	gapSize?: 'sm' | 'md' | 'lg';
+  fullWidth?: boolean;
+  fullHeight?: boolean;
 };
 
-const { vertical = false, gapSize = 'md' } = Astro.props;
+const { vertical = false, gapSize = 'md', fullWidth, fullHeight } = Astro.props;
 ---
-<div class="preview-card not-content" class:list={[vertical && "vertical", gapSize]}>
+<div 
+  class="preview-card not-content"
+  class:list={[vertical && "vertical", gapSize]}
+>
   <slot />
 </div>
 <style>
@@ -18,6 +23,7 @@ const { vertical = false, gapSize = 'md' } = Astro.props;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .preview-card.vertical {

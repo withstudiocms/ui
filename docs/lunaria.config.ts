@@ -5,7 +5,6 @@ export default defineConfig({
 		name: 'withstudiocms/ui',
 		rootDir: 'docs',
 		hosting: 'github',
-		// TODO: Change to 'main' this once the branch is ready to merge
 		branch: 'main',
 	},
 	sourceLocale: {

@@ -1,0 +1,376 @@
+---
+import { Icon } from '../../utils';
+import type { StudioCMSColorway } from '../../utils/colors';
+import { generateID } from '../../utils/generateID';
+import type { HeroIconName } from '../../utils/iconType';
+
+interface Tab {
+  icon?: HeroIconName;
+  label: string;
+  color: Exclude<StudioCMSColorway, 'default'>;
+  tabId: string;
+}
+
+/**
+ * The props for the Tabs component.
+ */
+interface Props {
+  /**
+   * The sync key for the tabs. If provided, the active tab will be synced across all instances of the tabs with the same sync key.
+   * Additionally, the active tab will be stored session- or local storage depending on the `storage` prop.
+   */
+  syncKey?: string;
+  /**
+   * The storage type for the tabs. Defaults to `session`.
+   */
+  storage?: 'session' | 'persistent';
+  /**
+   * The variant of the tabs. Defaults to `default`.
+   */
+  variant?: 'default' | 'starlight';
+  /**
+   * The alignment of the tabs. Defaults to `left`.
+   */
+  align?: 'left' | 'center' | 'right';
+}
+
+const extractTabInfoWithRegex = (input: string) => {
+  const tabItemRegex = /<sui-tab-item([^>]*)>/g;
+
+  const attributeRegex = /data-([\w-]+)="([^"]*)"/g;
+
+  const tabs: Tab[] = [];
+  let tabMatch: RegExpExecArray | null;
+
+  // biome-ignore lint/suspicious/noAssignInExpressions: Nop
+  while ((tabMatch = tabItemRegex.exec(input)) !== null) {
+    let attributes: { [key: string]: string } = {};
+
+    let attributeMatch: RegExpExecArray | null;
+
+    if (!tabMatch[1]) continue;
+
+    // biome-ignore lint/suspicious/noAssignInExpressions: Nop
+    while ((attributeMatch = attributeRegex.exec(tabMatch[1])) !== null) {
+      if (!attributeMatch[1] || !attributeMatch[2]) continue;
+
+      if (
+        attributeMatch[1] === 'icon' || 
+        attributeMatch[1] === 'label' || 
+        attributeMatch[1] === 'color'
+      ) {
+        attributes[attributeMatch[1]] = attributeMatch[2];
+      }
+
+      if (attributeMatch[1] === 'tab-id') {
+        attributes.tabId = attributeMatch[2];
+      }
+    }
+
+    tabs.push(attributes as unknown as Tab);
+  }
+
+  return tabs;
+};
+
+const markTabAsActive = (tabId: string, html: string): string => {
+  if (!tabId) return html;
+
+  const updatedHtml = html.replace(
+    new RegExp(`(<sui-tab-item[^>]*data-tab-id="${tabId}"[^>]*class=")([^"]*)(")`, 'g'),
+    '$1$2 active$3'
+  );
+
+  return updatedHtml;
+}
+
+const uniqueId = generateID('sui-tabs-container');
+
+const { 
+  syncKey: originalSyncKey, 
+  storage = 'session', 
+  variant = 'default',
+  align = 'left'
+} = Astro.props;
+
+const syncKey = originalSyncKey ? `sui-tabs-${originalSyncKey}` : undefined;
+
+const tabContents = await Astro.slots.render('default');
+const tabs = extractTabInfoWithRegex(tabContents);
+const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || "", tabContents);
+const containerId = generateID('sui-tabs-container');
+---
+
+<div 
+  class="sui-tabs-container"
+  id={containerId}
+  data-sync-key={syncKey}
+  data-unique-id={uniqueId}
+  data-storage-strategy={storage}
+  class:list={[variant, align]}
+>
+  <div class="sui-tabs-list" role="tablist">
+    {tabs.map((tab, i) => (
+      <button 
+        role="tab"
+        class="sui-tab-header"
+        id={syncKey ? `${syncKey}-${i}` : undefined}
+        tabindex={i === 0 ? 0 : -1}
+        data-tab-child={tab.tabId}
+        class:list={[i === 0 && "active", tab.color, syncKey && `${syncKey}:${i}`]}
+      >
+        {tab.icon && (
+          <Icon name={tab.icon} width={24} height={24} />
+        )}
+        <span>{tab.label}</span>
+      </button>
+    ))}
+  </div>
+  <div class="sui-tabs-content">
+    <Fragment set:html={finalizedTabContents} />
+  </div>
+</div>
+<script>
+  const tabContainers = document.querySelectorAll<HTMLDivElement>('.sui-tabs-container');
+
+  for (const tabContainer of tabContainers) {
+    const storage = tabContainer.dataset.storageStrategy!;
+    const syncKey = tabContainer.dataset.syncKey!;
+
+    let storageLayer = storage === 'session' ? sessionStorage : localStorage;
+
+    const constructCustomEvent = (tabIndex: number, uniqueId: string) => {
+      return new CustomEvent(`sui-tab-switch:${syncKey}`, {
+        detail: {
+          tabIndex,
+          uniqueId
+        }
+      });
+    }
+
+    const switchTab = (target: HTMLElement, container: HTMLElement, originatedFromSync = false) => {
+      const activeChildren = container.querySelectorAll<HTMLElement>('.active');
+      
+      for (const child of activeChildren) {
+        child.tabIndex = -1;
+        child.classList.remove('active');
+      }
+
+      const newActiveTab = target as HTMLElement;
+      newActiveTab.classList.add('active');
+      newActiveTab.tabIndex = 0;
+
+      const newActiveTabContentId = newActiveTab.dataset.tabChild;
+      const newActiveTabContent = container.querySelector<HTMLElement>(`sui-tab-item[data-tab-id="${newActiveTabContentId}"]`)!;
+
+      newActiveTabContent.classList.add('active');
+
+      if (syncKey && !originatedFromSync) {
+        const tabIndex = Array.prototype.indexOf.call(newActiveTab.parentElement!.children, newActiveTab);
+        storageLayer.setItem(syncKey, tabIndex.toString());
+
+        document.dispatchEvent(constructCustomEvent(tabIndex, container.dataset.uniqueId!));
+      }
+
+    }
+      
+    const tabHeaders = tabContainer.querySelectorAll<HTMLElement>('.sui-tab-header');
+
+    for (const tab of tabHeaders) {
+      tab.addEventListener('click', (e) => switchTab(e.target as HTMLElement, tabContainer));
+
+      tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+          const activeTabIndex = Array.prototype.indexOf.call(tab.parentElement!.children, tab);
+          const nextTabIndex = e.key === 'ArrowLeft' ? activeTabIndex - 1 : activeTabIndex + 1;
+          
+
+          if (nextTabIndex >= 0 && nextTabIndex < tab.parentElement!.children.length) {
+            tab.tabIndex = -1;
+
+            const nextTab = tab.parentElement!.children[nextTabIndex]! as HTMLElement;
+
+            nextTab.tabIndex = 0;
+            nextTab.click();
+            nextTab.focus();
+          } else if (nextTabIndex < 0) {
+            tab.tabIndex = -1;
+
+            const lastTab = tab.parentElement!.children[tab.parentElement!.children.length - 1] as HTMLElement;
+
+            lastTab.tabIndex = 0;
+            lastTab.click();
+            lastTab.focus();
+          } else {
+            tab.tabIndex = -1;
+
+            const firstTab = tab.parentElement!.children[0] as HTMLElement;
+
+            firstTab.tabIndex = 0;
+            firstTab.click();
+            firstTab.focus();
+          }
+        }
+      });
+    }
+
+    if (syncKey) {
+      // Retrieve the sync key value from localstorage, set the tab.
+      const activeTabIndex = storageLayer.getItem(syncKey);
+
+      if (activeTabIndex) {
+        const activeTab = tabContainer.querySelector<HTMLElement>(`#${syncKey}-${activeTabIndex}`);
+        
+        if (activeTab) {
+          activeTab.click();
+        }
+      }
+
+      document.addEventListener(`sui-tab-switch:${syncKey}`, (e) => {
+        const event = e as CustomEvent<{ tabIndex: number, uniqueId: string }>;
+        const { tabIndex, uniqueId } = event.detail;
+
+        if (uniqueId === tabContainer.dataset.uniqueId) return;
+
+        const newTab = tabContainer.querySelector<HTMLElement>(`#${syncKey}-${tabIndex}`)!;
+
+        switchTab(newTab, tabContainer, true);
+      });
+    }
+  }
+</script>
+<style>
+  .sui-tabs-container {
+    width: 100%;
+  }
+
+  .sui-tabs-list {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    position: relative;
+  }
+
+  .default .sui-tabs-list {
+    margin-top: -4px;
+    margin-bottom: calc(2rem - 4px);
+    padding: 4px 4px;
+    margin-left: -4px;
+  }
+
+  .center .sui-tabs-list {
+    justify-content: center;
+  }
+
+  .right .sui-tabs-list {
+    justify-content: flex-end;
+  }
+
+  .sui-tab-header {
+    margin-top: 0 !important;
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    cursor: pointer;
+    position: relative;
+    min-width: fit-content;
+  }
+
+  .default .sui-tab-header {
+    border-radius: 0.5rem;
+    height: 40px;
+    padding: 0.5rem 0.75rem;
+    transition: all .15s ease;
+    font-size: 0.875em;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .sui-tab-header * {
+    pointer-events: none;
+  }
+
+  .default .sui-tab-header:focus-visible {
+    outline: 2px solid hsl(var(--text-normal));
+    outline-offset: 2px;
+  }
+
+  .default .sui-tab-header:hover {
+    background-color: hsla(var(--default-flat-active)) !important;
+  }
+
+  .default .sui-tab-header.active {
+    background-color: hsla(var(--primary-flat-active)) !important;
+  }
+
+  .default .sui-tab-header.success.active {
+    background-color: hsla(var(--success-flat-active)) !important;
+  }
+
+  .default .sui-tab-header.warning.active {
+    background-color: hsla(var(--warning-flat-active)) !important;
+  }
+
+  .default .sui-tab-header.danger.active {
+    background-color: hsla(var(--danger-flat-active)) !important;
+  }
+
+  .starlight .sui-tabs-list {
+    margin-bottom: 1rem;
+    gap: 0;
+  }
+
+  .starlight .sui-tabs-list::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: hsl(var(--border));
+  }
+
+  .starlight .sui-tab-header {
+    padding: 0.25rem 1.25rem;
+    color: hsl(var(--text-muted));
+  }
+
+  .starlight .sui-tab-header.active {
+    font-weight: 600;
+    color: hsl(var(--text-normal));
+  }
+
+  .starlight .sui-tab-header.active::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: hsl(var(--primary-base));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+  }
+
+  .starlight .sui-tab-header:focus-visible::after {
+    height: calc(100% - 2px);
+    width: calc(100% - 2px);
+    bottom: 1px;
+    left: 1px;
+    border: 2px solid hsl(var(--primary-base));
+    background-color: transparent;
+    outline: 1px solid hsl(var(--text-normal));
+  }
+
+  .default .sui-tab-header.active {
+    background-color: hsla(var(--primary-flat-active)) !important;
+  }
+
+  .sui-tabs-content {
+    width: 100%;
+    margin: 0 !important;
+  }
+</style>

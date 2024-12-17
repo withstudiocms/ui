@@ -24,7 +24,7 @@ A custom radio group component with support for sizes and colors. Form compatibl
     ---
 
     <RadioGroup 
-      label="Label"
+      label='Label'
       options={[
         { label: 'Option 1', value: 'opt-1' },
         { label: 'Option 2', value: 'opt-2' }
@@ -51,7 +51,7 @@ You can change a radio group to be displayed horizontally by using the `horizont
     ---
 
     <RadioGroup 
-      label="Label"
+      label='Label'
       horizontal
       options={[
         { label: 'Option 1', value: 'opt-1-h' },
@@ -79,7 +79,7 @@ You can set a default selected option via the `defaultValue` prop.
     ---
 
     <RadioGroup 
-      label="Default Selected"
+      label='Default Selected'
       defaultValue='opt-1'
       options={[
         { label: 'Option 1', value: 'opt-1' }
@@ -107,18 +107,18 @@ The radio group component supports all default colorways.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "color=\"primary\"" showLinenumbers title="RadioGroupColorExample.astro"
+    ```astro "color='primary'" showLinenumbers title="RadioGroupColorExample.astro"
     ---
     import { RadioGroup } from '@studiocms/ui/components';
     ---
 
     <RadioGroup 
-      label="Default Selected"
+      label='Default Selected'
       defaultValue='opt-1'
       options={[
         { label: 'Option 1', value: 'opt-1' }
       ]}
-      color="primary"
+      color='primary'
     />
     <!-- Other colors omitted for simplicity -->
     ```
@@ -143,7 +143,7 @@ below shows how to do the latter:
     ---
 
     <RadioGroup 
-      label="Default"
+      label='Default'
       options={[
         { label: 'Option 1', value: 'opt-1', disabled: true },
         { label: 'Option 1', value: 'opt-2' }
@@ -168,7 +168,7 @@ import { RadioGroup } from '@studiocms/ui/components';
 ---
 
 <RadioGroup 
-  label="Required & Custom Name"
+  label='Required & Custom Name'
   isRequired
   name='required-radio'
   options={[
