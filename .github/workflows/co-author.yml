@@ -1,0 +1,20 @@
+name: Write coauthors to a pull request
+
+# To use this type '!coauthor' as a comment in a PR
+  
+on:
+  issue_comment:
+    types:
+      - created
+      
+permissions:
+  pull-requests: write
+
+jobs:
+  generate-coauthors:
+    name: Generate Coauthor List
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: kevinzunigacuellar/coauthor-action@292b32bdbffc663431a2a37b3bfa597d83a74905 # v0.1.3
