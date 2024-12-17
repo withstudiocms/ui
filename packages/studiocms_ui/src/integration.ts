@@ -1,14 +1,17 @@
 import type { AstroIntegration } from 'astro'
+import { createResolver } from './utils/create-resolver';
 
-type Config = {
-}
+// biome-ignore lint/complexity/noBannedTypes: Will be implemented in v0.3.0
+type Options = {}
 
-export default function integration(cfg: Config = {}): AstroIntegration {
+export default function integration(options: Options = {}): AstroIntegration {
+  const { resolve } = createResolver(import.meta.url);
+
   return {
     name: '@studiocms/ui',
     hooks: {
       'astro:config:setup': ({ injectScript }) => {
-        injectScript("page-ssr", "import '@studiocms/ui/css/global.css'");
+        injectScript("page-ssr", `import '${resolve('./css/global.css')}'`);
       }
     }
   }

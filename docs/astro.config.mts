@@ -175,9 +175,23 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Upgrade Guides',
+					autogenerate: {
+						directory: 'docs/upgrade-guides',
+						collapsed: true,
+					},
+				},
+				{
 					label: 'Components',
 					autogenerate: {
 						directory: 'docs/components',
+						collapsed: true,
+					},
+				},
+				{
+					label: 'Utilities',
+					autogenerate: {
+						directory: 'docs/utilities',
 						collapsed: true,
 					},
 				},
