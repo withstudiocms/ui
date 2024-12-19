@@ -1,5 +1,5 @@
-import { dirname, resolve } from 'node:path'; // Swapped out pathe for node:path to cut down on dependencies
 import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'pathe';
 
 /**
  * From the Astro Integration Kit (https://astro-integration-kit.netlify.app/).
