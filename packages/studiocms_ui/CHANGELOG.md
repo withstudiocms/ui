@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.3.1
+
+### Patch Changes
+
+- [#27](https://github.com/withstudiocms/ui/pull/27) [`6b0b58f`](https://github.com/withstudiocms/ui/commit/6b0b58fbbe2a92d4bce7fa44c587164b8f2f53e5) Thanks [@louisescher](https://github.com/louisescher)! - Add pathe as a dependency to deal with path issues on Windows
+
 ## 0.3.0
 
 ### Minor Changes
