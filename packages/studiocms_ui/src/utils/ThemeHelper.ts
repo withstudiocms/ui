@@ -15,6 +15,7 @@ class ThemeHelper {
 	 */
 	constructor(themeProvider?: HTMLElement) {
 		this.themeManagerElement = themeProvider || document.documentElement;
+		this.themeManagerElement.dataset.theme = this.getTheme(true);
 	}
 
 	/**
@@ -32,7 +33,7 @@ class ThemeHelper {
 			return theme as T extends true ? 'dark' | 'light' : Theme;
 		}
 
-		if (this.themeManagerElement.dataset.theme !== 'system') {
+		if ((this.themeManagerElement.dataset.theme ?? 'system') !== 'system') {
 			return this.themeManagerElement.dataset.theme as 'dark' | 'light';
 		}
 
@@ -56,7 +57,13 @@ class ThemeHelper {
 	 * @param theme The new theme. One of `dark`, `light` or `system`.
 	 */
 	public setTheme = (theme: Theme): void => {
+		// Assign the new theme to the dataset
 		this.themeManagerElement.dataset.theme = theme;
+
+		// If starlight is used, we also want to set the theme in local storage.
+		if (typeof localStorage.getItem('starlight-theme') === 'string') {
+			localStorage.setItem('starlight-theme', theme === 'system' ? '' : theme);
+		}
 	};
 
 	/**

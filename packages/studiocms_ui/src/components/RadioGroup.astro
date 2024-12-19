@@ -2,33 +2,75 @@
 import type { StudioCMSColorway } from '../utils/colors';
 import { generateID } from '../utils/generateID';
 
+/**
+ * The props for the RadioGroup component.
+ */
 interface Option {
+  /**
+   * The label of the option.
+   */
 	label: string;
+  /**
+   * The value of the option.
+   */
 	value: string;
+  /**
+   * Whether the option is disabled.
+   */
 	disabled?: boolean;
 }
 
+/**
+ * The props for the RadioGroup component.
+ */
 interface Props {
+  /**
+   * The label of the radio group.
+   */
 	label: string;
+  /**
+   * The color of the radio group. Defaults to `default`.
+   */
 	color?: StudioCMSColorway;
+  /**
+   * The default value of the radio group. Needs to be one of the values in the options.
+   */
 	defaultValue?: string;
+  /**
+   * The options to display in the radio group.
+   */
 	options: Option[];
+  /**
+   * Whether the radio group is disabled. Defaults to `false`.
+   */
 	disabled?: boolean;
+  /**
+   * The name of the radio group.
+   */
 	name?: string;
+  /**
+   * Whether the radio group is required. Defaults to `false`.
+   */
 	isRequired?: boolean;
+  /**
+   * Whether the radio group is horizontal. Defaults to `false`.
+   */
 	horizontal?: boolean;
+  /**
+   * Additional classes to apply to the radio group.
+   */
 	class?: string;
 }
 
 const {
 	label,
-	color,
+	color = 'default',
 	defaultValue,
 	options,
-	disabled,
+	disabled = false,
+	isRequired = false,
+	horizontal = false,
 	name = generateID('radio'),
-	isRequired,
-	horizontal,
 	class: className,
 } = Astro.props;
 ---
@@ -45,18 +87,24 @@ const {
   <span>
     {label} <span class="req-star">{isRequired && "*"}</span>
   </span>
-  <div class="sui-radio-inputs">
-    {options.map(({ label, value, disabled: individuallyDisabled }) => (
+  <div class="sui-radio-inputs" role="radiogroup">
+    {options.map(({ label, value, disabled: individuallyDisabled }, i) => (
       <label
         for={value}
         class="sui-radio-label"
         class:list={[ individuallyDisabled && "disabled" ]}
       >
         <div class="sui-radio-box-container">
-          <div class="sui-radio-box" />
+          <div 
+            class="sui-radio-box" 
+            role="radio" 
+            tabindex={i === 0 ? 0 : -1} 
+            aria-checked={value === defaultValue}
+            aria-label={label}
+          />
         </div>
         <input 
-          class="sui-radio-toggle" 
+          class="sui-radio-toggle"
           type="radio" 
           value={value} 
           id={value} 
@@ -70,6 +118,78 @@ const {
     ))}
   </div>
 </div>
+<script>
+  const elements = document.querySelectorAll<HTMLDivElement>('.sui-radio-container');
+
+  for (const element of elements) {
+    if (element.dataset.initialized) continue;
+    
+    element.dataset.initialized = 'true';
+
+    const radioBoxes = element.querySelectorAll<HTMLDivElement>('.sui-radio-box');
+
+    let i = 0;
+
+    for (const radioBox of radioBoxes) {
+      radioBox.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === " ") {
+          e.preventDefault();
+
+          const input = (e.target as HTMLDivElement).parentElement!.parentElement!.querySelector<HTMLInputElement>('.sui-radio-toggle')!;
+
+          if (input.disabled) return;
+
+          input.checked = true;
+        }
+
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+
+          let nextRadioBox: HTMLDivElement | undefined;
+
+          radioBoxes.forEach((box, index) => {
+            if (box === radioBox) nextRadioBox = radioBoxes[index + 1];
+          });
+
+          if (!nextRadioBox) return;
+
+          radioBox.tabIndex = -1;
+          nextRadioBox.tabIndex = 0;
+          nextRadioBox.focus();
+          nextRadioBox.click();
+        }
+
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+
+          let previousRadioBox: HTMLDivElement | undefined;
+
+          radioBoxes.forEach((box, index) => {
+            if (box === radioBox) previousRadioBox = radioBoxes[index - 1];
+          });
+
+          if (!previousRadioBox) return;
+
+          radioBox.tabIndex = -1;
+          previousRadioBox.tabIndex = 0;
+          previousRadioBox.focus();
+          previousRadioBox.click();
+        }
+      });
+
+      i++;
+    }
+    element.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+
+      const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
+        
+      if (!checkbox) return;
+
+      checkbox.click();
+    });
+  }
+</script>
 <style>
   .sui-radio-container {
     display: flex;
@@ -162,6 +282,10 @@ const {
     outline: 1px solid hsl(var(--default-base));
     outline-offset: 4px;
     transition: all .15s ease;
+  }
+
+  .sui-radio-box:focus-visible {
+    outline-color: hsl(var(--text-normal)) !important;
   }
 
   .sui-radio-toggle {

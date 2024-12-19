@@ -3,21 +3,63 @@ import Icon from '../utils/Icon.astro';
 import { generateID } from '../utils/generateID';
 import Input from './Input.astro';
 
+/**
+ * An option in the select dropdown
+ */
 interface Option {
+    /**
+     * The label of the option.
+     */
 	label: string;
+    /**
+     * The value of the option.
+     */
 	value: string;
+    /**
+     * Whether the option is disabled.
+     */
 	disabled?: boolean;
 }
 
+/**
+ * The props for the search select component.
+ */
 interface Props {
+    /**
+     * The label of the search select.
+     */
 	label?: string;
+    /**
+     * The default value of the search select. Needs to be one of the values in the options.
+     */
 	defaultValue?: string;
+    /**
+     * Additional classes to apply to the search select.
+     */
 	class?: string;
+    /**
+     * The name of the search select.
+     */
 	name?: string;
+    /**
+     * Whether the search select is required. Defaults to `false`.
+     */
 	isRequired?: boolean;
+    /**
+     * The options to display in the search select.
+     */
 	options: Option[];
+    /**
+     * Whether the search select is disabled. Defaults to `false`.
+     */
 	disabled?: boolean;
+    /**
+     * Whether the search select should take up the full width of its container.
+     */
 	fullWidth?: boolean;
+    /**
+     * The placeholder of the search select.
+     */
 	placeholder?: string;
 }
 
@@ -38,6 +80,8 @@ const {
     id={`${name}-container`}
     class="sui-search-select-label"
     class:list={[disabled && "disabled", className, fullWidth && "full"]}
+    data-options={JSON.stringify(options)}
+    data-id={name}
 >
     <div class="sui-search-input-wrapper" id={`${name}-search-input-wrapper`}>
         <Input
@@ -70,7 +114,7 @@ const {
             ))
         }
     </ul>
-    <select class="sui-hidden-select" id={name} name={name} required={isRequired}>
+    <select class="sui-hidden-select" id={name} name={name} required={isRequired} hidden tabindex="-1">
         <option value={""}> Select </option>
         {
             options.map((x) => (
@@ -85,245 +129,249 @@ const {
         }
     </select>
 </div>
-<script is:inline define:vars={{ id: name, options, defaultValue }}>
-    const container = document.getElementById(`${id}-container`);
-    const hiddenSelect = document.getElementById(id);
-    const searchWrapper = document.getElementById(`${id}-search-input-wrapper`);
-    const searchInput = searchWrapper.querySelector('input');
-    const valueSpan = document.getElementById(`${id}-value-span`);
-    const dropdown = document.getElementById(`${id}-dropdown`);
-    let optionElements = container.querySelectorAll("li");
+<script>
+    interface Option {
+       label: string;
+       value: string;
+       disabled?: boolean;
+   }
+    // id: name, options, defaultValue
+    const searchSelects = document.querySelectorAll<HTMLDivElement>('.sui-search-select-label');
 
-    let active = false;
+    for (const container of searchSelects) {
+        const hiddenSelect = container.querySelector<HTMLSelectElement>('select')!;
+        const searchWrapper = container.querySelector<HTMLDivElement>(`.sui-search-input-wrapper`)!;
+        const searchInput = searchWrapper.querySelector('input')!;
+        const dropdown = container.querySelector(`.sui-search-select-dropdown`)!;
+        let optionElements = container.querySelectorAll("li");
 
-    let filteredOptions = options;
+        let active = false;
 
-    searchWrapper.addEventListener("click", () => {
-        const { bottom, left, right, width, x, y, height } = searchWrapper.getBoundingClientRect();
+        const options = JSON.parse(container.dataset.options!) as Option[];
+        const id = container.dataset.id!;
+        let filteredOptions = options;
 
-        const optionHeight = 36;
-        const totalBorderSize = 2;
-        const margin = 4;
+        searchWrapper.addEventListener("click", () => {
+            const { bottom, left, right, width, x, y, height } = searchWrapper.getBoundingClientRect();
 
-        const dropdownHeight = options.length * optionHeight + totalBorderSize + margin;
+            const optionHeight = 36;
+            const totalBorderSize = 2;
+            const margin = 4;
 
-        const CustomRect = {
-            top: bottom + margin,
-            left,
-            right,
-            bottom: bottom + margin + dropdownHeight,
-            width,
-            height: dropdownHeight,
-            x,
-            y: y + height + margin,
-        };
+            const dropdownHeight = options.length * optionHeight + totalBorderSize + margin;
 
-        if (active) {
-            searchInput.ariaExpanded = false;
-            dropdown.classList.remove("active", "above");
-            active = false;
-            return;
-        }
+            const CustomRect = {
+                top: bottom + margin,
+                left,
+                right,
+                bottom: bottom + margin + dropdownHeight,
+                width,
+                height: dropdownHeight,
+                x,
+                y: y + height + margin,
+            };
 
-        active = true;
-        searchInput.ariaExpanded = true;
-
-        if (
-            CustomRect.top >= 0 &&
-            CustomRect.left >= 0 &&
-            CustomRect.bottom <=
-                (window.innerHeight || document.documentElement.clientHeight) &&
-            CustomRect.right <=
-                (window.innerWidth || document.documentElement.clientWidth)
-        ) {
-            dropdown.classList.add("active");
-        } else {
-            dropdown.classList.add("active", "above");
-        }
-    });
-
-    const handleSelection = (e, option) => {
-        e.stopImmediatePropagation();
-        
-        if (option.id === `${id}-selected` || !id) return;
-
-        const currentlySelected = document.getElementById(`${id}-selected`);
-
-        if (currentlySelected) {
-            currentlySelected.classList.remove("selected");
-            currentlySelected.id = "";
-        }
-
-        option.id = `${id}-selected`;
-        option.classList.add("selected");
-
-        const index = options.findIndex((x) => x.value === option.dataset.value);
-        focusIndex = index;
-
-        const opt = options[index];
-        hiddenSelect.value = opt.value;
-
-        searchInput.placeholder = opt.label;
-        dropdown.classList.remove("active", "above");
-        searchInput.blur();
-
-        searchInput.value = "";
-        filteredOptions = options;
-        constructOptionsBasedOnOptions(options);
-
-        active = false;
-    }
-
-    optionElements.forEach((option) => {
-        option.addEventListener("click", (e) => handleSelection(e, option));
-    });
-
-    window.addEventListener("scroll", () => {
-        dropdown.classList.remove("active", "above");
-        active = false;
-    });
-
-    hideOnClickOutside(container);
-
-    function hideOnClickOutside(element) {
-        const outsideClickListener = (event) => {
-            if (
-                !element.contains(event.target) &&
-                isVisible(element) &&
-                active === true
-            ) {
-                // or use: event.target.closest(selector) === null
+            if (active) {
+                searchInput.ariaExpanded = 'false';
                 dropdown.classList.remove("active", "above");
                 active = false;
+                return;
             }
-        };
 
-        const removeClickListener = () => {
-            document.removeEventListener("click", outsideClickListener);
-        };
+            active = true;
+            searchInput.ariaExpanded = 'true';
 
-        document.addEventListener("click", outsideClickListener);
-    }
-
-    // source (2018-03-11): https://github.com/jquery/jquery/blob/master/src/css/hiddenVisibleSelectors.js
-    const isVisible = (elem) =>
-        !!elem &&
-        !!(
-            elem.offsetWidth ||
-            elem.offsetHeight ||
-            elem.getClientRects().length
-        );
-
-    let focusIndex = 0;
-
-    const recomputeOptions = () => {
-        for (const entry of optionElements) {
-            if (entry.dataset.optionIndex == focusIndex) {
-                entry.classList.add('focused');
+            if (
+                CustomRect.top >= 0 &&
+                CustomRect.left >= 0 &&
+                CustomRect.bottom <=
+                    (window.innerHeight || document.documentElement.clientHeight) &&
+                CustomRect.right <=
+                    (window.innerWidth || document.documentElement.clientWidth)
+            ) {
+                dropdown.classList.add("active");
             } else {
-                entry.classList.remove('focused');
+                dropdown.classList.add("active", "above");
             }
-        }
-    }
+        });
 
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === "Escape") {
-            e.preventDefault();
+        const handleSelection = (e: MouseEvent, option: HTMLLIElement) => {
             e.stopImmediatePropagation();
+            
+            if (option.id === `${id}-selected` || !id) return;
+
+            const currentlySelected = document.getElementById(`${id}-selected`);
+
+            if (currentlySelected) {
+                currentlySelected.classList.remove("selected");
+                currentlySelected.id = "";
+            }
+
+            option.id = `${id}-selected`;
+            option.classList.add("selected");
+
+            const index = options.findIndex((x) => x.value === option.dataset.value);
+            focusIndex = index;
+
+            const opt = options[index]!;
+            hiddenSelect.value = opt.value;
+
+            searchInput.placeholder = opt.label;
+            dropdown.classList.remove("active", "above");
+            // searchInput.blur();
+
+            searchInput.value = "";
+            filteredOptions = options;
+            constructOptionsBasedOnOptions(options);
 
             active = false;
+        }
+
+        optionElements.forEach((option) => {
+            option.addEventListener("click", (e) => handleSelection(e, option));
+        });
+
+        window.addEventListener("scroll", () => {
             dropdown.classList.remove("active", "above");
-            searchInput.blur();
-            
-            return;
+            active = false;
+        });
+
+        hideOnClickOutside(container);
+
+        function hideOnClickOutside(element: HTMLElement) {
+            const outsideClickListener = (event: MouseEvent) => {
+                if (
+                    !element.contains(event.target! as Element) &&
+                    isVisible(element) &&
+                    active === true
+                ) {
+                    // or use: event.target.closest(selector) === null
+                    dropdown.classList.remove("active", "above");
+                    active = false;
+                }
+            };
+
+            document.addEventListener("click", outsideClickListener);
         }
 
-        if (e.key === "ArrowUp" && focusIndex > 0) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
+        // source (2018-03-11): https://github.com/jquery/jquery/blob/master/src/css/hiddenVisibleSelectors.js
+        const isVisible = (elem: HTMLElement) =>
+            !!elem &&
+            !!(
+                elem.offsetWidth ||
+                elem.offsetHeight ||
+                elem.getClientRects().length
+            );
 
-            focusIndex--;
-            recomputeOptions();
+        let focusIndex = 0;
 
-            return;
-        }
-
-        if (e.key === "ArrowDown" && focusIndex + 1 < filteredOptions.filter(x => !x.disabled).length) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-
-            focusIndex++;
-            recomputeOptions();
-
-            return;
-        }
-
-        if (e.key === "Enter") {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-
-            console.log(optionElements, focusIndex);
-
+        const recomputeOptions = () => {
             for (const entry of optionElements) {
-                if (entry.dataset.optionIndex == focusIndex) {
-                    entry.click();
+                if (Number.parseInt(entry.dataset.optionIndex!) == focusIndex) {
+                    entry.classList.add('focused');
+                } else {
+                    entry.classList.remove('focused');
                 }
             }
-
-            return;
-        }
-    });
-
-    searchInput.addEventListener('keyup', (e) => {
-        if (["Enter", "ArrowUp", "ArrowDown"].includes(e.key)) return;
-
-        if (searchInput.value.trim().length === 0) {
-            constructOptionsBasedOnOptions(options);
-            filteredOptions = options;
-            return;
-        };
-
-        filteredOptions = options.filter(x => x.label.includes(searchInput.value));
-        focusIndex = 0;
-
-        constructOptionsBasedOnOptions(filteredOptions);
-    });
-
-    function constructOptionsBasedOnOptions(options) {
-        dropdown.innerHTML = '';
-
-        if (options.length === 0) {
-            const element = document.createElement('li');
-            element.classList.add('empty-search-results');
-            element.textContent = "No results found.";
-
-            dropdown.appendChild(element);
         }
 
-        let i = 0;
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") {
+                e.preventDefault();
+                e.stopImmediatePropagation();
 
-        for (const option of options) {
-            const element = document.createElement('li');
-            element.classList.add(...[
-                'sui-search-select-option', 
-                option.disabled && "disabled",
-                focusIndex === i && 'focused',
-            ].filter(Boolean));
-            element.role = "option";
-            element.value = option.value;
-            element.id = "";
-            element.dataset.optionIndex = i;
-            element.dataset.value = option.value;
-            element.textContent = option.label;
+                active = false;
+                dropdown.classList.remove("active", "above");
+                searchInput.blur();
+                
+                return;
+            }
 
-            element.addEventListener("click", (e) => handleSelection(e, element));
+            if (e.key === "ArrowUp" && focusIndex > 0) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
 
-            dropdown.appendChild(element);
+                focusIndex--;
+                recomputeOptions();
 
-            i++;
+                return;
+            }
+
+            if (e.key === "ArrowDown" && focusIndex + 1 < filteredOptions.filter(x => !x.disabled).length) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                focusIndex++;
+                recomputeOptions();
+
+                return;
+            }
+
+            if (e.key === "Enter") {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                for (const entry of optionElements) {
+                    if (Number.parseInt(entry.dataset.optionIndex!) === focusIndex) {
+                        entry.click();
+                    }
+                }
+
+                return;
+            }
+        });
+
+        searchInput.addEventListener('keyup', (e) => {
+            if (["Enter", "ArrowUp", "ArrowDown"].includes(e.key)) return;
+
+            if (searchInput.value.trim().length === 0) {
+                constructOptionsBasedOnOptions(options);
+                filteredOptions = options;
+                return;
+            };
+
+            filteredOptions = options.filter(x => x.label.includes(searchInput.value));
+            focusIndex = 0;
+
+            constructOptionsBasedOnOptions(filteredOptions);
+        });
+
+        function constructOptionsBasedOnOptions(options: Option[]) {
+            dropdown.innerHTML = '';
+
+            if (options.length === 0) {
+                const element = document.createElement('li');
+                element.classList.add('empty-search-results');
+                element.textContent = "No results found.";
+
+                dropdown.appendChild(element);
+            }
+
+            let i = 0;
+
+            for (const option of options) {
+                const element = document.createElement('li');
+                element.classList.add(...[
+                    'sui-search-select-option', 
+                    option.disabled && "disabled",
+                    focusIndex === i && 'focused',
+                ].filter((x) => typeof x === 'string'));
+                element.role = "option";
+                element.value = Number.parseInt(option.value);
+                element.id = "";
+                element.dataset.optionIndex = i.toString();
+                element.dataset.value = option.value;
+                element.textContent = option.label;
+
+                element.addEventListener("click", (e) => handleSelection(e, element));
+
+                dropdown.appendChild(element);
+
+                i++;
+            }
+
+            optionElements = container.querySelectorAll("li");
         }
-
-        optionElements = container.querySelectorAll("li");
     }
 </script>
 <style is:global>
@@ -418,10 +466,14 @@ const {
         cursor: pointer;
     }
 
+    .sui-search-input-wrapper input {
+        padding-right: 2.5rem;
+    }
+
     .sui-search-select-indicator {
         position: absolute;
-        bottom: .75rem;
-        right: .75rem;
+        bottom: .675rem;
+        right: .675rem;
     }
 
     .sui-search-input-wrapper:has(input:focus) + .sui-search-select-dropdown {

@@ -34,11 +34,11 @@ A dropdown component that takes care of all the annoying bits for you, with adde
     import { Modal, Button } from '@studiocms/ui/components';
     ---
 
-    <Modal id="modal">
-      <h2 slot="header">Header Content</h2>
+    <Modal id='modal'>
+      <h2 slot='header'>Header Content</h2>
       <div>Modal Content</div>
     </Modal>
-    <Button color="primary" id="modal-trigger">
+    <Button color='primary' id='modal-trigger'>
       Trigger Modal
     </Button>
     ```
@@ -96,20 +96,20 @@ You can change the modal's size to one of three presets.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro /size="[a-z]+"/ showLinenumbers title="ModalSizesExample.astro"
+    ```astro /size='[a-z]+'/ showLinenumbers title="ModalSizesExample.astro"
     ---
     import { Modal, Button } from '@studiocms/ui/components';
     ---
 
-    <Modal id="modal" size="sm">
-      <h2 slot="header">Small Modal</h2>
+    <Modal id='modal' size='sm'>
+      <h2 slot='header'>Small Modal</h2>
       <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
-          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
-          aliquam nam consectetur dolorum et unde optio At delectus alias.
+        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+        nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+        aliquam nam consectetur dolorum et unde optio At delectus alias.
       </div>
     </Modal>
-    <Button color="primary" id="modal-trigger">
+    <Button color='primary' id='modal-trigger'>
       Small
     </Button>
 
@@ -150,15 +150,15 @@ You can change whether a modal can be dismissed by clicking outside of it via th
     import { Modal, Button } from '@studiocms/ui/components';
     ---
 
-    <Modal id="modal" dismissable={false}>
-      <h2 slot="header">Non-dismissable</h2>
+    <Modal id='modal' dismissable={false}>
+      <h2 slot='header'>Non-dismissable</h2>
       <div>
         Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
         nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
         aliquam nam consectetur dolorum et unde optio At delectus alias.
       </div>
     </Modal>
-    <Button color="primary" id="modal-trigger">
+    <Button color='primary' id='modal-trigger'>
       Non-Dismissable
     </Button>
     ```
@@ -199,15 +199,15 @@ Modals support both a "cancel" and a "confirm" button.
     import { Modal, Button } from '@studiocms/ui/components';
     ---
 
-    <Modal id="modal" cancelButton="Cancel" actionButton="Confirm">
-      <h2 slot="header">Buttons</h2>
+    <Modal id='modal' cancelButton='Cancel' actionButton='Confirm'>
+      <h2 slot='header'>Buttons</h2>
       <div>
-          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
-          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
-          aliquam nam consectetur dolorum et unde optio At delectus alias.
+        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+        nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+        aliquam nam consectetur dolorum et unde optio At delectus alias.
       </div>
     </Modal>
-    <Button color="primary" id="modal-trigger">
+    <Button color='primary' id='modal-trigger'>
       Buttons
     </Button>
     ```
@@ -229,18 +229,18 @@ import { Modal, Button } from '@studiocms/ui/components';
 ---
 
 <Modal
-  id="modal"
+  id='modal'
   cancelButton={{ label: 'Cancel', color: 'default' }}
   actionButton={{ label: 'Confirm', color: 'danger' }}
 >
-  <h2 slot="header">Buttons</h2>
+  <h2 slot='header'>Buttons</h2>
   <div>
     Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
     nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
     aliquam nam consectetur dolorum et unde optio At delectus alias.
   </div>
 </Modal>
-<Button color="primary" id="modal-trigger">
+<Button color='primary' id='modal-trigger'>
   Buttons
 </Button>
 ```

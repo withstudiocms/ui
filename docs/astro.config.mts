@@ -1,7 +1,6 @@
 import starlight from '@astrojs/starlight';
 import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
 import { defineConfig, envField } from 'astro/config';
-import starlightImageZoom from 'starlight-image-zoom';
 import rehypePluginKit from './src/plugins/rehypePluginKit';
 
 // Define the Site URL
@@ -63,7 +62,7 @@ export default defineConfig({
 			defaultLocale: 'root',
 			locales,
 			social: {
-				github: 'https://github.com/withstudiocms/studiocms',
+				github: 'https://github.com/withstudiocms/ui',
 				discord: 'https://chat.studiocms.dev',
 				youtube: 'https://www.youtube.com/@StudioCMS',
 				'x.com': 'https://x.com/withstudiocms',
@@ -91,14 +90,14 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: {
 						property: 'og:image',
-						content: `${site}og.jpg?v=1`,
+						content: `${site}og.png?v=1`,
 					},
 				},
 				{
 					tag: 'meta',
 					attrs: {
 						property: 'twitter:image',
-						content: `${site}og.jpg?v=1`,
+						content: `${site}og.png?v=1`,
 					},
 				},
 				{
@@ -159,6 +158,10 @@ export default defineConfig({
 						{
 							label: 'Installation',
 							link: 'docs/',
+							badge: {
+								text: 'Updated!',
+								variant: 'success',
+							}
 						},
 						{
 							label: 'Release Notes',
@@ -171,14 +174,27 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Upgrade Guides',
+					autogenerate: {
+						directory: 'docs/upgrade-guides',
+						collapsed: true,
+					},
+				},
+				{
 					label: 'Components',
 					autogenerate: {
 						directory: 'docs/components',
 						collapsed: true,
 					},
 				},
+				{
+					label: 'Utilities',
+					autogenerate: {
+						directory: 'docs/utilities',
+						collapsed: true,
+					},
+				},
 			],
-			plugins: [starlightImageZoom()],
 		}),
 	],
 });

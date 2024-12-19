@@ -24,7 +24,7 @@ A component to display user info.
     import { User } from '@studiocms/ui/components';
     ---
 
-    <User name="John Doe" description="A cool dude" />
+    <User name='John Doe' description='A cool dude' />
     ```
   </TabItem>
 </Tabs>
@@ -41,13 +41,13 @@ To change the loading behavior, you can pass the `loading` attribute. It is pass
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "avatar={ProfileImage}" showLinenumbers title="UserAvatarExample.astro"
+    ```astro "avatar={ProfileImage}" "loading='eager'" showLinenumbers title="UserAvatarExample.astro"
     ---
     import { User } from '@studiocms/ui/components';
     import ProfileImage from '~/assets/profile.png'
     ---
 
-    <User name="John Doe" loading='eager' description="A cool dude" avatar={ProfileImage} />
+    <User name='John Doe' loading='eager' description='A cool dude' avatar={ProfileImage} />
     ```
   </TabItem>
 </Tabs>

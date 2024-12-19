@@ -3,21 +3,63 @@ import Icon from '../../utils/Icon.astro';
 import type { StudioCMSColorway } from '../../utils/colors';
 import type { HeroIconName } from '../../utils/iconType';
 
+/**
+ * An option in the dropdown.
+ */
 interface Option {
+  /**
+   * The label of the option.
+   */
 	label: string;
+  /**
+   * The value of the option, returned by the helper when listened for.
+   */
 	value: string;
+  /**
+   * Whether the option is disabled.
+   */
 	disabled?: boolean;
+  /**
+   * The color of the option.
+   */
 	color?: StudioCMSColorway;
+  /**
+   * The icon to display next to the option.
+   */
 	icon?: HeroIconName;
+  /**
+   * The href to link to when the option is clicked. When given, the option will be rendered as an anchor tag.
+   */
 	href?: string;
 }
 
+/**
+ * The props for the Dropdown component.
+ */
 interface Props {
+  /**
+   * The options to display in the dropdown.
+   */
 	options: Option[];
+  /**
+   * Whether the dropdown is disabled.
+   */
 	disabled?: boolean;
+  /**
+   * The ID of the dropdown. Required because of the helper.
+   */
 	id: string;
+  /**
+   * The alignment of the dropdown, defaults to `center`. Will not work on mobile due to size constraints.
+   */
 	align?: 'start' | 'center' | 'end';
+  /**
+   * The type of click with which the dropdown is clicked. Defaults to `left`.
+   */
 	triggerOn?: 'left' | 'right' | 'both';
+  /**
+   * The offset of the dropdown from the trigger element in pixels.
+   */
 	offset?: number;
 }
 
@@ -42,12 +84,21 @@ const {
   <div class="sui-dropdown-toggle" id={`${id}-toggle-btn`}>
     <slot />
   </div>
-  <ul class="sui-dropdown" class:list={[align]} role="listbox" id={`${id}-dropdown`} transition:persist transition:persist-props>
+  <ul 
+    class="sui-dropdown" 
+    class:list={[align]}
+    role="listbox" id={`${id}-dropdown`} 
+    transition:persist
+    transition:persist-props
+    aria-labelledby={`${id}-toggle-btn`}
+  >
     {options.map(({ value, disabled, color, label, icon, href }) => (
       <li
         class="sui-dropdown-option"
         data-value={value}
         class:list={[disabled && "disabled", icon && "has-icon", color, href && "has-href"]}
+        role="option"
+        aria-selected="false"
       >
         {icon && (
           <Icon width={24} height={24} name={icon} />
@@ -197,7 +248,7 @@ const {
     user-select: none;
   }
 
-  .sui-dropdown-option:hover {
+  .sui-dropdown-option:hover, .sui-dropdown-option:focus, .sui-dropdown-option.focused {
     background-color: hsl(var(--background-step-3));
   }
 
@@ -208,6 +259,8 @@ const {
   .sui-dropdown-link {
     padding: .5rem .75rem;
     width: 100%;
+    text-decoration: none;
+    color: hsl(var(--text-normal));
   }
 
   .sui-dropdown-option.primary {

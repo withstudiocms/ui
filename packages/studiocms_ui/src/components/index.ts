@@ -16,6 +16,7 @@ export { default as Dropdown } from './Dropdown/Dropdown.astro';
 export { default as User } from './User.astro';
 export { default as ThemeToggle } from './ThemeToggle.astro';
 export { default as Footer } from './Footer.astro';
+export { Tabs, TabItem } from './Tabs/index';
 
 export { default as Sidebar } from './Sidebar/Single.astro';
 export { default as DoubleSidebar } from './Sidebar/Double.astro';

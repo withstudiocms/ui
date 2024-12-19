@@ -1,5 +1,6 @@
 import node from '@astrojs/node';
 import sentry from '@sentry/astro';
+import ui from '@studiocms/ui';
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
@@ -9,6 +10,7 @@ export default defineConfig({
 		mode: 'standalone',
 	}),
 	integrations: [
+		ui(),
 		sentry({
 			dsn: 'https://0f2693e5cc4590650ad844d6ad3f973f@sentry.studiocms.dev/3',
 			sourceMapsUploadOptions: {

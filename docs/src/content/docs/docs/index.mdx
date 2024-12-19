@@ -10,24 +10,46 @@ integration:
 
 import { PackageManagers } from 'starlight-package-managers'
 
+:::danger[Accessibility]
+`@studiocms/ui` has not yet been audited for accessibility. You can track our progress in our [accessibility issue tracker](https://github.com/withstudiocms/ui/issues/19) on GitHub.
+:::
+
 `@studiocms/ui` is the UI library that we use to build StudioCMS. The library is agnostic, meaning that you can use it
 in your own Astro projects! 
 
-You can install it from npm:
+To get started, add the integration to your project.
+
+<PackageManagers type="exec" pkg="astro add @studiocms/ui" />
+
+<details>
+<summary>Using `@studiocms/ui` with Astro 4</summary>
+
+StudioCMS UI can be used in Astro 5 without any additional configuration. As for Astro v4, `@studiocms/ui` requires version `v4.5.0` or higher, with the 
+`experimental.directRenderScript` flag turned on.
+</details>
+
+## Manual Installation
+
+Install the `@studiocms/ui` package with your preferred package manager.
 
 <PackageManagers type="add" pkg="@studiocms/ui" />
 
-All of these components can be tested in our [UI playground](https://ui-testing.studiocms.dev/) or on the docs right here.
+Import and use the `@studiocms/ui` integration in your Astro config.
 
-:::note
-StudioCMS UI can be used in Astro v5 without any issues. As for Astro v4, we require version `v4.5.0` or higher, with the 
-`experimental.directRenderScript` flag turned on. The library might still work with older versions, however we haven't tested 
-them and thus cannot guarantee that it works in those versions.
-:::
+```ts showLinenumbers title="astro.config.mjs" {2,6}
+import { defineConfig } from 'astro/config';
+import ui from '@studiocms/ui';
+
+export default defineConfig({
+  integrations: [
+    ui()
+  ]
+});
+```
 
 ## Importing Components
 
-All components this library are exported from `@studiocms/ui/components`. You can import and use the components like this:
+All components in this library are exported from `@studiocms/ui/components`. You can import and use the components like this:
 
 ```astro showLinenumbers title="ButtonExample.astro"
 ---
@@ -37,18 +59,40 @@ import { Button } from '@studiocms/ui/components';
 <Button />
 ```
 
-Include the styles by importing `@studiocms/ui/css/global.css` in your page layout.
+## Using `@studiocms/ui` with Tailwind
 
-```astro showLinenumbers title="Layout.astro"
----
-import '@studiocms/ui/css/global.css';
----
+If you haven't already, add Astro's Tailwind integration to your project.
+
+<PackageManagers type="exec" pkg="astro add tailwind" />
+
+Disable [Tailwind's preflight](https://tailwindcss.com/docs/preflight) styles with `applyBaseStyles: false`.
+
+```ts showLinenumbers title="astro.config.mjs" "applyBaseStyles: false"
+import { defineConfig } from 'astro/config';
+import ui from '@studiocms/ui';
+
+export default defineConfig({
+  integrations: [
+    ui(),
+    tailwind({ applyBaseStyles: false })
+  ]
+});
 ```
 
-:::danger[About Accessibility]
-As of right now, `@studiocms/ui` is nowhere near being accessible. We are still missing crucial support for keyboard navigation,
-screen readers etc. This is by design, as although this library is publicly accessible, we still focus on building StudioCMS with it.
+Create a CSS file for Tailwind's base styles. For example `src/styles/tailwind.css`.
 
-We will add support for keyboard navigation and screenreaders at a later time, once we perform the planned accessibility audit for StudioCMS.
-Should you however want to contribute, and add these features yourself, feel free to!
-:::
+```css showLinenumbers title="src/styles/tailwind.css"
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Import this CSS file in any layout or page that uses Tailwind.
+
+```astro showLinenumbers title="src/layouts/Base.astro"
+---
+import '../styles/tailwind.css';
+
+// ...
+---
+```
