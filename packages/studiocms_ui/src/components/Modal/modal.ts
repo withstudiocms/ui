@@ -130,7 +130,7 @@ class ModalHelper {
 
 	/**
 	 * Registers a callback for the confirm button.
-	 * @param func The callback function. If the modal is a form, the function will be called with 
+	 * @param func The callback function. If the modal is a form, the function will be called with
 	 * the form data as the first argument.
 	 */
 	public registerConfirmCallback = (func: (data?: FormData | undefined) => void) => {

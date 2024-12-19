@@ -92,7 +92,7 @@ class DropdownHelper {
 				if (!focused) {
 					this.hide();
 					return;
-				};
+				}
 
 				focused.click();
 			}
@@ -100,13 +100,15 @@ class DropdownHelper {
 			if (e.key === 'ArrowDown') {
 				e.preventDefault();
 
-				this.focusIndex = this.focusIndex === this.dropdown.children.length - 1 ? 0 : this.focusIndex + 1;
+				this.focusIndex =
+					this.focusIndex === this.dropdown.children.length - 1 ? 0 : this.focusIndex + 1;
 			}
 
 			if (e.key === 'ArrowUp') {
 				e.preventDefault();
 
-				this.focusIndex = this.focusIndex === 0 ? this.dropdown.children.length - 1 : this.focusIndex - 1;
+				this.focusIndex =
+					this.focusIndex === 0 ? this.dropdown.children.length - 1 : this.focusIndex - 1;
 			}
 
 			if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
@@ -124,8 +126,8 @@ class DropdownHelper {
 				newFocus.focus();
 			}
 		});
-	}
-	
+	};
+
 	/**
 	 * Registers callbacks to hide the dropdown when an option is clicked.
 	 */
@@ -156,7 +158,7 @@ class DropdownHelper {
 		this.dropdown.classList.remove('active');
 		this.active = false;
 		this.focusIndex = -1;
-		
+
 		this.dropdown.querySelector('li.focused')?.classList.remove('focused');
 
 		setTimeout(() => this.dropdown.classList.remove('above', 'below'), 200);

@@ -1,9 +1,9 @@
-import { dirname, resolve } from "node:path"; // Swapped out pathe for node:path to cut down on dependencies
-import { fileURLToPath } from "node:url";
+import { dirname, resolve } from 'node:path'; // Swapped out pathe for node:path to cut down on dependencies
+import { fileURLToPath } from 'node:url';
 
 /**
  * From the Astro Integration Kit (https://astro-integration-kit.netlify.app/).
- * 
+ *
  * Allows resolving paths relatively to the integration folder easily. Call it like this:
  *
  * @param {string} _base - The location you want to create relative references from. `import.meta.url` is usually what you'll want.
@@ -20,7 +20,7 @@ import { fileURLToPath } from "node:url";
  */
 export const createResolver = (_base: string) => {
 	let base = _base;
-	if (base.startsWith("file://")) {
+	if (base.startsWith('file://')) {
 		base = dirname(fileURLToPath(base));
 	}
 

@@ -6,17 +6,17 @@ import { generateID } from '../utils/generateID';
  * The props for the RadioGroup component.
  */
 interface Option {
-  /**
-   * The label of the option.
-   */
+	/**
+	 * The label of the option.
+	 */
 	label: string;
-  /**
-   * The value of the option.
-   */
+	/**
+	 * The value of the option.
+	 */
 	value: string;
-  /**
-   * Whether the option is disabled.
-   */
+	/**
+	 * Whether the option is disabled.
+	 */
 	disabled?: boolean;
 }
 
@@ -24,41 +24,41 @@ interface Option {
  * The props for the RadioGroup component.
  */
 interface Props {
-  /**
-   * The label of the radio group.
-   */
+	/**
+	 * The label of the radio group.
+	 */
 	label: string;
-  /**
-   * The color of the radio group. Defaults to `default`.
-   */
+	/**
+	 * The color of the radio group. Defaults to `default`.
+	 */
 	color?: StudioCMSColorway;
-  /**
-   * The default value of the radio group. Needs to be one of the values in the options.
-   */
+	/**
+	 * The default value of the radio group. Needs to be one of the values in the options.
+	 */
 	defaultValue?: string;
-  /**
-   * The options to display in the radio group.
-   */
+	/**
+	 * The options to display in the radio group.
+	 */
 	options: Option[];
-  /**
-   * Whether the radio group is disabled. Defaults to `false`.
-   */
+	/**
+	 * Whether the radio group is disabled. Defaults to `false`.
+	 */
 	disabled?: boolean;
-  /**
-   * The name of the radio group.
-   */
+	/**
+	 * The name of the radio group.
+	 */
 	name?: string;
-  /**
-   * Whether the radio group is required. Defaults to `false`.
-   */
+	/**
+	 * Whether the radio group is required. Defaults to `false`.
+	 */
 	isRequired?: boolean;
-  /**
-   * Whether the radio group is horizontal. Defaults to `false`.
-   */
+	/**
+	 * Whether the radio group is horizontal. Defaults to `false`.
+	 */
 	horizontal?: boolean;
-  /**
-   * Additional classes to apply to the radio group.
-   */
+	/**
+	 * Additional classes to apply to the radio group.
+	 */
 	class?: string;
 }
 

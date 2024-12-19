@@ -5,99 +5,99 @@ import { generateID } from '../../utils/generateID';
 import type { HeroIconName } from '../../utils/iconType';
 
 interface Tab {
-  icon?: HeroIconName;
-  label: string;
-  color: Exclude<StudioCMSColorway, 'default'>;
-  tabId: string;
+	icon?: HeroIconName;
+	label: string;
+	color: Exclude<StudioCMSColorway, 'default'>;
+	tabId: string;
 }
 
 /**
  * The props for the Tabs component.
  */
 interface Props {
-  /**
-   * The sync key for the tabs. If provided, the active tab will be synced across all instances of the tabs with the same sync key.
-   * Additionally, the active tab will be stored session- or local storage depending on the `storage` prop.
-   */
-  syncKey?: string;
-  /**
-   * The storage type for the tabs. Defaults to `session`.
-   */
-  storage?: 'session' | 'persistent';
-  /**
-   * The variant of the tabs. Defaults to `default`.
-   */
-  variant?: 'default' | 'starlight';
-  /**
-   * The alignment of the tabs. Defaults to `left`.
-   */
-  align?: 'left' | 'center' | 'right';
+	/**
+	 * The sync key for the tabs. If provided, the active tab will be synced across all instances of the tabs with the same sync key.
+	 * Additionally, the active tab will be stored session- or local storage depending on the `storage` prop.
+	 */
+	syncKey?: string;
+	/**
+	 * The storage type for the tabs. Defaults to `session`.
+	 */
+	storage?: 'session' | 'persistent';
+	/**
+	 * The variant of the tabs. Defaults to `default`.
+	 */
+	variant?: 'default' | 'starlight';
+	/**
+	 * The alignment of the tabs. Defaults to `left`.
+	 */
+	align?: 'left' | 'center' | 'right';
 }
 
 const extractTabInfoWithRegex = (input: string) => {
-  const tabItemRegex = /<sui-tab-item([^>]*)>/g;
+	const tabItemRegex = /<sui-tab-item([^>]*)>/g;
 
-  const attributeRegex = /data-([\w-]+)="([^"]*)"/g;
+	const attributeRegex = /data-([\w-]+)="([^"]*)"/g;
 
-  const tabs: Tab[] = [];
-  let tabMatch: RegExpExecArray | null;
+	const tabs: Tab[] = [];
+	let tabMatch: RegExpExecArray | null;
 
-  // biome-ignore lint/suspicious/noAssignInExpressions: Nop
-  while ((tabMatch = tabItemRegex.exec(input)) !== null) {
-    let attributes: { [key: string]: string } = {};
+	// biome-ignore lint/suspicious/noAssignInExpressions: Nop
+	while ((tabMatch = tabItemRegex.exec(input)) !== null) {
+		let attributes: { [key: string]: string } = {};
 
-    let attributeMatch: RegExpExecArray | null;
+		let attributeMatch: RegExpExecArray | null;
 
-    if (!tabMatch[1]) continue;
+		if (!tabMatch[1]) continue;
 
-    // biome-ignore lint/suspicious/noAssignInExpressions: Nop
-    while ((attributeMatch = attributeRegex.exec(tabMatch[1])) !== null) {
-      if (!attributeMatch[1] || !attributeMatch[2]) continue;
+		// biome-ignore lint/suspicious/noAssignInExpressions: Nop
+		while ((attributeMatch = attributeRegex.exec(tabMatch[1])) !== null) {
+			if (!attributeMatch[1] || !attributeMatch[2]) continue;
 
-      if (
-        attributeMatch[1] === 'icon' || 
-        attributeMatch[1] === 'label' || 
-        attributeMatch[1] === 'color'
-      ) {
-        attributes[attributeMatch[1]] = attributeMatch[2];
-      }
+			if (
+				attributeMatch[1] === 'icon' ||
+				attributeMatch[1] === 'label' ||
+				attributeMatch[1] === 'color'
+			) {
+				attributes[attributeMatch[1]] = attributeMatch[2];
+			}
 
-      if (attributeMatch[1] === 'tab-id') {
-        attributes.tabId = attributeMatch[2];
-      }
-    }
+			if (attributeMatch[1] === 'tab-id') {
+				attributes.tabId = attributeMatch[2];
+			}
+		}
 
-    tabs.push(attributes as unknown as Tab);
-  }
+		tabs.push(attributes as unknown as Tab);
+	}
 
-  return tabs;
+	return tabs;
 };
 
 const markTabAsActive = (tabId: string, html: string): string => {
-  if (!tabId) return html;
+	if (!tabId) return html;
 
-  const updatedHtml = html.replace(
-    new RegExp(`(<sui-tab-item[^>]*data-tab-id="${tabId}"[^>]*class=")([^"]*)(")`, 'g'),
-    '$1$2 active$3'
-  );
+	const updatedHtml = html.replace(
+		new RegExp(`(<sui-tab-item[^>]*data-tab-id="${tabId}"[^>]*class=")([^"]*)(")`, 'g'),
+		'$1$2 active$3'
+	);
 
-  return updatedHtml;
-}
+	return updatedHtml;
+};
 
 const uniqueId = generateID('sui-tabs-container');
 
-const { 
-  syncKey: originalSyncKey, 
-  storage = 'session', 
-  variant = 'default',
-  align = 'left'
+const {
+	syncKey: originalSyncKey,
+	storage = 'session',
+	variant = 'default',
+	align = 'left',
 } = Astro.props;
 
 const syncKey = originalSyncKey ? `sui-tabs-${originalSyncKey}` : undefined;
 
 const tabContents = await Astro.slots.render('default');
 const tabs = extractTabInfoWithRegex(tabContents);
-const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || "", tabContents);
+const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || '', tabContents);
 const containerId = generateID('sui-tabs-container');
 ---
 

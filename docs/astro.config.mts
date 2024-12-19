@@ -161,7 +161,7 @@ export default defineConfig({
 							badge: {
 								text: 'Updated!',
 								variant: 'success',
-							}
+							},
 						},
 						{
 							label: 'Release Notes',
