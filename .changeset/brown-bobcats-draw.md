@@ -2,8 +2,6 @@
 "@studiocms/ui": minor
 ---
 
-### The Accessibility Update
-
 This version of `@studiocms/ui` includes a lot of improvements to the documentation and components. The most important changes include the move to
 an integration-based system and a massive keyboard accessibility overhaul (thanks to [HiDeoo](https://github.com/HiDeoo) for the feedback on this)!
 
