@@ -21,7 +21,8 @@
     "astro-ui-library",
     "astro-components",
     "studiocms",
-    "ui-library"
+    "ui-library",
+    "astro-integration"
   ],
   "homepage": "https://ui.studiocms.dev",
   "publishConfig": {
@@ -42,8 +43,9 @@
     "./types": "./src/types/index.ts"
   },
   "dependencies": {
+    "@iconify-json/heroicons": "catalog:",
     "@iconify/utils": "catalog:",
-    "@iconify-json/heroicons": "catalog:"
+    "pathe": "catalog:"
   },
   "peerDependencies": {
     "astro": "catalog:peers"
