@@ -8,6 +8,10 @@ editUrl: false
 This document contains release notes for the `@studiocms/ui` package.
 For more information, see the [CHANGELOG file](https://github.com/withstudiocms/ui/blob/main/packages/studiocms_ui/CHANGELOG.md)
 
+## 0.3.1
+
+- [#27](https://github.com/withstudiocms/ui/pull/27) [`6b0b58f`](https://github.com/withstudiocms/ui/commit/6b0b58fbbe2a92d4bce7fa44c587164b8f2f53e5) Thanks [@louisescher](https://github.com/louisescher)! - Add pathe as a dependency to deal with path issues on Windows
+
 ## 0.3.0
 
 - [#18](https://github.com/withstudiocms/ui/pull/18) [`e471e11`](https://github.com/withstudiocms/ui/commit/e471e1129a30ff2a5b019366a8eb7bbbf2abb73e) Thanks [@louisescher](https://github.com/louisescher)! - The Accessibility Update
