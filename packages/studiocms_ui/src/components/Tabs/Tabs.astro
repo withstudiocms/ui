@@ -1,4 +1,5 @@
 ---
+import { AstroError } from 'astro/errors';
 import { Icon } from '../../utils';
 import type { StudioCMSColorway } from '../../utils/colors';
 import { generateID } from '../../utils/generateID';
@@ -83,10 +84,10 @@ const markTabAsActive = (tabId: string, html: string): string => {
       if (match.includes('class="')) {
         // If class attribute exists, add 'active' to the class attribute
         return match.replace(/(class="[^"]*)"/, '$1 active"');
-      } else {
-        // If class attribute does not exist, add it
-        return match.replace(/(<sui-tab-item[^>]*data-tab-id="[^"]*")/, '$1 class="active"');
       }
+
+      // If class attribute does not exist, add it
+      return match.replace(/(<sui-tab-item[^>]*data-tab-id="[^"]*")/, '$1 class="active"');
     }
     return match; // Return original if the tabId does not match
   });
@@ -102,6 +103,10 @@ const {
 	variant = 'default',
 	align = 'left',
 } = Astro.props;
+
+if (variant !== 'default' && variant !== 'starlight') {
+  throw new AstroError('Invalid variant provided. Must be either `default` or `starlight`.');
+}
 
 const syncKey = originalSyncKey ? `sui-tabs-${originalSyncKey}` : undefined;
 
