@@ -104,10 +104,6 @@ const {
 	align = 'left',
 } = Astro.props;
 
-if (variant !== 'default' && variant !== 'starlight') {
-  throw new AstroError('Invalid variant provided. Must be either `default` or `starlight`.');
-}
-
 const syncKey = originalSyncKey ? `sui-tabs-${originalSyncKey}` : undefined;
 
 const tabContents = await Astro.slots.render('default');
