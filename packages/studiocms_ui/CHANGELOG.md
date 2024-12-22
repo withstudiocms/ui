@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.3.2
+
+### Patch Changes
+
+- [#33](https://github.com/withstudiocms/ui/pull/33) [`58e223c`](https://github.com/withstudiocms/ui/commit/58e223c861321e95c8db064be67e28e4563b4ff3) Thanks [@louisescher](https://github.com/louisescher)! - Fix tabs not being displayed correctly & dividers displaying backgrounds for empty slots
+
 ## 0.3.1
 
 ### Patch Changes
