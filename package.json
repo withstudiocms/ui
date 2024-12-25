@@ -6,9 +6,6 @@
       "node": "20.14.0"
     },
     "scripts": {
-      "dev": "pnpm --filter ui-playground dev",
-      "playground:build": "pnpm --filter ui-playground build",
-      "playground:preview": "pnpm --filter ui-playground preview",
       "docs:dev": "pnpm --filter docs dev",
       "docs:build": "pnpm --filter docs build",
       "docs:preview": "pnpm --filter docs preview",

@@ -1,0 +1,79 @@
+---
+title: Breadcrumbs
+---
+
+import { Breadcrumbs } from '@studiocms/ui/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+
+A simple breadcrumb generator component! Used to indicate the current page's location within a navigational hierarchy.
+
+## Usage
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Breadcrumbs 
+        segments={[
+          { label: "Home", segment: "" },
+          { label: "Docs", segment: "docs" },
+          { label: "Components", segment: "components" },
+          { label: "Breadcrumbs", segment: "breadcrumbs" },
+        ]}
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="ButtonExample.astro"
+    ---
+    import { Breadcrumbs } from '@studiocms/ui/components';
+    ---
+
+    <Breadcrumbs 
+      segments={[
+        { label: "Home", segment: "" },
+        { label: "Docs", segment: "docs" },
+        { label: "Components", segment: "components" },
+        { label: "Breadcrumbs", segment: "breadcrumbs" },
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+### Changing the separator
+
+You can change the separator by passing a `separator` prop.
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Breadcrumbs 
+        segments={[
+          { label: "Home", segment: "" },
+          { label: "Docs", segment: "docs" },
+          { label: "Components", segment: "components" },
+          { label: "Breadcrumbs", segment: "breadcrumbs" },
+        ]}
+        separator="/"
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="ButtonExample.astro"
+    ---
+    import { Breadcrumbs } from '@studiocms/ui/components';
+    ---
+
+    <Breadcrumbs 
+      segments={[
+        { label: "Home", segment: "" },
+        { label: "Docs", segment: "docs" },
+        { label: "Components", segment: "components" },
+        { label: "Breadcrumbs", segment: "breadcrumbs" },
+      ]}
+      separator="/"
+    />
+    ```
+  </TabItem>
+</Tabs>

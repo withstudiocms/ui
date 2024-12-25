@@ -1,0 +1,100 @@
+.sui-toggle-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .5rem;
+  position: relative;
+  margin: .25rem 0;
+}
+
+.sui-toggle-label.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  color: hsl(var(--text-muted));
+}
+
+.sui-toggle-label:active .sui-toggle-switch {
+  transform: scale(0.85);
+}
+
+.sui-toggle-container {
+  --toggle-height: 12px;
+  --toggle-width: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all .15s ease;
+  background-color: hsl(var(--default-base));
+  width: var(--toggle-width);
+  height: var(--toggle-height);
+  border-radius: var(--toggle-height);
+}
+
+.sui-toggle-switch {
+  --switch: calc(var(--toggle-height) * 1.75);
+  height: var(--switch);
+  width: var(--switch);
+  background-color: hsl(var(--text-muted));
+  border-radius: var(--toggle-height);
+  position: relative;
+  left: 0;
+  transition: all .15s ease;
+  will-change: transform;
+}
+
+.sui-toggle-switch:focus-visible {
+  outline: 2px solid hsl(var(--text-normal));
+  outline-offset: 2px;
+}
+
+.sui-toggle-container:has(.sui-toggle-checkbox:checked) .sui-toggle-switch {
+  left: calc(100% - var(--switch));
+  background-color: hsl(var(--text-normal));
+}
+
+.sui-toggle-label.sm .sui-toggle-container {
+  --toggle-height: 10px;
+  --toggle-width: 32px;
+}
+
+.sui-toggle-label.sm .sui-toggle-switch {
+  --switch: calc(var(--toggle-height) * 1.65);
+}
+
+.sui-toggle-label.lg .sui-toggle-container {
+  --toggle-height: 16px;
+  --toggle-width: 48px;
+}
+
+.sui-toggle-label.lg .sui-toggle-switch {
+  --switch: calc(var(--toggle-height) * 1.65);
+}
+
+.sui-toggle-label.primary .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
+  background-color: hsl(var(--primary-base));
+}
+
+.sui-toggle-label.success .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
+  background-color: hsl(var(--success-base));
+}
+
+.sui-toggle-label.warning .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
+  background-color: hsl(var(--warning-base));
+}
+
+.sui-toggle-label.danger .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
+  background-color: hsl(var(--danger-base));
+}
+
+.req-star {
+  color: hsl(var(--danger-base));
+  font-weight: 700;
+}
+
+.sui-toggle-checkbox {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  margin: 0;
+}

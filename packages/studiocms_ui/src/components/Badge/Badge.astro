@@ -1,0 +1,19 @@
+---
+import type { StudioCMSColorway } from 'src/utils/colors';
+import './badge.css';
+import type { HeroIconName } from 'src/utils/iconType';
+import Icon from '../../utils/Icon.astro';
+
+interface Props {
+  color?: StudioCMSColorway;
+  icon?: HeroIconName;
+  label: string;
+}
+
+const { color, icon, label } = Astro.props;
+---
+
+<span class="sui-badge" class:list={[color]}>
+  {icon && <Icon name={icon} />}
+  {label}
+</span>

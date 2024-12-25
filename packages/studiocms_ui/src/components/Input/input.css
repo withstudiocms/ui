@@ -1,0 +1,45 @@
+.sui-input-label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.sui-input-label.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  color: hsl(var(--text-muted));
+}
+
+.label {
+  font-size: 14px;
+}
+
+.sui-input {
+  padding: .5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background-step-2));
+  color: hsl(var(--text-normal));
+  transition: all .15s ease;
+}
+
+.sui-input:hover {
+  background: hsl(var(--background-step-3));
+}
+
+.sui-input:active,
+.sui-input:focus {
+  border: 1px solid hsl(var(--primary-base));
+  outline: none;
+  background: hsl(var(--background-step-2));
+}
+
+.disabled .sui-input:active {
+  border: 1px solid hsl(var(--border));
+}
+
+.req-star {
+  color: hsl(var(--danger-base));
+  font-weight: 700;
+}

@@ -1,0 +1,58 @@
+.sui-textarea-label {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  max-width: 80ch;
+}
+
+.sui-textarea-label.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  color: hsl(var(--text-muted));
+}
+
+.sui-textarea-label.full-width {
+  width: 100%;
+  max-width: none;
+}
+
+.sui-textarea-label.full-height {
+  height: 100%;
+}
+
+.label {
+  font-size: 14px;
+}
+
+.sui-textarea {
+  padding: .65rem;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background-step-2));
+  color: hsl(var(--text-normal));
+  transition: all .15s ease;
+  resize: none;
+  min-height: 12ch;
+  width: 100%;
+  height: 100%;
+}
+
+.sui-textarea:hover {
+  background: hsl(var(--background-step-3));
+}
+
+.resize .sui-textarea {
+  resize: both;
+}
+
+.sui-textarea:active,
+.sui-textarea:focus {
+  border: 1px solid hsl(var(--primary-base));
+  outline: none;
+  background: hsl(var(--background-step-2));
+}
+
+.req-star {
+  color: hsl(var(--danger-base));
+  font-weight: 700;
+}

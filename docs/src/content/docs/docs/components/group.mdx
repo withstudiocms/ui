@@ -1,0 +1,40 @@
+---
+title: Group
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Group, Button } from '@studiocms/ui/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+
+Lol, group component
+
+## Usage
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Group>
+        <Button>Button 1</Button>
+        <Button>Button 2</Button>
+        <Button>Button 3</Button>
+      </Group>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="ButtonExample.astro"
+    ---
+    import { Group, Button } from '@studiocms/ui/components';
+    ---
+
+    <Group>
+      <Button>Button 1</Button>
+      <Button>Button 2</Button>
+      <Button>Button 3</Button>
+    </Group>
+    ```
+  </TabItem>
+</Tabs>

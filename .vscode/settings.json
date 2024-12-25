@@ -8,6 +8,7 @@
   "editor.gotoLocation.multipleDefinitions": "goto",
   "cSpell.words": [
     "astrojs",
+    "checkmark",
     "createtoast",
     "dismissable",
     "Eleventy",
@@ -19,8 +20,11 @@
     "Matthiesen",
     "onest",
     "pathe",
+    "polyline",
+    "searchselect",
     "socialproof",
     "studiocms",
+    "themetoggle",
     "Thum",
     "tsconfigs",
     "withstudiocms"

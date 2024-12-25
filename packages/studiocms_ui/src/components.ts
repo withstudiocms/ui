@@ -17,6 +17,8 @@ export { User } from './components/index';
 export { ThemeToggle } from './components/index';
 export { Footer } from './components/index';
 export { Tabs, TabItem } from './components/index';
+export { Breadcrumbs } from './components/index';
+export { Group } from './components/index';
 
 export {
 	Sidebar,

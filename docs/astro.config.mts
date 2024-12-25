@@ -158,10 +158,6 @@ export default defineConfig({
 						{
 							label: 'Installation',
 							link: 'docs/',
-							badge: {
-								text: 'Updated!',
-								variant: 'success',
-							},
 						},
 						{
 							label: 'Release Notes',

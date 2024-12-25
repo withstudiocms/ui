@@ -1,0 +1,122 @@
+---
+import type { StudioCMSColorway } from '../../utils/colors';
+import { generateID } from '../../utils/generateID';
+import './radiogroup.css';
+
+/**
+ * The props for the RadioGroup component.
+ */
+interface Option {
+	/**
+	 * The label of the option.
+	 */
+	label: string;
+	/**
+	 * The value of the option.
+	 */
+	value: string;
+	/**
+	 * Whether the option is disabled.
+	 */
+	disabled?: boolean;
+}
+
+/**
+ * The props for the RadioGroup component.
+ */
+interface Props {
+	/**
+	 * The label of the radio group.
+	 */
+	label: string;
+	/**
+	 * The color of the radio group. Defaults to `default`.
+	 */
+	color?: StudioCMSColorway;
+	/**
+	 * The default value of the radio group. Needs to be one of the values in the options.
+	 */
+	defaultValue?: string;
+	/**
+	 * The options to display in the radio group.
+	 */
+	options: Option[];
+	/**
+	 * Whether the radio group is disabled. Defaults to `false`.
+	 */
+	disabled?: boolean;
+	/**
+	 * The name of the radio group.
+	 */
+	name?: string;
+	/**
+	 * Whether the radio group is required. Defaults to `false`.
+	 */
+	isRequired?: boolean;
+	/**
+	 * Whether the radio group is horizontal. Defaults to `false`.
+	 */
+	horizontal?: boolean;
+	/**
+	 * Additional classes to apply to the radio group.
+	 */
+	class?: string;
+}
+
+const {
+	label,
+	color = 'default',
+	defaultValue,
+	options,
+	disabled = false,
+	isRequired = false,
+	horizontal = false,
+	name = generateID('radio'),
+	class: className,
+} = Astro.props;
+---
+
+<div 
+  class="sui-radio-container"
+  class:list={[
+    disabled && "disabled",
+    horizontal && "horizontal",
+    color,
+    className
+  ]}
+>
+  <span>
+    {label} <span class="req-star">{isRequired && "*"}</span>
+  </span>
+  <div class="sui-radio-inputs" role="radiogroup">
+    {options.map(({ label, value, disabled: individuallyDisabled }, i) => (
+      <label
+        for={value}
+        class="sui-radio-label"
+        class:list={[ individuallyDisabled && "disabled" ]}
+      >
+        <div class="sui-radio-box-container">
+          <div 
+            class="sui-radio-box" 
+            role="radio" 
+            tabindex={i === 0 ? 0 : -1} 
+            aria-checked={value === defaultValue}
+            aria-label={label}
+          />
+        </div>
+        <input 
+          class="sui-radio-toggle"
+          type="radio" 
+          value={value} 
+          id={value} 
+          name={name} 
+          checked={value === defaultValue} 
+          disabled={disabled || individuallyDisabled}
+          required={isRequired}
+        />
+        <span>{label}</span>
+      </label>
+    ))}
+  </div>
+</div>
+<script src="./radiogroup.ts" />
