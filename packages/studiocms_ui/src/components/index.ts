@@ -28,3 +28,4 @@ export { DropdownHelper } from './Dropdown/dropdown';
 
 export { default as Breadcrumbs } from './Breadcrumbs/Breadcrumbs.astro';
 export { default as Group } from './Group/Group.astro';
+export { default as Badge } from './Badge/Badge.astro';

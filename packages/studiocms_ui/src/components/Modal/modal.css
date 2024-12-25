@@ -1,6 +1,6 @@
 .sui-modal {
   border: 1px solid hsl(var(--border));
-  border-radius: .5rem;
+  border-radius: var(--radius-md);
   padding: 1.5rem;
   box-shadow: 0px 6px 8px hsl(var(--shadow));
   animation: hide .25s ease;
@@ -57,7 +57,7 @@ body:has(.sui-modal[open]) {
   align-items: center;
   justify-content: center;
   transition: background-color .15s ease;
-  border-radius: .25rem;
+  border-radius: var(--radius-sm);;
 }
 
 .x-mark-container:hover {

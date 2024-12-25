@@ -1,7 +1,7 @@
 .sui-card {
   border: 1px solid hsl(var(--border));
   background-color: hsl(var(--background-base));
-  border-radius: .5rem;
+  border-radius: var(--radius-md);
   width: fit-content;
   height: fit-content;
 }

@@ -19,6 +19,7 @@ export { Footer } from './components/index';
 export { Tabs, TabItem } from './components/index';
 export { Breadcrumbs } from './components/index';
 export { Group } from './components/index';
+export { Badge } from './components/index';
 
 export {
 	Sidebar,

@@ -29,7 +29,7 @@
 
 .sui-select-button {
   padding: 0.5rem 0.75rem 0.5rem 1rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   border: 1px solid hsl(var(--border));
   background: hsl(var(--background-step-2));
   color: hsl(var(--text-normal));
@@ -65,7 +65,7 @@
   margin: 0;
   padding: 0;
   flex-direction: column;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
   background-color: hsl(var(--background-step-2));
   overflow: hidden;
   top: calc(100% + 0.25rem);

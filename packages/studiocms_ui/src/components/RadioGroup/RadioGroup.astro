@@ -32,7 +32,7 @@ interface Props {
 	/**
 	 * The color of the radio group. Defaults to `default`.
 	 */
-	color?: StudioCMSColorway;
+	color?: Omit<StudioCMSColorway, 'default'>;
 	/**
 	 * The default value of the radio group. Needs to be one of the values in the options.
 	 */
@@ -65,7 +65,7 @@ interface Props {
 
 const {
 	label,
-	color = 'default',
+	color = 'primary',
 	defaultValue,
 	options,
 	disabled = false,

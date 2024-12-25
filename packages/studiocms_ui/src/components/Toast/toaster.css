@@ -27,7 +27,7 @@
 .sui-toast-container {
   pointer-events: all;
   padding: 1rem;
-  border-radius: .5rem;
+  border-radius: var(--radius-md);
   border: 1px solid hsl(var(--border));
   background-color: hsl(var(--background-base));
   box-shadow: 0px 4px 8px hsl(var(--shadow), 0.5);
@@ -73,6 +73,14 @@
   color: hsl(var(--danger-base));
 }
 
+.sui-toast-container.info .sui-toast-header-left-side svg {
+  color: hsl(var(--info-base));
+}
+
+.sui-toast-container.mono .sui-toast-header-left-side svg {
+  color: hsl(var(--mono-base));
+}
+
 .sui-toast-progress-bar {
   position: absolute;
   height: 4px;
@@ -107,7 +115,7 @@
   align-items: center;
   justify-content: center;
   transition: background-color .15s ease;
-  border-radius: .25rem;
+  border-radius: var(--radius-sm);
 }
 
 .close-icon-container:hover {

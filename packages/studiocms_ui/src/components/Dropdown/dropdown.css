@@ -15,7 +15,7 @@
   margin: 0;
   padding: 0;
   flex-direction: column;
-  border-radius: .5rem;
+  border-radius: var(--radius-md);
   background-color: hsl(var(--background-step-2));
   overflow: hidden;
   left: 0;
@@ -182,6 +182,24 @@
 .sui-dropdown-option.danger:hover {
   background-color: hsl(var(--danger-base));
   color: hsl(var(--text-light));
+}
+
+.sui-dropdown-option.info {
+  color: hsl(var(--info-base));
+}
+
+.sui-dropdown-option.info:hover {
+  background-color: hsl(var(--info-base));
+  color: hsl(var(--text-light));
+}
+
+.sui-dropdown-option.mono {
+  color: hsl(var(--text-normal));
+}
+
+.sui-dropdown-option.mono:hover {
+  background-color: hsl(var(--mono-base));
+  color: hsl(var(--text-inverted));
 }
 
 .sui-dropdown-option.disabled {

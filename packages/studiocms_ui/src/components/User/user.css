@@ -9,7 +9,7 @@
   width: 2.5rem;
   height: 2.5rem;
   background-color: hsl(var(--default-base));
-  border-radius: 3rem;
+  border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;

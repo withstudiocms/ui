@@ -34,7 +34,7 @@
   margin: 0;
   padding: 0;
   flex-direction: column;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
   background-color: hsl(var(--background-step-2));
   overflow: hidden;
   top: calc(100% + 0.25rem);

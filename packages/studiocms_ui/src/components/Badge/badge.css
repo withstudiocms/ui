@@ -1,0 +1,132 @@
+.sui-badge {
+  display: flex;
+  flex-direction: row;
+  gap: .5rem;
+  align-items: center;
+  padding: .125rem .75rem;
+  border-radius: var(--radius-full);
+  font-size: .875rem;
+}
+
+.sui-badge.semi {
+  border-radius: var(--radius-md);
+}
+
+.sui-badge.primary {
+  background-color: hsl(var(--primary-base));
+  color: hsl(var(--text-inverted));
+}
+
+.sui-badge.primary.flat, .sui-badge.primary.outlined {
+  background-color: hsla(var(--primary-flat));
+  color: hsl(var(--primary-base));
+}
+
+.sui-badge.primary.outlined {
+  border: 1px solid hsl(var(--primary-base));
+}
+
+.sui-badge.success {
+  background-color: hsl(var(--success-base));
+  color: hsl(var(--text-inverted));
+}
+
+.sui-badge.success.flat, .sui-badge.success.outlined {
+  background-color: hsla(var(--success-flat));
+  color: hsl(var(--success-base));
+}
+
+.sui-badge.success.outlined {
+  border: 1px solid hsl(var(--success-base));
+}
+
+.sui-badge.warning {
+  background-color: hsl(var(--warning-base));
+  color: hsl(var(--text-inverted));
+}
+
+.sui-badge.warning.flat, .sui-badge.warning.outlined {
+  background-color: hsla(var(--warning-flat));
+  color: hsl(var(--warning-base));
+}
+
+.sui-badge.warning.outlined {
+  border: 1px solid hsl(var(--warning-base));
+}
+
+.sui-badge.danger {
+  background-color: hsl(var(--danger-base));
+  color: hsl(var(--text-normal));
+}
+
+.sui-badge.danger.flat, .sui-badge.danger.outlined {
+  background-color: hsla(var(--danger-flat));
+  color: hsl(var(--danger-base));
+}
+
+.sui-badge.danger.outlined {
+  border: 1px solid hsl(var(--danger-base));
+}
+
+.sui-badge.info {
+  background-color: hsl(var(--info-base));
+  color: hsl(var(--text-normal));
+}
+
+.sui-badge.info.flat, .sui-badge.info.outlined {
+  background-color: hsla(var(--info-flat));
+  color: hsl(var(--info-base));
+}
+
+.sui-badge.info.outlined {
+  border: 1px solid hsl(var(--info-base));
+}
+
+.sui-badge.mono {
+  background-color: hsl(var(--mono-base));
+  color: hsl(var(--text-inverted));
+}
+
+.sui-badge.mono.flat, .sui-badge.mono.outlined {
+  background-color: hsla(var(--mono-flat));
+  color: hsl(var(--mono-base));
+}
+
+.sui-badge.mono.outlined {
+  border: 1px solid hsl(var(--mono-base));
+}
+
+[data-theme="light"] .sui-badge.danger {
+  color: hsl(var(--text-inverted));
+}
+
+[data-theme="light"] .sui-badge.info {
+  color: hsl(var(--text-inverted));
+}
+
+.sui-badge.sm {
+  padding: .125rem .75rem;
+}
+
+.sui-badge.sm {
+  font-size: .75rem;
+}
+
+.sui-badge.sm > svg {
+  width: 14px;
+  height: 14px;
+}
+
+.sui-badge.lg {
+  font-size: 1rem;
+  padding: .25rem 1rem;
+}
+
+.sui-badge.lg {
+  font-size: 1rem;
+}
+
+.sui-badge.lg > svg {
+  width: 20px;
+  height: 20px;
+}

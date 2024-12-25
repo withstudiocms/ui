@@ -27,7 +27,7 @@
   background-color: hsl(var(--default-base));
   width: var(--toggle-width);
   height: var(--toggle-height);
-  border-radius: var(--toggle-height);
+  border-radius: var(--radius-full);
 }
 
 .sui-toggle-switch {
@@ -35,7 +35,7 @@
   height: var(--switch);
   width: var(--switch);
   background-color: hsl(var(--text-muted));
-  border-radius: var(--toggle-height);
+  border-radius: var(--radius-full);
   position: relative;
   left: 0;
   transition: all .15s ease;
@@ -84,6 +84,18 @@
 
 .sui-toggle-label.danger .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
   background-color: hsl(var(--danger-base));
+}
+
+.sui-toggle-label.info .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
+  background-color: hsl(var(--info-base));
+}
+
+.sui-toggle-label.mono .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
+  background-color: hsl(var(--mono-base));
+}
+
+.sui-toggle-label.mono .sui-toggle-switch {
+  border: 1px solid hsl(var(--text-inverted));
 }
 
 .req-star {

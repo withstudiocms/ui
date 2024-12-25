@@ -26,7 +26,7 @@
 
 .sui-textarea {
   padding: .65rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   border: 1px solid hsl(var(--border));
   background: hsl(var(--background-step-2));
   color: hsl(var(--text-normal));

@@ -1,6 +1,10 @@
 ---
 i18nReady: true
 title: Button
+sidebar:
+  badge:
+    text: New Colors!
+    variant: tip
 ---
 
 import { Button } from '@studiocms/ui/components';
@@ -10,8 +14,6 @@ import PreviewCard from '~/components/PreviewCard.astro';
 A button component with support for different colors, sizes and states out of the box. You can also customize it to your needs!
 
 ## Usage
-
-Using the button component is easy. Check out the example below:
 
 <Tabs>
   <TabItem label="Preview">
@@ -104,6 +106,8 @@ There is five default colorways that can be used right away:
 - Success
 - Warning
 - Danger
+- Info
+- Monochrome
 
 <Tabs>
   <TabItem label="Preview">
@@ -122,6 +126,12 @@ There is five default colorways that can be used right away:
       </Button>
       <Button color='danger'>
         Danger
+      </Button>
+      <Button color='info'>
+        Info
+      </Button>
+      <Button color='mono'>
+        Monochrome
       </Button>
     </PreviewCard>
   </TabItem>
@@ -145,6 +155,12 @@ There is five default colorways that can be used right away:
     </Button>
     <Button color='danger'>
       Danger
+    </Button>
+    <Button color='info'>
+      Info
+    </Button>
+    <Button color='mono'>
+      Monochrome
     </Button>
     ```
   </TabItem>

@@ -39,7 +39,7 @@
 }
 
 .default .sui-tab-header {
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
   height: 40px;
   padding: 0.5rem 0.75rem;
   transition: all .15s ease;
@@ -78,6 +78,14 @@
 
 .default .sui-tab-header.danger.active {
   background-color: hsla(var(--danger-flat-active)) !important;
+}
+
+.default .sui-tab-header.danger.info {
+  background-color: hsla(var(--info-flat-active)) !important;
+}
+
+.default .sui-tab-header.danger.mono {
+  background-color: hsla(var(--mono-flat-active)) !important;
 }
 
 .starlight .sui-tabs-list {

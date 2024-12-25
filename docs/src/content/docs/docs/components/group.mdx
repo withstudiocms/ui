@@ -6,11 +6,19 @@ sidebar:
     variant: success
 ---
 
-import { Group, Button } from '@studiocms/ui/components';
+import { Group, Button, Badge } from '@studiocms/ui/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 
-Lol, group component
+The group component is a container component that groups its children together. 
+It is useful for grouping buttons, badges, inputs and other components, which
+makes it easier to manage their layout. It also changes their styles to make them
+look like a bar.
+
+The following components are supported by the group component:
+
+- Button
+- Badge
 
 ## Usage
 
@@ -18,22 +26,22 @@ Lol, group component
   <TabItem label="Preview">
     <PreviewCard>
       <Group>
-        <Button>Button 1</Button>
-        <Button>Button 2</Button>
-        <Button>Button 3</Button>
+        <Button color="primary">Button 1</Button>
+        <Button color="primary">Button 2</Button>
+        <Button color="primary">Button 3</Button>
       </Group>
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro showLinenumbers title="ButtonExample.astro"
+    ```astro showLinenumbers title="GroupExample.astro"
     ---
     import { Group, Button } from '@studiocms/ui/components';
     ---
 
     <Group>
-      <Button>Button 1</Button>
-      <Button>Button 2</Button>
-      <Button>Button 3</Button>
+      <Button color="primary">Button 1</Button>
+      <Button color="primary">Button 2</Button>
+      <Button color="primary">Button 3</Button>
     </Group>
     ```
   </TabItem>
