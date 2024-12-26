@@ -1,0 +1,19 @@
+---
+import Button, { type Props as ButtonProps } from '../Button/Button.astro';
+import './themetoggle.css';
+
+interface Props extends ButtonProps {}
+
+const props = Astro.props;
+---
+
+<Button id='sui-theme-toggle' {...props}>
+  <div id="dark-content">
+    <slot name="dark" />
+  </div>
+  <div id="light-content">
+    <slot name="light" />
+  </div>
+</Button>
+
+<script src="./themetoggle.ts" />

@@ -8,6 +8,10 @@ editUrl: false
 This document contains release notes for the `@studiocms/ui` package.
 For more information, see the [CHANGELOG file](https://github.com/withstudiocms/ui/blob/main/packages/studiocms_ui/CHANGELOG.md)
 
+## 0.3.2
+
+- [#33](https://github.com/withstudiocms/ui/pull/33) [`58e223c`](https://github.com/withstudiocms/ui/commit/58e223c861321e95c8db064be67e28e4563b4ff3) Thanks [@louisescher](https://github.com/louisescher)! - Fix tabs not being displayed correctly & dividers displaying backgrounds for empty slots
+
 ## 0.3.1
 
 - [#27](https://github.com/withstudiocms/ui/pull/27) [`6b0b58f`](https://github.com/withstudiocms/ui/commit/6b0b58fbbe2a92d4bce7fa44c587164b8f2f53e5) Thanks [@louisescher](https://github.com/louisescher)! - Add pathe as a dependency to deal with path issues on Windows

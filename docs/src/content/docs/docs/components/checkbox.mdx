@@ -1,6 +1,10 @@
 ---
 i18nReady: true
 title: Checkbox
+sidebar:
+  badge:
+    text: New Colors!
+    variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -68,6 +72,8 @@ The checkbox component supports all default colorways.
         <Checkbox label="Success" color="success" defaultChecked />
         <Checkbox label="Warning" color="warning" defaultChecked />
         <Checkbox label="Danger" color="danger" defaultChecked />
+        <Checkbox label="Info" color="info" defaultChecked />
+        <Checkbox label="Monochrome" color="mono" defaultChecked />
       </Row>
     </PreviewCard>
   </TabItem>
@@ -82,6 +88,8 @@ The checkbox component supports all default colorways.
     <Checkbox label='Success' color='success' defaultChecked />
     <Checkbox label='Warning' color='warning' defaultChecked />
     <Checkbox label='Danger' color='danger' defaultChecked />
+    <Checkbox label="Info" color="info" defaultChecked />
+    <Checkbox label="Monochrome" color="mono" defaultChecked />
     ```
   </TabItem>
 </Tabs>

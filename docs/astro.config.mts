@@ -158,10 +158,6 @@ export default defineConfig({
 						{
 							label: 'Installation',
 							link: 'docs/',
-							badge: {
-								text: 'Updated!',
-								variant: 'success',
-							},
 						},
 						{
 							label: 'Release Notes',
@@ -174,7 +170,14 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'Upgrade Guides',
+					label: 'Guides',
+					autogenerate: {
+						directory: 'docs/guides',
+						collapsed: true,
+					},
+				},
+				{
+					label: 'Upgrading StudioCMS',
 					autogenerate: {
 						directory: 'docs/upgrade-guides',
 						collapsed: true,

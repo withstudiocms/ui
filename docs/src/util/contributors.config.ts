@@ -25,7 +25,6 @@ export const contributorConfig = (Astro: AstroGlobal): ContributorConfig[] => [
 					'packages/studioCMS/',
 					// NEW Paths
 					'README.md',
-					'playgrounds/node/',
 					'packages/studiocms/',
 					'packages/studiocms_assets/',
 					'packages/studiocms_auth/',
@@ -46,7 +45,7 @@ export const contributorConfig = (Astro: AstroGlobal): ContributorConfig[] => [
 			{
 				repo: 'withstudiocms/studiocms',
 				type: 'byPath',
-				paths: ['packages/studiocms_ui/', 'playgrounds/ui/'],
+				paths: ['packages/studiocms_ui/'],
 			},
 		],
 	},

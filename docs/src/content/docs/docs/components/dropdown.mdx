@@ -1,6 +1,10 @@
 ---
 i18nReady: true
 title: Dropdown
+sidebar:
+  badge:
+    text: New Colors!
+    variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -179,6 +183,8 @@ No, you read that right. You can customize the options too. You can individually
           { label: 'Success', value: 'success', color: 'success' },
           { label: 'Warning', value: 'warning', color: 'warning' },
           { label: 'Danger', value: 'danger', color: 'danger' },
+          { label: 'Info', value: 'info', color: 'info' },
+          { label: 'Monochrome', value: 'mono', color: 'mono' },
           { label: 'Disabled', value: 'disabled', disabled: true },
           { label: 'As Link', value: 'custom-href', href: '/' },
         ]}
@@ -203,6 +209,8 @@ No, you read that right. You can customize the options too. You can individually
         { label: 'Success', value: 'success', color: 'success' },
         { label: 'Warning', value: 'warning', color: 'warning' },
         { label: 'Danger', value: 'danger', color: 'danger' },
+        { label: 'Info', value: 'info', color: 'info' },
+        { label: 'Monochrome', value: 'mono', color: 'mono' },
         { label: 'Disabled', value: 'disabled', disabled: true },
         { label: 'As Link', value: 'custom-href', href: '/' },
       ]}

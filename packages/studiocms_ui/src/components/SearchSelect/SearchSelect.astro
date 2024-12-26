@@ -1,0 +1,133 @@
+---
+import Icon from '../../utils/Icon.astro';
+import { generateID } from '../../utils/generateID';
+import Input from '../Input/Input.astro';
+import './searchselect.css';
+
+/**
+ * An option in the select dropdown
+ */
+interface Option {
+	/**
+	 * The label of the option.
+	 */
+	label: string;
+	/**
+	 * The value of the option.
+	 */
+	value: string;
+	/**
+	 * Whether the option is disabled.
+	 */
+	disabled?: boolean;
+}
+
+/**
+ * The props for the search select component.
+ */
+interface Props {
+	/**
+	 * The label of the search select.
+	 */
+	label?: string;
+	/**
+	 * The default value of the search select. Needs to be one of the values in the options.
+	 */
+	defaultValue?: string;
+	/**
+	 * Additional classes to apply to the search select.
+	 */
+	class?: string;
+	/**
+	 * The name of the search select.
+	 */
+	name?: string;
+	/**
+	 * Whether the search select is required. Defaults to `false`.
+	 */
+	isRequired?: boolean;
+	/**
+	 * The options to display in the search select.
+	 */
+	options: Option[];
+	/**
+	 * Whether the search select is disabled. Defaults to `false`.
+	 */
+	disabled?: boolean;
+	/**
+	 * Whether the search select should take up the full width of its container.
+	 */
+	fullWidth?: boolean;
+	/**
+	 * The placeholder of the search select.
+	 */
+	placeholder?: string;
+}
+
+const {
+	label,
+	defaultValue,
+	class: className,
+	name = generateID('search-select'),
+	isRequired,
+	options = [],
+	disabled,
+	fullWidth,
+	placeholder,
+} = Astro.props;
+---
+
+<div
+    id={`${name}-container`}
+    class="sui-search-select-label"
+    class:list={[disabled && "disabled", className, fullWidth && "full"]}
+    data-options={JSON.stringify(options)}
+    data-id={name}
+>
+    <div class="sui-search-input-wrapper" id={`${name}-search-input-wrapper`}>
+        <Input
+            placeholder={options.find((x) => x.value === defaultValue)?.label || (placeholder || "Select")}
+            role='combobox'
+            aria-controls={`${name}-dropdown`}
+            aria-expanded="false"
+            label={label || ''}
+            isRequired={isRequired || false}
+        />
+        <Icon name="chevron-up-down" class="sui-search-select-indicator" width={24} height={24} />
+    </div>
+    <ul class="sui-search-select-dropdown" role="listbox" id={`${name}-dropdown`}>
+        {
+            options.map((x, i) => (
+                <li
+                    class="sui-search-select-option"
+                    role="option"
+                    value={x.value}
+                    class:list={[
+                        x.disabled && "disabled",
+                        i === 0 && 'focused',
+                    ]}
+                    id={defaultValue === x.value ? `${name}-selected` : ""}
+                    data-option-index={i}
+                    data-value={x.value}
+                >
+                    {x.label}
+                </li>
+            ))
+        }
+    </ul>
+    <select class="sui-hidden-select" id={name} name={name} required={isRequired} hidden tabindex="-1">
+        <option value={""}> Select </option>
+        {
+            options.map((x) => (
+                <option
+                    value={x.value}
+                    selected={defaultValue === x.value}
+                    disabled={x.disabled}
+                >
+                    {x.label}
+                </option>
+            ))
+        }
+    </select>
+</div>
+<script src="./searchselect.ts" />

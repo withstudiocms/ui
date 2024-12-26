@@ -1,0 +1,108 @@
+.sui-search-select-label {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 200px;
+  position: relative;
+}
+
+.sui-search-select-label.full {
+  width: 100%;
+}
+
+.sui-search-select-label.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  color: hsl(var(--text-muted));
+}
+
+.label {
+  font-size: 14px;
+}
+
+.req-star {
+  color: hsl(var(--danger-base));
+  font-weight: 700;
+}
+
+.sui-search-select-dropdown {
+  position: absolute;
+  width: 100%;
+  border: 1px solid hsl(var(--border));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  background-color: hsl(var(--background-step-2));
+  overflow: hidden;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  display: none;
+  z-index: 90;
+  box-shadow: 0px 4px 8px hsl(var(--shadow), 0.5);
+}
+
+.sui-search-select-dropdown.above {
+  top: auto;
+  bottom: calc(100% - 18px + 0.25rem);
+}
+
+.sui-search-select-option, .empty-search-results {
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 0.975em;
+  transition: all 0.15s ease;
+}
+
+.sui-search-select-option.disabled {
+  pointer-events: none;
+  color: hsl(var(--text-muted));
+}
+
+.sui-search-select-option:hover, .sui-search-select-option.focused {
+  background-color: hsl(var(--background-step-3));
+}
+
+.sui-search-select-option.selected {
+  background-color: hsl(var(--primary-base));
+  color: hsl(var(--text-inverted));
+  cursor: default;
+}
+
+.sui-hidden-select {
+  height: 0;
+  width: 0;
+  border: none;
+  outline: none;
+  position: absolute;
+  background-color: transparent;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.sui-search-input-wrapper {
+  width: 100%;
+  position: relative;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.sui-search-input-wrapper input {
+  padding-right: 2.5rem;
+}
+
+.sui-search-select-indicator {
+  position: absolute;
+  bottom: .675rem;
+  right: .675rem;
+}
+
+.sui-search-input-wrapper:has(input:focus) + .sui-search-select-dropdown {
+  display: flex;
+}
+
+.sui-search-select-dropdown.active, .sui-search-select-dropdown:has(> li:active) {
+  display: flex;
+}

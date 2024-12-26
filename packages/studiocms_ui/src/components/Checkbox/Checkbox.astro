@@ -1,0 +1,93 @@
+---
+import Checkmark from '../../icons/Checkmark.astro';
+import type { StudioCMSColorway } from '../../utils/colors';
+import { generateID } from '../../utils/generateID';
+import './checkbox.css';
+
+/**
+ * The props for the Checkbox component.
+ */
+interface Props {
+	/**
+	 * The label of the checkbox.
+	 */
+	label: string;
+	/**
+	 * The size of the checkbox. Defaults to `md`.
+	 */
+	size?: 'sm' | 'md' | 'lg';
+	/**
+	 * The color of the checkbox. Defaults to `default`.
+	 */
+	color?: StudioCMSColorway;
+	/**
+	 * Whether the checkbox is checked by default.
+	 */
+	defaultChecked?: boolean;
+	/**
+	 * Whether the checkbox is disabled.
+	 */
+	disabled?: boolean;
+	/**
+	 * The name of the checkbox.
+	 */
+	name?: string;
+	/**
+	 * Whether the checkbox is required.
+	 */
+	isRequired?: boolean;
+}
+
+const {
+	size = 'md',
+	color = 'default',
+	defaultChecked,
+	disabled,
+	name = generateID('checkbox'),
+	label,
+	isRequired,
+} = Astro.props;
+
+const iconSizes = {
+	sm: 14,
+	md: 16,
+	lg: 24,
+};
+---
+<label 
+  class="sui-checkmark-label"
+  for={name}
+  class:list={[
+    disabled && "disabled",
+    color,
+    size,
+  ]}
+>
+  <div
+    class="sui-checkmark-container"
+    tabindex="0"
+    role="checkbox"
+    aria-checked={defaultChecked} 
+    aria-labelledby={`label-${name}`}
+    >
+    <Checkmark
+      class={'sui-checkmark'}
+      width={iconSizes[size]}
+      height={iconSizes[size]}
+    />
+    <input
+      type="checkbox"
+      name={name}
+      id={name}
+      checked={defaultChecked}
+      disabled={disabled}
+      required={isRequired}
+      class="sui-checkbox"
+      hidden
+    />
+  </div>
+  <span id={`label-${name}`}>
+    {label} <span class="req-star">{isRequired && "*"}</span>
+  </span>
+</label>
+<script src="./checkbox.ts" />

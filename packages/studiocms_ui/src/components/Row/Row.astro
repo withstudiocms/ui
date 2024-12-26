@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import './row.css';
+
+/**
+ * The props for the row component.
+ */
+interface Props extends HTMLAttributes<'div'> {
+	/**
+	 * Whether the row should be aligned to the center. Defaults to `false`.
+	 */
+	alignCenter?: boolean;
+	/**
+	 * The size of the gap between the children. Defaults to `md`.
+	 */
+	gapSize?: 'sm' | 'md' | 'lg';
+}
+
+const { alignCenter, gapSize = 'md', ...props } = Astro.props;
+---
+
+<div class="sui-row" class:list={[alignCenter && "align", gapSize]} {...props}>
+  <slot />
+</div>
