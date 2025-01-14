@@ -9,7 +9,7 @@ type Options = {
 	 * Path to a custom CSS file to be included in the build.
 	 * Can be used to overwrite the default styles by redefining the CSS variables.
 	 * 
-	 * @link https://ui.studiocms.dev/...
+	 * @link https://ui.studiocms.dev/docs/guides/customization/
 	 */
 	customCss?: string;
 };
