@@ -1,6 +1,6 @@
 import type { AstroConfig } from 'astro';
 
-type VitePlugin = Required<AstroConfig['vite']>['plugins'][number];
+export type VitePlugin = Required<AstroConfig['vite']>['plugins'][number];
 
 /**
  * Builds a Vite plugin that creates a virtual module.

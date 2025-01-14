@@ -2,6 +2,7 @@ import starlight from '@astrojs/starlight';
 import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
 import { defineConfig, envField } from 'astro/config';
 import rehypePluginKit from './src/plugins/rehypePluginKit';
+import ui from '@studiocms/ui';
 
 // Define the Site URL
 const site = 'https://ui.studiocms.dev/';
@@ -199,5 +200,6 @@ export default defineConfig({
 				},
 			],
 		}),
+		ui()
 	],
 });

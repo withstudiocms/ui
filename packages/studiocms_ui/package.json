@@ -51,6 +51,7 @@
     "astro": "catalog:peers"
   },
   "devDependencies": {
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vite": "^6.0.7"
   }
 }

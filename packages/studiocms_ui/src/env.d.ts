@@ -13,3 +13,7 @@ declare global {
 		dispatchEvent<K extends keyof CustomEventMap>(ev: CustomEventMap[K]): void;
 	}
 }
+
+declare module 'studiocms:ui/scripts/*' {
+
+}

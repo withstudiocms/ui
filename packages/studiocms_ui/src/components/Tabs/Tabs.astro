@@ -127,6 +127,7 @@ const containerId = generateID('sui-tabs-container');
     {tabs.map((tab, i) => (
       <button 
         role="tab"
+		type="button"
         class="sui-tab-header"
         id={syncKey ? `${syncKey}-${i}` : undefined}
         tabindex={i === 0 ? 0 : -1}
@@ -144,4 +145,6 @@ const containerId = generateID('sui-tabs-container');
     <Fragment set:html={finalizedTabContents} />
   </div>
 </div>
-<script src="./tabs.ts" />
+<script>
+import "studiocms:ui/scripts/tabs"
+</script>

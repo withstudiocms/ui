@@ -2,6 +2,7 @@ import type { AstroIntegration } from 'astro';
 import { version as packageVersion } from '../package.json';
 import { createResolver } from './utils/create-resolver';
 import { viteVirtualModulePluginBuilder } from './utils/virtual-module-plugin-builder';
+import { addVirtualImports } from './utils/integration-utils';
 
 type Options = {
 	/**
@@ -27,14 +28,31 @@ export default function integration(options: Options = {}): AstroIntegration {
 		'sui-version',
 		`export default '${packageVersion}'`
 	);
-
+	
 	return {
 		name: '@studiocms/ui',
 		hooks: {
-			'astro:config:setup': ({ injectScript, updateConfig }) => {
+			'astro:config:setup': (params) => {
+				const { injectScript, updateConfig } = params;
+
 				updateConfig({
 					vite: {
 						plugins: [globalCss(), version()],
+					},
+				});
+
+				addVirtualImports(params, {
+					name: 'sui-scripts',
+					imports: {
+						'studiocms:ui/scripts/checkbox': `import ${JSON.stringify(resolve('./components/Checkbox/checkbox.ts'))}`,
+						'studiocms:ui/scripts/radiogroup': `import ${JSON.stringify(resolve('./components/RadioGroup/radiogroup.ts'))}`,
+						'studiocms:ui/scripts/searchselect': `import ${JSON.stringify(resolve('./components/SearchSelect/searchselect.ts'))}`,
+						'studiocms:ui/scripts/select': `import ${JSON.stringify(resolve('./components/Select/select.ts'))}`,
+						'studiocms:ui/scripts/tabs': `import ${JSON.stringify(resolve('./components/Tabs/tabs.ts'))}`,
+						'studiocms:ui/scripts/themetoggle': `import ${JSON.stringify(resolve('./components/ThemeToggle/themetoggle.ts'))}`,
+						'studiocms:ui/scripts/toaster': `import ${JSON.stringify(resolve('./components/Toast/toaster.ts'))}`,
+						'studiocms:ui/scripts/toast': `import ${JSON.stringify(resolve('./components/Toast/toast.ts'))}`,
+						'studiocms:ui/scripts/toggle': `import ${JSON.stringify(resolve('./components/Toggle/toggle.ts'))}`,
 					},
 				});
 
