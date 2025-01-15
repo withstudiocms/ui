@@ -4,7 +4,7 @@ for (const accordion of accordions) {
   const items = accordion.querySelectorAll<HTMLDivElement>('.sui-accordion-item');
 
   for (const item of items) {
-    const content = accordion.querySelector<HTMLDivElement>('.sui-accordion-details');
+    const content = item.querySelector<HTMLDivElement>('.sui-accordion-details');
     if (!content) continue;
     const contentBoundingBox = content.getBoundingClientRect();
 
@@ -15,10 +15,11 @@ for (const accordion of accordions) {
 
     item.addEventListener('click', () => {
       item.classList.toggle('active');
+
       if (item.classList.contains('active')) {
         content.style.maxHeight = `${contentBoundingBox.height}px`;
       } else {
-        content.style.maxHeight = `0`;
+        content.style.maxHeight = '0';
       } 
     });
   }
