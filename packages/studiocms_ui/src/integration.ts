@@ -34,6 +34,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 		hooks: {
 			'astro:config:setup': (params) => {
 				const { injectScript, updateConfig } = params;
+				const { resolve: rootResolve } = createResolver(params.config.root.pathname);
 
 				updateConfig({
 					vite: {
@@ -57,6 +58,22 @@ export default function integration(options: Options = {}): AstroIntegration {
 				});
 
 				injectScript('page-ssr', `import 'studiocms:ui/global-css';`);
+
+				if (options.customCss) {
+					const customCss = viteVirtualModulePluginBuilder(
+						'studiocms:ui/custom-css',
+						'sui-custom-css',
+						`import '${rootResolve(options.customCss)}'`
+					);
+
+					updateConfig({
+						vite: {
+							plugins: [customCss()]
+						}
+					});
+
+					injectScript('page-ssr', `import 'studiocms:ui/custom-css';`);
+				}
 			},
 		},
 	};
