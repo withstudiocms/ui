@@ -54,6 +54,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 						'studiocms:ui/scripts/toaster': `import ${JSON.stringify(resolve('./components/Toast/toaster.ts'))}`,
 						'studiocms:ui/scripts/toast': `import ${JSON.stringify(resolve('./components/Toast/toast.ts'))}`,
 						'studiocms:ui/scripts/toggle': `import ${JSON.stringify(resolve('./components/Toggle/toggle.ts'))}`,
+						'studiocms:ui/scripts/accordion': `import ${JSON.stringify(resolve('./components/Accordion/accordion.ts'))}`,
 					},
 				});
 

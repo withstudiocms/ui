@@ -15,8 +15,10 @@ export { default as SearchSelect } from './SearchSelect/SearchSelect.astro';
 export { default as Dropdown } from './Dropdown/Dropdown.astro';
 export { default as User } from './User/User.astro';
 export { default as ThemeToggle } from './ThemeToggle/ThemeToggle.astro';
-export { default as Footer } from './Footer/Footer.astro';
 export { Tabs, TabItem } from './Tabs/index';
+export { default as Accordion } from './Accordion/Accordion.astro';
+export { default as AccordionItem } from './Accordion/Item.astro';
+export { default as Footer } from './Footer/Footer.astro';
 
 export { default as Sidebar } from './Sidebar/Single.astro';
 export { default as DoubleSidebar } from './Sidebar/Double.astro';

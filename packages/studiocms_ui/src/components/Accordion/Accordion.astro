@@ -1,0 +1,14 @@
+---
+import './accordion.css';
+
+interface Props {
+  initialOpen?: string;
+}
+---
+
+<div class="sui-accordion">
+  <slot />
+</div>
+<script>
+  import 'studiocms:ui/scripts/accordion';
+</script>

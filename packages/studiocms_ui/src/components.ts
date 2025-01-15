@@ -20,6 +20,7 @@ export { Tabs, TabItem } from './components/index';
 export { Breadcrumbs } from './components/index';
 export { Group } from './components/index';
 export { Badge } from './components/index';
+export { Accordion, AccordionItem } from './components/index'
 
 export {
 	Sidebar,

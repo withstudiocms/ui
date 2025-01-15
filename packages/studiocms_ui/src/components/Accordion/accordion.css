@@ -1,0 +1,23 @@
+.sui-accordion {
+  width: 100%;
+}
+
+.sui-accordion-details.initial {
+  visibility: hidden;
+  transition: none;
+  max-height: none;
+  position: absolute;
+  top: -200vh;
+  left: -200vh;
+}
+
+.sui-accordion-details.active {
+  overflow: hidden;
+  max-height: 0;
+  transition: all .3s ease;
+  position: relative;
+}
+
+.sui-accordion-item.active > .sui-accordion-details {
+  max-height: 100px;
+}
