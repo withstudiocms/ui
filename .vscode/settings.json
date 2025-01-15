@@ -15,6 +15,7 @@
     "fira",
     "fontsource",
     "frontmatter",
+    "heroicons",
     "iconify",
     "louisescher",
     "Matthiesen",
@@ -27,6 +28,7 @@
     "themetoggle",
     "Thum",
     "tsconfigs",
+    "vite",
     "withstudiocms"
   ]
 }
