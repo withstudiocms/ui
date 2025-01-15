@@ -48,10 +48,10 @@
     "pathe": "catalog:"
   },
   "peerDependencies": {
-    "astro": "catalog:peers"
+    "astro": "catalog:peers",
+    "vite": "catalog:peers"
   },
   "devDependencies": {
-    "typescript": "catalog:",
-    "vite": "^6.0.7"
+    "typescript": "catalog:"
   }
 }
