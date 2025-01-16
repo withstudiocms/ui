@@ -31,6 +31,10 @@ type Props<As extends HTMLTag = 'button'> = Omit<Polymorphic<{ as: As }>, 'as'> 
 	 * Whether the button is disabled. Defaults to `false`.
 	 */
 	disabled?: boolean;
+	/**
+	 * An optional href to use for the button. If provided, the button will render as an anchor tag.
+	 */
+	href?: string;
 };
 
 export type { Props };
@@ -40,10 +44,17 @@ const {
 	fullWidth = false,
 	color = 'default',
 	variant = 'solid',
-	as: As = 'button',
 	disabled = false,
 	...props
 } = Astro.props;
+
+let As: HTMLTag = 'button';
+
+if (props.href) {
+	As = 'a';
+} else {
+	As = props.as || 'button';
+}
 ---
 
 <As
