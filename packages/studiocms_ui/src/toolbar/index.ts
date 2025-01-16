@@ -14,7 +14,7 @@ const map: Record<string, Record<string, string>> = {
 function createRows(variables: string[]): HTMLTableRowElement[] {
   const body = getComputedStyle(document.body);
 
-  return variables.map(variable => {
+  const rows = variables.map(variable => {
     const row = document.createElement('tr');
     const cssVariable = document.createElement('td');
     const colorPicker = document.createElement('td');
@@ -56,6 +56,28 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
 
     return row;
   });
+
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.map(m => {
+      if (m.type !== 'attributes' || m.attributeName !== 'data-theme') return
+      rows.map(row => {
+        const theme = document.documentElement.dataset.theme ?? 'dark'
+        const picker = (row.children[1]?.firstElementChild as DevToolbarColorPicker)
+        const variable = picker.dataset.variable!
+        const value = map[theme]![variable]
+        if (!value) document.documentElement.style.removeProperty(variable)
+        else document.documentElement.style.setProperty(variable, value)
+        const color = body.getPropertyValue(variable)
+        picker.dataset.color = color
+        picker.setColor(color)
+      })
+    })
+  })
+
+  observer.observe(document.documentElement, { attributes: true })
+
+  return rows;
 }
 
 function createStyles(): HTMLStyleElement {
