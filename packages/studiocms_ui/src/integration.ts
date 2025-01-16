@@ -79,7 +79,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 				addDevToolbarApp({
 					id: 'studiocms:ui/toolbar',
 					name: 'StudioCMS/UI',
-					entrypoint: '@studiocms/ui/toolbar',
+					entrypoint: resolve('./toolbar/index.ts'),
 					icon: `
 						<svg width="755" height="792" viewBox="0 0 755 792" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<rect x="295" width="460" height="466" rx="32" fill="white"/>
