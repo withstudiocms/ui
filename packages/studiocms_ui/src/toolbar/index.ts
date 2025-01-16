@@ -211,7 +211,9 @@ function createRadiiTable(): TableAndVariables {
     numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
 
     numberInput.addEventListener('input', () => {
+      const size = `${numberInput.value}px`
       document.documentElement.style.setProperty(variable, `${numberInput.value}px`);
+      map.dark![variable] = size
     });
 
     value.appendChild(numberInput);
@@ -222,6 +224,7 @@ function createRadiiTable(): TableAndVariables {
     resetButton.addEventListener('click', () => {
       document.documentElement.style.setProperty(variable, initialValue);
       numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
+      delete map.dark![variable]
     });
 
     reset.appendChild(resetButton);
@@ -254,10 +257,10 @@ export default defineToolbarApp({
 
     const style = createStyles();
 
-    const { table: colorsTable, variables: colorVariables } = createColorsTable();
+    const { table: colorsTable } = createColorsTable();
     const colorDetails = createDetails('Colors', colorsTable);
 
-    const { table: radiiTable, variables: radiiVariables } = createRadiiTable();
+    const { table: radiiTable } = createRadiiTable();
     const radiiDetails = createDetails('Border Radii', radiiTable);
 
     myWindow.appendChild(header);
@@ -271,17 +274,11 @@ export default defineToolbarApp({
     exportButton.style.marginTop = '1rem';
 
     exportButton.addEventListener('click', () => {
-<<<<<<< HEAD
-      const css = [...colorVariables, ...radiiVariables].map(variable => {
-        return `  ${variable}: ${getComputedStyle(document.body).getPropertyValue(variable)};`;
-      }).join('\n');
-=======
       function getVariables(theme: 'light' | 'dark') {
         return Object.entries(map[theme]!).map(([variable, value]) => {
           return `  ${variable}: ${value};`;
         }).join('\n');
       }
->>>>>>> 33cb92d (Support light/dark & partial export)
 
       const darkVariables = getVariables('dark')
       const lightVariables = getVariables('light')
