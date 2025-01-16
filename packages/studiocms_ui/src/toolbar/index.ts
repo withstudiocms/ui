@@ -41,17 +41,17 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
     row.appendChild(reset);
 
     colorPickerEl.shadowRoot.firstElementChild?.addEventListener('input', () => {
-      const color = colorPickerEl.getColor()
-      const theme = document.documentElement.dataset.theme ?? 'dark'
+      const color = colorPickerEl.getColor();
+      const theme = document.documentElement.dataset.theme ?? 'dark';
       document.documentElement.style.setProperty(variable, color);
-      map[theme]![variable] = color
+      map[theme]![variable] = color;
     });
 
     resetButton.addEventListener('click', () => {
       const theme = document.documentElement.dataset.theme ?? 'dark'
       document.documentElement.style.setProperty(variable, initialColor);
       colorPickerEl.setColor(initialColor);
-      delete map[theme]![variable]
+      delete map[theme]![variable];
     });
 
     return row;
@@ -60,22 +60,22 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
 
   const observer = new MutationObserver((mutations) => {
     mutations.map(m => {
-      if (m.type !== 'attributes' || m.attributeName !== 'data-theme') return
+      if (m.type !== 'attributes' || m.attributeName !== 'data-theme') return;
       rows.map(row => {
-        const theme = document.documentElement.dataset.theme ?? 'dark'
-        const picker = (row.children[1]?.firstElementChild as DevToolbarColorPicker)
-        const variable = picker.dataset.variable!
-        const value = map[theme]![variable]
-        if (!value) document.documentElement.style.removeProperty(variable)
-        else document.documentElement.style.setProperty(variable, value)
-        const color = body.getPropertyValue(variable)
-        picker.dataset.color = color
-        picker.setColor(color)
-      })
-    })
-  })
+        const theme = document.documentElement.dataset.theme ?? 'dark';
+        const picker = (row.children[1]?.firstElementChild as DevToolbarColorPicker);
+        const variable = picker.dataset.variable!;
+        const value = map[theme]![variable];
+        if (!value) document.documentElement.style.removeProperty(variable);
+        else document.documentElement.style.setProperty(variable, value);
+        const color = body.getPropertyValue(variable);
+        picker.dataset.color = color;
+        picker.setColor(color);
+      });
+    });
+  });
 
-  observer.observe(document.documentElement, { attributes: true })
+  observer.observe(document.documentElement, { attributes: true });
 
   return rows;
 }
@@ -233,9 +233,9 @@ function createRadiiTable(): TableAndVariables {
     numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
 
     numberInput.addEventListener('input', () => {
-      const size = `${numberInput.value}px`
+      const size = `${numberInput.value}px`;
       document.documentElement.style.setProperty(variable, `${numberInput.value}px`);
-      map.dark![variable] = size
+      map.dark![variable] = size;
     });
 
     value.appendChild(numberInput);
@@ -246,7 +246,7 @@ function createRadiiTable(): TableAndVariables {
     resetButton.addEventListener('click', () => {
       document.documentElement.style.setProperty(variable, initialValue);
       numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
-      delete map.dark![variable]
+      delete map.dark![variable];
     });
 
     reset.appendChild(resetButton);
@@ -302,12 +302,12 @@ export default defineToolbarApp({
         }).join('\n');
       }
 
-      const darkVariables = getVariables('dark')
-      const lightVariables = getVariables('light')
+      const darkVariables = getVariables('dark');
+      const lightVariables = getVariables('light');
 
       const string = `${darkVariables ? `:root {\n${darkVariables}\n}\n` : ''}${lightVariables ? `\n[data-theme="light"] {\n${lightVariables}\n}` : ''}`;
 
-      navigator.clipboard.writeText(string);
+      navigator.clipboard.writeText(string || '/* No changes made */');
     });
 
     myWindow.appendChild(exportButton);
