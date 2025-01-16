@@ -6,6 +6,11 @@ import DevToolbarColorPicker from './ColorPicker';
 // - color picker
 // - slider
 
+interface TableAndVariables {
+  table: HTMLTableElement;
+  variables: string[];
+}
+
 function createRows(variables: string[]): HTMLTableRowElement[] {
   const body = getComputedStyle(document.body);
 
@@ -23,7 +28,10 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
     const resetButton = document.createElement('button');
     resetButton.textContent = 'Reset';
     
-    cssVariable.textContent = variable;
+    const codeEl = document.createElement('code');
+    codeEl.textContent = variable;
+
+    cssVariable.appendChild(codeEl);
 
     colorPicker.appendChild(colorPickerEl);
     reset.appendChild(resetButton);
@@ -45,89 +53,211 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
   });
 }
 
+function createStyles(): HTMLStyleElement {
+  const style = document.createElement('style');
+  style.textContent = `
+    button {
+      position: relative;
+      gap: 0.5rem;
+      outline: none;
+      border: none;
+      font-weight: 400;
+      border-radius: var(--radius-md);
+      transition: transform 0.15s, background-color 0.15s, border-color 0.15s, color 0.15s;
+      transition-timing-function: ease;
+      cursor: pointer;
+      background-color: hsl(var(--primary-base));
+      border-color: hsl(var(--primary-base));
+      color: hsl(var(--text-inverted));
+      min-width: fit-content;
+      will-change: transform;
+      text-decoration: none;
+      height: 32px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.825em;
+      text-align: center !important;
+    }
+
+    button:hover {
+      background-color: hsl(var(--primary-hover));
+    }
+
+    button:active {
+      background-color: hsl(var(--primary-active));
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    tr {
+      text-align: left;
+      color: #fff;
+    }
+
+    details {
+      margin-bottom: 1rem;
+    }
+  `;
+
+  return style;
+}
+
+function createColorsTable(): TableAndVariables {
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  const tr = document.createElement('tr');
+  const th1 = document.createElement('th');
+  const th2 = document.createElement('th');
+  const th3 = document.createElement('th');
+
+  th1.textContent = 'CSS Variable';
+  th2.textContent = 'Color Picker';
+  th3.textContent = 'Reset';
+
+  tr.appendChild(th1);
+  tr.appendChild(th2);
+  tr.appendChild(th3);
+  thead.appendChild(tr);
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+
+  const editableCSSVariables = [
+    '--background-base', '--background-step-1', '--background-step-2', '--background-step-3',
+    '--text-normal', '--text-muted', '--text-inverted', '--border', '--shadow', 
+    '--default-base', '--default-hover', '--default-active',
+    '--primary-base', '--primary-hover', '--primary-active',
+    '--success-base', '--success-hover', '--success-active',
+    '--warning-base', '--warning-hover', '--warning-active',
+    '--danger-base', '--danger-hover', '--danger-active',
+    '--info-base', '--info-hover', '--info-active',
+    '--mono-base', '--mono-hover', '--mono-active'
+  ];
+
+  const rows = createRows(editableCSSVariables);
+
+  for (const row of rows) {
+    tbody.appendChild(row);
+  }
+
+  table.appendChild(tbody);
+
+  return {
+    table: table,
+    variables: editableCSSVariables
+  };
+}
+
+function createDetails(title: string, table: HTMLTableElement): HTMLDetailsElement {
+  const details = document.createElement('details');
+  const summary = document.createElement('summary');
+
+  summary.textContent = title;
+  details.appendChild(summary);
+  details.appendChild(table);
+
+  return details;
+}
+
+function createRadiiTable(): TableAndVariables {
+  const radiiTable = document.createElement('table');
+  const radiiThead = document.createElement('thead');
+  const radiiTr = document.createElement('tr');
+  const radiiTh1 = document.createElement('th');
+  const radiiTh2 = document.createElement('th');
+  const radiiTh3 = document.createElement('th');
+
+  radiiTh1.textContent = 'CSS Variable';
+  radiiTh2.textContent = 'Value (px)';
+  radiiTh3.textContent = 'Reset';
+
+  radiiTr.appendChild(radiiTh1);
+  radiiTr.appendChild(radiiTh2);
+  radiiTr.appendChild(radiiTh3);
+  radiiThead.appendChild(radiiTr);
+  radiiTable.appendChild(radiiThead);
+  
+  const radiiTbody = document.createElement('tbody');
+
+  const editableRadiiCSSVariables = [
+    '--radius-sm', '--radius-md', '--radius-lg', '--radius-full'
+  ];
+
+  for (const variable of editableRadiiCSSVariables) {
+    const row = document.createElement('tr');
+    const cssVariable = document.createElement('td');
+    const value = document.createElement('td');
+    const reset = document.createElement('td');
+
+    const initialValue = getComputedStyle(document.body).getPropertyValue(variable);
+
+    const codeEl = document.createElement('code');
+    codeEl.textContent = variable;
+
+    cssVariable.appendChild(codeEl);
+
+    const numberInput = document.createElement('input');
+    numberInput.type = 'number';
+    numberInput.min = '0';
+    numberInput.step = '1';
+    numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
+
+    numberInput.addEventListener('input', () => {
+      document.documentElement.style.setProperty(variable, `${numberInput.value}px`);
+    });
+
+    value.appendChild(numberInput);
+
+    const resetButton = document.createElement('button');
+    resetButton.textContent = 'Reset';
+
+    resetButton.addEventListener('click', () => {
+      document.documentElement.style.setProperty(variable, initialValue);
+      numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
+    });
+
+    reset.appendChild(resetButton);
+
+    row.appendChild(cssVariable);
+    row.appendChild(value);
+    row.appendChild(reset);
+
+    radiiTbody.appendChild(row);
+  }
+
+  radiiTable.appendChild(radiiTbody);
+
+  return {
+    table: radiiTable,
+    variables: editableRadiiCSSVariables
+  }
+}
+
 export default defineToolbarApp({
   init(canvas) {
     const myWindow = document.createElement('astro-dev-toolbar-window');
-    
     myWindow.style.overflow = 'auto';
 
-    const style = document.createElement('style');
+    const header = document.createElement('h1');
+    header.textContent = 'StudioCMS UI Theme Editor';
+    header.style.marginBottom = '1rem';
+    header.style.marginTop = '0';
+    myWindow.appendChild(header);
 
-    style.textContent = `
-      button {
-        position: relative;
-        gap: 0.5rem;
-        outline: none;
-        border: none;
-        font-weight: 400;
-        border-radius: var(--radius-md);
-        transition: transform 0.15s, background-color 0.15s, border-color 0.15s, color 0.15s;
-        transition-timing-function: ease;
-        cursor: pointer;
-        background-color: hsl(var(--primary-base));
-        border-color: hsl(var(--primary-base));
-        color: hsl(var(--text-inverted));
-        min-width: fit-content;
-        will-change: transform;
-        text-decoration: none;
-        height: 32px;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.825em;
-        text-align: center !important;
-      }
+    const style = createStyles();
 
-      button:hover {
-        background-color: hsl(var(--primary-hover));
-      }
+    const { table: colorsTable, variables: colorVariables } = createColorsTable();
+    const colorDetails = createDetails('Colors', colorsTable);
 
-      button:active {
-        background-color: hsl(var(--primary-active));
-      }
-    `;
+    const { table: radiiTable, variables: radiiVariables } = createRadiiTable();
+    const radiiDetails = createDetails('Border Radii', radiiTable);
 
-    const table = document.createElement('table');
-    const thead = document.createElement('thead');
-    const tr = document.createElement('tr');
-    const th1 = document.createElement('th');
-    const th2 = document.createElement('th');
-    const th3 = document.createElement('th');
-
-    tr.style.textAlign = 'left';
-    tr.style.color = '#fff';
-
-    th1.textContent = 'CSS Variable';
-    th2.textContent = 'Color Picker';
-    th3.textContent = 'Reset';
-
-    tr.appendChild(th1);
-    tr.appendChild(th2);
-    tr.appendChild(th3);
-    thead.appendChild(tr);
-    table.appendChild(thead);
-
-    const tbody = document.createElement('tbody');
-
-    const editableCSSVariables = [
-      '--background-base', '--background-step-1', '--background-step-2', '--background-step-3',
-      '--text-normal', '--text-muted', '--text-inverted', '--border', '--shadow', 
-      '--default-base', '--default-hover', '--default-active',
-      '--primary-base', '--primary-hover', '--primary-active',
-      '--success-base', '--success-hover', '--success-active',
-      '--warning-base', '--warning-hover', '--warning-active',
-      '--danger-base', '--danger-hover', '--danger-active',
-      '--info-base', '--info-hover', '--info-active',
-      '--mono-base', '--mono-hover', '--mono-active'
-    ];
-
-    const rows = createRows(editableCSSVariables);
-
-    for (const row of rows) {
-      tbody.appendChild(row);
-    }
-
-    table.appendChild(tbody);
-
-    myWindow.appendChild(table);
+    myWindow.appendChild(header);
+    myWindow.appendChild(colorDetails);
+    myWindow.appendChild(radiiDetails);
     myWindow.appendChild(style);
 
     const exportButton = document.createElement('button');
@@ -136,7 +266,7 @@ export default defineToolbarApp({
     exportButton.style.marginTop = '1rem';
 
     exportButton.addEventListener('click', () => {
-      const css = editableCSSVariables.map(variable => {
+      const css = [...colorVariables, ...radiiVariables].map(variable => {
         return `  ${variable}: ${getComputedStyle(document.body).getPropertyValue(variable)};`;
       }).join('\n');
 
