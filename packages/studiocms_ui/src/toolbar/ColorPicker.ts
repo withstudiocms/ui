@@ -18,16 +18,23 @@ export default class DevToolbarColorPicker extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowRoot = this.attachShadow({ mode: 'open' });
-		this.shadowRoot.innerHTML = `
-      <input type="color" value="${rgb2hex(hsl2rgb(this.dataset.color?.replaceAll('%', '').split(' ')))}"/>
-    `;
+		
+		this.shadowRoot.innerHTML = `<input type="color" />`;
+
     (this.shadowRoot.firstElementChild as HTMLInputElement).addEventListener('input', () => {
-      console.log(this.getColor())
-      document.documentElement.style[this.dataset.variable] = this.getColor()
+			this.dataset.color = (this.shadowRoot.firstElementChild as HTMLInputElement).value;
     })
 	}
 
+	connectedCallback() {
+		(this.shadowRoot.firstElementChild as HTMLInputElement).value = rgb2hex(hsl2rgb(this.dataset.color!.replaceAll('%', '').split(' ')));
+	}
+
 	getColor() {
-		return rgb2hsl(hex2rgb((this.shadowRoot.firstElementChild as HTMLInputElement).value));
+		return (([r,g,b]) => `${r} ${g}% ${b}%`)(rgb2hsl(hex2rgb((this.shadowRoot.firstElementChild as HTMLInputElement).value)).map((v: number) => Math.round(v)));
+	}
+
+	setColor(color: string) {
+		(this.shadowRoot.firstElementChild as HTMLInputElement).value = rgb2hex(hsl2rgb(color.replaceAll('%', '').split(' ')));
 	}
 }
