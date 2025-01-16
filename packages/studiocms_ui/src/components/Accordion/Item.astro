@@ -1,12 +1,21 @@
 ---
+import { Icon } from "../../utils";
 
+interface Props {
+    open?: boolean
+}
+
+const { open = false } = Astro.props;
 ---
 
-<div class="sui-accordion-item">
-    <div class="sui-accordion-summary">
-        <slot name="summary" />
+<div class="sui-accordion-item" class:list={{ active: open }} data-open={open}>
+    <div class="sui-accordion-summary" tabindex="0">
+        <Icon name="chevron-right-20-solid" class='sui-summary-chevron' width={20} height={20} />
+        <div class="sui-accordion-summary-content">
+            <slot name="summary" />
+        </div>
     </div>
-    <div class="sui-accordion-details initial">
-        <slot name="details" />
+    <div class="sui-accordion-details" class:list={{ active: open, open: open, initial: !open }}>
+        <slot name="default" />
     </div>
 </div>

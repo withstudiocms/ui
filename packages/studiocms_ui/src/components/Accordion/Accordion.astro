@@ -2,11 +2,14 @@
 import './accordion.css';
 
 interface Props {
-  initialOpen?: string;
+  multipleOpen?: boolean;
+  style?: 'outlined' | 'separated' | 'filled' | 'blank';
 }
+
+const { style = 'outlined', multipleOpen = true } = Astro.props;
 ---
 
-<div class="sui-accordion">
+<div class="sui-accordion" class:list={[style]} data-multiple={multipleOpen}>
   <slot />
 </div>
 <script>
