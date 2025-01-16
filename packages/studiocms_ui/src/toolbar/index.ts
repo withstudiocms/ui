@@ -27,6 +27,7 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
 
     const resetButton = document.createElement('button');
     resetButton.textContent = 'Reset';
+    resetButton.disabled = true;
     
     const codeEl = document.createElement('code');
     codeEl.textContent = variable;
@@ -45,6 +46,7 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
       const theme = document.documentElement.dataset.theme ?? 'dark';
       document.documentElement.style.setProperty(variable, color);
       map[theme]![variable] = color;
+      resetButton.disabled = false;
     });
 
     resetButton.addEventListener('click', () => {
@@ -52,6 +54,7 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
       document.documentElement.style.setProperty(variable, initialColor);
       colorPickerEl.setColor(initialColor);
       delete map[theme]![variable];
+      resetButton.disabled = true;
     });
 
     return row;
@@ -111,6 +114,12 @@ function createStyles(): HTMLStyleElement {
 
     button:active {
       background-color: hsl(var(--primary-active));
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
     }
 
     table {
@@ -226,6 +235,19 @@ function createRadiiTable(): TableAndVariables {
 
     cssVariable.appendChild(codeEl);
 
+    const resetButton = document.createElement('button');
+    resetButton.textContent = 'Reset';
+    resetButton.disabled = true;
+
+    resetButton.addEventListener('click', () => {
+      document.documentElement.style.setProperty(variable, initialValue);
+      numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
+      delete map.dark![variable];
+      resetButton.disabled = true;
+    });
+
+    reset.appendChild(resetButton);
+
     const numberInput = document.createElement('input');
     numberInput.type = 'number';
     numberInput.min = '0';
@@ -236,20 +258,10 @@ function createRadiiTable(): TableAndVariables {
       const size = `${numberInput.value}px`;
       document.documentElement.style.setProperty(variable, `${numberInput.value}px`);
       map.dark![variable] = size;
+      resetButton.disabled = false;
     });
 
     value.appendChild(numberInput);
-
-    const resetButton = document.createElement('button');
-    resetButton.textContent = 'Reset';
-
-    resetButton.addEventListener('click', () => {
-      document.documentElement.style.setProperty(variable, initialValue);
-      numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
-      delete map.dark![variable];
-    });
-
-    reset.appendChild(resetButton);
 
     row.appendChild(cssVariable);
     row.appendChild(value);

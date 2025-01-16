@@ -3,8 +3,8 @@ title: Customizing StudioCMS UI
 ---
 
 StudioCMS UI is designed on top of CSS variables, which makes it easy to customize the look of the components
-to match your brand. You can customize the colors, typography, spacing, and more. Basic customization can be done
-by adding the `customCss` option to the integration options:
+to match your brand. You can customize the colors, typography, radii, and more. All customization is done
+with a custom CSS file that you can provide to the UI integration:
 
 ```ts showLinenumbers title="astro.config.mjs" {7}
 import { defineConfig } from 'astro/config';
@@ -20,7 +20,7 @@ export default defineConfig({
 ```
 
 In that file, you can override the CSS variables to change the look of the components. If you wanted to overwrite
-the default color, it'd look like this:
+the primary color, it'd look like this:
 
 ```css showLinenumbers title="custom.css"
 :root {
@@ -38,11 +38,24 @@ the default color, it'd look like this:
 
 If you make significant changes to the colors, remember to also adjust the light theme.
 
-For convenience, here are all the CSS variables used in StudioCMS UI. Always make sure to provide them as 
+Below, you will find all the CSS variables used in StudioCMS UI. Always make sure to provide them as 
 HSL values without commas. You can use them in your CSS like this: `background-color: hsl(var(--background-base));`.
 
+## Interactive Editing
+
+You can edit the colors in your own project during development using the dev toolbar. In the toolbar, you will find a 
+tab with the StudioCMS logo on it. Once clicked it will reveal a few color pickers and inputs you can use to adjust various 
+variables. You can copy your changes to your clipboard after you are done.
+
+import { Accordion, AccordionItem } from '@studiocms/ui/components';
+
 ## Color Variables
-### Dark Theme
+
+<Accordion>
+	<AccordionItem>
+		<div slot="summary">Dark Mode</div>
+		<div>
+
 | Variable | Description | Default |
 | --- | --- | --- |
 | `--background-base` | Base background color | `0 0% 6%` |
@@ -76,7 +89,12 @@ HSL values without commas. You can use them in your CSS like this: `background-c
 | `--mono-hover` | Mono color hover | `0 0% 90%` |
 | `--mono-active` | Mono color active | `0 0% 95%` |
 
-### Light Theme
+		</div>
+	</AccordionItem>
+
+	<AccordionItem>
+		<div slot="summary">Light Mode</div>
+		<div>
 
 | Variable | Description | Default |
 | --- | --- | --- |
@@ -111,7 +129,12 @@ HSL values without commas. You can use them in your CSS like this: `background-c
 | `--mono-hover` | Mono color hover | `0 0% 10%` |
 | `--mono-active` | Mono color active | `0 0% 5%` |
 
-## Non-Themed Color Variables
+		</div>
+	</AccordionItem>
+
+	<AccordionItem>
+		<div slot="summary">Non-Themed Color Variables</div>
+		<div>
 
 | Variable | Description | Default |
 | --- | --- | --- |
@@ -136,7 +159,12 @@ HSL values without commas. You can use them in your CSS like this: `background-c
 | `--info-flat-hover` | Info flat hover color | `var(--info-base) / 0.25` |
 | `--info-flat-active` | Info flat active color | `var(--info-base) / 0.35` |
 
-## Radius Variables
+		</div>
+	</AccordionItem>
+
+	<AccordionItem>
+		<div slot="summary">Radius Variables</div>
+		<div>
 
 | Variable | Description | Default |
 | --- | --- | --- |
@@ -144,3 +172,7 @@ HSL values without commas. You can use them in your CSS like this: `background-c
 | `--radius-md` | Medium radius | `.5rem` |
 | `--radius-lg` | Large radius | `1rem` |
 | `--radius-full` | Full radius | `999px` |
+
+		</div>
+	</AccordionItem>
+</Accordion>
