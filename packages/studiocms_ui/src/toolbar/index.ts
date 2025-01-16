@@ -1,14 +1,14 @@
 import { defineToolbarApp } from "astro/toolbar";
 import DevToolbarColorPicker from './ColorPicker';
 
-// components:
-// - tabs
-// - color picker
-// - slider
-
 interface TableAndVariables {
   table: HTMLTableElement;
   variables: string[];
+}
+
+const map: Record<string, Record<string, string>> = {
+  light: {},
+  dark: {},
 }
 
 function createRows(variables: string[]): HTMLTableRowElement[] {
@@ -41,12 +41,17 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
     row.appendChild(reset);
 
     colorPickerEl.shadowRoot.firstElementChild?.addEventListener('input', () => {
-      document.documentElement.style.setProperty(variable, colorPickerEl.getColor());
+      const color = colorPickerEl.getColor()
+      const theme = document.documentElement.dataset.theme ?? 'dark'
+      document.documentElement.style.setProperty(variable, color);
+      map[theme]![variable] = color
     });
 
     resetButton.addEventListener('click', () => {
+      const theme = document.documentElement.dataset.theme ?? 'dark'
       document.documentElement.style.setProperty(variable, initialColor);
       colorPickerEl.setColor(initialColor);
+      delete map[theme]![variable]
     });
 
     return row;
@@ -266,11 +271,22 @@ export default defineToolbarApp({
     exportButton.style.marginTop = '1rem';
 
     exportButton.addEventListener('click', () => {
+<<<<<<< HEAD
       const css = [...colorVariables, ...radiiVariables].map(variable => {
         return `  ${variable}: ${getComputedStyle(document.body).getPropertyValue(variable)};`;
       }).join('\n');
+=======
+      function getVariables(theme: 'light' | 'dark') {
+        return Object.entries(map[theme]!).map(([variable, value]) => {
+          return `  ${variable}: ${value};`;
+        }).join('\n');
+      }
+>>>>>>> 33cb92d (Support light/dark & partial export)
 
-      const string = `:root {\n${css}\n}`;
+      const darkVariables = getVariables('dark')
+      const lightVariables = getVariables('light')
+
+      const string = `${darkVariables ? `:root {\n${darkVariables}\n}\n` : ''}${lightVariables ? `\n[data-theme="light"] {\n${lightVariables}\n}` : ''}`;
 
       navigator.clipboard.writeText(string);
     });
