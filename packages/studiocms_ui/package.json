@@ -40,12 +40,14 @@
     "./layouts": "./src/layouts.ts",
     "./css/*": "./src/css/*",
     "./utils/*": "./src/utils/*",
-    "./types": "./src/types/index.ts"
+    "./types": "./src/types/index.ts",
+    "./toolbar": "./src/toolbar/index.ts"
   },
   "dependencies": {
     "@iconify-json/heroicons": "catalog:",
     "@iconify/utils": "catalog:",
-    "pathe": "catalog:"
+    "pathe": "catalog:",
+    "pure-color": "^1.3.0"
   },
   "peerDependencies": {
     "astro": "catalog:peers",
