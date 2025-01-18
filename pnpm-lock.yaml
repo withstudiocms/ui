@@ -182,6 +182,9 @@ importers:
       astro:
         specifier: catalog:peers
         version: 5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)
+      astro-transition-event-polyfill:
+        specifier: ^1.0.0
+        version: 1.0.0(astro@5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
       pathe:
         specifier: 'catalog:'
         version: 1.1.2
@@ -1447,6 +1450,11 @@ packages:
     resolution: {integrity: sha512-Tvdc7RV0G92BbtyEOsfJtXU35w41CkM94fOAzxbQP67Wj5jArfserJ321FO4XA7WG9QMV0GIBmQq77NBIRDzpQ==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0
+
+  astro-transition-event-polyfill@1.0.0:
+    resolution: {integrity: sha512-YLSXkYDLA8bvRT9+11AyGqVMM4Xc+nBryvx9GUlNr5b80DeBffMjvgPepbeDNeg591rHtFXatov2ZXJqnn/eCA==}
+    peerDependencies:
+      astro: ^4.5 || ^5.1.0
 
   astro@5.1.1:
     resolution: {integrity: sha512-prpWC2PRs4P3FKQg6gZaU+VNMqbZi5pDvORGB2nrjfRjkrvF6/l4BqhvkJ6YQ0Ohm5rIMVz8ljgaRI77mLHbwg==}
@@ -2727,6 +2735,9 @@ packages:
 
   pathe@1.1.2:
     resolution: {integrity: sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==}
+
+  pathe@2.0.2:
+    resolution: {integrity: sha512-15Ztpk+nov8DR524R4BF7uEuzESgzUEAV4Ah7CUMNGXdE5ELuvxElxGXndBl32vMSsWa1jpNf22Z+Er3sKwq+w==}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -4951,6 +4962,12 @@ snapshots:
       astro: 5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)
       rehype-expressive-code: 0.38.3
 
+  astro-transition-event-polyfill@1.0.0(astro@5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)):
+    dependencies:
+      '@types/node': 20.17.10
+      astro: 5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)
+      pathe: 2.0.2
+
   astro@5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1):
     dependencies:
       '@astrojs/compiler': 2.10.3
@@ -6705,6 +6722,8 @@ snapshots:
   path-type@4.0.0: {}
 
   pathe@1.1.2: {}
+
+  pathe@2.0.2: {}
 
   picocolors@1.1.1: {}
 

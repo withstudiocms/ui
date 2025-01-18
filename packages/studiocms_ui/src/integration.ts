@@ -3,6 +3,7 @@ import { version as packageVersion } from '../package.json';
 import { createResolver } from './utils/create-resolver';
 import { addVirtualImports } from './utils/integration-utils';
 import { viteVirtualModulePluginBuilder } from './utils/virtual-module-plugin-builder';
+import transitionEventPolyfill from 'astro-transition-event-polyfill';
 
 type Options = {
 	/**
@@ -40,6 +41,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 					vite: {
 						plugins: [globalCss(), version()],
 					},
+					integrations: [transitionEventPolyfill()]
 				});
 
 				addVirtualImports(params, {
