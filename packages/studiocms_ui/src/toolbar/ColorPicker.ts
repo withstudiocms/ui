@@ -11,24 +11,41 @@ function hex2rgb(hex: string): Color {
 	return [r, g, b];
 }
 
+function hueToRgb(p: number, q: number, t: number): number {
+  if (t < 0) t += 1;
+  if (t > 1) t -= 1;
+  if (t < 1 / 6) return p + (q - p) * 6 * t;
+  if (t < 1 / 2) return q;
+  if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+  return p;
+}
+
 /**
  * Convert an HSL color to an RGB color.
  * @param hsl - The HSL color to convert.
  */
 function hsl2rgb(hsl: number[]): Color {
-	const [h, s, l] = hsl as Color;
-	const c = (1 - Math.abs(2 * l - 1)) * s;
-	const x = c * (1 - Math.abs((h / 60) % 2 - 1));
-	const m = l - c / 2;
-	const [r, g, b] = (() => {
-		if (h < 60) return [c, x, 0];
-		if (h < 120) return [x, c, 0];
-		if (h < 180) return [0, c, x];
-		if (h < 240) return [0, x, c];
-		if (h < 300) return [x, 0, c];
-		return [c, 0, x];
-	})();
-	return [r, g, b].map(v => Math.round((v + m) * 255)) as Color;
+  const [h, sPercent, lPercent] = hsl as Color;
+
+  // Convert percentages to fractions
+  const s = sPercent / 100;
+  const l = lPercent / 100;
+
+  let r, g, b;
+
+  if (s === 0) {
+    // Achromatic (gray)
+    r = g = b = l;
+  } else {
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    const hueFraction = h / 360; // Convert hue from degrees to fractions
+    r = hueToRgb(p, q, hueFraction + 1 / 3);
+    g = hueToRgb(p, q, hueFraction);
+    b = hueToRgb(p, q, hueFraction - 1 / 3);
+  }
+
+  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
 
 /**
@@ -75,6 +92,7 @@ export default class DevToolbarColorPicker extends HTMLElement {
 	}
 
 	connectedCallback() {
+		console.log(this.dataset.color!.replaceAll('%', '').split(' ').map(Number));
 		(this.shadowRoot.firstElementChild as HTMLInputElement).value = rgb2hex(hsl2rgb(this.dataset.color!.replaceAll('%', '').split(' ').map(Number)));
 	}
 
