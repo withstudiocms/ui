@@ -15,8 +15,8 @@ function hex2rgb(hex: string): Color {
  * Convert an HSL color to an RGB color.
  * @param hsl - The HSL color to convert.
  */
-function hsl2rgb(hsl: Color): Color {
-	const [h, s, l] = hsl;
+function hsl2rgb(hsl: number[]): Color {
+	const [h, s, l] = hsl as Color;
 	const c = (1 - Math.abs(2 * l - 1)) * s;
 	const x = c * (1 - Math.abs((h / 60) % 2 - 1));
 	const m = l - c / 2;
@@ -75,8 +75,7 @@ export default class DevToolbarColorPicker extends HTMLElement {
 	}
 
 	connectedCallback() {
-		const hsl = this.dataset.color!.replaceAll('%', '').split(' ').map(Number) as Color;
-		(this.shadowRoot.firstElementChild as HTMLInputElement).value = rgb2hex(hsl2rgb(hsl));
+		(this.shadowRoot.firstElementChild as HTMLInputElement).value = rgb2hex(hsl2rgb(this.dataset.color!.replaceAll('%', '').split(' ').map(Number)));
 	}
 
 	getColor() {
@@ -84,7 +83,6 @@ export default class DevToolbarColorPicker extends HTMLElement {
 	}
 
 	setColor(color: string) {
-		const hsl = color.replaceAll('%', '').split(' ').map(Number) as Color;
-		(this.shadowRoot.firstElementChild as HTMLInputElement).value = rgb2hex(hsl2rgb(hsl));
+		(this.shadowRoot.firstElementChild as HTMLInputElement).value = rgb2hex(hsl2rgb(color.replaceAll('%', '').split(' ').map(Number)));
 	}
 }
