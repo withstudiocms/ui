@@ -54,6 +54,7 @@ function hsl2rgb(hsl: number[]): Color {
  */
 function rgb2hex(rgb: Color): string {
 	const [r, g, b] = rgb;
+	console.log(rgb);
 	return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 }
 
@@ -62,19 +63,28 @@ function rgb2hex(rgb: Color): string {
  * @param rgb - The RGB color to convert.
  */
 function rgb2hsl(rgb: Color): Color {
-	const [r, g, b] = rgb.map(v => v / 255) as Color;
+	const [r, g, b] = rgb.map((v) => v / 255) as Color;
 	const max = Math.max(r, g, b);
 	const min = Math.min(r, g, b);
 	const l = (max + min) / 2;
-	const d = max - min;
-	const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-	const h = (() => {
-		if (d === 0) return 0;
-		if (max === r) return 60 * (((g - b) / d) % 6);
-		if (max === g) return 60 * ((b - r) / d + 2);
-		return 60 * ((r - g) / d + 4);
-	})();
-	return [h, s, l];
+
+	let s = 0;
+	if (max !== min) {
+		s = l > 0.5 ? (max - min) / (2 - max - min) : (max - min) / (max + min);
+	}
+
+	let h = 0;
+	if (max !== min) {
+		if (max === r) {
+			h = ((g - b) / (max - min) + (g < b ? 6 : 0)) * 60;
+		} else if (max === g) {
+			h = ((b - r) / (max - min) + 2) * 60;
+		} else {
+			h = ((r - g) / (max - min) + 4) * 60;
+		}
+	}
+
+	return [h, s * 100, l * 100];
 }
 
 export default class DevToolbarColorPicker extends HTMLElement {
@@ -98,7 +108,11 @@ export default class DevToolbarColorPicker extends HTMLElement {
 	}
 
 	getColor() {
-		return (([r,g,b]) => `${r} ${g}% ${b}%`)(rgb2hsl(hex2rgb(this.input.value)).map((v: number) => Math.round(v)));
+		const rgb = hex2rgb(this.input.value);
+		const hsl = rgb2hsl(rgb).map((v: number) => Math.round(v));
+		const [h, s, l] = hsl;
+		console.log(rgb2hsl(rgb)[1], hsl);
+		return `${h} ${s}% ${l}%`;
 	}
 
 	setColor(color: string) {
