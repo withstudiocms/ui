@@ -27,13 +27,6 @@ catalogs:
     typescript:
       specifier: ^5.7.2
       version: 5.7.2
-  peers:
-    astro:
-      specifier: ^4.5 || ^5.0.0-beta.0
-      version: 5.1.1
-    vite:
-      specifier: ^5.0.0 || ^6.0.0
-      version: 6.0.6
 
 importers:
 
@@ -190,8 +183,8 @@ importers:
         specifier: catalog:peers
         version: 5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)
       astro-transition-event-polyfill:
-        specifier: ^1.0.0
-        version: 1.0.0(astro@5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
+        specifier: ^1.1.0
+        version: 1.1.0(astro@5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
       pathe:
         specifier: 'catalog:'
         version: 1.1.2
@@ -1455,8 +1448,8 @@ packages:
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0
 
-  astro-transition-event-polyfill@1.0.0:
-    resolution: {integrity: sha512-YLSXkYDLA8bvRT9+11AyGqVMM4Xc+nBryvx9GUlNr5b80DeBffMjvgPepbeDNeg591rHtFXatov2ZXJqnn/eCA==}
+  astro-transition-event-polyfill@1.1.0:
+    resolution: {integrity: sha512-DhR5MAcNl6zsTu5bU60vAe+nBZLTW61zNFUU6DX1gNSiFDQbQiRC7ft322kAMRDRir7MJIQ5/hCMcEWx3jDNWA==}
     peerDependencies:
       astro: ^4.5 || ^5.1.0
 
@@ -4923,7 +4916,7 @@ snapshots:
       astro: 5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)
       rehype-expressive-code: 0.38.3
 
-  astro-transition-event-polyfill@1.0.0(astro@5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)):
+  astro-transition-event-polyfill@1.1.0(astro@5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)):
     dependencies:
       '@types/node': 20.17.10
       astro: 5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1)

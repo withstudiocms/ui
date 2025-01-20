@@ -46,7 +46,7 @@
   "dependencies": {
     "@iconify-json/heroicons": "catalog:",
     "@iconify/utils": "catalog:",
-    "astro-transition-event-polyfill": "^1.0.0",
+    "astro-transition-event-polyfill": "^1.1.0",
     "pathe": "catalog:"
   },
   "peerDependencies": {

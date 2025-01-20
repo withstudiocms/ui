@@ -54,7 +54,6 @@ function hsl2rgb(hsl: number[]): Color {
  */
 function rgb2hex(rgb: Color): string {
 	const [r, g, b] = rgb;
-	console.log(rgb);
 	return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 }
 
@@ -111,7 +110,6 @@ export default class DevToolbarColorPicker extends HTMLElement {
 		const rgb = hex2rgb(this.input.value);
 		const hsl = rgb2hsl(rgb).map((v: number) => Math.round(v));
 		const [h, s, l] = hsl;
-		console.log(rgb2hsl(rgb)[1], hsl);
 		return `${h} ${s}% ${l}%`;
 	}
 
