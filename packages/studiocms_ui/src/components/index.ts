@@ -20,6 +20,9 @@ export { default as Accordion } from './Accordion/Accordion.astro';
 export { default as AccordionItem } from './Accordion/Item.astro';
 export { default as Footer } from './Footer/Footer.astro';
 
+export { default as Progress } from './Progress/Progress.astro';
+export { ProgressHelper } from './Progress/helper';
+
 export { default as Sidebar } from './Sidebar/Single.astro';
 export { default as DoubleSidebar } from './Sidebar/Double.astro';
 export { SingleSidebarHelper, DoubleSidebarHelper } from './Sidebar/helpers';

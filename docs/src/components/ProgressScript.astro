@@ -1,0 +1,18 @@
+<script>
+  import { ProgressHelper } from '@studiocms/ui/components';
+
+  const progress = new ProgressHelper('prog-2');
+
+  async function changeProgress() {
+    for (let i = 10; i <= 100; i += 10) {
+      progress.setValue(i);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+
+    progress.setValue(0);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    changeProgress();
+  }
+
+  changeProgress();
+</script>

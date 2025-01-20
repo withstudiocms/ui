@@ -2,7 +2,13 @@
 import './accordion.css';
 
 interface Props {
+  /**
+   * Whether multiple items in the accordion can be open at once. Default is `true`.
+   */
   multipleOpen?: boolean;
+  /**
+   * The style of the accordion. Default is `outlined`
+   */
   style?: 'outlined' | 'separated' | 'filled' | 'blank';
 }
 
