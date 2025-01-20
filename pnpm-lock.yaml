@@ -6,21 +6,12 @@ settings:
 
 catalogs:
   default:
-    '@astrojs/check':
-      specifier: ^0.9.4
-      version: 0.9.4
-    '@fontsource-variable/onest':
-      specifier: 5.1.0
-      version: 5.1.0
     '@iconify-json/heroicons':
       specifier: ^1.2.1
       version: 1.2.1
     '@iconify/utils':
       specifier: ^2.1.33
       version: 2.2.0
-    astro:
-      specifier: ^5.1.1
-      version: 5.1.1
     pathe:
       specifier: ^1.1.2
       version: 1.1.2
@@ -188,12 +179,9 @@ importers:
       pathe:
         specifier: 'catalog:'
         version: 1.1.2
-      pure-color:
-        specifier: ^1.3.0
-        version: 1.3.0
       vite:
         specifier: catalog:peers
-        version: 6.0.7(@types/node@20.17.10)(jiti@2.3.3)(yaml@2.6.1)
+        version: 6.0.6(@types/node@20.17.10)(jiti@2.3.3)(yaml@2.6.1)
     devDependencies:
       typescript:
         specifier: 'catalog:'
@@ -2807,9 +2795,6 @@ packages:
   pseudomap@1.0.2:
     resolution: {integrity: sha512-b/YwNhb8lk1Zz2+bXXpS/LK9OisiZZ1SNsSLxN1x2OXVEhW2Ckr/7mWE5vrC1ZTiJlD9g19jWszTmJsB+oEpFQ==}
 
-  pure-color@1.3.0:
-    resolution: {integrity: sha512-QFADYnsVoBMw1srW7OVKEYjG+MbIa49s54w1MA1EDY6r2r/sTcKKYqRX1f4GYvnXP7eN/Pe9HFcX+hwzmrXRHA==}
-
   query-registry@3.0.1:
     resolution: {integrity: sha512-M9RxRITi2mHMVPU5zysNjctUT8bAPx6ltEXo/ir9+qmiM47Y7f0Ir3+OxUO5OjYAWdicBQRew7RtHtqUXydqlg==}
     engines: {node: '>=20'}
@@ -3348,46 +3333,6 @@ packages:
 
   vite@6.0.6:
     resolution: {integrity: sha512-NSjmUuckPmDU18bHz7QZ+bTYhRR0iA72cs2QAxCqDpafJ0S6qetco0LB3WW2OxlMHS0JmAv+yZ/R3uPmMyGTjQ==}
-    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
-      jiti: '>=1.21.0'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      sass-embedded: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.16.0
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      jiti:
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      sass-embedded:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
-        optional: true
-
-  vite@6.0.7:
-    resolution: {integrity: sha512-RDt8r/7qx9940f8FcOIAH9PTViRrghKaK2K1jY3RaAURrEUbm9Du1mJ72G+jlhtG3WwodnfzY8ORQZbBavZEAQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -6791,8 +6736,6 @@ snapshots:
 
   pseudomap@1.0.2: {}
 
-  pure-color@1.3.0: {}
-
   query-registry@3.0.1:
     dependencies:
       query-string: 9.1.1
@@ -7415,17 +7358,6 @@ snapshots:
       vfile-message: 4.0.2
 
   vite@6.0.6(@types/node@20.17.10)(jiti@2.3.3)(yaml@2.6.1):
-    dependencies:
-      esbuild: 0.24.2
-      postcss: 8.4.49
-      rollup: 4.28.1
-    optionalDependencies:
-      '@types/node': 20.17.10
-      fsevents: 2.3.3
-      jiti: 2.3.3
-      yaml: 2.6.1
-
-  vite@6.0.7(@types/node@20.17.10)(jiti@2.3.3)(yaml@2.6.1):
     dependencies:
       esbuild: 0.24.2
       postcss: 8.4.49
