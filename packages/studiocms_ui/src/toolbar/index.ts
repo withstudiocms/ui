@@ -41,6 +41,7 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
     row.appendChild(colorPicker);
     row.appendChild(reset);
 
+    console.log(colorPickerEl.shadowRoot.firstElementChild);
     colorPickerEl.shadowRoot.firstElementChild?.addEventListener('input', () => {
       const color = colorPickerEl.getColor();
       const theme = document.documentElement.dataset.theme ?? 'dark';
@@ -60,12 +61,12 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
     return row;
   });
 
-
   const observer = new MutationObserver((mutations) => {
     mutations.map(m => {
       if (m.type !== 'attributes' || m.attributeName !== 'data-theme') return;
       rows.map(row => {
         const theme = document.documentElement.dataset.theme ?? 'dark';
+        console.log(row.children[1]?.firstElementChild);
         const picker = (row.children[1]?.firstElementChild as DevToolbarColorPicker);
         const variable = picker.dataset.variable!;
         const value = map[theme]![variable];
