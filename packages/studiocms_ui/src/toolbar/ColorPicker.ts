@@ -78,29 +78,30 @@ function rgb2hsl(rgb: Color): Color {
 }
 
 export default class DevToolbarColorPicker extends HTMLElement {
-	override shadowRoot: ShadowRoot;
+	private input: HTMLInputElement;
 
 	constructor() {
 		super();
-		this.shadowRoot = this.attachShadow({ mode: 'open' });
+		const shadowRoot = this.attachShadow({ mode: 'open' });
 		
-		this.shadowRoot.innerHTML = `<input type="color" />`;
+		shadowRoot.innerHTML = `<input type="color" />`;
 
-    (this.shadowRoot.firstElementChild as HTMLInputElement).addEventListener('input', () => {
-			this.dataset.color = (this.shadowRoot.firstElementChild as HTMLInputElement).value;
-    })
+		this.input = shadowRoot.firstElementChild as HTMLInputElement;
+
+    this.input.addEventListener('input', () => {
+			this.dataset.color = this.input.value;
+    });
 	}
 
 	connectedCallback() {
-		console.log(this.dataset.color!.replaceAll('%', '').split(' ').map(Number));
-		(this.shadowRoot.firstElementChild as HTMLInputElement).value = rgb2hex(hsl2rgb(this.dataset.color!.replaceAll('%', '').split(' ').map(Number)));
+		this.input.value = rgb2hex(hsl2rgb(this.dataset.color!.replaceAll('%', '').split(' ').map(Number)));
 	}
 
 	getColor() {
-		return (([r,g,b]) => `${r} ${g}% ${b}%`)(rgb2hsl(hex2rgb((this.shadowRoot.firstElementChild as HTMLInputElement).value)).map((v: number) => Math.round(v)));
+		return (([r,g,b]) => `${r} ${g}% ${b}%`)(rgb2hsl(hex2rgb(this.input.value)).map((v: number) => Math.round(v)));
 	}
 
 	setColor(color: string) {
-		(this.shadowRoot.firstElementChild as HTMLInputElement).value = rgb2hex(hsl2rgb(color.replaceAll('%', '').split(' ').map(Number)));
+		this.input.value = rgb2hex(hsl2rgb(color.replaceAll('%', '').split(' ').map(Number)));
 	}
 }
