@@ -5,7 +5,7 @@ title: Divider
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { Divider } from '@studiocms/ui/components';
+import { Divider } from 'studiocms:ui/components';
 
 A simple divider. Allows for showing a label in the center, which is helpful for seperating sidebars or other structured content.
 
@@ -20,7 +20,7 @@ A simple divider. Allows for showing a label in the center, which is helpful for
   <TabItem label="Code">
     ```astro showLinenumbers title="DividerExample.astro"
     ---
-    import { Divider } from '@studiocms/ui/components';
+    import { Divider } from 'studiocms:ui/components';
     ---
 
     <Divider>
@@ -37,7 +37,7 @@ you can use the `background` prop to change it to match the correct color.
 
 ```astro "background='background-step-1'" showLinenumbers title="DividerBackgroundExample.astro"
 ---
-import { Divider } from '@studiocms/ui/components';
+import { Divider } from 'studiocms:ui/components';
 ---
 
 <Divider background='background-step-1'>

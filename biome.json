@@ -33,10 +33,13 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noExplicitAny": "warn"
+        "noExplicitAny": "warn",
+        "noImplicitAnyLet": "info"
       },
       "style": {
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "noParameterAssign": "info",
+        "useSingleVarDeclarator": "info"
       }
     }
   },

@@ -6,7 +6,7 @@ sidebar:
     variant: success
 ---
 
-import { Badge } from '@studiocms/ui/components';
+import { Badge } from 'studiocms:ui/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 
@@ -23,7 +23,7 @@ A button component with support for different colors, sizes and states out of th
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeExample.astro"
     ---
-    import { Badge } from '@studiocms/ui/components';
+    import { Badge } from 'studiocms:ui/components';
     ---
 
     <Badge label="Badge" icon="sparkles-16-solid" />
@@ -49,7 +49,7 @@ The badge component has support for the following colors:
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeColorExample.astro"
     ---
-    import { Badge } from '@studiocms/ui/components';
+    import { Badge } from 'studiocms:ui/components';
     ---
 
     <Badge label="Primary" color="primary" />
@@ -75,7 +75,7 @@ The badge component has support for the following colors:
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeSizeExample.astro"
     ---
-    import { Badge } from '@studiocms/ui/components';
+    import { Badge } from 'studiocms:ui/components';
     ---
 
     <Badge label="Default" variant="default" />
@@ -99,7 +99,7 @@ You can change the badge's border-radius by setting the `rounding` prop:
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeSizeExample.astro"
     ---
-    import { Badge } from '@studiocms/ui/components';
+    import { Badge } from 'studiocms:ui/components';
     ---
 
     <Badge label="Full" rounding="full" />
@@ -121,7 +121,7 @@ You can change the badge's border-radius by setting the `rounding` prop:
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeSizeExample.astro"
     ---
-    import { Badge } from '@studiocms/ui/components';
+    import { Badge } from 'studiocms:ui/components';
     ---
 
     <Badge label="Small" size="sm" />

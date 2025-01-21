@@ -1,18 +1,16 @@
-import type { ToastProps } from '../../types';
-import type { ValidIconString } from '../../utils/iconStrings';
-
-import { generateID } from '../../utils/generateID';
-import { getIconString } from '../../utils/iconStrings';
+import type { ToastProps } from '../../types/index.js';
+import { generateID } from '../../utils/generateID.js';
+import { type ValidIconString, getIconString } from '../../utils/iconStrings.js';
 
 let activeToasts: string[] = [];
 
 let lastActiveElement: HTMLElement | null = null;
 
 const revertFocusBackToLastActiveElement = () => {
-  if (lastActiveElement) {
-    lastActiveElement.focus();
-    lastActiveElement = null;
-  }
+	if (lastActiveElement) {
+		lastActiveElement.focus();
+		lastActiveElement = null;
+	}
 };
 
 /**
@@ -21,194 +19,202 @@ const revertFocusBackToLastActiveElement = () => {
  * @param delay The delay in milliseconds.
  */
 class Timer {
-  private id: NodeJS.Timeout | null;
-  private started: Date | null;
-  private remaining: number;
-  private running: boolean;
-  private callback: () => unknown;
+	private id: NodeJS.Timeout | null;
+	private started: Date | null;
+	private remaining: number;
+	private running: boolean;
+	private callback: () => unknown;
 
-  constructor(callback: () => unknown, delay: number) {
-    this.id = null;
-    this.started = null;
-    this.remaining = delay;
-    this.running = false;
-    this.callback = callback;
+	constructor(callback: () => unknown, delay: number) {
+		this.id = null;
+		this.started = null;
+		this.remaining = delay;
+		this.running = false;
+		this.callback = callback;
 
-    this.start();
-  }
+		this.start();
+	}
 
-  start = () => {
-    this.running = true;
-    this.started = new Date();
-    this.id = setTimeout(this.callback, this.remaining);
-  };
+	start = () => {
+		this.running = true;
+		this.started = new Date();
+		this.id = setTimeout(this.callback, this.remaining);
+	};
 
-  pause = () => {
-    if (!this.id || !this.started || !this.running) return;
+	pause = () => {
+		if (!this.id || !this.started || !this.running) return;
 
-    this.running = false;
-    clearTimeout(this.id);
-    this.remaining -= new Date().getTime() - this.started.getTime();
-  };
+		this.running = false;
+		clearTimeout(this.id);
+		this.remaining -= new Date().getTime() - this.started.getTime();
+	};
 
-  getTimeLeft = () => {
-    if (this.running) {
-      this.pause();
-      this.start();
-    }
+	getTimeLeft = () => {
+		if (this.running) {
+			this.pause();
+			this.start();
+		}
 
-    return this.remaining;
-  };
+		return this.remaining;
+	};
 
-  getStateRunning = () => {
-    return this.running;
-  };
+	getStateRunning = () => {
+		return this.running;
+	};
 }
 
 function removeToast(toastID: string) {
-  const toastEl = document.getElementById(toastID);
+	const toastEl = document.getElementById(toastID);
 
-  if (!toastEl) return;
+	if (!toastEl) return;
 
-  activeToasts = activeToasts.filter(x => x !== toastID);
-  
-  toastEl.classList.add('closing');
-  
-  setTimeout(() => toastEl.remove(), 400);
+	activeToasts = activeToasts.filter((x) => x !== toastID);
+
+	toastEl.classList.add('closing');
+
+	setTimeout(() => toastEl.remove(), 400);
 }
 
 function createToast(props: ToastProps) {
-  const toastParent = document.getElementById('sui-toast-drawer')! as HTMLDivElement;
-  
-  const toastContainer = document.createElement('div');
-  const toastID = generateID('toast');
-  toastContainer.tabIndex = 0;
-  toastContainer.ariaLive = 'polite';
-  toastContainer.role = 'alert';
-  toastContainer.id = toastID;
-  toastContainer.ariaLabel = `${props.title} (F8)`;
-  toastContainer.classList.add('sui-toast-container', props.type, `${props.closeButton || props.persistent && "closeable"}`, `${props.persistent && 'persistent'}`);
+	const toastParent = document.getElementById('sui-toast-drawer')! as HTMLDivElement;
 
-  const toastHeader = document.createElement('div');
-  toastHeader.classList.add('sui-toast-header');
+	const toastContainer = document.createElement('div');
+	const toastID = generateID('toast');
+	toastContainer.tabIndex = 0;
+	toastContainer.ariaLive = 'polite';
+	toastContainer.role = 'alert';
+	toastContainer.id = toastID;
+	toastContainer.ariaLabel = `${props.title} (F8)`;
+	toastContainer.classList.add(
+		'sui-toast-container',
+		props.type,
+		`${props.closeButton || (props.persistent && 'closeable')}`,
+		`${props.persistent && 'persistent'}`
+	);
 
-  const toastHeaderLeftSide = document.createElement('div');
-  toastHeaderLeftSide.classList.add('sui-toast-header-left-side')
-  
-  const toastTitle = document.createElement('span');
-  toastTitle.textContent = props.title;
-  toastTitle.classList.add('sui-toast-title');
+	const toastHeader = document.createElement('div');
+	toastHeader.classList.add('sui-toast-header');
 
-  let iconString: ValidIconString;
+	const toastHeaderLeftSide = document.createElement('div');
+	toastHeaderLeftSide.classList.add('sui-toast-header-left-side');
 
-  if (props.type === 'success') {
-    iconString = 'check-circle';
-  } else if (props.type === 'danger') {
-    iconString = 'exclamation-circle';
-  } else if (props.type === 'warning') {
-    iconString = 'exclamation-triangle';
-  } else {
-    iconString = 'information-circle';
-  }
+	const toastTitle = document.createElement('span');
+	toastTitle.textContent = props.title;
+	toastTitle.classList.add('sui-toast-title');
 
-  const toastIcon = getIconString(iconString, 'toast-icon', 24, 24);
-  toastHeaderLeftSide.innerHTML = toastIcon;
+	let iconString: ValidIconString;
 
-  toastHeaderLeftSide.appendChild(toastTitle);
-  toastHeader.appendChild(toastHeaderLeftSide);
-  
-  if (props.closeButton || props.persistent) {
-    const closeIconContainer = document.createElement('button');
-    closeIconContainer.classList.add('close-icon-container');
-    closeIconContainer.addEventListener('click', () => removeToast(toastID));
-    closeIconContainer.innerHTML = getIconString('x-mark', 'close-icon', 24, 24);
-    closeIconContainer.tabIndex = 0;
-    closeIconContainer.ariaLabel = 'Close toast';
+	if (props.type === 'success') {
+		iconString = 'check-circle';
+	} else if (props.type === 'danger') {
+		iconString = 'exclamation-circle';
+	} else if (props.type === 'warning') {
+		iconString = 'exclamation-triangle';
+	} else {
+		iconString = 'information-circle';
+	}
 
-    toastHeader.appendChild(closeIconContainer);
-  }
+	const toastIcon = getIconString(iconString, 'toast-icon', 24, 24);
+	toastHeaderLeftSide.innerHTML = toastIcon;
 
-  toastContainer.appendChild(toastHeader);
+	toastHeaderLeftSide.appendChild(toastTitle);
+	toastHeader.appendChild(toastHeaderLeftSide);
 
-  if (props.description) {
-    const toastDesc = document.createElement('span');
-    toastDesc.innerHTML = props.description;
-    toastDesc.classList.add('sui-toast-desc');
+	if (props.closeButton || props.persistent) {
+		const closeIconContainer = document.createElement('button');
+		closeIconContainer.classList.add('close-icon-container');
+		closeIconContainer.addEventListener('click', () => removeToast(toastID));
+		closeIconContainer.innerHTML = getIconString('x-mark', 'close-icon', 24, 24);
+		closeIconContainer.tabIndex = 0;
+		closeIconContainer.ariaLabel = 'Close toast';
 
-    toastContainer.appendChild(toastDesc);
-  }
+		toastHeader.appendChild(closeIconContainer);
+	}
 
-  if (!props.persistent) {
-    const toastProgressBar = document.createElement('div');
-    toastProgressBar.classList.add('sui-toast-progress-bar');
-    toastProgressBar.style.animationDuration = props.duration ? `${props.duration}ms` : `${toastParent.dataset.duration || 4000}ms`;
+	toastContainer.appendChild(toastHeader);
 
-    toastContainer.appendChild(toastProgressBar);
-  }
+	if (props.description) {
+		const toastDesc = document.createElement('span');
+		toastDesc.innerHTML = props.description;
+		toastDesc.classList.add('sui-toast-desc');
 
-  toastParent.appendChild(toastContainer);
+		toastContainer.appendChild(toastDesc);
+	}
 
-  activeToasts.push(toastID);
+	if (!props.persistent) {
+		const toastProgressBar = document.createElement('div');
+		toastProgressBar.classList.add('sui-toast-progress-bar');
+		toastProgressBar.style.animationDuration = props.duration
+			? `${props.duration}ms`
+			: `${toastParent.dataset.duration || 4000}ms`;
 
-  if (!props.persistent) {
-    const timer = new Timer(
-      () => removeToast(toastID),
-      props.duration || (toastParent.dataset.duration ? Number.parseInt(toastParent.dataset.duration) : 4000)
-    );
+		toastContainer.appendChild(toastProgressBar);
+	}
 
-    const timerPauseWrapper = () => {
-      toastContainer.classList.add('paused');
-      timer.pause();
-    };
+	toastParent.appendChild(toastContainer);
 
-    const timerStartWrapper = () => {
-      toastContainer.classList.remove('paused');
-      timer.start();
-    };
+	activeToasts.push(toastID);
 
-    toastContainer.addEventListener('mouseenter', timerPauseWrapper);
-    toastContainer.addEventListener('focusin', timerPauseWrapper);
+	if (!props.persistent) {
+		const timer = new Timer(
+			() => removeToast(toastID),
+			props.duration ||
+				(toastParent.dataset.duration ? Number.parseInt(toastParent.dataset.duration) : 4000)
+		);
 
-    toastContainer.addEventListener('mouseleave', timerStartWrapper);
-    toastContainer.addEventListener('focusout', () => {
-      const focusedOrHasFocused = toastContainer.matches(':focus-within');
+		const timerPauseWrapper = () => {
+			toastContainer.classList.add('paused');
+			timer.pause();
+		};
 
-      if (!focusedOrHasFocused) {
-        revertFocusBackToLastActiveElement();
-      }
+		const timerStartWrapper = () => {
+			toastContainer.classList.remove('paused');
+			timer.start();
+		};
 
-      timerStartWrapper();
-    });
-  }
+		toastContainer.addEventListener('mouseenter', timerPauseWrapper);
+		toastContainer.addEventListener('focusin', timerPauseWrapper);
 
-  toastContainer.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      removeToast(toastID);
-      revertFocusBackToLastActiveElement();
-    }
-  });
+		toastContainer.addEventListener('mouseleave', timerStartWrapper);
+		toastContainer.addEventListener('focusout', () => {
+			const focusedOrHasFocused = toastContainer.matches(':focus-within');
+
+			if (!focusedOrHasFocused) {
+				revertFocusBackToLastActiveElement();
+			}
+
+			timerStartWrapper();
+		});
+	}
+
+	toastContainer.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') {
+			e.preventDefault();
+			removeToast(toastID);
+			revertFocusBackToLastActiveElement();
+		}
+	});
 }
 
 document.addEventListener('createtoast', (e) => {
-  e.stopImmediatePropagation();
+	e.stopImmediatePropagation();
 
-  const event = e as CustomEvent<ToastProps>;
-  
-  createToast(event.detail);
+	const event = e as CustomEvent<ToastProps>;
+
+	createToast(event.detail);
 });
 
 window.addEventListener('keydown', (e) => {
-  if (e.key === 'F8') {
-    e.preventDefault();
+	if (e.key === 'F8') {
+		e.preventDefault();
 
-    const oldestToast = activeToasts[0];
+		const oldestToast = activeToasts[0];
 
-    if (oldestToast) {
-      lastActiveElement = document.activeElement as HTMLElement;
+		if (oldestToast) {
+			lastActiveElement = document.activeElement as HTMLElement;
 
-      const toastEl = document.getElementById(oldestToast);
-      if (toastEl) toastEl?.focus();
-    }
-  }
+			const toastEl = document.getElementById(oldestToast);
+			if (toastEl) toastEl?.focus();
+		}
+	}
 });

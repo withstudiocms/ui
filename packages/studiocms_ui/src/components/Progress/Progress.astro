@@ -1,12 +1,12 @@
 ---
-import type { StudioCMSColorway } from 'src/utils/colors';
+import type { StudioCMSColorway } from '../../utils/colors.js';
 import './progress.css';
 import type { HTMLAttributes } from 'astro/types';
 
 type Props = {
-  id: string;
-  value?: number;
-  max?: number;
+	id: string;
+	value?: number;
+	max?: number;
 	color?: Omit<StudioCMSColorway, 'default'>;
 } & HTMLAttributes<'div'>;
 

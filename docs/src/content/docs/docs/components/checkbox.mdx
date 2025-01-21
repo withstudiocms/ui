@@ -9,7 +9,7 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { Checkbox, Row } from '@studiocms/ui/components';
+import { Checkbox, Row } from 'studiocms:ui/components';
 
 A custom checkbox component with support for sizes and colors. Form compatible.
 
@@ -24,7 +24,7 @@ A custom checkbox component with support for sizes and colors. Form compatible.
   <TabItem label="Code">
     ```astro showLinenumbers title="CheckboxExample.astro"
     ---
-    import { Checkbox } from '@studiocms/ui/components';
+    import { Checkbox } from 'studiocms:ui/components';
     ---
 
     <Checkbox label="Label" color='primary' />
@@ -49,7 +49,7 @@ There's three different sizes for checkboxes:
   <TabItem label="Code">
     ```astro /size='[a-z]+'/ showLinenumbers title="CheckboxSizesExample.astro"
     ---
-    import { Checkbox } from '@studiocms/ui/components';
+    import { Checkbox } from 'studiocms:ui/components';
     ---
 
     <Checkbox label='Small' color='primary' size='sm' defaultChecked />
@@ -80,7 +80,7 @@ The checkbox component supports all default colorways.
   <TabItem label="Code">
     ```astro /color='[a-z]+'/ showLinenumbers title="CheckboxColorsExample.astro"
     ---
-    import { Checkbox } from '@studiocms/ui/components';
+    import { Checkbox } from 'studiocms:ui/components';
     ---
 
     <Checkbox label='Default' defaultChecked />
@@ -110,7 +110,7 @@ the `FormData` returned by a submission. Here's an example showing how to set bo
   <TabItem label="Code">
     ```astro ins={8-9} showLinenumbers title="CheckboxFormExample.astro"
     ---
-    import { Checkbox } from '@studiocms/ui/components';
+    import { Checkbox } from 'studiocms:ui/components';
     ---
 
     <Checkbox 

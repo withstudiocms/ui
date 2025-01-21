@@ -1,30 +1,30 @@
-const elements = document.querySelectorAll<HTMLDivElement>('.sui-checkmark-container');
-const checkbox = document.querySelectorAll<HTMLInputElement>('.sui-checkbox');
+const allElements = document.querySelectorAll<HTMLDivElement>('.sui-checkmark-container');
+const allCheckbox = document.querySelectorAll<HTMLInputElement>('.sui-checkbox');
 
-for (const element of elements) {
-  if (element.dataset.initialized) continue;
-  
-  element.dataset.initialized = 'true';
+for (const element of allElements) {
+	if (element.dataset.initialized) continue;
 
-  element.addEventListener('keydown', (e) => {
-    if (e.key !== 'Enter' && e.key !== ' ') return;
+	element.dataset.initialized = 'true';
 
-    e.preventDefault();
+	element.addEventListener('keydown', (e) => {
+		if (e.key !== 'Enter' && e.key !== ' ') return;
 
-    const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
-      
-    if (!checkbox) return;
+		e.preventDefault();
 
-    checkbox.click();
-  });
+		const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
+
+		if (!checkbox) return;
+
+		checkbox.click();
+	});
 }
 
-for (const box of checkbox) {
-  if (box.dataset.initialized) continue;
+for (const box of allCheckbox) {
+	if (box.dataset.initialized) continue;
 
-  box.dataset.initialized = 'true';
+	box.dataset.initialized = 'true';
 
-  box.addEventListener('change', (e) => {
-    box.parentElement!.ariaChecked = (e.target as HTMLInputElement).checked ? 'true' : 'false';
-  });
+	box.addEventListener('change', (e) => {
+		box.parentElement!.ariaChecked = (e.target as HTMLInputElement).checked ? 'true' : 'false';
+	});
 }

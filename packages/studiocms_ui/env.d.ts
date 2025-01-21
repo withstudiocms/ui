@@ -1,7 +1,5 @@
-/// <reference path="../.astro/types.d.ts" />
-
 interface CustomEventMap {
-	createtoast: CustomEvent<import('./types').ToastProps>;
+	createtoast: CustomEvent<import('./src/types/index.ts').ToastProps>;
 }
 
 declare global {
@@ -14,6 +12,4 @@ declare global {
 	}
 }
 
-declare module 'studiocms:ui/scripts/*' {
-
-}
+declare module 'studiocms:ui/scripts/*' {}

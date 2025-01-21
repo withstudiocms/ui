@@ -16,7 +16,7 @@ The `ThemeHelper` can only be used client-side (in `<script>` tags).
 :::
 ```ts title="script.ts" twoslash showLinenumbers
 // @noErrors
-import { ThemeHelper } from '@studiocms/ui/utils/ThemeHelper.ts';
+import { ThemeHelper } from 'studiocms:ui/utils';
 
 // Instanciate a new helper
 const themeHelper = new ThemeHelper();
@@ -46,7 +46,7 @@ whenever the color scheme changes, for example in a `three.js` canvas where you 
 
 ```ts title="script.ts" twoslash showLinenumbers
 // @noErrors
-import { ThemeHelper } from '@studiocms/ui/utils/ThemeHelper.ts';
+import { ThemeHelper } from 'studiocms:ui/utils';
 
 // Instanciate a new helper
 const themeHelper = new ThemeHelper();
@@ -76,7 +76,7 @@ open the navbar and scroll all the way down. After you've changed the theme, che
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
-    import { ThemeHelper, type Theme } from '@studiocms/ui/utils/ThemeHelper.ts';
+    import { ThemeHelper, type Theme } from 'studiocms:ui/utils';
 
     // Instanciate a new helper
     const themeHelper = new ThemeHelper();
@@ -102,7 +102,7 @@ As a starting point, here's a barebones example of how to implement this:
 
 ```ts twoslash showLinenumbers title="Script Tag"
 // @noErrors
-import { ThemeHelper, type Theme } from '@studiocms/ui/utils/ThemeHelper.ts';
+import { ThemeHelper, type Theme } from 'studiocms:ui/utils';
 
 const themeHelper = new ThemeHelper();
 

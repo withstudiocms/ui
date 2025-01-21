@@ -1,70 +1,72 @@
-const radioGroupContainers = document.querySelectorAll<HTMLDivElement>('.sui-radio-container');
+const AllRadioGroupContainers = document.querySelectorAll<HTMLDivElement>('.sui-radio-container');
 
-for (const element of radioGroupContainers) {
-  if (element.dataset.initialized) continue;
-  
-  element.dataset.initialized = 'true';
+for (const element of AllRadioGroupContainers) {
+	if (element.dataset.initialized) continue;
 
-  const radioBoxes = element.querySelectorAll<HTMLDivElement>('.sui-radio-box');
+	element.dataset.initialized = 'true';
 
-  let i = 0;
+	const radioBoxes = element.querySelectorAll<HTMLDivElement>('.sui-radio-box');
 
-  for (const radioBox of radioBoxes) {
-    radioBox.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === " ") {
-        e.preventDefault();
+	let i = 0;
 
-        const input = (e.target as HTMLDivElement).parentElement!.parentElement!.querySelector<HTMLInputElement>('.sui-radio-toggle')!;
+	for (const radioBox of radioBoxes) {
+		radioBox.addEventListener('keydown', (e) => {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
 
-        if (input.disabled) return;
+				const input = (
+					e.target as HTMLDivElement
+				).parentElement!.parentElement!.querySelector<HTMLInputElement>('.sui-radio-toggle')!;
 
-        input.checked = true;
-      }
+				if (input.disabled) return;
 
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        e.preventDefault();
+				input.checked = true;
+			}
 
-        let nextRadioBox: HTMLDivElement | undefined;
+			if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+				e.preventDefault();
 
-        radioBoxes.forEach((box, index) => {
-          if (box === radioBox) nextRadioBox = radioBoxes[index + 1];
-        });
+				let nextRadioBox: HTMLDivElement | undefined;
 
-        if (!nextRadioBox) return;
+				radioBoxes.forEach((box, index) => {
+					if (box === radioBox) nextRadioBox = radioBoxes[index + 1];
+				});
 
-        radioBox.tabIndex = -1;
-        nextRadioBox.tabIndex = 0;
-        nextRadioBox.focus();
-        nextRadioBox.click();
-      }
+				if (!nextRadioBox) return;
 
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        e.preventDefault();
+				radioBox.tabIndex = -1;
+				nextRadioBox.tabIndex = 0;
+				nextRadioBox.focus();
+				nextRadioBox.click();
+			}
 
-        let previousRadioBox: HTMLDivElement | undefined;
+			if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+				e.preventDefault();
 
-        radioBoxes.forEach((box, index) => {
-          if (box === radioBox) previousRadioBox = radioBoxes[index - 1];
-        });
+				let previousRadioBox: HTMLDivElement | undefined;
 
-        if (!previousRadioBox) return;
+				radioBoxes.forEach((box, index) => {
+					if (box === radioBox) previousRadioBox = radioBoxes[index - 1];
+				});
 
-        radioBox.tabIndex = -1;
-        previousRadioBox.tabIndex = 0;
-        previousRadioBox.focus();
-        previousRadioBox.click();
-      }
-    });
+				if (!previousRadioBox) return;
 
-    i++;
-  }
-  element.addEventListener('keydown', (e) => {
-    if (e.key !== 'Enter') return;
+				radioBox.tabIndex = -1;
+				previousRadioBox.tabIndex = 0;
+				previousRadioBox.focus();
+				previousRadioBox.click();
+			}
+		});
 
-    const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
-      
-    if (!checkbox) return;
+		i++;
+	}
+	element.addEventListener('keydown', (e) => {
+		if (e.key !== 'Enter') return;
 
-    checkbox.click();
-  });
+		const checkbox = element.querySelector<HTMLInputElement>('.sui-checkbox');
+
+		if (!checkbox) return;
+
+		checkbox.click();
+	});
 }
