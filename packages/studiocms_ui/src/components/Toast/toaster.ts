@@ -87,7 +87,6 @@ function createToast(props: ToastProps) {
 	toastContainer.ariaLabel = `${props.title} (F8)`;
 	toastContainer.classList.add(
 		'sui-toast-container',
-		props.type,
 		`${props.closeButton || (props.persistent && 'closeable')}`,
 		`${props.persistent && 'persistent'}`
 	);
