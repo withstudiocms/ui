@@ -1,90 +1,92 @@
-import { defineToolbarApp } from "astro/toolbar";
-import DevToolbarColorPicker from './ColorPicker';
+import { defineToolbarApp } from 'astro/toolbar';
+import DevToolbarColorPicker from './ColorPicker.js';
 
 interface TableAndVariables {
-  table: HTMLTableElement;
-  variables: string[];
+	table: HTMLTableElement;
+	variables: string[];
 }
 
 const map: Record<string, Record<string, string>> = {
-  light: {},
-  dark: {},
-}
+	light: {},
+	dark: {},
+};
 
 function createRows(variables: string[]): HTMLTableRowElement[] {
-  const body = getComputedStyle(document.body);
+	const body = getComputedStyle(document.body);
 
-  const rows = variables.map(variable => {
-    const row = document.createElement('tr');
-    const cssVariable = document.createElement('td');
-    const colorPicker = document.createElement('td');
-    const reset = document.createElement('td');
+	const rows = variables.map((variable) => {
+		const row = document.createElement('tr');
+		const cssVariable = document.createElement('td');
+		const colorPicker = document.createElement('td');
+		const reset = document.createElement('td');
 
-    const colorPickerEl = document.createElement('dev-toolbar-color-picker') as DevToolbarColorPicker;
-    colorPickerEl.dataset.variable = variable;
-    const initialColor = body.getPropertyValue(variable);
-    colorPickerEl.dataset.color = initialColor;
+		const colorPickerEl = document.createElement(
+			'dev-toolbar-color-picker'
+		) as DevToolbarColorPicker;
+		colorPickerEl.dataset.variable = variable;
+		const initialColor = body.getPropertyValue(variable);
+		colorPickerEl.dataset.color = initialColor;
 
-    const resetButton = document.createElement('button');
-    resetButton.textContent = 'Reset';
-    resetButton.disabled = true;
-    
-    const codeEl = document.createElement('code');
-    codeEl.textContent = variable;
+		const resetButton = document.createElement('button');
+		resetButton.textContent = 'Reset';
+		resetButton.disabled = true;
 
-    cssVariable.appendChild(codeEl);
+		const codeEl = document.createElement('code');
+		codeEl.textContent = variable;
 
-    colorPicker.appendChild(colorPickerEl);
-    reset.appendChild(resetButton);
+		cssVariable.appendChild(codeEl);
 
-    row.appendChild(cssVariable);
-    row.appendChild(colorPicker);
-    row.appendChild(reset);
+		colorPicker.appendChild(colorPickerEl);
+		reset.appendChild(resetButton);
 
-    colorPickerEl.shadowRoot?.firstElementChild?.addEventListener('input', () => {
-      const color = colorPickerEl.getColor();
-      const theme = document.documentElement.dataset.theme ?? 'dark';
-      document.documentElement.style.setProperty(variable, color);
-      map[theme]![variable] = color;
-      resetButton.disabled = false;
-    });
+		row.appendChild(cssVariable);
+		row.appendChild(colorPicker);
+		row.appendChild(reset);
 
-    resetButton.addEventListener('click', () => {
-      const theme = document.documentElement.dataset.theme ?? 'dark'
-      document.documentElement.style.setProperty(variable, initialColor);
-      colorPickerEl.setColor(initialColor);
-      delete map[theme]![variable];
-      resetButton.disabled = true;
-    });
+		colorPickerEl.shadowRoot?.firstElementChild?.addEventListener('input', () => {
+			const color = colorPickerEl.getColor();
+			const theme = document.documentElement.dataset.theme ?? 'dark';
+			document.documentElement.style.setProperty(variable, color);
+			map[theme]![variable] = color;
+			resetButton.disabled = false;
+		});
 
-    return row;
-  });
+		resetButton.addEventListener('click', () => {
+			const theme = document.documentElement.dataset.theme ?? 'dark';
+			document.documentElement.style.setProperty(variable, initialColor);
+			colorPickerEl.setColor(initialColor);
+			delete map[theme]![variable];
+			resetButton.disabled = true;
+		});
 
-  const observer = new MutationObserver((mutations) => {
-    mutations.map(m => {
-      if (m.type !== 'attributes' || m.attributeName !== 'data-theme') return;
-      rows.map(row => {
-        const theme = document.documentElement.dataset.theme ?? 'dark';
-        const picker = (row.children[1]?.firstElementChild as DevToolbarColorPicker);
-        const variable = picker.dataset.variable!;
-        const value = map[theme]![variable];
-        if (!value) document.documentElement.style.removeProperty(variable);
-        else document.documentElement.style.setProperty(variable, value);
-        const color = body.getPropertyValue(variable);
-        picker.dataset.color = color;
-        picker.setColor(color);
-      });
-    });
-  });
+		return row;
+	});
 
-  observer.observe(document.documentElement, { attributes: true });
+	const observer = new MutationObserver((mutations) => {
+		mutations.map((m) => {
+			if (m.type !== 'attributes' || m.attributeName !== 'data-theme') return;
+			rows.map((row) => {
+				const theme = document.documentElement.dataset.theme ?? 'dark';
+				const picker = row.children[1]?.firstElementChild as DevToolbarColorPicker;
+				const variable = picker.dataset.variable!;
+				const value = map[theme]![variable];
+				if (!value) document.documentElement.style.removeProperty(variable);
+				else document.documentElement.style.setProperty(variable, value);
+				const color = body.getPropertyValue(variable);
+				picker.dataset.color = color;
+				picker.setColor(color);
+			});
+		});
+	});
 
-  return rows;
+	observer.observe(document.documentElement, { attributes: true });
+
+	return rows;
 }
 
 function createStyles(): HTMLStyleElement {
-  const style = document.createElement('style');
-  style.textContent = `
+	const style = document.createElement('style');
+	style.textContent = `
     button {
       position: relative;
       gap: 0.5rem;
@@ -137,194 +139,223 @@ function createStyles(): HTMLStyleElement {
     }
   `;
 
-  return style;
+	return style;
 }
 
 function createColorsTable(): TableAndVariables {
-  const table = document.createElement('table');
-  const thead = document.createElement('thead');
-  const tr = document.createElement('tr');
-  const th1 = document.createElement('th');
-  const th2 = document.createElement('th');
-  const th3 = document.createElement('th');
+	const table = document.createElement('table');
+	const thead = document.createElement('thead');
+	const tr = document.createElement('tr');
+	const th1 = document.createElement('th');
+	const th2 = document.createElement('th');
+	const th3 = document.createElement('th');
 
-  th1.textContent = 'CSS Variable';
-  th2.textContent = 'Color Picker';
-  th3.textContent = 'Reset';
+	th1.textContent = 'CSS Variable';
+	th2.textContent = 'Color Picker';
+	th3.textContent = 'Reset';
 
-  tr.appendChild(th1);
-  tr.appendChild(th2);
-  tr.appendChild(th3);
-  thead.appendChild(tr);
-  table.appendChild(thead);
+	tr.appendChild(th1);
+	tr.appendChild(th2);
+	tr.appendChild(th3);
+	thead.appendChild(tr);
+	table.appendChild(thead);
 
-  const tbody = document.createElement('tbody');
+	const tbody = document.createElement('tbody');
 
-  const editableCSSVariables = [
-    '--background-base', '--background-step-1', '--background-step-2', '--background-step-3',
-    '--text-normal', '--text-muted', '--text-inverted', '--border', '--shadow', 
-    '--default-base', '--default-hover', '--default-active',
-    '--primary-base', '--primary-hover', '--primary-active',
-    '--success-base', '--success-hover', '--success-active',
-    '--warning-base', '--warning-hover', '--warning-active',
-    '--danger-base', '--danger-hover', '--danger-active',
-    '--info-base', '--info-hover', '--info-active',
-    '--mono-base', '--mono-hover', '--mono-active'
-  ];
+	const editableCSSVariables = [
+		'--background-base',
+		'--background-step-1',
+		'--background-step-2',
+		'--background-step-3',
+		'--text-normal',
+		'--text-muted',
+		'--text-inverted',
+		'--border',
+		'--shadow',
+		'--default-base',
+		'--default-hover',
+		'--default-active',
+		'--primary-base',
+		'--primary-hover',
+		'--primary-active',
+		'--success-base',
+		'--success-hover',
+		'--success-active',
+		'--warning-base',
+		'--warning-hover',
+		'--warning-active',
+		'--danger-base',
+		'--danger-hover',
+		'--danger-active',
+		'--info-base',
+		'--info-hover',
+		'--info-active',
+		'--mono-base',
+		'--mono-hover',
+		'--mono-active',
+	];
 
-  const rows = createRows(editableCSSVariables);
+	const rows = createRows(editableCSSVariables);
 
-  for (const row of rows) {
-    tbody.appendChild(row);
-  }
+	for (const row of rows) {
+		tbody.appendChild(row);
+	}
 
-  table.appendChild(tbody);
+	table.appendChild(tbody);
 
-  return {
-    table: table,
-    variables: editableCSSVariables
-  };
+	return {
+		table: table,
+		variables: editableCSSVariables,
+	};
 }
 
 function createDetails(title: string, table: HTMLTableElement): HTMLDetailsElement {
-  const details = document.createElement('details');
-  const summary = document.createElement('summary');
+	const details = document.createElement('details');
+	const summary = document.createElement('summary');
 
-  summary.textContent = title;
-  details.appendChild(summary);
-  details.appendChild(table);
+	summary.textContent = title;
+	details.appendChild(summary);
+	details.appendChild(table);
 
-  return details;
+	return details;
 }
 
 function createRadiiTable(): TableAndVariables {
-  const radiiTable = document.createElement('table');
-  const radiiThead = document.createElement('thead');
-  const radiiTr = document.createElement('tr');
-  const radiiTh1 = document.createElement('th');
-  const radiiTh2 = document.createElement('th');
-  const radiiTh3 = document.createElement('th');
+	const radiiTable = document.createElement('table');
+	const radiiThead = document.createElement('thead');
+	const radiiTr = document.createElement('tr');
+	const radiiTh1 = document.createElement('th');
+	const radiiTh2 = document.createElement('th');
+	const radiiTh3 = document.createElement('th');
 
-  radiiTh1.textContent = 'CSS Variable';
-  radiiTh2.textContent = 'Value (px)';
-  radiiTh3.textContent = 'Reset';
+	radiiTh1.textContent = 'CSS Variable';
+	radiiTh2.textContent = 'Value (px)';
+	radiiTh3.textContent = 'Reset';
 
-  radiiTr.appendChild(radiiTh1);
-  radiiTr.appendChild(radiiTh2);
-  radiiTr.appendChild(radiiTh3);
-  radiiThead.appendChild(radiiTr);
-  radiiTable.appendChild(radiiThead);
-  
-  const radiiTbody = document.createElement('tbody');
+	radiiTr.appendChild(radiiTh1);
+	radiiTr.appendChild(radiiTh2);
+	radiiTr.appendChild(radiiTh3);
+	radiiThead.appendChild(radiiTr);
+	radiiTable.appendChild(radiiThead);
 
-  const editableRadiiCSSVariables = [
-    '--radius-sm', '--radius-md', '--radius-lg', '--radius-full'
-  ];
+	const radiiTbody = document.createElement('tbody');
 
-  for (const variable of editableRadiiCSSVariables) {
-    const row = document.createElement('tr');
-    const cssVariable = document.createElement('td');
-    const value = document.createElement('td');
-    const reset = document.createElement('td');
+	const editableRadiiCSSVariables = ['--radius-sm', '--radius-md', '--radius-lg', '--radius-full'];
 
-    const initialValue = getComputedStyle(document.body).getPropertyValue(variable);
+	for (const variable of editableRadiiCSSVariables) {
+		const row = document.createElement('tr');
+		const cssVariable = document.createElement('td');
+		const value = document.createElement('td');
+		const reset = document.createElement('td');
 
-    const codeEl = document.createElement('code');
-    codeEl.textContent = variable;
+		const initialValue = getComputedStyle(document.body).getPropertyValue(variable);
 
-    cssVariable.appendChild(codeEl);
+		const codeEl = document.createElement('code');
+		codeEl.textContent = variable;
 
-    const resetButton = document.createElement('button');
-    resetButton.textContent = 'Reset';
-    resetButton.disabled = true;
+		cssVariable.appendChild(codeEl);
 
-    resetButton.addEventListener('click', () => {
-      document.documentElement.style.setProperty(variable, initialValue);
-      numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
-      delete map.dark![variable];
-      resetButton.disabled = true;
-    });
+		const resetButton = document.createElement('button');
+		resetButton.textContent = 'Reset';
+		resetButton.disabled = true;
 
-    reset.appendChild(resetButton);
+		resetButton.addEventListener('click', () => {
+			document.documentElement.style.setProperty(variable, initialValue);
+			numberInput.value = (
+				initialValue.includes('rem')
+					? Number.parseFloat(initialValue.split('rem')[0]!) * 16
+					: Number.parseInt(initialValue.split('px')[0]!)
+			).toString();
+			delete map.dark![variable];
+			resetButton.disabled = true;
+		});
 
-    const numberInput = document.createElement('input');
-    numberInput.type = 'number';
-    numberInput.min = '0';
-    numberInput.step = '1';
-    numberInput.value = (initialValue.includes('rem') ? Number.parseFloat(initialValue.split('rem')[0]!) * 16 : Number.parseInt(initialValue.split('px')[0]!)).toString();
+		reset.appendChild(resetButton);
 
-    numberInput.addEventListener('input', () => {
-      const size = `${numberInput.value}px`;
-      document.documentElement.style.setProperty(variable, `${numberInput.value}px`);
-      map.dark![variable] = size;
-      resetButton.disabled = false;
-    });
+		const numberInput = document.createElement('input');
+		numberInput.type = 'number';
+		numberInput.min = '0';
+		numberInput.step = '1';
+		numberInput.value = (
+			initialValue.includes('rem')
+				? Number.parseFloat(initialValue.split('rem')[0]!) * 16
+				: Number.parseInt(initialValue.split('px')[0]!)
+		).toString();
 
-    value.appendChild(numberInput);
+		numberInput.addEventListener('input', () => {
+			const size = `${numberInput.value}px`;
+			document.documentElement.style.setProperty(variable, `${numberInput.value}px`);
+			map.dark![variable] = size;
+			resetButton.disabled = false;
+		});
 
-    row.appendChild(cssVariable);
-    row.appendChild(value);
-    row.appendChild(reset);
+		value.appendChild(numberInput);
 
-    radiiTbody.appendChild(row);
-  }
+		row.appendChild(cssVariable);
+		row.appendChild(value);
+		row.appendChild(reset);
 
-  radiiTable.appendChild(radiiTbody);
+		radiiTbody.appendChild(row);
+	}
 
-  return {
-    table: radiiTable,
-    variables: editableRadiiCSSVariables
-  }
+	radiiTable.appendChild(radiiTbody);
+
+	return {
+		table: radiiTable,
+		variables: editableRadiiCSSVariables,
+	};
 }
 
 export default defineToolbarApp({
-  init(canvas) {
-    const myWindow = document.createElement('astro-dev-toolbar-window');
-    myWindow.style.overflow = 'auto';
+	init(canvas) {
+		const myWindow = document.createElement('astro-dev-toolbar-window');
+		myWindow.style.overflow = 'auto';
 
-    const header = document.createElement('h1');
-    header.textContent = 'StudioCMS UI Theme Editor';
-    header.style.marginBottom = '1rem';
-    header.style.marginTop = '0';
-    myWindow.appendChild(header);
+		const header = document.createElement('h1');
+		header.textContent = 'StudioCMS UI Theme Editor';
+		header.style.marginBottom = '1rem';
+		header.style.marginTop = '0';
+		myWindow.appendChild(header);
 
-    const style = createStyles();
+		const style = createStyles();
 
-    const { table: colorsTable } = createColorsTable();
-    const colorDetails = createDetails('Colors', colorsTable);
+		const { table: colorsTable } = createColorsTable();
+		const colorDetails = createDetails('Colors', colorsTable);
 
-    const { table: radiiTable } = createRadiiTable();
-    const radiiDetails = createDetails('Border Radii', radiiTable);
+		const { table: radiiTable } = createRadiiTable();
+		const radiiDetails = createDetails('Border Radii', radiiTable);
 
-    myWindow.appendChild(header);
-    myWindow.appendChild(colorDetails);
-    myWindow.appendChild(radiiDetails);
-    myWindow.appendChild(style);
+		myWindow.appendChild(header);
+		myWindow.appendChild(colorDetails);
+		myWindow.appendChild(radiiDetails);
+		myWindow.appendChild(style);
 
-    const exportButton = document.createElement('button');
-    exportButton.textContent = 'Copy to clipboard';
+		const exportButton = document.createElement('button');
+		exportButton.textContent = 'Copy to clipboard';
 
-    exportButton.style.marginTop = '1rem';
+		exportButton.style.marginTop = '1rem';
 
-    exportButton.addEventListener('click', () => {
-      function getVariables(theme: 'light' | 'dark') {
-        return Object.entries(map[theme]!).map(([variable, value]) => {
-          return `  ${variable}: ${value};`;
-        }).join('\n');
-      }
+		exportButton.addEventListener('click', () => {
+			function getVariables(theme: 'light' | 'dark') {
+				return Object.entries(map[theme]!)
+					.map(([variable, value]) => {
+						return `  ${variable}: ${value};`;
+					})
+					.join('\n');
+			}
 
-      const darkVariables = getVariables('dark');
-      const lightVariables = getVariables('light');
+			const darkVariables = getVariables('dark');
+			const lightVariables = getVariables('light');
 
-      const string = `${darkVariables ? `:root {\n${darkVariables}\n}\n` : ''}${lightVariables ? `\n[data-theme="light"] {\n${lightVariables}\n}` : ''}`;
+			const string = `${darkVariables ? `:root {\n${darkVariables}\n}\n` : ''}${lightVariables ? `\n[data-theme="light"] {\n${lightVariables}\n}` : ''}`;
 
-      navigator.clipboard.writeText(string || '/* No changes made */');
-    });
+			navigator.clipboard.writeText(string || '/* No changes made */');
+		});
 
-    myWindow.appendChild(exportButton);
+		myWindow.appendChild(exportButton);
 
-    canvas.appendChild(myWindow);
-  }
+		canvas.appendChild(myWindow);
+	},
 });
 
-customElements.define('dev-toolbar-color-picker', DevToolbarColorPicker)
+customElements.define('dev-toolbar-color-picker', DevToolbarColorPicker);

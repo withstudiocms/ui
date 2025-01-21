@@ -1,0 +1,46 @@
+---
+import type { StudioCMSColorway } from '../../utils/colors.js';
+import { generateID } from '../../utils/generateID.js';
+import type { HeroIconName } from '../Icon/iconType.js';
+
+/**
+ * The props for the TabItem component.
+ */
+interface Props {
+	/**
+	 * The icon to display next to the tab.
+	 */
+	icon?: HeroIconName;
+	/**
+	 * The label of the tab.
+	 */
+	label: string;
+	/**
+	 * The color of the tab. Defaults to `primary`.
+	 */
+	color?: Exclude<StudioCMSColorway, 'default'>;
+}
+
+const id = generateID('tab');
+
+const { icon, label, color = 'primary' } = Astro.props;
+---
+<sui-tab-item 
+  data-icon={icon}
+  data-label={label}
+  data-color={color}
+  data-tab-id={id}
+>
+  <slot />
+</sui-tab-item>
+<style>
+  sui-tab-item {
+    display: none;
+    width: 100%;
+    height: auto;
+  }
+
+  sui-tab-item.active {
+    display: block;
+  }
+</style>

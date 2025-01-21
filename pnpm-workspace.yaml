@@ -1,5 +1,6 @@
 packages:
   - "packages/*"
+  - "build-scripts"
   - "docs"
 
 catalog:
