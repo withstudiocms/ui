@@ -1,0 +1,119 @@
+---
+title: Sidebar
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+:::caution[Helper required]
+This component requires a **helper**. Make sure to read the documentation carefully so you know how to use it.
+:::
+
+The Sidebar component(s) we use in StudioCMS, created for maximum customizability. Due to size constraints, this page will only showcase the code, not the component itself. Check out the StudioCMS dashboard to see how they look.
+
+## Usage
+
+### Single Sidebar
+
+The simpler version of the two. A sidebar with built-in mobile breakpoints.
+
+```astro title="SingleSidebarExample.astro"
+---
+import { Sidebar, Button } from 'studiocms:ui/components';
+---
+
+<Sidebar>
+  {/* Your sidebar content goes here */}
+</Sidebar>
+<Button id="my-toggle">
+Toggle Sidebar
+</Button>
+<script>
+import { SingleSidebarHelper } from 'studiocms:ui/components';
+
+new SingleSidebarHelper('my-toggle');
+</script>
+```
+
+It is up to you to create a toggle component. It should be shown once the sidebar can be hidden, the breakpoint being `840px`.
+
+The helper exposes a few helpful methods to interact with the sidebar:
+
+```ts title="SingleSidebarHelperExample.ts"
+import { SingleSidebarHelper } from 'studiocms:ui/components';
+
+const sidebar = new SingleSidebarHelper('my-toggle');
+
+// Adds an event listener to the given element 
+// (specified with its ID) that hides the sidebar 
+// when clicked. Only applicable on mobile viewports.
+sidebar.hideSidebarOnClick('my-element');
+
+// Adds an event listener to the given element 
+// (specified with its ID) that shows the sidebar 
+// when clicked. Only applicable on mobile viewports.
+sidebar.showSidebarOnClick('my-element');
+
+// Hides the sidebar.
+sidebar.hideSidebar();
+
+// Shows the sidebar.
+sidebar.showSidebar();
+```
+
+### Double Sidebar
+
+A more complex version with two panes, both with different breakpoints.
+
+```astro title="DoubleSidebarExample.astro"
+---
+import { DoubleSidebar } from 'studiocms:ui/components';
+---
+
+<DoubleSidebar>
+  <div slot="outer">
+    {/* Your outer sidebar content goes here */}
+  </div>
+  <div slot="inner">
+    {/* Your inner sidebar content goes here */}
+  </div>
+</DoubleSidebar>
+<script>
+import { DoubleSidebarHelper } from 'studiocms:ui/components';
+
+const sidebar = new DoubleSidebarHelper();
+</script>
+```
+
+Due to the more complex nature of the double sidebar, it's best to have the following setup:
+
+- On screens larger than `1200px`, don't show any toggles and show the sidebar entirely.
+- On screens smaller than `1200px` and larger than `840px`, show only one toggle to switch between inner and outer sidebar.
+- On screens smaller than `840px`, display a toggle to show the outer navbar when it's hidden and a toggle to switch between outer and inner when it's shown.
+
+To help you with managing the sidebar state, the following methods are exposed from the helper:
+
+```ts title="DoubleSidebarHelperExample.astro"
+import { DoubleSidebarHelper } from 'studiocms:ui/components';
+
+const sidebar = new DoubleSidebarHelper();
+
+// Register an element that will hide the sidebar entirely when clicked
+sidebar.hideSidebarOnClick('my-element');
+
+// Register an element that will show the outer sidebar when clicked
+sidebar.showOuterOnClick('my-element');
+
+// Register an element that will show the inner sidebar when clicked
+sidebar.showInnerOnClick('my-element');
+
+// Register an element that will toggle between the inner and outer sidebar when clicked
+sidebar.toggleStateOnClick('my-element');
+
+// All other functions should be self-explanatory:
+sidebar.showInnerSidebar();
+sidebar.showOuterSidebar();
+sidebar.toggleSidebarState();
+sidebar.hideSidebar();
+```

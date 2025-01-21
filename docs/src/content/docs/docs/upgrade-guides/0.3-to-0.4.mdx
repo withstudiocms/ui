@@ -2,4 +2,17 @@
 title: From v0.3 to v0.4
 ---
 
-There have been no breaking changes from v0.3.x to v0.4.
+In v0.3 of StudioCMS UI, we turned the library into an Astro integration. With v0.4, we're building on that foundation to fix some critical issues and further improve the developer experience. Here's what you'll have to do to migrate your existing projects:
+
+## New Imports
+
+In order to remove issues with script and style leakage, we've updated all imports to use virtual modules instead of barrel files. This means that you will have to change all of your imports for all components:
+
+```astro del={2} ins={3}
+---
+import { Button } from '@studiocms/ui/components';
+import { Button } from 'studiocms:ui/components';
+---
+```
+
+We recommend simply bulk-replacing `@studiocms/ui/` with `studiocms:ui/`.
