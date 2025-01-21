@@ -8,7 +8,7 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { Accordion, AccordionItem } from '@studiocms/ui/components';
+import { Accordion, AccordionItem } from 'studiocms:ui/components';
 
 An accordion component. Used to create small pockets of additional information.
 
@@ -32,7 +32,7 @@ An accordion component. Used to create small pockets of additional information.
   <TabItem label="Code">
     ```astro showLinenumbers title="AccordionExample.astro"
     ---
-    import { Accordion, AccordionItem } from '@studiocms/ui/components';
+    import { Accordion, AccordionItem } from 'studiocms:ui/components';
     ---
 
     <Accordion>
@@ -82,7 +82,7 @@ They can be used via the `style` prop on the accordion parent. Here's an accordi
   <TabItem label="Code">
     ```astro showLinenumbers title="AccordionStyleExample.astro"
     ---
-    import { Accordion, AccordionItem } from '@studiocms/ui/components';
+    import { Accordion, AccordionItem } from 'studiocms:ui/components';
     ---
 
     <Accordion style="filled">
@@ -121,7 +121,7 @@ By default, users can open multiple items in the accordion at once. You can chan
   <TabItem label="Code">
     ```astro showLinenumbers title="AccordionStyleExample.astro"
     ---
-    import { Accordion, AccordionItem } from '@studiocms/ui/components';
+    import { Accordion, AccordionItem } from 'studiocms:ui/components';
     ---
 
     <Accordion multipleOpen={false}>

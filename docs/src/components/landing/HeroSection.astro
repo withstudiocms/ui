@@ -4,6 +4,7 @@ import {
 	Checkbox,
 	Divider,
 	Dropdown,
+	Icon,
 	Input,
 	RadioGroup,
 	SearchSelect,
@@ -12,9 +13,8 @@ import {
 	ThemeToggle,
 	Toggle,
 	User,
-} from '@studiocms/ui/components';
+} from 'studiocms:ui/components';
 
-import Icon from '@studiocms/ui/utils/Icon.astro';
 import GitHubIcon from '~/components/icons/GitHubIcon.astro';
 ---
 <section class="hero not-content" aria-label="A bento grid showcasing various different components from @studiocms/ui">
@@ -43,7 +43,7 @@ import GitHubIcon from '~/components/icons/GitHubIcon.astro';
          Modal
       </Button>
       <script>
-         import { ModalHelper } from "@studiocms/ui/components";
+         import { ModalHelper } from "studiocms:ui/components";
 
          new ModalHelper('hero-example-modal', 'hero-example-modal-trigger');
       </script>
@@ -129,7 +129,7 @@ import GitHubIcon from '~/components/icons/GitHubIcon.astro';
          Trigger Toast
       </Button>
       <script>
-         import { toast } from "@studiocms/ui/components";
+         import { toast } from "studiocms:ui/components";
 
          const trigger = document.getElementById('hero-example-toasts-trigger');
 
@@ -156,7 +156,7 @@ import GitHubIcon from '~/components/icons/GitHubIcon.astro';
          </Button>
       </Dropdown>
       <script>
-         import { DropdownHelper } from "@studiocms/ui/components";
+         import { DropdownHelper } from "studiocms:ui/components";
 
          new DropdownHelper('hero-example-dropdown');
       </script>

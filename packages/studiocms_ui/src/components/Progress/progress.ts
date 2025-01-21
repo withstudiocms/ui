@@ -1,6 +1,6 @@
-const bars = document.querySelectorAll<HTMLDivElement>('.sui-progress');
+const allBars = document.querySelectorAll<HTMLDivElement>('.sui-progress');
 
-for (const bar of bars) {
+for (const bar of allBars) {
 	const value = bar.dataset.value;
 	const max = bar.dataset.max;
 

@@ -1,12 +1,12 @@
 ---
-import type { HTMLAttributes, HTMLTag, Polymorphic } from 'astro/types';
+import type { HTMLTag, Polymorphic } from 'astro/types';
 import type { StudioCMSColorway } from '../../utils/colors.js';
 import './button.css';
 
 /**
  * Props for the button component.
  */
-type ButtonProps<As extends HTMLTag = 'button'> = Omit<Polymorphic<{ as: As }>, 'as'> & {
+type Props<As extends HTMLTag = 'button'> = Omit<Polymorphic<{ as: As }>, 'as'> & {
 	/**
 	 * The polymorphic component to render the button as. Defaults to `button`.
 	 */
@@ -31,17 +31,11 @@ type ButtonProps<As extends HTMLTag = 'button'> = Omit<Polymorphic<{ as: As }>, 
 	 * Whether the button is disabled. Defaults to `false`.
 	 */
 	disabled?: boolean;
+	/**
+	 * An optional href to use for the button. If provided, the button will render as an anchor tag.
+	 */
+	href?: string;
 };
-
-type AnchorButtonProps = HTMLAttributes<'a'> &
-	ButtonProps & {
-		/**
-		 * An optional href to use for the button. If provided, the button will render as an anchor tag.
-		 */
-		href: string;
-	};
-
-type Props = ButtonProps | AnchorButtonProps;
 
 export type { Props };
 

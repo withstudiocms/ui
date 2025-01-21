@@ -10,7 +10,7 @@ sidebar:
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 import DropdownScript from '~/components/DropdownScript.astro';
-import { Dropdown, Button, Row } from '@studiocms/ui/components';
+import { Dropdown, Button, Row } from 'studiocms:ui/components';
 
 :::caution[Helper required]
 This component requires a **helper**. Make sure to read the documentation carefully so you know how to use it.
@@ -33,7 +33,7 @@ A dropdown component that takes care of all the annoying bits for you, with adde
   <TabItem label="Code">
     ```astro showLinenumbers title="DropdownExample.astro"
     ---
-    import { Dropdown, Button } from '@studiocms/ui/components';
+    import { Dropdown, Button } from 'studiocms:ui/components';
     ---
 
     <Dropdown 
@@ -49,7 +49,8 @@ A dropdown component that takes care of all the annoying bits for you, with adde
     </Dropdown>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    import { DropdownHelper } from '@studiocms/ui/components';
+    // @noErrors
+    import { DropdownHelper } from 'studiocms:ui/components';
 
     const dropdown = new DropdownHelper('dropdown');
     ```
@@ -85,7 +86,7 @@ You can change the dropdowns position by supplying the `align` prop.
   <TabItem label="Code">
     ```astro "align='start'" showLinenumbers title="DropdownAlignStartExample.astro"
     ---
-    import { Dropdown, Button } from '@studiocms/ui/components';
+    import { Dropdown, Button } from 'studiocms:ui/components';
     ---
 
     <Dropdown 
@@ -105,7 +106,7 @@ You can change the dropdowns position by supplying the `align` prop.
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
-    import { DropdownHelper } from '@studiocms/ui/components';
+    import { DropdownHelper } from 'studiocms:ui/components';
 
     const dropdown = new DropdownHelper('dropdown');
     ```
@@ -129,7 +130,7 @@ You can tell the dropdown wrapper to only show the dropdown when it's children a
   <TabItem label="Code">
     ```astro "triggerOn='right'" showLinenumbers title="DropdownRightClickExample.astro"
     ---
-    import { Dropdown, Button } from '@studiocms/ui/components';
+    import { Dropdown, Button } from 'studiocms:ui/components';
     ---
 
     <Dropdown
@@ -147,7 +148,7 @@ You can tell the dropdown wrapper to only show the dropdown when it's children a
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
-    import { DropdownHelper } from '@studiocms/ui/components';
+    import { DropdownHelper } from 'studiocms:ui/components';
 
     const dropdown = new DropdownHelper('dropdown');
     ```
@@ -198,7 +199,7 @@ No, you read that right. You can customize the options too. You can individually
   <TabItem label="Code">
     ```astro ins={7-14} showLinenumbers title="DropdownOptionsExample.astro"
     ---
-    import { Dropdown, Button } from '@studiocms/ui/components';
+    import { Dropdown, Button } from 'studiocms:ui/components';
     ---
 
     <Dropdown 
@@ -221,7 +222,8 @@ No, you read that right. You can customize the options too. You can individually
     </Dropdown>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    import { DropdownHelper } from '@studiocms/ui/components';
+    // @noErrors
+    import { DropdownHelper } from 'studiocms:ui/components';
 
     const dropdown = new DropdownHelper('dropdown');
     ```
@@ -236,7 +238,7 @@ dropdowns options has been clicked!
 
 ```ts twoslash showLinenumbers title="Script Tag"
 // @noErrors
-import { DropdownHelper } from '@studiocms/ui/components';
+import { DropdownHelper } from 'studiocms:ui/components';
 
 const dropdown = new DropdownHelper('dropdown');
 

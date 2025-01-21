@@ -4,8 +4,7 @@ title: Theme Toggle
 ---
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { ThemeToggle } from '@studiocms/ui/components';
-import Icon from '@studiocms/ui/utils/Icon.astro';
+import { ThemeToggle, Icon } from 'studiocms:ui/components';
 
 A simple but useful helper component that you can use as a theme toggle.
 
@@ -23,8 +22,7 @@ A simple but useful helper component that you can use as a theme toggle.
   <TabItem label="Code">
     ```astro showLinenumbers title="ThemeToggleExample.astro"
     ---
-    import { ThemeToggle } from '@studiocms/ui/components';
-    import Icon from '@studiocms/ui/utils/Icon.astro';
+    import { ThemeToggle, Icon } from 'studiocms:ui/components';
     ---
 
     <ThemeToggle>

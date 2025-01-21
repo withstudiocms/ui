@@ -35,8 +35,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "build-scripts build 'src/**/*.ts' --build-tsconfig",
-    "dev": "build-scripts dev 'src/**/*.ts' --build-tsconfig"
+    "build": "build-scripts build 'src/**/*.{ts,css}' --build-tsconfig",
+    "dev": "build-scripts dev 'src/**/*.{ts,css}' --build-tsconfig"
   },
   "exports": {
     ".": {
@@ -47,10 +47,13 @@
       "types": "./dist/toolbar/index.d.ts",
       "default": "./dist/toolbar/index.js"
     },
-    "./components": "./assets/components/index.ts",
-    "./css/*": "./assets/css/*",
-    "./utils/*": "./assets/utils/*",
-    "./types": "./assets/types/index.ts"
+    "./components/*": "./dist/components/*",
+    "./css/*": "./dist/css/*",
+    "./utils/*": "./dist/utils/*",
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/types/index.js"
+    }
   },
   "dependencies": {
     "@iconify-json/heroicons": "catalog:",

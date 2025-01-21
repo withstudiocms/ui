@@ -3,7 +3,7 @@ i18nReady: true
 title: Card
 ---
 
-import { Card } from '@studiocms/ui/components';
+import { Card } from 'studiocms:ui/components';
 import { Tabs, TabItem, Badge } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 
@@ -22,7 +22,7 @@ A simple card component to wrap other stuff in!
   <TabItem label="Code">
     ```astro showLinenumbers title="CardExample.astro"
     ---
-    import { Card } from '@studiocms/ui/components';
+    import { Card } from 'studiocms:ui/components';
     ---
 
     <Card>
@@ -48,7 +48,7 @@ Instead of just having a bordered card, you can use the `variant` prop to change
   <TabItem label="Code">
     ```astro "variant='filled'" showLinenumbers title="FullVariantExample.astro"
     ---
-    import { Card } from '@studiocms/ui/components';
+    import { Card } from 'studiocms:ui/components';
     ---
 
     <Card variant='filled'>
@@ -73,7 +73,7 @@ You can set the card to grow to its parent containers width using the `fullWidth
   <TabItem label="Code">
     ```astro "fullWidth" showLinenumbers title="FullVariantExample.astro"
     ---
-    import { Card } from '@studiocms/ui/components';
+    import { Card } from 'studiocms:ui/components';
     ---
 
     <Card fullWidth>
@@ -96,7 +96,7 @@ Additionally, you can set the card to grow to its parent containers height using
   <TabItem label="Code">
     ```astro "fullHeight" showLinenumbers title="FullHeightCardExample.astro"
     ---
-    import { Card } from '@studiocms/ui/components';
+    import { Card } from 'studiocms:ui/components';
     ---
 
     <Card fullHeight>
@@ -127,7 +127,7 @@ The card component supports a header and footer slot:
   <TabItem label="Code">
     ```astro /slot='(?:header|footer)'/ showLinenumbers title="CardSlotsExample.astro"
     ---
-    import { Card } from '@studiocms/ui/components';
+    import { Card } from 'studiocms:ui/components';
     ---
 
     <Card>
@@ -159,7 +159,7 @@ as whatever you want by passing the `as` attribute. Here's a card that renders a
   <TabItem label="Code">
     ```astro "as='a'" showLinenumbers title="CardPolymorphicExample.astro"
     ---
-    import { Card } from '@studiocms/ui/components';
+    import { Card } from 'studiocms:ui/components';
     ---
 
     <Card as='a' href='https://studiocms.dev'>

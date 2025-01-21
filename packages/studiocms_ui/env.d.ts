@@ -1,5 +1,5 @@
 interface CustomEventMap {
-	createtoast: CustomEvent<import('./assets/types').ToastProps>;
+	createtoast: CustomEvent<import('./src/types/index.ts').ToastProps>;
 }
 
 declare global {
