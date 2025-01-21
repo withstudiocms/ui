@@ -15,3 +15,5 @@ Add two new colors
 
 - `info` (Blue)
 - `monochrome` (Black/White)
+
+Add the ability to pass a CSS file for customization of all colors
