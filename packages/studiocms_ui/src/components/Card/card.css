@@ -1,46 +1,46 @@
 .sui-card {
-  border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--background-base));
-  border-radius: var(--radius-md);
-  width: fit-content;
-  height: fit-content;
+	border: 1px solid hsl(var(--border));
+	background-color: hsl(var(--background-base));
+	border-radius: var(--radius-md);
+	width: fit-content;
+	height: fit-content;
 }
 
 .sui-card.filled {
-  background-color: hsl(var(--background-step-3));
-  border: none;
+	background-color: hsl(var(--background-step-3));
+	border: none;
 }
 
 .sui-card.full-w {
-  width: 100%;
+	width: 100%;
 }
 
 .sui-card.full-h {
-  height: 100%;
+	height: 100%;
 }
 
 .sui-card-header:has(*) {
-  padding: 1rem 1rem 0rem 1rem;
-  * {
-    margin: 0;
-  }
+	padding: 1rem 1rem 0rem 1rem;
+	* {
+		margin: 0;
+	}
 }
 
 .sui-card-body {
-  padding: 1rem;
+	padding: 1rem;
 }
 
 .sui-card-footer:has(*) {
-  border-top: 1px solid hsl(var(--border));
-  padding: 1rem;
+	border-top: 1px solid hsl(var(--border));
+	padding: 1rem;
 }
 
 .filled .sui-card-footer {
-  border: none;
+	border: none;
 }
 
 @media screen and (max-width: 840px) {
-  .sui-card {
-    width: 100%;
-  }
+	.sui-card {
+		width: 100%;
+	}
 }

@@ -1,8 +1,8 @@
+import fs from 'node:fs';
 import type { AstroIntegration } from 'astro';
 import transitionEventPolyfill from 'astro-transition-event-polyfill';
 import { studiocmsLogo } from './toolbar/icon.js';
 import { addVirtualImports, createResolver } from './utils/integration-utils.js';
-import fs from 'node:fs';
 const pkgJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf-8'));
 
 type Options = {

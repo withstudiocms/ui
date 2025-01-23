@@ -200,6 +200,6 @@ export default defineConfig({
 				},
 			],
 		}),
-		ui()
+		ui(),
 	],
 });
