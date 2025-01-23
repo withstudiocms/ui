@@ -1,5 +1,31 @@
 # @studiocms/ui
 
+## 0.4.0
+
+### Minor Changes
+
+- [#36](https://github.com/withstudiocms/ui/pull/36) [`07e2d9e`](https://github.com/withstudiocms/ui/commit/07e2d9e5a473bdcd516bf4d43e8274988ec796e6) Thanks [@louisescher](https://github.com/louisescher)! - Implement Build step and migrate all exported components into virtual modules
+
+  Instead of `@studiocms/ui/components` use `studiocms:ui/components`
+
+  For more information see https://ui.studiocms.dev
+
+- [#36](https://github.com/withstudiocms/ui/pull/36) [`07e2d9e`](https://github.com/withstudiocms/ui/commit/07e2d9e5a473bdcd516bf4d43e8274988ec796e6) Thanks [@louisescher](https://github.com/louisescher)! - Add a few new components:
+
+  - Accordion
+  - Badge
+  - Breadcrumbs
+  - Group
+  - Progress
+  - Sidebar
+
+  Add two new colors
+
+  - `info` (Blue)
+  - `monochrome` (Black/White)
+
+  Add the ability to pass a CSS file for customization of all colors
+
 ## 0.3.2
 
 ### Patch Changes
