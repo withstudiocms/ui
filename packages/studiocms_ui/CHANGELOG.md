@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.1
+
+### Patch Changes
+
+- [#40](https://github.com/withstudiocms/ui/pull/40) [`641e4b0`](https://github.com/withstudiocms/ui/commit/641e4b09574eb3d54c08b52be65e36233c2bbd6a) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update publish config and files included
+
 ## 0.4.0
 
 ### Minor Changes
