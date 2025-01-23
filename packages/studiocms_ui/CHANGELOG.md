@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.2
+
+### Patch Changes
+
+- [#44](https://github.com/withstudiocms/ui/pull/44) [`99a2f79`](https://github.com/withstudiocms/ui/commit/99a2f7959b4269d47c99c87a06ea6711c74a373e) Thanks [@louisescher](https://github.com/louisescher)! - Fixes compatibility issues with Astro view transitions
+
 ## 0.4.1
 
 ### Patch Changes
