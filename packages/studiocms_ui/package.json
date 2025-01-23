@@ -30,25 +30,40 @@
   },
   "sideEffects": false,
   "files": [
-    "src"
+    "dist", "assets"
   ],
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "build": "build-scripts build 'src/**/*.{ts,css}' --build-tsconfig",
+    "dev": "build-scripts dev 'src/**/*.{ts,css}' --build-tsconfig"
+  },
   "exports": {
-    ".": "./src/integration.ts",
-    "./components": "./src/components.ts",
-    "./layouts": "./src/layouts.ts",
-    "./css/*": "./src/css/*",
-    "./utils/*": "./src/utils/*",
-    "./types": "./src/types/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./toolbar": {
+      "types": "./dist/toolbar/index.d.ts",
+      "default": "./dist/toolbar/index.js"
+    },
+    "./components/*": "./dist/components/*",
+    "./css/*": "./dist/css/*",
+    "./utils/*": "./dist/utils/*",
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/types/index.js"
+    }
   },
   "dependencies": {
     "@iconify-json/heroicons": "catalog:",
     "@iconify/utils": "catalog:",
+    "astro-transition-event-polyfill": "^1.1.0",
     "pathe": "catalog:"
   },
   "peerDependencies": {
-    "astro": "catalog:peers"
+    "astro": "catalog:peers",
+    "vite": "catalog:peers"
   },
   "devDependencies": {
     "typescript": "catalog:"

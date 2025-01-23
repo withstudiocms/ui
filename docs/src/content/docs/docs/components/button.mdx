@@ -1,17 +1,19 @@
 ---
 i18nReady: true
 title: Button
+sidebar:
+  badge:
+    text: New Colors!
+    variant: tip
 ---
 
-import { Button } from '@studiocms/ui/components';
+import { Button } from 'studiocms:ui/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 
 A button component with support for different colors, sizes and states out of the box. You can also customize it to your needs!
 
 ## Usage
-
-Using the button component is easy. Check out the example below:
 
 <Tabs>
   <TabItem label="Preview">
@@ -24,7 +26,7 @@ Using the button component is easy. Check out the example below:
   <TabItem label="Code">
     ```astro showLinenumbers title="ButtonExample.astro"
     ---
-    import { Button } from '@studiocms/ui/components';
+    import { Button } from 'studiocms:ui/components';
     ---
 
     <Button color='primary'>
@@ -49,7 +51,7 @@ You can disable the button component via the `disabled` attribute:
   <TabItem label="Code">
     ```astro "disabled" showLinenumbers title="DisabledButtonExample.astro"
     ---
-    import { Button } from '@studiocms/ui/components';
+    import { Button } from 'studiocms:ui/components';
     ---
 
     <Button color='primary' disabled>
@@ -80,7 +82,7 @@ The button component supports three different sizes out of the box:
   <TabItem label="Code">
     ```astro /size='(?:sm|lg)'/ showLinenumbers title="ButtonSizesExample.astro"
     ---
-    import { Button } from '@studiocms/ui/components';
+    import { Button } from 'studiocms:ui/components';
     ---
 
     <Button color='primary' size='sm'>
@@ -104,6 +106,8 @@ There is five default colorways that can be used right away:
 - Success
 - Warning
 - Danger
+- Info
+- Monochrome
 
 <Tabs>
   <TabItem label="Preview">
@@ -123,12 +127,18 @@ There is five default colorways that can be used right away:
       <Button color='danger'>
         Danger
       </Button>
+      <Button color='info'>
+        Info
+      </Button>
+      <Button color='mono'>
+        Monochrome
+      </Button>
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
     ```astro /color='[a-z]+'/ showLinenumbers title="ButtonColorsExample.astro"
     ---
-    import { Button } from '@studiocms/ui/components';
+    import { Button } from 'studiocms:ui/components';
     ---
 
     <Button color='default'>
@@ -145,6 +155,12 @@ There is five default colorways that can be used right away:
     </Button>
     <Button color='danger'>
       Danger
+    </Button>
+    <Button color='info'>
+      Info
+    </Button>
+    <Button color='mono'>
+      Monochrome
     </Button>
     ```
   </TabItem>
@@ -171,7 +187,7 @@ In addition to colors, the button component can be displayed in three different 
   <TabItem label="Code">
     ```astro /variant=\"[a-z]+\"/ showLinenumbers title="ButtonVariantsExample.astro"
     ---
-    import { Button } from '@studiocms/ui/components';
+    import { Button } from 'studiocms:ui/components';
     ---
 
     <Button color='primary'>
@@ -203,7 +219,7 @@ Here's an example where the button is an `<a>` tag instead of a `<button>`:
   <TabItem label="Code">
     ```astro "as='a'" showLinenumbers title="ButtonPolymorphicExample.astro"
     ---
-    import { Button } from '@studiocms/ui/components';
+    import { Button } from 'studiocms:ui/components';
     ---
   
     <Button color='primary' target="_blank" as='a' href="https://studiocms.dev">
@@ -233,7 +249,7 @@ them inline-styles!**
   <TabItem label="Code (with inline styles)">
     ```astro /style="(?:[^"]*)"/ showLinenumbers title="ButtonCustomStylesExample.astro"
     ---
-    import { Button } from '@studiocms/ui/components';
+    import { Button } from 'studiocms:ui/components';
     ---
   
     <Button style="background-image: linear-gradient(to top right, #a07cee, #4ff8d2); color: black; font-weight: 600;">
@@ -244,7 +260,7 @@ them inline-styles!**
   <TabItem label="Code (with !important)">
     ```astro ins={9-13} showLinenumbers title="ButtonCustomStylesExample.astro"
     ---
-    import { Button } from '@studiocms/ui/components';
+    import { Button } from 'studiocms:ui/components';
     ---
   
     <Button class="custom-btn">

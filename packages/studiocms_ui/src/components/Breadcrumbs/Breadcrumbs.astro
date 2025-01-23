@@ -1,0 +1,27 @@
+---
+import './breadcrumbs.css';
+
+type Props = {
+  segments: {
+    label: string;
+    segment: string;
+  }[];
+  separator?: string;
+}
+
+const { segments, separator = '>' } = Astro.props;
+
+const breadcrumbs = segments.map(({ label }, index) => {
+  const path = segments.slice(0, index + 1).map(({ segment }) => segment).join('/').replaceAll("//", "/");
+  return {
+    label,
+    path
+  };
+});
+---
+
+<div class="sui-breadcrumbs">
+  {breadcrumbs.map(({ label, path }) => (
+    <a href={path || '/'}>{label}</a><span>{separator}</span>
+  ))}  
+</div>

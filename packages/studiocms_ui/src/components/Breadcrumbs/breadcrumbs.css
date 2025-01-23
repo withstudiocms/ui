@@ -1,0 +1,18 @@
+.sui-breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  gap: .25rem;
+}
+
+.sui-breadcrumbs > *:last-child {
+  display: none;
+}
+
+.sui-breadcrumbs a {
+  color: hsl(var(--primary-base));
+  text-decoration: none;
+}
+
+.sui-breadcrumbs a:hover {
+  text-decoration: underline;
+}

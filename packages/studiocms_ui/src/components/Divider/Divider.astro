@@ -1,0 +1,26 @@
+---
+import './divider.css';
+
+/**
+ * Props for the divider component.
+ */
+interface Props {
+	/**
+	 * The background color of the divider, used to "hide" content behind the slot. Defaults to `background-base`.
+	 */
+	background?: 'background-base' | 'background-step-1' | 'background-step-2' | 'background-step-3';
+}
+
+const hasDefaultSlot = Astro.slots.has('default');
+
+const { background = 'background-base' } = Astro.props;
+---
+<div class="sui-divider-container">
+  <hr class="sui-divider-line" />
+  <div 
+    class="sui-divider-content" 
+    style={`background-color: hsl(var(--${background})); padding: ${hasDefaultSlot ? '.25rem .5rem;' : '0'}`}
+  >
+    <slot />
+  </div>
+</div>

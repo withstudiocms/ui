@@ -18,17 +18,7 @@ class SingleSidebarHelper {
 		this.sidebar = sidebarContainer;
 
 		if (toggleID) {
-			const navToggle = document.getElementById(toggleID);
-
-			if (!navToggle) {
-				throw new Error(`No item with ID ${toggleID} found.`);
-			}
-
-			this.sidebarToggle = navToggle;
-
-			this.sidebarToggle.addEventListener('click', () => {
-				this.sidebar.classList.toggle('active');
-			});
+			this.toggleSidebarOnClick(toggleID);
 		}
 	}
 
@@ -154,6 +144,20 @@ class DoubleSidebarHelper {
 	};
 
 	/**
+	 * A helper function to toggle between the outer and inner sidebar when an element is clicked.
+	 * @param elementID The ID of the element that should toggle the sidebar view.
+	 */
+	public toggleStateOnClick = (elementID: string) => {
+		const element = document.getElementById(elementID);
+
+		if (!element) {
+			throw new Error(`No item with ID ${elementID} found.`);
+		}
+
+		element.addEventListener('click', this.toggleSidebarState);
+	};
+
+	/**
 	 * A function to show the inner sidebar.
 	 */
 	public showInnerSidebar = () => {
@@ -166,6 +170,17 @@ class DoubleSidebarHelper {
 	public showOuterSidebar = () => {
 		this.sidebarsContainer.classList.add('active');
 		this.sidebarsContainer.classList.remove('inner');
+	};
+
+	/**
+	 * A function to toggle between the outer and inner sidebar.
+	 */
+	public toggleSidebarState = () => {
+		if (this.sidebarsContainer.classList.contains('inner')) {
+			this.showOuterSidebar();
+		} else {
+			this.showInnerSidebar();
+		}
 	};
 
 	/**

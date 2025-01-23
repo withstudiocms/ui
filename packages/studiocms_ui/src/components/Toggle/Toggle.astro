@@ -1,0 +1,84 @@
+---
+import type { StudioCMSColorway } from '../../utils/colors.js';
+import { generateID } from '../../utils/generateID.js';
+import './toggle.css';
+
+/**
+ * The props for the toggle component
+ */
+interface Props {
+	/**
+	 * The label of the toggle.
+	 */
+	label: string;
+	/**
+	 * The size of the toggle. Defaults to `md`.
+	 */
+	size?: 'sm' | 'md' | 'lg';
+	/**
+	 * The color of the toggle. Defaults to `default`.
+	 */
+	color?: StudioCMSColorway;
+	/**
+	 * Whether the toggle is checked by default. Defaults to `false`.
+	 */
+	defaultChecked?: boolean;
+	/**
+	 * Whether the toggle is disabled. Defaults to `false`.
+	 */
+	disabled?: boolean;
+	/**
+	 * The name of the toggle.
+	 */
+	name?: string;
+	/**
+	 * Whether the toggle is required. Defaults to `false`.
+	 */
+	isRequired?: boolean;
+}
+
+const {
+	size = 'md',
+	color = 'default',
+	defaultChecked,
+	disabled,
+	name = generateID('checkbox'),
+	label,
+	isRequired,
+} = Astro.props;
+---
+<label
+  class="sui-toggle-label"
+  for={name}
+  class:list={[
+    disabled && "disabled",
+    color,
+    size,
+  ]}
+>
+  <div class="sui-toggle-container">
+    <div 
+      class="sui-toggle-switch"
+      tabindex="0"
+      role="checkbox"
+      aria-checked={defaultChecked}
+      aria-label={label}
+    />
+    <input
+      type="checkbox"
+      name={name}
+      id={name}
+      checked={defaultChecked}
+      disabled={disabled}
+      required={isRequired}
+      class="sui-toggle-checkbox"
+      hidden
+    />
+  </div>
+  <span id={`label-${name}`}>
+    {label} <span class="req-star">{isRequired && "*"}</span>
+  </span>
+</label>
+<script>
+import "studiocms:ui/scripts/toggle"
+</script>

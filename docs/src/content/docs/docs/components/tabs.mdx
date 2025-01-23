@@ -2,12 +2,12 @@
 title: "Tabs"
 sidebar:
   badge:
-    text: New!
+    text: New Colors!
     variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Tabs as SuiTabs, TabItem as SuiTabItem, Card, Divider } from '@studiocms/ui/components';
+import { Tabs as SuiTabs, TabItem as SuiTabItem, Card, Divider } from 'studiocms:ui/components';
 
 import PreviewCard from '~/components/PreviewCard.astro';
 
@@ -40,7 +40,7 @@ The tabs you can see on [the StudioCMS UI landing page](https://ui.studiocms.dev
   <TabItem label="Code">
     ```astro showLinenumbers title="TabsExample.astro"
     ---
-    import { Tabs, TabItem, Card } from '@studiocms/ui/components';
+    import { Tabs, TabItem, Card } from 'studiocms:ui/components';
     ---
 
     <Tabs>
@@ -93,7 +93,7 @@ You can add icons and even change the color of the tabs:
   <TabItem label="Code">
     ```astro /icon='[A-Za-z-]+' color='[A-Za-z]+'/ showLinenumbers title="TabsCustomizationExample.astro"
     ---
-    import { Tabs, TabItem, Card } from '@studiocms/ui/components';
+    import { Tabs, TabItem, Card } from 'studiocms:ui/components';
     ---
 
     <Tabs>
@@ -148,7 +148,7 @@ this page.
   <TabItem label="Code">
     ```astro "variant='starlight'" showLinenumbers title="TabsVariantsExample.astro"
     ---
-    import { Tabs, TabItem, Card } from '@studiocms/ui/components';
+    import { Tabs, TabItem, Card } from 'studiocms:ui/components';
     ---
 
     <Tabs variant='starlight'>
@@ -197,7 +197,7 @@ In certain cases, you might want to change the alignment of the tabs. You can do
   <TabItem label="Code">
     ```astro "align='right'" showLinenumbers title="TabsAlignmentExample.astro"
     ---
-    import { Tabs, TabItem, Card } from '@studiocms/ui/components';
+    import { Tabs, TabItem, Card } from 'studiocms:ui/components';
     ---
 
     <Tabs align='right'>
@@ -257,7 +257,7 @@ set the `storage` prop to `persistent` to store the value in localStorage.
   <TabItem label="Code">
     ```astro "syncKey='sync-example'" showLinenumbers title="TabsSyncExample.astro"
     ---
-    import { Tabs, TabItem, Card, Divider } from '@studiocms/ui/components';
+    import { Tabs, TabItem, Card, Divider } from 'studiocms:ui/components';
     ---
 
     <Tabs syncKey='sync-example'>

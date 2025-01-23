@@ -1,0 +1,132 @@
+---
+title: Badge
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Badge } from 'studiocms:ui/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+
+A button component with support for different colors, sizes and states out of the box. You can also customize it to your needs!
+
+## Usage
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Badge label="Badge" icon="sparkles-16-solid" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="BadgeExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="Badge" icon="sparkles-16-solid" />
+    ```
+  </TabItem>
+</Tabs>
+
+### Colors
+
+The badge component has support for the following colors:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Badge label="Primary" color="primary" />
+      <Badge label="Success" color="success" />
+      <Badge label="Warning" color="warning" />
+      <Badge label="Danger" color="danger" />
+      <Badge label="Info" color="info" />
+      <Badge label="Monochrome" color="mono" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="BadgeColorExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="Primary" color="primary" />
+    <Badge label="Success" color="success" />
+    <Badge label="Warning" color="warning" />
+    <Badge label="Danger" color="danger" />
+    <Badge label="Info" color="info" />
+    <Badge label="Monochrome" color="mono" />
+    ```
+  </TabItem>
+</Tabs>
+
+### Variants
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Badge label="Default" variant="default" />
+      <Badge label="Outlined" variant="outlined" />
+      <Badge label="Flat" variant="flat" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="BadgeSizeExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="Default" variant="default" />
+    <Badge label="Outlined" variant="outlined" />
+    <Badge label="Flat" variant="flat" />
+    ```
+  </TabItem>
+</Tabs>
+
+### Rounding
+
+You can change the badge's border-radius by setting the `rounding` prop:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Badge label="Full" rounding="full" />
+      <Badge label="Semi" rounding="semi" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="BadgeSizeExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="Full" rounding="full" />
+    <Badge label="Semi" rounding="semi" />
+    ```
+  </TabItem>
+</Tabs>
+
+### Sizes
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Badge label="Small" size="sm" />
+      <Badge label="Medium" size="md" />
+      <Badge label="Large" size="lg" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="BadgeSizeExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="Small" size="sm" />
+    <Badge label="Medium" size="md" />
+    <Badge label="Large" size="lg" />
+    ```
+  </TabItem>
+</Tabs>

@@ -1,5 +1,6 @@
 import starlight from '@astrojs/starlight';
 import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
+import ui from '@studiocms/ui';
 import { defineConfig, envField } from 'astro/config';
 import rehypePluginKit from './src/plugins/rehypePluginKit';
 
@@ -90,14 +91,14 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: {
 						property: 'og:image',
-						content: `${site}og.png?v=2`,
+						content: `${site}og.png`,
 					},
 				},
 				{
 					tag: 'meta',
 					attrs: {
 						property: 'twitter:image',
-						content: `${site}og.png?v=2`,
+						content: `${site}og.png`,
 					},
 				},
 				{
@@ -158,10 +159,6 @@ export default defineConfig({
 						{
 							label: 'Installation',
 							link: 'docs/',
-							badge: {
-								text: 'Updated!',
-								variant: 'success',
-							},
 						},
 						{
 							label: 'Release Notes',
@@ -174,7 +171,14 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'Upgrade Guides',
+					label: 'Guides',
+					autogenerate: {
+						directory: 'docs/guides',
+						collapsed: true,
+					},
+				},
+				{
+					label: 'Upgrading StudioCMS',
 					autogenerate: {
 						directory: 'docs/upgrade-guides',
 						collapsed: true,
@@ -196,5 +200,6 @@ export default defineConfig({
 				},
 			],
 		}),
+		ui()
 	],
 });

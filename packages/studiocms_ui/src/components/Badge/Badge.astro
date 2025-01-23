@@ -1,0 +1,49 @@
+---
+import type { StudioCMSColorway } from '../../utils/colors.js';
+import './badge.css';
+import type { HTMLAttributes } from 'astro/types';
+import Icon from '../Icon/Icon.astro';
+import type { HeroIconName } from '../Icon/iconType.js';
+
+interface Props extends Omit<HTMLAttributes<'span'>, 'color'> {
+	/**
+	 * The color of the badge. Defaults to `primary`.
+	 */
+	color?: Omit<StudioCMSColorway, 'default'>;
+	/**
+	 * The icon to display in the badge.
+	 */
+	icon?: HeroIconName;
+	/**
+	 * The size of the badge. Defaults to `md`.
+	 */
+	size?: 'sm' | 'md' | 'lg';
+	/**
+	 * The variant of the badge. Defaults to `default`.
+	 */
+	variant?: 'default' | 'flat' | 'outline';
+	/**
+	 * The rounding of the badge. Full is a half-circle, semi is a quarter-circle. Defaults to `full`.
+	 */
+	rounding?: 'full' | 'semi';
+	/**
+	 * The label of the badge.
+	 */
+	label: string;
+}
+
+const {
+	color = 'primary',
+	icon,
+	size = 'md',
+	variant = 'default',
+	rounding = 'full',
+	label,
+	...props
+} = Astro.props;
+---
+
+<span class="sui-badge" class:list={[color, size, variant, rounding]} {...props}>
+  {icon && <Icon name={icon} width={16} height={16} />}
+  {label}
+</span>

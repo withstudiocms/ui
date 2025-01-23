@@ -1,6 +1,6 @@
 packages:
   - "packages/*"
-  - "playground"
+  - "build-scripts"
   - "docs"
 
 catalog:
@@ -12,9 +12,10 @@ catalog:
   "@sentry/astro": ^8.42.0
   "@types/node": ^20.14.11
   pathe: ^1.1.2
-  astro: ^5.0.8
+  astro: ^5.1.1
   typescript: ^5.7.2
 
 catalogs:
   peers:
     astro: ^4.5 || ^5.0.0-beta.0
+    vite: ^5.0.0 || ^6.0.0

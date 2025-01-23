@@ -2,7 +2,7 @@
 import '@fontsource-variable/onest/index.css';
 import '@fontsource-variable/fira-code/index.css';
 
-import { Footer, Modal, Toaster } from '@studiocms/ui/components';
+import { Button, Footer, Modal, Toaster } from 'studiocms:ui/components';
 
 import { getCollection } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
@@ -27,7 +27,6 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
 	chunkedSocialProofEntries.push(chunk);
 }
 ---
-
 <StarlightPage frontmatter={{ title: 'StudioCMS UI', template: 'splash' }}>
     <Toaster />
     <Modal id='hero-example-modal' actionButton='Okay'>

@@ -1,0 +1,58 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import './footer.css';
+
+interface FooterLink {
+	/**
+	 * The label of the link.
+	 */
+	label: string;
+	/**
+	 * The href of the link.
+	 */
+	href: string;
+}
+
+/**
+ * The props for the footer component.
+ */
+interface Props extends HTMLAttributes<'footer'> {
+	/**
+	 * The links to display in the footer.
+	 */
+	links: {
+		[label: string]: FooterLink[];
+	};
+	/**
+	 * The copyright text to display in the footer.
+	 */
+	copyright: string;
+}
+
+const { copyright, class: className, links, ...props } = Astro.props;
+---
+
+<footer {...props} class={`${className} sui-footer`}>
+  <div class="upper">
+    <div>
+      <slot name="brand" />
+    </div>
+    <div class="links">
+      {Object.keys(links).map((groupLabel) => (
+        <ul>
+          <li class="sui-footer-link-label">{groupLabel}</li>
+          {links[groupLabel]!.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+  <hr class="separator" />
+  <div class="lower">
+    <span class="copyright-span">{copyright}</span>
+    <slot name="socials" />
+  </div>
+</footer>

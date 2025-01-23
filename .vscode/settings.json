@@ -8,21 +8,27 @@
   "editor.gotoLocation.multipleDefinitions": "goto",
   "cSpell.words": [
     "astrojs",
+    "checkmark",
     "createtoast",
     "dismissable",
     "Eleventy",
     "fira",
     "fontsource",
     "frontmatter",
+    "heroicons",
     "iconify",
     "louisescher",
     "Matthiesen",
     "onest",
     "pathe",
+    "polyline",
+    "searchselect",
     "socialproof",
     "studiocms",
+    "themetoggle",
     "Thum",
     "tsconfigs",
+    "vite",
     "withstudiocms"
   ]
 }

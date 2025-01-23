@@ -1,0 +1,112 @@
+---
+title: Progress
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import ProgressScript from '~/components/ProgressScript.astro';
+import { Progress, ProgressHelper } from 'studiocms:ui/components';
+
+:::caution[Helper required]
+This component requires a **helper**. Make sure to read the documentation carefully so you know how to use it.
+:::
+
+A progress bar, used to show the progress of a task.
+
+## Usage
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Progress id="prog-1" max={100} value={50} />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="ProgressExample.astro"
+    ---
+    import { Progress } from 'studiocms:ui/components';
+    ---
+
+    <Progress id="progress" max={100} value={50} />
+    ```
+  </TabItem>
+</Tabs>
+
+### Value and Max
+
+Similar to the native HTML `<progress>` element, the `Progress` component takes two props: `value` and `max`. The `value` prop represents the current progress, while the `max` prop represents the maximum value of the progress bar.
+
+The value and max can be adjusted after the component has been initialized by using the `ProgressHelper`, which takes in the ID of the progress bar as the only argument:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Progress id="prog-2" max={100} value={50} />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="ProgressExample.astro"
+    ---
+    import { Progress } from 'studiocms:ui/components';
+    ---
+
+    <Progress id="progress" max={100} value={50} />
+    <script>
+      import { ProgressHelper } from 'studiocms:ui/components';
+
+      const progress = new ProgressHelper('progress');
+      progress.setValue(75);
+      progress.setMax(150);
+      
+      // You can obtain the value, max and percentage of the progress bar
+      progress.getValue(); // 75
+      progress.getMax(); // 150
+      progress.getPercentage(); // 50
+    </script>
+    ```
+  </TabItem>
+</Tabs>
+
+### Colors
+
+The progress component can be colored with all the colors available in the theme by setting the `color` prop to one of the following values:
+
+- `primary`
+- `success`
+- `warning`
+- `danger`
+- `info`
+- `monochrome`
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Progress id="prog-3" max={100} value={50} color="primary" />
+      <Progress id="prog-3" max={100} value={50} color="success" />
+      <Progress id="prog-4" max={100} value={50} color="warning" />
+      <Progress id="prog-3" max={100} value={50} color="danger" />
+      <Progress id="prog-4" max={100} value={50} color="info" />
+      <Progress id="prog-3" max={100} value={50} color="monochrome" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="ProgressExample.astro"
+    ---
+    import { Progress } from 'studiocms:ui/components';
+    ---
+
+    <Progress id="progress-1" max={100} value={50} color="primary" />
+    <Progress id="progress-2" max={100} value={50} color="success" />
+    <Progress id="progress-3" max={100} value={50} color="warning" />
+    <Progress id="progress-4" max={100} value={50} color="danger" />
+    <Progress id="progress-5" max={100} value={50} color="info" />
+    <Progress id="progress-6" max={100} value={50} color="monochrome" />
+    ```
+  </TabItem>
+</Tabs>
+
+<ProgressScript />

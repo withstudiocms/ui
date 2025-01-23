@@ -1,4 +1,4 @@
-import type { ToastProps } from '../../types';
+import type { ToastProps } from '../../types/index.js';
 
 /**
  * A function to create toasts with.

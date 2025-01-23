@@ -5,7 +5,7 @@ title: Input
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { Input } from '@studiocms/ui/components';
+import { Input } from 'studiocms:ui/components';
 
 A simple input component with support for easy labels and placeholders.
 
@@ -20,7 +20,7 @@ A simple input component with support for easy labels and placeholders.
   <TabItem label="Code">
     ```astro showLinenumbers title="InputExample.astro"
     ---
-    import { Input } from '@studiocms/ui/components';
+    import { Input } from 'studiocms:ui/components';
     ---
 
     <Input label='Label' placeholder='Placeholder' />
@@ -41,7 +41,7 @@ You can set the input's type to like you would normally. Here's a password input
   <TabItem label="Code">
     ```astro "type='password'" showLinenumbers title="PasswordInputExample.astro"
     ---
-    import { Input } from '@studiocms/ui/components';
+    import { Input } from 'studiocms:ui/components';
     ---
 
     <Input label='Label' placeholder='Placeholder' type='password' />
@@ -62,7 +62,7 @@ You can disable the input altogether by using the `disabled` prop.
   <TabItem label="Code">
     ```astro "disabled" showLinenumbers title="DisabledInputExample.astro"
     ---
-    import { Input } from '@studiocms/ui/components';
+    import { Input } from 'studiocms:ui/components';
     ---
 
     <Input label='Label' placeholder='Placeholder' disabled />
@@ -86,7 +86,7 @@ the `FormData` returned by a submission. Here's an example showing how to set bo
   <TabItem label="Code">
     ```astro "isRequired" "name='example-input'" showLinenumbers title="FormInputExample.astro"
     ---
-    import { Input } from '@studiocms/ui/components';
+    import { Input } from 'studiocms:ui/components';
     ---
 
     <Input label='Label' placeholder='Placeholder' isRequired name='example-input' />

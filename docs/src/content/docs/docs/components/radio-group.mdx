@@ -1,11 +1,15 @@
 ---
 i18nReady: true
 title: Radio Group
+sidebar:
+  badge:
+    text: New Colors!
+    variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { RadioGroup, Row } from '@studiocms/ui/components';
+import { RadioGroup, Row } from 'studiocms:ui/components';
 
 A custom radio group component with support for sizes and colors. Form compatible.
 
@@ -20,7 +24,7 @@ A custom radio group component with support for sizes and colors. Form compatibl
   <TabItem label="Code">
     ```astro showLinenumbers title="RadioGroupExample.astro"
     ---
-    import { RadioGroup } from '@studiocms/ui/components';
+    import { RadioGroup } from 'studiocms:ui/components';
     ---
 
     <RadioGroup 
@@ -47,7 +51,7 @@ You can change a radio group to be displayed horizontally by using the `horizont
   <TabItem label="Code">
     ```astro "horizontal" showLinenumbers title="RadioGroupHorizontalExample.astro"
     ---
-    import { RadioGroup } from '@studiocms/ui/components';
+    import { RadioGroup } from 'studiocms:ui/components';
     ---
 
     <RadioGroup 
@@ -75,7 +79,7 @@ You can set a default selected option via the `defaultValue` prop.
   <TabItem label="Code">
     ```astro "defaultValue='opt-1'" showLinenumbers title="RadioGroupDefaultValueExample.astro"
     ---
-    import { RadioGroup } from '@studiocms/ui/components';
+    import { RadioGroup } from 'studiocms:ui/components';
     ---
 
     <RadioGroup 
@@ -96,20 +100,19 @@ The radio group component supports all default colorways.
 
 <Tabs>
   <TabItem label="Preview">
-    <PreviewCard>
-      <Row gapSize="lg">    
-        <RadioGroup label="Default" defaultValue='opt-1-d' options={[{ label: 'Option 1', value: 'opt-1-d' }]} color='default' />
-        <RadioGroup label="Primary" defaultValue='opt-1-p' options={[{ label: 'Option 1', value: 'opt-1-p' }]} color='primary' />
-        <RadioGroup label="Success" defaultValue='opt-1-s' options={[{ label: 'Option 1', value: 'opt-1-s' }]} color='success' />
-        <RadioGroup label="Warning" defaultValue='opt-1-w' options={[{ label: 'Option 1', value: 'opt-1-w' }]} color='warning' />
-        <RadioGroup label="Danger" defaultValue='opt-1-da' options={[{ label: 'Option 1', value: 'opt-1-da' }]} color='danger' />
-      </Row>
+    <PreviewCard>  
+      <RadioGroup label="Primary" defaultValue='opt-1-p' options={[{ label: 'Option 1', value: 'opt-1-p' }]} color='primary' />
+      <RadioGroup label="Success" defaultValue='opt-1-s' options={[{ label: 'Option 1', value: 'opt-1-s' }]} color='success' />
+      <RadioGroup label="Warning" defaultValue='opt-1-w' options={[{ label: 'Option 1', value: 'opt-1-w' }]} color='warning' />
+      <RadioGroup label="Danger" defaultValue='opt-1-da' options={[{ label: 'Option 1', value: 'opt-1-da' }]} color='danger' />
+      <RadioGroup label="Info" defaultValue='opt-1-info' options={[{ label: 'Option 1', value: 'opt-1-info' }]} color='info' />
+      <RadioGroup label="Monochrome" defaultValue='opt-1-mono' options={[{ label: 'Option 1', value: 'opt-1-mono' }]} color='mono' />
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
     ```astro "color='primary'" showLinenumbers title="RadioGroupColorExample.astro"
     ---
-    import { RadioGroup } from '@studiocms/ui/components';
+    import { RadioGroup } from 'studiocms:ui/components';
     ---
 
     <RadioGroup 
@@ -139,7 +142,7 @@ below shows how to do the latter:
   <TabItem label="Code">
     ```astro "disabled: true" showLinenumbers title="RadioGroupDisabledExample.astro"
     ---
-    import { RadioGroup } from '@studiocms/ui/components';
+    import { RadioGroup } from 'studiocms:ui/components';
     ---
 
     <RadioGroup 
@@ -164,7 +167,7 @@ the `FormData` returned by a submission. Here's an example showing how to set bo
 
 ```astro "isRequired" "name='required-radio'" showLinenumbers title="RadioGroupFormExample.astro"
 ---
-import { RadioGroup } from '@studiocms/ui/components';
+import { RadioGroup } from 'studiocms:ui/components';
 ---
 
 <RadioGroup 

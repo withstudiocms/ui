@@ -1,0 +1,75 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types';
+import type { StudioCMSColorway } from '../../utils/colors.js';
+import './button.css';
+
+/**
+ * Props for the button component.
+ */
+type Props<As extends HTMLTag = 'button'> = Omit<Polymorphic<{ as: As }>, 'as'> & {
+	/**
+	 * The polymorphic component to render the button as. Defaults to `button`.
+	 */
+	as?: As;
+	/**
+	 * The size of the button. Defaults to `md`.
+	 */
+	size?: 'sm' | 'md' | 'lg';
+	/**
+	 * Whether the button should be full width. Defaults to `false`.
+	 */
+	fullWidth?: boolean;
+	/**
+	 * The colorway of the button. Defaults to `default`.
+	 */
+	color?: StudioCMSColorway;
+	/**
+	 * The variant of the button. Defaults to `solid`.
+	 */
+	variant?: 'solid' | 'outlined' | 'flat';
+	/**
+	 * Whether the button is disabled. Defaults to `false`.
+	 */
+	disabled?: boolean;
+	/**
+	 * An optional href to use for the button. If provided, the button will render as an anchor tag.
+	 */
+	href?: string;
+};
+
+export type { Props };
+
+const {
+	size = 'md',
+	fullWidth = false,
+	color = 'default',
+	variant = 'solid',
+	disabled = false,
+	...props
+} = Astro.props;
+
+let As: HTMLTag = 'button';
+
+if ('href' in props) {
+	As = 'a';
+} else {
+	As = props.as || 'button';
+}
+---
+
+<As
+  class="sui-button"
+  class:list={[
+    fullWidth && "full",
+    disabled && "disabled",
+    size,
+    color,
+    variant,
+  ]}
+  disabled={disabled}
+  tabindex={0}
+  {...props}>
+  <slot name="start-content" />
+  <slot />
+  <slot name="end-content" />
+</As>

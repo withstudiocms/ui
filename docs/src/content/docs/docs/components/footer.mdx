@@ -1,14 +1,10 @@
 ---
 title: "Footer"
-sidebar:
-  badge:
-    text: New!
-    variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { Footer } from '@studiocms/ui/components';
+import { Footer } from 'studiocms:ui/components';
 
 A footer component with lots of customization options!
 
@@ -28,7 +24,7 @@ The footer component has four different ways of customization:
 
 ```astro showLinenumbers title="FooterExample.astro"
 ---
-import { Footer } from '@studiocms/ui/components';
+import { Footer } from 'studiocms:ui/components';
 ---
 
 <Footer
@@ -54,7 +50,7 @@ Here's the example of how we implemented this footer on the StudioCMS UI landing
 
 ```astro showLinenumbers title="FooterExample.astro"
 ---
-import { Footer } from '@studiocms/ui/components';
+import { Footer } from 'studiocms:ui/components';
 // Different imports for icons & logos...
 ---
 <!-- Other page content -->

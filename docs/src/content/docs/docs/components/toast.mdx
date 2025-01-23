@@ -6,7 +6,7 @@ title: Toast
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 import ToasterScript from '~/components/ToasterScript.astro';
-import { Toaster, Button, Row } from '@studiocms/ui/components';
+import { Toaster, Button, Row } from 'studiocms:ui/components';
 
 :::caution[Helper required]
 This component requires a **helper**. Make sure to read the documentation carefully so you know how to use it.
@@ -25,7 +25,7 @@ This component requires a **helper**. Make sure to read the documentation carefu
   <TabItem label="Code">
     ```astro showLinenumbers title="ToastExample.astro"
     ---
-    import { Toaster, Button } from '@studiocms/ui/components';
+    import { Toaster, Button } from 'studiocms:ui/components';
     ---
 
     <!-- Add this to the root of your page: -->
@@ -37,7 +37,7 @@ This component requires a **helper**. Make sure to read the documentation carefu
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
     // @noErrors
-    import { toast } from '@studiocms/ui/components';
+    import { toast } from 'studiocms:ui/components';
 
     const trigger = document.getElementById('usage-trigger')!;
     trigger.addEventListener('click', () => {
@@ -57,7 +57,7 @@ You can change where all toasts are displayed via the `position` prop on the `<T
 
 ```astro /position='[a-z-]+'/ showLinenumbers title="ToastPosition.astro"
 ---
-import { Toaster } from '@studiocms/ui/components';
+import { Toaster } from 'studiocms:ui/components';
 ---
 
 <Toaster position='top-left' />
@@ -76,7 +76,7 @@ You can set the default duration like this:
 
 ```astro "duration={10000}" showLinenumbers title="ToastDuration.astro"
 ---
-import { Toaster } from '@studiocms/ui/components';
+import { Toaster } from 'studiocms:ui/components';
 ---
 
 <Toaster duration={10000} />
@@ -86,7 +86,7 @@ Or you can set it individually for every toast like this:
 
 ```ts "duration: 10000" twoslash showLinenumbers title="ToastDuration.ts"
 // @noErrors
-import { toast } from '@studiocms/ui/components';
+import { toast } from 'studiocms:ui/components';
 
 toast({
   title: 'This is a toast!',
@@ -103,7 +103,7 @@ to be persistent by setting `persistent` to `true`:
 
 ```ts "persistent: true" twoslash showLinenumbers title="ToastPersistence.ts"
 // @noErrors
-import { toast } from '@studiocms/ui/components';
+import { toast } from 'studiocms:ui/components';
 
 toast({
   title: 'This is a toast!',
@@ -119,7 +119,7 @@ Unless a toast is persistent, you can choose to hide the close button by setting
 
 ```ts "closeButton: false" twoslash showLinenumbers title="ToastCloseButton.ts"
 // @noErrors
-import { toast } from '@studiocms/ui/components';
+import { toast } from 'studiocms:ui/components';
 
 toast({
   title: 'This is a toast!',
@@ -135,7 +135,7 @@ You can change how far the toasts are away from the screen's edge by changing th
 
 ```astro showLinenumbers title="ToastOffset.astro"
 ---
-import { Toaster } from '@studiocms/ui/components';
+import { Toaster } from 'studiocms:ui/components';
 ---
 
 <!-- Offset in pixels -->
@@ -146,7 +146,7 @@ You can also change by how much toasts are separated via the `gap` prop on the `
 
 ```astro showLinenumbers title="ToastGap.astro"
 ---
-import { Toaster } from '@studiocms/ui/components';
+import { Toaster } from 'studiocms:ui/components';
 ---
 
 <!-- Offset in pixels -->

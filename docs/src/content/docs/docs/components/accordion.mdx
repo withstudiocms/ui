@@ -1,0 +1,139 @@
+---
+title: Accordion
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Accordion, AccordionItem } from 'studiocms:ui/components';
+
+An accordion component. Used to create small pockets of additional information.
+
+## Usage
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Accordion>
+        <AccordionItem open>
+          <div slot="summary">This is the summary</div>
+          <div>These are the details</div>
+        </AccordionItem>
+        <AccordionItem>
+          <div slot="summary">This is the 2nd summary</div>
+          <div>These are the 2nd details</div>
+        </AccordionItem>
+      </Accordion>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="AccordionExample.astro"
+    ---
+    import { Accordion, AccordionItem } from 'studiocms:ui/components';
+    ---
+
+    <Accordion>
+      <AccordionItem open>
+        <div slot="summary">This is the summary</div>
+        <div>These are the details</div>
+      </AccordionItem>
+      <AccordionItem>
+        <div slot="summary">This is the 2nd summary</div>
+        <div>These are the 2nd details</div>
+      </AccordionItem>
+    </Accordion>
+    ```
+  </TabItem>
+</Tabs>
+
+### Opening an item by default
+
+You can pass the `open` prop to any `<AccordionItem>` to have it be open by default, as seen above in the example.
+
+### Styles
+
+The accordion component has multiple different styles:
+
+- `outlined` (Default)
+- `separated`
+- `filled`
+- `blank`
+
+They can be used via the `style` prop on the accordion parent. Here's an accordion with the `filled` style:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Accordion style="filled">
+        <AccordionItem open>
+          <div slot="summary">This is the summary</div>
+          <div>These are the details</div>
+        </AccordionItem>
+        <AccordionItem>
+          <div slot="summary">This is the 2nd summary</div>
+          <div>These are the 2nd details</div>
+        </AccordionItem>
+      </Accordion>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="AccordionStyleExample.astro"
+    ---
+    import { Accordion, AccordionItem } from 'studiocms:ui/components';
+    ---
+
+    <Accordion style="filled">
+      <AccordionItem open>
+        <div slot="summary">This is the summary</div>
+        <div>These are the details</div>
+      </AccordionItem>
+      <AccordionItem>
+        <div slot="summary">This is the 2nd summary</div>
+        <div>These are the 2nd details</div>
+      </AccordionItem>
+    </Accordion>
+    ```
+  </TabItem>
+</Tabs>
+
+### Multiple Open Items
+
+By default, users can open multiple items in the accordion at once. You can change this behavior by setting the `multipleOpen` prop on the `<Accordion>` element to false:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Accordion multipleOpen={false}>
+        <AccordionItem open>
+          <div slot="summary">This is the summary</div>
+          <div>These are the details</div>
+        </AccordionItem>
+        <AccordionItem>
+          <div slot="summary">This is the 2nd summary</div>
+          <div>These are the 2nd details</div>
+        </AccordionItem>
+      </Accordion>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="AccordionStyleExample.astro"
+    ---
+    import { Accordion, AccordionItem } from 'studiocms:ui/components';
+    ---
+
+    <Accordion multipleOpen={false}>
+      <AccordionItem open>
+        <div slot="summary">This is the summary</div>
+        <div>These are the details</div>
+      </AccordionItem>
+      <AccordionItem>
+        <div slot="summary">This is the 2nd summary</div>
+        <div>These are the 2nd details</div>
+      </AccordionItem>
+    </Accordion>
+    ```
+  </TabItem>
+</Tabs>
