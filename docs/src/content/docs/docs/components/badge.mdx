@@ -130,3 +130,25 @@ You can change the badge's border-radius by setting the `rounding` prop:
     ```
   </TabItem>
 </Tabs>
+
+### Icons
+
+You can use the built-in icons from [HeroIcons](https://heroicons.com/) in the badge by passing the `icon` prop:
+
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Badge label="Badge with Icon" icon="sparkles-16-solid" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="IconExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="Badge with Icon" icon="sparkles-16-solid" />
+    ```
+  </TabItem>
+</Tabs>
