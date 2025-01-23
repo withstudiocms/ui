@@ -26,12 +26,12 @@
   ],
   "homepage": "https://ui.studiocms.dev",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "sideEffects": false,
   "files": [
-    "dist",
-    "assets"
+    "dist"
   ],
   "license": "MIT",
   "type": "module",
