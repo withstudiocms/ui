@@ -8,6 +8,10 @@ editUrl: false
 This document contains release notes for the `@studiocms/ui` package.
 For more information, see the [CHANGELOG file](https://github.com/withstudiocms/ui/blob/main/packages/studiocms_ui/CHANGELOG.md)
 
+## 0.4.3
+
+- [#46](https://github.com/withstudiocms/ui/pull/46) [`29ea967`](https://github.com/withstudiocms/ui/commit/29ea967c2cee935715de0f4787b603d69997e84b) Thanks [@louisescher](https://github.com/louisescher)! - Fixes icons getting cut off in certain circumstances and changes dropdown links to include icons
+
 ## 0.4.2
 
 - [#44](https://github.com/withstudiocms/ui/pull/44) [`99a2f79`](https://github.com/withstudiocms/ui/commit/99a2f7959b4269d47c99c87a06ea6711c74a373e) Thanks [@louisescher](https://github.com/louisescher)! - Fixes compatibility issues with Astro view transitions
