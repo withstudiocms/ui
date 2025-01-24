@@ -1,5 +1,19 @@
 # @studiocms/ui
 
+## 0.4.4
+
+### Patch Changes
+
+- [#48](https://github.com/withstudiocms/ui/pull/48) [`4a43e03`](https://github.com/withstudiocms/ui/commit/4a43e031b2395ca1cf72c8343638f5836178944e) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Fix Icon component requiring functions from Iconify Utils lib during runtime as well as extend usage possibilities.
+
+  NEW:
+
+  - `IconBase` component exported from `studiocms:ui/components` which allows passing custom image collections from Iconify.
+
+  Updated:
+
+  - `Icon` component to use this new system.
+
 ## 0.4.3
 
 ### Patch Changes
