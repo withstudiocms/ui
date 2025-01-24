@@ -8,6 +8,38 @@ editUrl: false
 This document contains release notes for the `@studiocms/ui` package.
 For more information, see the [CHANGELOG file](https://github.com/withstudiocms/ui/blob/main/packages/studiocms_ui/CHANGELOG.md)
 
+## 0.4.2
+
+- [#44](https://github.com/withstudiocms/ui/pull/44) [`99a2f79`](https://github.com/withstudiocms/ui/commit/99a2f7959b4269d47c99c87a06ea6711c74a373e) Thanks [@louisescher](https://github.com/louisescher)! - Fixes compatibility issues with Astro view transitions
+
+## 0.4.1
+
+- [#40](https://github.com/withstudiocms/ui/pull/40) [`641e4b0`](https://github.com/withstudiocms/ui/commit/641e4b09574eb3d54c08b52be65e36233c2bbd6a) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update publish config and files included
+
+## 0.4.0
+
+- [#36](https://github.com/withstudiocms/ui/pull/36) [`07e2d9e`](https://github.com/withstudiocms/ui/commit/07e2d9e5a473bdcd516bf4d43e8274988ec796e6) Thanks [@louisescher](https://github.com/louisescher)! - Implement Build step and migrate all exported components into virtual modules
+
+  Instead of `@studiocms/ui/components` use `studiocms:ui/components`
+
+  For more information see https://ui.studiocms.dev
+
+- [#36](https://github.com/withstudiocms/ui/pull/36) [`07e2d9e`](https://github.com/withstudiocms/ui/commit/07e2d9e5a473bdcd516bf4d43e8274988ec796e6) Thanks [@louisescher](https://github.com/louisescher)! - Add a few new components:
+
+  - Accordion
+  - Badge
+  - Breadcrumbs
+  - Group
+  - Progress
+  - Sidebar
+
+  Add two new colors
+
+  - `info` (Blue)
+  - `monochrome` (Black/White)
+
+  Add the ability to pass a CSS file for customization of all colors
+
 ## 0.3.2
 
 - [#33](https://github.com/withstudiocms/ui/pull/33) [`58e223c`](https://github.com/withstudiocms/ui/commit/58e223c861321e95c8db064be67e28e4563b4ff3) Thanks [@louisescher](https://github.com/louisescher)! - Fix tabs not being displayed correctly & dividers displaying backgrounds for empty slots
