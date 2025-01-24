@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.5
+
+### Patch Changes
+
+- [#50](https://github.com/withstudiocms/ui/pull/50) [`51d5565`](https://github.com/withstudiocms/ui/commit/51d556504790741ad3b6cd23092b9be0a92e8157) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - fix weird icon sizing during build
+
 ## 0.4.4
 
 ### Patch Changes
