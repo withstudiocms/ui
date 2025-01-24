@@ -4,12 +4,10 @@ import type { HTMLAttributes } from 'astro/types';
 import IconBase from './IconBase.astro';
 import { type HeroIconName } from './iconType.js';
 
-interface Props extends Omit<HTMLAttributes<'svg'>, 'name'> {
+interface Props extends HTMLAttributes<'svg'> {
 	name: HeroIconName;
 	height?: number;
 	width?: number;
 }
-
-const { name, ...props } = Astro.props;
 ---
-<IconBase iconCollection={icons} {name} {...props} />
+<IconBase iconCollection={icons} {...Astro.props} />

@@ -1,6 +1,5 @@
 ---
 import type { IconifyJSON } from '@iconify/types';
-import { AstroError } from 'astro/errors';
 import type { HTMLAttributes } from 'astro/types';
 import { getIconData, iconToSVG, replaceIDs } from '../../utils/iconifyUtils.js';
 
@@ -43,35 +42,34 @@ interface Props extends HTMLAttributes<'svg'> {
 	width?: number;
 }
 
-interface PropsAttributes extends Props {
+const { iconCollection, name, ...props } = Astro.props;
+
+interface SVGAttributes extends HTMLAttributes<'svg'> {
 	// biome-ignore lint/suspicious/noExplicitAny: Allow any string index
 	[key: string]: any;
 }
 
-const { iconCollection, name, height = 24, width = 24, ...props } = Astro.props;
-
-const attributes = props as PropsAttributes;
-
+const attributes = props as SVGAttributes;
 const iconData = getIconData(iconCollection, name);
 
 if (!iconData) {
-	throw new AstroError(`Icon "${name}" is missing in collection`);
+	throw new Error(`Icon "${name}" is missing`);
 }
 
 const renderData = iconToSVG(iconData, {
-	height: height,
-	width: width,
+	height: attributes.height || 24,
+	width: attributes.width || 24,
 });
 
 const body = replaceIDs(renderData.body);
 
 let renderAttribsHTML =
-	body.indexOf('xlink:') === -1 ? '' : ' xmlns:xlink="http://www.w3.org/1999/xlink';
+	body.indexOf('xlink:') === -1 ? '' : ' xmlns:xlink="http://www.w3.org/1999/xlink"';
 
 for (const attr in attributes) {
 	renderAttribsHTML += ` ${attr}="${attributes[attr]}"`;
 }
 
-const svg = `<svg style="min-width: ${height}px" xmlns="http://www.w3.org/2000/svg"${renderAttribsHTML}>${body}</svg>`;
+const svg = `<svg style="min-width: ${attributes.height || 24}px" xmlns="http://www.w3.org/2000/svg"${renderAttribsHTML}>${body}</svg>`;
 ---
 <Fragment set:html={svg} />
