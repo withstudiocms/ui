@@ -1,5 +1,6 @@
 ---
 import type { IconifyJSON } from '@iconify/types';
+import { AstroError } from 'astro/errors';
 import type { HTMLAttributes } from 'astro/types';
 import { getIconData, iconToSVG, replaceIDs } from '../../utils/iconifyUtils.js';
 
@@ -53,7 +54,7 @@ const attributes = props as SVGAttributes;
 const iconData = getIconData(iconCollection, name);
 
 if (!iconData) {
-	throw new Error(`Icon "${name}" is missing`);
+	throw new AstroError(`Icon "${name}" is missing in collection`);
 }
 
 const renderData = iconToSVG(iconData, {
