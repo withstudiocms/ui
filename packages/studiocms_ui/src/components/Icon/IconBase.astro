@@ -1,0 +1,77 @@
+---
+import type { IconifyJSON } from '@iconify/types';
+import { AstroError } from 'astro/errors';
+import type { HTMLAttributes } from 'astro/types';
+import { getIconData, iconToSVG, replaceIDs } from '../../utils/iconifyUtils.js';
+
+interface Props extends HTMLAttributes<'svg'> {
+	/**
+	 * Collection of icons
+	 *
+	 * Must be an `IconifyJSON` object from an Iconify JSON collection
+	 *
+	 * @example
+	 * ```tsx
+	 * ---
+	 * import { icons } from '@iconify-json/heroicons';
+	 * import type { HTMLAttributes } from 'astro/types';
+	 * import { IconBase } from 'studiocms:ui/components';
+	 *
+	 * interface Props extends Omit<HTMLAttributes<'svg'>, 'name'> {
+	 * 	name: keyof typeof icons;
+	 * 	height?: number;
+	 * 	width?: number;
+	 * }
+	 *
+	 * const { name, ...props } = Astro.props;
+	 * ---
+	 * <IconBase iconCollection={icons} {name} {...props} />
+	 * ```
+	 */
+	iconCollection: IconifyJSON;
+	/**
+	 * Name of the icon from the collection
+	 */
+	name: string;
+	/**
+	 * Height of the icon in pixels
+	 */
+	height?: number;
+	/**
+	 * Width of the icon in pixels
+	 */
+	width?: number;
+}
+
+interface PropsAttributes extends Props {
+	// biome-ignore lint/suspicious/noExplicitAny: Allow any string index
+	[key: string]: any;
+}
+
+const { iconCollection, name, height = 24, width = 24, ...props } = Astro.props;
+
+const attributes = props as PropsAttributes;
+
+const iconData = getIconData(iconCollection, name);
+
+if (!iconData) {
+	throw new AstroError(`Icon "${name}" is missing in collection`);
+}
+
+const renderData = iconToSVG(iconData, {
+	height: height,
+	width: width,
+});
+
+const body = replaceIDs(renderData.body);
+
+let renderAttribsHTML =
+	body.indexOf('xlink:') === -1 ? '' : ' xmlns:xlink="http://www.w3.org/1999/xlink';
+
+for (const attr in attributes) {
+	renderAttribsHTML += ` ${attr}="${attributes[attr]}"`;
+}
+
+const svg = `<svg style="min-width: ${height}px" xmlns="http://www.w3.org/2000/svg"${renderAttribsHTML}>${body}</svg>`;
+---
+<Fragment set:html={svg} />

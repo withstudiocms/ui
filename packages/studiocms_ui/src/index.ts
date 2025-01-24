@@ -81,6 +81,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export { default as Group } from '${resolve('./components/Group/Group.astro')}';
 							export { default as Badge } from '${resolve('./components/Badge/Badge.astro')}';
 							export { default as Icon } from '${resolve('./components/Icon/Icon.astro')}';
+							export { default as IconBase } from '${resolve('./components/Icon/IconBase.astro')}';
 
 							export { ProgressHelper } from '${resolve('./components/Progress/helper.js')}';
 							export { SingleSidebarHelper, DoubleSidebarHelper } from '${resolve('./components/Sidebar/helpers.js')}';
@@ -155,6 +156,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export const Group: typeof import('${resolve('./components/Group/Group.astro')}').default;
 							export const Badge: typeof import('${resolve('./components/Badge/Badge.astro')}').default;
 							export const Icon: typeof import('${resolve('./components/Icon/Icon.astro')}').default;
+							export const IconBase: typeof import('${resolve('./components/Icon/IconBase.astro')}').default;
 							export const toast: typeof import('${resolve('./components/Toast/toast.js')}').toast;
 							export type HeroIconName = import('${resolve('./components/Icon/iconType.js')}').HeroIconName;
 
