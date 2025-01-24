@@ -102,14 +102,17 @@ const {
         role="option"
         aria-selected="false"
       >
-        {icon && (
-          <Icon width={24} height={24} name={icon} />
-        )}
-        {href ? (
-          <a href={href} class="sui-dropdown-link">{label}</a>
-        ) : (
-          <span>{label}</span>
-        )}
+				{href ? (
+          <a href={href} class="sui-dropdown-link sui-dropdown-line-container">
+          	{icon && (<Icon width={24} height={24} name={icon} />)}
+						<span>{label}</span>
+					</a>
+				) : (
+					<div class="sui-dropdown-line-container">
+						{icon && (<Icon width={24} height={24} name={icon} />)}
+						<span>{label}</span>
+					</div>
+				)}
       </li>
     ))}
   </ul>

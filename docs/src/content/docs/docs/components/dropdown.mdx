@@ -230,6 +230,55 @@ No, you read that right. You can customize the options too. You can individually
   </TabItem>
 </Tabs>
 
+#### Icons
+
+The dropdown items also support icons. You can pass an icon name to the option object:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Dropdown 
+        id='icons-dropdown' 
+        options={[
+          { label: 'Notifications', value: 'notifications', icon: 'bell' },
+          { label: 'Settings', value: 'settings', icon: 'cog-6-tooth' },
+          { label: 'Profile', value: 'profile', icon: 'user' },
+        ]}
+      >
+        <Button color='primary'>
+          Customized Icons
+        </Button>
+      </Dropdown>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro ins={7-14} showLinenumbers title="DropdownIconsExample.astro"
+    ---
+    import { Dropdown, Button } from 'studiocms:ui/components';
+    ---
+
+    <Dropdown 
+      id='dropdown' 
+      options={[
+        { label: 'Notifications', value: 'notifications', icon: 'bell' },
+        { label: 'Settings', value: 'settings', icon: 'cog-6-tooth' },
+        { label: 'Profile', value: 'profile', icon: 'user' },
+      ]}
+    >
+      <Button color='primary'>
+        Customized Icons
+      </Button>
+    </Dropdown>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { DropdownHelper } from 'studiocms:ui/components';
+
+    const dropdown = new DropdownHelper('dropdown');
+    ```
+  </TabItem>
+</Tabs>
+
 ### Controlling Dropdowns Programmatically
 
 You know how, this entire page, we've been assigning our `DropdownHelper` to a variable? There's a reason for that. The DropdownHelper allows

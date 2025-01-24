@@ -35,7 +35,7 @@ for (const attr in attributes) {
 	renderAttribsHTML += ` ${attr}="${attributes[attr]}"`;
 }
 
-const svg = `<svg xmlns="http://www.w3.org/2000/svg"${renderAttribsHTML}>${body}</svg>`;
+const svg = `<svg style="min-width: ${attributes.height || 24}px" xmlns="http://www.w3.org/2000/svg"${renderAttribsHTML}>${body}</svg>`;
 ---
 
 <Fragment set:html={svg} />
