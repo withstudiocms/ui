@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.6
+
+### Patch Changes
+
+- [#52](https://github.com/withstudiocms/ui/pull/52) [`65eea2c`](https://github.com/withstudiocms/ui/commit/65eea2cff78c2c38314de9b3fe4b65173c81ea90) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update Input component to allow search type
+
 ## 0.4.5
 
 ### Patch Changes
