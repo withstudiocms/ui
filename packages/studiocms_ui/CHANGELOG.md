@@ -1,5 +1,19 @@
 # @studiocms/ui
 
+## 0.4.7
+
+### Patch Changes
+
+- [#56](https://github.com/withstudiocms/ui/pull/56) [`40ae2ea`](https://github.com/withstudiocms/ui/commit/40ae2eaa60f0b0df6e0447be5f3e362cbb9bff76) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Add option to disable global CSS injection and allow users to import the global css themselves.
+
+  Basic Example of how to import:
+
+  ```astro
+  ---
+  import "studiocms:ui/global-css";
+  ---
+  ```
+
 ## 0.4.6
 
 ### Patch Changes

@@ -133,8 +133,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0(astro@5.1.1(@types/node@20.17.10)(jiti@2.3.3)(rollup@4.28.1)(typescript@5.7.2)(yaml@2.6.1))
       expressive-code-twoslash:
-        specifier: ^0.3.0
-        version: 0.3.0(@expressive-code/core@0.38.3)(expressive-code@0.38.3)(typescript@5.7.2)
+        specifier: ^0.3.1
+        version: 0.3.1(@expressive-code/core@0.38.3)(expressive-code@0.38.3)(typescript@5.7.2)
       hast:
         specifier: 1.0.0
         version: 1.0.0
@@ -1979,8 +1979,8 @@ packages:
     resolution: {integrity: sha512-VyhnebXciFV2DESc+p6B+y0LjSm0krU4OgJN44qFAhBY0TJ+1V61tYD2+wHusZ6F9n5K+vl8k0sTy7PEfV4qpg==}
     engines: {node: '>=16.17'}
 
-  expressive-code-twoslash@0.3.0:
-    resolution: {integrity: sha512-adEOcFTRlNK3mnyi31cEWXEIP+anlZNHmMijTPdv4RVTqjs2qDlt591xntPvlH7YJSfypEw+c3teWOzelNxbvA==}
+  expressive-code-twoslash@0.3.1:
+    resolution: {integrity: sha512-soC622FPOekEvQoYGr2C5yTIazZfsVAEcz8wpVORt9erxEOxMTVg045g0Zqa2X15DgnprUZAzBp9w+T5FFEvWg==}
     peerDependencies:
       '@expressive-code/core': ^0.38.3
       expressive-code: ^0.38.3
@@ -5528,7 +5528,7 @@ snapshots:
       signal-exit: 4.1.0
       strip-final-newline: 3.0.0
 
-  expressive-code-twoslash@0.3.0(@expressive-code/core@0.38.3)(expressive-code@0.38.3)(typescript@5.7.2):
+  expressive-code-twoslash@0.3.1(@expressive-code/core@0.38.3)(expressive-code@0.38.3)(typescript@5.7.2):
     dependencies:
       '@expressive-code/core': 0.38.3
       expressive-code: 0.38.3
