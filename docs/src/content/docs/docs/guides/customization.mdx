@@ -41,6 +41,35 @@ If you make significant changes to the colors, remember to also adjust the light
 Below, you will find all the CSS variables used in StudioCMS UI. Always make sure to provide them as 
 HSL values without commas. You can use them in your CSS like this: `background-color: hsl(var(--background-base));`.
 
+## Disabling CSS Injection
+
+If you want to disable the CSS injection, you can do so by setting the `noInjectCSS` option to `true`:
+
+```ts twoslash showLinenumbers title="astro.config.mjs" {7}
+import { defineConfig } from 'astro/config';
+import ui from '@studiocms/ui';
+
+export default defineConfig({
+  integrations: [
+    ui({
+      noInjectCSS: true,
+    })
+  ]
+});
+```
+
+You can then include the CSS in your project manually. This is useful if you want to mix StudioCMS UI with other CSS frameworks, or if you are using the UI styling only for a subset of your components.
+
+```astro showLinenumbers title="src/layouts/SUILayout.astro"
+---
+// Using the virtual module to import the CSS file (recommended)
+import "studiocms:ui/global-css";
+
+// Alternatively, import the CSS file directly from the package
+import "@studiocms/ui/css/global.css";
+---
+```
+
 ## Interactive Editing
 
 You can edit the colors in your own project during development using the dev toolbar. In the toolbar, you will find a 

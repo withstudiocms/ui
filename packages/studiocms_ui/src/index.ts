@@ -13,6 +13,16 @@ type Options = {
 	 * @link https://ui.studiocms.dev/docs/guides/customization/
 	 */
 	customCss?: string;
+
+	/**
+	 * Disable CSS Generation and require manual addition of the global CSS
+	 *
+	 * @example
+	 * ```ts
+	 * import 'studiocms:ui/global-css';
+	 * ```
+	 */
+	noInjectCSS?: boolean;
 };
 
 export default function integration(options: Options = {}): AstroIntegration {
@@ -98,7 +108,9 @@ export default function integration(options: Options = {}): AstroIntegration {
 					},
 				});
 
-				injectScript('page-ssr', `import 'studiocms:ui/global-css';`);
+				if (!options.noInjectCSS) {
+					injectScript('page-ssr', `import 'studiocms:ui/global-css';`);
+				}
 
 				if (options.customCss) {
 					injectScript('page-ssr', `import 'studiocms:ui/custom-css';`);

@@ -8,6 +8,26 @@ editUrl: false
 This document contains release notes for the `@studiocms/ui` package.
 For more information, see the [CHANGELOG file](https://github.com/withstudiocms/ui/blob/main/packages/studiocms_ui/CHANGELOG.md)
 
+## 0.4.6
+
+- [#52](https://github.com/withstudiocms/ui/pull/52) [`65eea2c`](https://github.com/withstudiocms/ui/commit/65eea2cff78c2c38314de9b3fe4b65173c81ea90) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update Input component to allow search type
+
+## 0.4.5
+
+- [#50](https://github.com/withstudiocms/ui/pull/50) [`51d5565`](https://github.com/withstudiocms/ui/commit/51d556504790741ad3b6cd23092b9be0a92e8157) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - fix weird icon sizing during build
+
+## 0.4.4
+
+- [#48](https://github.com/withstudiocms/ui/pull/48) [`4a43e03`](https://github.com/withstudiocms/ui/commit/4a43e031b2395ca1cf72c8343638f5836178944e) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Fix Icon component requiring functions from Iconify Utils lib during runtime as well as extend usage possibilities.
+
+  NEW:
+
+  - `IconBase` component exported from `studiocms:ui/components` which allows passing custom image collections from Iconify.
+
+  Updated:
+
+  - `Icon` component to use this new system.
+
 ## 0.4.3
 
 - [#46](https://github.com/withstudiocms/ui/pull/46) [`29ea967`](https://github.com/withstudiocms/ui/commit/29ea967c2cee935715de0f4787b603d69997e84b) Thanks [@louisescher](https://github.com/louisescher)! - Fixes icons getting cut off in certain circumstances and changes dropdown links to include icons
