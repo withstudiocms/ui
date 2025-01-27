@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "pnpm make-changelog && astro dev",
+    "dev": "astro dev",
     "start": "pnpm dev",
     "check": "astro check",
     "build": "pnpm make-changelog && astro build",

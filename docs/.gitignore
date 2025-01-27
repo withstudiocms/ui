@@ -22,7 +22,7 @@ pnpm-debug.log*
 .DS_Store
 
 # Changelog documentation
-src/content/docs/docs/changelog.md
+docs/changelog.md
 
 # Eleventy cache
 .cache/
