@@ -58,14 +58,14 @@ export default defineConfig({
 });
 ```
 
-You can then include the CSS in your project manually. (Useful if you want to mix studiocms-ui with other CSS frameworks. or if you are using the UI styling only for a subset of your components.)
+You can then include the CSS in your project manually. This is useful if you want to mix StudioCMS UI with other CSS frameworks, or if you are using the UI styling only for a subset of your components.
 
 ```astro showLinenumbers title="src/layouts/SUILayout.astro"
 ---
-// Relying on the Virtual module to import the CSS file (recommended)
+// Using the virtual module to import the CSS file (recommended)
 import "studiocms:ui/global-css";
 
-// Or import the CSS file directly from the package
+// Alternatively, import the CSS file directly from the package
 import "@studiocms/ui/css/global.css";
 ---
 ```
