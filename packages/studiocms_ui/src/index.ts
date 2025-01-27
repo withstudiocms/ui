@@ -106,7 +106,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 					},
 				});
 
-				if (!noInjectCSS) {
+				if (!options.noInjectCSS) {
 				    injectScript('page-ssr', `import 'studiocms:ui/global-css';`);
 				}
 
