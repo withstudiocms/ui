@@ -1,5 +1,6 @@
 ---
 import { generateID } from '../../utils/generateID.js';
+import Badge from '../Badge/Badge.astro';
 import Icon from '../Icon/Icon.astro';
 import './select.css';
 
@@ -32,7 +33,7 @@ interface Props {
 	/**
 	 * The default value of the select.
 	 */
-	defaultValue?: string;
+	defaultValue?: string | string[];
 	/**
 	 * Additional classes to apply to the select.
 	 */
@@ -61,6 +62,10 @@ interface Props {
 	 * The placeholder of the select. Defaults to `Select`.
 	 */
 	placeholder?: string;
+	/**
+	 * Whether the select accepts multiple options. Defaults to `false`.
+	 */
+	multiple?: boolean;
 }
 
 const {
@@ -73,74 +78,93 @@ const {
 	disabled,
 	fullWidth,
 	placeholder = 'Select',
+	multiple = false,
 } = Astro.props;
+
+let selected: Option | (Option | undefined)[] | undefined;
+
+if (multiple && Array.isArray(defaultValue)) {
+	selected = defaultValue?.map((x) => options.find((y) => y.value === x));
+} else {
+	selected = options.find((x) => x.value === defaultValue);
+}
+
+const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?.label) : selected?.label : placeholder;
 ---
 
 <div
-    id={`${name}-container`}
-    class="sui-select-label"
-    class:list={[disabled && "disabled", className, fullWidth && "full"]}
-    data-options={JSON.stringify(options)}
-    data-id={name}
+	id={`${name}-container`}
+	class="sui-select-label"
+	class:list={[disabled && "disabled", className, fullWidth && "full"]}
+	data-options={JSON.stringify(options)}
+	data-multiple={multiple ? "true" : undefined}
+	data-id={name}
 >
-    {label && (
-        <label class="label" for={`${name}-select-btn`}>
-            {label}
-            <span class="req-star">{isRequired && "*"}</span>
-        </label>
-    )}
-    <button
-        class="sui-select-button"
-        role="combobox"
-        aria-controls={`${name}-dropdown`}
-        aria-expanded="false"
-        id={`${name}-select-btn`}
-        type="button"
-        aria-label={placeholder}
-        title={placeholder}
-    >
-        <span class="sui-select-value-span" id={`${name}-value-span`}>
-            {
-                defaultValue
-                    ? options.find((x) => x.value === defaultValue)?.label
-                    : placeholder
-            }
-        </span>
-        <Icon name="chevron-up-down" width={24} height={24} />
-    </button>
-    <ul class="sui-select-dropdown" role="listbox" id={`${name}-dropdown`}>
-        {
-            options.map((x, i) => (
-                <li
-                    class="sui-select-option"
-                    role="option"
-                    value={x.value}
-                    class:list={[
-                        defaultValue === x.value && `selected`,
-                        x.disabled && "disabled",
-                    ]}
-                    id={defaultValue === x.value ? `${name}-selected` : ""}
-                    data-option-index={i}
-                >
-                    {x.label}
-                </li>
-            ))
-        }
-    </ul>
-    <select class="sui-hidden-select" id={name} name={name} required={isRequired} hidden tabindex="-1">
-        <option value={""}> Select </option>
-        {
-            options.map((x) => (
-                <option
-                    value={x.value}
-                    selected={defaultValue === x.value}
-                    disabled={x.disabled}
-                >
-                    {x.label}
-                </option>
-            ))
-        }
-    </select>
+	{label && (
+		<label class="label" for={`${name}-select-btn`}>
+			{label}
+			<span class="req-star">{isRequired && "*"}</span>
+		</label>
+	)}
+	<button
+		class="sui-select-button"
+		role="combobox"
+		aria-controls={`${name}-dropdown`}
+		aria-expanded="false"
+		id={`${name}-select-btn`}
+		type="button"
+		aria-label={placeholder}
+		title={placeholder}
+	>
+		<span class="sui-select-value-span" id={`${name}-value-span`}>
+			<!-- TODO: Use badges for multiple select -->
+			{Array.isArray(selected) ? "" : selected?.label ?? defaultLabel}
+		</span>
+		<Icon name="chevron-up-down" width={24} height={24} />
+	</button>
+	<ul class="sui-select-dropdown" role="listbox" id={`${name}-dropdown`}>
+		{
+			options.map((x, i) => {
+				const isSelected = Array.isArray(selected)
+					? selected.map((y) => y?.value).includes(x.value)
+					: selected?.value === x.value;
+				return (
+					<li
+						class="sui-select-option"
+						role="option"
+						value={x.value}
+						class:list={[
+							isSelected && `selected`,
+							x.disabled && "disabled",
+						]}
+						id={isSelected ? `${name}-selected` : ""}
+						data-option-index={i}
+					>
+						{x.label}
+					</li>
+				)
+			})
+		}
+	</ul>
+	<select class="sui-hidden-select" id={name} name={name} required={isRequired} multiple={multiple ? "" : undefined} hidden tabindex="-1">
+		<option value={""}> Select </option>
+		{
+			options.map((x) => {
+				const isSelected = Array.isArray(selected)
+					? selected.map((y) => y?.value).includes(x.value)
+					: selected?.value === x.value;
+				(
+					<option
+						value={x.value}
+						selected={isSelected}
+						disabled={x.disabled}
+					>
+						{x.label}
+					</option>
+				)
+			})
+		}
+	</select>
 </div>
 <script>
 import "studiocms:ui/scripts/select"

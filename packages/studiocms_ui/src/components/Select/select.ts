@@ -1,3 +1,12 @@
+import type { StudioCMSColorway } from "src/utils/colors";
+
+type TagOptions = {
+	color?: Omit<StudioCMSColorway, 'default'>;
+	size?: 'sm' | 'md' | 'lg';
+	variant?: 'solid' | 'outline' | 'ghost' | 'link' | 'subtle';
+	rounding?: 'full' | 'semi';
+};
+
 function loadSelects() {
 	const allSelects = document.querySelectorAll<HTMLDivElement>('.sui-select-label');
 
@@ -9,8 +18,44 @@ function loadSelects() {
 		const optionElements = container.querySelectorAll<HTMLLIElement>('.sui-select-option');
 
 		const options = JSON.parse(container.dataset.options!);
+		const isMultiple = container.dataset.multiple === 'true';
 		const id = container.dataset.id!;
 		let active = false;
+
+		const renderMultiple = (tagOptions?: TagOptions) => {
+			if (!isMultiple) return;
+
+			const classes: string[] = [];
+			for (const tagOpt of Object.entries({
+				color: tagOptions?.color ?? "primary",
+				size: tagOptions?.size ?? "sm",
+				variant: tagOptions?.variant ?? "default",
+				rounding: tagOptions?.rounding ?? "full",
+			})) {
+				classes.push(tagOpt[1]);
+			}
+
+			valueSpan.innerHTML = "";
+			const spanElements: HTMLSpanElement[] = [];
+			let cumulativeSpanWidth = 0;
+
+			for (const entry of optionElements) {
+				if (entry.classList.contains('selected')) {
+					const option = options[Number.parseInt(entry.dataset.optionIndex!)];
+					const span = document.createElement('span');
+					span.classList.add('sui-badge');
+					span.classList.add(...classes);
+					span.textContent = option.label;
+					const childSpan = valueSpan.appendChild(span);
+					cumulativeSpanWidth += childSpan.getBoundingClientRect().width;
+					spanElements.push(span);
+				}
+			}
+
+			console.log("WIDTH", cumulativeSpanWidth);
+		}
+
+		renderMultiple();
 
 		const closeDropdown = () => {
 			dropdown.classList.remove('active', 'above');

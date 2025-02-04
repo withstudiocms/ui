@@ -59,6 +59,12 @@
 	background: hsl(var(--background-step-2));
 }
 
+.sui-select-value-span {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.25rem;
+}
+
 .sui-select-dropdown {
 	position: absolute;
 	width: 100%;
@@ -124,4 +130,8 @@
 	background-color: transparent;
 	pointer-events: none;
 	opacity: 0;
+}
+
+.sui-badge.sui-hidden-label {
+	display: none;
 }
