@@ -35,6 +35,10 @@
 	padding: 1rem;
 }
 
+.sui-card-footer:not(:has(*)) {
+	display: none;
+}
+
 .filled .sui-card-footer {
 	border: none;
 }
