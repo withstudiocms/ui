@@ -71,6 +71,8 @@ for (const attr in attributes) {
 	renderAttribsHTML += ` ${attr}="${attributes[attr]}"`;
 }
 
-const svg = `<svg style="min-width: ${attributes.height || 24}px" xmlns="http://www.w3.org/2000/svg"${renderAttribsHTML}>${body}</svg>`;
+const viewBox = renderData.attributes.viewBox;
+
+const svg = `<svg style="min-width: ${attributes.height || 24}px" xmlns="http://www.w3.org/2000/svg"${renderAttribsHTML}${viewBox && ` viewbox="${viewBox}"`}>${body}</svg>`;
 ---
 <Fragment set:html={svg} />
