@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.8
+
+### Patch Changes
+
+- [#59](https://github.com/withstudiocms/ui/pull/59) [`f71057d`](https://github.com/withstudiocms/ui/commit/f71057dcc00468d9c4f5584cbbc384dc987c136a) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Add viewbox attribute for IconBase component
+
 ## 0.4.7
 
 ### Patch Changes
