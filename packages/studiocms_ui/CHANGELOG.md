@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.9
+
+### Patch Changes
+
+- [#61](https://github.com/withstudiocms/ui/pull/61) [`59f4c05`](https://github.com/withstudiocms/ui/commit/59f4c05d303686b139fef632d69c2edf49895ea3) Thanks [@louisescher](https://github.com/louisescher)! - Fixes card footers to be hidden should they have no content
+
 ## 0.4.8
 
 ### Patch Changes
