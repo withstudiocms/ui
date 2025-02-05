@@ -4,28 +4,6 @@ import Badge from '../Badge/Badge.astro';
 import Icon from '../Icon/Icon.astro';
 import './select.css';
 
-type NonMultipleProps = {
-      /**
-       * Whether the select accepts multiple options. Defaults to `false`.
-       */
-      multiple: false;
-      /**
-       * The default value of the select.
-       */
-      defaultValue: string;
-}
-
-type MultipleProps = {
-      /**
-       * Whether the select accepts multiple options. Defaults to `false`.
-       */
-      multiple: true;
-      /**
-       * The default value of the select.
-       */
-      defaultValue: string[];
-}
-
 /**
  * The props for the select component.
  */
@@ -42,6 +20,28 @@ interface Option {
 	 * Whether the option is disabled. Defaults to `false`.
 	 */
 	disabled?: boolean;
+}
+
+type NonMultipleProps = {
+	/**
+	 * Whether the select accepts multiple options. Defaults to `false`.
+	 */
+	multiple: false;
+	/**
+	 * The default value of the select.
+	 */
+	defaultValue: string;
+}
+
+type MultipleProps = {
+	/**
+	 * Whether the select accepts multiple options. Defaults to `false`.
+	 */
+	multiple: true;
+	/**
+	 * The default value of the select.
+	 */
+	defaultValue: string[];
 }
 
 /**
@@ -83,7 +83,7 @@ type BaseProps = {
 }
 
 type Props = BaseProps & (
-        MultipleProps | NonMultipleProps
+	MultipleProps | NonMultipleProps
 )
 
 const {
@@ -102,7 +102,7 @@ const {
 let selected: Option | (Option | undefined)[] | undefined;
 
 if (multiple && Array.isArray(defaultValue)) {
-	selected = defaultValue?.map((x) => options.find((y) => y.value === x));
+	selected = defaultValue.map((x) => options.find((y) => y.value === x));
 } else {
 	selected = options.find((x) => x.value === defaultValue);
 }
@@ -135,16 +135,15 @@ const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?
 		title={placeholder}
 	>
 		<span class="sui-select-value-span" id={`${name}-value-span`}>
-			{Array.isArray(selected) ? selected.map((s) => <Badge label={s?.label ?? ""} icon="x-mark" />) : selected?.label ?? defaultLabel}
+			{Array.isArray(selected) ? selected.map((s) => s && <Badge size="sm" label={s.label} iconPosition="right" icon="x-mark" />) : selected?.label ?? defaultLabel}
 		</span>
 		<Icon name="chevron-up-down" width={24} height={24} />
 	</button>
-	{Array.isArray(selected) ? selected.map((s) => <Badge size="lg" label={s?.label ?? ""} icon="x-mark" />) : selected?.label ?? defaultLabel}
 	<ul class="sui-select-dropdown" role="listbox" id={`${name}-dropdown`}>
 		{
 			options.map((x, i) => {
 				const isSelected = Array.isArray(selected)
-					? selected.map((y) => y?.value).includes(x.value)
+					? selected.map((y) => y && y.value).includes(x.value)
 					: selected?.value === x.value;
 				return (
 					<li
@@ -169,7 +168,7 @@ const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?
 		{
 			options.map((x) => {
 				const isSelected = Array.isArray(selected)
-					? selected.map((y) => y?.value).includes(x.value)
+					? selected.map((y) => y && y.value).includes(x.value)
 					: selected?.value === x.value;
 				(
 					<option
