@@ -15,6 +15,10 @@ interface Props extends Omit<HTMLAttributes<'span'>, 'color'> {
 	 */
 	icon?: HeroIconName;
 	/**
+	 * The icon position. Defaults to `left`.
+	 */
+	iconPosition?: 'left' | 'right';
+	/**
 	 * The size of the badge. Defaults to `md`.
 	 */
 	size?: 'sm' | 'md' | 'lg';
@@ -38,12 +42,22 @@ const {
 	size = 'md',
 	variant = 'default',
 	rounding = 'full',
+	iconPosition = 'left',
 	label,
 	...props
 } = Astro.props;
+
+
+let iconSize = 16;
+if (size === 'sm') {
+	iconSize = 8;
+} else if (size === 'lg') {
+	iconSize = 24;
+}
 ---
 
 <span class="sui-badge" class:list={[color, size, variant, rounding]} {...props}>
-  {icon && <Icon name={icon} width={16} height={16} />}
+	{icon && iconPosition === 'left' && <Icon name={icon} width={iconSize} height={iconSize} viewBox="0 0 24 24" />}
   {label}
+	{icon && iconPosition === 'right' && <Icon name={icon} width={iconSize} height={iconSize} viewBox="0 0 24 24" />}
 </span>
