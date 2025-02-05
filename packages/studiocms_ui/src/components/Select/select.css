@@ -65,6 +65,10 @@
 	gap: 0.25rem;
 }
 
+.sui-select-value-span .sui-badge {
+	white-space: nowrap;
+}
+
 .sui-select-dropdown {
 	position: absolute;
 	width: 100%;
@@ -130,8 +134,4 @@
 	background-color: transparent;
 	pointer-events: none;
 	opacity: 0;
-}
-
-.sui-badge.sui-hidden-label {
-	display: none;
 }
