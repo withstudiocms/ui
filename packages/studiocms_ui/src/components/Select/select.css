@@ -39,6 +39,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	overflow: hidden;
 	cursor: pointer;
 	gap: 1rem;
 }
@@ -134,4 +135,13 @@
 	background-color: transparent;
 	pointer-events: none;
 	opacity: 0;
+}
+
+.sui-select-badge-container {
+	display: flex;
+	margin-top: 0.5rem;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	width: 100%;
 }

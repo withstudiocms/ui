@@ -137,7 +137,7 @@ const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?
 		<span class="sui-select-value-span" id={`${name}-value-span`}>
 			{Array.isArray(selected) ? selected.map((s) => s && <Badge size="sm" label={s.label} iconPosition="right" icon="x-mark" />) : selected?.label ?? defaultLabel}
 		</span>
-		<Icon name="chevron-up-down" width={24} height={24} />
+		<Icon name="chevron-up-down" width={24} height={24} class="sui-select-chevron" />
 	</button>
 	<ul class="sui-select-dropdown" role="listbox" id={`${name}-dropdown`}>
 		{

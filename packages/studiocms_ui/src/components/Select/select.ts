@@ -19,7 +19,12 @@ function loadSelects() {
 
 		const options = JSON.parse(container.dataset.options!);
 		const id = container.dataset.id!;
+		const multiple = container.dataset.multiple === 'true';
 		let active = false;
+
+		if (multiple) {
+			positionBadgesForSelect(container, button, valueSpan as HTMLSpanElement);
+		}
 
 		const closeDropdown = () => {
 			dropdown.classList.remove('active', 'above');
@@ -199,3 +204,29 @@ function loadSelects() {
 }
 
 document.addEventListener('astro:page-load', loadSelects);
+
+const positionBadgesForSelect = (
+	selectElement: HTMLDivElement,
+	selectButtonElement: HTMLButtonElement,
+	selectValueElement: HTMLSpanElement
+) => {
+	const chevron = selectButtonElement.querySelector<HTMLElement>('.sui-select-chevron')!;
+	const buttonRect = selectButtonElement.getBoundingClientRect();
+	const chevronRect = chevron.getBoundingClientRect();
+	const isOverflowing = chevronRect.left < buttonRect.left ||
+												chevronRect.right > buttonRect.right ||
+												chevronRect.top < buttonRect.top ||
+												chevronRect.bottom > buttonRect.bottom;
+
+	if (isOverflowing) {
+		const children = selectValueElement.querySelectorAll<HTMLSpanElement>('.sui-badge');
+		const container = document.createElement('div');
+		container.classList.add('sui-select-badge-container');
+
+		for (const child of children) {
+			container.appendChild(child);
+		}
+
+		selectElement.appendChild(container);
+	}
+}
