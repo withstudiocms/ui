@@ -53,12 +53,16 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
         copyright={'MIT License \u00A9 2024 - StudioCMS'}
     >
         <div slot="brand" class="footer-brand">
-            <LogoAdaptive height={48} width={45.76} />
-            <span class="studiocms-footer-text">
-                <span>StudioCMS</span>
-                <span>UI</span>
-            </span>
-            <Newsletter />
+            <div class="brand-newsletter">
+                <div class="brand-logo">
+                    <LogoAdaptive height={48} width={45.76} />
+                    <span class="studiocms-footer-text">
+                        <span>StudioCMS</span>
+                        <span>UI</span>
+                    </span>
+                </div>
+                <Newsletter />
+            </div>
         </div>
         <div slot="socials" class="socials">
             <a href="https://github.com/withstudiocms" aria-label="GitHub">
@@ -101,8 +105,8 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
         .footer-brand {
             flex-direction: column;
             gap: 1rem;
+            width: 100%;
         }
-        
     }
 
     .studiocms-footer-text {
@@ -128,6 +132,13 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
 
     .socials a:hover {
         color: hsl(var(--text-normal));
+    }
+
+    .brand-newsletter {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
     }
 </style>
 <style is:global>

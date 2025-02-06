@@ -3,18 +3,12 @@ import { Button, Checkbox, Icon, Input } from 'studiocms:ui/components';
 ---
 <form method="post" action="https://newsletter.studiocms.dev/subscription/form" id="newsletter-form">
     <div class="newsletter-container">
-        <h3>Get the latest updates from the StudioCMS Newsletter</h3>
+        <span>Subscribe to our newsletter</span>
         <input type="hidden" name="nonce" />
 
         <div class="newsletter-inputs">
-            <Input type="email" name="email" label="Email" isRequired placeholder='E-mail' />
-            <Input type="text" name="name" label="Name" placeholder='Name (optional)' />
-        </div>
-    
-        <div class="newsletter-button">
-            <Checkbox name="l" label="StudioCMS Newsletter" value="06711dc1-78ff-4993-9d79-df44ba3572fa" defaultChecked />
-            <Button type="submit" variant="outlined" color='primary' size={'sm'}>
-                <Icon name='newspaper-20-solid' slot="start-content" width={20} height={20} />
+            <Input type="email" name="email" isRequired placeholder='E-mail' aria-label='E-Mail' class='newsletter-email-input' />
+            <Button type="submit" color='primary' style="width: fit-content;">
                 Subscribe
             </Button>
         </div>
@@ -58,16 +52,17 @@ import { toast } from "studiocms:ui/components";
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-top: 2rem;
         gap: .5rem;
 
         text-wrap: wrap;
     }
 
     .newsletter-inputs {
-        display: grid;
+        display: flex;
+        flex-direction: row;
         gap: .5rem;
-        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        height: fit-content;
 
         @media (max-width: 768px) {
             grid-template-columns: 1fr;
@@ -82,4 +77,7 @@ import { toast } from "studiocms:ui/components";
         gap: .5rem;
     }
 
+    .newsletter-email-input {
+        height: 40px;
+    }
 </style>
