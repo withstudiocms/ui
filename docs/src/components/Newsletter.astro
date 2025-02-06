@@ -35,6 +35,7 @@ import { toast } from "studiocms:ui/components";
         const response = await fetch(form.action, {
             method: form.method,
             body: formData,
+            mode: 'no-cors',
         });
 
         if (response.ok) {
