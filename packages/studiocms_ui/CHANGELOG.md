@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.10
+
+### Patch Changes
+
+- [#63](https://github.com/withstudiocms/ui/pull/63) [`dc7b723`](https://github.com/withstudiocms/ui/commit/dc7b723c86ae9bafd9b8dba626be2345a92a2568) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Adds a value prop to the checkbox
+
 ## 0.4.9
 
 ### Patch Changes
