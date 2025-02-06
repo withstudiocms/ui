@@ -1,0 +1,81 @@
+---
+import { Button, Checkbox, Icon, Input } from 'studiocms:ui/components';
+---
+<form method="post" action="https://newsletter.studiocms.dev/subscription/form" id="newsletter-form">
+    <div class="newsletter-container">
+        <span>Subscribe to our newsletter</span>
+        <input type="hidden" name="nonce" />
+        <input id="06711" type="checkbox" name="l" hidden checked value="06711dc1-78ff-4993-9d79-df44ba3572fa" />
+
+        <div class="newsletter-inputs">
+            <Input type="email" name="email" isRequired placeholder='E-mail' aria-label='E-Mail' class='newsletter-email-input' />
+            <Button type="submit" color='primary' style="width: fit-content;">
+                Subscribe
+            </Button>
+        </div>
+    </div>
+</form>
+
+<script>
+import { toast } from "studiocms:ui/components";
+
+    const form = document.getElementById('newsletter-form') as HTMLFormElement;
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+        });
+
+        if (response.ok) {
+            form.reset();
+            toast({
+                title: 'Success',
+                type: 'success',
+                description: 'You have successfully subscribed to the StudioCMS Newsletter.',
+            })
+        } else {
+            toast({
+                title: 'Error',
+                type: 'danger',
+                description: 'An error occurred while subscribing to the StudioCMS Newsletter.',
+            })
+        }
+    });
+</script>
+
+<style>
+    .newsletter-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: .5rem;
+
+        text-wrap: wrap;
+    }
+
+    .newsletter-inputs {
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+        align-items: center;
+        height: fit-content;
+        max-width: 400px;
+    }
+
+    .newsletter-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    .newsletter-email-input {
+        height: 40px;
+    }
+</style>
