@@ -1,0 +1,86 @@
+---
+import { Button, Icon, Input } from 'studiocms:ui/components';
+---
+<form method="post" action="https://newsletter.studiocms.dev/subscription/form" id="newsletter-form">
+    <div class="newsletter-container">
+        <h3>Get the latest Updates from the StudioCMS Newsletter</h3>
+        <input type="hidden" name="nonce" />
+
+        <div class="newsletter-inputs">
+            <Input type="email" name="email" label="Email" isRequired placeholder='E-mail' />
+            <Input type="text" name="name" label="Name" placeholder='Name (optional)' />
+        </div>
+    
+        <div class="newsletter-button">
+            <input id="06711" type="checkbox" name="l" checked value="06711dc1-78ff-4993-9d79-df44ba3572fa" />
+            <label for="06711">StudioCMS Newsletter</label>
+            <Button type="submit" variant="outlined" color='primary' size={'sm'}>
+                <Icon name='newspaper-20-solid' slot="start-content" width={20} height={20} />
+                Subscribe
+            </Button>
+        </div>
+    </div>
+</form>
+
+<script>
+import { toast } from "studiocms:ui/components";
+
+    const form = document.getElementById('newsletter-form') as HTMLFormElement;
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+        });
+
+        if (response.ok) {
+            form.reset();
+            toast({
+                title: 'Success',
+                type: 'success',
+                description: 'You have successfully subscribed to the StudioCMS Newsletter.',
+            })
+        } else {
+            toast({
+                title: 'Error',
+                type: 'danger',
+                description: 'An error occurred while subscribing to the StudioCMS Newsletter.',
+            })
+        }
+    });
+</script>
+
+<style>
+    .newsletter-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 2rem;
+        gap: .5rem;
+
+        text-wrap: wrap;
+    }
+
+    .newsletter-inputs {
+        display: grid;
+        gap: .5rem;
+        grid-template-columns: 1fr 1fr;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .newsletter-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        gap: .5rem;
+    }
+
+</style>

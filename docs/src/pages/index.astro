@@ -2,7 +2,7 @@
 import '@fontsource-variable/onest/index.css';
 import '@fontsource-variable/fira-code/index.css';
 
-import { Button, Footer, Modal, Toaster } from 'studiocms:ui/components';
+import { Button, Divider, Footer, Modal, Toaster } from 'studiocms:ui/components';
 
 import { getCollection } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
@@ -12,6 +12,7 @@ import GitHubLogo from '~/assets/github.svg';
 import LogoAdaptive from '~/assets/logo-adaptive.svg';
 import PatreonLogo from '~/assets/patreon.svg';
 import TwitterLogo from '~/assets/twitter.svg';
+import Newsletter from '~/components/Newsletter.astro';
 import EcosystemSection from '~/components/landing/EcosystemSection.astro';
 import HeroSection from '~/components/landing/HeroSection.astro';
 import ShowcaseSection from '~/components/landing/ShowcaseSection.astro';
@@ -57,6 +58,7 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
                 <span>StudioCMS</span>
                 <span>UI</span>
             </span>
+            <Newsletter />
         </div>
         <div slot="socials" class="socials">
             <a href="https://github.com/withstudiocms" aria-label="GitHub">
@@ -93,6 +95,14 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
         gap: 1.5rem;
         align-items: center;
         white-space: nowrap;
+    }
+
+    @media screen and (max-width: 768px) {
+        .footer-brand {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
     }
 
     .studiocms-footer-text {
