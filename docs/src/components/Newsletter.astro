@@ -1,9 +1,9 @@
 ---
-import { Button, Icon, Input } from 'studiocms:ui/components';
+import { Button, Checkbox, Icon, Input } from 'studiocms:ui/components';
 ---
 <form method="post" action="https://newsletter.studiocms.dev/subscription/form" id="newsletter-form">
     <div class="newsletter-container">
-        <h3>Get the latest Updates from the StudioCMS Newsletter</h3>
+        <h3>Get the latest updates from the StudioCMS Newsletter</h3>
         <input type="hidden" name="nonce" />
 
         <div class="newsletter-inputs">
@@ -12,8 +12,7 @@ import { Button, Icon, Input } from 'studiocms:ui/components';
         </div>
     
         <div class="newsletter-button">
-            <input id="06711" type="checkbox" name="l" checked value="06711dc1-78ff-4993-9d79-df44ba3572fa" />
-            <label for="06711">StudioCMS Newsletter</label>
+            <Checkbox name="l" label="StudioCMS Newsletter" value="06711dc1-78ff-4993-9d79-df44ba3572fa" defaultChecked />
             <Button type="submit" variant="outlined" color='primary' size={'sm'}>
                 <Icon name='newspaper-20-solid' slot="start-content" width={20} height={20} />
                 Subscribe
