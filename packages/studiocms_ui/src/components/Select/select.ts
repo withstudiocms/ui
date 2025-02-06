@@ -1,232 +1,139 @@
-import type { StudioCMSColorway } from "src/utils/colors";
-
-type TagOptions = {
-	color?: Omit<StudioCMSColorway, 'default'>;
-	size?: 'sm' | 'md' | 'lg';
-	variant?: 'solid' | 'outline' | 'ghost' | 'link' | 'subtle';
-	rounding?: 'full' | 'semi';
+type SelectOption = {
+	value: string;
+	label: string;
+	disabled?: boolean;
 };
 
+type State = {
+	container: SpecialContainer | undefined;
+	options: Record<string, SelectOption[]>;
+}
+
+type SpecialContainer = HTMLDivElement & {
+	button: HTMLButtonElement | null;
+	dropdown: HTMLUListElement | null;
+}
+
 function loadSelects() {
-	const allSelects = document.querySelectorAll<HTMLDivElement>('.sui-select-label');
+	const OPTION_HEIGHT = 36;
+	const BORDER_SIZE = 2;
+	const MARGIN = 4;
+
+	const toggleDropdown = (state: State, container: SpecialContainer) => {
+		if (!container.button || !container.dropdown) return;
+    const isActive = container.dropdown.classList.contains('active');
+    if (!isActive) {
+			openDropdown(state, container);
+    } else {
+      closeDropdown(state);
+    }
+	};
+
+	const isSelectAbove = (state: State, container: SpecialContainer) => {
+		if (!container.button) return false;
+		const { bottom, left, right, width, x, y, height } = container.button.getBoundingClientRect();
+		const optionsLength = state.options[container.dataset.id as string]?.length ?? 0;
+
+		const dropdownHeight = optionsLength * OPTION_HEIGHT + BORDER_SIZE + MARGIN;
+		const customRect = {
+			top: bottom + MARGIN,
+			left,
+			right,
+			bottom: bottom + MARGIN + dropdownHeight,
+			width,
+			height: dropdownHeight,
+			x,
+			y: y + height + MARGIN,
+		};
+
+		return (
+			customRect.top >= 0 &&
+			customRect.left >= 0 &&
+			customRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			customRect.right <= (window.innerWidth || document.documentElement.clientWidth)
+		);
+	}
+
+	const closeDropdown = (state: State) => {
+		if (!state || !state.container?.button || !state.container?.dropdown) return;
+		state.container.dropdown.classList.remove('active', 'above');
+		state.container.button.ariaExpanded = 'false';
+		state.container = undefined;
+	};
+
+	const openDropdown = (
+		state: State,
+		container: SpecialContainer,
+	) => {
+		if (!container.button || !container.dropdown) return;
+		if (state.container) {
+			closeDropdown(state);
+		}
+
+		const isAbove = isSelectAbove(state, container);
+		
+		container.button.ariaExpanded = 'true';
+		state.container = container;
+		
+		if (isAbove) {
+			container.dropdown.classList.add('active');
+		} else {
+			container.dropdown.classList.add('active', 'above');
+		}
+
+	}
+
+	// source (2018-03-11): https://github.com/jquery/jquery/blob/master/src/css/hiddenVisibleSelectors.js
+	const isVisible = (elem: HTMLElement) =>
+		!!elem && !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+
+	const documentClickHandler = (state: State) => {
+		return (event: MouseEvent) => {
+			if (!state.container || !state.container.dropdown) return;
+			if (
+				!state.container?.contains(event.target as HTMLElement) &&
+				isVisible(state.container!) &&
+				state.container.dropdown.classList.contains('active')
+			) {
+				closeDropdown(state);
+			}
+		}
+	};
+
+	const documentKeydownHandler = (state: State) => {
+		return (event: KeyboardEvent) => {
+			if (!state.container) return;
+			if (event.key === 'Escape') {
+				closeDropdown(state);
+			}
+		}
+	};
+
+	const allSelects = document.querySelectorAll<HTMLDivElement>('.sui-select-label') as NodeListOf<HTMLDivElement>;
+	const state: State = {
+		container: undefined,
+		options: {},
+	};
+
+	// Catch and handle all document clicks outside of the active select
+	// This performs better than adding and removing event listeners to the document
+	// every time a select is opened or closed
+	document.addEventListener('click', documentClickHandler(state));
+	document.addEventListener('keydown', documentKeydownHandler(state));
 
 	for (const container of allSelects) {
-		const hiddenSelect = container.querySelector('select')!;
-		const button = container.querySelector('button')!;
-		const valueSpan = container.querySelector('.sui-select-value-span')!;
-		const dropdown = container.querySelector('.sui-select-dropdown')!;
-		const optionElements = container.querySelectorAll<HTMLLIElement>('.sui-select-option');
+		const _container = container as SpecialContainer;
+		_container.button = container.querySelector('button');
+		_container.dropdown = container.querySelector('.sui-select-dropdown');
 
-		const options = JSON.parse(container.dataset.options!);
-		const id = container.dataset.id!;
-		const multiple = container.dataset.multiple === 'true';
-		let active = false;
+		const options = JSON.parse(_container.dataset.options as string) as SelectOption[];
+		const id = _container.dataset.id as string;
+		state.options[id] = options;
 
-		if (multiple) {
-			positionBadgesForSelect(container, button, valueSpan as HTMLSpanElement);
-		}
-
-		const closeDropdown = () => {
-			dropdown.classList.remove('active', 'above');
-			active = false;
-			button.ariaExpanded = 'false';
-			focusIndex = -1;
-
-			for (const entry of optionElements) {
-				entry.classList.remove('focused');
-			}
-		};
-
-		const openDropdown = (toggle: boolean) => {
-			const { bottom, left, right, width, x, y, height } = button.getBoundingClientRect();
-
-			const optionHeight = 36;
-			const totalBorderSize = 2;
-			const margin = 4;
-
-			const dropdownHeight = options.length * optionHeight + totalBorderSize + margin;
-
-			const CustomRect = {
-				top: bottom + margin,
-				left,
-				right,
-				bottom: bottom + margin + dropdownHeight,
-				width,
-				height: dropdownHeight,
-				x,
-				y: y + height + margin,
-			};
-
-			if (active && toggle) {
-				closeDropdown();
-				return;
-			}
-
-			active = true;
-			button.ariaExpanded = 'true';
-
-			// Set focusIndex to currently selected option
-			focusIndex = Array.from(optionElements).findIndex((x) => x.classList.contains('selected'));
-
-			if (
-				CustomRect.top >= 0 &&
-				CustomRect.left >= 0 &&
-				CustomRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-				CustomRect.right <= (window.innerWidth || document.documentElement.clientWidth)
-			) {
-				dropdown.classList.add('active');
-			} else {
-				dropdown.classList.add('active', 'above');
-			}
-		};
-
-		button.addEventListener('click', () => openDropdown(true));
-
-		let focusIndex = -1;
-
-		const recomputeOptions = () => {
-			for (const entry of optionElements) {
-				if (Number.parseInt(entry.dataset.optionIndex!) === focusIndex) {
-					entry.classList.add('focused');
-				} else {
-					entry.classList.remove('focused');
-				}
-			}
-		};
-
-		button.addEventListener('keydown', (e) => {
-			if (e.key === 'Tab' || e.key === 'Escape') {
-				closeDropdown();
-				return;
-			}
-
-			if (e.key === ' ' && !active) openDropdown(false);
-
-			if (e.key === 'Enter') {
-				const currentlyFocused = container.querySelector<HTMLElement>('.focused');
-				if (currentlyFocused) {
-					currentlyFocused.classList.remove('focused');
-					currentlyFocused.click();
-
-					// Stop dropdown from immediately reopening
-					e.preventDefault();
-					e.stopImmediatePropagation();
-				}
-
-				return;
-			}
-
-			e.preventDefault();
-			e.stopImmediatePropagation();
-
-			const neighbor = (offset: number) => {
-				return optionElements.item(
-					(Array.from(optionElements).findIndex((x) => x.classList.contains('selected')) ?? -1) +
-						offset
-				);
-			};
-
-			if (e.key === 'ArrowUp' && (focusIndex > 0 || !active)) {
-				if (!active) return neighbor(-1)?.click();
-				focusIndex--;
-				recomputeOptions();
-			}
-
-			if (e.key === 'ArrowDown' && focusIndex + 1 < optionElements.length) {
-				if (!active) return neighbor(1)?.click();
-				focusIndex++;
-				recomputeOptions();
-			}
-
-			if (e.key === 'PageUp') {
-				focusIndex = 0;
-				if (!active) return optionElements.item(focusIndex)?.click();
-				recomputeOptions();
-			}
-			if (e.key === 'PageDown') {
-				focusIndex = optionElements.length - 1;
-				if (!active) return optionElements.item(focusIndex)?.click();
-				recomputeOptions();
-			}
+		_container.button!.addEventListener('click', () => {
+			toggleDropdown(state, _container);
 		});
-
-		const handleSelection = (e: MouseEvent, option: HTMLElement) => {
-			e.stopImmediatePropagation();
-			if (option.id === `${id}-selected` || !id) return;
-			const currentlySelected = document.getElementById(`${id}-selected`);
-			if (currentlySelected) {
-				currentlySelected.classList.remove('selected');
-				currentlySelected.id = '';
-			}
-			option.id = `${id}-selected`;
-			option.classList.add('selected');
-			const opt = options[Number.parseInt(option.dataset.optionIndex!)];
-			hiddenSelect.value = opt.value;
-			valueSpan.textContent = opt.label;
-			closeDropdown();
-		};
-
-		for (const option of optionElements) {
-			const handleSelectionForOption = (e: MouseEvent) => handleSelection(e, option);
-
-			option.addEventListener('click', handleSelectionForOption);
-		}
-
-		window.addEventListener('scroll', closeDropdown);
-
-		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && dropdown.classList.contains('active')) {
-				closeDropdown();
-			}
-		});
-
-		hideOnClickOutside(container);
-
-		function hideOnClickOutside(element: HTMLElement) {
-			const outsideClickListener = (event: MouseEvent) => {
-				if (
-					!element.contains(event.target as HTMLElement) &&
-					isVisible(element) &&
-					active === true
-				) {
-					// or use: event.target.closest(selector) === null
-					closeDropdown();
-				}
-			};
-
-			document.addEventListener('click', outsideClickListener);
-		}
-
-		// source (2018-03-11): https://github.com/jquery/jquery/blob/master/src/css/hiddenVisibleSelectors.js
-		const isVisible = (elem: HTMLElement) =>
-			!!elem && !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
 	}
 }
 
-document.addEventListener('astro:page-load', loadSelects);
-
-const positionBadgesForSelect = (
-	selectElement: HTMLDivElement,
-	selectButtonElement: HTMLButtonElement,
-	selectValueElement: HTMLSpanElement
-) => {
-	const chevron = selectButtonElement.querySelector<HTMLElement>('.sui-select-chevron')!;
-	const buttonRect = selectButtonElement.getBoundingClientRect();
-	const chevronRect = chevron.getBoundingClientRect();
-	const isOverflowing = chevronRect.left < buttonRect.left ||
-												chevronRect.right > buttonRect.right ||
-												chevronRect.top < buttonRect.top ||
-												chevronRect.bottom > buttonRect.bottom;
-
-	if (isOverflowing) {
-		const children = selectValueElement.querySelectorAll<HTMLSpanElement>('.sui-badge');
-		const container = document.createElement('div');
-		container.classList.add('sui-select-badge-container');
-
-		for (const child of children) {
-			container.appendChild(child);
-		}
-
-		selectElement.appendChild(container);
-	}
-}
+loadSelects();

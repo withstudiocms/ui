@@ -94,7 +94,7 @@
 
 .sui-select-dropdown.above {
 	top: auto;
-	bottom: calc(100% - 18px + 0.25rem);
+	bottom: calc(100% - (18px + 0.15rem));
 }
 
 .sui-select-option {
@@ -126,6 +126,10 @@
 	cursor: default;
 }
 
+.sui-select-label[data-multiple="true"] .sui-select-option.selected {
+	cursor: pointer;
+}
+
 .sui-hidden-select {
 	height: 0;
 	width: 0;
@@ -139,9 +143,14 @@
 
 .sui-select-badge-container {
 	display: flex;
-	margin-top: 0.5rem;
 	flex-direction: row;
-	flex-wrap: wrap;
+	gap: 0.25rem;
+	width: fit-content;
+}
+
+.sui-select-badge-container.below {
+	margin-top: 0.5rem;
 	gap: 0.5rem;
+	flex-wrap: wrap;
 	width: 100%;
 }
