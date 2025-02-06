@@ -2,4 +2,4 @@
 "@studiocms/ui": patch
 ---
 
-add value prop to checkbox
+Adds a value prop to the checkbox
