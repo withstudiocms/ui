@@ -31,5 +31,8 @@
     "twoslash",
     "vite",
     "withstudiocms"
-  ]
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
