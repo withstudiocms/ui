@@ -37,29 +37,25 @@ function loadSelects() {
     );
     if (!buttonSpan) return;
 
-    buttonSpan.textContent = "";
     button.setAttribute("aria-label", label);
 
     if (isMultiple) {
-      let badgeContainer = button.querySelector<HTMLDivElement>(
+      let badgeContainer = buttonSpan.querySelector<HTMLDivElement>(
         ".sui-select-badge-container",
-      );
-      if (!badgeContainer) {
-        badgeContainer = document.createElement("div");
-        badgeContainer.classList.add("sui-select-badge-container");
-        buttonSpan.appendChild(badgeContainer);
-      } else {
-        badgeContainer.innerHTML = "";
-      }
+      ) as HTMLDivElement | null;
+			badgeContainer!.innerHTML = "";
 
-      if (label) {
+      if (badgeContainer && label) {
         const labels = label.split(", ").filter((l) => l);
-        labels.forEach((badgeLabel) => {
-          const badge = document.createElement("span");
-          badge.classList.add("sui-badge", "sui-select-badge", "primary", "sm", "default", "full");
-          badge.textContent = badgeLabel;
-          badgeContainer.appendChild(badge);
-        });
+				for (const badgeLabel of labels) {
+					const badge = document.createElement("span");
+					badge.classList.add("sui-badge", "sui-select-badge", "primary", "sm", "default", "full");
+					badge.textContent = badgeLabel;
+					badgeContainer?.appendChild(badge);
+				}
+				if (isElementOverflowingHorizontally(button, button.querySelector<HTMLElement>(".sui-select-chevron")!)) {
+					badgeContainer?.classList.add("below");
+				}
       }
     } else {
       buttonSpan.textContent = label;
@@ -143,7 +139,8 @@ function loadSelects() {
         .filter((opt) => opt.classList.contains("selected"))
         .map((opt) => opt.textContent ?? "")
         .join(", ");
-      updateLabel(state.container.button, selectedTexts, isMultiple);
+			updateLabel(state.container.button, selectedTexts, isMultiple);
+			closeDropdown(state);
     } else {
       if (!option.classList.contains("selected")) {
         for (const opt of optionElements) {
@@ -151,10 +148,16 @@ function loadSelects() {
         }
         option.classList.add("selected");
         updateLabel(state.container.button, option.textContent ?? "");
+				closeDropdown(state);
       }
-      closeDropdown(state);
     }
   };
+
+	const isElementOverflowingHorizontally = (containerElement: HTMLElement, targetElement: HTMLElement): boolean => {
+		const containerRect = containerElement.getBoundingClientRect();
+		const iconRect = targetElement.getBoundingClientRect();
+		return iconRect.left < containerRect.left || iconRect.right > containerRect.right;
+	};	
 
   const state: State = {
     container: undefined,
@@ -196,6 +199,16 @@ function loadSelects() {
     _container.dropdown?.addEventListener("click", (e) =>
       handleOptionSelection(state, e.target as HTMLElement),
     );
+
+		if (_container.dataset.multiple === "true") {
+			const iconElement = _container.querySelector<HTMLElement>(".sui-select-chevron");
+			const badgeContainer = _container.querySelector(".sui-select-badge-container")!;
+			if (iconElement && isElementOverflowingHorizontally(_container, iconElement)) {
+				badgeContainer.classList.add("below");
+			} else {
+				badgeContainer.classList.remove("below");
+			}
+		}
   }
 }
 document.addEventListener("astro:page-load", loadSelects);
