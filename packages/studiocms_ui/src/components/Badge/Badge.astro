@@ -44,6 +44,7 @@ const {
 	rounding = 'full',
 	iconPosition = 'left',
 	label,
+	class: className,
 	...props
 } = Astro.props;
 
@@ -56,7 +57,7 @@ if (size === 'sm') {
 }
 ---
 
-<span class="sui-badge" class:list={[color, size, variant, rounding]} {...props}>
+<span class="sui-badge" class:list={[color, size, variant, rounding, className]} {...props}>
 	{icon && iconPosition === 'left' && <Icon name={icon} width={iconSize} height={iconSize} viewBox="0 0 24 24" />}
   {label}
 	{icon && iconPosition === 'right' && <Icon name={icon} width={iconSize} height={iconSize} viewBox="0 0 24 24" />}

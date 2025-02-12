@@ -5,15 +5,13 @@ type SelectOption = {
 };
 
 type State = {
-  container: SpecialContainer | undefined;
-  options: Record<string, SelectOption[]>;
-  isMultiple: Record<string, boolean>;
-};
-
-type SpecialContainer = HTMLDivElement & {
-  button: HTMLButtonElement | null;
-  dropdown: HTMLUListElement | null;
-  select: HTMLSelectElement | null;
+  activeContainer: HTMLDivElement & {
+    button: HTMLButtonElement | null;
+    dropdown: HTMLUListElement | null;
+    select: HTMLSelectElement | null;
+  } | null;
+  optionsMap: Record<string, SelectOption[]>;
+  isMultipleMap: Record<string, boolean>;
 };
 
 function loadSelects() {
@@ -23,192 +21,177 @@ function loadSelects() {
     MARGIN: 4,
   } as const;
 
-  const isVisible = (elem: HTMLElement) =>
-    !!elem &&
-    !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+  const isVisible = (elem: HTMLElement): boolean => (
+    elem.offsetWidth > 0 || 
+    elem.offsetHeight > 0 || 
+    elem.getClientRects().length > 0
+  );
 
-  const updateLabel = (
-    button: HTMLButtonElement,
-    label: string,
-    isMultiple = false,
-  ) => {
-    const buttonSpan = button.querySelector<HTMLSpanElement>(
-      ".sui-select-value-span",
-    );
-    if (!buttonSpan) return;
-
-    button.setAttribute("aria-label", label);
-
-    if (isMultiple) {
-      let badgeContainer = buttonSpan.querySelector<HTMLDivElement>(
-        ".sui-select-badge-container",
-      ) as HTMLDivElement | null;
-			badgeContainer!.innerHTML = "";
-
-      if (badgeContainer && label) {
-        const labels = label.split(", ").filter((l) => l);
-				for (const badgeLabel of labels) {
-					const badge = document.createElement("span");
-					badge.classList.add("sui-badge", "sui-select-badge", "primary", "sm", "default", "full");
-					badge.textContent = badgeLabel;
-					badgeContainer?.appendChild(badge);
-				}
-				if (isElementOverflowingHorizontally(button, button.querySelector<HTMLElement>(".sui-select-chevron")!)) {
-					badgeContainer?.classList.add("below");
-				}
-      }
-    } else {
-      buttonSpan.textContent = label;
-    }
-  };
-
-  const calculateDropdownPosition = (
-    button: HTMLButtonElement,
-    optionsLength: number,
-  ) => {
-    const { bottom, left, right, width, x, y, height } =
-      button.getBoundingClientRect();
-    const dropdownHeight =
-      optionsLength * CONSTANTS.OPTION_HEIGHT +
-      CONSTANTS.BORDER_SIZE +
-      CONSTANTS.MARGIN;
+  const getDropdownPosition = (button: HTMLButtonElement, optionsCount: number) => {
+    const rect = button.getBoundingClientRect();
+    const dropdownHeight = optionsCount * CONSTANTS.OPTION_HEIGHT + 
+      CONSTANTS.BORDER_SIZE + CONSTANTS.MARGIN;
 
     const customRect = {
-      top: bottom + CONSTANTS.MARGIN,
-      bottom: bottom + CONSTANTS.MARGIN + dropdownHeight,
-      left,
-      right,
-      width,
-      x,
-      y: y + height + CONSTANTS.MARGIN,
+      top: rect.bottom + CONSTANTS.MARGIN,
+      bottom: rect.bottom + CONSTANTS.MARGIN + dropdownHeight,
+      left: rect.left,
+      right: rect.right,
+      width: rect.width,
+      x: rect.x,
+      y: rect.y + rect.height + CONSTANTS.MARGIN,
       height: dropdownHeight,
     };
 
     return {
-      isAbove:
-        customRect.top >= 0 &&
-        customRect.left >= 0 &&
-        customRect.bottom <=
-          (window.innerHeight || document.documentElement.clientHeight) &&
-        customRect.right <=
-          (window.innerWidth || document.documentElement.clientWidth),
+      isAbove: customRect.top >= 0 && customRect.left >= 0 &&
+        customRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        customRect.right <= (window.innerWidth || document.documentElement.clientWidth),
       customRect,
     };
   };
 
-  const closeDropdown = (state: State) => {
-    if (!state.container?.button || !state.container?.dropdown) return;
-    state.container.dropdown.classList.remove("active", "above");
-    state.container.button.ariaExpanded = "false";
-    state.container = undefined;
+  const closeDropdown = ({ activeContainer }: State): void => {
+    if (!activeContainer?.button || !activeContainer?.dropdown) return;
+    activeContainer.dropdown.classList.remove("active", "above");
+    activeContainer.button.ariaExpanded = "false";
+    state.activeContainer = null;
   };
 
-  const openDropdown = (state: State, container: SpecialContainer) => {
-    if (!container.button || !container.dropdown) return;
-    if (state.container) closeDropdown(state);
+  const openDropdown = (state: State, container: State["activeContainer"]): void => {
+    if (!container?.button || !container?.dropdown) return;
+    
+    if (state.activeContainer) closeDropdown(state);
 
-    const { isAbove } = calculateDropdownPosition(
+    const { isAbove } = getDropdownPosition(
       container.button,
-      state.options[container.dataset.id as string]?.length ?? 0,
+      state.optionsMap[container.dataset.id as string]?.length ?? 0
     );
 
     container.button.ariaExpanded = "true";
-    state.container = container;
+    state.activeContainer = container;
     container.dropdown.classList.add("active", ...(isAbove ? [] : ["above"]));
   };
 
-  const toggleDropdown = (state: State, container: SpecialContainer) => {
-    if (!container.button || !container.dropdown) return;
-    container.dropdown.classList.contains("active")
-      ? closeDropdown(state)
-      : openDropdown(state, container);
-  };
+  const handleBadgeOverflow = (container: State["activeContainer"]): void => {
+    const buttonContainer = container?.button?.parentElement;
+    const overflowContainer = container?.querySelector(".sui-select-badge-container-below");
+    const badges = [...container?.querySelectorAll(".sui-select-badge") ?? []];
+    
+    if (!buttonContainer || !overflowContainer || !container?.button) return;
 
-  const handleOptionSelection = (state: State, targetElement: HTMLElement) => {
-    if (!state.container?.dropdown?.contains(targetElement)) return;
+    const availableWidth = buttonContainer.clientWidth;
+    
+    for (const badge of badges) {
+      container.button.appendChild(badge);
+    }
 
-    const option = targetElement.closest("li") as HTMLLIElement;
-    if (!option || !state.container.button) return;
+    const totalWidth = [...buttonContainer.children].reduce((width, badge) => {
+      const { marginLeft, marginRight } = window.getComputedStyle(badge as HTMLElement);
+      return width + (badge as HTMLElement).offsetWidth + 
+        (Number.parseInt(marginLeft) || 0) + (Number.parseInt(marginRight) || 0);
+    }, 0);
 
-    const isMultiple = state.isMultiple[state.container.dataset.id ?? ""];
-    const optionElements = state.container.dropdown.querySelectorAll("li");
-
-    if (isMultiple) {
-      option.classList.toggle("selected");
-      const selectedTexts = Array.from(optionElements)
-        .filter((opt) => opt.classList.contains("selected"))
-        .map((opt) => opt.textContent ?? "")
-        .join(", ");
-			updateLabel(state.container.button, selectedTexts, isMultiple);
-			closeDropdown(state);
-    } else {
-      if (!option.classList.contains("selected")) {
-        for (const opt of optionElements) {
-          opt.classList.remove("selected");
-        }
-        option.classList.add("selected");
-        updateLabel(state.container.button, option.textContent ?? "");
-				closeDropdown(state);
+    if (totalWidth > availableWidth) {
+      for (const badge of badges) {
+        overflowContainer.appendChild(badge);
       }
     }
   };
 
-	const isElementOverflowingHorizontally = (containerElement: HTMLElement, targetElement: HTMLElement): boolean => {
-		const containerRect = containerElement.getBoundingClientRect();
-		const iconRect = targetElement.getBoundingClientRect();
-		return iconRect.left < containerRect.left || iconRect.right > containerRect.right;
-	};	
-
-  const state: State = {
-    container: undefined,
-    options: {},
-    isMultiple: {},
+  const updateLabel = (state: State, container: State["activeContainer"]): void => {
+    const isMultiple = state.isMultipleMap[container?.dataset.id as string];
+    if (isMultiple) {
+      handleBadgeOverflow(container);
+    } else {
+      const selected = container?.querySelector(".sui-select-option.selected") as HTMLLIElement;
+      const selectedButtonSpan = container?.button?.querySelector(".sui-select-value-span") as HTMLSpanElement;
+      if (selected && selectedButtonSpan) {
+        selectedButtonSpan.innerText = selected.innerText.trim();
+      }
+    }
   };
 
-  document.addEventListener("click", (e) => {
-    if (!state.container?.dropdown?.classList.contains("active")) return;
-    if (
-      !state.container.contains(e.target as HTMLElement) &&
-      isVisible(state.container)
-    ) {
+  const handleOptionSelect = (target: HTMLElement, state: State, container: State["activeContainer"]): void => {
+    const option = target.closest(".sui-select-option") as HTMLLIElement;
+    const lastActive = container?.dropdown?.querySelector(".sui-select-option.selected");
+    const isMultiple = state.isMultipleMap[container?.dataset.id as string];
+    if (isMultiple) {
+      option.classList.toggle("selected");
+      const selectOpt = container?.select?.querySelector(`option[value="${option.getAttribute("value")}"]`) as HTMLOptionElement;
+      if (selectOpt) {
+        selectOpt.selected = !selectOpt.selected;
+      }
+
+      updateLabel(state, container);
+    } else {
+      if (lastActive) {
+        lastActive.classList.remove("selected");
+        const lastSelectOpt = container?.select?.querySelector(`option[value="${lastActive.getAttribute("value")}"]`) as HTMLOptionElement;
+        if (lastSelectOpt) {
+          lastSelectOpt.selected = false;
+        }
+      }
+      if (option) {
+        option.classList.add("selected");
+        const selectOpt = container?.select?.querySelector(`option[value="${option.getAttribute("value")}"]`) as HTMLOptionElement;
+        if (selectOpt) {
+          selectOpt.selected = true;
+        }
+    
+        updateLabel(state, container);
+      }
+    }
+
+    closeDropdown(state);
+  };
+
+  const handleContainerClick = (e: MouseEvent, state: State, container: State["activeContainer"]): void => {
+    const target = e.target as HTMLElement;
+    if (target.closest(".sui-select-button")) {
+      if (state.activeContainer) {
+        closeDropdown(state);
+      } else {
+        openDropdown(state, container);
+      }
+    }
+    if (target.closest(".sui-select-dropdown.active")) {
+      handleOptionSelect(target, state, container);
+    }
+  };
+
+  const state: State = {
+    activeContainer: null,
+    optionsMap: {},
+    isMultipleMap: {},
+  };
+  const selects = document.querySelectorAll<HTMLDivElement>(".sui-select-label");
+
+  document.addEventListener("click", ({ target }) => {
+    if (!state.activeContainer?.dropdown?.classList.contains("active") || !target) return;
+    if (!state.activeContainer.contains(target as HTMLElement) && isVisible(state.activeContainer)) {
       closeDropdown(state);
     }
   });
-
-  document.addEventListener("keydown", (e) => {
-    if (state.container && e.key === "Escape") closeDropdown(state);
+  document.addEventListener("keydown", ({ key }) => {
+    if (state.activeContainer && key === "Escape") closeDropdown(state);
   });
-
-  // Setup selects
-  const selects =
-    document.querySelectorAll<HTMLDivElement>(".sui-select-label");
-
+  
   for (const container of selects) {
-    const _container = container as SpecialContainer;
-    _container.button = container.querySelector("button");
-    _container.dropdown = container.querySelector(".sui-select-dropdown");
-    _container.select = container.querySelector("select");
+    const id = container.dataset.id as string;
+    const specialContainer = Object.assign(container, {
+      button: container.querySelector("button"),
+      dropdown: container.querySelector(".sui-select-dropdown") as HTMLUListElement,
+      select: container.querySelector("select"),
+    });
 
-    const id = _container.dataset.id as string;
-    state.options[id] = JSON.parse(_container.dataset.options as string);
-    state.isMultiple[id] = _container.dataset.multiple === "true";
+    state.optionsMap[id] = JSON.parse(container.dataset.options as string);
+    state.isMultipleMap[id] = container.dataset.multiple === "true";
 
-    _container.button?.addEventListener("click", () =>
-      toggleDropdown(state, _container),
-    );
-    _container.dropdown?.addEventListener("click", (e) =>
-      handleOptionSelection(state, e.target as HTMLElement),
-    );
+    specialContainer.addEventListener("click", (e) => handleContainerClick(e, state, specialContainer));
 
-		if (_container.dataset.multiple === "true") {
-			const iconElement = _container.querySelector<HTMLElement>(".sui-select-chevron");
-			const badgeContainer = _container.querySelector(".sui-select-badge-container")!;
-			if (iconElement && isElementOverflowingHorizontally(_container, iconElement)) {
-				badgeContainer.classList.add("below");
-			} else {
-				badgeContainer.classList.remove("below");
-			}
-		}
+    handleBadgeOverflow(specialContainer);
   }
 }
+
 document.addEventListener("astro:page-load", loadSelects);

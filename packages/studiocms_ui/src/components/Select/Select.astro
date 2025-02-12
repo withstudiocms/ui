@@ -136,7 +136,7 @@ const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?
 	>
 		<span class="sui-select-value-span" id={`${name}-value-span`}>
 			{Array.isArray(selected) 
-				? <div class="sui-select-badge-container">{selected.map((s) => s && <Badge data-value={s.value} size="sm" label={s.label} iconPosition="right" icon="x-mark" />)}</div> 
+				? <div class="sui-select-badge-container">{selected.map((s) => s && <Badge class="sui-select-badge" data-value={s.value} size="sm" label={s.label} iconPosition="right" icon="x-mark" />)}</div> 
 				: selected?.label ?? defaultLabel
 			}
 		</span>
@@ -185,6 +185,7 @@ const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?
 			})
 		}
 	</select>
+	{multiple && <div class="sui-select-badge-container-below"></div>}
 </div>
 <script>
 import "studiocms:ui/scripts/select"
