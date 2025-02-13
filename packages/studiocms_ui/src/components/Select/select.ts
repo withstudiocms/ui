@@ -19,6 +19,7 @@ function loadSelects() {
     OPTION_HEIGHT: 36,
     BORDER_SIZE: 2,
     MARGIN: 4,
+    BADGE_PADDING: 40,
   } as const;
 
   const isVisible = (elem: HTMLElement): boolean => (
@@ -73,29 +74,83 @@ function loadSelects() {
     container.dropdown.classList.add("active", ...(isAbove ? [] : ["above"]));
   };
 
-  const handleBadgeOverflow = (container: State["activeContainer"]): void => {
-    const buttonContainer = container?.button?.parentElement;
-    const overflowContainer = container?.querySelector(".sui-select-badge-container-below");
-    const badges = [...container?.querySelectorAll(".sui-select-badge") ?? []];
-    
-    if (!buttonContainer || !overflowContainer || !container?.button) return;
+  const createSelectBadge = (value: string, label: string): HTMLSpanElement => {
+    const badge = document.createElement("span");
+    badge.classList.add("sui-badge", "primary", "sm", "default", "full", "sui-select-badge");
+    badge.setAttribute("data-value", value);
+    badge.innerHTML = `${label} <svg style="min-width: 8px" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+    return badge;
+  };
 
-    const availableWidth = buttonContainer.clientWidth;
-    
+  const measureBadgesWidth = (
+    activeSelects: NodeListOf<Element>
+  ): { totalWidth: number; badges: HTMLElement[]; tempContainer: HTMLElement } => {
+    // Create temporary container for measurement
+    const tempContainer = document.createElement("div");
+    tempContainer.classList.add("sui-select-badge-container");
+    tempContainer.style.position = "absolute";
+    tempContainer.style.visibility = "hidden";
+    document.body.appendChild(tempContainer);
+
+    const badges = Array.from(activeSelects).map(select => 
+      createSelectBadge(select.getAttribute("value") ?? "", (select as HTMLLIElement).innerText.trim())
+    );
+
     for (const badge of badges) {
-      container.button.appendChild(badge);
+      tempContainer.appendChild(badge);
     }
 
-    const totalWidth = [...buttonContainer.children].reduce((width, badge) => {
-      const { marginLeft, marginRight } = window.getComputedStyle(badge as HTMLElement);
-      return width + (badge as HTMLElement).offsetWidth + 
-        (Number.parseInt(marginLeft) || 0) + (Number.parseInt(marginRight) || 0);
+    // Calculate total width including margins
+    const totalWidth = badges.reduce((width, badge) => {
+      const badgeStyle = window.getComputedStyle(badge);
+      return width + badge.offsetWidth + 
+        (Number.parseFloat(badgeStyle.marginLeft) || 0) + 
+        (Number.parseFloat(badgeStyle.marginRight) || 0);
     }, 0);
-
-    if (totalWidth > availableWidth) {
-      for (const badge of badges) {
-        overflowContainer.appendChild(badge);
-      }
+  
+    return { totalWidth, badges, tempContainer };
+  };
+  
+  const handleBadgeOverflow = (container: State["activeContainer"]): void => {
+    const buttonContainer = container?.button?.parentElement;
+    const buttonValueSpan = container?.button?.querySelector(".sui-select-value-span") as HTMLSpanElement;
+    const activeSelects = container?.dropdown?.querySelectorAll(".sui-select-option.selected");
+    const overflowContainer = container?.querySelector(".sui-select-badge-container-below");
+    
+    if (!buttonContainer || !overflowContainer || !container?.button || !activeSelects) return;
+  
+    const parentContainer = buttonContainer.parentElement;
+    if (!parentContainer) return;
+  
+    // Clear existing content
+    overflowContainer.innerHTML = "";
+    buttonValueSpan!.innerHTML = "";
+  
+    // Measure badges
+    const { totalWidth, badges, tempContainer } = measureBadgesWidth(activeSelects);
+  
+    // Get the maximum available width from the parent container
+    const parentStyles = window.getComputedStyle(parentContainer);
+    const availableWidth = parentContainer.clientWidth - 
+      (Number.parseFloat(parentStyles.paddingLeft) || 0) - 
+      (Number.parseFloat(parentStyles.paddingRight) || 0);
+  
+    const effectiveAvailableWidth = availableWidth - CONSTANTS.BADGE_PADDING;
+  
+    // Clean up temporary container
+    document.body.removeChild(tempContainer);
+  
+    const finalBadgeContainer = document.createElement("div");
+    finalBadgeContainer.classList.add("sui-select-badge-container");
+    for (const badge of badges) {
+      finalBadgeContainer.appendChild(badge.cloneNode(true));
+    }
+  
+    // Place badges based on available space
+    if (totalWidth > effectiveAvailableWidth) {
+      overflowContainer.appendChild(finalBadgeContainer);
+    } else {
+      buttonValueSpan.appendChild(finalBadgeContainer);
     }
   };
 
@@ -112,6 +167,14 @@ function loadSelects() {
     }
   };
 
+  const deselectMultiOption = (id: string, container: State["activeContainer"]): void => {
+    const selectOpt = container?.dropdown?.querySelector(`.sui-select-option[value="${id}"]`) as HTMLOptionElement;
+    if (selectOpt) {
+      selectOpt.selected = false;
+      selectOpt.classList.remove("selected");
+    }
+  };
+
   const handleOptionSelect = (target: HTMLElement, state: State, container: State["activeContainer"]): void => {
     const option = target.closest(".sui-select-option") as HTMLLIElement;
     const lastActive = container?.dropdown?.querySelector(".sui-select-option.selected");
@@ -122,7 +185,6 @@ function loadSelects() {
       if (selectOpt) {
         selectOpt.selected = !selectOpt.selected;
       }
-
       updateLabel(state, container);
     } else {
       if (lastActive) {
@@ -138,7 +200,6 @@ function loadSelects() {
         if (selectOpt) {
           selectOpt.selected = true;
         }
-    
         updateLabel(state, container);
       }
     }
@@ -148,6 +209,10 @@ function loadSelects() {
 
   const handleContainerClick = (e: MouseEvent, state: State, container: State["activeContainer"]): void => {
     const target = e.target as HTMLElement;
+    if (target.closest(".sui-select-badge svg")) {
+      deselectMultiOption(target.closest(".sui-select-badge")?.getAttribute("data-value") as string, container);
+      handleBadgeOverflow(container);
+    }
     if (target.closest(".sui-select-button")) {
       if (state.activeContainer) {
         closeDropdown(state);
