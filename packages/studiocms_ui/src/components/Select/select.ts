@@ -12,6 +12,7 @@ type State = {
 	} | null;
 	optionsMap: Record<string, SelectOption[]>;
 	isMultipleMap: Record<string, boolean>;
+	focusIndex: number;
 };
 
 function loadSelects() {
@@ -57,12 +58,13 @@ function loadSelects() {
 		activeContainer.dropdown.classList.remove("active", "above");
 		activeContainer.button.ariaExpanded = "false";
 		state.activeContainer = null;
+		console.log("close");
 	};
 
 	const openDropdown = (state: State, container: State["activeContainer"]): void => {
 		if (!container?.button || !container?.dropdown) return;
 		
-		if (state.activeContainer) closeDropdown(state);
+		// if (state.activeContainer) closeDropdown(state);
 
 		const { isAbove } = getDropdownPosition(
 			container.button,
@@ -225,10 +227,82 @@ function loadSelects() {
 		}
 	};
 
+	const neighbor = (offset: number, container: State["activeContainer"]): HTMLLIElement | undefined => {
+		const optionElements = container?.dropdown?.querySelectorAll(".sui-select-option") as NodeListOf<HTMLLIElement>;
+		return optionElements?.item(
+			(Array.from(optionElements).findIndex((x) => x.classList.contains('selected')) ?? -1) +
+				offset
+		);
+	};
+
+	const recomputeOptions = (state: State,container: State["activeContainer"]): void => {
+		const optionElements = container?.dropdown?.querySelectorAll(".sui-select-option") as NodeListOf<HTMLLIElement>;
+		for (const entry of optionElements) {
+			if (Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex) {
+				entry.classList.add('focused');
+			} else {
+				entry.classList.remove('focused');
+			}
+		}
+	};
+
+	const handleSelectKeyDown = (e: KeyboardEvent, state: State, container: State["activeContainer"]): void => {
+		const active = !!state.activeContainer?.querySelector<HTMLElement>('.sui-select-dropdown.active');
+		if (e.key === 'Tab' || e.key === 'Escape') {
+			closeDropdown(state);
+			return;
+		}
+		if (e.key === ' ' && !active) {
+			openDropdown(state, container);
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			return;
+		}
+		if (e.key === 'Enter') {
+			const currentlyFocused = container?.querySelector<HTMLElement>('.sui-select-option.focused');
+			if (currentlyFocused) {
+				currentlyFocused.classList.remove('focused');
+				currentlyFocused.click();
+				// Stop dropdown from immediately reopening
+				e.preventDefault();
+				e.stopImmediatePropagation();
+			}
+			return;
+		}
+		e.preventDefault();
+		e.stopImmediatePropagation();
+
+		if (e.key === 'ArrowUp' && (state.focusIndex > 0 || !active)) {
+			if (!active) neighbor(-1, container)?.click();
+			state.focusIndex--;
+			recomputeOptions(state, container);
+		}
+
+		const optionElements = container?.dropdown?.querySelectorAll(".sui-select-option") as NodeListOf<HTMLLIElement>;
+		if (e.key === 'ArrowDown' && state.focusIndex + 1 < optionElements.length) {
+			if (!active) neighbor(1, container)?.click();
+			state.focusIndex++;
+			recomputeOptions(state, container);
+		}
+
+		if (e.key === 'PageUp') {
+			state.focusIndex = 0;
+			if (!active) optionElements.item(state.focusIndex)?.click();
+			recomputeOptions(state, container);
+		}
+		if (e.key === 'PageDown') {
+			state.focusIndex = optionElements.length - 1;
+			if (!active) optionElements.item(state.focusIndex)?.click();
+			recomputeOptions(state, container);
+		}
+
+	};
+
 	const state: State = {
 		activeContainer: null,
 		optionsMap: {},
 		isMultipleMap: {},
+		focusIndex: -1,
 	};
 	const selects = document.querySelectorAll<HTMLDivElement>(".sui-select-label");
 
@@ -238,10 +312,7 @@ function loadSelects() {
 			closeDropdown(state);
 		}
 	});
-	document.addEventListener("keydown", ({ key }) => {
-		if (state.activeContainer && key === "Escape") closeDropdown(state);
-	});
-	
+
 	for (const container of selects) {
 		const id = container.dataset.id as string;
 		const specialContainer = Object.assign(container, {
@@ -254,6 +325,7 @@ function loadSelects() {
 		state.isMultipleMap[id] = container.dataset.multiple === "true";
 
 		specialContainer.addEventListener("click", (e) => handleContainerClick(e, state, specialContainer));
+		specialContainer.addEventListener("keydown", (e) => handleSelectKeyDown(e, state, specialContainer));
 
 		handleBadgeOverflow(specialContainer);
 	}
