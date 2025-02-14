@@ -202,13 +202,6 @@ You can select multiple options by setting the `multiple` prop to `true`:
           'opt-1-mult1',
           'opt-2-mult1',
           'opt-3-mult1',
-          'opt-4-mult1',
-          'opt-5-mult1',
-          'opt-7-mult1',
-          'opt-8-mult1',
-          'opt-9-mult1',
-          'opt-10-mult1',
-          'opt-11-mult1',
         ]}
         options={[
           { label: "Option 1", value: "opt-1-mult1" },
@@ -236,6 +229,47 @@ You can select multiple options by setting the `multiple` prop to `true`:
     <Select
       label='Select Element'
       multiple
+      options={[
+        { label: 'Option 1', value: 'opt-1' },
+        { label: 'Option 2', value: 'opt-2' },
+        { label: 'Option 3', value: 'opt-3' },
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+### Max Option Selections
+
+You can set a maximum number of options that can be selected using the `max` prop:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Select
+        label='Select Element'
+        multiple
+        max={3}
+        options={[
+          { label: "Option 1", value: "opt-1-mult2" },
+          { label: "Option 2", value: "opt-2-mult2" },
+          { label: "Option 3", value: "opt-3-mult2" },
+          { label: "Option 4", value: "opt-4-mult2" },
+          { label: "Option 5", value: "opt-5-mult2" },
+        ]}
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro "max={3}" showLinenumbers title="SelectMultipleMaxExample.astro"
+    ---
+    import { Select } from 'studiocms:ui/components';
+    ---
+
+    <Select
+      label='Select Element'
+      multiple
+      max={3}
       options={[
         { label: 'Option 1', value: 'opt-1' },
         { label: 'Option 2', value: 'opt-2' },

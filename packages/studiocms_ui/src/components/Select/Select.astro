@@ -80,6 +80,10 @@ type BaseProps = {
 	 * The placeholder of the select. Defaults to `Select`.
 	 */
 	placeholder?: string;
+	/**
+	 * The maximum number of options that can be selected. Defaults to `undefined`.
+	 */
+	max?: number;
 }
 
 type Props = BaseProps & (
@@ -97,6 +101,7 @@ const {
 	fullWidth,
 	placeholder = 'Select',
 	multiple = false,
+	max = undefined,
 } = Astro.props;
 
 let selected: Option | (Option | undefined)[] | undefined;
@@ -116,6 +121,7 @@ const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?
 	class:list={[disabled && "disabled", className, fullWidth && "full"]}
 	data-options={JSON.stringify(options)}
 	data-multiple={multiple ? "true" : undefined}
+	data-multiple-max={multiple && max !== undefined ? max : undefined}
 	data-id={name}
 >
 	{label && (
