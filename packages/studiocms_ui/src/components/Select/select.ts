@@ -16,6 +16,13 @@ type State = {
 	placeholder: string;
 };
 
+type ResizeCallback = (width: number, height: number, element: Element) => void;
+
+const observerMap = new WeakMap<Element, {
+  observer: ResizeObserver;
+  callback: ResizeCallback;
+}>();
+
 function loadSelects() {
 	const CONSTANTS = {
 		OPTION_HEIGHT: 36,
@@ -23,6 +30,35 @@ function loadSelects() {
 		MARGIN: 4,
 		BADGE_PADDING: 80,
 	} as const;
+
+
+
+	function observeResize(
+		element: Element,
+		callback: ResizeCallback
+	): () => void {
+		// Clean up any existing observer for this element
+		if (observerMap.has(element)) {
+			unobserveResize(element);
+		}
+		const observer = new ResizeObserver((entries) => {
+			for (const entry of entries) {
+				const { width, height } = entry.contentRect;
+				callback(width, height, entry.target);
+			}
+		});
+		observer.observe(element);
+		observerMap.set(element, { observer, callback });
+		return () => unobserveResize(element);
+	}
+
+	function unobserveResize(element: Element): void {
+		const data = observerMap.get(element);
+		if (data) {
+			data.observer.disconnect();
+			observerMap.delete(element);
+		}
+	}
 
 	const isVisible = (elem: HTMLElement): boolean => (
 		elem.offsetWidth > 0 || 
@@ -338,6 +374,11 @@ function loadSelects() {
 
 		specialContainer.addEventListener("click", (e) => handleContainerClick(e, state, specialContainer));
 		specialContainer.addEventListener("keydown", (e) => handleSelectKeyDown(e, state, specialContainer));
+		if (state.isMultipleMap[id]) {
+			observeResize(specialContainer.button!, () => {
+				handleBadgeOverflow(state, specialContainer);
+			});
+		}
 
 		handleBadgeOverflow(state, specialContainer);
 	}
