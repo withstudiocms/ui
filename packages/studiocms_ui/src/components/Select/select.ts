@@ -31,8 +31,6 @@ function loadSelects() {
 		BADGE_PADDING: 80,
 	} as const;
 
-
-
 	function observeResize(
 		element: Element,
 		callback: ResizeCallback
