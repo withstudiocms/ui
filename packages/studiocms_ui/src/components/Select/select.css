@@ -155,18 +155,22 @@
 
 .sui-select-badge-container .sui-select-badge {
 	white-space: nowrap;
-}
-
-.sui-select-badge {
 	cursor: default;
+	position: relative;
+	padding-right: 2rem;
 }
 
-.sui-select-badge svg {
-	padding: 2px;
+.sui-select-badge-container .sui-select-badge svg {
+	position: absolute;
+	right: 0.18rem;
+	padding: 4px;
+	height: 20px;
+	width: 20px;
+	aspect-ratio: 1/1;
 	border-radius: 999px;
 	cursor: pointer;
 }
 
-.sui-select-badge svg:hover {
+.sui-select-badge-container .sui-select-badge svg:hover {
 	background-color: hsla(100, 100%, 95%, 0.2);
 }

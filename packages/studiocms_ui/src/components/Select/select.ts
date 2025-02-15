@@ -21,7 +21,7 @@ function loadSelects() {
 		OPTION_HEIGHT: 36,
 		BORDER_SIZE: 2,
 		MARGIN: 4,
-		BADGE_PADDING: 40,
+		BADGE_PADDING: 80,
 	} as const;
 
 	const isVisible = (elem: HTMLElement): boolean => (
@@ -59,7 +59,6 @@ function loadSelects() {
 		activeContainer.dropdown.classList.remove("active", "above");
 		activeContainer.button.ariaExpanded = "false";
 		state.activeContainer = null;
-		console.log("close");
 	};
 
 	const openDropdown = (state: State, container: State["activeContainer"]): void => {
