@@ -18,11 +18,6 @@ type State = {
 
 type ResizeCallback = (width: number, height: number, element: Element) => void;
 
-const observerMap = new WeakMap<Element, {
-  observer: ResizeObserver;
-  callback: ResizeCallback;
-}>();
-
 function loadSelects() {
 	const CONSTANTS = {
 		OPTION_HEIGHT: 36,
@@ -30,6 +25,11 @@ function loadSelects() {
 		MARGIN: 4,
 		BADGE_PADDING: 80,
 	} as const;
+	
+	const observerMap = new WeakMap<Element, {
+		observer: ResizeObserver;
+		callback: ResizeCallback;
+	}>();
 
 	function observeResize(
 		element: Element,
@@ -236,15 +236,15 @@ function loadSelects() {
 	};
 
 	const handleOptionSelect = (target: HTMLElement, state: State, container: State["activeContainer"]): void => {
-		const option = target.closest(".sui-select-option") as HTMLLIElement;
+		const option = target.closest(".sui-select-option") as HTMLLIElement | null;
 		const lastActive = container?.dropdown?.querySelector(".sui-select-option.selected");
 		const isMultiple = state.isMultipleMap[container?.dataset.id as string];
 		if (isMultiple) {
 			const max = Number.parseInt(container?.dataset.multipleMax as string);
 			const selectedCount = container?.querySelectorAll(".sui-select-option.selected").length ?? 0;
-			const isSelected = option.classList.contains("selected");
+			const isSelected = option?.classList.contains("selected");
 
-			if (isSelected || Number.isNaN(max) || selectedCount < max) {
+			if (option && (isSelected || Number.isNaN(max) || selectedCount < max)) {
         option.classList.toggle("selected");
         const selectOpt = container?.select?.querySelector(`option[value="${option.getAttribute("value")}"]`) as HTMLOptionElement;
         if (selectOpt) {
