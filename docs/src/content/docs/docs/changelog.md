@@ -8,6 +8,18 @@ editUrl: false
 This document contains release notes for the `@studiocms/ui` package.
 For more information, see the [CHANGELOG file](https://github.com/withstudiocms/ui/blob/main/packages/studiocms_ui/CHANGELOG.md)
 
+## 0.4.7
+
+- [#56](https://github.com/withstudiocms/ui/pull/56) [`40ae2ea`](https://github.com/withstudiocms/ui/commit/40ae2eaa60f0b0df6e0447be5f3e362cbb9bff76) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Add option to disable global CSS injection and allow users to import the global css themselves.
+
+  Basic Example of how to import:
+
+  ```astro
+  ---
+  import "studiocms:ui/global-css";
+  ---
+  ```
+
 ## 0.4.6
 
 - [#52](https://github.com/withstudiocms/ui/pull/52) [`65eea2c`](https://github.com/withstudiocms/ui/commit/65eea2cff78c2c38314de9b3fe4b65173c81ea90) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update Input component to allow search type

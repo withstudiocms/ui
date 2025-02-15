@@ -153,14 +153,14 @@
 	flex-wrap: wrap;
 }
 
-.sui-select-badge-container .sui-select-badge {
+.sui-select-badge-container .sui-select-badge.sui-badge {
 	white-space: nowrap;
 	cursor: default;
 	position: relative;
 	padding-right: 2rem;
 }
 
-.sui-select-badge-container .sui-select-badge svg {
+.sui-select-badge-container .sui-select-badge.sui-badge svg {
 	position: absolute;
 	right: 0.18rem;
 	padding: 4px;
@@ -171,6 +171,6 @@
 	cursor: pointer;
 }
 
-.sui-select-badge-container .sui-select-badge svg:hover {
+.sui-select-badge-container .sui-select-badge.sui-badge svg:hover {
 	background-color: hsla(100, 100%, 95%, 0.2);
 }
