@@ -1,5 +1,23 @@
 # @studiocms/ui
 
+## 0.4.10
+
+### Patch Changes
+
+- [#63](https://github.com/withstudiocms/ui/pull/63) [`dc7b723`](https://github.com/withstudiocms/ui/commit/dc7b723c86ae9bafd9b8dba626be2345a92a2568) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Adds a value prop to the checkbox
+
+## 0.4.9
+
+### Patch Changes
+
+- [#61](https://github.com/withstudiocms/ui/pull/61) [`59f4c05`](https://github.com/withstudiocms/ui/commit/59f4c05d303686b139fef632d69c2edf49895ea3) Thanks [@louisescher](https://github.com/louisescher)! - Fixes card footers to be hidden should they have no content
+
+## 0.4.8
+
+### Patch Changes
+
+- [#59](https://github.com/withstudiocms/ui/pull/59) [`f71057d`](https://github.com/withstudiocms/ui/commit/f71057dcc00468d9c4f5584cbbc384dc987c136a) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Add viewbox attribute for IconBase component
+
 ## 0.4.7
 
 ### Patch Changes

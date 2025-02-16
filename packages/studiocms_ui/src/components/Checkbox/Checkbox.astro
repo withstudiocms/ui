@@ -36,6 +36,10 @@ interface Props {
 	 * Whether the checkbox is required.
 	 */
 	isRequired?: boolean;
+	/**
+	 * The value of the checkbox.
+	 */
+	value?: string;
 }
 
 const {
@@ -46,6 +50,7 @@ const {
 	name = generateID('checkbox'),
 	label,
 	isRequired,
+	value,
 } = Astro.props;
 
 const iconSizes = {
@@ -83,6 +88,7 @@ const iconSizes = {
       disabled={disabled}
       required={isRequired}
       class="sui-checkbox"
+	  value={value}
       hidden
     />
   </div>
