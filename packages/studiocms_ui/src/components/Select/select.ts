@@ -242,14 +242,18 @@ function loadSelects() {
 		if (isMultiple) {
 			const max = Number.parseInt(container?.dataset.multipleMax as string);
 			const selectedCount = container?.querySelectorAll(".sui-select-option.selected").length ?? 0;
+			const selectedCountEl = container?.querySelector(".sui-select-max-span .sui-select-select-count") as HTMLSpanElement;
 			const isSelected = option?.classList.contains("selected");
 
 			if (option && (isSelected || Number.isNaN(max) || selectedCount < max)) {
         option.classList.toggle("selected");
         const selectOpt = container?.select?.querySelector(`option[value="${option.getAttribute("value")}"]`) as HTMLOptionElement;
         if (selectOpt) {
-            selectOpt.selected = !selectOpt.selected;
-        }
+          selectOpt.selected = !selectOpt.selected;
+				}
+				if (selectedCountEl) {
+					selectedCountEl.innerText = String(selectedCount + (isSelected ? -1 : 1));
+				}
         updateLabel(state, container);
     	}
 		} else {

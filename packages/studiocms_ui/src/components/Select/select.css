@@ -158,19 +158,26 @@
 	cursor: default;
 	position: relative;
 	padding-right: 2rem;
+	border-block: 1.5px solid rgba(0, 0, 0, 0);
 }
 
 .sui-select-badge-container .sui-select-badge.sui-badge svg {
 	position: absolute;
-	right: 0.18rem;
+	right: 0.25rem;
 	padding: 4px;
 	height: 20px;
 	width: 20px;
 	aspect-ratio: 1/1;
 	border-radius: 999px;
 	cursor: pointer;
+	transition: background-color 0.15s ease;
 }
 
 .sui-select-badge-container .sui-select-badge.sui-badge svg:hover {
 	background-color: hsla(100, 100%, 95%, 0.2);
+}
+
+.sui-select-max-span {
+	font-size: 0.875em;
+	color: hsl(var(--text-muted));
 }

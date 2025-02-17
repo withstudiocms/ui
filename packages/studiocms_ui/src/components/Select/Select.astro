@@ -191,6 +191,11 @@ const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?
 			})
 		}
 	</select>
+	{multiple && max !== undefined && (
+		<span class="sui-select-max-span">
+			<span class="sui-select-select-count">0</span> / {max} selected
+		</span>
+	)}
 	{multiple && <div class="sui-select-badge-container-below"></div>}
 </div>
 <script>
