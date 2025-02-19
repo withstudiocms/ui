@@ -358,7 +358,7 @@
 	}
 
 	.sui-button.success.flat {
-		background-color: hsl(var(--success-base), 0.2);
+		background-color: hsla(var(--success-base), 0.2);
 		color: hsl(143, 59%, 20%);
 	}
 
