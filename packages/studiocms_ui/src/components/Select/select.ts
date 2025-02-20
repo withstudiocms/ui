@@ -148,7 +148,7 @@ function loadSelects() {
 	};
 	
 	const handleBadgeOverflow = (state: State, container: State["activeContainer"]): void => {
-		const buttonContainer = container?.button?.parentElement;
+		const buttonContainer = container?.button?.parentElement?.parentElement;
 		const buttonValueSpan = container?.button?.querySelector(".sui-select-value-span") as HTMLSpanElement;
 		const activeSelects = container?.dropdown?.querySelectorAll(".sui-select-option.selected");
 		const overflowContainer = container?.querySelector(".sui-select-badge-container-below");
@@ -208,11 +208,23 @@ function loadSelects() {
 		}
 	};
 
-	const deselectMultiOption = (id: string, container: State["activeContainer"]): void => {
+	const deselectMultiOption = (state: State, id: string, container: State["activeContainer"]): void => {
 		const selectOpt = container?.dropdown?.querySelector(`.sui-select-option[value="${id}"]`) as HTMLOptionElement;
-		if (selectOpt) {
-			selectOpt.selected = false;
-			selectOpt.classList.remove("selected");
+		const max = Number.parseInt(container?.dataset.multipleMax as string);
+		const selectedCount = container?.querySelectorAll(".sui-select-option.selected").length ?? 0;
+		const selectedCountEl = container?.querySelector(".sui-select-max-span .sui-select-select-count") as HTMLSpanElement;
+		const isSelected = selectOpt?.classList.contains("selected");
+
+		if (selectOpt && (isSelected || Number.isNaN(max) || selectedCount < max)) {
+			selectOpt.classList.toggle("selected");
+			const selectOptEl = container?.select?.querySelector(`option[value="${selectOpt.getAttribute("value")}"]`) as HTMLOptionElement;
+			if (selectOptEl) {
+				selectOptEl.selected = !selectOpt.selected;
+			}
+			if (selectedCountEl) {
+				selectedCountEl.innerText = String(selectedCount + (isSelected ? -1 : 1));
+			}
+			updateLabel(state, container);
 		}
 	};
 
@@ -240,22 +252,7 @@ function loadSelects() {
 		const lastActive = container?.dropdown?.querySelector(".sui-select-option.selected");
 		const isMultiple = state.isMultipleMap[container?.dataset.id as string];
 		if (isMultiple) {
-			const max = Number.parseInt(container?.dataset.multipleMax as string);
-			const selectedCount = container?.querySelectorAll(".sui-select-option.selected").length ?? 0;
-			const selectedCountEl = container?.querySelector(".sui-select-max-span .sui-select-select-count") as HTMLSpanElement;
-			const isSelected = option?.classList.contains("selected");
-
-			if (option && (isSelected || Number.isNaN(max) || selectedCount < max)) {
-        option.classList.toggle("selected");
-        const selectOpt = container?.select?.querySelector(`option[value="${option.getAttribute("value")}"]`) as HTMLOptionElement;
-        if (selectOpt) {
-          selectOpt.selected = !selectOpt.selected;
-				}
-				if (selectedCountEl) {
-					selectedCountEl.innerText = String(selectedCount + (isSelected ? -1 : 1));
-				}
-        updateLabel(state, container);
-    	}
+			deselectMultiOption(state, option?.getAttribute("value") as string, container);
 		} else {
 			if (lastActive) {
 				lastActive.classList.remove("selected");
@@ -279,7 +276,7 @@ function loadSelects() {
 	const handleContainerClick = (e: MouseEvent, state: State, container: State["activeContainer"]): void => {
 		const target = e.target as HTMLElement;
 		if (target.closest(".sui-select-badge svg")) {
-			deselectMultiOption(target.closest(".sui-select-badge")?.getAttribute("data-value") as string, container);
+			deselectMultiOption(state, target.closest(".sui-select-badge")?.getAttribute("data-value") as string, container);
 			handleBadgeOverflow(state, container);
 		}
 		if (target.closest(".sui-select-button")) {
