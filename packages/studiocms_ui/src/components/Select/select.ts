@@ -97,8 +97,6 @@ function loadSelects() {
 
 	const openDropdown = (state: State, container: State['activeContainer']): void => {
 		if (!container?.button || !container?.dropdown) return;
-		
-		// if (state.activeContainer) closeDropdown(state);
 
 		const { isAbove } = getDropdownPosition(
 			container.button,
@@ -229,14 +227,6 @@ function loadSelects() {
 		}
 	};
 
-	const neighbor = (offset: number, container: State['activeContainer']): HTMLLIElement | undefined => {
-		const optionElements = container?.dropdown?.querySelectorAll('.sui-select-option') as NodeListOf<HTMLLIElement>;
-		return optionElements?.item(
-			(Array.from(optionElements).findIndex((x) => x.classList.contains('selected')) ?? -1) +
-				offset
-		);
-	};
-
 	const recomputeOptions = (state: State,container: State['activeContainer']): void => {
 		const optionElements = container?.dropdown?.querySelectorAll('.sui-select-option') as NodeListOf<HTMLLIElement>;
 		for (const entry of optionElements) {
@@ -246,6 +236,15 @@ function loadSelects() {
 				entry.classList.remove('focused');
 			}
 		}
+	};
+
+	const getInteractiveOptions = (container: State['activeContainer']): HTMLLIElement[] => {
+		const allOptions = container?.dropdown?.querySelectorAll('.sui-select-option') as NodeListOf<HTMLLIElement>;
+		return Array.from(allOptions).filter(option => 
+				!option.classList.contains('hidden') && 
+				!option.classList.contains('disabled') && 
+				!option.hasAttribute('disabled')
+		);
 	};
 
 	const handleOptionSelect = (target: HTMLElement, state: State, container: State['activeContainer']): void => {
@@ -295,7 +294,7 @@ function loadSelects() {
 	const handleSelectKeyDown = (e: KeyboardEvent, state: State, container: State['activeContainer']): void => {
 		const active = !!state.activeContainer?.querySelector<HTMLElement>('.sui-select-dropdown.active');
 		const focusedElement = document.activeElement;
-		
+
 		if (e.key === 'Tab' || e.key === 'Escape') {
 				closeDropdown(state);
 				return;
@@ -305,18 +304,24 @@ function loadSelects() {
 			const badgeElement = focusedElement?.closest('.sui-select-badge');
 			if (badgeElement && state.isMultipleMap[container?.dataset.id as string]) {
 				const badgeValue = badgeElement.getAttribute('data-value');
-				const prevBadge = badgeElement.previousElementSibling as HTMLElement;
-				const prevBadgeValue = prevBadge?.getAttribute('data-value');
+				let nextBadge = badgeElement.previousElementSibling as HTMLElement;
+				if (!nextBadge) {
+					nextBadge = badgeElement.nextElementSibling as HTMLElement;
+				}
+				const nextBadgeValue = nextBadge?.getAttribute('data-value');
 				
 				deselectMultiOption(state, badgeValue as string, container);
 				handleBadgeOverflow(state, container);
 				setTimeout(() => {
-					const badgeToFocus = container?.querySelector(
-							`.sui-select-badge[data-value="${prevBadgeValue}"] svg`
-					) as HTMLElement;
-					
-					if (badgeToFocus) {
+					if (nextBadgeValue) {
+						const badgeToFocus = container?.querySelector(
+							`.sui-select-badge[data-value="${nextBadgeValue}"] svg`
+						) as HTMLElement;
+						if (badgeToFocus) {
 							badgeToFocus.focus();
+						}
+					} else {
+						container?.button?.focus();
 					}
 				}, 0);
 				e.preventDefault();
@@ -326,46 +331,51 @@ function loadSelects() {
 		}
 		
 		if ((e.key === ' ' || e.key === 'Enter') && !active) {
-				openDropdown(state, container);
-				e.preventDefault();
-				e.stopImmediatePropagation();
-				return;
+			openDropdown(state, container);
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			return;
 		}
 
 		if (e.key === 'Enter' && active) {
-				const currentlyFocused = container?.querySelector<HTMLElement>('.sui-select-option.focused');
-				if (currentlyFocused) {
-						currentlyFocused.click();
-						e.preventDefault();
-						e.stopImmediatePropagation();
-				}
-				return;
+			const currentlyFocused = container?.querySelector<HTMLElement>('.sui-select-option.focused');
+			if (currentlyFocused) {
+				currentlyFocused.click();
+				e.preventDefault();
+				e.stopImmediatePropagation();
+			}
+			return;
 		}
 		
 		e.preventDefault();
 		e.stopImmediatePropagation();
 
-		if (e.key === 'ArrowUp' && (state.focusIndex > 0 || !active)) {
-			if (!active) neighbor(-1, container)?.click();
-			state.focusIndex--;
+		const interactiveOptions = getInteractiveOptions(container);
+		const currentInteractiveIndex = interactiveOptions.findIndex(option => 
+			option.classList.contains('focused')
+		);
+
+		if (e.key === 'ArrowUp' && currentInteractiveIndex > 0) {
+			state.focusIndex = Array.from(container?.dropdown?.querySelectorAll('.sui-select-option') || [])
+				.indexOf(interactiveOptions[currentInteractiveIndex - 1] as Element);
 			recomputeOptions(state, container);
 		}
 
-		const optionElements = container?.dropdown?.querySelectorAll('.sui-select-option') as NodeListOf<HTMLLIElement>;
-		if (e.key === 'ArrowDown' && state.focusIndex + 1 < optionElements.length) {
-			if (!active) neighbor(1, container)?.click();
-			state.focusIndex++;
+		if (e.key === 'ArrowDown' && currentInteractiveIndex < interactiveOptions.length - 1) {
+			state.focusIndex = Array.from(container?.dropdown?.querySelectorAll('.sui-select-option') || [])
+				.indexOf(interactiveOptions[currentInteractiveIndex + 1] as Element);
 			recomputeOptions(state, container);
 		}
 
 		if (e.key === 'PageUp') {
-			state.focusIndex = 0;
-			if (!active) optionElements.item(state.focusIndex)?.click();
+			state.focusIndex = Array.from(container?.dropdown?.querySelectorAll('.sui-select-option') || [])
+				.indexOf(interactiveOptions[0] as Element);
 			recomputeOptions(state, container);
 		}
+
 		if (e.key === 'PageDown') {
-			state.focusIndex = optionElements.length - 1;
-			if (!active) optionElements.item(state.focusIndex)?.click();
+			state.focusIndex = Array.from(container?.dropdown?.querySelectorAll('.sui-select-option') || [])
+				.indexOf(interactiveOptions[interactiveOptions.length - 1] as Element);
 			recomputeOptions(state, container);
 		}
 	};
