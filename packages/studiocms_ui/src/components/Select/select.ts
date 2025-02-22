@@ -4,12 +4,13 @@ type SelectOption = {
 	disabled?: boolean;
 };
 
-type State = {
-	activeContainer: HTMLDivElement & {
-		button: HTMLButtonElement | null;
-		dropdown: HTMLUListElement | null;
-		select: HTMLSelectElement | null;
-	} | null;
+type SelectContainer = HTMLDivElement & {
+	button: HTMLButtonElement | null;
+	dropdown: HTMLUListElement | null;
+	select: HTMLSelectElement | null;
+};
+
+type SelectState = {
 	optionsMap: Record<string, SelectOption[]>;
 	isMultipleMap: Record<string, boolean>;
 	focusIndex: number;
@@ -88,14 +89,13 @@ function loadSelects() {
 		};
 	};
 
-	const closeDropdown = ({ activeContainer }: State): void => {
-		if (!activeContainer?.button || !activeContainer?.dropdown) return;
-		activeContainer.dropdown.classList.remove('active', 'above');
-		activeContainer.button.ariaExpanded = 'false';
-		state.activeContainer = null;
+	const closeDropdown = (container: SelectContainer): void => {
+		if (!container?.button || !container?.dropdown) return;
+		container.dropdown.classList.remove('active', 'above');
+		container.button.ariaExpanded = 'false';
 	};
 
-	const openDropdown = (state: State, container: State['activeContainer']): void => {
+	const openDropdown = (state: SelectState, container: SelectContainer): void => {
 		if (!container?.button || !container?.dropdown) return;
 
 		const { isAbove } = getDropdownPosition(
@@ -104,7 +104,6 @@ function loadSelects() {
 		);
 
 		container.button.ariaExpanded = 'true';
-		state.activeContainer = container;
 		container.dropdown.classList.add('active', ...(isAbove ? [] : ['above']));
 	};
 
@@ -145,7 +144,7 @@ function loadSelects() {
 		return { totalWidth, badges, tempContainer };
 	};
 	
-	const handleBadgeOverflow = (state: State, container: State['activeContainer']): void => {
+	const handleBadgeOverflow = (state: SelectState, container: SelectContainer): void => {
 		const buttonContainer = container?.button?.parentElement?.parentElement;
 		const buttonValueSpan = container?.button?.querySelector('.sui-select-value-span') as HTMLSpanElement;
 		const activeSelects = container?.dropdown?.querySelectorAll('.sui-select-option.selected');
@@ -194,7 +193,7 @@ function loadSelects() {
 		}
 	};
 
-	const updateLabel = (state: State, container: State['activeContainer']): void => {
+	const updateLabel = (state: SelectState, container: SelectContainer): void => {
 		const isMultiple = state.isMultipleMap[container?.dataset.id as string];
 		if (isMultiple) {
 			handleBadgeOverflow(state, container);
@@ -207,7 +206,7 @@ function loadSelects() {
 		}
 	};
 
-	const deselectMultiOption = (state: State, id: string, container: State['activeContainer']): void => {
+	const deselectMultiOption = (state: SelectState, id: string, container: SelectContainer): void => {
 		const selectOpt = container?.dropdown?.querySelector(`.sui-select-option[value='${id}']`) as HTMLOptionElement;
 		const max = Number.parseInt(container?.dataset.multipleMax as string);
 		const selectedCount = container?.querySelectorAll('.sui-select-option.selected').length ?? 0;
@@ -227,7 +226,7 @@ function loadSelects() {
 		}
 	};
 
-	const recomputeOptions = (state: State,container: State['activeContainer']): void => {
+	const recomputeOptions = (state: SelectState,container: SelectContainer): void => {
 		const optionElements = container?.dropdown?.querySelectorAll('.sui-select-option') as NodeListOf<HTMLLIElement>;
 		for (const entry of optionElements) {
 			if (Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex) {
@@ -238,7 +237,7 @@ function loadSelects() {
 		}
 	};
 
-	const getInteractiveOptions = (container: State['activeContainer']): HTMLLIElement[] => {
+	const getInteractiveOptions = (container: SelectContainer): HTMLLIElement[] => {
 		const allOptions = container?.dropdown?.querySelectorAll('.sui-select-option') as NodeListOf<HTMLLIElement>;
 		return Array.from(allOptions).filter(option => 
 				!option.classList.contains('hidden') && 
@@ -247,10 +246,10 @@ function loadSelects() {
 		);
 	};
 
-	const handleOptionSelect = (target: HTMLElement, state: State, container: State['activeContainer']): void => {
+	const handleOptionSelect = (target: HTMLElement, state: SelectState, container: SelectContainer): void => {
 		const option = target.closest('.sui-select-option') as HTMLLIElement | null;
 		const lastActive = container?.dropdown?.querySelector('.sui-select-option.selected');
-		const isMultiple = state.isMultipleMap[container?.dataset.id as string];
+		const isMultiple = state.isMultipleMap[container!.dataset.id as string];
 		if (isMultiple) {
 			deselectMultiOption(state, option?.getAttribute('value') as string, container);
 		} else {
@@ -269,19 +268,20 @@ function loadSelects() {
 				}
 				updateLabel(state, container);
 			}
-			closeDropdown(state);
+			closeDropdown(container);
 		}
 	};
 
-	const handleContainerClick = (e: MouseEvent, state: State, container: State['activeContainer']): void => {
+	const handleContainerClick = (e: MouseEvent, state: SelectState, container: SelectContainer): void => {
 		const target = e.target as HTMLElement;
 		if (target.closest('.sui-select-badge svg')) {
 			deselectMultiOption(state, target.closest('.sui-select-badge')?.getAttribute('data-value') as string, container);
 			handleBadgeOverflow(state, container);
 		}
 		if (target.closest('.sui-select-button')) {
-			if (state.activeContainer) {
-				closeDropdown(state);
+			const container = target.closest('.sui-select-label') as SelectContainer;
+			if (container.dropdown?.classList.contains('active')) {
+				closeDropdown(container);
 			} else {
 				openDropdown(state, container);
 			}
@@ -291,12 +291,12 @@ function loadSelects() {
 		}
 	};
 
-	const handleSelectKeyDown = (e: KeyboardEvent, state: State, container: State['activeContainer']): void => {
-		const active = !!state.activeContainer?.querySelector<HTMLElement>('.sui-select-dropdown.active');
+	const handleSelectKeyDown = (e: KeyboardEvent, state: SelectState, container: SelectContainer): void => {
+		const active = !!container.dropdown?.classList.contains('active');
 		const focusedElement = document.activeElement;
 
 		if (e.key === 'Tab' || e.key === 'Escape') {
-				closeDropdown(state);
+				closeDropdown(container);
 				return;
 		}
 		
@@ -380,8 +380,7 @@ function loadSelects() {
 		}
 	};
 
-	const state: State = {
-		activeContainer: null,
+	const state: SelectState = {
 		optionsMap: {},
 		isMultipleMap: {},
 		focusIndex: -1,
@@ -390,9 +389,11 @@ function loadSelects() {
 	const selects = document.querySelectorAll<HTMLDivElement>('.sui-select-label');
 
 	document.addEventListener('click', ({ target }) => {
-		if (!state.activeContainer?.dropdown?.classList.contains('active') || !target) return;
-		if (!state.activeContainer.contains(target as HTMLElement) && isVisible(state.activeContainer)) {
-			closeDropdown(state);
+		for (const container of selects) {
+			if (!(container as SelectContainer).dropdown?.classList.contains('active') || !target) continue;
+			if (!container.contains(target as HTMLElement) && isVisible(container)) {
+				closeDropdown(container as SelectContainer);
+			}
 		}
 	});
 

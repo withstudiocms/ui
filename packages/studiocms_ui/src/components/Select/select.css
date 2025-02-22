@@ -168,6 +168,10 @@
 	flex-wrap: wrap;
 }
 
+.sui-select-label:has(.sui-select-max-span) .sui-select-badge-container {
+	margin-top: 0rem;
+}
+
 .sui-select-badge-container .sui-select-badge.sui-badge {
 	white-space: nowrap;
 	cursor: default;
