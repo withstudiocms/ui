@@ -358,7 +358,7 @@
 	}
 
 	.sui-button.success.flat {
-		background-color: hsl(var(--success-base), 0.2);
+		background-color: hsla(var(--success-base) / 0.2);
 		color: hsl(143, 59%, 20%);
 	}
 
@@ -371,16 +371,16 @@
 	}
 
 	.sui-button.warning.flat {
-		background-color: hsla(var(--warning-base), 0.2);
+		background-color: hsla(var(--warning-base) / 0.2);
 		color: hsl(48, 78%, 20%);
 	}
 
 	.sui-button.warning.flat:hover {
-		background-color: hsla(var(--warning-base), 0.25);
+		background-color: hsla(var(--warning-base) / 0.25);
 	}
 
 	.sui-button.warning.flat:active {
-		background-color: hsla(var(--warning-base), 0.4);
+		background-color: hsla(var(--warning-base) / 0.4);
 	}
 
 	.sui-button.danger.flat {
