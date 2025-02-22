@@ -387,12 +387,18 @@ function loadSearchSelects() {
 	};
 
 	const handleContainerFocusIn = (state: SearchSelectState, container: SearchSelectContainer) => {
-		const { isAbove } = getDropdownPosition(
-			container.input as HTMLInputElement,
-			state.optionsMap[container.dataset.id as string]?.length ?? 0
-		);
-		container.dropdown?.classList.add('active', ...(isAbove ? [] : ['above']));
-	};
+    const allDropdowns = document.querySelectorAll('.sui-search-select-dropdown');
+		for (const dropdown of allDropdowns) {
+			if (dropdown !== container.dropdown) {
+				dropdown.classList.remove('active', 'above');
+			}
+		}
+    const { isAbove } = getDropdownPosition(
+        container.input as HTMLInputElement,
+        state.optionsMap[container.dataset.id as string]?.length ?? 0
+    );
+    container.dropdown?.classList.add('active', ...(isAbove ? [] : ['above']));
+};
 
 	const state: SearchSelectState = {
 		optionsMap: {},
