@@ -26,6 +26,16 @@
 	font-weight: 700;
 }
 
+.sui-search-select-dropdown-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	position: relative;
+	height: fit-content;
+}
+
+
 .sui-search-select-dropdown {
 	position: absolute;
 	width: 100%;
@@ -46,7 +56,7 @@
 
 .sui-search-select-dropdown.above {
 	top: auto;
-	bottom: calc(100% - 18px + 0.25rem);
+	bottom: calc(100% - 1.5rem);
 }
 
 .sui-search-select-option,
@@ -67,10 +77,20 @@
 	background-color: hsl(var(--background-step-3));
 }
 
+.sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected:hover,
+.sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected:focus,
+.sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected.focused {
+	background-color: hsl(var(--primary-hover));
+}
+
 .sui-search-select-option.selected {
 	background-color: hsl(var(--primary-base));
 	color: hsl(var(--text-inverted));
 	cursor: default;
+}
+
+.sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected {
+	cursor: pointer;
 }
 
 .sui-hidden-select {
@@ -99,6 +119,7 @@
 	position: absolute;
 	bottom: .675rem;
 	right: .675rem;
+	pointer-events: none;
 }
 
 .sui-search-input-wrapper:has(input:focus) + .sui-search-select-dropdown {
@@ -108,4 +129,53 @@
 .sui-search-select-dropdown.active,
 .sui-search-select-dropdown:has(> li:active) {
 	display: flex;
+}
+
+.sui-search-select-badge-container {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+}
+
+.sui-search-select-label:has(.sui-search-select-max-span) .sui-search-select-badge-container {
+	margin-top: 0rem;
+}
+
+.sui-search-select-badge-container .sui-search-select-badge.sui-badge {
+	white-space: nowrap;
+	cursor: default;
+	position: relative;
+	padding-right: 2rem;
+	border-block: 1.5px solid rgba(0, 0, 0, 0);
+}
+
+.sui-search-select-badge-container .sui-search-select-badge.sui-badge svg {
+	position: absolute;
+	right: 0.25rem;
+	padding: 4px;
+	height: 20px;
+	width: 20px;
+	aspect-ratio: 1/1;
+	border-radius: 999px;
+	cursor: pointer;
+	outline: 1px solid hsla(var(--border), 0);
+	transition: background-color 0.15s ease, outline 0.15s ease;
+}
+
+.sui-search-select-badge-container .sui-search-select-badge.sui-badge svg:hover {
+	background-color: hsla(100, 100%, 95%, 0.2);
+}
+
+.sui-search-select-badge-container .sui-search-select-badge.sui-badge svg:active,
+.sui-search-select-badge-container .sui-search-select-badge.sui-badge svg:focus {
+	background-color: hsla(100, 100%, 95%, 0.2);
+	outline: 1px solid hsl(var(--border));
+}
+
+.sui-search-select-max-span {
+	font-size: 0.875em;
+	color: hsl(var(--text-muted));
 }
