@@ -58,7 +58,7 @@ if (size === 'sm') {
 ---
 
 <span class="sui-badge" class:list={[color, size, variant, rounding, className]} {...props}>
-	{icon && iconPosition === 'left' && <Icon name={icon} width={iconSize} height={iconSize} viewBox="0 0 24 24" />}
+	{icon && iconPosition === 'left' && <Icon name={icon} width={iconSize} height={iconSize} />}
   {label}
-	{icon && iconPosition === 'right' && <Icon name={icon} width={iconSize} height={iconSize} viewBox="0 0 24 24" />}
+	{icon && iconPosition === 'right' && <Icon name={icon} width={iconSize} height={iconSize} />}
 </span>
