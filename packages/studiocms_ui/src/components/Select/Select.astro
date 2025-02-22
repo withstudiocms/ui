@@ -200,13 +200,7 @@ const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?
 	)}
 	{
 		multiple && Array.isArray(selected ?? []) && (		
-			<div class="sui-select-badge-container-below">
-				{
-					((selected ?? []) as Option[]).map((s) => s && 
-						<Badge class="sui-select-badge" data-value={s.value} size="sm" label={s.label} iconPosition="right" icon="x-mark" />
-					)
-				}
-			</div>
+			<div class="sui-select-badge-container-below"></div>
 		)
 	}
 </div>

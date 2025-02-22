@@ -415,9 +415,8 @@ function loadSelects() {
 			observeResize(specialContainer.button!, () => {
 				handleBadgeOverflow(state, specialContainer);
 			});
+			handleBadgeOverflow(state, specialContainer);
 		}
-
-		handleBadgeOverflow(state, specialContainer);
 	}
 }
 
