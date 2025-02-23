@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.12
+
+### Patch Changes
+
+- [#72](https://github.com/withstudiocms/ui/pull/72) [`f183732`](https://github.com/withstudiocms/ui/commit/f18373291c20ffbd69c1e0fb3c23526931f1d8da) Thanks [@louisescher](https://github.com/louisescher)! - Fixes a z-index for starlight variant tabs being too great
+
 ## 0.4.11
 
 ### Patch Changes
