@@ -8,6 +8,10 @@ editUrl: false
 This document contains release notes for the `@studiocms/ui` package.
 For more information, see the [CHANGELOG file](https://github.com/withstudiocms/ui/blob/main/packages/studiocms_ui/CHANGELOG.md)
 
+## 0.4.11
+
+- [#69](https://github.com/withstudiocms/ui/pull/69) [`ef29352`](https://github.com/withstudiocms/ui/commit/ef29352b03b87a34da163ade2aae6652ce819251) Thanks [@louisescher](https://github.com/louisescher)! - Fixes broken styles for flat success buttons in light mode and starlight tabs when used in cards
+
 ## 0.4.10
 
 - [#63](https://github.com/withstudiocms/ui/pull/63) [`dc7b723`](https://github.com/withstudiocms/ui/commit/dc7b723c86ae9bafd9b8dba626be2345a92a2568) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Adds a value prop to the checkbox

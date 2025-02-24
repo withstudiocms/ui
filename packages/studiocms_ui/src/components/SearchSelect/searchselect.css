@@ -67,6 +67,11 @@
 	transition: all 0.15s ease;
 }
 
+.empty-search-results:hover {
+	background-color: hsl(var(--background-step-2));
+	cursor: default;
+}
+
 .sui-search-select-option.disabled {
 	pointer-events: none;
 	color: hsl(var(--text-muted));

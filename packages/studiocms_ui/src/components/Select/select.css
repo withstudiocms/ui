@@ -29,7 +29,7 @@
 }
 
 .sui-select-button {
-	padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+	padding: 0.5rem 0.75rem 0.5rem 0.75rem;
 	border-radius: var(--radius-md);
 	border: 1px solid hsl(var(--border));
 	background: hsl(var(--background-step-2));
@@ -57,6 +57,10 @@
 .sui-select-button:has(+ .sui-select-dropdown.active) {
 	border: 1px solid hsl(var(--primary-base));
 	background: hsl(var(--background-step-2));
+}
+
+.sui-select-button:has(.sui-select-badge-container) {
+	padding: 0.5rem 0.75rem 0.5rem 0.5rem;
 }
 
 .sui-select-value-span {

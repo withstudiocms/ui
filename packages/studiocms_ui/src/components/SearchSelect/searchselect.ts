@@ -169,6 +169,10 @@ function loadSearchSelects() {
 		container.dropdown!.innerHTML = '';
 		let i = 0;
 		const selectedValues = state.selectedOptionsMap[container.dataset.id as string] || [];
+		if (filteredOptions.length === 0) {
+			container.dropdown!.innerHTML = '<li class="empty-search-results">No results found</li>';
+			return;
+		}
 		for (const option of filteredOptions) {
 			const element = document.createElement('li');
 			element.classList.add('sui-search-select-option');
