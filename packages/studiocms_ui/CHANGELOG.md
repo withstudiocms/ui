@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.13
+
+### Patch Changes
+
+- [#67](https://github.com/withstudiocms/ui/pull/67) [`ad073b3`](https://github.com/withstudiocms/ui/commit/ad073b3a3cc9fc3d0a9d82fdada17ff487bcca0a) Thanks [@RATIU5](https://github.com/RATIU5)! - Adds multi-select functionality on the select component
+
 ## 0.4.12
 
 ### Patch Changes
