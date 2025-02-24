@@ -8,6 +8,34 @@ editUrl: false
 This document contains release notes for the `@studiocms/ui` package.
 For more information, see the [CHANGELOG file](https://github.com/withstudiocms/ui/blob/main/packages/studiocms_ui/CHANGELOG.md)
 
+## 0.4.11
+
+- [#69](https://github.com/withstudiocms/ui/pull/69) [`ef29352`](https://github.com/withstudiocms/ui/commit/ef29352b03b87a34da163ade2aae6652ce819251) Thanks [@louisescher](https://github.com/louisescher)! - Fixes broken styles for flat success buttons in light mode and starlight tabs when used in cards
+
+## 0.4.10
+
+- [#63](https://github.com/withstudiocms/ui/pull/63) [`dc7b723`](https://github.com/withstudiocms/ui/commit/dc7b723c86ae9bafd9b8dba626be2345a92a2568) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Adds a value prop to the checkbox
+
+## 0.4.9
+
+- [#61](https://github.com/withstudiocms/ui/pull/61) [`59f4c05`](https://github.com/withstudiocms/ui/commit/59f4c05d303686b139fef632d69c2edf49895ea3) Thanks [@louisescher](https://github.com/louisescher)! - Fixes card footers to be hidden should they have no content
+
+## 0.4.8
+
+- [#59](https://github.com/withstudiocms/ui/pull/59) [`f71057d`](https://github.com/withstudiocms/ui/commit/f71057dcc00468d9c4f5584cbbc384dc987c136a) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Add viewbox attribute for IconBase component
+
+## 0.4.7
+
+- [#56](https://github.com/withstudiocms/ui/pull/56) [`40ae2ea`](https://github.com/withstudiocms/ui/commit/40ae2eaa60f0b0df6e0447be5f3e362cbb9bff76) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Add option to disable global CSS injection and allow users to import the global css themselves.
+
+  Basic Example of how to import:
+
+  ```astro
+  ---
+  import "studiocms:ui/global-css";
+  ---
+  ```
+
 ## 0.4.6
 
 - [#52](https://github.com/withstudiocms/ui/pull/52) [`65eea2c`](https://github.com/withstudiocms/ui/commit/65eea2cff78c2c38314de9b3fe4b65173c81ea90) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update Input component to allow search type

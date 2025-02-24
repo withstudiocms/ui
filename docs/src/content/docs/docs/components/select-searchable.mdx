@@ -1,6 +1,10 @@
 ---
 i18nReady: true
 title: Select (Searchable)
+sidebar:
+  badge:
+    text: Updated!
+    variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -184,6 +188,115 @@ You can adjust the placeholder shown in the select by passing the `placeholder` 
         { label: 'Option 1', value: 'opt-1' },
         { label: 'Option 2', value: 'opt-2' },
         { label: 'Option 3', value: 'opt-3' },
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+### Multiple Options
+
+You can select multiple options by setting the `multiple` prop to `true`:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <SearchSelect
+        label='Searchable Select Element'
+        multiple
+        placeholder='Select multiple options'
+        defaultValue={[
+          'opt-1-mult1',
+          'opt-2-mult1',
+          'opt-3-mult1',
+        ]}
+        options={[
+          { label: "Option 1", value: "opt-1-mult1" },
+          { label: "Option 2", value: "opt-2-mult1" },
+          { label: "Option 3", value: "opt-3-mult1" },
+          { label: "Option 4", value: "opt-4-mult1" },
+          { label: "Option 5", value: "opt-5-mult1" },
+          { label: "Option 6", value: "opt-6-mult1" },
+          { label: "Option 7", value: "opt-7-mult1" },
+          { label: "Option 8", value: "opt-8-mult1" },
+          { label: "Option 9", value: "opt-9-mult1" },
+          { label: "Option 10", value: "opt-10-mult1" },
+          { label: "Option 11", value: "opt-11-mult1" },
+          { label: "Option 12", value: "opt-12-mult1" },
+        ]}
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro "multiple" showLinenumbers title="SearchSelectMultipleExample.astro"
+    ---
+    import { SearchSelect } from 'studiocms:ui/components';
+    ---
+
+    <SearchSelect
+      label='Searchable Select Element'
+      multiple
+      defaultValue={[
+        'opt-1-mult1',
+        'opt-2-mult1',
+        'opt-3-mult1',
+      ]}
+      options={[
+        { label: "Option 1", value: "opt-1-mult1" },
+        { label: "Option 2", value: "opt-2-mult1" },
+        { label: "Option 3", value: "opt-3-mult1" },
+        { label: "Option 4", value: "opt-4-mult1" },
+        { label: "Option 5", value: "opt-5-mult1" },
+        { label: "Option 6", value: "opt-6-mult1" },
+        { label: "Option 7", value: "opt-7-mult1" },
+        { label: "Option 8", value: "opt-8-mult1" },
+        { label: "Option 9", value: "opt-9-mult1" },
+        { label: "Option 10", value: "opt-10-mult1" },
+        { label: "Option 11", value: "opt-11-mult1" },
+        { label: "Option 12", value: "opt-12-mult1" },
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+### Max Option Selections
+
+You can set a maximum number of options that can be selected using the `max` prop:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <SearchSelect
+        label='Searchable Select Element'
+        multiple
+        max={3}
+        options={[
+          { label: "Option 1", value: "opt-1-mult2" },
+          { label: "Option 2", value: "opt-2-mult2" },
+          { label: "Option 3", value: "opt-3-mult2" },
+          { label: "Option 4", value: "opt-4-mult2" },
+          { label: "Option 5", value: "opt-5-mult2" },
+        ]}
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro "max={3}" showLinenumbers title="SearchSelectMultipleMaxExample.astro"
+    ---
+    import { SearchSelect } from 'studiocms:ui/components';
+    ---
+
+    <SearchSelect
+      label='Searchable Select Element'
+      multiple
+      max={3}
+      options={[
+        { label: "Option 1", value: "opt-1-mult2" },
+        { label: "Option 2", value: "opt-2-mult2" },
+        { label: "Option 3", value: "opt-3-mult2" },
+        { label: "Option 4", value: "opt-4-mult2" },
+        { label: "Option 5", value: "opt-5-mult2" },
       ]}
     />
     ```
