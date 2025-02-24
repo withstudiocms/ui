@@ -31,7 +31,7 @@ type NonMultipleProps = {
 	 * The default value of the select.
 	 */
 	defaultValue: string;
-}
+};
 
 type MultipleProps = {
 	/**
@@ -42,7 +42,7 @@ type MultipleProps = {
 	 * The default value of the select.
 	 */
 	defaultValue: string[];
-}
+};
 
 /**
  * The props for the select component.
@@ -84,11 +84,9 @@ type BaseProps = {
 	 * The maximum number of options that can be selected. Defaults to `undefined`.
 	 */
 	max?: number;
-}
+};
 
-type Props = BaseProps & (
-	MultipleProps | NonMultipleProps
-)
+type Props = BaseProps & (MultipleProps | NonMultipleProps);
 
 const {
 	label,
@@ -112,7 +110,11 @@ if (multiple && Array.isArray(defaultValue)) {
 	selected = options.find((x) => x.value === defaultValue);
 }
 
-const defaultLabel = selected ? Array.isArray(selected) ? selected.map((x) => x?.label) : selected.label : placeholder;
+const defaultLabel = selected
+	? Array.isArray(selected)
+		? selected.map((x) => x?.label)
+		: selected.label
+	: placeholder;
 ---
 
 <div

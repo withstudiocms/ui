@@ -26,7 +26,7 @@ interface Option {
 /**
  * The props for the search select component.
  */
- type NonMultipleProps = {
+type NonMultipleProps = {
 	/**
 	 * Whether the select accepts multiple options. Defaults to `false`.
 	 */
@@ -35,7 +35,7 @@ interface Option {
 	 * The default value of the select.
 	 */
 	defaultValue: string;
-}
+};
 
 type MultipleProps = {
 	/**
@@ -46,7 +46,7 @@ type MultipleProps = {
 	 * The default value of the select.
 	 */
 	defaultValue: string[];
-}
+};
 
 /**
  * The props for the select component.
@@ -88,11 +88,9 @@ type BaseProps = {
 	 * The maximum number of options that can be selected. Defaults to `undefined`.
 	 */
 	max?: number;
-}
+};
 
-type Props = BaseProps & (
-	MultipleProps | NonMultipleProps
-)
+type Props = BaseProps & (MultipleProps | NonMultipleProps);
 const {
 	label,
 	defaultValue,
@@ -115,7 +113,11 @@ if (multiple && Array.isArray(defaultValue)) {
 	selected = options.find((x) => x.value === defaultValue);
 }
 
-const defaultLabel = selected ? Array.isArray(selected) ? placeholder : selected.label : placeholder;
+const defaultLabel = selected
+	? Array.isArray(selected)
+		? placeholder
+		: selected.label
+	: placeholder;
 ---
 
 <div
