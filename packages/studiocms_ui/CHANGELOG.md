@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.14
+
+### Patch Changes
+
+- [#78](https://github.com/withstudiocms/ui/pull/78) [`c27bf16`](https://github.com/withstudiocms/ui/commit/c27bf1633d6ba3d537e7afcd5515be403f477553) Thanks [@louisescher](https://github.com/louisescher)! - Fixes mismatched IDs in the CSS for the double sidebar component
+
 ## 0.4.13
 
 ### Patch Changes
