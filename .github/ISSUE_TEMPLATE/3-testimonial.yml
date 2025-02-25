@@ -2,6 +2,7 @@ name: Testimonial
 description: Share your experience with StudioCMS/UI
 title: "[Testimonial]: <title>"
 labels: ["testimonial"]
+type: "Testimonial"
 body:
   - type: markdown
     attributes:
