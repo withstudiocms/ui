@@ -3,6 +3,7 @@ description: Suggest an idea/feature for @studiocms/ui
 title: '[Feature Request]: '
 labels: 
  - feat
+type: 'Feature'
 body:
   - type: markdown
     attributes:
