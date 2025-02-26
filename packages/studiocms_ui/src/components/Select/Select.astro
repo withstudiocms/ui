@@ -7,94 +7,94 @@ import './select.css';
 /**
  * Represents an option in the select component.
  */
- export interface SelectOption {
-  /**
-   * The label of the option displayed to the user.
-   */
-  label: string;
-  /**
-   * The value of the option used for form submission.
-   */
-  value: string;
-  /**
-   * Whether the option is disabled. Defaults to `false`.
-   */
-  disabled?: boolean;
+export interface SelectOption {
+	/**
+	 * The label of the option displayed to the user.
+	 */
+	label: string;
+	/**
+	 * The value of the option used for form submission.
+	 */
+	value: string;
+	/**
+	 * Whether the option is disabled. Defaults to `false`.
+	 */
+	disabled?: boolean;
 }
 
 /**
  * Base properties shared by both single and multiple select components.
  */
 export interface SelectBaseProps {
-  /**
-   * The label of the select field.
-   */
-  label?: string;
-  /**
-   * Additional classes to apply to the select component.
-   */
-  class?: string;
-  /**
-   * The name of the select field, used for form submission.
-   */
-  name?: string;
-  /**
-   * Whether the select field is required. Defaults to `false`.
-   */
-  isRequired?: boolean;
-  /**
-   * The options to display in the select dropdown.
-   */
-  options: SelectOption[];
-  /**
-   * Whether the select field is disabled. Defaults to `false`.
-   */
-  disabled?: boolean;
-  /**
-   * Whether the select field should take up the full width of its container. Defaults to `false`.
-   */
-  fullWidth?: boolean;
-  /**
-   * The placeholder text to display when no option is selected. Defaults to `Select`.
-   */
-  placeholder?: string;
+	/**
+	 * The label of the select field.
+	 */
+	label?: string;
+	/**
+	 * Additional classes to apply to the select component.
+	 */
+	class?: string;
+	/**
+	 * The name of the select field, used for form submission.
+	 */
+	name?: string;
+	/**
+	 * Whether the select field is required. Defaults to `false`.
+	 */
+	isRequired?: boolean;
+	/**
+	 * The options to display in the select dropdown.
+	 */
+	options: SelectOption[];
+	/**
+	 * Whether the select field is disabled. Defaults to `false`.
+	 */
+	disabled?: boolean;
+	/**
+	 * Whether the select field should take up the full width of its container. Defaults to `false`.
+	 */
+	fullWidth?: boolean;
+	/**
+	 * The placeholder text to display when no option is selected. Defaults to `Select`.
+	 */
+	placeholder?: string;
 }
 
 /**
  * Properties specific to single-select mode.
  */
 export interface SingleSelectProps extends SelectBaseProps {
-  /**
-   * Whether the select accepts multiple options.
-   */
-  multiple?: false;
-  /**
-   * The default selected value.
-   */
-  defaultValue?: string;
-  /**
-   * The maximum number of options that can be selected.
-   * This property has no effect in single-select mode.
-   */
-  max?: never;
+	/**
+	 * Whether the select accepts multiple options.
+	 */
+	multiple?: false;
+	/**
+	 * The default selected value.
+	 */
+	defaultValue?: string;
+	/**
+	 * The maximum number of options that can be selected.
+	 * This property has no effect in single-select mode.
+	 */
+	max?: never;
 }
 
 /**
  * Properties specific to multi-select mode.
  */
 export interface MultiSelectProps extends SelectBaseProps {
-  /**
-   * Whether the select accepts multiple options.
-   */
-  multiple: true;
-  /**
-   * The default selected values.
-   */
-  defaultValue?: string[];
-  /**
-   * The maximum number of options that can be selected.
-   */
-  max?: number;
+	/**
+	 * Whether the select accepts multiple options.
+	 */
+	multiple: true;
+	/**
+	 * The default selected values.
+	 */
+	defaultValue?: string[];
+	/**
+	 * The maximum number of options that can be selected.
+	 */
+	max?: number;
 }
 
 /**
