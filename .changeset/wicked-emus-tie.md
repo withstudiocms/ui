@@ -2,4 +2,4 @@
 "@studiocms/ui": patch
 ---
 
-Adds multi-select functionality on the select component
+fixes select interfaces and types and adds safety check to prevent duplicate event listeners
