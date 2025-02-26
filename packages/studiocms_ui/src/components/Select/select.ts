@@ -448,6 +448,7 @@ function loadSelects() {
 	});
 
 	for (const container of selects) {
+		if (container.dataset.initialized === 'true') continue;
 		const id = container.dataset.id as string;
 		const specialContainer = Object.assign(container, {
 			button: container.querySelector('button'),
@@ -473,6 +474,7 @@ function loadSelects() {
 			});
 			handleBadgeOverflow(state, specialContainer);
 		}
+		container.dataset.initialized = 'true';
 	}
 }
 
