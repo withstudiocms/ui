@@ -1,5 +1,23 @@
 # @studiocms/ui
 
+## 0.4.14
+
+### Patch Changes
+
+- [#78](https://github.com/withstudiocms/ui/pull/78) [`c27bf16`](https://github.com/withstudiocms/ui/commit/c27bf1633d6ba3d537e7afcd5515be403f477553) Thanks [@louisescher](https://github.com/louisescher)! - Fixes mismatched IDs in the CSS for the double sidebar component
+
+## 0.4.13
+
+### Patch Changes
+
+- [#67](https://github.com/withstudiocms/ui/pull/67) [`ad073b3`](https://github.com/withstudiocms/ui/commit/ad073b3a3cc9fc3d0a9d82fdada17ff487bcca0a) Thanks [@RATIU5](https://github.com/RATIU5)! - Adds multi-select functionality on the select component
+
+## 0.4.12
+
+### Patch Changes
+
+- [#72](https://github.com/withstudiocms/ui/pull/72) [`f183732`](https://github.com/withstudiocms/ui/commit/f18373291c20ffbd69c1e0fb3c23526931f1d8da) Thanks [@louisescher](https://github.com/louisescher)! - Fixes a z-index for starlight variant tabs being too great
+
 ## 0.4.11
 
 ### Patch Changes

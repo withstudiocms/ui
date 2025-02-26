@@ -2,7 +2,7 @@ type SearchSelectOption = {
 	label: string;
 	value: string;
 	disabled?: boolean;
-}
+};
 
 type SearchSelectContainer = HTMLDivElement & {
 	input: HTMLInputElement | null;
@@ -26,11 +26,11 @@ function loadSearchSelects() {
 		MARGIN: 4,
 		BADGE_PADDING: 80,
 	} as const;
-	
+
 	const getDropdownPosition = (input: HTMLInputElement, optionsCount: number) => {
 		const rect = input.getBoundingClientRect();
-		const dropdownHeight = optionsCount * CONSTANTS.OPTION_HEIGHT + 
-			CONSTANTS.BORDER_SIZE + CONSTANTS.MARGIN;
+		const dropdownHeight =
+			optionsCount * CONSTANTS.OPTION_HEIGHT + CONSTANTS.BORDER_SIZE + CONSTANTS.MARGIN;
 
 		const customRect = {
 			top: rect.bottom + CONSTANTS.MARGIN,
@@ -44,7 +44,9 @@ function loadSearchSelects() {
 		};
 
 		return {
-			isAbove: customRect.top >= 0 && customRect.left >= 0 &&
+			isAbove:
+				customRect.top >= 0 &&
+				customRect.left >= 0 &&
 				customRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
 				customRect.right <= (window.innerWidth || document.documentElement.clientWidth),
 			customRect,
@@ -62,22 +64,22 @@ function loadSearchSelects() {
 	const recalculateBadges = (state: SearchSelectState, container: SearchSelectContainer) => {
 		const badgeContainer = container.querySelector('.sui-search-select-badge-container');
 		if (!badgeContainer || !container.input) return;
-		
+
 		badgeContainer.innerHTML = '';
 		const selectedValues = state.selectedOptionsMap[container.dataset.id as string] || [];
 		const allOptions = state.optionsMap[container.dataset.id as string] || [];
-	
+
 		if (selectedValues.length === 0) {
-			container.input.placeholder = state.placeholderMap[container.dataset.id as string] ?? "";
+			container.input.placeholder = state.placeholderMap[container.dataset.id as string] ?? '';
 			return;
 		}
-		
+
 		for (const value of selectedValues.sort((a, b) => {
 			const numA = Number.parseInt(a.match(/\d+/)?.[0] || '0');
 			const numB = Number.parseInt(b.match(/\d+/)?.[0] || '0');
 			return numA - numB;
 		})) {
-			const option = allOptions.find(opt => opt.value === value);
+			const option = allOptions.find((opt) => opt.value === value);
 			if (option) {
 				const newBadge = createSelectBadge(value, option.label);
 				badgeContainer.appendChild(newBadge);
@@ -88,16 +90,18 @@ function loadSearchSelects() {
 	const updateLabel = (
 		isMultiple: boolean,
 		state: SearchSelectState,
-		container:SearchSelectContainer
+		container: SearchSelectContainer
 	) => {
 		const selectedInput = container?.input;
 		if (isMultiple) {
 			recalculateBadges(state, container);
 			if (selectedInput) {
-				selectedInput.placeholder = state.placeholderMap[container.dataset.id as string] ?? "";
+				selectedInput.placeholder = state.placeholderMap[container.dataset.id as string] ?? '';
 			}
 		} else {
-			const selected = container.querySelector('.sui-search-select-option.selected') as HTMLLIElement;
+			const selected = container.querySelector(
+				'.sui-search-select-option.selected'
+			) as HTMLLIElement;
 			if (selected && selectedInput) {
 				selectedInput.placeholder = selected.innerText.trim();
 			}
@@ -116,9 +120,9 @@ function loadSearchSelects() {
 		if (!isCurrentlySelected && !Number.isNaN(max) && currentSelected.length >= max) {
 			return false;
 		}
-	
-		const newSelected = isCurrentlySelected 
-			? currentSelected.filter(v => v !== value)
+
+		const newSelected = isCurrentlySelected
+			? currentSelected.filter((v) => v !== value)
 			: [...currentSelected, value];
 		state.selectedOptionsMap[container.dataset.id as string] = newSelected;
 		const option = container.dropdown?.querySelector(
@@ -142,16 +146,21 @@ function loadSearchSelects() {
 		return true;
 	};
 
-	const toggleMultiOption = (id: string, container: SearchSelectContainer, state: SearchSelectState) => {
+	const toggleMultiOption = (
+		id: string,
+		container: SearchSelectContainer,
+		state: SearchSelectState
+	) => {
 		const success = updateOptionSelection(id, container, state);
 		if (success) {
 			recalculateBadges(state, container);
 		}
 	};
 
-	const recomputeOptions = (state: SearchSelectState,container: SearchSelectContainer): void => {
-		const optionElements = container?.dropdown
-			?.querySelectorAll('.sui-search-select-option') as NodeListOf<HTMLLIElement>;
+	const recomputeOptions = (state: SearchSelectState, container: SearchSelectContainer): void => {
+		const optionElements = container?.dropdown?.querySelectorAll(
+			'.sui-search-select-option'
+		) as NodeListOf<HTMLLIElement>;
 		for (const entry of optionElements) {
 			if (Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex) {
 				entry.classList.add('focused');
@@ -162,9 +171,9 @@ function loadSearchSelects() {
 	};
 
 	const reconstructOptions = (
-    filteredOptions: SearchSelectOption[],
-    state: SearchSelectState,
-    container: SearchSelectContainer
+		filteredOptions: SearchSelectOption[],
+		state: SearchSelectState,
+		container: SearchSelectContainer
 	): void => {
 		container.dropdown!.innerHTML = '';
 		let i = 0;
@@ -192,12 +201,14 @@ function loadSearchSelects() {
 	};
 
 	const getInteractiveOptions = (container: SearchSelectContainer): HTMLLIElement[] => {
-		const allOptions = container?.dropdown
-			?.querySelectorAll('.sui-search-select-option') as NodeListOf<HTMLLIElement>;
-		return Array.from(allOptions).filter(option => 
-			!option.classList.contains('hidden') && 
-			!option.classList.contains('disabled') && 
-			!option.hasAttribute('disabled')
+		const allOptions = container?.dropdown?.querySelectorAll(
+			'.sui-search-select-option'
+		) as NodeListOf<HTMLLIElement>;
+		return Array.from(allOptions).filter(
+			(option) =>
+				!option.classList.contains('hidden') &&
+				!option.classList.contains('disabled') &&
+				!option.hasAttribute('disabled')
 		);
 	};
 
@@ -215,7 +226,9 @@ function loadSearchSelects() {
 			state.isSelectingOption = false;
 		}, 0);
 		if (target.closest('.sui-search-select-badge svg')) {
-			const value = target.closest('.sui-search-select-badge')?.getAttribute('data-value') as string;
+			const value = target
+				.closest('.sui-search-select-badge')
+				?.getAttribute('data-value') as string;
 			const success = updateOptionSelection(value, container, state);
 			if (success) {
 				recalculateBadges(state, container);
@@ -257,7 +270,7 @@ function loadSearchSelects() {
 		const focusedElement = document.activeElement;
 
 		if (e.key === 'Escape' || e.key === 'Tab') {
-			container.input?.blur()
+			container.input?.blur();
 			container.dropdown?.classList.remove('active', 'above');
 			return;
 		}
@@ -271,7 +284,7 @@ function loadSearchSelects() {
 					nextBadge = badgeElement.nextElementSibling as HTMLElement;
 				}
 				const nextBadgeValue = nextBadge?.getAttribute('data-value');
-				
+
 				toggleMultiOption(badgeValue as string, container, state);
 				recalculateBadges(state, container);
 				setTimeout(() => {
@@ -291,38 +304,38 @@ function loadSearchSelects() {
 		}
 
 		const interactiveOptions = getInteractiveOptions(container);
-		const currentInteractiveIndex = interactiveOptions.findIndex(option => 
+		const currentInteractiveIndex = interactiveOptions.findIndex((option) =>
 			option.classList.contains('focused')
 		);
 
 		if (e.key === 'ArrowUp' && currentInteractiveIndex > 0) {
-			state.focusIndex = Array.from(container?.dropdown
-				?.querySelectorAll('.sui-search-select-option') || [])
-				.indexOf(interactiveOptions[currentInteractiveIndex - 1] as Element);
+			state.focusIndex = Array.from(
+				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
+			).indexOf(interactiveOptions[currentInteractiveIndex - 1] as Element);
 			recomputeOptions(state, container);
 			return;
 		}
 
 		if (e.key === 'ArrowDown' && currentInteractiveIndex < interactiveOptions.length - 1) {
-			state.focusIndex = Array.from(container?.dropdown
-				?.querySelectorAll('.sui-search-select-option') || [])
-				.indexOf(interactiveOptions[currentInteractiveIndex + 1] as Element);
+			state.focusIndex = Array.from(
+				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
+			).indexOf(interactiveOptions[currentInteractiveIndex + 1] as Element);
 			recomputeOptions(state, container);
 			return;
 		}
 
 		if (e.key === 'PageUp') {
-			state.focusIndex = Array.from(container?.dropdown
-				?.querySelectorAll('.sui-search-select-option') || [])
-				.indexOf(interactiveOptions[0] as Element);
+			state.focusIndex = Array.from(
+				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
+			).indexOf(interactiveOptions[0] as Element);
 			recomputeOptions(state, container);
 			return;
 		}
 
 		if (e.key === 'PageDown') {
-			state.focusIndex = Array.from(container?.dropdown
-				?.querySelectorAll('.sui-search-select-option') || [])
-				.indexOf(interactiveOptions[interactiveOptions.length - 1] as Element);
+			state.focusIndex = Array.from(
+				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
+			).indexOf(interactiveOptions[interactiveOptions.length - 1] as Element);
 			recomputeOptions(state, container);
 			return;
 		}
@@ -330,16 +343,22 @@ function loadSearchSelects() {
 		if (e.key === 'Enter') {
 			e.preventDefault();
 			e.stopImmediatePropagation();
-			
-			const optionElements = container?.dropdown
-				?.querySelectorAll('.sui-search-select-option') as NodeListOf<HTMLLIElement>;
-			const focusedOption = Array.from(optionElements)
-				.find(entry => Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex);
-			
-			if (focusedOption && !focusedOption.classList.contains('disabled') && !focusedOption.hasAttribute('disabled')) {
+
+			const optionElements = container?.dropdown?.querySelectorAll(
+				'.sui-search-select-option'
+			) as NodeListOf<HTMLLIElement>;
+			const focusedOption = Array.from(optionElements).find(
+				(entry) => Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex
+			);
+
+			if (
+				focusedOption &&
+				!focusedOption.classList.contains('disabled') &&
+				!focusedOption.hasAttribute('disabled')
+			) {
 				const value = focusedOption.dataset.value;
 				if (!value) return;
-				
+
 				const isMultiple = state.isMultipleMap[container.dataset.id as string];
 				if (isMultiple) {
 					const success = updateOptionSelection(value, container, state);
@@ -363,46 +382,45 @@ function loadSearchSelects() {
 	};
 
 	const handleInputKeyup = (
-    e: KeyboardEvent,
-    state: SearchSelectState,
-    container: SearchSelectContainer
+		e: KeyboardEvent,
+		state: SearchSelectState,
+		container: SearchSelectContainer
 	): void => {
-    if (['Enter', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
-    const value = (container.input as HTMLInputElement).value.trim().toLowerCase();
-    const allOptions = state.optionsMap[container.dataset.id as string];
-    // If input is empty, show all options
-    if (value.length === 0) {
+		if (['Enter', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
+		const value = (container.input as HTMLInputElement).value.trim().toLowerCase();
+		const allOptions = state.optionsMap[container.dataset.id as string];
+		// If input is empty, show all options
+		if (value.length === 0) {
 			reconstructOptions(allOptions!, state, container);
 			return;
-    }
-    // Otherwise filter options
-    const filteredOptions = allOptions?.filter((option) => 
-			option.label.toLowerCase().includes(value)
-    ) ?? [];
-    state.focusIndex = 0;
-    reconstructOptions(filteredOptions, state, container);
+		}
+		// Otherwise filter options
+		const filteredOptions =
+			allOptions?.filter((option) => option.label.toLowerCase().includes(value)) ?? [];
+		state.focusIndex = 0;
+		reconstructOptions(filteredOptions, state, container);
 	};
 
 	const handleContainerFocusOut = (state: SearchSelectState, container: SearchSelectContainer) => {
 		if (state.isSelectingOption) return;
-		container.input!.value = "";
+		container.input!.value = '';
 		reconstructOptions(state.optionsMap[container.dataset.id as string] ?? [], state, container);
 		container.dropdown?.classList.remove('active', 'above');
 	};
 
 	const handleContainerFocusIn = (state: SearchSelectState, container: SearchSelectContainer) => {
-    const allDropdowns = document.querySelectorAll('.sui-search-select-dropdown');
+		const allDropdowns = document.querySelectorAll('.sui-search-select-dropdown');
 		for (const dropdown of allDropdowns) {
 			if (dropdown !== container.dropdown) {
 				dropdown.classList.remove('active', 'above');
 			}
 		}
-    const { isAbove } = getDropdownPosition(
-        container.input as HTMLInputElement,
-        state.optionsMap[container.dataset.id as string]?.length ?? 0
-    );
-    container.dropdown?.classList.add('active', ...(isAbove ? [] : ['above']));
-};
+		const { isAbove } = getDropdownPosition(
+			container.input as HTMLInputElement,
+			state.optionsMap[container.dataset.id as string]?.length ?? 0
+		);
+		container.dropdown?.classList.add('active', ...(isAbove ? [] : ['above']));
+	};
 
 	const state: SearchSelectState = {
 		optionsMap: {},
@@ -424,27 +442,27 @@ function loadSearchSelects() {
 			specialContainer.dropdown?.querySelectorAll('.sui-search-select-option.selected') ?? []
 		);
 
-		state.placeholderMap[id] = (specialContainer.input?.placeholder ?? '');
+		state.placeholderMap[id] = specialContainer.input?.placeholder ?? '';
 		state.optionsMap[id] = JSON.parse(container.dataset.options ?? '{}');
 		state.isMultipleMap[id] = container.dataset.multiple === 'true';
-		state.selectedOptionsMap[id] = selectedOptions.map((x) => x.getAttribute('data-value') ?? "");
+		state.selectedOptionsMap[id] = selectedOptions.map((x) => x.getAttribute('data-value') ?? '');
 
 		specialContainer.input?.addEventListener('focusin', () =>
 			handleContainerFocusIn(state, specialContainer)
 		);
-		specialContainer.addEventListener('focusout', () => 
+		specialContainer.addEventListener('focusout', () =>
 			handleContainerFocusOut(state, specialContainer)
 		);
-		specialContainer.addEventListener('keydown', (e) => 
+		specialContainer.addEventListener('keydown', (e) =>
 			handleSelectKeyDown(e, state, specialContainer)
 		);
-		specialContainer.input?.addEventListener('keyup', (e) => 
+		specialContainer.input?.addEventListener('keyup', (e) =>
 			handleInputKeyup(e, state, specialContainer)
 		);
 		// In order to ensure the blur/focusout event is triggered before the click event, we need to set a timeout
 		// to set the isSelectingOption state to false after the click event has been handled
 		// If we don't want to do this, we need to set a 100-200ms timeout to ensure the blur/focusout event is triggered
-		specialContainer.addEventListener('mousedown', (e) => 
+		specialContainer.addEventListener('mousedown', (e) =>
 			handleContainerMouseDown(e, state, specialContainer)
 		);
 
