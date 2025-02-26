@@ -432,6 +432,7 @@ function loadSearchSelects() {
 	};
 	const selects = document.querySelectorAll<HTMLDivElement>('.sui-search-select-label');
 	for (const container of selects) {
+		if (container.dataset.initialized === 'true') continue;
 		const id = container.dataset.id as string;
 		const specialContainer = Object.assign(container, {
 			input: container.querySelector('input'),
@@ -469,6 +470,7 @@ function loadSearchSelects() {
 		if (state.isMultipleMap[id]) {
 			recalculateBadges(state, specialContainer);
 		}
+		container.dataset.initialized = 'true';
 	}
 }
 

@@ -19,6 +19,9 @@ type SelectState = {
 
 type ResizeCallback = (width: number, height: number, element: Element) => void;
 
+// Set attribute or safety check to make sure this function is only called once
+// Or create a map of all selects and their observers
+
 function loadSelects() {
 	const CONSTANTS = {
 		OPTION_HEIGHT: 36,
@@ -448,6 +451,7 @@ function loadSelects() {
 	});
 
 	for (const container of selects) {
+		if (container.dataset.initialized === 'true') continue;
 		const id = container.dataset.id as string;
 		const specialContainer = Object.assign(container, {
 			button: container.querySelector('button'),
@@ -473,6 +477,7 @@ function loadSelects() {
 			});
 			handleBadgeOverflow(state, specialContainer);
 		}
+		container.dataset.initialized = 'true';
 	}
 }
 

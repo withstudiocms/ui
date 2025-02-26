@@ -6,91 +6,103 @@ import Input from '../Input/Input.astro';
 import './searchselect.css';
 
 /**
- * An option in the select dropdown
+ * Represents an option in the select component.
  */
-interface Option {
-	/**
-	 * The label of the option.
-	 */
-	label: string;
-	/**
-	 * The value of the option.
-	 */
-	value: string;
-	/**
-	 * Whether the option is disabled.
-	 */
-	disabled?: boolean;
+ export interface SearchSelectOption {
+  /**
+   * The label of the option displayed to the user.
+   */
+  label: string;
+  /**
+   * The value of the option used for form submission.
+   */
+  value: string;
+  /**
+   * Whether the option is disabled. Defaults to `false`.
+   */
+  disabled?: boolean;
 }
 
 /**
- * The props for the search select component.
+ * Base properties shared by both single and multiple select components.
  */
-type NonMultipleProps = {
-	/**
-	 * Whether the select accepts multiple options. Defaults to `false`.
-	 */
-	multiple: false;
-	/**
-	 * The default value of the select.
-	 */
-	defaultValue: string;
-};
-
-type MultipleProps = {
-	/**
-	 * Whether the select accepts multiple options. Defaults to `false`.
-	 */
-	multiple: true;
-	/**
-	 * The default value of the select.
-	 */
-	defaultValue: string[];
-};
+export interface SearchSelectBaseProps {
+  /**
+   * The label of the select field.
+   */
+  label?: string;
+  /**
+   * Additional classes to apply to the select component.
+   */
+  class?: string;
+  /**
+   * The name of the select field, used for form submission.
+   */
+  name?: string;
+  /**
+   * Whether the select field is required. Defaults to `false`.
+   */
+  isRequired?: boolean;
+  /**
+   * The options to display in the select dropdown.
+   */
+  options: SearchSelectOption[];
+  /**
+   * Whether the select field is disabled. Defaults to `false`.
+   */
+  disabled?: boolean;
+  /**
+   * Whether the select field should take up the full width of its container. Defaults to `false`.
+   */
+  fullWidth?: boolean;
+  /**
+   * The placeholder text to display when no option is selected. Defaults to `Select`.
+   */
+  placeholder?: string;
+}
 
 /**
- * The props for the select component.
+ * Properties specific to single-select mode.
  */
-type BaseProps = {
-	/**
-	 * The label of the select.
-	 */
-	label?: string;
-	/**
-	 * Additional classes to apply to the select.
-	 */
-	class?: string;
-	/**
-	 * The name of the select. Required because of the helper.
-	 */
-	name?: string;
-	/**
-	 * Whether the select is required. Defaults to `false`.
-	 */
-	isRequired?: boolean;
-	/**
-	 * The options to display in the select.
-	 */
-	options: Option[];
-	/**
-	 * Whether the select is disabled. Defaults to `false`.
-	 */
-	disabled?: boolean;
-	/**
-	 * Whether the select is full width. Defaults to `false`.
-	 */
-	fullWidth?: boolean;
-	/**
-	 * The placeholder of the select. Defaults to `Select`.
-	 */
-	placeholder?: string;
-	/**
-	 * The maximum number of options that can be selected. Defaults to `undefined`.
-	 */
-	max?: number;
-};
+export interface SingleSearchSelectProps extends SearchSelectBaseProps {
+  /**
+   * Whether the select accepts multiple options.
+   */
+  multiple?: false;
+  /**
+   * The default selected value.
+   */
+  defaultValue?: string;
+  /**
+   * The maximum number of options that can be selected.
+   * This property has no effect in single-select mode.
+   */
+  max?: never;
+}
 
-type Props = BaseProps & (MultipleProps | NonMultipleProps);
+/**
+ * Properties specific to multi-select mode.
+ */
+export interface MultiSearchSelectProps extends SearchSelectBaseProps {
+  /**
+   * Whether the select accepts multiple options.
+   */
+  multiple: true;
+  /**
+   * The default selected values.
+   */
+  defaultValue?: string[];
+  /**
+   * The maximum number of options that can be selected.
+   */
+  max?: number;
+}
+
+/**
+ * Union type representing all possible select component properties.
+ */
+export type Props = SingleSearchSelectProps | MultiSearchSelectProps;
+
 const {
 	label,
 	defaultValue,
@@ -105,7 +117,7 @@ const {
 	max = undefined,
 } = Astro.props;
 
-let selected: Option | (Option | undefined)[] | undefined;
+let selected: SearchSelectOption | (SearchSelectOption | undefined)[] | undefined;
 
 if (multiple && Array.isArray(defaultValue)) {
 	selected = defaultValue.map((x) => options.find((y) => y.value === x));
@@ -136,6 +148,7 @@ const defaultLabel = selected
 				role='combobox'
 				aria-controls={`${name}-dropdown`}
 				aria-expanded="false"
+				tabindex={disabled ? -1 : 0}
 				label={label || ''}
 				isRequired={isRequired || false}
 			/>
@@ -195,7 +208,7 @@ const defaultLabel = selected
 		multiple && Array.isArray(selected ?? []) && (		
 			<div class="sui-search-select-badge-container">
 				{
-					((selected ?? []) as Option[]).map((s) => s && 
+					((selected ?? []) as SearchSelectOption[]).map((s) => s && 
 						<Badge class="sui-search-select-badge" data-value={s.value} size="sm" label={s.label} iconPosition="right" icon="x-mark" />
 					)
 				}
