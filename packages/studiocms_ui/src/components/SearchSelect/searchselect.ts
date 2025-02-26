@@ -55,17 +55,21 @@ function loadSearchSelects() {
 
 	const createSelectBadge = (value: string, label: string): HTMLSpanElement => {
 		const badge = document.createElement('span');
+
 		badge.classList.add('sui-badge', 'primary', 'sm', 'default', 'full', 'sui-search-select-badge');
 		badge.setAttribute('data-value', value);
 		badge.innerHTML = `${label} <svg style='min-width: 8px' xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24' role="button" tabindex="0"><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 18L18 6M6 6l12 12'></path></svg>`;
+		
 		return badge;
 	};
 
 	const recalculateBadges = (state: SearchSelectState, container: SearchSelectContainer) => {
 		const badgeContainer = container.querySelector('.sui-search-select-badge-container');
+
 		if (!badgeContainer || !container.input) return;
 
 		badgeContainer.innerHTML = '';
+
 		const selectedValues = state.selectedOptionsMap[container.dataset.id as string] || [];
 		const allOptions = state.optionsMap[container.dataset.id as string] || [];
 
@@ -93,8 +97,10 @@ function loadSearchSelects() {
 		container: SearchSelectContainer
 	) => {
 		const selectedInput = container?.input;
+
 		if (isMultiple) {
 			recalculateBadges(state, container);
+
 			if (selectedInput) {
 				selectedInput.placeholder = state.placeholderMap[container.dataset.id as string] ?? '';
 			}
@@ -102,6 +108,7 @@ function loadSearchSelects() {
 			const selected = container.querySelector(
 				'.sui-search-select-option.selected'
 			) as HTMLLIElement;
+
 			if (selected && selectedInput) {
 				selectedInput.placeholder = selected.innerText.trim();
 			}
@@ -117,6 +124,7 @@ function loadSearchSelects() {
 		const currentSelected = state.selectedOptionsMap[container.dataset.id as string] || [];
 		const isCurrentlySelected = currentSelected.includes(value);
 		const max = Number.parseInt(container.dataset.multipleMax as string);
+
 		if (!isCurrentlySelected && !Number.isNaN(max) && currentSelected.length >= max) {
 			return false;
 		}
@@ -124,25 +132,29 @@ function loadSearchSelects() {
 		const newSelected = isCurrentlySelected
 			? currentSelected.filter((v) => v !== value)
 			: [...currentSelected, value];
+
 		state.selectedOptionsMap[container.dataset.id as string] = newSelected;
+
 		const option = container.dropdown?.querySelector(
 			`.sui-search-select-option[data-value='${value}']`
 		) as HTMLLIElement;
+
 		if (option) {
 			option.classList.toggle('selected', forceState ?? !isCurrentlySelected);
+
+			if (container && container.select) {
+				container.select.value = option.getAttribute('value') as string;
+			}
 		}
-		const selectOption = container.select?.querySelector(
-			`option[value='${value}']`
-		) as HTMLOptionElement;
-		if (selectOption) {
-			selectOption.selected = forceState ?? !isCurrentlySelected;
-		}
+
 		const selectedCountEl = container.querySelector(
 			'.sui-search-select-max-span .sui-search-select-select-count'
 		) as HTMLSpanElement;
+
 		if (selectedCountEl) {
 			selectedCountEl.innerText = String(newSelected.length);
 		}
+
 		return true;
 	};
 
@@ -152,6 +164,7 @@ function loadSearchSelects() {
 		state: SearchSelectState
 	) => {
 		const success = updateOptionSelection(id, container, state);
+
 		if (success) {
 			recalculateBadges(state, container);
 		}
@@ -161,6 +174,7 @@ function loadSearchSelects() {
 		const optionElements = container?.dropdown?.querySelectorAll(
 			'.sui-search-select-option'
 		) as NodeListOf<HTMLLIElement>;
+
 		for (const entry of optionElements) {
 			if (Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex) {
 				entry.classList.add('focused');
@@ -176,12 +190,16 @@ function loadSearchSelects() {
 		container: SearchSelectContainer
 	): void => {
 		container.dropdown!.innerHTML = '';
-		let i = 0;
+
 		const selectedValues = state.selectedOptionsMap[container.dataset.id as string] || [];
+		
 		if (filteredOptions.length === 0) {
 			container.dropdown!.innerHTML = '<li class="empty-search-results">No results found</li>';
 			return;
 		}
+		
+		let i = 0;
+
 		for (const option of filteredOptions) {
 			const element = document.createElement('li');
 			element.classList.add('sui-search-select-option');
@@ -204,6 +222,7 @@ function loadSearchSelects() {
 		const allOptions = container?.dropdown?.querySelectorAll(
 			'.sui-search-select-option'
 		) as NodeListOf<HTMLLIElement>;
+
 		return Array.from(allOptions).filter(
 			(option) =>
 				!option.classList.contains('hidden') &&
@@ -218,44 +237,59 @@ function loadSearchSelects() {
 		container: SearchSelectContainer
 	) => {
 		const target = e.target as HTMLElement;
+
 		if (!target.closest('input')) {
 			e.preventDefault();
 		}
+
 		state.isSelectingOption = true;
+
 		setTimeout(() => {
 			state.isSelectingOption = false;
 		}, 0);
+
 		if (target.closest('.sui-search-select-badge svg')) {
 			const value = target
 				.closest('.sui-search-select-badge')
 				?.getAttribute('data-value') as string;
+
 			const success = updateOptionSelection(value, container, state);
+
 			if (success) {
 				recalculateBadges(state, container);
 			}
+
 			return;
 		}
 
 		const opt = target.closest('.sui-search-select-option') as HTMLLIElement | null;
+
 		if (!opt?.dataset.value) return;
+
 		if (opt.classList.contains('disabled') || opt.hasAttribute('disabled')) {
 			container.input?.focus();
 			return;
 		}
+
 		const isMultiple = state.isMultipleMap[container.dataset.id as string];
+
 		if (isMultiple) {
 			const success = updateOptionSelection(opt.dataset.value, container, state);
+
 			if (success) {
 				updateLabel(true, state, container);
 				recalculateBadges(state, container);
 			}
 		} else {
 			const currentSelected = state.selectedOptionsMap[container.dataset.id as string] || [];
+
 			for (const value of currentSelected) {
 				updateOptionSelection(value, container, state, false);
 			}
+
 			updateOptionSelection(opt.dataset.value, container, state, true);
 			updateLabel(false, state, container);
+
 			container.dropdown?.classList.remove('active', 'above');
 			container.input?.blur();
 			container.input!.value = '';
@@ -277,16 +311,20 @@ function loadSearchSelects() {
 
 		if ((e.key === 'Enter' || e.key === ' ') && focusedElement?.tagName.toLowerCase() === 'svg') {
 			const badgeElement = focusedElement?.closest('.sui-search-select-badge');
+
 			if (badgeElement && state.isMultipleMap[container?.dataset.id as string]) {
 				const badgeValue = badgeElement.getAttribute('data-value');
 				let nextBadge = badgeElement.previousElementSibling as HTMLElement;
+				
 				if (!nextBadge) {
 					nextBadge = badgeElement.nextElementSibling as HTMLElement;
 				}
+
 				const nextBadgeValue = nextBadge?.getAttribute('data-value');
 
 				toggleMultiOption(badgeValue as string, container, state);
 				recalculateBadges(state, container);
+
 				setTimeout(() => {
 					if (nextBadgeValue) {
 						const badgeToFocus = container?.querySelector(
@@ -297,8 +335,10 @@ function loadSearchSelects() {
 						}
 					}
 				}, 0);
+
 				e.preventDefault();
 				e.stopImmediatePropagation();
+
 				return;
 			}
 		}
@@ -312,7 +352,9 @@ function loadSearchSelects() {
 			state.focusIndex = Array.from(
 				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
 			).indexOf(interactiveOptions[currentInteractiveIndex - 1] as Element);
+
 			recomputeOptions(state, container);
+
 			return;
 		}
 
@@ -320,7 +362,9 @@ function loadSearchSelects() {
 			state.focusIndex = Array.from(
 				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
 			).indexOf(interactiveOptions[currentInteractiveIndex + 1] as Element);
+
 			recomputeOptions(state, container);
+
 			return;
 		}
 
@@ -328,7 +372,9 @@ function loadSearchSelects() {
 			state.focusIndex = Array.from(
 				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
 			).indexOf(interactiveOptions[0] as Element);
+
 			recomputeOptions(state, container);
+
 			return;
 		}
 
@@ -336,7 +382,9 @@ function loadSearchSelects() {
 			state.focusIndex = Array.from(
 				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
 			).indexOf(interactiveOptions[interactiveOptions.length - 1] as Element);
+
 			recomputeOptions(state, container);
+
 			return;
 		}
 
@@ -347,6 +395,7 @@ function loadSearchSelects() {
 			const optionElements = container?.dropdown?.querySelectorAll(
 				'.sui-search-select-option'
 			) as NodeListOf<HTMLLIElement>;
+
 			const focusedOption = Array.from(optionElements).find(
 				(entry) => Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex
 			);
@@ -357,26 +406,33 @@ function loadSearchSelects() {
 				!focusedOption.hasAttribute('disabled')
 			) {
 				const value = focusedOption.dataset.value;
+
 				if (!value) return;
 
 				const isMultiple = state.isMultipleMap[container.dataset.id as string];
+
 				if (isMultiple) {
 					const success = updateOptionSelection(value, container, state);
+
 					if (success) {
 						updateLabel(true, state, container);
 						recalculateBadges(state, container);
 					}
 				} else {
 					const currentSelected = state.selectedOptionsMap[container.dataset.id as string] || [];
+
 					for (const existingValue of currentSelected) {
 						updateOptionSelection(existingValue, container, state, false);
 					}
+
 					updateOptionSelection(value, container, state, true);
 					updateLabel(false, state, container);
+
 					container.dropdown?.classList.remove('active', 'above');
 					container.input!.value = '';
 				}
 			}
+
 			return;
 		}
 	};
@@ -387,22 +443,28 @@ function loadSearchSelects() {
 		container: SearchSelectContainer
 	): void => {
 		if (['Enter', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
+
 		const value = (container.input as HTMLInputElement).value.trim().toLowerCase();
 		const allOptions = state.optionsMap[container.dataset.id as string];
+
 		// If input is empty, show all options
 		if (value.length === 0) {
 			reconstructOptions(allOptions!, state, container);
 			return;
 		}
+
 		// Otherwise filter options
 		const filteredOptions =
 			allOptions?.filter((option) => option.label.toLowerCase().includes(value)) ?? [];
+
 		state.focusIndex = 0;
+
 		reconstructOptions(filteredOptions, state, container);
 	};
 
 	const handleContainerFocusOut = (state: SearchSelectState, container: SearchSelectContainer) => {
 		if (state.isSelectingOption) return;
+
 		container.input!.value = '';
 		reconstructOptions(state.optionsMap[container.dataset.id as string] ?? [], state, container);
 		container.dropdown?.classList.remove('active', 'above');
@@ -410,15 +472,18 @@ function loadSearchSelects() {
 
 	const handleContainerFocusIn = (state: SearchSelectState, container: SearchSelectContainer) => {
 		const allDropdowns = document.querySelectorAll('.sui-search-select-dropdown');
+
 		for (const dropdown of allDropdowns) {
 			if (dropdown !== container.dropdown) {
 				dropdown.classList.remove('active', 'above');
 			}
 		}
+
 		const { isAbove } = getDropdownPosition(
 			container.input as HTMLInputElement,
 			state.optionsMap[container.dataset.id as string]?.length ?? 0
 		);
+
 		container.dropdown?.classList.add('active', ...(isAbove ? [] : ['above']));
 	};
 
@@ -430,15 +495,20 @@ function loadSearchSelects() {
 		focusIndex: 0,
 		isSelectingOption: false,
 	};
+
 	const selects = document.querySelectorAll<HTMLDivElement>('.sui-search-select-label');
+
 	for (const container of selects) {
 		if (container.dataset.initialized === 'true') continue;
+
 		const id = container.dataset.id as string;
+		
 		const specialContainer = Object.assign(container, {
 			input: container.querySelector('input'),
 			dropdown: container.querySelector('.sui-search-select-dropdown'),
 			select: container.querySelector('select'),
 		});
+
 		const selectedOptions = Array.from(
 			specialContainer.dropdown?.querySelectorAll('.sui-search-select-option.selected') ?? []
 		);
@@ -451,15 +521,19 @@ function loadSearchSelects() {
 		specialContainer.input?.addEventListener('focusin', () =>
 			handleContainerFocusIn(state, specialContainer)
 		);
+
 		specialContainer.addEventListener('focusout', () =>
 			handleContainerFocusOut(state, specialContainer)
 		);
+
 		specialContainer.addEventListener('keydown', (e) =>
 			handleSelectKeyDown(e, state, specialContainer)
 		);
+
 		specialContainer.input?.addEventListener('keyup', (e) =>
 			handleInputKeyup(e, state, specialContainer)
 		);
+
 		// In order to ensure the blur/focusout event is triggered before the click event, we need to set a timeout
 		// to set the isSelectingOption state to false after the click event has been handled
 		// If we don't want to do this, we need to set a 100-200ms timeout to ensure the blur/focusout event is triggered
@@ -470,6 +544,7 @@ function loadSearchSelects() {
 		if (state.isMultipleMap[id]) {
 			recalculateBadges(state, specialContainer);
 		}
+		
 		container.dataset.initialized = 'true';
 	}
 }
