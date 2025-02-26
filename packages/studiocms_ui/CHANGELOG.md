@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.15
+
+### Patch Changes
+
+- [#81](https://github.com/withstudiocms/ui/pull/81) [`cbee510`](https://github.com/withstudiocms/ui/commit/cbee5108ad7355cd810297d28bfce7350c931d7f) Thanks [@RATIU5](https://github.com/RATIU5)! - fixes select interfaces and types and adds safety check to prevent duplicate event listeners
+
 ## 0.4.14
 
 ### Patch Changes
