@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.16
+
+### Patch Changes
+
+- [#83](https://github.com/withstudiocms/ui/pull/83) [`9fc5efb`](https://github.com/withstudiocms/ui/commit/9fc5efb169b7d534cc67d95ecf5f716adace8db4) Thanks [@louisescher](https://github.com/louisescher)! - Fixes selects not being form compatible
+
 ## 0.4.15
 
 ### Patch Changes
