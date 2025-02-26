@@ -19,9 +19,6 @@ type SelectState = {
 
 type ResizeCallback = (width: number, height: number, element: Element) => void;
 
-// Set attribute or safety check to make sure this function is only called once
-// Or create a map of all selects and their observers
-
 function loadSelects() {
 	const CONSTANTS = {
 		OPTION_HEIGHT: 36,
