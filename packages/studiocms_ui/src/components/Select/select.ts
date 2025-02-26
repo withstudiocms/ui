@@ -40,19 +40,23 @@ function loadSelects() {
 		if (observerMap.has(element)) {
 			unobserveResize(element);
 		}
+
 		const observer = new ResizeObserver((entries) => {
 			for (const entry of entries) {
 				const { width, height } = entry.contentRect;
 				callback(width, height, entry.target);
 			}
 		});
+
 		observer.observe(element);
 		observerMap.set(element, { observer, callback });
+
 		return () => unobserveResize(element);
 	}
 
 	function unobserveResize(element: Element): void {
 		const data = observerMap.get(element);
+
 		if (data) {
 			data.observer.disconnect();
 			observerMap.delete(element);
@@ -90,6 +94,7 @@ function loadSelects() {
 
 	const closeDropdown = (container: SelectContainer): void => {
 		if (!container?.button || !container?.dropdown) return;
+
 		container.dropdown.classList.remove('active', 'above');
 		container.button.ariaExpanded = 'false';
 	};
@@ -108,9 +113,11 @@ function loadSelects() {
 
 	const createSelectBadge = (value: string, label: string): HTMLSpanElement => {
 		const badge = document.createElement('span');
+
 		badge.classList.add('sui-badge', 'primary', 'sm', 'default', 'full', 'sui-select-badge');
 		badge.setAttribute('data-value', value);
 		badge.innerHTML = `${label} <svg style='min-width: 8px' xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24'><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 18L18 6M6 6l12 12'></path></svg>`;
+		
 		return badge;
 	};
 
@@ -119,9 +126,11 @@ function loadSelects() {
 	): { totalWidth: number; badges: HTMLElement[]; tempContainer: HTMLElement } => {
 		// Create temporary container for measurement
 		const tempContainer = document.createElement('div');
+
 		tempContainer.classList.add('sui-select-badge-container');
 		tempContainer.style.position = 'absolute';
 		tempContainer.style.visibility = 'hidden';
+
 		document.body.appendChild(tempContainer);
 
 		const badges = Array.from(activeSelects).map((select) =>
@@ -160,6 +169,7 @@ function loadSelects() {
 		if (!buttonContainer || !overflowContainer || !container?.button || !activeSelects) return;
 
 		const parentContainer = buttonContainer.parentElement;
+
 		if (!parentContainer) return;
 
 		// Clear existing content
@@ -187,7 +197,9 @@ function loadSelects() {
 		document.body.removeChild(tempContainer);
 
 		const finalBadgeContainer = document.createElement('div');
+
 		finalBadgeContainer.classList.add('sui-select-badge-container');
+
 		for (const badge of badges) {
 			badge.querySelector('svg')?.setAttribute('tabindex', '0');
 			finalBadgeContainer.appendChild(badge.cloneNode(true));
@@ -203,13 +215,16 @@ function loadSelects() {
 
 	const updateLabel = (state: SelectState, container: SelectContainer): void => {
 		const isMultiple = state.isMultipleMap[container?.dataset.id as string];
+
 		if (isMultiple) {
 			handleBadgeOverflow(state, container);
 		} else {
 			const selected = container?.querySelector('.sui-select-option.selected') as HTMLLIElement;
+
 			const selectedButtonSpan = container?.button?.querySelector(
 				'.sui-select-value-span'
 			) as HTMLSpanElement;
+
 			if (selected && selectedButtonSpan) {
 				selectedButtonSpan.innerText = selected.innerText.trim();
 			}
@@ -224,24 +239,31 @@ function loadSelects() {
 		const selectOpt = container?.dropdown?.querySelector(
 			`.sui-select-option[value='${id}']`
 		) as HTMLOptionElement;
+
 		const max = Number.parseInt(container?.dataset.multipleMax as string);
 		const selectedCount = container?.querySelectorAll('.sui-select-option.selected').length ?? 0;
+
 		const selectedCountEl = container?.querySelector(
 			'.sui-select-max-span .sui-select-select-count'
 		) as HTMLSpanElement;
+
 		const isSelected = selectOpt?.classList.contains('selected');
 
 		if (selectOpt && (isSelected || Number.isNaN(max) || selectedCount < max)) {
 			selectOpt.classList.toggle('selected');
+
 			const selectOptEl = container?.select?.querySelector(
 				`option[value='${selectOpt.getAttribute('value')}']`
 			) as HTMLOptionElement;
+
 			if (selectOptEl) {
 				selectOptEl.selected = !selectOpt.selected;
 			}
+
 			if (selectedCountEl) {
 				selectedCountEl.innerText = String(selectedCount + (isSelected ? -1 : 1));
 			}
+
 			updateLabel(state, container);
 		}
 	};
@@ -250,6 +272,7 @@ function loadSelects() {
 		const optionElements = container?.dropdown?.querySelectorAll(
 			'.sui-select-option'
 		) as NodeListOf<HTMLLIElement>;
+
 		for (const entry of optionElements) {
 			if (Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex) {
 				entry.classList.add('focused');
@@ -263,6 +286,7 @@ function loadSelects() {
 		const allOptions = container?.dropdown?.querySelectorAll(
 			'.sui-select-option'
 		) as NodeListOf<HTMLLIElement>;
+
 		return Array.from(allOptions).filter(
 			(option) =>
 				!option.classList.contains('hidden') &&
@@ -279,28 +303,24 @@ function loadSelects() {
 		const option = target.closest('.sui-select-option') as HTMLLIElement | null;
 		const lastActive = container?.dropdown?.querySelector('.sui-select-option.selected');
 		const isMultiple = state.isMultipleMap[container!.dataset.id as string];
+
 		if (isMultiple) {
 			deselectMultiOption(state, option?.getAttribute('value') as string, container);
 		} else {
 			if (lastActive) {
 				lastActive.classList.remove('selected');
-				const lastSelectOpt = container?.select?.querySelector(
-					`option[value='${lastActive.getAttribute('value')}']`
-				) as HTMLOptionElement;
-				if (lastSelectOpt) {
-					lastSelectOpt.selected = false;
-				}
 			}
+
 			if (option) {
 				option.classList.add('selected');
-				const selectOpt = container?.select?.querySelector(
-					`option[value='${option.getAttribute('value')}']`
-				) as HTMLOptionElement;
-				if (selectOpt) {
-					selectOpt.selected = true;
+
+				if (container && container.select) {
+					container.select.value = option.getAttribute('value') as string;
 				}
+
 				updateLabel(state, container);
 			}
+
 			closeDropdown(container);
 		}
 	};
@@ -311,6 +331,7 @@ function loadSelects() {
 		container: SelectContainer
 	): void => {
 		const target = e.target as HTMLElement;
+
 		if (target.closest('.sui-select-badge svg')) {
 			deselectMultiOption(
 				state,
@@ -319,6 +340,7 @@ function loadSelects() {
 			);
 			handleBadgeOverflow(state, container);
 		}
+
 		if (target.closest('.sui-select-button')) {
 			const container = target.closest('.sui-select-label') as SelectContainer;
 			if (container.dropdown?.classList.contains('active')) {
@@ -327,6 +349,7 @@ function loadSelects() {
 				openDropdown(state, container);
 			}
 		}
+
 		if (target.closest('.sui-select-dropdown.active')) {
 			handleOptionSelect(target, state, container);
 		}
@@ -347,16 +370,21 @@ function loadSelects() {
 
 		if ((e.key === 'Enter' || e.key === ' ') && focusedElement?.tagName.toLowerCase() === 'svg') {
 			const badgeElement = focusedElement?.closest('.sui-select-badge');
+
 			if (badgeElement && state.isMultipleMap[container?.dataset.id as string]) {
 				const badgeValue = badgeElement.getAttribute('data-value');
+
 				let nextBadge = badgeElement.previousElementSibling as HTMLElement;
+
 				if (!nextBadge) {
 					nextBadge = badgeElement.nextElementSibling as HTMLElement;
 				}
+
 				const nextBadgeValue = nextBadge?.getAttribute('data-value');
 
 				deselectMultiOption(state, badgeValue as string, container);
 				handleBadgeOverflow(state, container);
+
 				setTimeout(() => {
 					if (nextBadgeValue) {
 						const badgeToFocus = container?.querySelector(
@@ -369,8 +397,10 @@ function loadSelects() {
 						container?.button?.focus();
 					}
 				}, 0);
+
 				e.preventDefault();
 				e.stopImmediatePropagation();
+
 				return;
 			}
 		}
@@ -384,11 +414,13 @@ function loadSelects() {
 
 		if (e.key === 'Enter' && active) {
 			const currentlyFocused = container?.querySelector<HTMLElement>('.sui-select-option.focused');
+
 			if (currentlyFocused) {
 				currentlyFocused.click();
 				e.preventDefault();
 				e.stopImmediatePropagation();
 			}
+
 			return;
 		}
 
@@ -404,6 +436,7 @@ function loadSelects() {
 			state.focusIndex = Array.from(
 				container?.dropdown?.querySelectorAll('.sui-select-option') || []
 			).indexOf(interactiveOptions[currentInteractiveIndex - 1] as Element);
+
 			recomputeOptions(state, container);
 		}
 
@@ -411,6 +444,7 @@ function loadSelects() {
 			state.focusIndex = Array.from(
 				container?.dropdown?.querySelectorAll('.sui-select-option') || []
 			).indexOf(interactiveOptions[currentInteractiveIndex + 1] as Element);
+
 			recomputeOptions(state, container);
 		}
 
@@ -418,6 +452,7 @@ function loadSelects() {
 			state.focusIndex = Array.from(
 				container?.dropdown?.querySelectorAll('.sui-select-option') || []
 			).indexOf(interactiveOptions[0] as Element);
+
 			recomputeOptions(state, container);
 		}
 
@@ -425,6 +460,7 @@ function loadSelects() {
 			state.focusIndex = Array.from(
 				container?.dropdown?.querySelectorAll('.sui-select-option') || []
 			).indexOf(interactiveOptions[interactiveOptions.length - 1] as Element);
+
 			recomputeOptions(state, container);
 		}
 	};
@@ -435,6 +471,7 @@ function loadSelects() {
 		focusIndex: -1,
 		placeholder: '',
 	};
+
 	const selects = document.querySelectorAll<HTMLDivElement>('.sui-select-label');
 
 	document.addEventListener('click', ({ target }) => {
@@ -449,7 +486,9 @@ function loadSelects() {
 
 	for (const container of selects) {
 		if (container.dataset.initialized === 'true') continue;
+
 		const id = container.dataset.id as string;
+
 		const specialContainer = Object.assign(container, {
 			button: container.querySelector('button'),
 			dropdown: container.querySelector('.sui-select-dropdown') as HTMLUListElement,
@@ -459,21 +498,25 @@ function loadSelects() {
 		state.placeholder =
 			(specialContainer.button?.querySelector('.sui-select-value-span') as HTMLSpanElement)
 				?.innerText ?? '';
+
 		state.optionsMap[id] = JSON.parse(container.dataset.options as string);
 		state.isMultipleMap[id] = container.dataset.multiple === 'true';
 
 		specialContainer.addEventListener('click', (e) =>
 			handleContainerClick(e, state, specialContainer)
 		);
+
 		specialContainer.addEventListener('keydown', (e) =>
 			handleSelectKeyDown(e, state, specialContainer)
 		);
+
 		if (state.isMultipleMap[id]) {
 			observeResize(specialContainer.button!, () => {
 				handleBadgeOverflow(state, specialContainer);
 			});
 			handleBadgeOverflow(state, specialContainer);
 		}
+		
 		container.dataset.initialized = 'true';
 	}
 }

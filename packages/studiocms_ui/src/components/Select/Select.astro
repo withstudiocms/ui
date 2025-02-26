@@ -198,7 +198,8 @@ const defaultLabel = selected
 				const isSelected = Array.isArray(selected)
 					? selected.map((y) => y && y.value).includes(x.value)
 					: selected?.value === x.value;
-				(
+					
+				return (
 					<option
 						value={x.value}
 						selected={isSelected}
