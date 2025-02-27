@@ -92,6 +92,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export { default as Badge } from '${resolve('./components/Badge/Badge.astro')}';
 							export { default as Icon } from '${resolve('./components/Icon/Icon.astro')}';
 							export { default as IconBase } from '${resolve('./components/Icon/IconBase.astro')}';
+							export { default as Skeleton } from '${resolve('./components/Skeleton/Skeleton.astro')}';
 
 							export { ProgressHelper } from '${resolve('./components/Progress/helper.js')}';
 							export { SingleSidebarHelper, DoubleSidebarHelper } from '${resolve('./components/Sidebar/helpers.js')}';
@@ -170,6 +171,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export const Icon: typeof import('${resolve('./components/Icon/Icon.astro')}').default;
 							export const IconBase: typeof import('${resolve('./components/Icon/IconBase.astro')}').default;
 							export const toast: typeof import('${resolve('./components/Toast/toast.js')}').toast;
+							export const Skeleton: typeof import('${resolve('./components/Skeleton/Skeleton.astro')}').default;
 							export type HeroIconName = import('${resolve('./components/Icon/iconType.js')}').HeroIconName;
 
 							export class ModalHelper {

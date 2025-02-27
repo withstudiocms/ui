@@ -1,0 +1,176 @@
+---
+import './skeleton.css';
+
+interface BaseProps {
+
+	/**
+	 * The class of the skeleton. Defaults to `undefined`.
+	 */
+	class?: string;
+
+	/**
+	 * The variant of the skeleton. Defaults to `undefined`.
+	 */
+	variant: 'card' | 'text' | 'block' | 'circle';
+
+	/**
+	 * The width of the skeleton. Defaults to `undefined`.
+	 */
+	width?: `${number}%` | `${number}px` | `${number}rem`;
+
+	/**
+	 * The height of the skeleton. Defaults to `undefined`.
+	 */
+	height?: `${number}%` | `${number}px` | `${number}rem`;
+
+	/**
+	 * The radius of the skeleton. Defaults to `lg`.
+	 * 
+	 * This property is ignored for the `circle` variant.
+	 */
+	radius?: 'none' | 'sm' | 'md' | 'lg';
+
+	/**
+	 * The direction of the contents within the skeleton. Defaults to `row`.
+	 * 
+	 * This property is only applicable for the `card` variant.
+	 */
+	direction?: 'row' | 'column';
+
+	/**
+	 * The content horizontal alignment of the skeleton. Defaults to `center`.
+	 * 
+	 * This property is only applicable for the `card` variant.
+	 */
+	hAlign?: 'start' | 'center' | 'end';
+
+	/**
+	 * The content vertical alignment of the skeleton. Defaults to `center`.
+	 * 
+	 * This property is only applicable for the `card` variant.
+	 */
+	vAlign?: 'start' | 'center' | 'end';
+
+	/**
+	 * The gap between items inside a card. Defaults to `0.5rem`.
+	 * 
+	 * This property is only applicable for the `card` variant.
+	 */
+	gap?: `${number}px` | `${number}rem`;
+
+	/**
+	 * The animation of the skeleton. Defaults to `slide`.
+	 * 
+	 * This property defaults to none when the user has reduced motion enabled.
+	 */
+	animation?: 'none' | 'slide' | 'pulse';
+}
+
+interface CardProps extends BaseProps {
+	/**
+	 * The variant of the skeleton. Defaults to `undefined`.
+	 */
+	variant: 'card';
+
+	/**
+	 * The direction of the contents within the skeleton. Defaults to `row`.
+	 * 
+	 * This property is only applicable for the `card` variant.
+	 */
+	direction: 'row' | 'column';
+
+	/**
+	 * The content horizontal alignment of the skeleton. Defaults to `center`.
+	 * 
+	 * This property is only applicable for the `card` variant.
+	 */
+	hAlign?: 'start' | 'center' | 'end';
+
+	/**
+	 * The content vertical alignment of the skeleton. Defaults to `center`.
+	 * 
+	 * This property is only applicable for the `card` variant.
+	 */
+	vAlign?: 'start' | 'center' | 'end';
+
+	/**
+	 * The gap between items inside a card. Defaults to `0.5rem`.
+	 * 
+	 * This property is only applicable for the `card` variant.
+	 */
+	gap?: `${number}px` | `${number}rem`;
+}
+
+interface ShapeProps extends BaseProps {
+	/**
+	 * The variant of the skeleton. Defaults to `undefined`.
+	 */
+	variant: 'block' | 'circle';
+
+	/**
+	 * The width of the skeleton. Defaults to `undefined`.
+	 */
+	width: `${number}%` | `${number}px` | `${number}rem`;
+
+	/**
+	 * The height of the skeleton. Defaults to `undefined`.
+	 */
+	height: `${number}%` | `${number}px` | `${number}rem`;
+}
+
+type Props = BaseProps | CardProps | ShapeProps;
+
+const { 
+	variant,
+	width,
+	height,
+	radius = 'lg',
+	direction = 'column',
+	animation = 'slide',
+	vAlign = 'center',
+	hAlign = 'center',
+	gap = '0.5rem',
+	class: className,
+} = Astro.props;
+
+const styles = [
+ width && `width: ${width};`,
+ height && `height: ${height};`,
+ gap && variant === 'card' && `gap: ${gap};`
+].filter(Boolean).join(' ');
+
+function getClasses() {
+	const classes = ['sui-skeleton'];
+
+	if (variant) {
+		classes.push(`sui-skeleton-${variant}`);
+		
+		if (variant === 'card') {
+			classes.push(`sui-skeleton-${direction}`);
+			
+			const hAlignProp = direction === 'row' ? 'justify' : 'align';
+			const vAlignProp = direction === 'row' ? 'items' : 'justify';
+			
+			classes.push(`sui-skeleton-${hAlignProp}-${hAlign}`);
+			classes.push(`sui-skeleton-${vAlignProp}-${vAlign}`);
+		}
+	}
+
+	if (radius !== 'none' && variant !== 'circle') {
+		classes.push(`sui-skeleton-radii-${radius}`);
+	}
+
+	if (animation !== 'none' && variant !== 'card') {
+		classes.push(`sui-skeleton-anim-${animation}`);
+	}
+	if (className) {
+		classes.push(className);
+	}
+
+	return classes;
+}
+---
+
+<div class:list={getClasses()} style={styles}>
+	<slot />
+</div>
