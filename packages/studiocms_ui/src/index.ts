@@ -78,7 +78,6 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export { default as SearchSelect } from '${resolve('./components/SearchSelect/SearchSelect.astro')}';
 							export { default as Dropdown } from '${resolve('./components/Dropdown/Dropdown.astro')}';
 							export { default as User } from '${resolve('./components/User/User.astro')}';
-							export { default as ThemeToggle } from '${resolve('./components/ThemeToggle/ThemeToggle.astro')}';
 							export { default as Tabs } from '${resolve('./components/Tabs/Tabs.astro')}';
 							export { default as TabItem } from '${resolve('./components/Tabs/TabItem.astro')}';
 							export { default as Accordion } from '${resolve('./components/Accordion/Accordion.astro')}';
@@ -156,7 +155,6 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export const SearchSelect: typeof import('${resolve('./components/SearchSelect/SearchSelect.astro')}').default;
 							export const Dropdown: typeof import('${resolve('./components/Dropdown/Dropdown.astro')}').default;
 							export const User: typeof import('${resolve('./components/User/User.astro')}').default;
-							export const ThemeToggle: typeof import('${resolve('./components/ThemeToggle/ThemeToggle.astro')}').default;
 							export const Tabs: typeof import('${resolve('./components/Tabs/Tabs.astro')}').default;
 							export const TabItem: typeof import('${resolve('./components/Tabs/TabItem.astro')}').default;
 							export const Accordion: typeof import('${resolve('./components/Accordion/Accordion.astro')}').default;
