@@ -170,8 +170,8 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export const Badge: typeof import('${resolve('./components/Badge/Badge.astro')}').default;
 							export const Icon: typeof import('${resolve('./components/Icon/Icon.astro')}').default;
 							export const IconBase: typeof import('${resolve('./components/Icon/IconBase.astro')}').default;
-							export const toast: typeof import('${resolve('./components/Toast/toast.js')}').toast;
 							export const Skeleton: typeof import('${resolve('./components/Skeleton/Skeleton.astro')}').default;
+							export const toast: typeof import('${resolve('./components/Toast/toast.js')}').toast;
 							export type HeroIconName = import('${resolve('./components/Icon/iconType.js')}').HeroIconName;
 
 							export class ModalHelper {
