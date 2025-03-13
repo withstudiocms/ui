@@ -1,3 +1,4 @@
+/// <reference path="./events.d.ts" />
 import fs from 'node:fs';
 import { icons as heroicons } from '@iconify-json/heroicons';
 import type { IconifyJSON } from '@iconify/types';

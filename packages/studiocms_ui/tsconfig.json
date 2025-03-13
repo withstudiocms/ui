@@ -5,5 +5,5 @@
     "target": "ESNext"
   },
   "exclude": ["dist"],
-  "include": ["src/**/*", "env.d.ts", "icons.d.ts"]
+  "include": ["src/**/*", "scripts.d.ts", "icons.d.ts"]
 }

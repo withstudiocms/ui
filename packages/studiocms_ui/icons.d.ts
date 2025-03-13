@@ -1,3 +1,5 @@
+// This file contains the default types for 'studiocms:ui/icons' module
+
 declare module 'studiocms:ui/icons' {
 	export const availableIcons: (
 		| 'heroicons:academic-cap'
