@@ -1,13 +1,119 @@
 ---
-import { icons } from '@iconify-json/heroicons';
+import { type AvailableIcons, type IconCollections, iconCollections } from 'studiocms:ui/icons';
+import * as Icons from 'studiocms:ui/icons';
 import type { HTMLAttributes } from 'astro/types';
 import IconBase from './IconBase.astro';
-import { type HeroIconName } from './iconType.js';
+import { StudioCMS_UI_IconError, errorHintBuilder } from './errors.js';
 
+/**
+ * Props interface for the Icon component.
+ *
+ * @extends HTMLAttributes<'svg'>
+ *
+ * @property {AvailableIcons} name - The name of the icon to be displayed.
+ * @property {number} height - The height of the icon.
+ * @property {number} width - The width of the icon.
+ */
 interface Props extends HTMLAttributes<'svg'> {
-	name: HeroIconName;
-	height?: number;
-	width?: number;
+	/**
+	 * Name of the icon to be displayed.
+	 */
+	name: AvailableIcons;
+
+	/**
+	 * Height of the icon.
+	 */
+	height: number;
+
+	/**
+	 * Width of the icon.
+	 */
+	width: number;
+}
+
+// Extract the props from the Astro component.
+const { name: __name, height, width, ...rest } = Astro.props;
+
+/**
+ * Splits the `__name` string by the colon (:) character.
+ * The resulting array is stored in the `_nameSplit` variable.
+ *
+ * Example:
+ * If `__name` is "prefix:suffix", `_nameSplit` will be ["prefix", "suffix"].
+ */
+const _nameSplit = __name.split(':');
+
+/**
+ * Checks if the icon name contains a colon and if the split name length is not equal to 1.
+ * If both conditions are met, throws a StudioCMS_UI_IconError with a message indicating an invalid icon name.
+ *
+ * @throws {StudioCMS_UI_IconError} Throws an error if the icon name is invalid.
+ * @param {string} __name - The name of the icon to be validated.
+ * @param {Array} _nameSplit - The split parts of the icon name.
+ * @param {Object} iconCollections - The available icon collections.
+ */
+if (__name.includes(':') && _nameSplit.length !== 2) {
+	throw new StudioCMS_UI_IconError(
+		`Invalid icon name: ${__name}`,
+		errorHintBuilder({ iconCollections, prefix: '', iconName: __name })
+	);
+}
+
+/**
+ * Extracts the prefix from the `_nameSplit` array and casts it to the `IconCollections` type.
+ *
+ * @constant
+ * @type {IconCollections}
+ */
+const prefix: IconCollections = _nameSplit[0] as IconCollections;
+
+/**
+ * Extracts the second element from the `_nameSplit` array and casts it to the `AvailableIcons` type.
+ *
+ * @constant
+ * @type {AvailableIcons}
+ */
+const name: AvailableIcons = _nameSplit[1] as AvailableIcons;
+
+/**
+ * Retrieves the icon collection based on the provided prefix.
+ *
+ * @constant
+ * @param {string} prefix - The prefix used to identify the icon collection.
+ */
+const iconCollection = Icons[prefix];
+
+/**
+ * Validates the provided icon collection prefix and throws an error if it is invalid.
+ *
+ * @throws {StudioCMS_UI_IconError} If the prefix is not provided, not included in the icon collections, or if the icon collection is not defined.
+ *
+ * @param {string} prefix - The prefix of the icon collection to validate.
+ * @param {Array<string>} iconCollections - The list of valid icon collection prefixes.
+ * @param {Object} iconCollection - The icon collection object to validate.
+ * @param {string} name - The name of the icon.
+ */
+if (!prefix || !iconCollections.includes(prefix) || !iconCollection) {
+	throw new StudioCMS_UI_IconError(
+		`Invalid icon collection: ${prefix}`,
+		errorHintBuilder({ iconCollections, prefix, iconName: name })
+	);
+}
+
+/**
+ * Throws an error if the icon name is invalid.
+ *
+ * @throws {StudioCMS_UI_IconError} If the icon name is not provided or invalid.
+ * @param {string} name - The name of the icon.
+ * @param {Object} iconCollections - The collections of available icons.
+ * @param {string} prefix - The prefix for the icon name.
+ * @param {Function} errorHintBuilder - A function to build error hints.
+ */
+if (!name) {
+	throw new StudioCMS_UI_IconError(
+		`Invalid icon name: ${name}`,
+		errorHintBuilder({ iconCollections, prefix, iconName: name })
+	);
 }
 ---
-<IconBase iconCollection={icons} {...Astro.props} />
+<IconBase {iconCollection} {name} {prefix} {...rest} {height} {width} />
