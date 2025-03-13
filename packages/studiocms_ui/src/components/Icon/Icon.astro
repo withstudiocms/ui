@@ -13,7 +13,7 @@ interface Props extends HTMLAttributes<'svg'> {
 
 const { name: _name, height, width, ...rest } = Astro.props;
 
-if (_name.includes(':') && _name.split(':').length > 2) {
+if ((_name.includes(':') && _name.split(':').length > 2) || _name.split(':').length < 1) {
 	throw new StudioCMS_UI_IconError(
 		`Invalid icon name: ${_name}`,
 		errorHintBuilder({ iconCollections, prefix: '', iconName: _name })
