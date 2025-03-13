@@ -11,16 +11,18 @@ interface Props extends HTMLAttributes<'svg'> {
 	width: number;
 }
 
-const { name: _name, height, width, ...rest } = Astro.props;
+const { name: __name, height, width, ...rest } = Astro.props;
 
-if (_name.includes(':') && _name.split(':').length > 2 && _name.split(':').length < 1) {
+const _nameSplit = __name.split(':');
+
+if (__name.includes(':') && _nameSplit.length > 2 && _nameSplit.length < 1) {
 	throw new StudioCMS_UI_IconError(
-		`Invalid icon name: ${_name}`,
-		errorHintBuilder({ iconCollections, prefix: '', iconName: _name })
+		`Invalid icon name: ${__name}`,
+		errorHintBuilder({ iconCollections, prefix: '', iconName: __name })
 	);
 }
 
-const [prefix, name] = _name.split(':');
+const [prefix, name] = _nameSplit;
 
 const iconCollection = Icons[prefix as IconCollections];
 
