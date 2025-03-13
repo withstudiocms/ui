@@ -206,9 +206,6 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export const availableIcons = ${JSON.stringify(icons.availableIcons)};
 
 							export const iconCollections = ${JSON.stringify(icons.iconCollections)};
-
-							export type AvailableIcons = (typeof availableIcons)[number];
-							export type IconCollections = (typeof iconCollections)[number];
 						`,
 					},
 				});
