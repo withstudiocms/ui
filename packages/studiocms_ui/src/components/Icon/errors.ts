@@ -11,9 +11,7 @@ import { AstroError } from 'astro/errors';
  * @property {const} type - The type of the error, set to 'AstroUserError'.
  */
 export class StudioCMS_UI_IconError extends AstroError {
-	override name = 'StudioCMS UI Icon Error';
-	override hint =
-		'Please check that the Icon Collection you are using includes the icon you are trying to use.';
+	override name = '@studiocms/ui Icon Error';
 	override type = 'AstroUserError' as const;
 }
 

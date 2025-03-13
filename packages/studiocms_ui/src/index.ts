@@ -193,8 +193,6 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export { toast } from '${resolve('./components/Toast/toast.js')}';
 							export { ModalHelper } from '${resolve('./components/Modal/modal.js')}';
 							export { DropdownHelper } from '${resolve('./components/Dropdown/dropdown.js')}';
-
-							export * from '${resolve('./components/Icon/iconType.js')}';
 						`,
 
 						'studiocms:ui/utils': `
