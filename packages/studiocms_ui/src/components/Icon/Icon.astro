@@ -3,6 +3,7 @@ import { type AvailableIcons, type IconCollections, iconCollections } from 'stud
 import * as Icons from 'studiocms:ui/icons';
 import type { HTMLAttributes } from 'astro/types';
 import IconBase from './IconBase.astro';
+import { StudioCMS_UI_IconError } from './errors.js';
 
 interface Props extends HTMLAttributes<'svg'> {
 	name: AvailableIcons;
@@ -10,33 +11,18 @@ interface Props extends HTMLAttributes<'svg'> {
 	width?: number;
 }
 
-function getPrefix(name: AvailableIcons) {
-	const [prefix] = name.split(':');
-	return prefix;
-}
+const { name, ...rest } = Astro.props;
 
-const { name, ...rest } = Astro.props as Props;
-
-const prefix = getPrefix(name);
-
-if (!prefix) {
-	throw new Error(`Invalid icon name: ${name}`);
-}
-
-if (!iconCollections.includes(prefix as IconCollections)) {
-	throw new Error(`Invalid icon collection: ${prefix}`);
-}
-
-if (prefix === 'iconCollections' || prefix === 'availableIcons') {
-	throw new Error(`Invalid icon name: ${name}`);
-}
+const [prefix, iconName] = name.split(':');
 
 const collection = Icons[prefix as IconCollections];
 
-if (!collection) {
-	throw new Error(`Invalid icon collection: ${prefix}`);
+if (!prefix || !iconCollections.includes(prefix as IconCollections) || !collection) {
+	throw new StudioCMS_UI_IconError(`Invalid icon collection: ${prefix}`);
 }
 
-const iconName = name.replace(`${prefix}:`, '');
+if (!iconName) {
+	throw new StudioCMS_UI_IconError(`Invalid icon name: ${iconName}`);
+}
 ---
 <IconBase iconCollection={collection} name={iconName} {...rest} />
