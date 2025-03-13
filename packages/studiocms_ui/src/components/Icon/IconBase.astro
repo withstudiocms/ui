@@ -118,8 +118,8 @@ if (!iconData) {
  * @returns {string} The rendered SVG data as a string.
  */
 const renderData = iconToSVG(iconData, {
-	height: attributes.height || 24,
-	width: attributes.width || 24,
+	height: attributes.height || iconCollection.height || 24,
+	width: attributes.width || iconCollection.width || 24,
 });
 
 /**
