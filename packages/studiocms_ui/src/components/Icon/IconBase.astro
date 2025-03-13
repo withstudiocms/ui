@@ -35,13 +35,17 @@ interface Props extends HTMLAttributes<'svg'> {
 	 */
 	name: string;
 	/**
+	 * Prefix of the icon collection
+	 */
+	prefix: string;
+	/**
 	 * Height of the icon in pixels
 	 */
-	height?: number;
+	height: number;
 	/**
 	 * Width of the icon in pixels
 	 */
-	width?: number;
+	width: number;
 }
 
 const { iconCollection, name, ...props } = Astro.props;
