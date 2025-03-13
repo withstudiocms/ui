@@ -1,13 +1,42 @@
 ---
-import { icons } from '@iconify-json/heroicons';
+import { type AvailableIcons, type IconCollections, iconCollections } from 'studiocms:ui/icons';
+import * as Icons from 'studiocms:ui/icons';
 import type { HTMLAttributes } from 'astro/types';
 import IconBase from './IconBase.astro';
-import { type HeroIconName } from './iconType.js';
 
 interface Props extends HTMLAttributes<'svg'> {
-	name: HeroIconName;
+	name: AvailableIcons;
 	height?: number;
 	width?: number;
 }
+
+function getPrefix(name: AvailableIcons) {
+	const [prefix] = name.split(':');
+	return prefix;
+}
+
+const { name, ...rest } = Astro.props as Props;
+
+const prefix = getPrefix(name);
+
+if (!prefix) {
+	throw new Error(`Invalid icon name: ${name}`);
+}
+
+if (!iconCollections.includes(prefix as IconCollections)) {
+	throw new Error(`Invalid icon collection: ${prefix}`);
+}
+
+if (prefix === 'iconCollections' || prefix === 'availableIcons') {
+	throw new Error(`Invalid icon name: ${name}`);
+}
+
+const collection = Icons[prefix as IconCollections];
+
+if (!collection) {
+	throw new Error(`Invalid icon collection: ${prefix}`);
+}
+
+const iconName = name.replace(`${prefix}:`, '');
 ---
-<IconBase iconCollection={icons} {...Astro.props} />
+<IconBase iconCollection={collection} name={iconName} {...rest} />

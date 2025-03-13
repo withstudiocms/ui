@@ -1,4 +1,6 @@
 import fs from 'node:fs';
+import { icons as heroicons } from '@iconify-json/heroicons';
+import type { IconifyJSON } from '@iconify/types';
 import type { AstroIntegration } from 'astro';
 import transitionEventPolyfill from 'astro-transition-event-polyfill';
 import { studiocmsLogo } from './toolbar/icon.js';
@@ -23,11 +25,93 @@ type Options = {
 	 * ```
 	 */
 	noInjectCSS?: boolean;
+
+	/**
+	 * Allows the ability to add custom icons to the Icon component.
+	 *
+	 * @example:
+	 * ```ts
+	 * import { icons as heroicons } from '@iconify-json/heroicons';
+	 *
+	 * {
+	 * 	icons: {
+	 * 		heroicons,
+	 * 		// OR
+	 * 		'custom-heroicons': heroicons
+	 * }
+	 */
+	icons?: Record<string, IconifyJSON>;
 };
 
+/**
+ * Creates a collection of icon prefixes, integration collections, and available icons from the provided IconifyJSON records.
+ *
+ * @param {Record<string, IconifyJSON>} [icons] - An optional record of icon collections keyed by their prefix.
+ * @returns {object} An object containing:
+ * - `iconCollections`: An array of icon collection prefixes.
+ * - `integrationCollections`: An array of strings representing the export statements for each icon collection.
+ * - `availableIcons`: An array of strings representing the available icons in the format `prefix:icon`.
+ */
+function createIconifyPrefixCollection(icons?: Record<string, IconifyJSON>): {
+	iconCollections: string[];
+	integrationCollections: string[];
+	availableIcons: string[];
+} {
+	const iconCollections: string[] = [];
+
+	const integrationCollections: string[] = [];
+
+	const availableIcons: string[] = [];
+
+	if (!icons) {
+		return {
+			iconCollections,
+			integrationCollections,
+			availableIcons,
+		};
+	}
+
+	for (const [prefix, collection] of Object.entries(icons)) {
+		iconCollections.push(prefix);
+
+		integrationCollections.push(`export const ${prefix} = ${JSON.stringify(collection)};`);
+
+		for (const icon of Object.keys(collection.icons)) {
+			availableIcons.push(`${prefix}:${icon}`);
+		}
+	}
+
+	return {
+		iconCollections,
+		integrationCollections,
+		availableIcons,
+	};
+}
+
+/**
+ * The Astro integration for StudioCMS UI.
+ *
+ * @see https://ui.studiocms.dev
+ * @param {Options} [options] - The options for the integration.
+ * @returns {AstroIntegration} The Astro integration object.
+ */
 export default function integration(options: Options = {}): AstroIntegration {
 	// Resolve paths relative to the current file (pkg/src/index.ts)
 	const { resolve } = createResolver(import.meta.url);
+
+	const optIcons: Record<string, IconifyJSON> = {
+		heroicons,
+	};
+
+	let icons: {
+		iconCollections: string[];
+		integrationCollections: string[];
+		availableIcons: string[];
+	} = {
+		iconCollections: [],
+		integrationCollections: [],
+		availableIcons: [],
+	};
 
 	return {
 		name: '@studiocms/ui',
@@ -39,6 +123,16 @@ export default function integration(options: Options = {}): AstroIntegration {
 				updateConfig({
 					integrations: [transitionEventPolyfill()],
 				});
+
+				if (options.icons) {
+					for (const [prefix, collection] of Object.entries(options.icons)) {
+						if (!optIcons[prefix]) {
+							optIcons[prefix] = collection;
+						}
+					}
+				}
+
+				icons = createIconifyPrefixCollection(optIcons);
 
 				addVirtualImports(params, {
 					name: '@studiocms/ui',
@@ -104,6 +198,17 @@ export default function integration(options: Options = {}): AstroIntegration {
 
 						'studiocms:ui/utils': `
 							export { ThemeHelper, Theme } from '${resolve('./utils/ThemeHelper.js')}';
+						`,
+
+						'studiocms:ui/icons': `
+							${icons.integrationCollections.join('\n')}
+
+							export const availableIcons = ${JSON.stringify(icons.availableIcons)};
+
+							export const iconCollections = ${JSON.stringify(icons.iconCollections)};
+
+							export type AvailableIcons = (typeof availableIcons)[number];
+							export type IconCollections = (typeof iconCollections)[number];
 						`,
 					},
 				});
@@ -401,6 +506,25 @@ export default function integration(options: Options = {}): AstroIntegration {
 								 */
 								private themeManagerMutationHandler;
 							}
+						}
+					`,
+				});
+
+				injectTypes({
+					filename: 'icons.d.ts',
+					content: `
+						declare module 'studiocms:ui/icons' {
+							export const availableIcons: ('${icons.availableIcons.join("'\n | '")}')[];
+							export const iconCollections: ('${icons.iconCollections.join("'\n | '")}')[];
+
+							${icons.iconCollections
+								.map((collection) => {
+									return `export const ${collection}: import('@studiocms/ui/types').IconifyJSON;`;
+								})
+								.join('\n')}
+
+							export type AvailableIcons = (typeof availableIcons)[number];
+							export type IconCollections = (typeof iconCollections)[number];
 						}
 					`,
 				});

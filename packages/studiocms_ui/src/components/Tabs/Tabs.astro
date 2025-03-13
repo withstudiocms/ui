@@ -1,12 +1,12 @@
 ---
+import type { AvailableIcons } from 'studiocms:ui/icons';
 import type { StudioCMSColorway } from '../../utils/colors.js';
 import { generateID } from '../../utils/generateID.js';
 import Icon from '../Icon/Icon.astro';
-import type { HeroIconName } from '../Icon/iconType.js';
 import './tabs.css';
 
 interface Tab {
-	icon?: HeroIconName;
+	icon?: AvailableIcons;
 	label: string;
 	color: Exclude<StudioCMSColorway, 'default'>;
 	tabId: string;

@@ -1,9 +1,9 @@
 ---
 import type { StudioCMSColorway } from '../../utils/colors.js';
 import './badge.css';
+import type { AvailableIcons } from 'studiocms:ui/icons';
 import type { HTMLAttributes } from 'astro/types';
 import Icon from '../Icon/Icon.astro';
-import type { HeroIconName } from '../Icon/iconType.js';
 
 interface Props extends Omit<HTMLAttributes<'span'>, 'color'> {
 	/**
@@ -13,7 +13,7 @@ interface Props extends Omit<HTMLAttributes<'span'>, 'color'> {
 	/**
 	 * The icon to display in the badge.
 	 */
-	icon?: HeroIconName;
+	icon?: AvailableIcons;
 	/**
 	 * The icon position. Defaults to `left`.
 	 */

@@ -152,7 +152,7 @@ const defaultLabel = selected
 				label={label || ''}
 				isRequired={isRequired || false}
 			/>
-			<Icon name="chevron-up-down" class="sui-search-select-indicator" width={24} height={24} />
+			<Icon name="heroicons:chevron-up-down" class="sui-search-select-indicator" width={24} height={24} />
 		</div>
 		<ul class="sui-search-select-dropdown" role="listbox" id={`${name}-dropdown`}>
 			{
@@ -210,7 +210,7 @@ const defaultLabel = selected
 			<div class="sui-search-select-badge-container">
 				{
 					((selected ?? []) as SearchSelectOption[]).map((s) => s && 
-						<Badge class="sui-search-select-badge" data-value={s.value} size="sm" label={s.label} iconPosition="right" icon="x-mark" />
+						<Badge class="sui-search-select-badge" data-value={s.value} size="sm" label={s.label} iconPosition="right" icon="heroicons:x-mark" />
 					)
 				}
 			</div>
