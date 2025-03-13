@@ -26,7 +26,7 @@ interface Props extends HTMLAttributes<'svg'> {
 	 *
 	 * const { name, ...props } = Astro.props;
 	 * ---
-	 * <IconBase iconCollection={icons} {name} {...props} />
+	 * <IconBase iconCollection={icons} {name} prefix={icons.prefix} {...props} />
 	 * ```
 	 */
 	iconCollection: IconifyJSON;

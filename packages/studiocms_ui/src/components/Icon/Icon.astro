@@ -25,7 +25,10 @@ if (!prefix || !iconCollections.includes(prefix as IconCollections) || !iconColl
 }
 
 if (!name) {
-	throw new StudioCMS_UI_IconError(`Invalid icon name: ${name}`);
+	throw new StudioCMS_UI_IconError(
+		`Invalid icon name: ${name}`,
+		errorHintBuilder({ iconCollections, prefix, iconName: name })
+	);
 }
 ---
 <IconBase {iconCollection} {name} {prefix} {...rest} {height} {width} />
