@@ -1,3 +1,4 @@
+// @ts-ignore - This is a TypeGenerated Module, available in dev thanks to manual d.ts file - This comment is here because this causes a type-error during build
 import type { iconCollections as _iconCollections } from 'studiocms:ui/icons';
 import { AstroError } from 'astro/errors';
 

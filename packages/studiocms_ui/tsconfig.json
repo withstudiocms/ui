@@ -1,9 +1,10 @@
 {
-  "extends": "astro/tsconfigs/strictest",
+  "extends": "../../tsconfig.base.json",
+  "exclude": ["dist"],
+  "include": ["src/**/*", "icons.d.ts"],
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "ESNext"
-  },
-  "exclude": ["dist"],
-  "include": ["src/**/*", "scripts.d.ts", "icons.d.ts"]
+    "resolveJsonModule": true,
+    "jsx": "preserve"
+  }
 }
