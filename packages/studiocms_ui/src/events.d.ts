@@ -9,9 +9,9 @@ interface CustomEventMap {
 	 * contains the properties defined in ToastProps.
 	 *
 	 * @event createtoast
-	 * @type {CustomEvent<import('./types/index').ToastProps>}
+	 * @type {CustomEvent<import('./types/index.js').ToastProps>}
 	 */
-	createtoast: CustomEvent<import('./types/index').ToastProps>;
+	createtoast: CustomEvent<import('./types/index.js').ToastProps>;
 }
 
 /**
