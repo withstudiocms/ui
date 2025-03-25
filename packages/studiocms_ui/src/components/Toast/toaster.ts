@@ -105,12 +105,16 @@ function createToast(props: ToastProps) {
 
 	if (props.type === 'success') {
 		iconString = 'check-circle';
+		toastContainer.classList.add('success');
 	} else if (props.type === 'danger') {
 		iconString = 'exclamation-circle';
+		toastContainer.classList.add('danger');
 	} else if (props.type === 'warning') {
 		iconString = 'exclamation-triangle';
+		toastContainer.classList.add('warning');
 	} else {
 		iconString = 'information-circle';
+		toastContainer.classList.add('info');
 	}
 
 	const toastIcon = getIconString(iconString, 'toast-icon', 24, 24);
