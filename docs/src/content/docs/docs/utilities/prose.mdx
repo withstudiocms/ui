@@ -1,0 +1,97 @@
+---
+i18nReady: false
+title: Prose Helper
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import 'studiocms:ui/prose';
+
+The `studiocms:ui/prose` dynamic import adds a CSS file that contains a `prose` class that can be used to add styled typography to your content.
+
+## Usage
+
+```astro showLinenumbers title="Prose Example" "import 'studiocms:ui/prose';" 'class="prose"'
+---
+import 'studiocms:ui/prose';
+---
+
+<section class="prose">
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, velit cumque aliquam iusto ea hic commodi modi fugiat voluptates esse voluptate facilis, accusamus pariatur deserunt ipsa quis consectetur dignissimos. Impedit.
+Rerum, minima odit. Velit quo dicta eaque inventore rem aut omnis cupiditate obcaecati, ipsam, incidunt voluptate. Ab, dolore non? Voluptatibus nemo animi corporis consectetur praesentium delectus veniam recusandae nisi quidem!</p>
+  <p>Soluta minus fugiat magni molestias dignissimos tempore quia, aliquid quaerat blanditiis autem culpa atque, nulla obcaecati assumenda qui eum quidem distinctio odio est. Nemo in incidunt nihil libero. Exercitationem, vel.
+Nobis optio consequatur velit eos eligendi eius, nisi fuga voluptatibus molestiae, quos laborum blanditiis laudantium? Nisi voluptatem quas commodi consectetur repellendus atque, odit a eveniet nostrum iure natus maxime vel.</p>
+</section>
+```
+
+## Example
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <section class="prose">
+        <h2>Heading 2</h2>
+
+        <p>Lorem ipsum dolor sit amet <i>consectetur</i>, adipisicing elit. Quam, velit cumque <b>aliquam</b> iusto ea hic commodi modi fugiat voluptates esse voluptate facilis, accusamus pariatur deserunt ipsa quis consectetur dignissimos. Impedit.
+      Rerum, minima odit. Velit quo dicta eaque inventore rem aut omnis cupiditate obcaecati, ipsam, incidunt voluptate. Ab, dolore non? Voluptatibus nemo animi corporis consectetur praesentium delectus veniam recusandae nisi quidem!</p>
+        <p>Soluta minus fugiat magni molestias dignissimos tempore quia, aliquid quaerat blanditiis autem culpa atque, nulla obcaecati assumenda qui eum quidem distinctio odio est. Nemo in incidunt nihil libero. Exercitationem, vel.
+      Nobis optio consequatur velit eos eligendi eius, nisi fuga voluptatibus molestiae, quos laborum blanditiis laudantium? Nisi voluptatem quas commodi consectetur repellendus atque, odit a eveniet nostrum iure natus maxime vel.</p>
+
+        <h3>Heading 3</h3>
+
+        <ol>
+          <li>List item 1</li>
+          <li>List item 2</li>
+          <li>List item 3</li>
+        </ol>
+
+        <h3>Quotes</h3>
+        <blockquote>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, velit cumque aliquam iusto ea hic commodi modi fugiat voluptates esse voluptate facilis, accusamus pariatur deserunt ipsa quis consectetur dignissimos. Impedit.</p>
+        </blockquote>
+
+        <h3>Code</h3>
+
+        <p>This is a paragraph. Here's some code: <code>const foo = 'bar';</code></p>
+
+        <pre><code>const foo = 'bar';</code></pre>
+      </section>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="Prose Example"
+    ---
+    import 'studiocms:ui/prose';
+    ---
+
+    <section class="prose">
+      <h2>Heading 2</h2>
+
+      <p>Lorem ipsum dolor sit amet <i>consectetur</i>, adipisicing elit. Quam, velit cumque <b>aliquam</b> iusto ea hic commodi modi fugiat voluptates esse voluptate facilis, accusamus pariatur deserunt ipsa quis consectetur dignissimos. Impedit.
+    Rerum, minima odit. Velit quo dicta eaque inventore rem aut omnis cupiditate obcaecati, ipsam, incidunt voluptate. Ab, dolore non? Voluptatibus nemo animi corporis consectetur praesentium delectus veniam recusandae nisi quidem!</p>
+      <p>Soluta minus fugiat magni molestias dignissimos tempore quia, aliquid quaerat blanditiis autem culpa atque, nulla obcaecati assumenda qui eum quidem distinctio odio est. Nemo in incidunt nihil libero. Exercitationem, vel.
+    Nobis optio consequatur velit eos eligendi eius, nisi fuga voluptatibus molestiae, quos laborum blanditiis laudantium? Nisi voluptatem quas commodi consectetur repellendus atque, odit a eveniet nostrum iure natus maxime vel.</p>
+
+      <h3>Heading 3</h3>
+
+      <ol>
+        <li>Milk</li>
+        <li>Eggs</li>
+        <li>Bread</li>
+      </ol>
+
+      <h3>Quotes</h3>
+      <blockquote>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, velit cumque aliquam iusto ea hic commodi modi fugiat voluptates esse voluptate facilis, accusamus pariatur deserunt ipsa quis consectetur dignissimos. Impedit.</p>
+        <p>Rerum, minima odit. Velit quo dicta eaque inventore rem aut omnis cupiditate obcaecati, ipsam, incidunt voluptate. Ab, dolore non? Voluptatibus nemo animi corporis consectetur praesentium delectus veniam recusandae nisi quidem!</p>
+      </blockquote>
+
+      <h3>Code</h3>
+
+      <p>This is a paragraph. Here's some code: <code>const foo = 'bar';</code></p>
+
+      <pre><code>const foo = 'bar';</code></pre>
+    </section>
+    ```
+  </TabItem>
+</Tabs>

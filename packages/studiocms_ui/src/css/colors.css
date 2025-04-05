@@ -16,6 +16,7 @@
 	--background-step-3: 0 0% 14%;
 
 	--text-normal: 0 0% 100%;
+	--text-dimmed: 0 0% 80%;
 	--text-muted: 0 0% 54%;
 	--text-inverted: 0 0% 0%;
 
@@ -93,6 +94,7 @@
 	--background-step-3: 0 0% 80%;
 
 	--text-normal: 0 0% 0%;
+	--text-dimmed: 0 0% 12%;
 	--text-muted: 0 0% 24%;
 	--text-inverted: 0 0% 100%;
 
