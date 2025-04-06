@@ -144,6 +144,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 						'studiocms:ui/version': `export default '${pkgJson.version}';`,
 						// Styles
 						'studiocms:ui/global-css': `import '${resolve('./css/global.css')}';`,
+						'studiocms:ui/prose': `import '${resolve('./css/prose.css')}';`,
 						'studiocms:ui/custom-css': `import '${rootResolve(options.customCss ? options.customCss : '')}';`,
 						// Scripts
 						'studiocms:ui/scripts/checkbox': `import '${resolve('./components/Checkbox/checkbox.js')}';`,
