@@ -14,7 +14,7 @@
 .sui-search-select-label.disabled {
 	opacity: 0.5;
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .label {
@@ -22,7 +22,7 @@
 }
 
 .req-star {
-	color: hsl(var(--danger-base));
+	color: var(--danger-base);
 	font-weight: 700;
 }
 
@@ -38,19 +38,19 @@
 .sui-search-select-dropdown {
 	position: absolute;
 	width: 100%;
-	border: 1px solid hsl(var(--border));
+	border: 1px solid var(--border);
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	flex-direction: column;
 	border-radius: var(--radius-md);
-	background-color: hsl(var(--background-step-2));
+	background-color: var(--background-step-2);
 	overflow: hidden;
 	top: calc(100% + 0.25rem);
 	left: 0;
 	display: none;
 	z-index: 90;
-	box-shadow: 0px 4px 8px hsl(var(--shadow), 0.5);
+	box-shadow: 0px 4px 8px var(--shadow);
 }
 
 .sui-search-select-dropdown.above {
@@ -67,29 +67,29 @@
 }
 
 .empty-search-results:hover {
-	background-color: hsl(var(--background-step-2));
+	background-color: var(--background-step-2);
 	cursor: default;
 }
 
 .sui-search-select-option.disabled {
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .sui-search-select-option:hover,
 .sui-search-select-option.focused {
-	background-color: hsl(var(--background-step-3));
+	background-color: var(--background-step-3);
 }
 
 .sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected:hover,
 .sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected:focus,
 .sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected.focused {
-	background-color: hsl(var(--primary-hover));
+	background-color: var(--primary-hover);
 }
 
 .sui-search-select-option.selected {
-	background-color: hsl(var(--primary-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--primary-base);
+	color: var(--text-inverted);
 	cursor: default;
 }
 
@@ -176,10 +176,10 @@
 .sui-search-select-badge-container .sui-search-select-badge.sui-badge svg:active,
 .sui-search-select-badge-container .sui-search-select-badge.sui-badge svg:focus {
 	background-color: hsla(100, 100%, 95%, 0.2);
-	outline: 1px solid hsl(var(--border));
+	outline: 1px solid var(--border);
 }
 
 .sui-search-select-max-span {
 	font-size: 0.875em;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }

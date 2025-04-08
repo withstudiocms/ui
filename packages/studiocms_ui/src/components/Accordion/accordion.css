@@ -34,22 +34,22 @@
 
 .sui-accordion.outlined,
 .sui-accordion.filled {
-	border: 1px solid hsl(var(--border));
+	border: 1px solid var(--border);
 	border-radius: var(--radius-sm);
 }
 
 .sui-accordion.filled {
-	background-color: hsl(var(--background-step-1));
+	background-color: var(--background-step-1);
 }
 
 .sui-accordion.separated .sui-accordion-item,
 .sui-accordion.outlined .sui-accordion-item,
 .sui-accordion.filled .sui-accordion-item {
-	border-bottom: 1px solid hsl(var(--border));
+	border-bottom: 1px solid var(--border);
 }
 
 .sui-accordion.separated .sui-accordion-item:first-of-type {
-	border-top: 1px solid hsl(var(--border));
+	border-top: 1px solid var(--border);
 }
 
 .sui-accordion.filled .sui-accordion-item:last-of-type,
@@ -58,7 +58,7 @@
 }
 
 .sui-accordion-summary {
-	color: hsl(var(--text-normal));
+	color: var(--text-normal);
 	display: flex;
 	flex-direction: row;
 	gap: .5rem;

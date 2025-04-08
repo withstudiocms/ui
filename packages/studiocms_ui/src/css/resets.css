@@ -6,7 +6,7 @@
 
 html {
 	color-scheme: dark;
-	accent-color: hsl(var(--primary-base));
+	accent-color: var(--primary-base);
 }
 
 html,
@@ -20,8 +20,8 @@ html[data-theme="light"] {
 
 body {
 	-webkit-font-smoothing: antialiased;
-	color: hsl(var(--text-normal));
-	background-color: hsl(var(--background-base));
+	color: var(--text-normal);
+	background-color: var(--background-base);
 }
 
 input,

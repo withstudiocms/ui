@@ -36,7 +36,7 @@ const { avatar, name, handle, message, image } = Astro.props;
     height: fit-content;
     border-radius: 1rem;
     padding: 2rem;
-    background-color: hsl(var(--background-step-1));
+    background-color: var(--background-step-1);
   }
 
   .social-proof-author {
@@ -61,7 +61,7 @@ const { avatar, name, handle, message, image } = Astro.props;
 
   .social-proof-author-handle {
     font-weight: 300;
-    color: hsl(var(--text-muted));
+    color: var(--text-muted);
     font-size: .875em;
     line-height: 1;
   }

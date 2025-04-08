@@ -1,22 +1,22 @@
 .prose {
   color: var(--sui-prose-body);
-  --sui-prose-body: hsl(var(--text-dimmed));
-  --sui-prose-headings: hsl(var(--text-normal));
-  --sui-prose-links: hsl(var(--primary-hover));
-  --sui-prose-bold: hsl(var(--text-normal));
-  --sui-prose-counters: hsl(var(--text-normal));
-  --sui-prose-bullets: hsl(var(--text-normal));
-  --sui-prose-hr: hsl(var(--border));
-  --sui-prose-quotes: hsl(var(--text-dimmed));
-  --sui-prose-quote-borders: hsl(var(--border));
-  --sui-prose-captions: hsl(var(--text-normal));
-  --sui-prose-kbd: hsl(var(--background-step-2));
-  --sui-prose-kbd-shadows: hsl(var(--shadow));
-  --sui-prose-code: hsl(var(--text-normal));
-  --sui-prose-pre-code: hsl(var(--text-normal));
-  --sui-prose-pre-bg: hsl(var(--background-step-2));
-  --sui-prose-th-borders: hsl(var(--border));
-  --sui-prose-td-borders: hsl(var(--border));
+  --sui-prose-body: var(--text-dimmed);
+  --sui-prose-headings: var(--text-normal);
+  --sui-prose-links: var(--primary-hover);
+  --sui-prose-bold: var(--text-normal);
+  --sui-prose-counters: var(--text-normal);
+  --sui-prose-bullets: var(--text-normal);
+  --sui-prose-hr: var(--border);
+  --sui-prose-quotes: var(--text-dimmed);
+  --sui-prose-quote-borders: var(--border);
+  --sui-prose-captions: var(--text-normal);
+  --sui-prose-kbd: var(--background-step-2);
+  --sui-prose-kbd-shadows: var(--shadow);
+  --sui-prose-code: var(--text-normal);
+  --sui-prose-pre-code: var(--text-normal);
+  --sui-prose-pre-bg: var(--background-step-2);
+  --sui-prose-th-borders: var(--border);
+  --sui-prose-td-borders: var(--border);
   max-width: 65ch;
   font-size: 1rem;
   line-height: 1.75;
@@ -245,7 +245,7 @@
   color: var(--sui-prose-code);
   font-size: 0.875em;
   font-weight: 600;
-  background: hsl(var(--background-step-3));
+  background: var(--background-step-3);
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
 }
