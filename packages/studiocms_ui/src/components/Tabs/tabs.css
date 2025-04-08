@@ -61,31 +61,31 @@
 }
 
 .sui-tabs-container.default .sui-tab-header:hover {
-	background-color: hsla(var(--default-flat-active)) !important;
+	background-color: var(--default-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.active {
-	background-color: hsla(var(--primary-flat-active)) !important;
+	background-color: var(--primary-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.success.active {
-	background-color: hsla(var(--success-flat-active)) !important;
+	background-color: var(--success-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.warning.active {
-	background-color: hsla(var(--warning-flat-active)) !important;
+	background-color: var(--warning-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.danger.active {
-	background-color: hsla(var(--danger-flat-active)) !important;
+	background-color: var(--danger-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.danger.info {
-	background-color: hsla(var(--info-flat-active)) !important;
+	background-color: var(--info-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.danger.mono {
-	background-color: hsla(var(--mono-flat-active)) !important;
+	background-color: var(--mono-flat-active) !important;
 }
 
 .sui-tabs-container.starlight .sui-tabs-list {

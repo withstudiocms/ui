@@ -63,15 +63,15 @@
 }
 
 .sui-button.flat {
-	background: hsla(var(--default-flat));
+	background: var(--default-flat);
 }
 
 .sui-button.flat:hover {
-	background: hsla(var(--default-flat-hover));
+	background: var(--default-flat-hover);
 }
 
 .sui-button.flat:active {
-	background: hsla(var(--default-flat-active));
+	background: var(--default-flat-active);
 }
 
 /* Sizes */
@@ -130,16 +130,16 @@
 }
 
 .sui-button.primary.flat {
-	background-color: hsla(var(--primary-flat));
+	background-color: var(--primary-flat);
 	color: hsl(259, 96%, 79%);
 }
 
 .sui-button.primary.flat:hover {
-	background-color: hsla(var(--primary-flat-hover));
+	background-color: var(--primary-flat-hover);
 }
 
 .sui-button.primary.flat:active {
-	background-color: hsla(var(--primary-flat-active));
+	background-color: var(--primary-flat-active);
 }
 
 /* Success Colorway */
@@ -171,16 +171,16 @@
 }
 
 .sui-button.success.flat {
-	background-color: hsla(var(--success-flat));
+	background-color: var(--success-flat);
 	color: var(--success-base);
 }
 
 .sui-button.success.flat:hover {
-	background-color: hsla(var(--success-flat-hover));
+	background-color: var(--success-flat-hover);
 }
 
 .sui-button.success.flat:active {
-	background-color: hsla(var(--success-flat-active));
+	background-color: var(--success-flat-active);
 }
 
 /* Warning Colorway */
@@ -212,16 +212,16 @@
 }
 
 .sui-button.warning.flat {
-	background-color: hsla(var(--warning-flat));
+	background-color: var(--warning-flat);
 	color: var(--warning-base);
 }
 
 .sui-button.warning.flat:hover {
-	background-color: hsla(var(--warning-flat-hover));
+	background-color: var(--warning-flat-hover);
 }
 
 .sui-button.warning.flat:active {
-	background-color: hsla(var(--warning-flat-active));
+	background-color: var(--warning-flat-active);
 }
 
 /* Danger Colorway */
@@ -253,16 +253,16 @@
 }
 
 .sui-button.danger.flat {
-	background-color: hsla(var(--danger-flat));
+	background-color: var(--danger-flat);
 	color: hsl(337, 92%, 71%);
 }
 
 .sui-button.danger.flat:hover {
-	background-color: hsla(var(--danger-flat-hover));
+	background-color: var(--danger-flat-hover);
 }
 
 .sui-button.danger.flat:active {
-	background-color: hsla(var(--danger-flat-active));
+	background-color: var(--danger-flat-active);
 }
 
 /* Info Colorway */
@@ -294,16 +294,16 @@
 }
 
 .sui-button.info.flat {
-	background-color: hsla(var(--info-flat));
+	background-color: var(--info-flat);
 	color: var(--info-base);
 }
 
 .sui-button.info.flat:hover {
-	background-color: hsla(var(--info-flat-hover));
+	background-color: var(--info-flat-hover);
 }
 
 .sui-button.info.flat:active {
-	background-color: hsla(var(--info-flat-active));
+	background-color: var(--info-flat-active);
 }
 
 /* Mono Colorway */
@@ -335,16 +335,16 @@
 }
 
 .sui-button.mono.flat {
-	background-color: hsla(var(--mono-flat));
+	background-color: var(--mono-flat);
 	color: var(--mono-base);
 }
 
 .sui-button.mono.flat:hover {
-	background-color: hsla(var(--mono-flat-hover));
+	background-color: var(--mono-flat-hover);
 }
 
 .sui-button.mono.flat:active {
-	background-color: hsla(var(--mono-flat-active));
+	background-color: var(--mono-flat-active);
 }
 
 .sui-button.full {
@@ -358,29 +358,29 @@
 	}
 
 	.sui-button.success.flat {
-		background-color: hsla(var(--success-base) / 0.2);
+		background-color: var(--success-flat-base);
 		color: hsl(143, 59%, 20%);
 	}
 
 	.sui-button.success.flat:hover {
-		background-color: hsla(var(--success-flat-hover));
+		background-color: var(--success-flat-hover);
 	}
 
 	.sui-button.success.flat:active {
-		background-color: hsla(var(--success-flat-active));
+		background-color: var(--success-flat-active);
 	}
 
 	.sui-button.warning.flat {
-		background-color: hsla(var(--warning-base) / 0.2);
+		background-color: var(--warning-flat-base);
 		color: hsl(48, 78%, 20%);
 	}
 
 	.sui-button.warning.flat:hover {
-		background-color: hsla(var(--warning-base) / 0.25);
+		background-color: var(--warning-flat-hover);
 	}
 
 	.sui-button.warning.flat:active {
-		background-color: hsla(var(--warning-base) / 0.4);
+		background-color: var(--warning-flat-active);
 	}
 
 	.sui-button.danger.flat {

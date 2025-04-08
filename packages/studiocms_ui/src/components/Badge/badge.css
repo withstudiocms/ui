@@ -19,7 +19,7 @@
 
 .sui-badge.primary.flat,
 .sui-badge.primary.outlined {
-	background-color: hsla(var(--primary-flat));
+	background-color: var(--primary-flat);
 	color: var(--primary-base);
 }
 
@@ -34,7 +34,7 @@
 
 .sui-badge.success.flat,
 .sui-badge.success.outlined {
-	background-color: hsla(var(--success-flat));
+	background-color: var(--success-flat);
 	color: var(--success-base);
 }
 
@@ -49,7 +49,7 @@
 
 .sui-badge.warning.flat,
 .sui-badge.warning.outlined {
-	background-color: hsla(var(--warning-flat));
+	background-color: var(--warning-flat);
 	color: var(--warning-base);
 }
 
@@ -64,7 +64,7 @@
 
 .sui-badge.danger.flat,
 .sui-badge.danger.outlined {
-	background-color: hsla(var(--danger-flat));
+	background-color: var(--danger-flat);
 	color: var(--danger-base);
 }
 
@@ -79,7 +79,7 @@
 
 .sui-badge.info.flat,
 .sui-badge.info.outlined {
-	background-color: hsla(var(--info-flat));
+	background-color: var(--info-flat);
 	color: var(--info-base);
 }
 
@@ -94,7 +94,7 @@
 
 .sui-badge.mono.flat,
 .sui-badge.mono.outlined {
-	background-color: hsla(var(--mono-flat));
+	background-color: var(--mono-flat);
 	color: var(--mono-base);
 }
 
