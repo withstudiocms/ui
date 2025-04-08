@@ -10,7 +10,7 @@ const { open = false } = Astro.props;
 
 <div class="sui-accordion-item" class:list={{ active: open }} data-open={open}>
     <div class="sui-accordion-summary not-content" tabindex="0">
-        <Icon name="chevron-right-20-solid" class='sui-summary-chevron' width={20} height={20} />
+        <Icon name="heroicons:chevron-right-20-solid" class='sui-summary-chevron' width={20} height={20} />
         <div class="sui-accordion-summary-content">
             <slot name="summary" />
         </div>

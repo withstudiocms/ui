@@ -107,6 +107,10 @@
 	background-color: hsl(var(--danger-base));
 }
 
+.sui-toast-container.info .sui-toast-progress-bar {
+	background-color: hsl(var(--info-base));
+}
+
 .close-icon-container {
 	cursor: pointer;
 	height: 1.5rem;

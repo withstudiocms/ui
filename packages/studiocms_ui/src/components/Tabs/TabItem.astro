@@ -1,7 +1,7 @@
 ---
+import type { AvailableIcons } from 'studiocms:ui/icons';
 import type { StudioCMSColorway } from '../../utils/colors.js';
 import { generateID } from '../../utils/generateID.js';
-import type { HeroIconName } from '../Icon/iconType.js';
 
 /**
  * The props for the TabItem component.
@@ -10,7 +10,7 @@ interface Props {
 	/**
 	 * The icon to display next to the tab.
 	 */
-	icon?: HeroIconName;
+	icon?: AvailableIcons;
 	/**
 	 * The label of the tab.
 	 */

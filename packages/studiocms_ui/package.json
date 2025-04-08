@@ -54,6 +54,10 @@
     "./types": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/types/index.js"
+    },
+    "./v/types": {
+      "types": "./dist/virtuals.d.ts",
+      "default": "./dist/virtuals.d.js"
     }
   },
   "dependencies": {

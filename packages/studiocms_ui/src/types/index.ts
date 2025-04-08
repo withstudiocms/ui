@@ -1,3 +1,5 @@
+import type { IconifyJSON } from '@iconify/types';
+
 export interface ToastProps {
 	title: string;
 	/**
@@ -9,3 +11,5 @@ export interface ToastProps {
 	persistent?: boolean;
 	closeButton?: boolean;
 }
+
+export type { IconifyJSON };
