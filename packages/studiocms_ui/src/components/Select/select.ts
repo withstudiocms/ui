@@ -314,7 +314,7 @@ function loadSelects() {
 			if (option) {
 				option.classList.add('selected');
 
-				if (container && container.select) {
+				if (container?.select) {
 					container.select.value = option.getAttribute('value') as string;
 				}
 
