@@ -142,7 +142,7 @@ function loadSearchSelects() {
 		if (option) {
 			option.classList.toggle('selected', forceState ?? !isCurrentlySelected);
 
-			if (container && container.select) {
+			if (container?.select) {
 				container.select.value = option.getAttribute('value') as string;
 			}
 		}
@@ -242,6 +242,23 @@ function loadSearchSelects() {
 			e.preventDefault();
 		}
 
+		if (container.input?.value.length === 0) {
+			reconstructOptions(state.optionsMap[container.dataset.id as string] ?? [], state, container);
+		}
+		
+		if (target.closest('.sui-search-select-indicator')) {
+			if (container.dropdown?.parentElement?.classList.contains('active')) {
+				container.dropdown?.parentElement?.classList.remove('active', 'above');
+				container.input?.blur();
+				container.input!.value = '';
+			} else {
+				container.dropdown?.parentElement?.classList.add('active');
+				container.input?.focus();
+				container.input!.value = '';
+			}
+			return;
+		}
+
 		state.isSelectingOption = true;
 
 		setTimeout(() => {
@@ -290,7 +307,7 @@ function loadSearchSelects() {
 			updateOptionSelection(opt.dataset.value, container, state, true);
 			updateLabel(false, state, container);
 
-			container.dropdown?.classList.remove('active', 'above');
+			container.dropdown?.parentElement?.classList.remove('active', 'above');
 			container.input?.blur();
 			container.input!.value = '';
 		}
@@ -305,7 +322,7 @@ function loadSearchSelects() {
 
 		if (e.key === 'Escape' || e.key === 'Tab') {
 			container.input?.blur();
-			container.dropdown?.classList.remove('active', 'above');
+			container.dropdown?.parentElement?.classList.remove('active', 'above');
 			return;
 		}
 
@@ -428,7 +445,7 @@ function loadSearchSelects() {
 					updateOptionSelection(value, container, state, true);
 					updateLabel(false, state, container);
 
-					container.dropdown?.classList.remove('active', 'above');
+					container.dropdown?.parentElement?.classList.remove('active', 'above');
 					container.input!.value = '';
 				}
 			}
@@ -467,15 +484,15 @@ function loadSearchSelects() {
 
 		container.input!.value = '';
 		reconstructOptions(state.optionsMap[container.dataset.id as string] ?? [], state, container);
-		container.dropdown?.classList.remove('active', 'above');
+		container.dropdown?.parentElement?.classList.remove('active', 'above');
 	};
 
 	const handleContainerFocusIn = (state: SearchSelectState, container: SearchSelectContainer) => {
-		const allDropdowns = document.querySelectorAll('.sui-search-select-dropdown');
+		const allDropdowns = document.querySelectorAll('.sui-search-select-dropdown-list');
 
 		for (const dropdown of allDropdowns) {
 			if (dropdown !== container.dropdown) {
-				dropdown.classList.remove('active', 'above');
+				dropdown.parentElement?.classList.remove('active', 'above');
 			}
 		}
 
@@ -484,7 +501,7 @@ function loadSearchSelects() {
 			state.optionsMap[container.dataset.id as string]?.length ?? 0
 		);
 
-		container.dropdown?.classList.add('active', ...(isAbove ? [] : ['above']));
+		container.dropdown?.parentElement?.classList.add('active', ...(isAbove ? [] : ['above']));
 	};
 
 	const state: SearchSelectState = {
@@ -505,7 +522,7 @@ function loadSearchSelects() {
 		
 		const specialContainer = Object.assign(container, {
 			input: container.querySelector('input'),
-			dropdown: container.querySelector('.sui-search-select-dropdown'),
+			dropdown: container.querySelector('.sui-search-select-dropdown-list'),
 			select: container.querySelector('select'),
 		});
 
