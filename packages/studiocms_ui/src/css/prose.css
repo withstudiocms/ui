@@ -229,8 +229,6 @@
 }
 .prose :where(kbd):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   color: var(--sui-prose-kbd);
-  box-shadow: 0 0 0 1px rgb(var(--sui-prose-kbd-shadows) / 10%),
-    0 3px rgb(var(--sui-prose-kbd-shadows) / 10%);
   padding-top: 0.1875em;
   padding-inline-end: 0.375em;
   padding-bottom: 0.1875em;

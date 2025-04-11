@@ -116,7 +116,7 @@
 
 	--warning-base: hsl(48 92% 46%);
 	--warning-hover: hsl(48 88% 43%);
-	--warning-active: 48 85% 40%;
+	--warning-active: hsl(48 85% 40%);
 
 	--danger-base: hsl(339 97% 31%);
 	--danger-hover: hsl(337 98% 37%);
