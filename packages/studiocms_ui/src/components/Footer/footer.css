@@ -2,9 +2,9 @@ footer.sui-footer {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	background-color: hsl(var(--background-step-1));
+	background-color: var(--background-step-1);
 	padding: 2rem 10vw;
-	color: hsl(var(--text-normal)) !important;
+	color: var(--text-normal) !important;
 }
 
 .upper,
@@ -30,7 +30,7 @@ footer.sui-footer {
 
 .links ul li,
 .links ul li * {
-	color: hsl(var(--text-normal)) !important;
+	color: var(--text-normal) !important;
 	width: fit-content;
 }
 
@@ -47,7 +47,7 @@ footer.sui-footer {
 	height: 1px;
 	width: 100%;
 	border: none;
-	background: hsl(var(--border));
+	background: var(--border);
 }
 
 .lower {

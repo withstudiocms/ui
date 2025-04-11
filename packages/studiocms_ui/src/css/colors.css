@@ -10,123 +10,123 @@
 
 :root {
 	/* Default Styles (Dark Mode) */
-	--background-base: 0 0% 6%;
-	--background-step-1: 0 0% 8%;
-	--background-step-2: 0 0% 10%;
-	--background-step-3: 0 0% 14%;
+	--background-base: hsl(0 0% 6%);
+	--background-step-1: hsl(0 0% 8%);
+	--background-step-2: hsl(0 0% 10%);
+	--background-step-3: hsl(0 0% 14%);
 
-	--text-normal: 0 0% 100%;
-	--text-dimmed: 0 0% 80%;
-	--text-muted: 0 0% 54%;
-	--text-inverted: 0 0% 0%;
+	--text-normal: hsl(0 0% 100%);
+	--text-dimmed: hsl(0 0% 80%);
+	--text-muted: hsl(0 0% 54%);
+	--text-inverted: hsl(0 0% 0%);
 
-	--border: 240 5% 17%;
+	--border: hsl(240 5% 17%);
 
-	--shadow: 0 0% 0%;
+	--shadow: hsl(0 0% 0% / 0.5);
 
-	--default-base: 0 0% 14%;
-	--default-hover: 0 0% 21%;
-	--default-active: 0 0% 15%;
+	--default-base: hsl(0 0% 14%);
+	--default-hover: hsl(0 0% 21%);
+	--default-active: hsl(0 0% 15%);
 
-	--primary-base: 259 83% 73%;
-	--primary-hover: 259 77% 78%;
-	--primary-active: 259 73% 67%;
+	--primary-base: hsl(259 83% 73%);
+	--primary-hover: hsl(259 77% 78%);
+	--primary-active: hsl(259 73% 67%);
 
-	--success-base: 142 71% 46%;
-	--success-hover: 142 72% 61%;
-	--success-active: 142 87% 52%;
+	--success-base: hsl(142 71% 46%);
+	--success-hover: hsl(142 72% 61%);
+	--success-active: hsl(142 87% 52%);
 
-	--warning-base: 48 96% 53%;
-	--warning-hover: 48 97% 70%;
-	--warning-active: 48 100% 61%;
+	--warning-base: hsl(48 96% 53%);
+	--warning-hover: hsl(48 97% 70%);
+	--warning-active: hsl(48 100% 61%);
 
-	--danger-base: 339 97% 31%;
-	--danger-hover: 337 98% 37%;
-	--danger-active: 337 88% 32%;
+	--danger-base: hsl(339 97% 31%);
+	--danger-hover: hsl(337 98% 37%);
+	--danger-active: hsl(337 88% 32%);
 
-	--info-base: 217 92% 52%;
-	--info-hover: 214 95% 58%;
-	--info-active: 214 85% 52%;
+	--info-base: hsl(217 92% 52%);
+	--info-hover: hsl(214 95% 58%);
+	--info-active: hsl(214 85% 52%);
 
-	--mono-base: 0 0% 100%;
-	--mono-hover: 0 0% 90%;
-	--mono-active: 0 0% 95%;
+	--mono-base: hsl(0 0% 100%);
+	--mono-hover: hsl(0 0% 90%);
+	--mono-active: hsl(0 0% 95%);
 
 	/* Non-specific variables */
-	--text-light: 0 0% 100%;
-	--text-dark: 0 0% 0%;
+	--text-light: hsl(0 0% 100%);
+	--text-dark: hsl(0 0% 0%);
 
 	/* Flat colorways since they use variables */
-	--default-flat: var(--default-base) / 0.5;
-	--default-flat-hover: var(--default-base) / 0.75;
-	--default-flat-active: var(--default-base) / 0.85;
+	--default-flat: hsl(0 0% 14% / 0.5);
+	--default-flat-hover: hsl(0 0% 14% / 0.75);
+	--default-flat-active: hsl(0 0% 14% / 0.85);
 
-	--primary-flat: var(--primary-base) / 0.1;
-	--primary-flat-hover: var(--primary-base) / 0.25;
-	--primary-flat-active: var(--primary-base) / 0.35;
+	--primary-flat: hsl(259 83% 73% / 0.1);
+	--primary-flat-hover: hsl(259 83% 73% / 0.25);
+	--primary-flat-active: hsl(259 83% 73% / 0.35);
 
-	--success-flat: var(--success-base) / 0.1;
-	--success-flat-hover: var(--success-base) / 0.25;
-	--success-flat-active: var(--success-base) / 0.35;
+	--success-flat: hsl(142 71% 46% / 0.1);
+	--success-flat-hover: hsl(142 71% 46% / 0.25);
+	--success-flat-active: hsl(142 71% 46% / 0.35);
 
-	--warning-flat: var(--warning-base) / 0.1;
-	--warning-flat-hover: var(--warning-base) / 0.25;
-	--warning-flat-active: var(--warning-base) / 0.35;
+	--warning-flat: hsl(48 96% 53% / 0.1);
+	--warning-flat-hover: hsl(48 96% 53% / 0.25);
+	--warning-flat-active: hsl(48 96% 53% / 0.35);
 
-	--danger-flat: var(--danger-base) / 0.1;
-	--danger-flat-hover: var(--danger-base) / 0.25;
-	--danger-flat-active: var(--danger-base) / 0.35;
+	--danger-flat: hsl(339 97% 31% / 0.1);
+	--danger-flat-hover: hsl(339 97% 31% / 0.25);
+	--danger-flat-active: hsl(339 97% 31% / 0.35);
 
-	--info-flat: var(--info-base) / 0.1;
-	--info-flat-hover: var(--info-base) / 0.25;
-	--info-flat-active: var(--info-base) / 0.35;
+	--info-flat: hsl(217 92% 52% / 0.1);
+	--info-flat-hover: hsl(217 92% 52% / 0.25);
+	--info-flat-active: hsl(217 92% 52% / 0.35);
 
-	--mono-flat: var(--mono-base) / 0.1;
-	--mono-flat-hover: var(--mono-base) / 0.25;
-	--mono-flat-active: var(--mono-base) / 0.35;
+	--mono-flat: hsl(0 0% 100% / 0.1);
+	--mono-flat-hover: hsl(0 0% 100% / 0.25);
+	--mono-flat-active: hsl(0 0% 100% / 0.35);
 }
 
 [data-theme="light"] {
 	/* Light Mode Styles */
-	--background-base: 0 0% 97%;
-	--background-step-1: 0 0% 90%;
-	--background-step-2: 0 0% 85%;
-	--background-step-3: 0 0% 80%;
+	--background-base: hsl(0 0% 97%);
+	--background-step-1: hsl(0 0% 90%);
+	--background-step-2: hsl(0 0% 85%);
+	--background-step-3: hsl(0 0% 80%);
 
-	--text-normal: 0 0% 0%;
-	--text-dimmed: 0 0% 12%;
-	--text-muted: 0 0% 24%;
-	--text-inverted: 0 0% 100%;
+	--text-normal: hsl(0 0% 0%);
+	--text-dimmed: hsl(0 0% 12%);
+	--text-muted: hsl(0 0% 24%);
+	--text-inverted: hsl(0 0% 100%);
 
-	--border: 263 5% 68%;
+	--border: hsl(263 5% 68%);
 
-	--shadow: 0 0% 65%;
+	--shadow: hsl(0 0% 65% / 0.5);
 
-	--default-base: 0 0% 74%;
-	--default-hover: 0 0% 81%;
-	--default-active: 0 0% 91%;
+	--default-base: hsl(0 0% 74%);
+	--default-hover: hsl(0 0% 81%);
+	--default-active: hsl(0 0% 91%);
 
-	--primary-base: 259 85% 61%;
-	--primary-hover: 259 78% 56%;
-	--primary-active: 259 71% 50%;
+	--primary-base: hsl(259 85% 61%);
+	--primary-hover: hsl(259 78% 56%);
+	--primary-active: hsl(259 71% 50%);
 
-	--success-base: 142 59% 47%;
-	--success-hover: 142 62% 56%;
-	--success-active: 142 87% 59%;
+	--success-base: hsl(142 59% 47%);
+	--success-hover: hsl(142 62% 56%);
+	--success-active: hsl(142 87% 59%);
 
-	--warning-base: 48 92% 46%;
-	--warning-hover: 48 88% 43%;
-	--warning-active: 48 85% 40%;
+	--warning-base: hsl(48 92% 46%);
+	--warning-hover: hsl(48 88% 43%);
+	--warning-active: hsl(48 85% 40%);
 
-	--danger-base: 339 97% 31%;
-	--danger-hover: 337 98% 37%;
-	--danger-active: 337 88% 45%;
+	--danger-base: hsl(339 97% 31%);
+	--danger-hover: hsl(337 98% 37%);
+	--danger-active: hsl(337 88% 45%);
 
-	--info-base: 217 92% 52%;
-	--info-hover: 214 95% 58%;
-	--info-active: 214 85% 52%;
+	--info-base: hsl(217 92% 52%);
+	--info-hover: hsl(214 95% 58%);
+	--info-active: hsl(214 85% 52%);
 
-	--mono-base: 0 0% 0%;
-	--mono-hover: 0 0% 10%;
-	--mono-active: 0 0% 5%;
+	--mono-base: hsl(0 0% 0%);
+	--mono-hover: hsl(0 0% 10%);
+	--mono-active: hsl(0 0% 5%);
 }
