@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 0.4.17
+
+### Patch Changes
+
+- [#94](https://github.com/withstudiocms/ui/pull/94) [`2b89d92`](https://github.com/withstudiocms/ui/commit/2b89d92eb95277cdb65be6839851bd75650661a9) Thanks [@RATIU5](https://github.com/RATIU5)! - prevents overflow select dropdowns with a scrollable container and enables toggling the dropdown via svg icon click
+
 ## 0.4.16
 
 ### Patch Changes

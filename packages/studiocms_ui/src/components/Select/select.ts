@@ -117,7 +117,7 @@ function loadSelects() {
 		badge.classList.add('sui-badge', 'primary', 'sm', 'default', 'full', 'sui-select-badge');
 		badge.setAttribute('data-value', value);
 		badge.innerHTML = `${label} <svg style='min-width: 8px' xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24'><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 18L18 6M6 6l12 12'></path></svg>`;
-		
+
 		return badge;
 	};
 
@@ -314,7 +314,7 @@ function loadSelects() {
 			if (option) {
 				option.classList.add('selected');
 
-				if (container && container.select) {
+				if (container?.select) {
 					container.select.value = option.getAttribute('value') as string;
 				}
 
@@ -516,7 +516,7 @@ function loadSelects() {
 			});
 			handleBadgeOverflow(state, specialContainer);
 		}
-		
+
 		container.dataset.initialized = 'true';
 	}
 }
