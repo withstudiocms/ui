@@ -115,7 +115,7 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
     }
 
     .studiocms-footer-text span:last-of-type {
-        color: hsl(var(--text-muted));
+        color: var(--text-muted);
     }
 
     .socials {
@@ -126,13 +126,13 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
     }
 
     .socials a {
-        color: hsla(var(--text-normal) / .75);
+        color: var(--text-muted);
         transition: all .15s ease;
         display: flex;
     }
 
     .socials a:hover {
-        color: hsl(var(--text-normal));
+        color: var(--text-normal);
     }
 
     .brand-newsletter {
@@ -173,7 +173,7 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
     }
 
     section {
-        color: hsl(var(--text-normal)) !important;
+        color: var(--text-normal) !important;
     }
 
     footer.sl-flex {
