@@ -154,31 +154,33 @@ const defaultLabel = selected
 			/>
 			<Icon name="heroicons:chevron-up-down" class="sui-search-select-indicator" width={24} height={24} />
 		</div>
-		<ul class="sui-search-select-dropdown" role="listbox" id={`${name}-dropdown`}>
-			{
-				options.map((x, i) => {
-					const isSelected = Array.isArray(selected)
-						? selected.map((y) => y && y.value).includes(x.value)
-						: selected?.value === x.value;
-					return (
-						<li
-							class="sui-search-select-option"
-							role="option"
-							value={x.value}
-							class:list={[
-								isSelected && `selected`,
-								x.disabled && "disabled"
-							]}
-							id={isSelected ? `${name}-selected` : ""}
-							data-option-index={i}
-							data-value={x.value}
-						>
-							{x.label}
-						</li>
-					)
-				})
-			}
-		</ul>
+		<div class="sui-search-select-dropdown">
+			<ul class="sui-search-select-dropdown-list" role="listbox" id={`${name}-dropdown`}>
+				{
+					options.map((x, i) => {
+						const isSelected = Array.isArray(selected)
+							? selected.map((y) => y && y.value).includes(x.value)
+							: selected?.value === x.value;
+						return (
+							<li
+								class="sui-search-select-option"
+								role="option"
+								value={x.value}
+								class:list={[
+									isSelected && `selected`,
+									x.disabled && "disabled"
+								]}
+								id={isSelected ? `${name}-selected` : ""}
+								data-option-index={i}
+								data-value={x.value}
+							>
+								{x.label}
+							</li>
+						)
+					})
+				}
+			</ul>
+		</div>
 	</div>
 	<select class="sui-hidden-search-select" id={name} name={name} required={isRequired} multiple={multiple ? "" : undefined} hidden tabindex="-1">
 		<option value={""}> Select </option>

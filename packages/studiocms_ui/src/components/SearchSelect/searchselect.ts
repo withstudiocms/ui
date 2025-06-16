@@ -59,7 +59,7 @@ function loadSearchSelects() {
 		badge.classList.add('sui-badge', 'primary', 'sm', 'default', 'full', 'sui-search-select-badge');
 		badge.setAttribute('data-value', value);
 		badge.innerHTML = `${label} <svg style='min-width: 8px' xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24' role="button" tabindex="0"><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 18L18 6M6 6l12 12'></path></svg>`;
-		
+
 		return badge;
 	};
 
@@ -142,7 +142,7 @@ function loadSearchSelects() {
 		if (option) {
 			option.classList.toggle('selected', forceState ?? !isCurrentlySelected);
 
-			if (container && container.select) {
+			if (container?.select) {
 				container.select.value = option.getAttribute('value') as string;
 			}
 		}
@@ -192,12 +192,12 @@ function loadSearchSelects() {
 		container.dropdown!.innerHTML = '';
 
 		const selectedValues = state.selectedOptionsMap[container.dataset.id as string] || [];
-		
+
 		if (filteredOptions.length === 0) {
 			container.dropdown!.innerHTML = '<li class="empty-search-results">No results found</li>';
 			return;
 		}
-		
+
 		let i = 0;
 
 		for (const option of filteredOptions) {
@@ -240,6 +240,29 @@ function loadSearchSelects() {
 
 		if (!target.closest('input')) {
 			e.preventDefault();
+		}
+
+		if (container.input?.value.length === 0) {
+			reconstructOptions(state.optionsMap[container.dataset.id as string] ?? [], state, container);
+		}
+
+		if (target.closest('.sui-search-select-indicator')) {
+			if (container.dropdown?.parentElement?.classList.contains('active')) {
+				container.dropdown?.parentElement?.classList.remove('active', 'above');
+				container.input?.blur();
+				container.input!.value = '';
+			} else {
+				container.dropdown?.parentElement?.classList.add('active');
+				container.input?.focus();
+				container.input!.value = '';
+			}
+			return;
+		}
+
+		if (target.closest('.sui-search-select-badge-container')) {
+			container.dropdown?.parentElement?.classList.remove('active', 'above');
+			container.input?.blur();
+			container.input!.value = '';
 		}
 
 		state.isSelectingOption = true;
@@ -290,7 +313,7 @@ function loadSearchSelects() {
 			updateOptionSelection(opt.dataset.value, container, state, true);
 			updateLabel(false, state, container);
 
-			container.dropdown?.classList.remove('active', 'above');
+			container.dropdown?.parentElement?.classList.remove('active', 'above');
 			container.input?.blur();
 			container.input!.value = '';
 		}
@@ -305,7 +328,7 @@ function loadSearchSelects() {
 
 		if (e.key === 'Escape' || e.key === 'Tab') {
 			container.input?.blur();
-			container.dropdown?.classList.remove('active', 'above');
+			container.dropdown?.parentElement?.classList.remove('active', 'above');
 			return;
 		}
 
@@ -315,7 +338,7 @@ function loadSearchSelects() {
 			if (badgeElement && state.isMultipleMap[container?.dataset.id as string]) {
 				const badgeValue = badgeElement.getAttribute('data-value');
 				let nextBadge = badgeElement.previousElementSibling as HTMLElement;
-				
+
 				if (!nextBadge) {
 					nextBadge = badgeElement.nextElementSibling as HTMLElement;
 				}
@@ -428,7 +451,7 @@ function loadSearchSelects() {
 					updateOptionSelection(value, container, state, true);
 					updateLabel(false, state, container);
 
-					container.dropdown?.classList.remove('active', 'above');
+					container.dropdown?.parentElement?.classList.remove('active', 'above');
 					container.input!.value = '';
 				}
 			}
@@ -467,15 +490,15 @@ function loadSearchSelects() {
 
 		container.input!.value = '';
 		reconstructOptions(state.optionsMap[container.dataset.id as string] ?? [], state, container);
-		container.dropdown?.classList.remove('active', 'above');
+		container.dropdown?.parentElement?.classList.remove('active', 'above');
 	};
 
 	const handleContainerFocusIn = (state: SearchSelectState, container: SearchSelectContainer) => {
-		const allDropdowns = document.querySelectorAll('.sui-search-select-dropdown');
+		const allDropdowns = document.querySelectorAll('.sui-search-select-dropdown-list');
 
 		for (const dropdown of allDropdowns) {
 			if (dropdown !== container.dropdown) {
-				dropdown.classList.remove('active', 'above');
+				dropdown.parentElement?.classList.remove('active', 'above');
 			}
 		}
 
@@ -484,7 +507,7 @@ function loadSearchSelects() {
 			state.optionsMap[container.dataset.id as string]?.length ?? 0
 		);
 
-		container.dropdown?.classList.add('active', ...(isAbove ? [] : ['above']));
+		container.dropdown?.parentElement?.classList.add('active', ...(isAbove ? [] : ['above']));
 	};
 
 	const state: SearchSelectState = {
@@ -502,10 +525,10 @@ function loadSearchSelects() {
 		if (container.dataset.initialized === 'true') continue;
 
 		const id = container.dataset.id as string;
-		
+
 		const specialContainer = Object.assign(container, {
 			input: container.querySelector('input'),
-			dropdown: container.querySelector('.sui-search-select-dropdown'),
+			dropdown: container.querySelector('.sui-search-select-dropdown-list'),
 			select: container.querySelector('select'),
 		});
 
@@ -544,7 +567,7 @@ function loadSearchSelects() {
 		if (state.isMultipleMap[id]) {
 			recalculateBadges(state, specialContainer);
 		}
-		
+
 		container.dataset.initialized = 'true';
 	}
 }

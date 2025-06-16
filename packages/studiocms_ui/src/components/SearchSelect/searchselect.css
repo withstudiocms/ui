@@ -49,6 +49,10 @@
 	top: calc(100% + 0.25rem);
 	left: 0;
 	display: none;
+	max-height: 300px;
+	border: 1px solid hsl(var(--border));
+	border-radius: var(--radius-md);
+	background-color: hsl(var(--background-step-2));
 	z-index: 90;
 	box-shadow: 0px 4px 8px var(--shadow);
 }
@@ -123,7 +127,6 @@
 	position: absolute;
 	bottom: .675rem;
 	right: .675rem;
-	pointer-events: none;
 }
 
 .sui-search-input-wrapper:has(input:focus) + .sui-search-select-dropdown {
