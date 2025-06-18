@@ -38,6 +38,7 @@ declare module 'studiocms:ui/components' {
 	export const TabItem: typeof import('./components/Tabs/TabItem.astro').default;
 	export const Textarea: typeof import('./components/Textarea/Textarea.astro').default;
 	export const Toaster: typeof import('./components/Toast/Toaster.astro').default;
+	export const Tooltip: typeof import('./components/Tooltip/Tooltip.astro').default;
 	export const toast: typeof import('./components/Toast/toast.js').toast;
 	export const Toggle: typeof import('./components/Toggle/Toggle.astro').default;
 	export const User: typeof import('./components/User/User.astro').default;

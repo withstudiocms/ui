@@ -1,0 +1,79 @@
+---
+import './tooltip.css';
+
+interface Props {
+  /**
+   * The position of the tooltip. Defaults to 'auto'.
+   *
+   * 'auto' will try to position below, then above, then right, then left.
+   */
+  position?: 'auto' | 'top' | 'bottom' | 'left' | 'right';
+
+  /**
+   * Whether the tooltip should be inline with the anchor element. Defaults to false.
+   */
+  inline?: boolean;
+
+  /**
+   * The delay before the tooltip appears in milliseconds. Defaults to 0.
+   */
+  enterDelay?: number;
+
+  /**
+   * The delay before the tooltip disappears in milliseconds. Defaults to 0.
+   */
+  exitDelay: number;
+
+  /**
+   * Whether the tooltip should be hover only. Defaults to false.
+   *
+   * By default, the tooltip will show on mouse hover and click (for mobile support).
+   */
+  hoverOnly?: boolean;
+
+  /**
+   * Whether the tooltip should animate a fade in and out. Defaults to true.
+   */
+  animate?: boolean;
+
+  /**
+   * Render a triangle pointer on the tooltip. Defaults to true.
+   */
+  pointer?: boolean;
+}
+
+const {
+  position = "auto",
+  inline = false,
+  enterDelay = 0,
+  exitDelay = 0,
+  hoverOnly = false,
+  animate = true,
+  pointer = true,
+} = Astro.props;
+---
+
+<div class:list={["sui-tooltip-container", inline && "inline"]} data-sui-tooltip data-sui-tooltip-options={JSON.stringify({
+  position,
+  enterDelay,
+  exitDelay,
+  hoverOnly,
+  animate,
+  pointer,
+})}>
+  <div class="sui-tooltip-anchor-wrapper" data-sui-tooltip-anchor>
+    <slot />
+  </div>
+  <div class:list={["sui-tooltip-popup", animate && "animate"]} data-sui-tooltip-popup>
+    {pointer && (
+      <div class="sui-tooltip-pointer"></div>
+    )}
+    <slot name="tooltip">
+      <p>Warning: slot 'tooltip' was not found</p>
+    </slot>
+  </div>
+</div>
+
+<script>
+import "studiocms:ui/scripts/tooltip";
+</script>

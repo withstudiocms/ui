@@ -156,6 +156,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 						'studiocms:ui/scripts/toaster': `import '${resolve('./components/Toast/toaster.js')}';`,
 						'studiocms:ui/scripts/toast': `import '${resolve('./components/Toast/toast.js')}';`,
 						'studiocms:ui/scripts/toggle': `import '${resolve('./components/Toggle/toggle.js')}';`,
+						'studiocms:ui/scripts/tooltip': `import '${resolve('./components/Tooltip/tooltip.js')}';`,
 						'studiocms:ui/scripts/accordion': `import '${resolve('./components/Accordion/accordion.js')}';`,
 						'studiocms:ui/scripts/progress': `import '${resolve('./components/Progress/progress.js')}';`,
 						// Components
@@ -190,6 +191,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export { default as Icon } from '${resolve('./components/Icon/Icon.astro')}';
 							export { default as IconBase } from '${resolve('./components/Icon/IconBase.astro')}';
 							export { default as Skeleton } from '${resolve('./components/Skeleton/Skeleton.astro')}';
+							export { default as Tooltip } from '${resolve('./components/Tooltip/Tooltip.astro')}';
 
 							export { ProgressHelper } from '${resolve('./components/Progress/helper.js')}';
 							export { SingleSidebarHelper, DoubleSidebarHelper } from '${resolve('./components/Sidebar/helpers.js')}';

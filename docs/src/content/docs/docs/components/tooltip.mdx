@@ -1,0 +1,51 @@
+---
+i18nReady: false
+title: Tooltip
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PreviewCard from "~/components/PreviewCard.astro";
+import { Tooltip } from 'studiocms:ui/components';
+
+A tooltip component that will show on hover (desktop) or tap (mobile). It's used to provide additional information about an element.
+
+## Usage
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <p>
+        Lorem ipsum dolor sit{' '}
+        <Tooltip inline={true}>
+          <span>amet</span>
+          <Fragment slot="tooltip">
+            <p>This contains the tooltip information that will be shown.</p>
+          </Fragment>
+        </Tooltip>
+        {' '}, consectetur adipiscing elit.
+      </p>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components';
+    ---
+
+    <p>
+      Lorem ipsum dolor sit{' '}
+      <Tooltip inline={true}>
+        <span>amet</span>
+        <Fragment slot="tooltip">
+          <p>This contains the tooltip information that will be shown.</p>
+        </Fragment>
+      </Tooltip>
+      {' '}, consectetur adipiscing elit.
+    </p>
+    ```
+  </TabItem>
+</Tabs>
