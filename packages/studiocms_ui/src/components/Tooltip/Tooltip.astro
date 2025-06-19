@@ -1,5 +1,5 @@
 ---
-import './tooltip.css';
+import "./tooltip.css";
 
 interface Props {
   /**
@@ -7,7 +7,7 @@ interface Props {
    *
    * 'auto' will try to position below, then above, then right, then left.
    */
-  position?: 'auto' | 'top' | 'bottom' | 'left' | 'right';
+  position?: "auto" | "top" | "bottom" | "left" | "right";
 
   /**
    * Whether the tooltip should be inline with the anchor element. Defaults to false.
@@ -51,29 +51,37 @@ const {
   animate = true,
   pointer = true,
 } = Astro.props;
+
+const Tag = inline ? "span" : "div";
 ---
 
-<div class:list={["sui-tooltip-container", inline && "inline"]} data-sui-tooltip data-sui-tooltip-options={JSON.stringify({
-  position,
-  enterDelay,
-  exitDelay,
-  hoverOnly,
-  animate,
-  pointer,
-})}>
-  <div class="sui-tooltip-anchor-wrapper" data-sui-tooltip-anchor>
+<Tag
+  class:list={["sui-tooltip-container", inline && "inline"]}
+  data-sui-tooltip
+  data-sui-tooltip-options={JSON.stringify({
+    position,
+    enterDelay,
+    exitDelay,
+    hoverOnly,
+    animate,
+    pointer,
+  })}
+>
+  <Tag class="sui-tooltip-anchor-wrapper" data-sui-tooltip-anchor>
     <slot />
-  </div>
-  <div class:list={["sui-tooltip-popup", animate && "animate"]} data-sui-tooltip-popup>
-    {pointer && (
-      <div class="sui-tooltip-pointer"></div>
-    )}
+  </Tag>
+  <div
+    class:list={["sui-tooltip-popup", animate && "animate"]}
+    data-sui-tooltip-popup
+    role="tooltip"
+  >
+    {pointer && <div class="sui-tooltip-pointer" />}
     <slot name="tooltip">
       <p>Warning: slot 'tooltip' was not found</p>
     </slot>
   </div>
-</div>
+</Tag>
 
 <script>
-import "studiocms:ui/scripts/tooltip";
+  import "studiocms:ui/scripts/tooltip";
 </script>

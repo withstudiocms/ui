@@ -6,7 +6,7 @@ type Point = {
 };
 
 interface TooltipOptions {
-	position: 'auto' | 'top' | 'bottom' | 'left' | 'right';
+	position: Position;
 	enterDelay?: number;
 	exitDelay?: number;
 	hoverOnly?: boolean;
@@ -23,6 +23,7 @@ class Tooltip {
 	throttleUpdate: () => void;
 	rafId: number | null = null;
 	offset = 4;
+	isSticky = false;
 	edgePadding = 8;
 
 	constructor(container: HTMLElement | null) {
@@ -69,8 +70,7 @@ class Tooltip {
 	}
 
 	bindEvents() {
-		window.addEventListener('resize', () => this.throttleUpdate);
-		window.addEventListener('scroll', () => this.throttleUpdate, true);
+		window.addEventListener('resize', this.throttleUpdate);
 		if (window.ResizeObserver) {
 			this.resizeObserver = new ResizeObserver(() => this.update());
 			this.resizeObserver.observe(this.tooltip);
@@ -91,34 +91,34 @@ class Tooltip {
 		let x: number | null = null;
 		let y: number | null = null;
 		const anchorCenter = {
-			x: anchorRect.left - window.scrollX + anchorRect.width / 2,
-			y: anchorRect.top - window.scrollY + anchorRect.height / 2,
+			x: anchorRect.left + window.scrollX + anchorRect.width / 2,
+			y: anchorRect.top + window.scrollY + anchorRect.height / 2,
 		};
 
 		switch (position) {
 			case 'top': {
 				x = anchorCenter.x - tooltipWidth / 2;
-				y = anchorRect.top - window.scrollY - tooltipHeight - this.offset;
+				y = anchorRect.top + window.scrollY - tooltipHeight - this.offset;
 				break;
 			}
 			case 'bottom': {
-				x = anchorRect.x - tooltipWidth / 2;
-				y = anchorRect.bottom - window.scrollY + this.offset;
+				x = anchorCenter.x - tooltipWidth / 2;
+				y = anchorRect.bottom + window.scrollY + this.offset;
 				break;
 			}
 			case 'left': {
-				x = anchorRect.left - window.scrollX - tooltipWidth - this.offset;
+				x = anchorRect.left + window.scrollX - tooltipWidth - 12;
 				y = anchorCenter.y - tooltipHeight / 2;
 				break;
 			}
 			case 'right': {
-				x = anchorRect.right - window.scrollX + this.offset;
+				x = anchorRect.right + window.scrollX + 12;
 				y = anchorCenter.y - tooltipHeight / 2;
 				break;
 			}
 			default: {
 				x = anchorCenter.x - tooltipWidth / 2;
-				y = anchorRect.top - window.scrollY - tooltipHeight - this.offset;
+				y = anchorRect.top + window.scrollY - tooltipHeight - this.offset;
 				break;
 			}
 		}
@@ -164,12 +164,7 @@ class Tooltip {
 		tooltipHeight: number
 	): Position | 'overlap' {
 		const position = this.options.position;
-		const anchor = {
-			top: anchorRect.top - window.scrollY,
-			bottom: anchorRect.bottom - window.scrollY,
-			left: anchorRect.left - window.scrollX,
-			right: anchorRect.right - window.scrollX,
-		};
+		const anchor = anchorRect;
 		const space = {
 			top: anchor.top - this.offset - this.edgePadding,
 			bottom: window.innerHeight - anchor.bottom - this.offset - this.edgePadding,
@@ -189,7 +184,7 @@ class Tooltip {
 			bottom: ['bottom', 'top', 'right', 'left'],
 			left: ['left', 'right', 'top', 'bottom'],
 			right: ['right', 'left', 'top', 'bottom'],
-			auto: ['top', 'bottom', 'left', 'right'],
+			auto: ['top', 'bottom', 'right', 'left'],
 		};
 		const priority = positionHierarchy[position] || positionHierarchy.auto;
 		for (const pos of priority) {
@@ -201,22 +196,17 @@ class Tooltip {
 	}
 
 	applyViewportConstraints(x: number, y: number, width: number, height: number): Point {
-		let newX: number | null = null;
-		let newY: number | null = null;
+		const minX = this.edgePadding + window.scrollX;
+		const maxX = window.innerWidth - width - this.edgePadding + window.scrollX;
+		const finalX = Math.max(minX, Math.min(x, maxX));
 
-		if (x < this.edgePadding) {
-			newX = this.edgePadding;
-		} else if (x + width > window.innerWidth - this.edgePadding) {
-			newX = window.innerWidth - width - this.edgePadding;
-		}
-		if (y < this.edgePadding) {
-			newY = this.edgePadding;
-		} else if (y + height > window.innerHeight - this.edgePadding) {
-			newY = window.innerHeight - height - this.edgePadding;
-		}
+		const minY = this.edgePadding + window.scrollY;
+		const maxY = window.innerHeight - height - this.edgePadding + window.scrollY;
+		const finalY = Math.max(minY, Math.min(y, maxY));
+
 		return {
-			x: newX ?? x,
-			y: newY ?? y,
+			x: finalX,
+			y: finalY,
 		};
 	}
 
@@ -254,9 +244,16 @@ class Tooltip {
 		return this.anchor;
 	}
 
+	isHoverOnly() {
+		return this.options.hoverOnly ?? false;
+	}
+
+	setSticky(sticky: boolean) {
+		this.isSticky = sticky;
+	}
+
 	destroy() {
 		window.removeEventListener('resize', this.throttleUpdate);
-		window.removeEventListener('scroll', this.throttleUpdate, true);
 		if (this.resizeObserver) {
 			this.resizeObserver.disconnect();
 			this.resizeObserver = null;
@@ -282,6 +279,7 @@ function loadTooltips() {
 		enterTimeout = window.setTimeout(() => {
 			if (activeTooltip && activeTooltip !== tooltipInstance) {
 				activeTooltip.hide();
+				activeTooltip.setSticky(false);
 			}
 			tooltipInstance.show();
 			activeTooltip = tooltipInstance;
@@ -292,6 +290,7 @@ function loadTooltips() {
 		clearTimeout(enterTimeout);
 		exitTimeout = window.setTimeout(() => {
 			tooltipInstance.hide();
+			tooltipInstance.setSticky(false);
 			if (activeTooltip === tooltipInstance) {
 				activeTooltip = null;
 			}
@@ -304,28 +303,51 @@ function loadTooltips() {
 		const anchor = tooltipInstance.getAnchor();
 		const popup = tooltipInstance.tooltip;
 
-		anchor.addEventListener('mouseenter', () => show(tooltipInstance));
-		anchor.addEventListener('focus', () => show(tooltipInstance));
-		anchor.addEventListener('mouseleave', () => hide(tooltipInstance));
-		anchor.addEventListener('blur', () => hide(tooltipInstance));
-		anchor.addEventListener('drag', () => hide(tooltipInstance));
+		anchor.addEventListener('mouseenter', () => {
+			if (!tooltipInstance.isSticky) {
+				show(tooltipInstance);
+			}
+		});
 
-		popup.addEventListener('mouseenter', () => clearTimeout(exitTimeout));
-		popup.addEventListener('mouseleave', () => hide(tooltipInstance));
+		anchor.addEventListener('focus', () => {
+			if (!tooltipInstance.isSticky) {
+				show(tooltipInstance);
+			}
+		});
+
+		anchor.addEventListener('mouseleave', () => {
+			if (!tooltipInstance.isSticky) {
+				hide(tooltipInstance);
+			}
+		});
+
+		anchor.addEventListener('blur', () => {
+			if (!tooltipInstance.isSticky) {
+				hide(tooltipInstance);
+			}
+		});
 
 		anchor.addEventListener('click', (e) => {
 			e.stopPropagation();
-			if (activeTooltip === tooltipInstance && !exitTimeout) {
+			if (tooltipInstance.isSticky) {
 				hide(tooltipInstance);
 			} else {
 				show(tooltipInstance);
+				tooltipInstance.setSticky(true);
+			}
+		});
+
+		popup.addEventListener('mouseenter', () => clearTimeout(exitTimeout));
+		popup.addEventListener('mouseleave', () => {
+			if (!tooltipInstance.isSticky) {
+				hide(tooltipInstance);
 			}
 		});
 	}
 
 	document.addEventListener('click', (e) => {
 		if (
-			activeTooltip &&
+			activeTooltip?.isSticky &&
 			!activeTooltip.getAnchor().contains(e.target as Node) &&
 			!activeTooltip.tooltip.contains(e.target as Node)
 		) {
@@ -335,8 +357,7 @@ function loadTooltips() {
 
 	document.addEventListener('keydown', (e) => {
 		if (e.key === 'Escape' && activeTooltip) {
-			activeTooltip.hide();
-			activeTooltip = null;
+			hide(activeTooltip);
 		}
 	});
 }
