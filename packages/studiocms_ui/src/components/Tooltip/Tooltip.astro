@@ -1,7 +1,8 @@
 ---
 import "./tooltip.css";
+import type { HTMLAttributes } from "astro/types";
 
-interface Props {
+interface Props extends Omit<HTMLAttributes<"div">, "class:list"> {
   /**
    * The position of the tooltip. Defaults to 'auto'.
    *
@@ -10,9 +11,29 @@ interface Props {
   position?: "auto" | "top" | "bottom" | "left" | "right";
 
   /**
+   * Whether the tooltip should be opened by default. Defaults to false.
+   */
+  defaultOpen?: boolean;
+
+  /**
    * Whether the tooltip should be inline with the anchor element. Defaults to false.
    */
   inline?: boolean;
+
+  /**
+   * The variant of the tooltip. Defaults to 'default'.
+   */
+  variant?: "default" | "outlined";
+
+  /**
+   * The color of the tooltip. Defaults to 'default'.
+   */
+  color?: "default" | "primary" | "secondary" | "success" | "warning" | "error";
+
+  /**
+   * The gap between the tooltip and the anchor element in pixels. Defaults to 8.
+   */
+  gap?: number;
 
   /**
    * The delay before the tooltip appears in milliseconds. Defaults to 0.
@@ -44,12 +65,17 @@ interface Props {
 
 const {
   position = "auto",
+  defaultOpen = false,
   inline = false,
+  variant = "default",
+  color = "default",
+  gap = 8,
   enterDelay = 0,
   exitDelay = 0,
   hoverOnly = false,
   animate = true,
   pointer = true,
+  ...others
 } = Astro.props;
 
 const Tag = inline ? "span" : "div";
@@ -60,18 +86,22 @@ const Tag = inline ? "span" : "div";
   data-sui-tooltip
   data-sui-tooltip-options={JSON.stringify({
     position,
+    defaultOpen,
+    gap,
     enterDelay,
     exitDelay,
     hoverOnly,
     animate,
     pointer,
   })}
+  {...others}
 >
   <Tag class="sui-tooltip-anchor-wrapper" data-sui-tooltip-anchor>
     <slot />
   </Tag>
   <div
-    class:list={["sui-tooltip-popup", animate && "animate"]}
+    class={`sui-tooltip-popup color-${color} variant-${variant}`}
+    class:list={[animate && "animate"]}
     data-sui-tooltip-popup
     role="tooltip"
   >

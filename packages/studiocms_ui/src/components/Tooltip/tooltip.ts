@@ -7,6 +7,8 @@ type Point = {
 
 interface TooltipOptions {
 	position: Position;
+	defaultOpen?: boolean;
+	gap?: number;
 	enterDelay?: number;
 	exitDelay?: number;
 	hoverOnly?: boolean;
@@ -22,7 +24,7 @@ class Tooltip {
 	resizeObserver: ResizeObserver | null = null;
 	throttleUpdate: () => void;
 	rafId: number | null = null;
-	offset = 4;
+	offset: number;
 	isSticky = false;
 	edgePadding = 8;
 
@@ -35,6 +37,7 @@ class Tooltip {
 		this.tooltip = container.querySelector<HTMLElement>('[data-sui-tooltip-popup]')!;
 
 		this.options = this.processOptionsFromAttributes();
+		this.offset = this.options.gap ?? 8;
 		this.throttleUpdate = this.throttle(() => this.update(), 16);
 		this.#init();
 	}
@@ -83,9 +86,8 @@ class Tooltip {
 		const tooltipWidth = this.tooltip.offsetWidth;
 		const tooltipHeight = this.tooltip.offsetHeight;
 		const position = this.determinePosition(anchorRect, tooltipWidth, tooltipHeight);
-		const classPrefix = 'sui-tooltip-position';
 		for (const p of ['top', 'bottom', 'left', 'right', 'overlap']) {
-			this.tooltip.classList.toggle(`${classPrefix}--${p}`, p === position);
+			this.tooltip.classList.toggle(p, p === position);
 		}
 
 		let x: number | null = null;
@@ -252,6 +254,10 @@ class Tooltip {
 		this.isSticky = sticky;
 	}
 
+	isDefaultOpen() {
+		return this.options.defaultOpen ?? false;
+	}
+
 	destroy() {
 		window.removeEventListener('resize', this.throttleUpdate);
 		if (this.resizeObserver) {
@@ -274,8 +280,9 @@ function loadTooltips() {
 	let enterTimeout: number;
 	let exitTimeout: number;
 
-	const show = (tooltipInstance: Tooltip) => {
+	const show = (tooltipInstance: Tooltip, immediate = false) => {
 		clearTimeout(exitTimeout);
+		const delay = immediate ? 0 : tooltipInstance.options.enterDelay;
 		enterTimeout = window.setTimeout(() => {
 			if (activeTooltip && activeTooltip !== tooltipInstance) {
 				activeTooltip.hide();
@@ -283,7 +290,7 @@ function loadTooltips() {
 			}
 			tooltipInstance.show();
 			activeTooltip = tooltipInstance;
-		}, tooltipInstance.options.enterDelay);
+		}, delay);
 	};
 
 	const hide = (tooltipInstance: Tooltip) => {
@@ -302,6 +309,9 @@ function loadTooltips() {
 		const tooltipInstance: Tooltip = new Tooltip(element);
 		const anchor = tooltipInstance.getAnchor();
 		const popup = tooltipInstance.tooltip;
+
+		// @ts-expect-error
+		window.sui.tooltips.instances.set(tooltipInstance.container.id, tooltipInstance);
 
 		anchor.addEventListener('mouseenter', () => {
 			if (!tooltipInstance.isSticky) {
@@ -343,6 +353,11 @@ function loadTooltips() {
 				hide(tooltipInstance);
 			}
 		});
+
+		if (tooltipInstance.isDefaultOpen()) {
+			show(tooltipInstance, true);
+			tooltipInstance.setSticky(true);
+		}
 	}
 
 	document.addEventListener('click', (e) => {
@@ -361,5 +376,30 @@ function loadTooltips() {
 		}
 	});
 }
+
+// TODO: Investigate why global type definitions are not being recognized
+// @ts-expect-error
+window.sui = window.sui ?? {};
+
+// @ts-expect-error
+window.sui.tooltips = {
+	instances: new Map<string, Tooltip>(),
+
+	get: function (id: string) {
+		return this.instances.get(id);
+	},
+
+	show: function (id: string) {
+		const instance = this.get(id);
+		if (instance) {
+			instance.show();
+			instance.setSticky(true);
+		}
+	},
+
+	hide: function (id: string) {
+		this.get(id)?.hide();
+	},
+};
 
 document.addEventListener('astro:page-load', loadTooltips);
