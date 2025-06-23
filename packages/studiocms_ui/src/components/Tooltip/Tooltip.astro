@@ -17,6 +17,10 @@ interface Props extends Omit<HTMLAttributes<"div">, "class:list"> {
 
   /**
    * Whether the tooltip should be inline with the anchor element. Defaults to false.
+   * 
+   * @todo This is not fully working, due to an Astro bug: https://github.com/withastro/astro/issues/13970
+   * 
+   * USE AT YOUR OWN RISK!
    */
   inline?: boolean;
 
@@ -43,7 +47,7 @@ interface Props extends Omit<HTMLAttributes<"div">, "class:list"> {
   /**
    * The delay before the tooltip disappears in milliseconds. Defaults to 0.
    */
-  exitDelay: number;
+  exitDelay?: number;
 
   /**
    * Whether the tooltip should be hover only. Defaults to false.
@@ -77,11 +81,9 @@ const {
   pointer = true,
   ...others
 } = Astro.props;
-
-const Tag = inline ? "span" : "div";
 ---
 
-<Tag
+<div
   class:list={["sui-tooltip-container", inline && "inline"]}
   data-sui-tooltip
   data-sui-tooltip-options={JSON.stringify({
@@ -96,9 +98,9 @@ const Tag = inline ? "span" : "div";
   })}
   {...others}
 >
-  <Tag class="sui-tooltip-anchor-wrapper" data-sui-tooltip-anchor>
+  <div class="sui-tooltip-anchor-wrapper" data-sui-tooltip-anchor>
     <slot />
-  </Tag>
+  </div>
   <div
     class={`sui-tooltip-popup color-${color} variant-${variant}`}
     class:list={[animate && "animate"]}
@@ -110,7 +112,7 @@ const Tag = inline ? "span" : "div";
       <p>Warning: slot 'tooltip' was not found</p>
     </slot>
   </div>
-</Tag>
+</div>
 
 <script>
   import "studiocms:ui/scripts/tooltip";

@@ -125,12 +125,20 @@ class Tooltip {
 			}
 		}
 
-		const constraints = this.applyViewportConstraints(x, y, tooltipWidth, tooltipHeight);
-		this.tooltip.style.left = `${constraints.x}px`;
-		this.tooltip.style.top = `${constraints.y}px`;
+		let finalPosition: Point;
+		const anchorIsVisible = this.isAnchorInViewport(anchorRect);
+
+		if (anchorIsVisible) {
+			finalPosition = this.applyViewportConstraints(x, y, tooltipWidth, tooltipHeight);
+		} else {
+			finalPosition = { x, y };
+		}
+
+		this.tooltip.style.left = `${finalPosition.x}px`;
+		this.tooltip.style.top = `${finalPosition.y}px`;
 
 		if (this.options.pointer) {
-			this.updatePointer(position, anchorCenter, constraints, tooltipWidth, tooltipHeight);
+			this.updatePointer(position, anchorCenter, finalPosition, tooltipWidth, tooltipHeight);
 		}
 	}
 
@@ -195,6 +203,15 @@ class Tooltip {
 			}
 		}
 		return 'overlap';
+	}
+
+	isAnchorInViewport(anchorRect: DOMRect): boolean {
+		return (
+			anchorRect.top < window.innerHeight &&
+			anchorRect.bottom > 0 &&
+			anchorRect.left < window.innerWidth &&
+			anchorRect.right > 0
+		);
 	}
 
 	applyViewportConstraints(x: number, y: number, width: number, height: number): Point {
