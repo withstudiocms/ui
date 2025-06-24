@@ -57,6 +57,11 @@
   color: var(--text-light);
   border-color: var(--info-hover);
 }
+.sui-tooltip-popup.color-mono {
+  background-color: var(--mono-base);
+  color: var(--text-inverted);
+  border-color: var(--mono-hover);
+}
 .sui-tooltip-popup.color-default.variant-outlined {
   border-color: var(--text-muted);
   background-color: var(--default-base);
@@ -79,6 +84,10 @@
 }
 .sui-tooltip-popup.color-info.variant-outlined {
   border-color: var(--info-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-mono.variant-outlined {
+  border-color: var(--mono-hover);
   background-color: var(--default-base);
 }
 .sui-tooltip-popup.animate {
@@ -122,6 +131,10 @@
   background-color: var(--info-base);
   border-color: var(--info-hover);
 }
+.sui-tooltip-popup.color-mono .sui-tooltip-pointer {
+  background-color: var(--mono-base);
+  border-color: var(--mono-hover);
+}
 .sui-tooltip-popup.color-default.variant-outlined .sui-tooltip-pointer {
   border-color: var(--text-muted);
   background-color: var(--default-base);
@@ -143,6 +156,10 @@
 }
 .sui-tooltip-popup.color-info.variant-outlined .sui-tooltip-pointer {
   border-color: var(--info-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-mono.variant-outlined .sui-tooltip-pointer {
+  border-color: var(--mono-hover);
   background-color: var(--default-base);
 }
 .sui-tooltip-popup.top .sui-tooltip-pointer {

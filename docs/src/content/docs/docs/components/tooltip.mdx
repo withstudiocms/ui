@@ -13,6 +13,10 @@ import { Tooltip } from "studiocms:ui/components";
 
 A tooltip component that will show on hover (desktop) or tap (mobile). It's used to provide additional information about an element.
 
+:::note[Note]
+Only one tooltip can be open at a time. If you open another tooltip, the previous one will close.
+:::
+
 ## Usage
 
 <Tabs>
@@ -109,6 +113,8 @@ The values for the position prop are:
 
 The tooltip can be set to be open by default. This is useful for debugging or when you want the tooltip to be visible without user interaction.
 
+Keep in mind, if a user interacts with another tooltip, the `defaultOpen` tooltip will close, even if it was not in view.
+
 :::note[Note]
 The `defaultOpen` prop can only be used on one tooltip at a time per page. If you set it on multiple tooltips, only the last one will be open by default.
 :::
@@ -174,6 +180,10 @@ The tooltip can be styled with different colors. The default is `default`. The a
         <button>Info</button>
         <Fragment slot="tooltip">This is an info tooltip.</Fragment>
       </Tooltip>
+      <Tooltip color="mono">
+        <button>Monochrome</button>
+        <Fragment slot="tooltip">This is an monochrome tooltip.</Fragment>
+      </Tooltip>
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
@@ -205,6 +215,10 @@ The tooltip can be styled with different colors. The default is `default`. The a
     <Tooltip color='info'>
       <button>Info</button>
       <Fragment slot="tooltip">This is an info tooltip.</Fragment>
+    </Tooltip>
+    <Tooltip color="mono">
+      <button>Monochrome</button>
+      <Fragment slot="tooltip">This is an monochrome tooltip.</Fragment>
     </Tooltip>
     ```
   </TabItem>
