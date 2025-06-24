@@ -4,7 +4,6 @@
 .sui-tooltip-container.inline {
   display: inline-block;
 }
-
 .sui-tooltip-popup {
   position: absolute;
   z-index: 1000;
@@ -35,27 +34,27 @@
 }
 .sui-tooltip-popup.color-primary {
   background-color: var(--primary-base);
-  color: var(--text-normal);
+  color: var(--text-inverted);
   border-color: var(--primary-hover);
 }
 .sui-tooltip-popup.color-success {
   background-color: var(--success-base);
-  color: var(--text-normal);
+  color: var(--text-dark);
   border-color: var(--success-hover);
 }
 .sui-tooltip-popup.color-warning {
   background-color: var(--warning-base);
-  color: var(--text-normal);
+  color: var(--text-dark);
   border-color: var(--warning-hover);
 }
 .sui-tooltip-popup.color-danger {
   background-color: var(--danger-base);
-  color: var(--text-normal);
+  color: var(--text-light);
   border-color: var(--danger-hover);
 }
 .sui-tooltip-popup.color-info {
   background-color: var(--info-base);
-  color: var(--text-normal);
+  color: var(--text-light);
   border-color: var(--info-hover);
 }
 .sui-tooltip-popup.color-default.variant-outlined {
