@@ -1,0 +1,188 @@
+.sui-tooltip-container {
+  display: block;
+}
+.sui-tooltip-container.inline {
+  display: inline-block;
+}
+.sui-tooltip-popup {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: var(--radius-md);
+  padding: 0.5rem 1rem;
+  min-width: 250px;
+  pointer-events: none;
+}
+.sui-tooltip-popup[data-visible="true"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+.sui-tooltip-popup.variant-default,
+.sui-tooltip-popup.variant-outlined {
+  border-style: solid;
+  border-width: 1px;
+}
+.sui-tooltip-popup.color-default {
+  background-color: var(--background-step-3);
+  color: var(--text-normal);
+  border-color: var(--border);
+}
+.sui-tooltip-popup.color-primary {
+  background-color: var(--primary-base);
+  color: var(--text-inverted);
+  border-color: var(--primary-hover);
+}
+.sui-tooltip-popup.color-success {
+  background-color: var(--success-base);
+  color: var(--text-dark);
+  border-color: var(--success-hover);
+}
+.sui-tooltip-popup.color-warning {
+  background-color: var(--warning-base);
+  color: var(--text-dark);
+  border-color: var(--warning-hover);
+}
+.sui-tooltip-popup.color-danger {
+  background-color: var(--danger-base);
+  color: var(--text-light);
+  border-color: var(--danger-hover);
+}
+.sui-tooltip-popup.color-info {
+  background-color: var(--info-base);
+  color: var(--text-light);
+  border-color: var(--info-hover);
+}
+.sui-tooltip-popup.color-mono {
+  background-color: var(--mono-base);
+  color: var(--text-inverted);
+  border-color: var(--mono-hover);
+}
+.sui-tooltip-popup.color-default.variant-outlined {
+  border-color: var(--text-muted);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-primary.variant-outlined {
+  border-color: var(--primary-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-success.variant-outlined {
+  border-color: var(--success-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-warning.variant-outlined {
+  border-color: var(--warning-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-danger.variant-outlined {
+  border-color: var(--danger-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-info.variant-outlined {
+  border-color: var(--info-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-mono.variant-outlined {
+  border-color: var(--mono-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.animate {
+  transition: opacity 0.2s ease-out, visibility 0.2s;
+}
+
+.sui-tooltip-pointer {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  z-index: 999;
+  background-color: var(--background-step-3);
+  border: solid 1px var(--border);
+}
+.sui-tooltip-popup.variant-default .sui-tooltip-pointer,
+.sui-tooltip-popup.variant-outlined .sui-tooltip-pointer {
+  border-style: solid;
+  border-width: 1px;
+}
+.sui-tooltip-popup.color-default .sui-tooltip-pointer {
+  background-color: var(--background-step-3);
+  border-color: var(--border);
+}
+.sui-tooltip-popup.color-primary .sui-tooltip-pointer {
+  background-color: var(--primary-base);
+  border-color: var(--primary-hover);
+}
+.sui-tooltip-popup.color-success .sui-tooltip-pointer {
+  background-color: var(--success-base);
+  border-color: var(--success-hover);
+}
+.sui-tooltip-popup.color-warning .sui-tooltip-pointer {
+  background-color: var(--warning-base);
+  border-color: var(--warning-hover);
+}
+.sui-tooltip-popup.color-danger .sui-tooltip-pointer {
+  background-color: var(--danger-base);
+  border-color: var(--danger-hover);
+}
+.sui-tooltip-popup.color-info .sui-tooltip-pointer {
+  background-color: var(--info-base);
+  border-color: var(--info-hover);
+}
+.sui-tooltip-popup.color-mono .sui-tooltip-pointer {
+  background-color: var(--mono-base);
+  border-color: var(--mono-hover);
+}
+.sui-tooltip-popup.color-default.variant-outlined .sui-tooltip-pointer {
+  border-color: var(--text-muted);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-primary.variant-outlined .sui-tooltip-pointer {
+  border-color: var(--primary-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-success.variant-outlined .sui-tooltip-pointer {
+  border-color: var(--success-hover);
+}
+.sui-tooltip-popup.color-warning.variant-outlined .sui-tooltip-pointer {
+  border-color: var(--warning-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-danger.variant-outlined .sui-tooltip-pointer {
+  border-color: var(--danger-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-info.variant-outlined .sui-tooltip-pointer {
+  border-color: var(--info-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.color-mono.variant-outlined .sui-tooltip-pointer {
+  border-color: var(--mono-hover);
+  background-color: var(--default-base);
+}
+.sui-tooltip-popup.top .sui-tooltip-pointer {
+  bottom: -9px;
+  transform: rotateZ(45deg);
+  border-left: none;
+  border-top: none;
+}
+.sui-tooltip-popup.bottom .sui-tooltip-pointer {
+  top: -9px;
+  transform: rotateZ(45deg);
+  border-bottom: none;
+  border-right: none;
+}
+.sui-tooltip-popup.left .sui-tooltip-pointer {
+  right: -9px;
+  transform: rotateZ(45deg);
+  border-bottom: none;
+  border-left: none;
+}
+.sui-tooltip-popup.right .sui-tooltip-pointer {
+  left: -9px;
+  transform: rotateZ(45deg);
+  border-top: none;
+  border-right: none;
+}

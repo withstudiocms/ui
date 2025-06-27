@@ -15,6 +15,31 @@ interface CustomEventMap {
 }
 
 /**
+ * Tooltip interface defines the structure of a tooltip API on the window object.
+ */
+interface SuiTooltipApi {
+	instances: Map<string, Tooltip>;
+	/**
+	 * Gets a tooltip instance by its container ID.
+	 * @param id The ID of the tooltip container element.
+	 * @returns The Tooltip instance if found, otherwise undefined.
+	 */
+	get: (id: string) => Tooltip | undefined;
+
+	/**
+	 * Shows a tooltip by its container ID.
+	 * @param id The ID of the tooltip container element.
+	 */
+	show: (id: string) => void;
+
+	/**
+	 * Hides a tooltip by its container ID.
+	 * @param id The ID of the tooltip container element.
+	 */
+	hide: (id: string) => void;
+}
+
+/**
  * Extends the global `Document` interface to include custom event handling methods.
  *
  * @template K - The type of the event name, which must be a key of `CustomEventMap`.
@@ -63,5 +88,18 @@ declare global {
 		 * @param ev - The custom event to be dispatched.
 		 */
 		dispatchEvent<K extends keyof CustomEventMap>(ev: CustomEventMap[K]): void;
+	}
+
+	
+	interface Window {
+		/**
+		 * The StudioCMS UI API, which includes various tools and utilities for the UI.
+		 */
+		sui: {
+			/**
+			 * The tooltip API, which provides methods for managing tooltips in the UI.
+			 */
+			tooltips: SuiTooltipApi;
+		}
 	}
 }
