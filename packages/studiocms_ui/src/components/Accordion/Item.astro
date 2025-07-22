@@ -8,14 +8,16 @@ interface Props {
 const { open = false } = Astro.props;
 ---
 
-<div class="sui-accordion-item" class:list={{ active: open }} data-open={open}>
-    <div class="sui-accordion-summary not-content" tabindex="0">
+<div class="sui-accordion-item" data-open={open}>
+    <button class="sui-accordion-summary not-content" type="button" aria-expanded={open}>
         <Icon name="heroicons:chevron-right-20-solid" class='sui-summary-chevron' width={20} height={20} />
         <div class="sui-accordion-summary-content">
             <slot name="summary" />
         </div>
-    </div>
-    <div class="sui-accordion-details" class:list={{ active: open, open: open, initial: !open }}>
-        <slot name="default" />
+    </button>
+    <div class="sui-accordion-details" aria-hidden={!open}>
+        <div class="sui-accordion-content">
+            <slot name="default" />
+        </div>
     </div>
 </div>
