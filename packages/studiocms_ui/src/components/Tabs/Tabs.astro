@@ -10,6 +10,7 @@ interface Tab {
 	label: string;
 	color: Exclude<StudioCMSColorway, 'default'>;
 	tabId: string;
+	active?: boolean;
 }
 
 /**
@@ -41,7 +42,7 @@ interface Props {
  * @returns An object of key-value pairs for the parsed attributes.
  */
 const getAttributes = (tagContent: string) => {
-	const attributes: { [key: string]: string } = {};
+	const attributes: { [key: string]: string | boolean } = {};
 	const attributeRegex = /data-([\w-]+)="([^"]*)"/g;
 	for (const match of tagContent.matchAll(attributeRegex)) {
 		const [, key, value] = match;
@@ -50,6 +51,8 @@ const getAttributes = (tagContent: string) => {
 			attributes[key] = value;
 		} else if (key === 'tab-id') {
 			attributes.tabId = value;
+		} else if (key === 'active') {
+			attributes.active = value === 'true';
 		}
 	}
 	return attributes;
@@ -140,7 +143,8 @@ const syncKey = originalSyncKey ? `sui-tabs-${originalSyncKey}` : undefined;
 
 const tabContents = await Astro.slots.render('default');
 const tabs = extractTabInfoWithRegex(tabContents);
-const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || '', tabContents);
+const defaultActiveTab = tabs.find((tab) => tab.active) ?? tabs[0];
+const finalizedTabContents = markTabAsActive(defaultActiveTab?.tabId || '', tabContents);
 const containerId = generateID('sui-tabs-container');
 ---
 
@@ -153,22 +157,25 @@ const containerId = generateID('sui-tabs-container');
   class:list={[variant, align]}
 >
   <div class="sui-tabs-list" role="tablist">
-    {tabs.map((tab, i) => (
-      <button 
-        role="tab"
-		type="button"
-        class="sui-tab-header"
-        id={syncKey ? `${syncKey}-${i}` : undefined}
-        tabindex={i === 0 ? 0 : -1}
-        data-tab-child={tab.tabId}
-        class:list={[i === 0 && "active", tab.color, syncKey && `${syncKey}:${i}`]}
-      >
-        {tab.icon && (
-          <Icon name={tab.icon} width={24} height={24} />
-        )}
-        <span>{tab.label}</span>
-      </button>
-    ))}
+    {tabs.map((tab, i) => {
+		const isActive = tab.tabId === defaultActiveTab?.tabId;
+		return (
+			<button 
+				role="tab"
+				type="button"
+				class="sui-tab-header"
+				id={syncKey ? `${syncKey}-${i}` : undefined}
+				tabindex={isActive ? 0 : -1}
+				data-tab-child={tab.tabId}
+				class:list={[isActive && "active", tab.color, syncKey && `${syncKey}:${i}`]}
+			>
+				{tab.icon && (
+				<Icon name={tab.icon} width={24} height={24} />
+				)}
+				<span>{tab.label}</span>
+			</button>
+		)
+	})}
   </div>
   <div class="sui-tabs-content">
     <Fragment set:html={finalizedTabContents} />

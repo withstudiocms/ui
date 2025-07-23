@@ -289,6 +289,58 @@ set the `storage` prop to `persistent` to store the value in localStorage.
   </TabItem>
 </Tabs>
 
+### Active Tab
+
+You can set a default active tab to be selected when the tabs are first rendered by using the `active` prop.
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard fullWidth>
+      <SuiTabs>
+        <SuiTabItem label="Tab #1">
+          <Card fullWidth>
+            Content #1
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #2" active>
+          <Card fullWidth>
+            Content #2
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #3">
+          <Card fullWidth>
+            Content #3
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TabsAlignmentExample.astro"
+    ---
+    import { Tabs, TabItem, Card } from 'studiocms:ui/components';
+    ---
+
+    <Tabs>
+      <TabItem label='Tab #1'>
+        <Card fullWidth>
+          Content #1
+        </Card>
+      </TabItem>
+      <TabItem label='Tab #2' active>
+        <Card fullWidth>
+          Content #2
+        </Card>
+      </TabItem>
+      <TabItem label='Tab #3'>
+        <Card fullWidth>
+          Content #3
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>
 
 ### Nesting Tabs
 
