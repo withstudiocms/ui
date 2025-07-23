@@ -143,7 +143,10 @@ const setupTabContainer = (tabContainer: HTMLDivElement) => {
  * Initializes all tab systems on the page.
  * Finds all tab containers and applies the setup logic to each.
  */
-const loadTabs = () =>
-	document.querySelectorAll<HTMLDivElement>('.sui-tabs-container').forEach(setupTabContainer);
+const loadTabs = () => {
+	for (const tabContainer of document.querySelectorAll<HTMLDivElement>('.sui-tabs-container')) {
+		setupTabContainer(tabContainer);
+	}
+}
 
 document.addEventListener('astro:page-load', loadTabs);

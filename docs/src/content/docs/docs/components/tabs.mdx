@@ -1,5 +1,9 @@
 ---
 title: "Tabs"
+sidebar:
+  badge:
+    text: Updated!
+    variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -278,6 +282,72 @@ set the `storage` prop to `persistent` to store the value in localStorage.
       <TabItem label='Tab #4 (Sync 2)' icon='heroicons:bolt-slash' color='success'>
         <Card fullWidth>
           Tab Contents #4 (Sync 2)
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>
+
+
+### Nesting Tabs
+
+You can nest tabs inside of other tabs, allowing for complex tab structures. Here's an example of how to do this:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard fullWidth>
+      <SuiTabs>
+        <SuiTabItem label="Tab #1 (Normal)">
+          <Card fullWidth>
+            Tab Contents #1 (Normal)
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="Tab #2 (Nested)">
+          <Card fullWidth>
+            <SuiTabs>
+              <SuiTabItem label="Nested Tab #1">
+                <Card fullWidth>
+                  Nested Tab Contents #1
+                </Card>
+              </SuiTabItem>
+              <SuiTabItem label="Nested Tab #2">
+                <Card fullWidth>
+                  Nested Tab Contents #2
+                </Card>
+              </SuiTabItem>
+            </SuiTabs>
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro "syncKey='sync-example'" showLinenumbers title="TabsSyncExample.astro"
+    ---
+    import { Tabs, TabItem, Card, Divider } from 'studiocms:ui/components';
+    ---
+
+    <Tabs>
+      <TabItem label='Tab #1 (Normal)'>
+        <Card fullWidth>
+          Tab Contents #1 (Normal)
+        </Card>
+      </TabItem>
+      <TabItem label='Tab #2 (Nested)'>
+        <Card fullWidth>
+          <SuiTabs>
+            <SuiTabItem label="Nested Tab #1">
+              <Card fullWidth>
+                Nested Tab Contents #1
+              </Card>
+            </SuiTabItem>
+            <SuiTabItem label="Nested Tab #2">
+              <Card fullWidth>
+                Nested Tab Contents #2
+              </Card>
+            </SuiTabItem>
+          </SuiTabs>
         </Card>
       </TabItem>
     </Tabs>
