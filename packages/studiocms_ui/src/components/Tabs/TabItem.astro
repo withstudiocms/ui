@@ -19,19 +19,24 @@ interface Props {
 	 * The color of the tab. Defaults to `primary`.
 	 */
 	color?: Exclude<StudioCMSColorway, 'default'>;
+	/**
+	 * Whether the tab should be active by default.
+	 */
+	active?: boolean;
 }
 
 const id = generateID('tab');
 
-const { icon, label, color = 'primary' } = Astro.props;
+const { icon, label, color = 'primary', active = false } = Astro.props;
 ---
-<sui-tab-item 
-  data-icon={icon}
-  data-label={label}
-  data-color={color}
-  data-tab-id={id}
+<sui-tab-item
+	data-icon={icon}
+	data-label={label}
+	data-color={color}
+	data-tab-id={id}
+	data-active={active ? 'true' : undefined}
 >
-  <slot />
+	<slot />
 </sui-tab-item>
 <style>
   sui-tab-item {

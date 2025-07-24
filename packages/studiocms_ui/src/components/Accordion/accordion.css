@@ -9,27 +9,22 @@
 
 .sui-accordion-details {
 	margin-left: calc(2.25rem);
-}
-
-.sui-accordion-details.initial {
-	visibility: hidden;
-	transition: none;
-	max-height: none;
-	position: absolute;
-	top: -200vh;
-	left: -200vh;
-}
-
-.sui-accordion-details.active {
-	overflow: hidden;
-	max-height: 0;
-	transition: all .3s ease;
+	display: grid;
+	grid-template-rows: 0fr;
 	position: relative;
-	bottom: .25rem;
+	bottom: 0;
+	transition: grid-template-rows 0.3s ease, bottom 0.3s ease;
+	overflow: hidden;
 }
 
-.sui-accordion-details.open {
-	max-height: none;
+.sui-accordion-item[data-open="true"] > .sui-accordion-details {
+	bottom: .25rem;
+	grid-template-rows: 1fr;
+}
+
+.sui-accordion-content {
+	min-height: 0;
+	overflow: hidden;
 }
 
 .sui-accordion.outlined,
@@ -66,12 +61,32 @@
 	padding-left: .5rem;
 	padding-bottom: .5rem;
 	padding-top: .5rem;
+	user-select: none;
+	width: 100%;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	text-align: left;
+}
+
+.sui-accordion-summary:focus-visible {
+	outline: 2px solid var(--text-normal);
+	outline-offset: 2px;
 }
 
 .sui-summary-chevron {
 	transition: all .3s ease;
 }
 
-.sui-accordion-item.active .sui-summary-chevron {
+.sui-accordion-item[data-open="true"] > .sui-accordion-summary .sui-summary-chevron {
 	transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sui-accordion-details {
+		transition: none;
+	}
+	.sui-summary-chevron {
+		transition: none;
+	}
 }
