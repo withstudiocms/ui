@@ -246,7 +246,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 					injectScript('page-ssr', `import 'studiocms:ui/custom-css';`);
 				}
 
-				// TODO: @louisescher this needs a different icon please... 
+				// TODO: @louisescher this needs a different icon please...
 				// UI Should not be confused with StudioCMS itself
 				addDevToolbarApp({
 					id: 'studiocms-ui-toolbar',
@@ -264,10 +264,10 @@ export default function integration(options: Options = {}): AstroIntegration {
 							export const iconCollections: ('${icons.iconCollections.join("'\n | '")}')[];
 
 							${icons.iconCollections
-							.map((collection) => {
-								return `export const ${collection}: import('@studiocms/ui/types').IconifyJSON;`;
-							})
-							.join('\n')}
+								.map((collection) => {
+									return `export const ${collection}: import('@studiocms/ui/types').IconifyJSON;`;
+								})
+								.join('\n')}
 
 							export type AvailableIcons = (typeof availableIcons)[number];
 							export type IconCollections = (typeof iconCollections)[number];

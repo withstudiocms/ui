@@ -3,11 +3,11 @@ declare module 'studiocms:ui/version' {
 	export default version;
 }
 
-declare module 'studiocms:ui/global-css' { }
+declare module 'studiocms:ui/global-css' {}
 
-declare module 'studiocms:ui/custom-css' { }
+declare module 'studiocms:ui/custom-css' {}
 
-declare module 'studiocms:ui/scripts/*' { }
+declare module 'studiocms:ui/scripts/*' {}
 
 declare module 'studiocms:ui/components/button' {
 	export const Button: typeof import('./components/Button/Button.astro').default;
@@ -273,7 +273,6 @@ declare module 'studiocms:ui/components/sidebar' {
 		 */
 		hideSidebar: () => void;
 	}
-
 }
 
 declare module 'studiocms:ui/components/breadcrumbs' {

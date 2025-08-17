@@ -33,8 +33,5 @@
     "virtuals",
     "vite",
     "withstudiocms"
-  ],
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  ]
 }
