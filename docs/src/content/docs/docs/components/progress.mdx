@@ -5,7 +5,7 @@ title: Progress
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 import ProgressScript from '~/components/ProgressScript.astro';
-import { Progress, ProgressHelper } from 'studiocms:ui/components';
+import { Progress, ProgressHelper } from 'studiocms:ui/components/progress';
 
 :::caution[Helper required]
 This component requires a **helper**. Make sure to read the documentation carefully so you know how to use it.
@@ -24,7 +24,7 @@ A progress bar, used to show the progress of a task.
   <TabItem label="Code">
     ```astro showLinenumbers title="ProgressExample.astro"
     ---
-    import { Progress } from 'studiocms:ui/components';
+    import { Progress } from 'studiocms:ui/components/progress';
     ---
 
     <Progress id="progress" max={100} value={50} />
@@ -47,12 +47,12 @@ The value and max can be adjusted after the component has been initialized by us
   <TabItem label="Code">
     ```astro showLinenumbers title="ProgressExample.astro"
     ---
-    import { Progress } from 'studiocms:ui/components';
+    import { Progress } from 'studiocms:ui/components/progress';
     ---
 
     <Progress id="progress" max={100} value={50} />
     <script>
-      import { ProgressHelper } from 'studiocms:ui/components';
+      import { ProgressHelper } from 'studiocms:ui/components/progress';
 
       const progress = new ProgressHelper('progress');
       progress.setValue(75);
@@ -92,7 +92,7 @@ The progress component can be colored with all the colors available in the theme
   <TabItem label="Code">
     ```astro showLinenumbers title="ProgressExample.astro"
     ---
-    import { Progress } from 'studiocms:ui/components';
+    import { Progress } from 'studiocms:ui/components/progress';
     ---
 
     <Progress id="progress-1" max={100} value={50} color="primary" />

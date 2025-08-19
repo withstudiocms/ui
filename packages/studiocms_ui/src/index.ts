@@ -137,6 +137,68 @@ export default function integration(options: Options = {}): AstroIntegration {
 
 				icons = createIconifyPrefixCollection(optIcons);
 
+				const componentMap: Record<string, string> = {
+					'studiocms:ui/components/button': `export { default as Button } from '${resolve('./components/Button/Button.astro')}';`,
+					'studiocms:ui/components/divider': `export { default as Divider } from '${resolve('./components/Divider/Divider.astro')}';`,
+					'studiocms:ui/components/input': `export { default as Input } from '${resolve('./components/Input/Input.astro')}';`,
+					'studiocms:ui/components/textarea': `export { default as Textarea } from '${resolve('./components/Textarea/Textarea.astro')}';`,
+					'studiocms:ui/components/row': `export { default as Row } from '${resolve('./components/Row/Row.astro')}';`,
+					'studiocms:ui/components/center': `export { default as Center } from '${resolve('./components/Center/Center.astro')}';`,
+					'studiocms:ui/components/checkbox': `export { default as Checkbox } from '${resolve('./components/Checkbox/Checkbox.astro')}';`,
+					'studiocms:ui/components/toggle': `export { default as Toggle } from '${resolve('./components/Toggle/Toggle.astro')}';`,
+					'studiocms:ui/components/radiogroup': `export { default as RadioGroup } from '${resolve('./components/RadioGroup/RadioGroup.astro')}';`,
+					'studiocms:ui/components/toaster': `
+						export { default as Toaster } from '${resolve('./components/Toast/Toaster.astro')}';
+						export { toast } from '${resolve('./components/Toast/toast.js')}';
+					`,
+					'studiocms:ui/components/card': `export { default as Card } from '${resolve('./components/Card/Card.astro')}';`,
+					'studiocms:ui/components/modal': `
+						export { default as Modal } from '${resolve('./components/Modal/Modal.astro')}';
+						export { ModalHelper } from '${resolve('./components/Modal/modal.js')}';	
+					`,
+					'studiocms:ui/components/select': `
+						export { default as Select } from '${resolve('./components/Select/Select.astro')}';
+						export { default as SearchSelect } from '${resolve('./components/SearchSelect/SearchSelect.astro')}';
+					`,
+					'studiocms:ui/components/dropdown': `
+						export { default as Dropdown } from '${resolve('./components/Dropdown/Dropdown.astro')}';
+						export { DropdownHelper } from '${resolve('./components/Dropdown/dropdown.js')}';	
+					`,
+					'studiocms:ui/components/user': `export { default as User } from '${resolve('./components/User/User.astro')}';`,
+					'studiocms:ui/components/tabs': `
+						export { default as Tabs } from '${resolve('./components/Tabs/Tabs.astro')}';
+						export { default as TabItem } from '${resolve('./components/Tabs/TabItem.astro')}';
+					`,
+					'studiocms:ui/components/accordion': `
+						export { default as Accordion } from '${resolve('./components/Accordion/Accordion.astro')}';
+						export { default as AccordionItem } from '${resolve('./components/Accordion/Item.astro')}';
+					`,
+					'studiocms:ui/components/footer': `export { default as Footer } from '${resolve('./components/Footer/Footer.astro')}';`,
+					'studiocms:ui/components/progress': `
+						export { default as Progress } from '${resolve('./components/Progress/Progress.astro')}';
+						export { ProgressHelper } from '${resolve('./components/Progress/helper.js')}';
+					`,
+					'studiocms:ui/components/sidebar': `
+						export { default as Sidebar } from '${resolve('./components/Sidebar/Single.astro')}';
+						export { default as DoubleSidebar } from '${resolve('./components/Sidebar/Double.astro')}';
+						export { SingleSidebarHelper, DoubleSidebarHelper } from '${resolve('./components/Sidebar/helpers.js')}';
+					`,
+					'studiocms:ui/components/breadcrumbs': `export { default as Breadcrumbs } from '${resolve('./components/Breadcrumbs/Breadcrumbs.astro')}';`,
+					'studiocms:ui/components/group': `export { default as Group } from '${resolve('./components/Group/Group.astro')}';`,
+					'studiocms:ui/components/badge': `export { default as Badge } from '${resolve('./components/Badge/Badge.astro')}';`,
+					'studiocms:ui/components/icon': `
+						export { default as Icon } from '${resolve('./components/Icon/Icon.astro')}';
+						export { default as IconBase } from '${resolve('./components/Icon/IconBase.astro')}';
+					`,
+					'studiocms:ui/components/skeleton': `export { default as Skeleton } from '${resolve('./components/Skeleton/Skeleton.astro')}';`,
+					'studiocms:ui/components/tooltip': `export { default as Tooltip } from '${resolve('./components/Tooltip/Tooltip.astro')}';`,
+				};
+
+				const virtualComponents: Record<string, string> = {
+					...componentMap,
+					'studiocms:ui/components': Object.values(componentMap).join('\n'),
+				};
+
 				addVirtualImports(params, {
 					name: '@studiocms/ui',
 					imports: {
@@ -160,45 +222,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 						'studiocms:ui/scripts/accordion': `import '${resolve('./components/Accordion/accordion.js')}';`,
 						'studiocms:ui/scripts/progress': `import '${resolve('./components/Progress/progress.js')}';`,
 						// Components
-						'studiocms:ui/components': `
-							export { default as Button } from '${resolve('./components/Button/Button.astro')}';
-							export { default as Divider } from '${resolve('./components/Divider/Divider.astro')}';
-							export { default as Input } from '${resolve('./components/Input/Input.astro')}';
-							export { default as Row } from '${resolve('./components/Row/Row.astro')}';
-							export { default as Center } from '${resolve('./components/Center/Center.astro')}';
-							export { default as Textarea } from '${resolve('./components/Textarea/Textarea.astro')}';
-							export { default as Checkbox } from '${resolve('./components/Checkbox/Checkbox.astro')}';
-							export { default as Toggle } from '${resolve('./components/Toggle/Toggle.astro')}';
-							export { default as RadioGroup } from '${resolve('./components/RadioGroup/RadioGroup.astro')}';
-							export { default as Toaster } from '${resolve('./components/Toast/Toaster.astro')}';
-							export { default as Card } from '${resolve('./components/Card/Card.astro')}';
-							export { default as Modal } from '${resolve('./components/Modal/Modal.astro')}';
-							export { default as Select } from '${resolve('./components/Select/Select.astro')}';
-							export { default as SearchSelect } from '${resolve('./components/SearchSelect/SearchSelect.astro')}';
-							export { default as Dropdown } from '${resolve('./components/Dropdown/Dropdown.astro')}';
-							export { default as User } from '${resolve('./components/User/User.astro')}';
-							export { default as Tabs } from '${resolve('./components/Tabs/Tabs.astro')}';
-							export { default as TabItem } from '${resolve('./components/Tabs/TabItem.astro')}';
-							export { default as Accordion } from '${resolve('./components/Accordion/Accordion.astro')}';
-							export { default as AccordionItem } from '${resolve('./components/Accordion/Item.astro')}';
-							export { default as Footer } from '${resolve('./components/Footer/Footer.astro')}';
-							export { default as Progress } from '${resolve('./components/Progress/Progress.astro')}';
-							export { default as Sidebar } from '${resolve('./components/Sidebar/Single.astro')}';
-							export { default as DoubleSidebar } from '${resolve('./components/Sidebar/Double.astro')}';
-							export { default as Breadcrumbs } from '${resolve('./components/Breadcrumbs/Breadcrumbs.astro')}';
-							export { default as Group } from '${resolve('./components/Group/Group.astro')}';
-							export { default as Badge } from '${resolve('./components/Badge/Badge.astro')}';
-							export { default as Icon } from '${resolve('./components/Icon/Icon.astro')}';
-							export { default as IconBase } from '${resolve('./components/Icon/IconBase.astro')}';
-							export { default as Skeleton } from '${resolve('./components/Skeleton/Skeleton.astro')}';
-							export { default as Tooltip } from '${resolve('./components/Tooltip/Tooltip.astro')}';
-
-							export { ProgressHelper } from '${resolve('./components/Progress/helper.js')}';
-							export { SingleSidebarHelper, DoubleSidebarHelper } from '${resolve('./components/Sidebar/helpers.js')}';
-							export { toast } from '${resolve('./components/Toast/toast.js')}';
-							export { ModalHelper } from '${resolve('./components/Modal/modal.js')}';
-							export { DropdownHelper } from '${resolve('./components/Dropdown/dropdown.js')}';
-						`,
+						...virtualComponents,
 
 						'studiocms:ui/utils': `
 							export { ThemeHelper, Theme } from '${resolve('./utils/ThemeHelper.js')}';
@@ -222,6 +246,8 @@ export default function integration(options: Options = {}): AstroIntegration {
 					injectScript('page-ssr', `import 'studiocms:ui/custom-css';`);
 				}
 
+				// TODO: @louisescher this needs a different icon please...
+				// UI Should not be confused with StudioCMS itself
 				addDevToolbarApp({
 					id: 'studiocms-ui-toolbar',
 					name: 'StudioCMS/UI',

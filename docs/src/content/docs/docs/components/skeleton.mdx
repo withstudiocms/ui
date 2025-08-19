@@ -8,7 +8,7 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { Skeleton } from 'studiocms:ui/components';
+import { Skeleton } from 'studiocms:ui/components/skeleton';
 
 An extremely customizable skeleton loading component.
 
@@ -27,7 +27,7 @@ An extremely customizable skeleton loading component.
   <TabItem label='Code'>
     ```astro showLinenumbers title='SkeletonExample.astro'
     ---
-    import { Skeleton } from 'studiocms:ui/components';
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
     ---
 
     <Skeleton variant='card'>
@@ -62,7 +62,7 @@ You can use the `variant` prop to change the skeleton's appearance. The followin
   <TabItem label='Code'>
     ```astro "variant='card'" "variant='text'" "variant='block'" "variant='circle'" showLinenumbers title='SkeletonExample.astro'
     ---
-    import { Skeleton } from 'studiocms:ui/components';
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
     ---
 
     <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
@@ -92,7 +92,7 @@ The `width` and `height` props can be used to set the width and height of the sk
   <TabItem label='Code'>
     ```astro "width='100px' height='100px'" "width='50%' height='10rem'" "width='25%' height='1rem'" showLinenumbers title='SkeletonExample.astro'
     ---
-    import { Skeleton } from 'studiocms:ui/components';
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
     ---
 
     <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
@@ -129,7 +129,7 @@ The default value is `lg`.
   <TabItem label='Code'>
     ```astro "radius='none'" "radius='sm'" "radius='md'" "radius='lg'" showLinenumbers title='SkeletonExample.astro'
     ---
-    import { Skeleton } from 'studiocms:ui/components';
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
     ---
 
     <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
@@ -165,7 +165,7 @@ The default value is `slide`.
   <TabItem label='Code'>
     ```astro "animation='none'" "animation='slide'" "animation='pulse'" showLinenumbers title='SkeletonExample.astro'
     ---
-    import { Skeleton } from 'studiocms:ui/components';
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
     ---
 
     <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
@@ -210,7 +210,7 @@ The default value is `column`.
   <TabItem label='Code'>
     ```astro "direction='row'" showLinenumbers title='SkeletonExample.astro'
     ---
-    import { Skeleton } from 'studiocms:ui/components';
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
     ---
 
     <Skeleton variant='card' direction='row'>
@@ -260,7 +260,7 @@ The default value is `center`.
   <TabItem label='Code'>
     ```astro "hAlign='start'" "hAlign='center'" "hAlign='end'" showLinenumbers title='SkeletonExample.astro'
     ---
-    import { Skeleton } from 'studiocms:ui/components';
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
     ---
 
     <Skeleton variant='card' hAlign='start' direction='row'>
@@ -327,7 +327,7 @@ The default value is `center`.
   <TabItem label='Code'>
     ```astro "vAlign='start'" "vAlign='center'" "vAlign='end'" showLinenumbers title='SkeletonExample.astro'
     ---
-    import { Skeleton } from 'studiocms:ui/components';
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
     ---
 
     <Skeleton variant='card' vAlign='start' direction='column'>
@@ -371,7 +371,7 @@ You can use the `gap` prop to change the gap between the skeletons. The default 
   <TabItem label='Code'>
     ```astro "gap='1rem'" showLinenumbers title='SkeletonExample.astro'
     ---
-    import { Skeleton } from 'studiocms:ui/components';
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
     ---
 
     <Skeleton variant='card' gap='1rem'>

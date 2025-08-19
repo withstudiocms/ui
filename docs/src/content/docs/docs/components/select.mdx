@@ -5,7 +5,7 @@ title: Select
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { Select } from 'studiocms:ui/components';
+import { Select } from 'studiocms:ui/components/select';
 
 A custom select element that just works.
 
@@ -27,7 +27,7 @@ A custom select element that just works.
   <TabItem label="Code">
     ```astro showLinenumbers title="SelectExample.astro"
     ---
-    import { Select } from 'studiocms:ui/components';
+    import { Select } from 'studiocms:ui/components/select';
     ---
 
     <Select
@@ -63,7 +63,7 @@ You can set a default value using the `defaultValue` prop:
   <TabItem label="Code">
     ```astro "defaultValue='opt-1'" showLinenumbers title="SelectDefaultValueExample.astro"
     ---
-    import { Select } from 'studiocms:ui/components';
+    import { Select } from 'studiocms:ui/components/select';
     ---
 
     <Select
@@ -92,7 +92,7 @@ individual options by adding `disabled: true` to the option you want to disable:
 
 ```astro ins={7-9,16} showLinenumbers title="SelectFormExample.astro"
 ---
-import { Select } from 'studiocms:ui/components';
+import { Select } from 'studiocms:ui/components/select';
 ---
 
 <Select
@@ -135,7 +135,7 @@ the entire width of its parent container by setting the `fullWidth` prop to true
   <TabItem label="Code">
     ```astro "fullWidth" showLinenumbers title="SelectFullWidthExample.astro"
     ---
-    import { Select } from 'studiocms:ui/components';
+    import { Select } from 'studiocms:ui/components/select';
     ---
 
     <Select
@@ -172,7 +172,7 @@ You can adjust the placeholder shown in the select by passing the `placeholder` 
   <TabItem label="Code">
     ```astro "placeholder='Custom Placeholder'" showLinenumbers title="SelectPlaceholderExample.astro"
     ---
-    import { Select } from 'studiocms:ui/components';
+    import { Select } from 'studiocms:ui/components/select';
     ---
 
     <Select
@@ -223,7 +223,7 @@ You can select multiple options by setting the `multiple` prop to `true`:
   <TabItem label="Code">
     ```astro "multiple" showLinenumbers title="SelectMultipleExample.astro"
     ---
-    import { Select } from 'studiocms:ui/components';
+    import { Select } from 'studiocms:ui/components/select';
     ---
 
     <Select
@@ -277,7 +277,7 @@ You can set a maximum number of options that can be selected using the `max` pro
   <TabItem label="Code">
     ```astro "max={3}" showLinenumbers title="SelectMultipleMaxExample.astro"
     ---
-    import { Select } from 'studiocms:ui/components';
+    import { Select } from 'studiocms:ui/components/select';
     ---
 
     <Select

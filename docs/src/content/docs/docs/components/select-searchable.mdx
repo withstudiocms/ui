@@ -5,7 +5,7 @@ title: Select (Searchable)
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
-import { SearchSelect } from 'studiocms:ui/components';
+import { SearchSelect } from 'studiocms:ui/components/select';
 
 A variation of the `<Select />` element that supports arrow keys and filtering.
 
@@ -29,7 +29,7 @@ A variation of the `<Select />` element that supports arrow keys and filtering.
   <TabItem label="Code">
     ```astro showLinenumbers title="SearchSelectExample.astro"
     ---
-    import { SearchSelect } from 'studiocms:ui/components';
+    import { SearchSelect } from 'studiocms:ui/components/select';
     ---
 
     <SearchSelect
@@ -65,7 +65,7 @@ You can set a default value using the `defaultValue` prop:
   <TabItem label="Code">
     ```astro "defaultValue='opt-1'" showLinenumbers title="SearchSelectDefaultValueExample.astro"
     ---
-    import { SearchSelect } from 'studiocms:ui/components';
+    import { SearchSelect } from 'studiocms:ui/components/select';
     ---
 
     <SearchSelect
@@ -94,7 +94,7 @@ individual options by adding `disabled: true` to the option you want to disable:
 
 ```astro ins={7-9,16} showLinenumbers title="SearchSelectFormExample.astro"
 ---
-import { SearchSelect } from 'studiocms:ui/components';
+import { SearchSelect } from 'studiocms:ui/components/select';
 ---
 
 <SearchSelect
@@ -137,7 +137,7 @@ the entire width of its parent container by setting the `fullWidth` prop to true
   <TabItem label="Code">
     ```astro "fillWidth" showLinenumbers title="FullWidthSearchSelectExample.astro"
     ---
-    import { SearchSelect } from 'studiocms:ui/components';
+    import { SearchSelect } from 'studiocms:ui/components/select';
     ---
 
     <SearchSelect
@@ -174,7 +174,7 @@ You can adjust the placeholder shown in the select by passing the `placeholder` 
   <TabItem label="Code">
     ```astro "placeholder='Custom Placeholder'" showLinenumbers title="SearchSelectPlaceholderExample.astro"
     ---
-    import { SearchSelect } from 'studiocms:ui/components';
+    import { SearchSelect } from 'studiocms:ui/components/select';
     ---
 
     <SearchSelect
@@ -226,7 +226,7 @@ You can select multiple options by setting the `multiple` prop to `true`:
   <TabItem label="Code">
     ```astro "multiple" showLinenumbers title="SearchSelectMultipleExample.astro"
     ---
-    import { SearchSelect } from 'studiocms:ui/components';
+    import { SearchSelect } from 'studiocms:ui/components/select';
     ---
 
     <SearchSelect
@@ -280,7 +280,7 @@ You can set a maximum number of options that can be selected using the `max` pro
   <TabItem label="Code">
     ```astro "max={3}" showLinenumbers title="SearchSelectMultipleMaxExample.astro"
     ---
-    import { SearchSelect } from 'studiocms:ui/components';
+    import { SearchSelect } from 'studiocms:ui/components/select';
     ---
 
     <SearchSelect

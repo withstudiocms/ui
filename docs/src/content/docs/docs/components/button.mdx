@@ -3,7 +3,7 @@ i18nReady: true
 title: Button
 ---
 
-import { Button } from 'studiocms:ui/components';
+import { Button } from 'studiocms:ui/components/button';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 
@@ -22,7 +22,7 @@ A button component with support for different colors, sizes and states out of th
   <TabItem label="Code">
     ```astro showLinenumbers title="ButtonExample.astro"
     ---
-    import { Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
     ---
 
     <Button color='primary'>
@@ -47,7 +47,7 @@ You can disable the button component via the `disabled` attribute:
   <TabItem label="Code">
     ```astro "disabled" showLinenumbers title="DisabledButtonExample.astro"
     ---
-    import { Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
     ---
 
     <Button color='primary' disabled>
@@ -78,7 +78,7 @@ The button component supports three different sizes out of the box:
   <TabItem label="Code">
     ```astro /size='(?:sm|lg)'/ showLinenumbers title="ButtonSizesExample.astro"
     ---
-    import { Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
     ---
 
     <Button color='primary' size='sm'>
@@ -134,7 +134,7 @@ There is five default colorways that can be used right away:
   <TabItem label="Code">
     ```astro /color='[a-z]+'/ showLinenumbers title="ButtonColorsExample.astro"
     ---
-    import { Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
     ---
 
     <Button color='default'>
@@ -183,7 +183,7 @@ In addition to colors, the button component can be displayed in three different 
   <TabItem label="Code">
     ```astro /variant=\"[a-z]+\"/ showLinenumbers title="ButtonVariantsExample.astro"
     ---
-    import { Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
     ---
 
     <Button color='primary'>
@@ -215,7 +215,7 @@ Here's an example where the button is an `<a>` tag instead of a `<button>`:
   <TabItem label="Code">
     ```astro "as='a'" showLinenumbers title="ButtonPolymorphicExample.astro"
     ---
-    import { Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
     ---
   
     <Button color='primary' target="_blank" as='a' href="https://studiocms.dev">
@@ -245,7 +245,7 @@ them inline-styles!**
   <TabItem label="Code (with inline styles)">
     ```astro /style="(?:[^"]*)"/ showLinenumbers title="ButtonCustomStylesExample.astro"
     ---
-    import { Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
     ---
   
     <Button style="background-image: linear-gradient(to top right, #a07cee, #4ff8d2); color: black; font-weight: 600;">
@@ -256,7 +256,7 @@ them inline-styles!**
   <TabItem label="Code (with !important)">
     ```astro ins={9-13} showLinenumbers title="ButtonCustomStylesExample.astro"
     ---
-    import { Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
     ---
   
     <Button class="custom-btn">
