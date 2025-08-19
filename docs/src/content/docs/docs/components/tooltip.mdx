@@ -9,7 +9,7 @@ sidebar:
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 import PreviewCard from "~/components/PreviewCard.astro";
-import { Tooltip } from "studiocms:ui/components";
+import { Tooltip } from "studiocms:ui/components/tooltip";
 
 A tooltip component that will show on hover (desktop) or tap (mobile). It's used to provide additional information about an element.
 
@@ -35,7 +35,7 @@ Only one tooltip can be open at a time. If you open another tooltip, the previou
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip>
@@ -86,7 +86,7 @@ The values for the position prop are:
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipPositionExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip position='top'>
@@ -131,7 +131,7 @@ The `defaultOpen` prop can only be used on one tooltip at a time per page. If yo
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipDefaultStateExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip defaultOpen={true}>
@@ -189,7 +189,7 @@ The tooltip can be styled with different colors. The default is `default`. The a
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipColorsExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip color='default'>
@@ -247,7 +247,7 @@ The tooltip can be styled with different variants. The default is `default`. The
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipVariantsExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip variant='default'>
@@ -284,7 +284,7 @@ The tooltip can be configured to have a gap between the anchor element and the t
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipGapExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip gap={24}>
@@ -319,7 +319,7 @@ The tooltip can be configured to have delays for showing and hiding. The default
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipDelaysExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip enterDelay={500} exitDelay={0}>
@@ -354,7 +354,7 @@ By default, the tooltip will show on hover or tap. You can disable the tap activ
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipHoverOnlyExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip hoverOnly>
@@ -388,7 +388,7 @@ By default, the tooltip will fade in when shown and out when hidden. You can dis
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipAnimateExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip animate={false}>
@@ -422,7 +422,7 @@ By default, the tooltip will show a pointer to indicate where the tooltip is poi
   <TabItem label="Code">
     ```astro showLinenumbers title="TooltipPointerExample.astro"
     ---
-    import { Tooltip } from 'studiocms:ui/components';
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
     ---
 
     <Tooltip pointer={false}>

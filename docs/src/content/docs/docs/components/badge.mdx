@@ -2,7 +2,7 @@
 title: Badge
 ---
 
-import { Badge } from 'studiocms:ui/components';
+import { Badge } from 'studiocms:ui/components/badge';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 
@@ -19,7 +19,7 @@ A button component with support for different colors, sizes and states out of th
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeExample.astro"
     ---
-    import { Badge } from 'studiocms:ui/components';
+    import { Badge } from 'studiocms:ui/components/badge';
     ---
 
     <Badge label="Badge" icon="heroicons:sparkles-16-solid" />
@@ -45,7 +45,7 @@ The badge component has support for the following colors:
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeColorExample.astro"
     ---
-    import { Badge } from 'studiocms:ui/components';
+    import { Badge } from 'studiocms:ui/components/badge';
     ---
 
     <Badge label="Primary" color="primary" />
@@ -71,7 +71,7 @@ The badge component has support for the following colors:
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeSizeExample.astro"
     ---
-    import { Badge } from 'studiocms:ui/components';
+    import { Badge } from 'studiocms:ui/components/badge';
     ---
 
     <Badge label="Default" variant="default" />
@@ -95,7 +95,7 @@ You can change the badge's border-radius by setting the `rounding` prop:
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeSizeExample.astro"
     ---
-    import { Badge } from 'studiocms:ui/components';
+    import { Badge } from 'studiocms:ui/components/badge';
     ---
 
     <Badge label="Full" rounding="full" />
@@ -117,7 +117,7 @@ You can change the badge's border-radius by setting the `rounding` prop:
   <TabItem label="Code">
     ```astro showLinenumbers title="BadgeSizeExample.astro"
     ---
-    import { Badge } from 'studiocms:ui/components';
+    import { Badge } from 'studiocms:ui/components/badge';
     ---
 
     <Badge label="Small" size="sm" />
@@ -141,7 +141,7 @@ You can use the built-in icons from [HeroIcons](https://heroicons.com/) in the b
   <TabItem label="Code">
     ```astro showLinenumbers title="IconExample.astro"
     ---
-    import { Badge } from 'studiocms:ui/components';
+    import { Badge } from 'studiocms:ui/components/badge';
     ---
 
     <Badge label="Badge with Icon" icon="heroicons:sparkles-16-solid" />

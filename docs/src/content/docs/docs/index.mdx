@@ -49,11 +49,25 @@ export default defineConfig({
 
 ## Importing Components
 
+### Primary Bundled Export
+
 All components in this library are exported from `@studiocms/ui/components`. You can import and use the components like this:
 
 ```astro showLinenumbers title="ButtonExample.astro"
 ---
 import { Button } from 'studiocms:ui/components';
+---
+
+<Button />
+```
+
+### Tree-Shakeable Imports
+
+You can also import components individually to reduce bundle size. For example, to import the `Button` component:
+
+```astro showLinenumbers title="ButtonExample.astro"
+---
+import { Button } from 'studiocms:ui/components/button';
 ---
 
 <Button />
