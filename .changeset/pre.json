@@ -7,16 +7,5 @@
     "@studiocms/ui": "0.4.17"
   },
   "changesets": [
-    "cuddly-donuts-move",
-    "eighty-planes-judge",
-    "flat-icons-drive",
-    "gentle-elephants-raise",
-    "honest-days-hammer",
-    "mean-carrots-accept",
-    "nice-ants-visit",
-    "silver-poets-fetch",
-    "sixty-rice-peel",
-    "slow-fishes-remain",
-    "twelve-otters-pull"
   ]
 }
