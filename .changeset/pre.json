@@ -6,6 +6,5 @@
     "docs": "0.0.1",
     "@studiocms/ui": "0.4.17"
   },
-  "changesets": [
-  ]
+  "changesets": []
 }
