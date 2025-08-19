@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "build-scripts": "0.0.14",
+    "docs": "0.0.1",
+    "@studiocms/ui": "0.4.17"
+  },
+  "changesets": []
+}
