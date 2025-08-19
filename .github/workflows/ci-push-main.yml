@@ -78,7 +78,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
           
     mergebot:
-      if: ${{ github.repository_owner == 'withstudiocms' && github.event_name == 'push' && github.event.commits[0].message != '[ci] lint' && !contains(github.event.commits[0].message, 'Version Packages') && github.event.commits[0].author.username != 'dependabot[bot]' }}
+      if: ${{ github.repository_owner == 'withstudiocms' && github.event_name == 'push' && github.event.head_commit.message != '[ci] lint' && !contains(github.event.head_commit.message, 'Version Packages') && github.actor != 'dependabot[bot]' }}
       uses: withstudiocms/automations/.github/workflows/mergebot.yml@main
       secrets:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_MERGEBOT }}
