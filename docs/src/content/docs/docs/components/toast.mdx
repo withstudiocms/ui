@@ -37,7 +37,9 @@ This component requires a **helper**. Make sure to read the documentation carefu
     </Button>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
+    /// <reference types="@studiocms/ui/v/types" />
+    // @lib: dom
+    // ---cut---
     import { toast } from 'studiocms:ui/components/toaster';
 
     const trigger = document.getElementById('trigger')!;
@@ -86,7 +88,8 @@ import { Toaster } from 'studiocms:ui/components/toaster';
 Or you can set it individually for every toast like this:
 
 ```ts "duration: 10000" twoslash showLinenumbers title="ToastDuration.ts"
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
 import { toast } from 'studiocms:ui/components/toaster';
 
 toast({
@@ -103,7 +106,8 @@ Sometimes, you don't need a toast to expire after a set time. Instead of setting
 to be persistent by setting `persistent` to `true`:
 
 ```ts "persistent: true" twoslash showLinenumbers title="ToastPersistence.ts"
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
 import { toast } from 'studiocms:ui/components/toaster';
 
 toast({
@@ -119,7 +123,8 @@ toast({
 Unless a toast is persistent, you can choose to hide the close button by setting the `closeButton` option to `false`:
 
 ```ts "closeButton: false" twoslash showLinenumbers title="ToastCloseButton.ts"
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
 import { toast } from 'studiocms:ui/components/toaster';
 
 toast({

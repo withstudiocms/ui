@@ -44,7 +44,8 @@ A dropdown component that takes care of all the annoying bits for you, with adde
     </Button>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
     import { ModalHelper } from 'studiocms:ui/components/modal';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -119,7 +120,8 @@ You can change the modal's size to one of three presets.
     <!-- Other modals and triggers omitted for simplicity -->
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
     import { ModalHelper } from 'studiocms:ui/components/modal';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -168,7 +170,8 @@ You can change whether a modal can be dismissed by clicking outside of it via th
     </Button>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
     import { ModalHelper } from 'studiocms:ui/components/modal';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -219,7 +222,8 @@ Modals support both a "cancel" and a "confirm" button.
     </Button>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
     import { ModalHelper } from 'studiocms:ui/components/modal';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
@@ -258,7 +262,8 @@ import { Modal } from 'studiocms:ui/components/modal';
 If you want to implement functionality based on which of the buttons is clicked, you can register a callback on each of them. 
 
 ```ts twoslash ins={5-7,9-11} showLinenumbers title="Script Tag"
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
 import { ModalHelper } from 'studiocms:ui/components/modal';
 
 const modal = new ModalHelper('modal', 'modal-trigger');
@@ -280,7 +285,8 @@ This only changes their types, not their text.
 By using the `registerConfirmCallback` function, you can retrieve the `FormData` after the `Confirm` button is clicked. Any inputs in the modal will be included.
 
 ```ts twoslash "formData" showLinenumbers title="Script Tag"
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
 import { ModalHelper } from 'studiocms:ui/components/modal';
 
 const modal = new ModalHelper('modal', 'modal-trigger');
@@ -295,7 +301,8 @@ modal.registerConfirmCallback((formData) => {
 You can add multiple triggers to your modal by using the `bindTrigger` function in combination with an element's ID.
 
 ```ts twoslash ins={4-5} showLinenumbers title="Script Tag"
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
 import { ModalHelper } from 'studiocms:ui/components/modal';
 
 const modal = new ModalHelper('modal', 'modal-trigger');
@@ -308,7 +315,8 @@ modal.bindTrigger('modal-trigger-three');
 Similar to [dropdowns](/customizing/studiocms-ui/components/dropdown), modals can be shown and hidden programatically:
 
 ```ts twoslash ins={5-6} showLinenumbers title="Script Tag"
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
 import { ModalHelper } from 'studiocms:ui/components/modal';
 
 const modal = new ModalHelper('modal', 'modal-trigger');
