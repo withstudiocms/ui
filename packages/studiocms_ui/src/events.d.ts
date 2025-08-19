@@ -90,7 +90,6 @@ declare global {
 		dispatchEvent<K extends keyof CustomEventMap>(ev: CustomEventMap[K]): void;
 	}
 
-	
 	interface Window {
 		/**
 		 * The StudioCMS UI API, which includes various tools and utilities for the UI.
@@ -100,6 +99,6 @@ declare global {
 			 * The tooltip API, which provides methods for managing tooltips in the UI.
 			 */
 			tooltips: SuiTooltipApi;
-		}
+		};
 	}
 }

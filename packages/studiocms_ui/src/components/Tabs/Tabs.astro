@@ -93,7 +93,7 @@ const extractTabInfoWithRegex = (html: string): Tab[] => {
 	for (const tabMatch of html.matchAll(tabItemRegex)) {
 		const tabIndex = tabMatch.index;
 		const isNested = nestedContainerRanges.some(
-			(range) => tabIndex > range.start && tabIndex < range.end,
+			(range) => tabIndex > range.start && tabIndex < range.end
 		);
 		if (!isNested) {
 			const attributes = getAttributes(tabMatch[1]);

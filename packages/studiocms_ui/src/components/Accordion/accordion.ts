@@ -22,13 +22,13 @@ const findOwningAccordion = (accordionItem: HTMLDivElement): HTMLDivElement | nu
 const getDirectAccordionItems = (accordion: HTMLDivElement): HTMLDivElement[] => {
 	const allItems = accordion.querySelectorAll<HTMLDivElement>('.sui-accordion-item');
 	const directItems: HTMLDivElement[] = [];
-	
+
 	for (let i = 0; i < allItems.length; i++) {
 		if (findOwningAccordion(allItems[i]) === accordion) {
 			directItems.push(allItems[i]);
 		}
 	}
-	
+
 	return directItems;
 };
 
@@ -40,7 +40,7 @@ const getDirectAccordionItems = (accordion: HTMLDivElement): HTMLDivElement[] =>
 const updateAccordionARIA = (item: HTMLDivElement, isOpen: boolean) => {
 	const summary = item.querySelector<HTMLButtonElement>('.sui-accordion-summary');
 	const details = item.querySelector<HTMLDivElement>('.sui-accordion-details');
-	
+
 	if (summary) summary.setAttribute('aria-expanded', isOpen.toString());
 	if (details) details.setAttribute('aria-hidden', (!isOpen).toString());
 };
@@ -59,7 +59,7 @@ const toggleAccordionItem = (accordionItem: HTMLDivElement, accordion: HTMLDivEl
 		accordionItem.dataset.open = newState.toString();
 	} else {
 		const directItems = getDirectAccordionItems(accordion);
-		
+
 		for (let i = 0; i < directItems.length; i++) {
 			const item = directItems[i];
 			const shouldBeOpen = item === accordionItem;
@@ -86,14 +86,16 @@ const focusAccordionItem = (
 ) => {
 	const items = getDirectAccordionItems(accordion);
 	const currentIndex = items.indexOf(currentItem);
-	
-	if (currentIndex === -1) return;
-	
-	const targetIndex = direction === 'next' 
-		? (currentIndex + 1) % items.length
-		: (currentIndex - 1 + items.length) % items.length;
 
-	const targetSummary = items[targetIndex]?.querySelector<HTMLButtonElement>('.sui-accordion-summary');
+	if (currentIndex === -1) return;
+
+	const targetIndex =
+		direction === 'next'
+			? (currentIndex + 1) % items.length
+			: (currentIndex - 1 + items.length) % items.length;
+
+	const targetSummary =
+		items[targetIndex]?.querySelector<HTMLButtonElement>('.sui-accordion-summary');
 	targetSummary?.focus();
 };
 
@@ -102,7 +104,7 @@ const focusAccordionItem = (
  */
 const initializeAccordionStates = () => {
 	const allAccordionItems = document.querySelectorAll<HTMLDivElement>('.sui-accordion-item');
-	
+
 	for (let i = 0; i < allAccordionItems.length; i++) {
 		const item = allAccordionItems[i];
 		const isOpen = item.dataset.open === 'true';
@@ -121,12 +123,12 @@ let listenersAdded = false;
 const handleAccordionInteraction = (event: Event, isKeyboard = false) => {
 	const target = event.target as HTMLElement;
 	const accordionSummary = target.closest<HTMLButtonElement>('.sui-accordion-summary');
-	
+
 	if (!accordionSummary) return;
-	
+
 	const accordionItem = accordionSummary.closest<HTMLDivElement>('.sui-accordion-item');
 	const accordion = accordionItem && findOwningAccordion(accordionItem);
-	
+
 	if (!accordionItem || !accordion) return;
 
 	if (isKeyboard) {
@@ -154,7 +156,7 @@ const handleAccordionInteraction = (event: Event, isKeyboard = false) => {
 
 const loadAccordions = () => {
 	initializeAccordionStates();
-	
+
 	if (!listenersAdded) {
 		document.addEventListener('click', handleAccordionInteraction);
 		document.addEventListener('keydown', (e) => handleAccordionInteraction(e, true));

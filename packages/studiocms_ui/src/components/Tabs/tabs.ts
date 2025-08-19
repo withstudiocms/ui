@@ -7,13 +7,13 @@
 const switchTab = (
 	tabContainer: HTMLDivElement,
 	newActiveHeader: HTMLElement,
-	originatedFromSync = false,
+	originatedFromSync = false
 ) => {
 	const tabHeaders = Array.from(
-		tabContainer.querySelectorAll<HTMLElement>(':scope > .sui-tabs-list > .sui-tab-header'),
+		tabContainer.querySelectorAll<HTMLElement>(':scope > .sui-tabs-list > .sui-tab-header')
 	);
 	const tabPanels = Array.from(
-		tabContainer.querySelectorAll<HTMLElement>(':scope > .sui-tabs-content > sui-tab-item'),
+		tabContainer.querySelectorAll<HTMLElement>(':scope > .sui-tabs-content > sui-tab-item')
 	);
 
 	if (!newActiveHeader || !tabHeaders.includes(newActiveHeader)) return;
@@ -50,7 +50,7 @@ const switchTab = (
 					tabIndex,
 					uniqueId: tabContainer.dataset.uniqueId,
 				},
-			}),
+			})
 		);
 	}
 };
@@ -61,10 +61,10 @@ const switchTab = (
  */
 const setupTabContainer = (tabContainer: HTMLDivElement) => {
 	const tabHeaders = Array.from(
-		tabContainer.querySelectorAll<HTMLElement>(':scope > .sui-tabs-list > .sui-tab-header'),
+		tabContainer.querySelectorAll<HTMLElement>(':scope > .sui-tabs-list > .sui-tab-header')
 	);
 	const tabPanels = Array.from(
-		tabContainer.querySelectorAll<HTMLElement>(':scope > .sui-tabs-content > sui-tab-item'),
+		tabContainer.querySelectorAll<HTMLElement>(':scope > .sui-tabs-content > sui-tab-item')
 	);
 	const tabList = tabContainer.querySelector<HTMLElement>(':scope > .sui-tabs-list');
 
@@ -109,7 +109,8 @@ const setupTabContainer = (tabContainer: HTMLDivElement) => {
 	});
 
 	const syncKey = tabContainer.dataset.syncKey;
-	const initiallyActiveTab = tabHeaders.find((h) => h.classList.contains('active')) ?? tabHeaders[0]!;
+	const initiallyActiveTab =
+		tabHeaders.find((h) => h.classList.contains('active')) ?? tabHeaders[0]!;
 
 	if (syncKey) {
 		const storage = tabContainer.dataset.storageStrategy ?? 'session';
@@ -147,6 +148,6 @@ const loadTabs = () => {
 	for (const tabContainer of document.querySelectorAll<HTMLDivElement>('.sui-tabs-container')) {
 		setupTabContainer(tabContainer);
 	}
-}
+};
 
 document.addEventListener('astro:page-load', loadTabs);

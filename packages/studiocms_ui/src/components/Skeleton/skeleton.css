@@ -42,27 +42,33 @@
 	flex-direction: row;
 }
 
-.sui-skeleton-justify-start, .sui-skeleton-align-start {
+.sui-skeleton-justify-start,
+.sui-skeleton-align-start {
 	justify-content: flex-start;
 }
 
-.sui-skeleton-justify-center, .sui-skeleton-align-center {
+.sui-skeleton-justify-center,
+.sui-skeleton-align-center {
 	justify-content: center;
 }
 
-.sui-skeleton-justify-end, .sui-skeleton-align-end {
+.sui-skeleton-justify-end,
+.sui-skeleton-align-end {
 	justify-content: flex-end;
 }
 
-.sui-skeleton-items-start, .sui-skeleton-justify-start {
+.sui-skeleton-items-start,
+.sui-skeleton-justify-start {
 	align-items: flex-start;
 }
 
-.sui-skeleton-items-center, .sui-skeleton-justify-center {
+.sui-skeleton-items-center,
+.sui-skeleton-justify-center {
 	align-items: center;
 }
 
-.sui-skeleton-items-end, .sui-skeleton-justify-end {
+.sui-skeleton-items-end,
+.sui-skeleton-justify-end {
 	align-items: flex-end;
 }
 
@@ -104,7 +110,12 @@
 
 .sui-skeleton-anim-slide {
 	@media (prefers-reduced-motion: no-preference) {
-		background-image: linear-gradient(90deg, var(--background-step-2) 25%, var(--background-step-3) 50%, var(--background-step-2) 75%);
+		background-image: linear-gradient(
+			90deg,
+			var(--background-step-2) 25%,
+			var(--background-step-3) 50%,
+			var(--background-step-2) 75%
+		);
 		background-position: 175% 0;
 		background-size: 200% 100%;
 		background-repeat: no-repeat;
