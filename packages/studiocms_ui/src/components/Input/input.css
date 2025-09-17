@@ -45,6 +45,10 @@
 	font-weight: 700;
 }
 
+.sui-input-desc {
+	font-size: .825rem;
+}
+
 .input-icon {
 	position: absolute;
 	top: 50%;
@@ -61,6 +65,14 @@
 
 .label + .input-icon {
 	top: calc(50% + 14px);
+}
+
+.label + .input-icon:has(~ .sui-input-desc) {
+	top: calc(50%);
+}
+
+.input-icon:has(~ .sui-input-desc):not(.label + .input-icon) {
+	top: calc(50% - 14px);
 }
 
 .sui-input.has-icon.icon-left {

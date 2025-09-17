@@ -45,12 +45,16 @@ interface Props extends HTMLAttributes<'input'> {
 	 */
 	class?: string;
 	/**
-	 * An optional icon to be shown in the icon.
+	 * An optional icon to be shown in the input.
 	 */
 	icon?: AvailableIcons | {
 		name: AvailableIcons;
 		position: 'left' | 'right';
 	};
+	/**
+	 * A description to be shown below the input
+	 */
+	description?: string;
 }
 
 const {
@@ -63,6 +67,7 @@ const {
 	disabled = false,
 	class: className,
 	icon,
+	description,
 	...props
 } = Astro.props;
 
@@ -100,4 +105,7 @@ const iconPos = icon ? typeof icon === "string" || (typeof icon === "object" && 
     value={defaultValue}
 		{...props}
   />
+	{description && (
+		<span class="sui-input-desc">{description}</span>
+	)}
 </label>

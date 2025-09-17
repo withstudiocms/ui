@@ -98,12 +98,11 @@ the `FormData` returned by a submission. Here's an example showing how to set bo
 If no name is set, a random one is generated for the component.
 :::
 
-
 ### Icons
 
 You can pass the name of an icon using the `icon` prop to display it inside of the input on the left side. To show the icon on the
 right hand side of the input, or explicitly set the position, pass an object to the `icon` prop containing the `name` and `position`
-of the icon.
+of the icon:
 
 <Tabs>
   <TabItem label="Preview">
@@ -113,13 +112,34 @@ of the icon.
     </PreviewCard>
   </TabItem>
   <TabItem label="Code">
-    ```astro "isRequired" "name='example-input'" showLinenumbers title="IconsExample.astro"
+    ```astro "icon='heroicons:bolt-20-solid'" "icon={{ name: 'heroicons:bolt-20-solid', position: 'right' }}" "name='example-input'" showLinenumbers title="IconsExample.astro"
     ---
     import { Input } from 'studiocms:ui/components/input';
     ---
 
-    <Input label="Label" placeholder="Placeholder" icon="heroicons:bolt-20-solid" />
-    <Input placeholder="Placeholder" icon={{ name: "heroicons:bolt-20-solid", position: "right" }} />
+    <Input label='Label' placeholder='Placeholder' icon='heroicons:bolt-20-solid' />
+    <Input placeholder='Placeholder' icon={{ name: 'heroicons:bolt-20-solid', position: 'right' }} />
+    ```
+  </TabItem>
+</Tabs>
+
+### Description
+
+You can add a description to be shown below the input by using the `description` prop:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Input label='Label' placeholder='Placeholder' description='This is some text to help the user understand the input!' />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro "description='This is some text to help the user understand the input!'" showLinenumbers title="DescriptionExample.astro"
+    ---
+    import { Input } from 'studiocms:ui/components/input';
+    ---
+
+    <Input label='Label' placeholder='Placeholder' description='This is some text to help the user understand the input!' />
     ```
   </TabItem>
 </Tabs>
