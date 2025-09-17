@@ -5,6 +5,7 @@
 }
 
 .sui-group > .sui-button:not(:first-child):not(:last-child),
+.sui-group .sui-dropdown-container:not(:first-child):not(:last-child) .sui-button,
 .sui-group > .sui-badge:not(:first-child):not(:last-child) {
 	border-radius: 0;
 }
