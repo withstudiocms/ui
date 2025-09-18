@@ -8,7 +8,6 @@
   "scripts": {
     "build": "pnpm --filter @studiocms/* build",
     "dev": "pnpm --stream --filter @studiocms/* --filter docs -r -parallel dev",
-
     "docs:dev": "pnpm --filter docs dev",
     "docs:build": "pnpm build && pnpm --filter docs build",
     "docs:preview": "pnpm --filter docs preview",
