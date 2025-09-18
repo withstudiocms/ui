@@ -3,6 +3,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: .25rem;
+	position: relative;
 }
 
 .sui-input-label.disabled {
@@ -42,4 +43,42 @@
 .req-star {
 	color: var(--danger-base);
 	font-weight: 700;
+}
+
+.sui-input-desc {
+	font-size: .825rem;
+}
+
+.input-icon {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.input-icon.icon-left {
+	left: 0.75rem;
+}
+
+.input-icon.icon-right {
+	right: 0.75rem;
+}
+
+.label + .input-icon {
+	top: calc(50% + 14px);
+}
+
+.label + .input-icon:has(~ .sui-input-desc) {
+	top: calc(50%);
+}
+
+.input-icon:has(~ .sui-input-desc):not(.label + .input-icon) {
+	top: calc(50% - 14px);
+}
+
+.sui-input.has-icon.icon-left {
+	padding-left: calc(1.5rem + 20px);
+}
+
+.sui-input.has-icon.icon-right {
+	padding-right: calc(1.5rem + 20px);
 }
