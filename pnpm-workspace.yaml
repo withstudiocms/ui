@@ -1,21 +1,34 @@
 packages:
-  - "packages/*"
-  - "build-scripts"
-  - "docs"
+  - packages/*
+  - build-scripts
+  - docs
 
 catalog:
-  "@astrojs/check": ^0.9.4
-  "@astrojs/node": ^9.0.0
-  "@fontsource-variable/onest": 5.1.0
-  "@iconify-json/heroicons": ^1.2.1
-  "@iconify/utils": ^2.1.33
-  "@sentry/astro": ^8.42.0
-  "@types/node": ^20.14.11
-  pathe: ^1.1.2
+  '@astrojs/check': ^0.9.4
+  '@astrojs/node': ^9.0.0
+  '@fontsource-variable/onest': 5.1.0
+  '@iconify-json/heroicons': ^1.2.1
+  '@iconify/utils': ^2.1.33
+  '@sentry/astro': ^8.42.0
+  '@types/node': ^20.14.11
   astro: ^5.1.1
+  pathe: ^1.1.2
   typescript: ^5.7.2
 
 catalogs:
   peers:
     astro: ^4.5 || ^5.0.0-beta.0
     vite: ^5.0.0 || ^6.0.0
+
+minimumReleaseAge: 4320
+
+minimumReleaseAgeExclude:
+  - studiocms
+  - '@studiocms/*'
+  - '@withstudiocms/*'
+
+onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - '@parcel/watcher'
+  - esbuild
+  - sharp
