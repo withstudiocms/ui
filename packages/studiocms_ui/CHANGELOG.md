@@ -1,5 +1,15 @@
 # @studiocms/ui
 
+## 1.0.0-beta.1
+
+### Patch Changes
+
+- [#110](https://github.com/withstudiocms/ui/pull/110) [`8bb4637`](https://github.com/withstudiocms/ui/commit/8bb4637f84dcc66cba8ed68d36d31671fb3b3058) Thanks [@louisescher](https://github.com/louisescher)! - Fixes the focus outline of buttons within groups sometimes being hidden behind other buttons in the same group.
+
+- [#112](https://github.com/withstudiocms/ui/pull/112) [`ba10776`](https://github.com/withstudiocms/ui/commit/ba10776d35c04f1abff7451ece468689fbfe1212) Thanks [@louisescher](https://github.com/louisescher)! - Fixes buttons within dropdowns not displaying properly within a group
+
+- [#111](https://github.com/withstudiocms/ui/pull/111) [`f2fc787`](https://github.com/withstudiocms/ui/commit/f2fc787501445ba150c409d38ddedc7fa4cf5034) Thanks [@louisescher](https://github.com/louisescher)! - Adds optional icons and help texts to inputs
+
 ## 1.0.0-beta.0
 
 ### Major Changes
