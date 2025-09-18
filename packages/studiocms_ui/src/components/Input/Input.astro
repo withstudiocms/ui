@@ -46,10 +46,12 @@ interface Props extends HTMLAttributes<'input'> {
 	/**
 	 * An optional icon to be shown in the input.
 	 */
-	icon?: AvailableIcons | {
-		name: AvailableIcons;
-		position: 'left' | 'right';
-	};
+	icon?:
+		| AvailableIcons
+		| {
+				name: AvailableIcons;
+				position: 'left' | 'right';
+		  };
 	/**
 	 * A description to be shown below the input
 	 */
@@ -70,14 +72,19 @@ const {
 	...props
 } = Astro.props;
 
-if (typeof icon === "object") {
-	if (!icon.name) throw new AstroError("Missing icon name for input!");
-	if (!icon.position) throw new AstroError("Missing icon position for input!");
+if (typeof icon === 'object') {
+	if (!icon.name) throw new AstroError('Missing icon name for input!');
+	if (!icon.position) throw new AstroError('Missing icon position for input!');
 
-	if (!["left", "right"].includes(icon.position)) throw new AstroError("Invalid icon position for input!");
+	if (!['left', 'right'].includes(icon.position))
+		throw new AstroError('Invalid icon position for input!');
 }
 
-const iconPos = icon ? typeof icon === "string" || (typeof icon === "object" && icon.position === "left") ? "left" : "right" : undefined;
+const iconPos = icon
+	? typeof icon === 'string' || (typeof icon === 'object' && icon.position === 'left')
+		? 'left'
+		: 'right'
+	: undefined;
 ---
 
 <label for={name} class="sui-input-label" class:list={[disabled && "disabled"]}>
