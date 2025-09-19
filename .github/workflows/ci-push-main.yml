@@ -1,10 +1,11 @@
-name: CI - Push to main
+name: CI - Push (main, v1.0.0)
 
 on:
   workflow_dispatch:
   push:
     branches:
       - main
+      - v1.0.0
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -25,7 +26,7 @@ jobs:
         - name: Check out code using Git
           uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
           with:
-            ref: ${{ github.head_ref }}
+            ref: ${{ github.head_ref || github.ref_name }}
             token: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
   
         - name: Install Tools & Dependencies
@@ -38,7 +39,7 @@ jobs:
           uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5058a842 # v5
           with:
             commit_message: '[ci] lint'
-            branch: ${{ github.head_ref }}
+            branch: ${{ github.head_ref || github.ref_name }}
             commit_user_name: studiocms-no-reply
             commit_user_email: no-reply@studiocms.dev
             commit_author: StudioCMS <no-reply@studiocms.dev>
@@ -77,7 +78,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
           
     mergebot:
-      if: ${{ github.repository_owner == 'withstudiocms' && github.event_name == 'push' && github.event.commits[0].message != '[ci] lint' && github.event.commits[0].author.username != 'dependabot[bot]' }}
+      if: ${{ github.repository_owner == 'withstudiocms' && github.event_name == 'push' && github.event.head_commit.message != '[ci] lint' && !contains(github.event.head_commit.message, 'Version Packages') && github.actor != 'dependabot[bot]' }}
       uses: withstudiocms/automations/.github/workflows/mergebot.yml@main
       secrets:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_MERGEBOT }}

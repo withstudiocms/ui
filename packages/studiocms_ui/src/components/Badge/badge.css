@@ -13,101 +13,101 @@
 }
 
 .sui-badge.primary {
-	background-color: hsl(var(--primary-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--primary-base);
+	color: var(--text-inverted);
 }
 
 .sui-badge.primary.flat,
 .sui-badge.primary.outlined {
-	background-color: hsla(var(--primary-flat));
-	color: hsl(var(--primary-base));
+	background-color: var(--primary-flat);
+	color: var(--primary-base);
 }
 
 .sui-badge.primary.outlined {
-	border: 1px solid hsl(var(--primary-base));
+	border: 1px solid var(--primary-base);
 }
 
 .sui-badge.success {
-	background-color: hsl(var(--success-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--success-base);
+	color: var(--text-inverted);
 }
 
 .sui-badge.success.flat,
 .sui-badge.success.outlined {
-	background-color: hsla(var(--success-flat));
-	color: hsl(var(--success-base));
+	background-color: var(--success-flat);
+	color: var(--success-base);
 }
 
 .sui-badge.success.outlined {
-	border: 1px solid hsl(var(--success-base));
+	border: 1px solid var(--success-base);
 }
 
 .sui-badge.warning {
-	background-color: hsl(var(--warning-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--warning-base);
+	color: var(--text-inverted);
 }
 
 .sui-badge.warning.flat,
 .sui-badge.warning.outlined {
-	background-color: hsla(var(--warning-flat));
-	color: hsl(var(--warning-base));
+	background-color: var(--warning-flat);
+	color: var(--warning-base);
 }
 
 .sui-badge.warning.outlined {
-	border: 1px solid hsl(var(--warning-base));
+	border: 1px solid var(--warning-base);
 }
 
 .sui-badge.danger {
-	background-color: hsl(var(--danger-base));
-	color: hsl(var(--text-normal));
+	background-color: var(--danger-base);
+	color: var(--text-normal);
 }
 
 .sui-badge.danger.flat,
 .sui-badge.danger.outlined {
-	background-color: hsla(var(--danger-flat));
-	color: hsl(var(--danger-base));
+	background-color: var(--danger-flat);
+	color: var(--danger-base);
 }
 
 .sui-badge.danger.outlined {
-	border: 1px solid hsl(var(--danger-base));
+	border: 1px solid var(--danger-base);
 }
 
 .sui-badge.info {
-	background-color: hsl(var(--info-base));
-	color: hsl(var(--text-normal));
+	background-color: var(--info-base);
+	color: var(--text-normal);
 }
 
 .sui-badge.info.flat,
 .sui-badge.info.outlined {
-	background-color: hsla(var(--info-flat));
-	color: hsl(var(--info-base));
+	background-color: var(--info-flat);
+	color: var(--info-base);
 }
 
 .sui-badge.info.outlined {
-	border: 1px solid hsl(var(--info-base));
+	border: 1px solid var(--info-base);
 }
 
 .sui-badge.mono {
-	background-color: hsl(var(--mono-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--mono-base);
+	color: var(--text-inverted);
 }
 
 .sui-badge.mono.flat,
 .sui-badge.mono.outlined {
-	background-color: hsla(var(--mono-flat));
-	color: hsl(var(--mono-base));
+	background-color: var(--mono-flat);
+	color: var(--mono-base);
 }
 
 .sui-badge.mono.outlined {
-	border: 1px solid hsl(var(--mono-base));
+	border: 1px solid var(--mono-base);
 }
 
 [data-theme="light"] .sui-badge.danger {
-	color: hsl(var(--text-inverted));
+	color: var(--text-inverted);
 }
 
 [data-theme="light"] .sui-badge.info {
-	color: hsl(var(--text-inverted));
+	color: var(--text-inverted);
 }
 
 .sui-badge.sm {

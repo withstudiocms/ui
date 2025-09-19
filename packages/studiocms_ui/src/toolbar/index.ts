@@ -97,9 +97,9 @@ function createStyles(): HTMLStyleElement {
       transition: transform 0.15s, background-color 0.15s, border-color 0.15s, color 0.15s;
       transition-timing-function: ease;
       cursor: pointer;
-      background-color: hsl(var(--primary-base));
-      border-color: hsl(var(--primary-base));
-      color: hsl(var(--text-inverted));
+      background-color: var(--primary-base);
+      border-color: var(--primary-base);
+      color: var(--text-inverted);
       min-width: fit-content;
       will-change: transform;
       text-decoration: none;
@@ -110,11 +110,11 @@ function createStyles(): HTMLStyleElement {
     }
 
     button:hover {
-      background-color: hsl(var(--primary-hover));
+      background-color: var(--primary-hover);
     }
 
     button:active {
-      background-color: hsl(var(--primary-active));
+      background-color: var(--primary-active);
     }
 
     button:disabled {

@@ -10,7 +10,7 @@
 .sui-toggle-label.disabled {
 	opacity: 0.5;
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .sui-toggle-label:active .sui-toggle-switch {
@@ -24,7 +24,7 @@
 	align-items: center;
 	cursor: pointer;
 	transition: all .15s ease;
-	background-color: hsl(var(--default-base));
+	background-color: var(--default-base);
 	width: var(--toggle-width);
 	height: var(--toggle-height);
 	border-radius: var(--radius-full);
@@ -34,7 +34,7 @@
 	--switch: calc(var(--toggle-height) * 1.75);
 	height: var(--switch);
 	width: var(--switch);
-	background-color: hsl(var(--text-muted));
+	background-color: var(--text-muted);
 	border-radius: var(--radius-full);
 	position: relative;
 	left: 0;
@@ -43,13 +43,13 @@
 }
 
 .sui-toggle-switch:focus-visible {
-	outline: 2px solid hsl(var(--text-normal));
+	outline: 2px solid var(--text-normal);
 	outline-offset: 2px;
 }
 
 .sui-toggle-container:has(.sui-toggle-checkbox:checked) .sui-toggle-switch {
 	left: calc(100% - var(--switch));
-	background-color: hsl(var(--text-normal));
+	background-color: var(--text-normal);
 }
 
 .sui-toggle-label.sm .sui-toggle-container {
@@ -71,35 +71,35 @@
 }
 
 .sui-toggle-label.primary .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
-	background-color: hsl(var(--primary-base));
+	background-color: var(--primary-base);
 }
 
 .sui-toggle-label.success .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
-	background-color: hsl(var(--success-base));
+	background-color: var(--success-base);
 }
 
 .sui-toggle-label.warning .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
-	background-color: hsl(var(--warning-base));
+	background-color: var(--warning-base);
 }
 
 .sui-toggle-label.danger .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
-	background-color: hsl(var(--danger-base));
+	background-color: var(--danger-base);
 }
 
 .sui-toggle-label.info .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
-	background-color: hsl(var(--info-base));
+	background-color: var(--info-base);
 }
 
 .sui-toggle-label.mono .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
-	background-color: hsl(var(--mono-base));
+	background-color: var(--mono-base);
 }
 
 .sui-toggle-label.mono .sui-toggle-switch {
-	border: 1px solid hsl(var(--text-inverted));
+	border: 1px solid var(--text-inverted);
 }
 
 .req-star {
-	color: hsl(var(--danger-base));
+	color: var(--danger-base);
 	font-weight: 700;
 }
 

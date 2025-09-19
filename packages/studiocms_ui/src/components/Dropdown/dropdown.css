@@ -16,7 +16,7 @@
 	padding: 0;
 	flex-direction: column;
 	border-radius: var(--radius-md);
-	background-color: hsl(var(--background-step-2));
+	background-color: var(--background-step-2);
 	overflow: hidden;
 	left: 0;
 	z-index: 90;
@@ -28,7 +28,7 @@
 	pointer-events: none;
 	user-select: none;
 
-	box-shadow: 0px 4px 8px hsl(var(--shadow), 0.5);
+	box-shadow: 0px 4px 8px var(--shadow);
 }
 
 @keyframes pop-up {
@@ -52,7 +52,7 @@
 		pointer-events: all;
 		top: auto;
 		bottom: auto;
-		border: 1px solid hsl(var(--border));
+		border: 1px solid var(--border);
 		opacity: 1;
 		user-select: all;
 	}
@@ -65,7 +65,7 @@
 		bottom: initial;
 		top: auto;
 		bottom: auto;
-		border: 1px solid hsl(var(--border));
+		border: 1px solid var(--border);
 		opacity: 0;
 	}
 
@@ -83,7 +83,7 @@
 
 .sui-dropdown.initialized.active {
 	display: flex;
-	border: 1px solid hsl(var(--border));
+	border: 1px solid var(--border);
 	height: auto;
 	pointer-events: all;
 
@@ -143,7 +143,7 @@
 .sui-dropdown-option:hover,
 .sui-dropdown-option:focus,
 .sui-dropdown-option.focused {
-	background-color: hsl(var(--background-step-3));
+	background-color: var(--background-step-3);
 }
 
 .sui-dropdown-option.has-href {
@@ -153,66 +153,66 @@
 .sui-dropdown-link {
 	width: 100%;
 	text-decoration: none;
-	color: hsl(var(--text-normal));
+	color: var(--text-normal);
 }
 
 .sui-dropdown-option.primary {
-	color: hsl(var(--primary-base));
+	color: var(--primary-base);
 }
 
 .sui-dropdown-option.primary:hover {
-	background-color: hsl(var(--primary-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--primary-base);
+	color: var(--text-inverted);
 }
 
 .sui-dropdown-option.success {
-	color: hsl(var(--success-base));
+	color: var(--success-base);
 }
 
 .sui-dropdown-option.success:hover {
-	background-color: hsl(var(--success-base));
-	color: hsl(var(--text-dark));
+	background-color: var(--success-base);
+	color: var(--text-dark);
 }
 
 .sui-dropdown-option.warning {
-	color: hsl(var(--warning-base));
+	color: var(--warning-base);
 }
 
 .sui-dropdown-option.warning:hover {
-	background-color: hsl(var(--warning-base));
-	color: hsl(var(--text-dark));
+	background-color: var(--warning-base);
+	color: var(--text-dark);
 }
 
 .sui-dropdown-option.danger {
-	color: hsl(var(--danger-base));
+	color: var(--danger-base);
 }
 
 .sui-dropdown-option.danger:hover {
-	background-color: hsl(var(--danger-base));
-	color: hsl(var(--text-light));
+	background-color: var(--danger-base);
+	color: var(--text-light);
 }
 
 .sui-dropdown-option.info {
-	color: hsl(var(--info-base));
+	color: var(--info-base);
 }
 
 .sui-dropdown-option.info:hover {
-	background-color: hsl(var(--info-base));
-	color: hsl(var(--text-light));
+	background-color: var(--info-base);
+	color: var(--text-light);
 }
 
 .sui-dropdown-option.mono {
-	color: hsl(var(--text-normal));
+	color: var(--text-normal);
 }
 
 .sui-dropdown-option.mono:hover {
-	background-color: hsl(var(--mono-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--mono-base);
+	color: var(--text-inverted);
 }
 
 .sui-dropdown-option.disabled {
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .sui-dropdown-option.end {

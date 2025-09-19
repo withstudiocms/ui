@@ -12,12 +12,12 @@
 	transform: translate(-50%, 0);
 	width: 100%;
 	height: 1px;
-	background-color: hsl(var(--border));
+	background-color: var(--border);
 	z-index: 1;
 	border: none;
 }
 
 .sui-divider-content {
 	z-index: 2;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
