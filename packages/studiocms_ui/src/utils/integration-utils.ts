@@ -1,3 +1,12 @@
+/* v8 ignore start */
+/**
+ * @file integration-utils.ts
+ * @description Utilities to help building Astro integrations.
+ * @see https://astro-integration-kit.netlify.app/
+ *
+ * CC @louisescher maybe we should migrate back to AIK now that they no
+ * longer have the extra dependencies?
+ */
 import { fileURLToPath } from 'node:url';
 import type { AstroConfig, HookParameters } from 'astro';
 import { AstroError } from 'astro/errors';
@@ -336,3 +345,4 @@ export const addVirtualImports = defineUtility('astro:config:setup')(
 		});
 	}
 );
+/* v8 ignore stop */

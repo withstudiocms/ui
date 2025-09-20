@@ -21,8 +21,8 @@ describe('Icon Components', () => {
 		expect(result).toMatchSnapshot();
 	});
 
-	test('XMark component renders correctly', async ({ renderComponent }) => {
-		const result = await renderComponent(XMark, 'XMark');
+	test('X-Mark component renders correctly', async ({ renderComponent }) => {
+		const result = await renderComponent(XMark, 'X-Mark');
 		expect(result).toMatchSnapshot();
 	});
 });
