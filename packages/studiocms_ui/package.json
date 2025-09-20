@@ -36,8 +36,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "buildkit build 'src/**/*.{ts,css}' --build-tsconfig",
-    "dev": "buildkit dev 'src/**/*.{ts,css}' --build-tsconfig",
+    "build": "buildkit build 'src/**/*.{ts,d.ts,css,astro}' --build-tsconfig",
+    "dev": "buildkit dev 'src/**/*.{ts,d.ts,css,astro}' --build-tsconfig",
 
 		"playwright:setup": "pnpm exec playwright install --with-deps",
     "test-server": "pnpm --filter @test-fixture/server dev",
