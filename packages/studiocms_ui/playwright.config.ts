@@ -8,7 +8,7 @@ const baseURL = `http://localhost:${port}`;
  */
 export default defineConfig({
 	testDir: './test',
-	testMatch: ['**/*.spec.ts'],
+	testMatch: ['**/*.e2e.ts'],
 	/* Run tests in files in parallel */
 	fullyParallel: true,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
