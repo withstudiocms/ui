@@ -15,7 +15,13 @@ export default defineConfig(
 				coverage: {
 					provider: 'v8',
 					reporter: ['text', 'json', 'html'],
-					exclude: ['playwright.config.ts'],
+					exclude: [
+						'playwright.config.ts',
+						'vitest.config.ts',
+						'**/test/**',
+						'**/dist/**',
+						'**/node_modules/**',
+					],
 				},
 			},
 		},
