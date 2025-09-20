@@ -1,0 +1,133 @@
+import AxeBuilder from '@axe-core/playwright';
+import { expect, test } from '@playwright/test';
+
+export { test } from '@playwright/test';
+
+type Include = Parameters<AxeBuilder['include']>[0];
+
+type AxeAudit = {
+	/**
+	 * Common accessibility best practices
+	 * @see https://www.deque.com/axe/core-documentation/api-documentation
+	 */
+	bestPractice: (include: Include) => Promise<void>;
+
+	/**
+	 * WCAG 2.0 Level A and WCAG 2.1 Level A accessibility standards
+	 * @see https://www.deque.com/axe/core-documentation/api-documentation
+	 */
+	wcagA: (include: Include) => Promise<void>;
+
+	/**
+	 * WCAG 2.0 Level AA, WCAG 2.1 Level AA and WCAG 2.2 Level AA accessibility standards
+	 * @see https://www.deque.com/axe/core-documentation/api-documentation
+	 */
+	wcagAA: (include: Include) => Promise<void>;
+
+	/**
+	 * WCAG 2.0 Level AAA accessibility standards
+	 * @see https://www.deque.com/axe/core-documentation/api-documentation
+	 */
+	wcagAAA: (include: Include) => Promise<void>;
+
+	/**
+	 * Take a screenshot of the page or element
+	 */
+	takeScreenshot: (name: string, selector?: string) => Promise<void>;
+
+	/**
+	 * Switch to light mode
+	 */
+	switchToLightMode: () => Promise<void>;
+};
+
+export const axeAudit = test.extend<AxeAudit>({
+	bestPractice: async ({ page }, use, testInfo) => {
+		const runner = async (include: Include) => {
+			const results = await new AxeBuilder({ page })
+				.withTags(['best-practice'])
+				.include(include)
+				.analyze();
+
+			await testInfo.attach('best-practice-results', {
+				body: JSON.stringify(results, null, 2),
+				contentType: 'application/json',
+			});
+
+			expect(results.violations).toEqual([]);
+		};
+
+		await use(runner);
+	},
+	wcagA: async ({ page }, use, testInfo) => {
+		const runner = async (include: Include) => {
+			const results = await new AxeBuilder({ page })
+				.withTags(['wcag2a', 'wcag21a'])
+				.include(include)
+				.analyze();
+
+			await testInfo.attach('wcag-a-results', {
+				body: JSON.stringify(results, null, 2),
+				contentType: 'application/json',
+			});
+
+			expect(results.violations).toEqual([]);
+		};
+
+		await use(runner);
+	},
+	wcagAA: async ({ page }, use, testInfo) => {
+		const runner = async (include: Include) => {
+			const results = await new AxeBuilder({ page })
+				.withTags(['wcag2aa', 'wcag21aa', 'wcag22aa'])
+				.include(include)
+				.analyze();
+
+			await testInfo.attach('wcag-aa-results', {
+				body: JSON.stringify(results, null, 2),
+				contentType: 'application/json',
+			});
+
+			expect(results.violations).toEqual([]);
+		};
+
+		await use(runner);
+	},
+	wcagAAA: async ({ page }, use, testInfo) => {
+		const runner = async (include: Include) => {
+			const results = await new AxeBuilder({ page })
+				.withTags(['wcag2aaa'])
+				.include(include)
+				.analyze();
+
+			await testInfo.attach('wcag-aaa-results', {
+				body: JSON.stringify(results, null, 2),
+				contentType: 'application/json',
+			});
+
+			expect(results.violations).toEqual([]);
+		};
+
+		await use(runner);
+	},
+	takeScreenshot: async ({ page }, use, testInfo) => {
+		const screenshot = async (name: string, selector?: string) => {
+			const element = selector ? page.locator(selector) : page;
+			const body = await element.screenshot();
+			const options = { body, contentType: 'image/png' };
+			testInfo.attach(name, options);
+		};
+
+		await use(screenshot);
+	},
+	switchToLightMode: async ({ page }, use) => {
+		const runner = async () => {
+			await page.evaluate(() => {
+				const selector = document.documentElement;
+				if (selector) selector.dataset.theme = 'light';
+			});
+		};
+
+		await use(runner);
+	},
+});

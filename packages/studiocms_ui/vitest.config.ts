@@ -1,0 +1,25 @@
+import { getViteConfig } from 'astro/config';
+import { defineConfig } from 'vitest/config';
+import ui from './src/index';
+
+export default defineConfig(
+	getViteConfig(
+		{
+			test: {
+				environment: 'node',
+				include: ['**/*.test.ts'],
+				reporters: ['default', 'junit'],
+				outputFile: {
+					junit: './junit-report.xml',
+				},
+				coverage: {
+					provider: 'v8',
+					reporter: ['text', 'json', 'html'],
+				},
+			},
+		},
+		{
+			integrations: [ui()],
+		}
+	)
+);
