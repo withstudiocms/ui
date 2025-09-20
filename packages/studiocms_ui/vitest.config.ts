@@ -8,7 +8,7 @@ export default defineConfig(
 			test: {
 				environment: 'node',
 				include: ['**/*.test.ts'],
-				setupFiles: ['./test/fixtures/vitest/vitest.setup.ts'],
+				setupFiles: ['./test/fixtures/vitest/setup-jest.ts'],
 				reporters: ['default', 'junit'],
 				outputFile: {
 					junit: './test-report.junit.xml',
