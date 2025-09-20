@@ -43,6 +43,7 @@
     "test-server": "pnpm --filter @test-fixture/server dev",
 
     "test:vitest": "vitest",
+    "test:vitest:run": "vitest run",
     "test:vitest:ui": "vitest --ui",
     "test:vitest:coverage": "vitest run --coverage",
 		"test:playwright": "pnpm exec playwright test",

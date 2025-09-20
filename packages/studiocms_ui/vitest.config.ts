@@ -1,6 +1,6 @@
 import { getViteConfig } from 'astro/config';
 import { defineConfig } from 'vitest/config';
-import ui from './src/index';
+import ui from './dist/index';
 
 export default defineConfig(
 	getViteConfig(

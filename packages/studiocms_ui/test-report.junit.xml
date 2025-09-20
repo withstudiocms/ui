@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="1" failures="0" errors="0" time="0.002961303">
+    <testsuite name="test/index.test.ts" timestamp="2025-09-20T20:13:02.601Z" hostname="Framework-11thGen" tests="1" failures="0" errors="0" skipped="0" time="0.002961303">
+        <testcase classname="test/index.test.ts" name="Astro Integration &gt; should correctly setup integration for Astro" time="0.001883449">
+        </testcase>
+    </testsuite>
+</testsuites>
