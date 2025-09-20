@@ -19,7 +19,12 @@
     "ci:prepublish": "pnpm build",
     "ci:version": "pnpm changeset version",
     "ci:publish": "pnpm changeset publish",
-    "ci:snapshot": "pnpx pkg-pr-new publish --pnpm --compact './packages/*' "
+    "ci:snapshot": "pnpx pkg-pr-new publish --pnpm --compact './packages/*' ",
+
+    "ci:build": "pnpm build",
+    "ci:coverage": "pnpm --filter @studiocms/* ci:coverage",
+    "ci:setup:playwright": "pnpm --filter @studiocms/* playwright:setup",
+    "ci:e2e": "pnpm --filter @studiocms/* test:playwright"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
