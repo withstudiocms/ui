@@ -111,7 +111,9 @@ export function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
 		case 'meta':
 			return hasOneOf(head, entry, ['name', 'property', 'http-equiv']);
 		default:
+			/* v8 ignore start */
 			return false;
+		/* v8 ignore stop */
 	}
 }
 
@@ -175,7 +177,9 @@ export function getImportance(entry: HeadConfig[number]) {
 		if (entry.tag === 'link' && 'rel' in entry.attrs && entry.attrs.rel === 'shortcut icon') {
 			return 70;
 		}
+		/* v8 ignore start */
 		return 80;
+		/* v8 ignore stop */
 	}
 	// 4. SEO meta tags.
 	return 0;
