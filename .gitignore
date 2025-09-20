@@ -6,6 +6,6 @@ node_modules
 
 coverage/*
 coverage
-junit-report.xml
+*.junit.xml
 
 dist

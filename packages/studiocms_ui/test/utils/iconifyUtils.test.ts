@@ -1,16 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import {
 	calculateSize,
-	defaultIconCustomisations,
-	defaultIconProps,
 	getIconData,
 	getIconsTree,
 	getSVGViewBox,
 	iconToSVG,
-	internalGetIconData,
 	isUnsetKeyword,
 	mergeDefsAndContent,
-	mergeIconData,
 	mergeIconTransformations,
 	replaceIDs,
 	splitSVGDefs,
