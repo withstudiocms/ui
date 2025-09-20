@@ -54,7 +54,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
 #   playwright:
-#     name: Run Playwright Tests
+#     name: Run E2E Tests (Playwright)
 #     timeout-minutes: 60
 #     runs-on: ubuntu-latest
 #     strategy:

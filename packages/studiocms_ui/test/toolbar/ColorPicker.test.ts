@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-	default as DevToolbarColorPicker,
+	type default as DevToolbarColorPicker,
 	hex2rgb,
 	hsl2rgb,
 	hueToRgb,
@@ -46,19 +46,6 @@ describe('Color conversion functions', () => {
 });
 
 describe('DevToolbarColorPicker', () => {
-	let picker: DevToolbarColorPicker;
-
-	beforeEach(() => {
-		if (!customElements.get('dev-toolbar-color-picker')) {
-			customElements.define('dev-toolbar-color-picker', DevToolbarColorPicker);
-		}
-		picker = document.createElement('dev-toolbar-color-picker') as DevToolbarColorPicker;
-		document.body.appendChild(picker);
-	});
-
+	let colorPicker: DevToolbarColorPicker;
 	it.todo('sets and gets color correctly', () => {});
-
-	afterEach(() => {
-		picker.remove();
-	});
 });
