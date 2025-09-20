@@ -47,8 +47,7 @@
     "test:vitest:coverage": "vitest run --coverage",
 		"test:playwright": "pnpm exec playwright test",
 
-    "test": "pnpm run test:vitest && pnpm run test:playwright"
-
+    "test": "pnpm run test:vitest:coverage && pnpm run test:playwright"
   },
   "exports": {
     ".": {

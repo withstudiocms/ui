@@ -10,7 +10,7 @@ export default defineConfig(
 				include: ['**/*.test.ts'],
 				reporters: ['default', 'junit'],
 				outputFile: {
-					junit: './junit-report.xml',
+					junit: './test-report.junit.xml',
 				},
 				coverage: {
 					provider: 'v8',
