@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Breadcrumbs Component > renders Breadcrumbs component correctly 1`] = `"<div class="sui-breadcrumbs"> <a href="/">Home</a><span>&gt;</span><a href="/about">About</a><span>&gt;</span><a href="/about/contact">Contact</a><span>&gt;</span> </div>"`;
+
+exports[`Breadcrumbs Component > renders Breadcrumbs component with custom separator 1`] = `"<div class="sui-breadcrumbs"> <a href="/">Home</a><span>&gt;</span><a href="/about">About</a><span>&gt;</span><a href="/about/contact">Contact</a><span>&gt;</span> </div>"`;
+
+exports[`Breadcrumbs Component > renders Breadcrumbs component with no segments 1`] = `"<div class="sui-breadcrumbs">  </div>"`;
+
+exports[`Breadcrumbs Component > renders Breadcrumbs component with single segment 1`] = `"<div class="sui-breadcrumbs"> <a href="/">Home</a><span>&gt;</span> </div>"`;

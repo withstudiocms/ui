@@ -22,6 +22,11 @@ export default defineConfig(
 						'**/test/**',
 						'**/dist/**',
 						'**/node_modules/**',
+
+						// This is a unique case where we want to test the Astro components, but not the underlying TS files as they are internal to the component's implementation
+						// and not part of the public API of the package.
+						// We should be testing the Astro component's output instead and using E2E tests for end-to-end coverage.
+						'src/components/**/*.ts',
 					],
 				},
 			},
