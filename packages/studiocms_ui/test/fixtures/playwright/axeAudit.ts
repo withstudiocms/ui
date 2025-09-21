@@ -47,7 +47,9 @@ export const test = baseTest.extend<AxeAudit>({
 				.include(include)
 				.analyze();
 
-			const theme = document.documentElement.dataset.theme;
+			const theme = await page.evaluate(() => {
+				return document.documentElement.dataset.theme;
+			});
 
 			await testInfo.attach(`best-practice-results-${theme}`, {
 				body: JSON.stringify(results, null, 2),
@@ -66,7 +68,9 @@ export const test = baseTest.extend<AxeAudit>({
 				.include(include)
 				.analyze();
 
-			const theme = document.documentElement.dataset.theme;
+			const theme = await page.evaluate(() => {
+				return document.documentElement.dataset.theme;
+			});
 
 			await testInfo.attach(`wcag-a-results-${theme}`, {
 				body: JSON.stringify(results, null, 2),
@@ -85,7 +89,9 @@ export const test = baseTest.extend<AxeAudit>({
 				.include(include)
 				.analyze();
 
-			const theme = document.documentElement.dataset.theme;
+			const theme = await page.evaluate(() => {
+				return document.documentElement.dataset.theme;
+			});
 
 			await testInfo.attach(`wcag-aa-results-${theme}`, {
 				body: JSON.stringify(results, null, 2),
@@ -104,7 +110,9 @@ export const test = baseTest.extend<AxeAudit>({
 				.include(include)
 				.analyze();
 
-			const theme = document.documentElement.dataset.theme;
+			const theme = await page.evaluate(() => {
+				return document.documentElement.dataset.theme;
+			});
 
 			await testInfo.attach(`wcag-aaa-results-${theme}`, {
 				body: JSON.stringify(results, null, 2),
