@@ -13,7 +13,7 @@ describe('Breadcrumbs Component', () => {
 		},
 		{ segments: [] },
 		{ segments: [{ label: 'Home', segment: '/' }] },
-	])('renders Breadcrumbs with props %#', async (props, { renderComponent }) => {
+	])('renders Breadcrumbs with props %s', async (props, { renderComponent }) => {
 		const result = await renderComponent(Breadcrumbs, 'Breadcrumbs', { props });
 		expect(result).toMatchSnapshot();
 	});

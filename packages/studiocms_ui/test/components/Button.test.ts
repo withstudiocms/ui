@@ -29,7 +29,7 @@ describe('Button Component', () => {
 		{ fullWidth: true },
 		{ disabled: true },
 		{ as: 'a', href: 'https://example.com' },
-	])('renders Button with props %#', async (props, { renderComponent }) => {
+	])('renders Button with props %s', async (props, { renderComponent }) => {
 		const result = await renderComponent(Button, 'Button', {
 			props,
 			slots: { default: 'Test Button' },

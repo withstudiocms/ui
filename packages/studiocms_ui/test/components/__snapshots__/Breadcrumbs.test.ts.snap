@@ -1,10 +1,10 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Breadcrumbs Component > renders Breadcrumbs with props 0 1`] = `"<div class="sui-breadcrumbs"> <a href="/">Home</a><span>&gt;</span><a href="/about">About</a><span>&gt;</span><a href="/about/contact">Contact</a><span>&gt;</span> </div>"`;
+exports[`Breadcrumbs Component > renders Breadcrumbs with props { segments: [ { label: 'Home', segment: '/' } ] } 1`] = `"<div class="sui-breadcrumbs"> <a href="/">Home</a><span>&gt;</span> </div>"`;
 
-exports[`Breadcrumbs Component > renders Breadcrumbs with props 1 1`] = `"<div class="sui-breadcrumbs">  </div>"`;
+exports[`Breadcrumbs Component > renders Breadcrumbs with props { segments: [ { label: 'Home', segment: '/' }, { label: 'About', segment: 'about' }, { label: 'Contact', segment: 'contact' } ] } 1`] = `"<div class="sui-breadcrumbs"> <a href="/">Home</a><span>&gt;</span><a href="/about">About</a><span>&gt;</span><a href="/about/contact">Contact</a><span>&gt;</span> </div>"`;
 
-exports[`Breadcrumbs Component > renders Breadcrumbs with props 2 1`] = `"<div class="sui-breadcrumbs"> <a href="/">Home</a><span>&gt;</span> </div>"`;
+exports[`Breadcrumbs Component > renders Breadcrumbs with props { segments: [] } 1`] = `"<div class="sui-breadcrumbs">  </div>"`;
 
 exports[`Breadcrumbs Component > renders Breadcrumbs with separator "{ separator: '/', segments: [ { label: 'Home', segment: '/' }, { label: 'Products', segment: '/products' }, { label: 'Electronics', segment: '/products/electronics' } ] }" 1`] = `"<div class="sui-breadcrumbs"> <a href="/">Home</a><span>/</span><a href="//products">Products</a><span>/</span><a href="//products/products/electronics">Electronics</a><span>/</span> </div>"`;
 
