@@ -35,5 +35,9 @@
     "virtuals",
     "vite",
     "withstudiocms"
-  ]
+  ],
+  "material-icon-theme.files.associations": {
+    "*.e2e.ts": "playwright",
+    "*.test.ts": "vitest"
+  }
 }
