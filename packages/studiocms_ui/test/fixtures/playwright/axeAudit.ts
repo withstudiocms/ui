@@ -48,7 +48,7 @@ export const test = baseTest.extend<AxeAudit>({
 				.analyze();
 
 			const theme = await page.evaluate(() => {
-				return document.documentElement.dataset.theme;
+				return document.documentElement.dataset.theme || 'dark';
 			});
 
 			await testInfo.attach(`best-practice-results-${theme}`, {
@@ -69,7 +69,7 @@ export const test = baseTest.extend<AxeAudit>({
 				.analyze();
 
 			const theme = await page.evaluate(() => {
-				return document.documentElement.dataset.theme;
+				return document.documentElement.dataset.theme || 'dark';
 			});
 
 			await testInfo.attach(`wcag-a-results-${theme}`, {
@@ -90,7 +90,7 @@ export const test = baseTest.extend<AxeAudit>({
 				.analyze();
 
 			const theme = await page.evaluate(() => {
-				return document.documentElement.dataset.theme;
+				return document.documentElement.dataset.theme || 'dark';
 			});
 
 			await testInfo.attach(`wcag-aa-results-${theme}`, {
@@ -111,7 +111,7 @@ export const test = baseTest.extend<AxeAudit>({
 				.analyze();
 
 			const theme = await page.evaluate(() => {
-				return document.documentElement.dataset.theme;
+				return document.documentElement.dataset.theme || 'dark';
 			});
 
 			await testInfo.attach(`wcag-aaa-results-${theme}`, {
