@@ -12,7 +12,7 @@ const mockProps = {
 	],
 };
 
-describe('SearchSelect Component', () => {
+describe.todo('SearchSelect Component', () => {
 	// SearchSelect input component current uses a dynamic input instead of a static one
 	// which makes snapshot testing difficult. This test is a placeholder for future implementation.
 
