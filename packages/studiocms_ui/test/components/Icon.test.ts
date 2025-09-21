@@ -4,10 +4,15 @@ import Icon from '../../src/components/Icon/Icon.astro';
 import IconBase from '../../src/components/Icon/IconBase.astro';
 import { test } from '../fixtures/vitest/AstroContainer';
 
+const mockProps = {
+	height: 24,
+	width: 24,
+};
+
 describe('Icon Component', () => {
 	test('renders Icon component correctly', async ({ renderComponent }) => {
 		const result = await renderComponent(Icon, 'Icon', {
-			props: { name: 'heroicons:academic-cap', height: 24, width: 24 },
+			props: { name: 'heroicons:academic-cap', ...mockProps },
 		});
 		expect(result).toMatchSnapshot();
 	});
@@ -16,7 +21,7 @@ describe('Icon Component', () => {
 describe('IconBase Component', () => {
 	test('renders IconBase component correctly', async ({ renderComponent }) => {
 		const result = await renderComponent(IconBase, 'IconBase', {
-			props: { iconCollection: icons, name: 'academic-cap', height: 24, width: 24 },
+			props: { iconCollection: icons, name: 'academic-cap', ...mockProps },
 		});
 		expect(result).toMatchSnapshot();
 	});
