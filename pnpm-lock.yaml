@@ -36,6 +36,9 @@ importers:
       '@actions/core':
         specifier: ^1.11.1
         version: 1.11.1
+      '@axe-core/playwright':
+        specifier: ^4.10.2
+        version: 4.10.2(playwright-core@1.55.0)
       '@biomejs/biome':
         specifier: ^1.9.4
         version: 1.9.4
@@ -48,12 +51,27 @@ importers:
       '@changesets/config':
         specifier: 3.0.3
         version: 3.0.3
+      '@playwright/test':
+        specifier: ^1.55.0
+        version: 1.55.0
       '@types/node':
         specifier: 24.5.2
         version: 24.5.2
+      '@vitest/coverage-v8':
+        specifier: ^3.2.4
+        version: 3.2.4(vitest@3.2.4)
+      '@vitest/ui':
+        specifier: ^3.2.4
+        version: 3.2.4(vitest@3.2.4)
       '@withstudiocms/buildkit':
         specifier: ^0.1.0-beta.4
         version: 0.1.0-beta.4
+      jest-extended:
+        specifier: ^6.0.0
+        version: 6.0.0(typescript@5.7.2)
+      jsdom:
+        specifier: ^27.0.0
+        version: 27.0.0(postcss@8.5.6)
       knip:
         specifier: ^5.46.0
         version: 5.46.0(@types/node@24.5.2)(typescript@5.7.2)
@@ -63,6 +81,9 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.7.2
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.5.2)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@27.0.0(postcss@8.5.6))(yaml@2.6.1)
 
   docs:
     dependencies:
@@ -187,36 +208,15 @@ importers:
         specifier: catalog:peers
         version: 6.3.6(@types/node@24.5.2)(jiti@2.4.2)(yaml@2.6.1)
     devDependencies:
-      '@axe-core/playwright':
-        specifier: ^4.10.2
-        version: 4.10.2(playwright-core@1.55.0)
-      '@playwright/test':
-        specifier: ^1.55.0
-        version: 1.55.0
       '@types/node':
         specifier: 24.5.2
         version: 24.5.2
-      '@vitest/coverage-v8':
-        specifier: ^3.2.4
-        version: 3.2.4(vitest@3.2.4)
-      '@vitest/ui':
-        specifier: ^3.2.4
-        version: 3.2.4(vitest@3.2.4)
       astro:
         specifier: 'catalog:'
         version: 5.13.8(@types/node@24.5.2)(jiti@2.4.2)(rollup@4.50.2)(typescript@5.7.2)(yaml@2.6.1)
-      jest-extended:
-        specifier: ^6.0.0
-        version: 6.0.0(typescript@5.7.2)
-      jsdom:
-        specifier: ^27.0.0
-        version: 27.0.0(postcss@8.5.6)
       typescript:
         specifier: 'catalog:'
         version: 5.7.2
-      vitest:
-        specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.5.2)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@27.0.0(postcss@8.5.6))(yaml@2.6.1)
 
   packages/studiocms_ui/test/fixtures/test-server:
     dependencies:
