@@ -45,7 +45,8 @@ describe('Color conversion functions', () => {
 	});
 });
 
-describe('DevToolbarColorPicker', () => {
+// TODO @louisescher please do this
+describe.todo('DevToolbarColorPicker', () => {
 	let colorPicker: DevToolbarColorPicker;
 	it.todo('sets and gets color correctly', () => {});
 });
