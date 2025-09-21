@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Footer Component > renders Footer component correctly 1`] = `"<footer class="undefined sui-footer"> <div class="upper"> <div> YourCompany </div> <div class="links"> <ul> <li class="sui-footer-link-label">Resources</li> <li> <a href="#">Documentation</a> </li><li> <a href="#">Tutorials</a> </li> </ul><ul> <li class="sui-footer-link-label">Legal</li> <li> <a href="#">Privacy Policy</a> </li><li> <a href="#">Terms of Service</a> </li> </ul> </div> </div> <hr class="separator"> <div class="lower"> <span class="copyright-span">© 2024 Your Company. All rights reserved.</span>  </div> </footer>"`;
