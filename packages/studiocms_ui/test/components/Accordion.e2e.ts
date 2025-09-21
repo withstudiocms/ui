@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-import { test } from '../fixtures/playwright/axeAudit';
+import { expect, test } from '../fixtures/playwright/axeAudit';
 
 test.describe('Accordion Component', () => {
 	test.beforeEach(async ({ page }) => {

@@ -1,6 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
 import { test as baseTest, expect } from '@playwright/test';
 
+export { expect };
+
 type Include = Parameters<AxeBuilder['include']>[0];
 
 type AxeAudit = {

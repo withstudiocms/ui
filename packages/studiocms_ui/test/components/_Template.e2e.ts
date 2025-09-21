@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-import { test } from '../fixtures/playwright/axeAudit';
+import { expect, test } from '../fixtures/playwright/axeAudit';
 
 // This is a placeholder test file. Please copy-paste this file when creating new component tests.
 // Then replace all instances of "_Template"/"Template" with the name of the component you are testing.
