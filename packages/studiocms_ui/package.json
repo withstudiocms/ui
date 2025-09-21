@@ -48,6 +48,8 @@
     "test:vitest:coverage": "vitest run --coverage",
 		"test:playwright": "pnpm exec playwright test",
 
+    "view:playwright": "pnpm exec playwright show-report",
+
     "ci:coverage": "pnpm test:vitest:coverage"
   },
   "exports": {

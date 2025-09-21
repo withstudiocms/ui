@@ -8,6 +8,7 @@
   "editor.gotoLocation.multipleDefinitions": "goto",
   "cSpell.words": [
     "astrojs",
+    "automations",
     "buildkit",
     "checkmark",
     "createtoast",
@@ -34,6 +35,7 @@
     "viewbox",
     "virtuals",
     "vite",
+    "Vitest",
     "withstudiocms"
   ],
   "material-icon-theme.files.associations": {

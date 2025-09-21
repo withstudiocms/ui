@@ -7,14 +7,27 @@
   },
   "scripts": {
     "build": "pnpm --filter @studiocms/* build",
-    "dev": "pnpm --stream --filter @studiocms/* --filter docs -r -parallel dev",
+
+    "dev": "pnpm --stream --filter @studiocms/* --filter @test-fixture/server -r -parallel dev",
+
     "docs:dev": "pnpm --filter docs dev",
     "docs:build": "pnpm build && pnpm --filter docs build",
     "docs:preview": "pnpm --filter docs preview",
     "docs:sync": "pnpm --filter docs astro sync",
+
+    "test:vitest:watch": "pnpm --filter @studiocms/* test:vitest",
+    "test:vitest": "pnpm --filter @studiocms/* test:vitest:run",
+    "test:vitest:ui": "pnpm --filter @studiocms/* test:vitest:ui",
+    "test:playwright": "pnpm --filter @studiocms/* test:playwright",
+
+    "view:playwright": "pnpm --filter @studiocms/* view:playwright",
+
+    "setup:playwright": "pnpm --filter @studiocms/* playwright:setup",
+
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "ci:lint": "biome ci --formatter-enabled=true --organize-imports-enabled=true  --reporter=github",
+
     "ci:install": "pnpm install --frozen-lockfile",
     "ci:prepublish": "pnpm build",
     "ci:version": "pnpm changeset version",
