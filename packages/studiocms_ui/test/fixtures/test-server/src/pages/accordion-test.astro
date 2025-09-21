@@ -1,13 +1,29 @@
 ---
 import { Accordion, AccordionItem } from 'studiocms:ui/components/accordion';
 ---
-<Accordion>
-    <AccordionItem open>
-        <div slot="summary">This is the summary</div>
-        <div>These are the details</div>
-    </AccordionItem>
-    <AccordionItem>
-        <div slot="summary">This is the 2nd summary</div>
-        <div>These are the 2nd details</div>
-    </AccordionItem>
-</Accordion>
+
+<div id="basic-test">
+    <Accordion>
+        <AccordionItem open>
+            <div slot="summary">This is the summary</div>
+            <div>These are the details</div>
+        </AccordionItem>
+        <AccordionItem>
+            <div slot="summary">This is the 2nd summary</div>
+            <div>These are the 2nd details</div>
+        </AccordionItem>
+    </Accordion>
+</div>
+
+<div id="variant-test">
+    <Accordion style="filled">
+        <AccordionItem open>
+            <div slot="summary">This is the summary</div>
+            <div>These are the details</div>
+        </AccordionItem>
+        <AccordionItem>
+            <div slot="summary">This is the 2nd summary</div>
+            <div>These are the 2nd details</div>
+        </AccordionItem>
+    </Accordion>
+</div>

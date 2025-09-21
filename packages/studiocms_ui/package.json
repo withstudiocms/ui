@@ -92,6 +92,7 @@
     "jsdom": "^27.0.0",
     "jest-extended": "^6.0.0",
     "vitest": "^3.2.4",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@types/node": "24.5.2"
   }
 }

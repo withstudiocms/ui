@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test } from '@playwright/test';
+import { test as baseTest, expect } from '@playwright/test';
 
-export { test } from '@playwright/test';
+// export { test } from '@playwright/test';
 
 type Include = Parameters<AxeBuilder['include']>[0];
 
@@ -41,7 +41,7 @@ type AxeAudit = {
 	switchToLightMode: () => Promise<void>;
 };
 
-export const axeAudit = test.extend<AxeAudit>({
+export const test = baseTest.extend<AxeAudit>({
 	bestPractice: async ({ page }, use, testInfo) => {
 		const runner = async (include: Include) => {
 			const results = await new AxeBuilder({ page })

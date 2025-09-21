@@ -1,48 +1,71 @@
-import { expect, test } from '@playwright/test';
-import { axeAudit } from '../fixtures/playwright/axeAudit';
+import { expect } from '@playwright/test';
+import { test } from '../fixtures/playwright/axeAudit';
 
 test.describe('Accordion Component', () => {
-	test('Basic functionality', async ({ page }) => {
+	test.beforeEach(async ({ page }) => {
 		await page.goto('/accordion-test');
-		await expect(page.getByText('These are the details')).toBeVisible();
-		await page.getByRole('button', { name: 'This is the summary' }).click();
-		await page.getByRole('button', { name: 'This is the 2nd summary' }).click();
-		await expect(page.getByText('These are the 2nd details')).toBeVisible();
 	});
 
-	axeAudit(
-		'Test Accessibility (dark mode)',
-		async ({ page, takeScreenshot, bestPractice, wcagA, wcagAA, wcagAAA }) => {
-			await page.goto('/accordion-test');
+	test('Test Functionality', async ({ page }) => {
+		await expect(page.locator('#basic-test').getByText('These are the details')).toBeVisible();
+		await page
+			.locator('#basic-test')
+			.getByRole('button', { name: 'This is the 2nd summary' })
+			.click();
+		await expect(page.locator('#basic-test').getByText('These are the 2nd details')).toBeVisible();
+	});
 
-			await takeScreenshot('Accordion (Dark Mode)', '.sui-accordion');
+	test('Test Accessibility - Basic Styling', async ({
+		takeScreenshot,
+		bestPractice,
+		wcagA,
+		wcagAA,
+		wcagAAA,
+		switchToLightMode,
+	}) => {
+		// Dark mode
+		await takeScreenshot('Accordion - basic (Dark Mode)', '#basic-test');
 
-			await bestPractice('.sui-accordion');
+		await bestPractice('#basic-test');
+		await wcagA('#basic-test');
+		await wcagAA('#basic-test');
+		await wcagAAA('#basic-test');
 
-			await wcagA('.sui-accordion');
+		// Light mode
+		await switchToLightMode();
 
-			await wcagAA('.sui-accordion');
+		await takeScreenshot('Accordion - basic (Light Mode)', '#basic-test');
 
-			await wcagAAA('.sui-accordion');
-		}
-	);
+		await bestPractice('#basic-test');
+		await wcagA('#basic-test');
+		await wcagAA('#basic-test');
+		await wcagAAA('#basic-test');
+	});
 
-	axeAudit(
-		'Test Accessibility (light mode)',
-		async ({ page, takeScreenshot, bestPractice, wcagA, wcagAA, wcagAAA, switchToLightMode }) => {
-			await page.goto('/accordion-test');
+	test('Test Accessibility - Variant Styling', async ({
+		takeScreenshot,
+		bestPractice,
+		wcagA,
+		wcagAA,
+		wcagAAA,
+		switchToLightMode,
+	}) => {
+		// Dark mode
+		await takeScreenshot('Accordion - variant (Dark Mode)', '#variant-test');
 
-			await switchToLightMode();
+		await bestPractice('#variant-test');
+		await wcagA('#variant-test');
+		await wcagAA('#variant-test');
+		await wcagAAA('#variant-test');
 
-			await takeScreenshot('Accordion (Light Mode)', '.sui-accordion');
+		// Light mode
+		await switchToLightMode();
 
-			await bestPractice('.sui-accordion');
+		await takeScreenshot('Accordion - variant (Light Mode)', '#variant-test');
 
-			await wcagA('.sui-accordion');
-
-			await wcagAA('.sui-accordion');
-
-			await wcagAAA('.sui-accordion');
-		}
-	);
+		await bestPractice('#variant-test');
+		await wcagA('#variant-test');
+		await wcagAA('#variant-test');
+		await wcagAAA('#variant-test');
+	});
 });
