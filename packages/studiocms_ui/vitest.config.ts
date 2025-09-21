@@ -8,6 +8,7 @@ export default defineConfig(
 			test: {
 				environment: 'node',
 				include: ['**/*.test.ts'],
+				exclude: ['**/components/_Template.test.ts', '**/test/fixtures/**', '**/node_modules/**'],
 				setupFiles: ['./test/fixtures/vitest/setup-jest.ts'],
 				reporters: ['default', 'junit'],
 				outputFile: {
