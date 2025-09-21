@@ -9,6 +9,7 @@ const baseURL = `http://localhost:${port}`;
 export default defineConfig({
 	testDir: './test',
 	testMatch: ['**/*.e2e.ts'],
+	testIgnore: ['**/test/fixtures/**', '**/node_modules/**', '**/test/components/_Template.e2e.ts'],
 	/* Run tests in files in parallel */
 	fullyParallel: true,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
