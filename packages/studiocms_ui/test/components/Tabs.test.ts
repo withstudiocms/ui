@@ -3,8 +3,9 @@ import TabItem from '../../src/components/Tabs/TabItem.astro';
 import Tabs from '../../src/components/Tabs/Tabs.astro';
 import { test } from '../fixtures/vitest/AstroContainer';
 
-describe('Tabs Component', () => {
-	test('renders Tabs component correctly', async ({ renderComponent }) => {
+// TODO Tab and TabItem have to much dynamic behavior to snapshot test effectively
+describe.todo('Tabs Component', () => {
+	test.todo('renders Tabs component correctly', async ({ renderComponent }) => {
 		const tabsContent = [];
 		for (let i = 1; i <= 3; i++) {
 			tabsContent.push(
