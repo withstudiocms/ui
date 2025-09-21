@@ -2,40 +2,40 @@
 
 exports[`Button Component > renders Button component correctly 1`] = `"<button tabindex="0" class="sui-button md default solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different colors 1`] = `"<button tabindex="0" class="sui-button md primary solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with { name: 'default', content: 'Default Slot' } slot 1`] = `"<button tabindex="0" class="sui-button md default solid">  Default Slot  </button>"`;
 
-exports[`Button Component > renders Button component with different colors 2`] = `"<button tabindex="0" class="sui-button md default solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with { name: 'end-content', content: 'Suffix Slot' } slot 1`] = `"<button tabindex="0" class="sui-button md default solid">   Suffix Slot </button>"`;
 
-exports[`Button Component > renders Button component with different colors 3`] = `"<button tabindex="0" class="sui-button md success solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with { name: 'start-content', content: 'Prefix Slot' } slot 1`] = `"<button tabindex="0" class="sui-button md default solid"> Prefix Slot   </button>"`;
 
-exports[`Button Component > renders Button component with different colors 4`] = `"<button tabindex="0" class="sui-button md danger solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 0 1`] = `"<button tabindex="0" class="sui-button sm default solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different colors 5`] = `"<button tabindex="0" class="sui-button md warning solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 1 1`] = `"<button tabindex="0" class="sui-button md default solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different colors 6`] = `"<button tabindex="0" class="sui-button md info solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 2 1`] = `"<button tabindex="0" class="sui-button lg default solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different colors 7`] = `"<button tabindex="0" class="sui-button md mono solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 3 1`] = `"<button tabindex="0" class="sui-button md primary solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different sizes 1`] = `"<button tabindex="0" class="sui-button sm default solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 4 1`] = `"<button tabindex="0" class="sui-button md default solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different sizes 2`] = `"<button tabindex="0" class="sui-button md default solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 5 1`] = `"<button tabindex="0" class="sui-button md success solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different sizes 3`] = `"<button tabindex="0" class="sui-button lg default solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 6 1`] = `"<button tabindex="0" class="sui-button md danger solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different variants 1`] = `"<button tabindex="0" class="sui-button md default solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 7 1`] = `"<button tabindex="0" class="sui-button md warning solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different variants 2`] = `"<button tabindex="0" class="sui-button md default outlined">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 8 1`] = `"<button tabindex="0" class="sui-button md info solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with different variants 3`] = `"<button tabindex="0" class="sui-button md default flat">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 9 1`] = `"<button tabindex="0" class="sui-button md mono solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with miscellaneous props 1`] = `"<button tabindex="0" class="sui-button full md default solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 10 1`] = `"<button tabindex="0" class="sui-button md default solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with miscellaneous props 2`] = `"<button disabled tabindex="0" class="sui-button disabled md default solid">  Test Button  </button>"`;
+exports[`Button Component > renders Button with props 11 1`] = `"<button tabindex="0" class="sui-button md default outlined">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button component with miscellaneous props 3`] = `"<a tabindex="0" as="a" href="https://example.com" class="sui-button md default solid">  Test Button  </a>"`;
+exports[`Button Component > renders Button with props 12 1`] = `"<button tabindex="0" class="sui-button md default flat">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button with different slots 1`] = `"<button tabindex="0" class="sui-button md default solid">  Default Slot  </button>"`;
+exports[`Button Component > renders Button with props 13 1`] = `"<button tabindex="0" class="sui-button full md default solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button with different slots 2`] = `"<button tabindex="0" class="sui-button md default solid"> Prefix Slot   </button>"`;
+exports[`Button Component > renders Button with props 14 1`] = `"<button disabled tabindex="0" class="sui-button disabled md default solid">  Test Button  </button>"`;
 
-exports[`Button Component > renders Button with different slots 3`] = `"<button tabindex="0" class="sui-button md default solid">   Suffix Slot </button>"`;
+exports[`Button Component > renders Button with props 15 1`] = `"<a tabindex="0" as="a" href="https://example.com" class="sui-button md default solid">  Test Button  </a>"`;
