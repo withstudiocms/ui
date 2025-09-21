@@ -1,8 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { test as baseTest, expect } from '@playwright/test';
 
-// export { test } from '@playwright/test';
-
 type Include = Parameters<AxeBuilder['include']>[0];
 
 type AxeAudit = {
@@ -49,7 +47,9 @@ export const test = baseTest.extend<AxeAudit>({
 				.include(include)
 				.analyze();
 
-			await testInfo.attach('best-practice-results', {
+			const theme = document.documentElement.dataset.theme;
+
+			await testInfo.attach(`best-practice-results-${theme}`, {
 				body: JSON.stringify(results, null, 2),
 				contentType: 'application/json',
 			});
@@ -66,7 +66,9 @@ export const test = baseTest.extend<AxeAudit>({
 				.include(include)
 				.analyze();
 
-			await testInfo.attach('wcag-a-results', {
+			const theme = document.documentElement.dataset.theme;
+
+			await testInfo.attach(`wcag-a-results-${theme}`, {
 				body: JSON.stringify(results, null, 2),
 				contentType: 'application/json',
 			});
@@ -83,7 +85,9 @@ export const test = baseTest.extend<AxeAudit>({
 				.include(include)
 				.analyze();
 
-			await testInfo.attach('wcag-aa-results', {
+			const theme = document.documentElement.dataset.theme;
+
+			await testInfo.attach(`wcag-aa-results-${theme}`, {
 				body: JSON.stringify(results, null, 2),
 				contentType: 'application/json',
 			});
@@ -100,7 +104,9 @@ export const test = baseTest.extend<AxeAudit>({
 				.include(include)
 				.analyze();
 
-			await testInfo.attach('wcag-aaa-results', {
+			const theme = document.documentElement.dataset.theme;
+
+			await testInfo.attach(`wcag-aaa-results-${theme}`, {
 				body: JSON.stringify(results, null, 2),
 				contentType: 'application/json',
 			});
