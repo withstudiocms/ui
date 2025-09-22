@@ -65,7 +65,7 @@ export const test = baseTest.extend<AxeAudit>({
 			expect(
 				results.violations,
 				buildError({ message: 'Best Practice Violations', theme })
-			).toEqual([]);
+			).toHaveLength(0);
 		};
 
 		await use(runner);
@@ -86,7 +86,9 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations, buildError({ message: 'WCAG A Violations', theme })).toEqual([]);
+			expect(results.violations, buildError({ message: 'WCAG A Violations', theme })).toHaveLength(
+				0
+			);
 		};
 
 		await use(runner);
@@ -107,7 +109,9 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations, buildError({ message: 'WCAG AA Violations', theme })).toEqual([]);
+			expect(results.violations, buildError({ message: 'WCAG AA Violations', theme })).toHaveLength(
+				0
+			);
 		};
 
 		await use(runner);
@@ -128,7 +132,10 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations, buildError({ message: 'WCAG AAA Violations', theme })).toEqual([]);
+			expect(
+				results.violations,
+				buildError({ message: 'WCAG AAA Violations', theme })
+			).toHaveLength(0);
 		};
 
 		await use(runner);
