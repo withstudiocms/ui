@@ -5,7 +5,7 @@ import { expect, test } from '../fixtures/playwright/axeAudit';
 // Finally, update the test cases below to test the functionality of your component.
 
 test.describe('Template Component', () => {
-	test.beforeAll(async ({ page }) => {
+	test.beforeEach(async ({ page }) => {
 		// Navigate to the test page for this component
 		await page.goto('/template-test');
 	});
