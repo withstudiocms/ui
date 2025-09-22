@@ -20,7 +20,7 @@ permissions:
   
 jobs:
   codecov:
-    name: Run Tests & Code Coverage (Vitest)
+    name: Run Code Coverage (Vitest)
     runs-on: ubuntu-latest
     env:
       NODE_OPTIONS: "--max_old_space_size=4096"
@@ -89,7 +89,7 @@ jobs:
           retention-days: 1
 
   playwright-reporter:
-    name: Merge Playwright Test Results
+    name: Build E2E Report
     if: ${{ !cancelled() }}
     needs: [playwright]
 
