@@ -1,4 +1,4 @@
-name: CI - Tests
+name: Run Tests
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ permissions:
   
 jobs:
   codecov:
-    name: Run Code Coverage (Vitest)
+    name: Code Coverage (Vitest)
     runs-on: ubuntu-latest
     env:
       NODE_OPTIONS: "--max_old_space_size=4096"
@@ -47,14 +47,14 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload test results to Codecov
-        if: ${{ always() }}
+        if: ${{ !cancelled() }}
         uses: codecov/test-results-action@47f89e9acb64b76debcd5ea40642d25a4adced9f
         with:
           slug: withstudiocms/ui
           token: ${{ secrets.CODECOV_TOKEN }}
 
   playwright:
-    name: Run E2E Tests (Playwright)
+    name: E2E (Playwright)
     timeout-minutes: 60
     runs-on: ubuntu-latest
     strategy:
