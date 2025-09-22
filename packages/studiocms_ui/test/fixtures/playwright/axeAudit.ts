@@ -58,7 +58,7 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations).toEqual([]);
+			expect(results.violations, 'Best Practice Violations').toEqual([]);
 		};
 
 		await use(runner);
@@ -79,7 +79,7 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations).toEqual([]);
+			expect(results.violations, 'WCAG A Violations').toEqual([]);
 		};
 
 		await use(runner);
@@ -100,7 +100,7 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations).toEqual([]);
+			expect(results.violations, 'WCAG AA Violations').toEqual([]);
 		};
 
 		await use(runner);
@@ -121,7 +121,7 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations).toEqual([]);
+			expect(results.violations, 'WCAG AAA Violations').toEqual([]);
 		};
 
 		await use(runner);
