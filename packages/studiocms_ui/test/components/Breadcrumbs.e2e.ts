@@ -1,17 +1,16 @@
 import { expect, test } from '../fixtures/playwright/axeAudit';
 
-// This is a placeholder test file. Please copy-paste this file when creating new component tests.
-// Then replace all instances of "_Template"/"Template" with the name of the component you are testing.
-// Finally, update the test cases below to test the functionality of your component.
-
-test.describe('Template Component', () => {
+test.describe('Breadcrumbs Component', () => {
 	test.beforeEach(async ({ page }) => {
 		// Navigate to the test page for this component
-		await page.goto('/template-test');
+		await page.goto('/breadcrumbs-test');
 	});
 
 	test('Basic functionality', async ({ page }) => {
-		await expect(page.getByText('Template Component Test')).toBeVisible();
+		await expect(page.getByRole('link', { name: 'Home' })).toBeVisible();
+		await expect(page.getByRole('link', { name: 'Docs' })).toBeVisible();
+		await expect(page.getByRole('link', { name: 'Components' })).toBeVisible();
+		await expect(page.getByRole('link', { name: 'Breadcrumbs' })).toBeVisible();
 	});
 
 	test('Test Accessibility', async ({
