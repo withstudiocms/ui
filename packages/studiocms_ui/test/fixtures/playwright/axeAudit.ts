@@ -5,6 +5,10 @@ export { expect };
 
 type Include = Parameters<AxeBuilder['include']>[0];
 
+function buildError(opts: { message: string; theme: string }): string {
+	return `Axe Audit (${opts.theme} mode): ${opts.message}`;
+}
+
 type AxeAudit = {
 	/**
 	 * Common accessibility best practices
@@ -58,7 +62,10 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations, 'Best Practice Violations').toEqual([]);
+			expect(
+				results.violations,
+				buildError({ message: 'Best Practice Violations', theme })
+			).toEqual([]);
 		};
 
 		await use(runner);
@@ -79,7 +86,7 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations, 'WCAG A Violations').toEqual([]);
+			expect(results.violations, buildError({ message: 'WCAG A Violations', theme })).toEqual([]);
 		};
 
 		await use(runner);
@@ -100,7 +107,7 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations, 'WCAG AA Violations').toEqual([]);
+			expect(results.violations, buildError({ message: 'WCAG AA Violations', theme })).toEqual([]);
 		};
 
 		await use(runner);
@@ -121,7 +128,7 @@ export const test = baseTest.extend<AxeAudit>({
 				contentType: 'application/json',
 			});
 
-			expect(results.violations, 'WCAG AAA Violations').toEqual([]);
+			expect(results.violations, buildError({ message: 'WCAG AAA Violations', theme })).toEqual([]);
 		};
 
 		await use(runner);
