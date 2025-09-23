@@ -129,7 +129,10 @@ jobs:
         if: always()
         with:
           report-path: './ctrf/*.json'
-          pull-request-report: ${{ github.event_name == 'pull_request' }}
+          pull-request: ${{ github.event_name == 'pull_request' }}
+          github-report: true
+          file-report: true
           overwrite-comment: true
+          report-order: 'github-report,file-report'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
