@@ -56,6 +56,7 @@
     "jsdom": "^27.0.0",
     "jest-extended": "^6.0.0",
     "pkg-pr-new": "^0.0.41",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "playwright-ctrf-json-reporter": "0.0.23"
   }
 }

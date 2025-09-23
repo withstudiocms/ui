@@ -93,7 +93,10 @@ jobs:
     name: E2E Reporter (Playwright)
     if: ${{ !cancelled() }}
     needs: [playwright]
-
+    permissions: 
+      actions: read
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Check out code using Git
@@ -112,7 +115,7 @@ jobs:
           merge-multiple: true
 
       - name: Merge into HTML Report
-        run: pnpm exec playwright merge-reports --reporter html,github ./all-blob-reports
+        run: pnpm exec playwright merge-reports --reporter html,playwright-ctrf-json-reporter ./all-blob-reports
 
       - name: Upload HTML report
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -120,3 +123,12 @@ jobs:
           name: html-report--attempt-${{ github.run_attempt }}
           path: playwright-report
           retention-days: 30
+
+      - name: Publish Test Report
+        uses: ctrf-io/github-test-reporter@v1
+        with:
+          report-path: './ctrf/*.json'
+          pull-request-report: ${{ github.event_name == 'pull_request' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: always()
