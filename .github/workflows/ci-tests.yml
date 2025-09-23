@@ -97,6 +97,7 @@ jobs:
       actions: read
       contents: read
       pull-requests: write
+      checks: write
     runs-on: ubuntu-latest
     steps:
       - name: Check out code using Git
@@ -133,6 +134,7 @@ jobs:
           github-report: true
           suite-folded-report: true
           overwrite-comment: true
+          use-suite-name: true
           report-order: 'github-report,suite-folded-report'
           status-check: true
           status-check-name: 'E2E Test Report'
