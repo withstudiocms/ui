@@ -130,7 +130,6 @@ jobs:
         with:
           report-path: './ctrf/*.json'
           pull-request-report: ${{ github.event_name == 'pull_request' }}
-          github-report: true
           overwrite-comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
