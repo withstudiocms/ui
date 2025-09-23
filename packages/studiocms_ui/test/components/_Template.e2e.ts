@@ -1,6 +1,8 @@
 import { expect, test } from '../fixtures/playwright/axeAudit';
 
 // This is a placeholder test file. Please copy-paste this file when creating new component tests.
+// component tests page files are located in the
+// 'packages/studiocms_ui/test/fixtures/test-server/src/pages/' directory.
 // Then replace all instances of "_Template"/"Template" with the name of the component you are testing.
 // Finally, update the test cases below to test the functionality of your component.
 

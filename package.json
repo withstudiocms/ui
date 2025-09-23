@@ -10,7 +10,7 @@
 
     "dev": "pnpm --stream --filter @studiocms/* --filter @test-fixture/server -r -parallel dev",
 
-    "docs:dev": "pnpm --filter docs dev",
+    "docs:dev": "pnpm --stream --filter @studiocms/* --filter docs -r -parallel dev",
     "docs:build": "pnpm build && pnpm --filter docs build",
     "docs:preview": "pnpm --filter docs preview",
     "docs:sync": "pnpm --filter docs astro sync",
