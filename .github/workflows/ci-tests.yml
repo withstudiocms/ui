@@ -131,8 +131,10 @@ jobs:
           report-path: './ctrf/*.json'
           pull-request: ${{ github.event_name == 'pull_request' }}
           github-report: true
-          file-report: true
+          suite-folded-report: true
           overwrite-comment: true
-          report-order: 'github-report,file-report'
+          report-order: 'github-report,suite-folded-report'
+          status-check: true
+          status-check-name: 'E2E Test Report'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

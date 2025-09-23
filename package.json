@@ -57,6 +57,6 @@
     "jest-extended": "^6.0.0",
     "pkg-pr-new": "^0.0.41",
     "typescript": "catalog:",
-    "playwright-ctrf-json-reporter": "0.0.23"
+    "playwright-ctrf-json-reporter": "^0.0.23"
   }
 }
