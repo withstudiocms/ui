@@ -1,0 +1,44 @@
+---
+import { Card } from 'studiocms:ui/components/card';
+---
+
+<br />
+<br />
+
+<div id="basic-test">
+    <Card> Content </Card>
+</div>
+
+<br />
+<br />
+
+<div id="variant-test">
+    <Card> Default </Card>
+    <Card variant="filled"> Filled </Card>
+</div>
+
+<br />
+<br />
+
+<div id="slot-test">
+    <Card>
+        <h4 slot="header">Header Content</h4>
+        <p>
+            Lorem ipsum dolor sit amet. Et nulla cumque et suscipit molestiae
+            est quam eaque et placeat iste est velit dignissimos aut totam
+            voluptatum qui eveniet nostrum. Aut neque reprehenderit est vero
+            debitis in inventore voluptas ut dolores facilis et voluptatibus
+            quibusdam aut dolorum sunt non vitae sequi.
+        </p>
+        <span slot="footer">Footer Content</span>
+    </Card>
+</div>
+
+<br />
+<br />
+
+<div id="polymorphic-test">
+    <Card as="section"> Section Content </Card>
+    <Card as="article"> Article Content </Card>
+    <Card as="div"> Div Content </Card>
+</div>
