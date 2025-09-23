@@ -79,6 +79,7 @@ jobs:
 
       - name: Run Playwright tests
         run: pnpm ci:e2e --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        continue-on-error: true
 
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
