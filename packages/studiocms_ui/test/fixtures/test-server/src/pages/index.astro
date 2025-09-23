@@ -21,7 +21,7 @@ const currentTests: CurrentTest[] = testFiles.map((path) => ({
 		.replace(/-test/g, '')
 		.replace(/\b\w/g, (c) => c.toUpperCase()),
 
-	path: `/${path.replace('./', '')}`,
+	path: path.replace('./', '/'),
 }));
 ---
 
