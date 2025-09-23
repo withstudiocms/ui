@@ -1,16 +1,20 @@
 ---
 import { Breadcrumbs } from 'studiocms:ui/components/breadcrumbs';
+import Layout from '../layouts/Layout.astro';
 ---
-<br>
-<br>
 
-<div id="basic-test">
-    <Breadcrumbs
-        segments={[
-            { label: "Home", segment: "" },
-            { label: "Docs", segment: "docs" },
-            { label: "Components", segment: "components" },
-            { label: "Breadcrumbs", segment: "breadcrumbs" },
-        ]}
-    />
-</div>
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Breadcrumbs
+            segments={[
+                { label: "Home", segment: "" },
+                { label: "Docs", segment: "docs" },
+                { label: "Components", segment: "components" },
+                { label: "Breadcrumbs", segment: "breadcrumbs" },
+            ]}
+        />
+    </div>
+</Layout>

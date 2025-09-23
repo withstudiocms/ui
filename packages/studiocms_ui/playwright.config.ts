@@ -41,10 +41,14 @@ export default defineConfig({
 			use: { ...devices['Desktop Chrome'] },
 		},
 
-		{
-			name: 'firefox',
-			use: { ...devices['Desktop Firefox'] },
-		},
+		...(process.env.CI
+			? [
+					{
+						name: 'firefox',
+						use: { ...devices['Desktop Firefox'] },
+					},
+				]
+			: []),
 
 		// Playwright webkit does not seem to work
 		// {

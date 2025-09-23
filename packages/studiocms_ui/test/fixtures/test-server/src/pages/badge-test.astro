@@ -1,38 +1,41 @@
 ---
 import { Badge } from 'studiocms:ui/components/badge';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<br />
-<br />
+<Layout>
+    <br />
+    <br />
 
-<div id="basic-test">
-    <Badge label="Test Badge" icon="heroicons:sparkles-16-solid" />
-</div>
+    <div id="basic-test">
+        <Badge label="Test Badge" icon="heroicons:sparkles-16-solid" />
+    </div>
 
-<br />
-<br />
+    <br />
+    <br />
 
-<div id="color-test">
-    <Badge label="Primary" color="primary" />
-    <br />
-    <Badge label="Success" color="success" />
-    <br />
-    <Badge label="Warning" color="warning" />
-    <br />
-    <Badge label="Danger" color="danger" />
-    <br />
-    <Badge label="Info" color="info" />
-    <br />
-    <Badge label="Monochrome" color="mono" />
-</div>
+    <div id="color-test">
+        <Badge label="Primary" color="primary" />
+        <br />
+        <Badge label="Success" color="success" />
+        <br />
+        <Badge label="Warning" color="warning" />
+        <br />
+        <Badge label="Danger" color="danger" />
+        <br />
+        <Badge label="Info" color="info" />
+        <br />
+        <Badge label="Monochrome" color="mono" />
+    </div>
 
-<br />
-<br />
+    <br />
+    <br />
 
-<div id="variant-test">
-    <Badge label="Default" variant="default" />
-    <br />
-    <Badge label="Outlined" variant="outlined" />
-    <br />
-    <Badge label="Flat" variant="flat" />
-</div>
+    <div id="variant-test">
+        <Badge label="Default" variant="default" />
+        <br />
+        <Badge label="Outlined" variant="outlined" />
+        <br />
+        <Badge label="Flat" variant="flat" />
+    </div>
+</Layout>

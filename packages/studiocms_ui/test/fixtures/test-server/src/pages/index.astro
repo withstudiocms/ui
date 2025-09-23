@@ -1,4 +1,5 @@
 ---
+import Layout from '../layouts/Layout.astro';
 
 interface CurrentTest {
 	label: string;
@@ -25,22 +26,15 @@ const currentTests: CurrentTest[] = testFiles.map((path) => ({
 }));
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Test Fixtures</title>
-	</head>
-	<body>
-		<h1>Available Test Fixtures</h1>
-		<ul>
-			{currentTests.map(({ label, path }) => (
+<Layout>
+	<h1>Available Test Fixtures</h1>
+	<ul>
+		{
+			currentTests.map(({ label, path }) => (
 				<li>
 					<a href={path}>{label}</a>
 				</li>
-			))}
-		</ul>
-	</body>
-</html>
+			))
+		}
+	</ul>
+</Layout>

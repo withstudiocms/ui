@@ -1,31 +1,27 @@
 ---
 import { Footer } from 'studiocms:ui/components/footer';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html>
-    <head>
-        <meta charset="utf-8" />
-    </head>
-    <body>
-        <br />
-        <br />
+<Layout>
+    <br />
+    <br />
 
-        <div id="basic-test">
-            <Footer
-                links={{
-                    Resources: [
-                        { label: "Docs", href: "/docs" },
-                        { label: "Support", href: "/support" },
-                    ],
-                    Legal: [
-                        { label: "Privacy Policy", href: "/privacy" },
-                        { label: "Terms of Service", href: "/tos" },
-                    ],
-                }}
-                copyright="MIT License © 2024 - Acme Inc."
-            >
-                <div slot="brand">Acme, Inc.</div>
-            </Footer>
-        </div>
-    </body>
-</html>
+    <div id="basic-test">
+        <Footer
+            links={{
+                Resources: [
+                    { label: "Docs", href: "/docs" },
+                    { label: "Support", href: "/support" },
+                ],
+                Legal: [
+                    { label: "Privacy Policy", href: "/privacy" },
+                    { label: "Terms of Service", href: "/tos" },
+                ],
+            }}
+            copyright="MIT License © 2024 - Acme Inc."
+        >
+            <div slot="brand">Acme, Inc.</div>
+        </Footer>
+    </div>
+</Layout>
