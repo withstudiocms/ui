@@ -14,29 +14,33 @@ test.describe('Template Component', () => {
 		await expect(page.getByText('Template Component Test')).toBeVisible();
 	});
 
-	test('Test Accessibility - Basic Styling', async ({
-		bestPractice,
-		wcagA,
-		wcagAA,
-		wcagAAA,
-		takeScreenshot,
-		switchToLightMode,
-	}) => {
-		await takeScreenshot('Template - basic (Dark Mode)', '#basic-test');
+	[{ label: 'Basic', key: 'basic' }].forEach(({ label, key }) => {
+		const elmKey = `#${key}-test`;
+		// Placeholder for more tests
+		test(`Test Accessibility - ${label} Styling`, async ({
+			bestPractice,
+			wcagA,
+			wcagAA,
+			wcagAAA,
+			takeScreenshot,
+			switchToLightMode,
+		}) => {
+			await takeScreenshot(`Template - ${key} (Dark Mode)`, elmKey);
 
-		await bestPractice('#basic-test');
-		await wcagA('#basic-test');
-		await wcagAA('#basic-test');
-		await wcagAAA('#basic-test');
+			await bestPractice(elmKey);
+			await wcagA(elmKey);
+			await wcagAA(elmKey);
+			await wcagAAA(elmKey);
 
-		// Switch to light mode and re-test
-		await switchToLightMode();
+			// Switch to light mode and re-test
+			await switchToLightMode();
 
-		await takeScreenshot('Template - basic (Light Mode)', '#basic-test');
+			await takeScreenshot(`Template - ${key} (Light Mode)`, elmKey);
 
-		await bestPractice('#basic-test');
-		await wcagA('#basic-test');
-		await wcagAA('#basic-test');
-		await wcagAAA('#basic-test');
+			await bestPractice(elmKey);
+			await wcagA(elmKey);
+			await wcagAA(elmKey);
+			await wcagAAA(elmKey);
+		});
 	});
 });

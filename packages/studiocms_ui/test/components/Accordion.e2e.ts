@@ -14,57 +14,36 @@ test.describe('Accordion Component', () => {
 		await expect(page.locator('#basic-test').getByText('These are the 2nd details')).toBeVisible();
 	});
 
-	test('Test Accessibility - Basic Styling', async ({
-		takeScreenshot,
-		bestPractice,
-		wcagA,
-		wcagAA,
-		wcagAAA,
-		switchToLightMode,
-	}) => {
-		// Dark mode
-		await takeScreenshot('Accordion - basic (Dark Mode)', '#basic-test');
+	[
+		{ label: 'Basic', key: 'basic' },
+		{ label: 'Variant', key: 'variant' },
+	].forEach(({ label, key }) => {
+		const elmKey = `#${key}-test`;
+		// Placeholder for more tests
+		test(`Test Accessibility - ${label} Styling`, async ({
+			bestPractice,
+			wcagA,
+			wcagAA,
+			wcagAAA,
+			takeScreenshot,
+			switchToLightMode,
+		}) => {
+			await takeScreenshot(`Accordion - ${key} (Dark Mode)`, elmKey);
 
-		await bestPractice('#basic-test');
-		await wcagA('#basic-test');
-		await wcagAA('#basic-test');
-		await wcagAAA('#basic-test');
+			await bestPractice(elmKey);
+			await wcagA(elmKey);
+			await wcagAA(elmKey);
+			await wcagAAA(elmKey);
 
-		// Light mode
-		await switchToLightMode();
+			// Switch to light mode and re-test
+			await switchToLightMode();
 
-		await takeScreenshot('Accordion - basic (Light Mode)', '#basic-test');
+			await takeScreenshot(`Accordion - ${key} (Light Mode)`, elmKey);
 
-		await bestPractice('#basic-test');
-		await wcagA('#basic-test');
-		await wcagAA('#basic-test');
-		await wcagAAA('#basic-test');
-	});
-
-	test('Test Accessibility - Variant Styling', async ({
-		takeScreenshot,
-		bestPractice,
-		wcagA,
-		wcagAA,
-		wcagAAA,
-		switchToLightMode,
-	}) => {
-		// Dark mode
-		await takeScreenshot('Accordion - variant (Dark Mode)', '#variant-test');
-
-		await bestPractice('#variant-test');
-		await wcagA('#variant-test');
-		await wcagAA('#variant-test');
-		await wcagAAA('#variant-test');
-
-		// Light mode
-		await switchToLightMode();
-
-		await takeScreenshot('Accordion - variant (Light Mode)', '#variant-test');
-
-		await bestPractice('#variant-test');
-		await wcagA('#variant-test');
-		await wcagAA('#variant-test');
-		await wcagAAA('#variant-test');
+			await bestPractice(elmKey);
+			await wcagA(elmKey);
+			await wcagAA(elmKey);
+			await wcagAAA(elmKey);
+		});
 	});
 });

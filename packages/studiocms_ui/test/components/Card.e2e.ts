@@ -11,107 +11,38 @@ test.describe('Card Component', () => {
 		await expect(page.locator('#basic-test')).toContainText('Content');
 	});
 
-	test('Test Accessibility - Basic Styling', async ({
-		bestPractice,
-		wcagA,
-		wcagAA,
-		wcagAAA,
-		takeScreenshot,
-		switchToLightMode,
-	}) => {
-		await takeScreenshot('Card - basic (Dark Mode)', '#basic-test');
+	[
+		{ label: 'Basic', key: 'basic' },
+		{ label: 'Variant', key: 'variant' },
+		{ label: 'Slot', key: 'slot' },
+		{ label: 'Polymorphic', key: 'polymorphic' },
+	].forEach(({ label, key }) => {
+		const elmKey = `#${key}-test`;
+		// Placeholder for more tests
+		test(`Test Accessibility - ${label} Styling`, async ({
+			bestPractice,
+			wcagA,
+			wcagAA,
+			wcagAAA,
+			takeScreenshot,
+			switchToLightMode,
+		}) => {
+			await takeScreenshot(`Card - ${key} (Dark Mode)`, elmKey);
 
-		await bestPractice('#basic-test');
-		await wcagA('#basic-test');
-		await wcagAA('#basic-test');
-		await wcagAAA('#basic-test');
+			await bestPractice(elmKey);
+			await wcagA(elmKey);
+			await wcagAA(elmKey);
+			await wcagAAA(elmKey);
 
-		// Switch to light mode and re-test
-		await switchToLightMode();
+			// Switch to light mode and re-test
+			await switchToLightMode();
 
-		await takeScreenshot('Card - basic (Light Mode)', '#basic-test');
+			await takeScreenshot(`Card - ${key} (Light Mode)`, elmKey);
 
-		await bestPractice('#basic-test');
-		await wcagA('#basic-test');
-		await wcagAA('#basic-test');
-		await wcagAAA('#basic-test');
-	});
-
-	test('Test Accessibility - Variant Styling', async ({
-		bestPractice,
-		wcagA,
-		wcagAA,
-		wcagAAA,
-		takeScreenshot,
-		switchToLightMode,
-	}) => {
-		await takeScreenshot('Card - variant (Dark Mode)', '#variant-test');
-
-		await bestPractice('#variant-test');
-		await wcagA('#variant-test');
-		await wcagAA('#variant-test');
-		await wcagAAA('#variant-test');
-
-		// Switch to light mode and re-test
-		await switchToLightMode();
-
-		await takeScreenshot('Card - variant (Light Mode)', '#variant-test');
-
-		await bestPractice('#variant-test');
-		await wcagA('#variant-test');
-		await wcagAA('#variant-test');
-		await wcagAAA('#variant-test');
-	});
-
-	test('Test Accessibility - Slot Styling', async ({
-		bestPractice,
-		wcagA,
-		wcagAA,
-		wcagAAA,
-		takeScreenshot,
-		switchToLightMode,
-	}) => {
-		await takeScreenshot('Card - slot (Dark Mode)', '#slot-test');
-
-		await bestPractice('#slot-test');
-		await wcagA('#slot-test');
-		await wcagAA('#slot-test');
-		await wcagAAA('#slot-test');
-
-		// Switch to light mode and re-test
-		await switchToLightMode();
-
-		await takeScreenshot('Card - slot (Light Mode)', '#slot-test');
-
-		await bestPractice('#slot-test');
-		await wcagA('#slot-test');
-		await wcagAA('#slot-test');
-		await wcagAAA('#slot-test');
-	});
-
-	test('Test Accessibility - Polymorphic Styling', async ({
-		bestPractice,
-		wcagA,
-		wcagAA,
-		wcagAAA,
-		takeScreenshot,
-		switchToLightMode,
-	}) => {
-		await takeScreenshot('Card - polymorphic (Dark Mode)', '#polymorphic-test');
-
-		await bestPractice('#polymorphic-test');
-		await wcagA('#polymorphic-test');
-		await wcagAA('#polymorphic-test');
-		await wcagAAA('#polymorphic-test');
-
-		// Switch to light mode and re-test
-		await switchToLightMode();
-
-		await takeScreenshot('Card - polymorphic (Light Mode)', '#polymorphic-test');
-
-		await bestPractice('#polymorphic-test');
-		await wcagA('#polymorphic-test');
-		await wcagAA('#polymorphic-test');
-		await wcagAAA('#polymorphic-test');
+			await bestPractice(elmKey);
+			await wcagA(elmKey);
+			await wcagAA(elmKey);
+			await wcagAAA(elmKey);
+		});
 	});
 });
