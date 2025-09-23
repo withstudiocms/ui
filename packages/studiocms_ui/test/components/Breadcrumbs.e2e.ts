@@ -13,7 +13,7 @@ test.describe('Breadcrumbs Component', () => {
 		await expect(page.getByRole('link', { name: 'Breadcrumbs' })).toBeVisible();
 	});
 
-	test('Test Accessibility', async ({
+	test('Test Accessibility - Basic Styling', async ({
 		bestPractice,
 		wcagA,
 		wcagAA,

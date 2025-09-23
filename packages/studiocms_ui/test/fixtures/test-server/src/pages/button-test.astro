@@ -1,0 +1,41 @@
+---
+import { Button } from 'studiocms:ui/components/button';
+---
+
+<br />
+<br />
+
+<div id="basic-test">
+    <Button> Button Component Test </Button>
+</div>
+
+<br />
+<br />
+
+<div id="color-test">
+    <Button color="default"> Default </Button>
+    <Button color="primary"> Primary </Button>
+    <Button color="success"> Success </Button>
+    <Button color="warning"> Warning </Button>
+    <Button color="danger"> Danger </Button>
+    <Button color="info"> Info </Button>
+    <Button color="mono"> Monochrome </Button>
+</div>
+
+<br />
+<br />
+
+<div id="variant-test">
+    <Button color="primary"> Default </Button>
+    <Button color="primary" variant="outlined"> Outlined </Button>
+    <Button color="primary" variant="flat"> Flat </Button>
+</div>
+
+<br />
+<br />
+
+<div id="polymorphic-test">
+    <Button color="primary" target="_blank" as="a" href="/button-test/#">
+        Link Button
+    </Button>
+</div>

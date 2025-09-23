@@ -14,7 +14,7 @@ test.describe('Template Component', () => {
 		await expect(page.getByText('Template Component Test')).toBeVisible();
 	});
 
-	test('Test Accessibility', async ({
+	test('Test Accessibility - Basic Styling', async ({
 		bestPractice,
 		wcagA,
 		wcagAA,
@@ -22,7 +22,7 @@ test.describe('Template Component', () => {
 		takeScreenshot,
 		switchToLightMode,
 	}) => {
-		await takeScreenshot('Template (Dark Mode)', '#basic-test');
+		await takeScreenshot('Template - basic (Dark Mode)', '#basic-test');
 
 		await bestPractice('#basic-test');
 		await wcagA('#basic-test');
@@ -32,7 +32,7 @@ test.describe('Template Component', () => {
 		// Switch to light mode and re-test
 		await switchToLightMode();
 
-		await takeScreenshot('Template (Light Mode)', '#basic-test');
+		await takeScreenshot('Template - basic (Light Mode)', '#basic-test');
 
 		await bestPractice('#basic-test');
 		await wcagA('#basic-test');
