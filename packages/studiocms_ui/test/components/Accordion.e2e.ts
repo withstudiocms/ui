@@ -19,14 +19,12 @@ test.describe('Accordion Component', () => {
 		{ label: 'Variant', key: 'variant' },
 	].forEach(({ label, key }) => {
 		const elmKey = `#${key}-test`;
-		// Placeholder for more tests
-		test(`Test Accessibility - ${label} Styling`, async ({
+		test(`Test Accessibility - ${label} Styling (Dark Mode)`, async ({
 			bestPractice,
 			wcagA,
 			wcagAA,
 			wcagAAA,
 			takeScreenshot,
-			switchToLightMode,
 		}) => {
 			await takeScreenshot(`Accordion - ${key} (Dark Mode)`, elmKey);
 
@@ -34,8 +32,17 @@ test.describe('Accordion Component', () => {
 			await wcagA(elmKey);
 			await wcagAA(elmKey);
 			await wcagAAA(elmKey);
+		});
 
-			// Switch to light mode and re-test
+		test(`Test Accessibility - ${label} Styling (Light Mode)`, async ({
+			bestPractice,
+			wcagA,
+			wcagAA,
+			wcagAAA,
+			takeScreenshot,
+			switchToLightMode,
+		}) => {
+			// Ensure we are in light mode
 			await switchToLightMode();
 
 			await takeScreenshot(`Accordion - ${key} (Light Mode)`, elmKey);

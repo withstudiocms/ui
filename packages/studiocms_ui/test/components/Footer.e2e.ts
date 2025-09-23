@@ -14,14 +14,12 @@ test.describe('Footer Component', () => {
 
 	[{ label: 'Basic', key: 'basic' }].forEach(({ label, key }) => {
 		const elmKey = `#${key}-test`;
-		// Placeholder for more tests
-		test(`Test Accessibility - ${label} Styling`, async ({
+		test(`Test Accessibility - ${label} Styling (Dark Mode)`, async ({
 			bestPractice,
 			wcagA,
 			wcagAA,
 			wcagAAA,
 			takeScreenshot,
-			switchToLightMode,
 		}) => {
 			await takeScreenshot(`Footer - ${key} (Dark Mode)`, elmKey);
 
@@ -29,8 +27,17 @@ test.describe('Footer Component', () => {
 			await wcagA(elmKey);
 			await wcagAA(elmKey);
 			await wcagAAA(elmKey);
+		});
 
-			// Switch to light mode and re-test
+		test(`Test Accessibility - ${label} Styling (Light Mode)`, async ({
+			bestPractice,
+			wcagA,
+			wcagAA,
+			wcagAAA,
+			takeScreenshot,
+			switchToLightMode,
+		}) => {
+			// Ensure we are in light mode
 			await switchToLightMode();
 
 			await takeScreenshot(`Footer - ${key} (Light Mode)`, elmKey);
