@@ -1,0 +1,30 @@
+---
+import { Progress } from 'studiocms:ui/components/progress';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Progress id="progress" max={100} value={50} />
+    </div>
+
+    <br />
+    <br />
+
+    <div id="color-test">
+        <Progress id="progress-1" max={100} value={50} color="primary" />
+        <br />
+        <Progress id="progress-2" max={100} value={50} color="success" />
+        <br />
+        <Progress id="progress-3" max={100} value={50} color="warning" />
+        <br />
+        <Progress id="progress-4" max={100} value={50} color="danger" />
+        <br />
+        <Progress id="progress-5" max={100} value={50} color="info" />
+        <br />
+        <Progress id="progress-6" max={100} value={50} color="monochrome" />
+    </div>
+</Layout>
