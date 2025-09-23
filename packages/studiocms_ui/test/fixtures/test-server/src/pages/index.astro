@@ -15,6 +15,7 @@
 const currentTests: { label: string; path: string }[] = Object.keys(
 	import.meta.glob('./*-test.astro', { eager: true })
 )
+	.filter((path) => path !== './_template-test.astro') // Exclude the template test file
 	// Remove the .astro extension from each path
 	.map((path) => path.replace('.astro', ''))
 	// Map to an array of test objects with label and path
