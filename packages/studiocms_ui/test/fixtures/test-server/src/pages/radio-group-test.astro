@@ -1,0 +1,66 @@
+---
+import { RadioGroup } from 'studiocms:ui/components/radiogroup';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test" style="margin-left: 2rem;">
+        <RadioGroup
+            label="Label"
+            options={[
+                { label: "Option 1", value: "opt-1" },
+                { label: "Option 2", value: "opt-2" },
+            ]}
+        />
+    </div>
+
+    <br />
+    <br />
+
+    <div id="color-test" style="margin-left: 2rem;">
+        <RadioGroup
+            label="Primary"
+            defaultValue="opt-1-p"
+            options={[{ label: "Option 1", value: "opt-1-p" }]}
+            color="primary"
+        />
+        <br />
+        <RadioGroup
+            label="Success"
+            defaultValue="opt-1-s"
+            options={[{ label: "Option 1", value: "opt-1-s" }]}
+            color="success"
+        />
+        <br />
+        <RadioGroup
+            label="Warning"
+            defaultValue="opt-1-w"
+            options={[{ label: "Option 1", value: "opt-1-w" }]}
+            color="warning"
+        />
+        <br />
+        <RadioGroup
+            label="Danger"
+            defaultValue="opt-1-da"
+            options={[{ label: "Option 1", value: "opt-1-da" }]}
+            color="danger"
+        />
+        <br />
+        <RadioGroup
+            label="Info"
+            defaultValue="opt-1-info"
+            options={[{ label: "Option 1", value: "opt-1-info" }]}
+            color="info"
+        />
+        <br />
+        <RadioGroup
+            label="Monochrome"
+            defaultValue="opt-1-mono"
+            options={[{ label: "Option 1", value: "opt-1-mono" }]}
+            color="mono"
+        />
+    </div>
+</Layout>
