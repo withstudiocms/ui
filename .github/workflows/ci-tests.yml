@@ -128,7 +128,7 @@ jobs:
         uses: ctrf-io/github-test-reporter@v1
         with:
           report-path: './ctrf/*.json'
-          pull-request-report: ${{ github.event_name == 'pull_request' }}
+          github-report: ${{ github.event_name == 'pull_request' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: always()
