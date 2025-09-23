@@ -86,6 +86,6 @@
   "devDependencies": {
     "astro": "catalog:",
     "typescript": "catalog:",
-    "@types/node": "24.5.2"
+    "@types/node": "catalog:"
   }
 }
