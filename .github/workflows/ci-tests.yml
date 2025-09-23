@@ -136,7 +136,5 @@ jobs:
           overwrite-comment: true
           use-suite-name: true
           report-order: 'github-report,suite-folded-report'
-          status-check: true
-          status-check-name: 'E2E Test Report'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
