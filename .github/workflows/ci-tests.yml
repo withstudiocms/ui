@@ -120,12 +120,12 @@ jobs:
       - name: Upload HTML report
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: html-report--attempt-${{ github.run_attempt }}
+          name: html-report
           path: playwright-report
           retention-days: 30
 
       - name: Publish Test Report
-        uses: ctrf-io/github-test-reporter@v1
+        uses: ctrf-io/github-test-reporter@646f98cfc16c6f7a0e1f6100cabe2deb95dd2eef # v1
         with:
           report-path: './ctrf/*.json'
           pull-request-report: ${{ github.event_name == 'pull_request' }}
