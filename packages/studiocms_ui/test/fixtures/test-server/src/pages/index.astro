@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import 'studiocms:ui/prose';
 
 interface CurrentTest {
 	label: string;
@@ -33,14 +34,74 @@ const currentTests: CurrentTest[] = testFiles.map((path) => ({
 ---
 
 <Layout>
-	<h1>Available Test Fixtures</h1>
-	<ul>
-		{
-			currentTests.map(({ label, href }) => (
-				<li>
-					<a {href}>{label}</a>
-				</li>
-			))
+	<div class="prose" style="max-width: 1000px; padding: 2rem; width: 100%;">
+		<h1>Available Component Tests</h1>
+
+		<p>
+			These are the available test fixtures for various components and
+			features. Click on any link to view and interact with the specific
+			test case. To add a new test fixture, copy the <code
+				>_template-test.astro</code
+			> file, rename it according to the component or feature being tested,
+			and implement the necessary test cases.
+		</p>
+		<blockquote>
+			<strong>Note:</strong> All files are located in the <code
+				>packages/studiocms_ui/test/fixtures/test-server/src/pages</code
+			> directory.
+		</blockquote>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Component Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					currentTests.map(({ label, href }) => (
+						<tr>
+							<td>
+								<a {href}>{label}</a>
+							</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</div>
+
+	<style>
+		table {
+			border-collapse: collapse;
+			margin-top: 1rem;
 		}
-	</ul>
+
+		th,
+		td {
+			border: 1px solid var(--border);
+			padding: 8px;
+		}
+
+		th {
+			background-color: var(--background-step-3);
+		}
+
+		tr:nth-child(even) {
+			background-color: var(--background-step-2);
+		}
+
+		tr:hover {
+			background-color: var(--background-step-1);
+		}
+
+		a {
+			color: var(--text-normal);
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+	</style>
 </Layout>
