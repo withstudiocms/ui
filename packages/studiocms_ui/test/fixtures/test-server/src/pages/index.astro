@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 
 interface CurrentTest {
 	label: string;
-	path: string;
+	href: string;
 }
 
 // Import all test files in the current directory that match the pattern '*-test.astro'
@@ -18,11 +18,17 @@ const testFiles: string[] = Object.keys(testFilesPaths)
 // Create an array of current tests with labels and paths for rendering in the UI
 const currentTests: CurrentTest[] = testFiles.map((path) => ({
 	label: path
+		// remove the leading './', path prefix
 		.replace('./', '')
+		// remove the '-test' suffix
 		.replace(/-test/g, '')
+		// replace hyphens with spaces
+		.replace(/-/g, ' ')
+		// capitalize each word
 		.replace(/\b\w/g, (c) => c.toUpperCase()),
 
-	path: path.replace('./', '/'),
+	// The path to the test file converted to a web-safe URL path
+	href: path.replace('./', '/'),
 }));
 ---
 
@@ -30,9 +36,9 @@ const currentTests: CurrentTest[] = testFiles.map((path) => ({
 	<h1>Available Test Fixtures</h1>
 	<ul>
 		{
-			currentTests.map(({ label, path }) => (
+			currentTests.map(({ label, href }) => (
 				<li>
-					<a href={path}>{label}</a>
+					<a {href}>{label}</a>
 				</li>
 			))
 		}
