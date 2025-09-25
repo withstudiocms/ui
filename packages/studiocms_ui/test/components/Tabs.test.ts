@@ -9,7 +9,7 @@ describe('Tabs Component', () => {
 		for (let i = 1; i <= 3; i++) {
 			tabsContent.push(
 				await renderComponent(TabItem, 'TabItem', {
-					props: { label: `Tab ${i}` },
+					props: { label: `Tab ${i}`, id: `tab-${i}` },
 					slots: { default: `Content for Tab ${i}` },
 				})
 			);
