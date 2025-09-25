@@ -1,0 +1,48 @@
+---
+import { SearchSelect } from 'studiocms:ui/components/select';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <SearchSelect
+            label="Searchable Select Element"
+            name="basic-select"
+            defaultValue="opt-1"
+            options={[
+                { label: "Option 1", value: "opt-1" },
+                { label: "Option 2", value: "opt-2" },
+                { label: "Option 3", value: "opt-3" },
+            ]}
+        />
+    </div>
+
+    <br />
+    <br />
+
+    <div id="multi-select-test">
+        <SearchSelect
+            label="Multi-Searchable Select Element"
+            name="multi-select"
+            multiple
+            defaultValue={["opt-1-mult1", "opt-2-mult1", "opt-3-mult1"]}
+            options={[
+                { label: "Option 1", value: "opt-1-mult1" },
+                { label: "Option 2", value: "opt-2-mult1" },
+                { label: "Option 3", value: "opt-3-mult1" },
+                { label: "Option 4", value: "opt-4-mult1" },
+                { label: "Option 5", value: "opt-5-mult1" },
+                { label: "Option 6", value: "opt-6-mult1" },
+                { label: "Option 7", value: "opt-7-mult1" },
+                { label: "Option 8", value: "opt-8-mult1" },
+                { label: "Option 9", value: "opt-9-mult1" },
+                { label: "Option 10", value: "opt-10-mult1" },
+                { label: "Option 11", value: "opt-11-mult1" },
+                { label: "Option 12", value: "opt-12-mult1" },
+            ]}
+        />
+    </div>
+</Layout>

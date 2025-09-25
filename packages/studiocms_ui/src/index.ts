@@ -55,7 +55,7 @@ type Options = {
  * - `integrationCollections`: An array of strings representing the export statements for each icon collection.
  * - `availableIcons`: An array of strings representing the available icons in the format `prefix:icon`.
  */
-function createIconifyPrefixCollection(icons?: Record<string, IconifyJSON>): {
+export function createIconifyPrefixCollection(icons?: Record<string, IconifyJSON>): {
 	iconCollections: string[];
 	integrationCollections: string[];
 	availableIcons: string[];
@@ -119,6 +119,8 @@ export default function integration(options: Options = {}): AstroIntegration {
 	return {
 		name: '@studiocms/ui',
 		hooks: {
+			/* v8 ignore start */
+			/** Astro integrations cannot be properly tested for code coverage */
 			'astro:config:setup': (params) => {
 				const { addDevToolbarApp, injectScript, updateConfig } = params;
 				const { resolve: rootResolve } = createResolver(params.config.root.pathname);
@@ -275,6 +277,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 					`,
 				});
 			},
+			/* v8 ignore stop */
 		},
 	};
 }

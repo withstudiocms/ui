@@ -1,0 +1,141 @@
+---
+import { Skeleton } from 'studiocms:ui/components/skeleton';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Skeleton variant="card">
+            <Skeleton variant="block" width="50%" height="8rem" />
+            <Skeleton variant="text" />
+            <Skeleton variant="text" />
+        </Skeleton>
+    </div>
+
+    <br />
+    <br />
+
+    <div
+        id="variant-test"
+        style="width: 100%; display: flex; flex-direction: column; gap: 1rem;"
+    >
+        <Skeleton variant="card" />
+        <Skeleton variant="text" />
+        <Skeleton variant="block" width="50%" height="8rem" />
+        <Skeleton variant="circle" width="100px" height="100px" />
+    </div>
+
+    <br />
+    <br />
+
+    <div
+        id="width-height-test"
+        style="width: 100%; display: flex; flex-direction: column; gap: 1rem;"
+    >
+        <Skeleton variant="block" width="100px" height="100px" />
+        <Skeleton variant="block" width="50%" height="10rem" />
+        <Skeleton variant="block" width="25%" height="1rem" />
+    </div>
+
+    <br />
+    <br />
+
+    <div
+        id="radius-test"
+        style="width: 100%; display: flex; flex-direction: column; gap: 1rem;"
+    >
+        <Skeleton variant="block" radius="none" height="2rem" width="100%" />
+        <Skeleton variant="block" radius="sm" height="2rem" width="100%" />
+        <Skeleton variant="block" radius="md" height="2rem" width="100%" />
+        <Skeleton variant="block" radius="lg" height="2rem" width="100%" />
+    </div>
+
+    <br />
+    <br />
+
+    <div
+        id="direction-test"
+        style="width: 100%; display: flex; flex-direction: column; gap: 1rem;"
+    >
+        <Skeleton variant="card" direction="row">
+            <Skeleton variant="text" />
+            <Skeleton variant="text" />
+        </Skeleton>
+    </div>
+
+    <br />
+    <br />
+
+    <div
+        id="horizontal-alignment-test"
+        style="width: 100%; display: flex; flex-direction: column; gap: 1rem;"
+    >
+        <Skeleton variant="card" hAlign="start" direction="row">
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+        </Skeleton>
+
+        <br />
+
+        <Skeleton variant="card" hAlign="center" direction="row">
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+        </Skeleton>
+
+        <br />
+
+        <Skeleton variant="card" hAlign="end" direction="row">
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+        </Skeleton>
+    </div>
+
+    <br />
+    <br />
+
+    <div
+        id="vertical-alignment-test"
+        style="width: 100%; display: flex; flex-direction: column; gap: 1rem;"
+    >
+        <Skeleton variant="card" vAlign="start" direction="column">
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+        </Skeleton>
+
+        <br />
+
+        <Skeleton variant="card" vAlign="center" direction="column">
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+        </Skeleton>
+
+        <br />
+
+        <Skeleton variant="card" vAlign="end" direction="column">
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+            <Skeleton variant="block" width="100px" height="100px" />
+        </Skeleton>
+    </div>
+
+    <br />
+    <br />
+
+    <div
+        id="gap-test"
+        style="width: 100%; display: flex; flex-direction: column; gap: 1rem;"
+    >
+        <Skeleton variant="card" gap="1rem">
+            <Skeleton variant="text" />
+            <Skeleton variant="text" />
+        </Skeleton>
+    </div>
+</Layout>

@@ -1,3 +1,8 @@
+/* v8 ignore start */
+/**
+ * Astro dev toolbar app, ignored by v8 for coverage purposes as it requires
+ * the Astro dev environment to run properly.
+ */
 import { defineToolbarApp } from 'astro/toolbar';
 import DevToolbarColorPicker from './ColorPicker.js';
 
@@ -359,3 +364,4 @@ export default defineToolbarApp({
 });
 
 customElements.define('dev-toolbar-color-picker', DevToolbarColorPicker);
+/* v8 ignore stop */
