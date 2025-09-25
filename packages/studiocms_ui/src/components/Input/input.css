@@ -23,6 +23,7 @@
 	background: var(--background-step-2);
 	color: var(--text-normal);
 	transition: all .15s ease;
+	width: 100%;
 }
 
 .sui-input:hover {
@@ -56,29 +57,22 @@
 }
 
 .input-icon.icon-left {
-	left: 0.75rem;
+	left: 0.5rem;
 }
 
 .input-icon.icon-right {
-	right: 0.75rem;
+	right: 0.5rem;
 }
 
-.label + .input-icon {
-	top: calc(50% + 14px);
+.sui-input.icon-left {
+	padding-left: calc(1.25rem + 20px);
 }
 
-.label + .input-icon:has(~ .sui-input-desc) {
-	top: calc(50%);
+.sui-input.icon-right {
+	padding-right: calc(1.25rem + 20px);
 }
 
-.input-icon:has(~ .sui-input-desc):not(.label + .input-icon) {
-	top: calc(50% - 14px);
-}
-
-.sui-input.has-icon.icon-left {
-	padding-left: calc(1.5rem + 20px);
-}
-
-.sui-input.has-icon.icon-right {
-	padding-right: calc(1.5rem + 20px);
+.sui-input-wrapper {
+	position: relative;
+	width: 100%;
 }
