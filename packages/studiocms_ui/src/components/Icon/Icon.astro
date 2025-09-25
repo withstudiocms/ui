@@ -1,8 +1,10 @@
 ---
-// @ts-ignore - This is a TypeGenerated Module, available in dev thanks to manual d.ts file - This comment is here because this causes a type-error during build
-import { type AvailableIcons, type IconCollections, iconCollections } from 'studiocms:ui/icons';
-// @ts-ignore - This is a TypeGenerated Module, available in dev thanks to manual d.ts file - This comment is here because this causes a type-error during build
-import * as Icons from 'studiocms:ui/icons';
+import {
+	type AvailableIcons,
+	type IconCollections,
+	collections,
+	iconCollections,
+} from 'studiocms:ui/icons';
 import type { HTMLAttributes } from 'astro/types';
 import IconBase from './IconBase.astro';
 import { StudioCMS_UI_IconError, errorHintBuilder } from './errors.js';
@@ -85,7 +87,7 @@ const name: AvailableIcons = _nameSplit[1] as AvailableIcons;
  * @constant
  * @param {string} prefix - The prefix used to identify the icon collection.
  */
-const iconCollection = Icons[prefix];
+const iconCollection = collections[prefix];
 
 /* v8 ignore start */
 /**
