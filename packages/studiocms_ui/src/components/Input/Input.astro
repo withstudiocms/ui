@@ -93,24 +93,26 @@ const iconPos = icon
 			{label} <span class="req-star">{isRequired && "*"}</span>
 		</span>
 	)}
-	{typeof icon === "string" && (
-		<Icon name={icon} width={20} height={20} class="input-icon icon-left" />
-	)}
-	{typeof icon === "object" && (
-		<Icon name={icon.name} width={20} height={20} class="input-icon" class:list={[`icon-${iconPos}`]}  />
-	)}
-  <input
-    placeholder={placeholder}
-    name={name}
-    id={name}
-    type={type}
-    class="sui-input"
-		class:list={[className, iconPos && `has-icon icon-${iconPos}`]}
-    required={isRequired}
-    disabled={disabled}
-    value={defaultValue}
-		{...props}
-  />
+	<div class="sui-input-wrapper">
+		{typeof icon === "object" && (
+			<Icon name={icon.name} width={20} height={20} class="input-icon" class:list={[`icon-${iconPos}`]} />
+		)}
+		{typeof icon === "string" && (
+			<Icon name={icon} width={20} height={20} class="input-icon icon-left" />
+		)}
+	  <input
+	    placeholder={placeholder}
+	    name={name}
+	    id={name}
+	    type={type}
+	    class="sui-input"
+			class:list={[className, iconPos && `icon-${iconPos}`]}
+	    required={isRequired}
+	    disabled={disabled}
+	    value={defaultValue}
+			{...props}
+	  />
+  </div>
 	{description && (
 		<span class="sui-input-desc">{description}</span>
 	)}
