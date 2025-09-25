@@ -41,14 +41,14 @@ const {
 	gap = 8,
 } = Astro.props;
 ---
-<div 
-  id="sui-toaster" 
+<div
+  id="sui-toaster"
   class:list={[
     closeButton && "closeable",
     position,
-  ]},
+  ]}
 >
-  <div 
+  <div
     id="sui-toast-drawer"
     data-offset={offset}
     data-gap={gap}
