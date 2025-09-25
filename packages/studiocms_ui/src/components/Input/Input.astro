@@ -51,7 +51,7 @@ interface Props extends HTMLAttributes<'input'> {
 		| {
 				name: AvailableIcons;
 				position: 'left' | 'right';
-		  };
+			};
 	/**
 	 * A description to be shown below the input
 	 */
@@ -88,7 +88,7 @@ const iconPos = icon
 ---
 
 <label for={name} class="sui-input-label" class:list={[disabled && "disabled"]}>
-  {label && (
+	{label && (
 		<span class="label">
 			{label} <span class="req-star">{isRequired && "*"}</span>
 		</span>
@@ -100,19 +100,19 @@ const iconPos = icon
 		{typeof icon === "string" && (
 			<Icon name={icon} width={20} height={20} class="input-icon icon-left" />
 		)}
-	  <input
-	    placeholder={placeholder}
-	    name={name}
-	    id={name}
-	    type={type}
-	    class="sui-input"
+		<input
+			placeholder={placeholder}
+			name={name}
+			id={name}
+			type={type}
+			class="sui-input"
 			class:list={[className, iconPos && `icon-${iconPos}`]}
-	    required={isRequired}
-	    disabled={disabled}
-	    value={defaultValue}
+			required={isRequired}
+			disabled={disabled}
+			value={defaultValue}
 			{...props}
-	  />
-  </div>
+		/>
+	</div>
 	{description && (
 		<span class="sui-input-desc">{description}</span>
 	)}
