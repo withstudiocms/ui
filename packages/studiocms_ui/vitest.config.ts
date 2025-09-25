@@ -28,6 +28,9 @@ export default defineConfig(
 						// and not part of the public API of the package.
 						// We should be testing the Astro component's output instead and using E2E tests for end-to-end coverage.
 						'src/components/**/*.ts',
+
+						// ignore stub files
+						'**/stubs/**.stub.js',
 					],
 				},
 			},
