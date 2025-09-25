@@ -1,0 +1,23 @@
+---
+import { DoubleSidebar } from 'studiocms:ui/components/sidebar';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <div id="basic-test">
+        <DoubleSidebar>
+            <div slot="outer">
+                <p>This is some outer sidebar content.</p>
+            </div>
+            <div slot="inner">
+                <p>This is some inner sidebar content.</p>
+            </div>
+        </DoubleSidebar>
+    </div>
+
+    <script>
+        import { DoubleSidebarHelper } from "studiocms:ui/components";
+
+        const sidebar = new DoubleSidebarHelper();
+    </script>
+</Layout>

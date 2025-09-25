@@ -89,6 +89,7 @@ const attributes = props as SVGAttributes;
  */
 const iconData = getIconData(iconCollection, name);
 
+/* v8 ignore start */
 /**
  * Throws an error if the icon data is missing from the collection.
  *
@@ -105,6 +106,7 @@ if (!iconData) {
 		`Icon "${name}" is missing in ${iconCollection.prefix} collection`
 	);
 }
+/* v8 ignore stop */
 
 /**
  * Converts icon data to SVG format and renders it with specified attributes.

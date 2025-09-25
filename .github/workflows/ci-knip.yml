@@ -33,5 +33,8 @@ jobs:
         - name: Install Tools & Dependencies
           uses: withstudiocms/automations/.github/actions/install@main
 
+        - name: Build Project
+          run: pnpm build
+
         - name: Run Knip Linter
           run: pnpm knip

@@ -7,29 +7,56 @@
   },
   "scripts": {
     "build": "pnpm --filter @studiocms/* build",
-    "dev": "pnpm --stream --filter @studiocms/* --filter docs -r -parallel dev",
-    "docs:dev": "pnpm --filter docs dev",
+
+    "dev": "pnpm --stream --filter @studiocms/* --filter @test-fixture/server -r -parallel dev",
+
+    "docs:dev": "pnpm --stream --filter @studiocms/* --filter docs -r -parallel dev",
     "docs:build": "pnpm build && pnpm --filter docs build",
     "docs:preview": "pnpm --filter docs preview",
     "docs:sync": "pnpm --filter docs astro sync",
+
+    "test:vitest:watch": "pnpm --filter @studiocms/* test:vitest",
+    "test:vitest": "pnpm --filter @studiocms/* test:vitest:run",
+    "test:vitest:ui": "pnpm --filter @studiocms/* test:vitest:ui",
+    "test:playwright": "pnpm --filter @studiocms/* test:playwright",
+
+    "view:playwright": "pnpm --filter @studiocms/* view:playwright",
+
+    "setup:playwright": "pnpm --filter @studiocms/* playwright:setup",
+
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "ci:lint": "biome ci --formatter-enabled=true --organize-imports-enabled=true  --reporter=github",
+
     "ci:install": "pnpm install --frozen-lockfile",
     "ci:prepublish": "pnpm build",
     "ci:version": "pnpm changeset version",
     "ci:publish": "pnpm changeset publish",
-    "ci:snapshot": "pnpx pkg-pr-new publish --pnpm --compact './packages/*' "
+    "ci:snapshot": "pnpx pkg-pr-new publish --pnpm --compact './packages/*' ",
+
+    "ci:build": "pnpm build",
+    "ci:coverage": "pnpm --filter @studiocms/* ci:coverage",
+    "ci:setup:playwright": "pnpm --filter @studiocms/* playwright:setup",
+    "ci:e2e": "pnpm --filter @studiocms/* test:playwright"
   },
   "dependencies": {
-      "@actions/core": "^1.11.1",
-      "@biomejs/biome": "^1.9.4",
-      "@changesets/cli": "2.27.9",
-      "@changesets/config": "3.0.3",
-      "@changesets/changelog-github": "^0.5.0",
-      "build-scripts": "workspace:*",
-      "knip": "^5.46.0",
-      "pkg-pr-new": "^0.0.41",
-      "typescript": "catalog:"
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.55.0",
+    "@vitest/ui": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
+    "vitest": "^3.2.4",
+    "@actions/core": "^1.11.1",
+    "@biomejs/biome": "^1.9.4",
+    "@changesets/cli": "2.27.9",
+    "@changesets/config": "3.0.3",
+    "@changesets/changelog-github": "^0.5.0",
+    "@withstudiocms/buildkit": "^0.1.0-beta.4",
+    "@types/node": "catalog:",
+    "knip": "^5.46.0",
+    "jsdom": "^27.0.0",
+    "jest-extended": "^6.0.0",
+    "pkg-pr-new": "^0.0.41",
+    "typescript": "catalog:",
+    "playwright-ctrf-json-reporter": "^0.0.23"
   }
 }

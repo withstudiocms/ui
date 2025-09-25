@@ -8,8 +8,11 @@
   "editor.gotoLocation.multipleDefinitions": "goto",
   "cSpell.words": [
     "astrojs",
+    "automations",
+    "buildkit",
     "checkmark",
     "createtoast",
+    "ctrf",
     "dismissable",
     "Eleventy",
     "fira",
@@ -17,13 +20,18 @@
     "frontmatter",
     "heroicons",
     "iconify",
+    "kevinzunigacuellar",
+    "Knip",
     "louisescher",
     "Matthiesen",
+    "mergebot",
     "onest",
     "pathe",
     "polyline",
+    "roundings",
     "searchselect",
     "socialproof",
+    "stefanzweifel",
     "studiocms",
     "themetoggle",
     "Thum",
@@ -32,6 +40,11 @@
     "viewbox",
     "virtuals",
     "vite",
+    "Vitest",
     "withstudiocms"
-  ]
+  ],
+  "material-icon-theme.files.associations": {
+    "*.e2e.ts": "playwright",
+    "*.test.ts": "vitest"
+  }
 }

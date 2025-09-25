@@ -1,0 +1,25 @@
+name: CI - Renovate Changesets
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled]
+
+permissions: {}
+
+jobs:
+  renovate:
+    name: Update Renovate PR
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'dependencies')
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Update PR
+        uses: mscharley/dependency-changesets-action@9ed25d74aded420840fa0264625c26f1443d13da # v1.1.8
+        with:
+          token: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
+          use-conventional-commits: true
+          author-name: StudioCMS
+          author-email: no-reply@studiocms.dev

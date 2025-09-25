@@ -36,8 +36,21 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "build-scripts build 'src/**/*.{ts,css}' --build-tsconfig",
-    "dev": "build-scripts dev 'src/**/*.{ts,css}' --build-tsconfig"
+    "build": "buildkit build 'src/**/*.{ts,d.ts,css,astro}' --build-tsconfig",
+    "dev": "buildkit dev 'src/**/*.{ts,d.ts,css,astro}' --build-tsconfig",
+
+		"playwright:setup": "pnpm exec playwright install --with-deps",
+    "test-server": "pnpm --filter @test-fixture/server dev",
+
+    "test:vitest": "vitest",
+    "test:vitest:run": "vitest run",
+    "test:vitest:ui": "vitest --ui",
+    "test:vitest:coverage": "vitest run --coverage",
+		"test:playwright": "pnpm exec playwright test",
+
+    "view:playwright": "pnpm exec playwright show-report",
+
+    "ci:coverage": "pnpm test:vitest:coverage"
   },
   "exports": {
     ".": {
@@ -71,6 +84,8 @@
     "vite": "catalog:peers"
   },
   "devDependencies": {
-    "typescript": "catalog:"
+    "astro": "catalog:",
+    "typescript": "catalog:",
+    "@types/node": "catalog:"
   }
 }
