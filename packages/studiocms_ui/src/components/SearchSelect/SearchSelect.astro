@@ -151,6 +151,7 @@ const defaultLabel = selected
 				tabindex={disabled ? -1 : 0}
 				label={label || ''}
 				isRequired={isRequired || false}
+				name={name ? `${name}-input` : undefined}
 				icon={{
 					name: "heroicons:chevron-up-down",
 					position: "right"
