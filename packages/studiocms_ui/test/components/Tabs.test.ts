@@ -16,6 +16,7 @@ describe('Tabs Component', () => {
 		}
 
 		const result = await renderComponent(Tabs, 'Tabs', {
+			props: { id: 'tab-container' },
 			slots: { default: tabsContent.join('') },
 		});
 		expect(result).toMatchSnapshot();
