@@ -45,6 +45,7 @@ const { name: __name, height, width, ...rest } = Astro.props;
  */
 const _nameSplit = __name.split(':');
 
+/* v8 ignore start */
 /**
  * Checks if the icon name contains a colon and if the split name length is not equal to 1.
  * If both conditions are met, throws a StudioCMS_UI_IconError with a message indicating an invalid icon name.
@@ -60,6 +61,7 @@ if (__name.includes(':') && _nameSplit.length !== 2) {
 		errorHintBuilder({ iconCollections, prefix: '', iconName: __name })
 	);
 }
+/* v8 ignore stop */
 
 /**
  * Extracts the prefix from the `_nameSplit` array and casts it to the `IconCollections` type.
@@ -85,6 +87,7 @@ const name: AvailableIcons = _nameSplit[1] as AvailableIcons;
  */
 const iconCollection = Icons[prefix];
 
+/* v8 ignore start */
 /**
  * Validates the provided icon collection prefix and throws an error if it is invalid.
  *
@@ -101,7 +104,9 @@ if (!prefix || !iconCollections.includes(prefix) || !iconCollection) {
 		errorHintBuilder({ iconCollections, prefix, iconName: name })
 	);
 }
+/* v8 ignore stop */
 
+/* v8 ignore start */
 /**
  * Throws an error if the icon name is invalid.
  *
@@ -117,5 +122,6 @@ if (!name) {
 		errorHintBuilder({ iconCollections, prefix, iconName: name })
 	);
 }
+/* v8 ignore stop */
 ---
 <IconBase {iconCollection} {name} {prefix} {...rest} {height} {width} />

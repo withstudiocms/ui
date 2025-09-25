@@ -9,10 +9,6 @@ const config: KnipConfig = {
 			entry: ['.github/workflows/*.yml', '.changeset/config.json', 'biome.json'],
 			project: ['.github/workflows/*.yml', '.changeset/config.json', 'biome.json'],
 		},
-		'build-scripts': {
-			entry: 'index.js',
-			project: '**/*.js',
-		},
 		'packages/studiocms_ui': {
 			ignoreDependencies: ['studiocms'],
 			entry: ['src/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}'],
