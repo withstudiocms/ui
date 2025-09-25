@@ -39,7 +39,7 @@ const { icon, label, color = 'primary', active = false, id: customId } = Astro.p
 	data-icon={icon}
 	data-label={label}
 	data-color={color}
-	data-tab-id={id}
+	data-tab-id={customId ?? id}
 	data-active={active ? 'true' : undefined}
 >
 	<slot />

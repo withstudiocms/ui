@@ -158,7 +158,7 @@ const containerId = generateID('sui-tabs-container');
   class="sui-tabs-container"
   id={customId ?? containerId}
   data-sync-key={syncKey}
-  data-unique-id={uniqueId}
+  data-unique-id={customId ?? uniqueId}
   data-storage-strategy={storage}
   class:list={[variant, align]}
 >
