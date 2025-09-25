@@ -1,5 +1,17 @@
 # @studiocms/ui
 
+## 1.0.0-beta.2
+
+### Minor Changes
+
+- [#118](https://github.com/withstudiocms/ui/pull/118) [`1779190`](https://github.com/withstudiocms/ui/commit/1779190849e80ed21af4eeac3b36553cb4c8447f) Thanks [@RATIU5](https://github.com/RATIU5)! - Updates the Tabs components to optionally use a custom ID
+
+### Patch Changes
+
+- [#119](https://github.com/withstudiocms/ui/pull/119) [`6bdc0ee`](https://github.com/withstudiocms/ui/commit/6bdc0ee2b99fd984caf49f83a680a23c7c1d497a) Thanks [@louisescher](https://github.com/louisescher)! - Fixes an issue where the toaster HTML Element would have an unnecessary comma attribute due to a typo.
+
+- [#124](https://github.com/withstudiocms/ui/pull/124) [`8a2f606`](https://github.com/withstudiocms/ui/commit/8a2f6060d1c25c9a537a078c21e967c5d998ef8b) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Improve icon handling and processing, allowing icon sets defined in the config to also use `-` in their name (e.g. 'simple-icons')
+
 ## 1.0.0-beta.1
 
 ### Patch Changes
