@@ -4,18 +4,32 @@ const config: KnipConfig = {
 	exclude: ['duplicates', 'optionalPeerDependencies'],
 	workspaces: {
 		'.': {
-			ignoreBinaries: ['preview', 'astro'],
-			ignoreDependencies: ['@changesets/config'],
+			ignoreBinaries: ['preview', 'astro', 'playwright:setup', 'test:vitest:run'],
+			ignoreDependencies: ['@changesets/config', 'playwright-ctrf-json-reporter'],
 			entry: ['.github/workflows/*.yml', '.changeset/config.json', 'biome.json'],
 			project: ['.github/workflows/*.yml', '.changeset/config.json', 'biome.json'],
 		},
 		'packages/studiocms_ui': {
 			ignoreDependencies: ['studiocms'],
-			entry: ['src/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}'],
+			entry: [
+				'src/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}',
+				'test/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}',
+				'vite.config.{js,ts}',
+				'playwright.config.{js,ts}',
+			],
 			project: ['**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}'],
 			astro: {
-				entry: ['src/**/*.astro'],
-				project: ['src/**/*.astro'],
+				entry: ['src/**/*.astro', 'test/**/*.astro'],
+				project: ['src/**/*.astro', 'test/**/*.astro'],
+			},
+		},
+		'packages/*/test/fixtures/test-server': {
+			ignoreDependencies: ['studiocms'],
+			entry: ['**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,json,html,css,astro}'],
+			project: ['**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,json,html,css,astro}'],
+			astro: {
+				entry: ['**/*.astro'],
+				project: ['**/*.astro'],
 			},
 		},
 		docs: {
