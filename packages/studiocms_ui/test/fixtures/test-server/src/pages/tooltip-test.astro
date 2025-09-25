@@ -1,0 +1,16 @@
+---
+import { Tooltip } from 'studiocms:ui/components/tooltip';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Tooltip defaultOpen={true}>
+            <button>Open by default</button>
+            <Fragment slot="tooltip">This tooltip is open by default.</Fragment>
+        </Tooltip>
+    </div>
+</Layout>

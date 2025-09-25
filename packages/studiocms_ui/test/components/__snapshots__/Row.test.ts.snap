@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Row Component > renders Row component correctly 1`] = `"<div class="sui-row md"> <span>Small Row</span> <span>Small Row</span> <span>Small Row</span> </div>"`;
+
+exports[`Row Component > renders Row with props: "{ alignCenter: true }" 1`] = `"<div class="sui-row align md"> <span>Small Row</span> <span>Small Row</span> <span>Small Row</span> </div>"`;
+
+exports[`Row Component > renders Row with props: "{ gap: 'lg' }" 1`] = `"<div class="sui-row md" gap="lg"> <span>Small Row</span> <span>Small Row</span> <span>Small Row</span> </div>"`;
+
+exports[`Row Component > renders Row with props: "{ gap: 'md' }" 1`] = `"<div class="sui-row md" gap="md"> <span>Small Row</span> <span>Small Row</span> <span>Small Row</span> </div>"`;
+
+exports[`Row Component > renders Row with props: "{ gap: 'sm' }" 1`] = `"<div class="sui-row md" gap="sm"> <span>Small Row</span> <span>Small Row</span> <span>Small Row</span> </div>"`;

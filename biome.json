@@ -40,6 +40,9 @@
         "noNonNullAssertion": "off",
         "noParameterAssign": "info",
         "useSingleVarDeclarator": "info"
+      },
+      "complexity": {
+        "noForEach": "off"
       }
     }
   },

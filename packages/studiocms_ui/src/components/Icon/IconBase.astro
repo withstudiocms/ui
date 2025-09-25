@@ -1,9 +1,20 @@
 ---
 import type { IconifyJSON } from '@iconify/types';
-import { AstroError } from 'astro/errors';
 import type { HTMLAttributes } from 'astro/types';
 import { getIconData, iconToSVG, replaceIDs } from '../../utils/iconifyUtils.js';
+import { StudioCMS_UI_IconError } from './errors.js';
 
+/**
+ * Props interface for the IconBase component.
+ *
+ * @extends HTMLAttributes<'svg'>
+ *
+ * @property {IconifyJSON} iconCollection - The collection of icons.
+ * @property {string} name - The name of the icon from the collection.
+ * @property {string} prefix - The prefix of the icon collection.
+ * @property {number} height - The height of the icon.
+ * @property {number} width - The width of the icon.
+ */
 interface Props extends HTMLAttributes<'svg'> {
 	/**
 	 * Collection of icons
@@ -25,54 +36,146 @@ interface Props extends HTMLAttributes<'svg'> {
 	 *
 	 * const { name, ...props } = Astro.props;
 	 * ---
-	 * <IconBase iconCollection={icons} {name} {...props} />
+	 * <IconBase iconCollection={icons} {name} prefix={icons.prefix} {...props} />
 	 * ```
 	 */
 	iconCollection: IconifyJSON;
+
 	/**
 	 * Name of the icon from the collection
 	 */
 	name: string;
+
+	/**
+	 * Prefix of the icon collection
+	 */
+	prefix: string;
+
 	/**
 	 * Height of the icon in pixels
 	 */
-	height?: number;
+	height: number;
+
 	/**
 	 * Width of the icon in pixels
 	 */
-	width?: number;
+	width: number;
 }
 
 const { iconCollection, name, ...props } = Astro.props;
 
+/**
+ * Interface representing the attributes for an SVG element.
+ * Extends the HTMLAttributes interface for 'svg' elements.
+ *
+ * @interface SVGAttributes
+ * @extends {HTMLAttributes<'svg'>}
+ *
+ * @property {any} [key: string] - Allows any string index to be used as a property.
+ */
 interface SVGAttributes extends HTMLAttributes<'svg'> {
 	// biome-ignore lint/suspicious/noExplicitAny: Allow any string index
 	[key: string]: any;
 }
 
 const attributes = props as SVGAttributes;
+
+/**
+ * Retrieves the icon data from the specified icon collection.
+ *
+ * @param {string} iconCollection - The collection of icons to retrieve from.
+ * @param {string} name - The name of the icon to retrieve.
+ * @returns {object} The data for the specified icon.
+ */
 const iconData = getIconData(iconCollection, name);
 
+/* v8 ignore start */
+/**
+ * Throws an error if the icon data is missing from the collection.
+ *
+ * @throws {StudioCMS_UI_IconError} If the icon data is not found in the collection.
+ * @param {Object} iconData - The data for the icon.
+ * @param {string} name - The name of the icon.
+ * @param {Object} iconCollections - The collection of icons.
+ * @param {Object} iconCollection - The specific icon collection.
+ * @param {string} iconCollection.prefix - The prefix for the icon collection.
+ * @param {Function} errorHintBuilder - A function to build error hints.
+ */
 if (!iconData) {
-	throw new AstroError(`Icon "${name}" is missing in collection`);
+	throw new StudioCMS_UI_IconError(
+		`Icon "${name}" is missing in ${iconCollection.prefix} collection`
+	);
 }
+/* v8 ignore stop */
 
+/**
+ * Converts icon data to SVG format and renders it with specified attributes.
+ *
+ * @param {Object} iconData - The data representing the icon to be converted to SVG.
+ * @param {Object} attributes - The attributes to apply to the SVG element.
+ * @param {number} [attributes.height=24] - The height of the SVG element. Defaults to 24 if not provided.
+ * @param {number} [attributes.width=24] - The width of the SVG element. Defaults to 24 if not provided.
+ * @returns {string} The rendered SVG data as a string.
+ */
 const renderData = iconToSVG(iconData, {
-	height: attributes.height || 24,
-	width: attributes.width || 24,
+	height: attributes.height || iconData.height || iconCollection.height || 24,
+	width: attributes.width || iconData.width || iconCollection.width || 24,
 });
 
+/**
+ * Replaces IDs in the provided render data body.
+ *
+ * @param {string} renderData.body - The body of the render data where IDs need to be replaced.
+ * @returns {string} The body with replaced IDs.
+ */
 const body = replaceIDs(renderData.body);
 
+/**
+ * Determines the value of the `renderAttribsHTML` variable based on the presence of the 'xlink:' substring in the `body` string.
+ * If 'xlink:' is found in the `body`, `renderAttribsHTML` is set to the XML namespace for xlink.
+ * Otherwise, it is set to an empty string.
+ *
+ * @example
+ * // Assuming `body` contains 'xlink:href="some-link"'
+ * let renderAttribsHTML = ' xmlns:xlink="http://www.w3.org/1999/xlink"';
+ *
+ * @example
+ * // Assuming `body` does not contain 'xlink:'
+ * let renderAttribsHTML = '';
+ */
 let renderAttribsHTML =
 	body.indexOf('xlink:') === -1 ? '' : ' xmlns:xlink="http://www.w3.org/1999/xlink"';
 
+/**
+ * Iterates over the `attributes` object and constructs a string of HTML attributes.
+ * Each attribute is added to the `renderAttribsHTML` string in the format ` key="value"`.
+ *
+ * @param {Object} attributes - An object containing key-value pairs of HTML attributes.
+ * @param {string} renderAttribsHTML - A string that accumulates the HTML attributes.
+ */
 for (const attr in attributes) {
 	renderAttribsHTML += ` ${attr}="${attributes[attr]}"`;
 }
 
+/**
+ * Extracts the `viewBox` attribute from the `renderData` object.
+ *
+ * @constant
+ * @type {string}
+ * @memberof IconBase
+ */
 const viewBox = renderData.attributes.viewBox;
 
+/**
+ * Generates an SVG element as a string with specified attributes and content.
+ *
+ * @param {Object} attributes - The attributes for the SVG element.
+ * @param {number} [attributes.height=24] - The minimum height of the SVG element in pixels.
+ * @param {string} renderAttribsHTML - The HTML string of additional attributes to be added to the SVG element.
+ * @param {string} [viewBox] - The viewBox attribute for the SVG element, if provided.
+ * @param {string} body - The inner content of the SVG element.
+ * @returns {string} The generated SVG element as a string.
+ */
 const svg = `<svg style="min-width: ${attributes.height || 24}px" xmlns="http://www.w3.org/2000/svg"${renderAttribsHTML}${viewBox && ` viewbox="${viewBox}"`}>${body}</svg>`;
 ---
 <Fragment set:html={svg} />

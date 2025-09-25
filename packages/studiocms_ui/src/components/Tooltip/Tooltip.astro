@@ -1,0 +1,119 @@
+---
+import './tooltip.css';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'div'>, 'class:list'> {
+	/**
+	 * The position of the tooltip. Defaults to 'auto'.
+	 *
+	 * 'auto' will try to position below, then above, then right, then left.
+	 */
+	position?: 'auto' | 'top' | 'bottom' | 'left' | 'right';
+
+	/**
+	 * Whether the tooltip should be opened by default. Defaults to false.
+	 */
+	defaultOpen?: boolean;
+
+	/**
+	 * Whether the tooltip should be inline with the anchor element. Defaults to false.
+	 *
+	 * @todo This is not fully working, due to an Astro bug: https://github.com/withastro/astro/issues/13970
+	 *
+	 * USE AT YOUR OWN RISK!
+	 */
+	inline?: boolean;
+
+	/**
+	 * The variant of the tooltip. Defaults to 'default'.
+	 */
+	variant?: 'default' | 'outlined';
+
+	/**
+	 * The color of the tooltip. Defaults to 'default'.
+	 */
+	color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'mono';
+
+	/**
+	 * The gap between the tooltip and the anchor element in pixels. Defaults to 8.
+	 */
+	gap?: number;
+
+	/**
+	 * The delay before the tooltip appears in milliseconds. Defaults to 0.
+	 */
+	enterDelay?: number;
+
+	/**
+	 * The delay before the tooltip disappears in milliseconds. Defaults to 0.
+	 */
+	exitDelay?: number;
+
+	/**
+	 * Whether the tooltip should be hover only. Defaults to false.
+	 *
+	 * By default, the tooltip will show on mouse hover and click (for mobile support).
+	 */
+	hoverOnly?: boolean;
+
+	/**
+	 * Whether the tooltip should animate a fade in and out. Defaults to true.
+	 */
+	animate?: boolean;
+
+	/**
+	 * Render a triangle pointer on the tooltip. Defaults to true.
+	 */
+	pointer?: boolean;
+}
+
+const {
+	position = 'auto',
+	defaultOpen = false,
+	inline = false,
+	variant = 'default',
+	color = 'default',
+	gap = 8,
+	enterDelay = 0,
+	exitDelay = 0,
+	hoverOnly = false,
+	animate = true,
+	pointer = true,
+	...others
+} = Astro.props;
+---
+
+<div
+  class:list={["sui-tooltip-container", inline && "inline"]}
+  data-sui-tooltip
+  data-sui-tooltip-options={JSON.stringify({
+    position,
+    defaultOpen,
+    gap,
+    enterDelay,
+    exitDelay,
+    hoverOnly,
+    animate,
+    pointer,
+  })}
+  {...others}
+>
+  <div class="sui-tooltip-anchor-wrapper" data-sui-tooltip-anchor>
+    <slot />
+  </div>
+  <div
+    class={`sui-tooltip-popup color-${color} variant-${variant}`}
+    class:list={[animate && "animate"]}
+    data-sui-tooltip-popup
+    role="tooltip"
+  >
+    {pointer && <div class="sui-tooltip-pointer" />}
+    <slot name="tooltip">
+      <p>Warning: slot 'tooltip' was not found</p>
+    </slot>
+  </div>
+</div>
+
+<script>
+  import "studiocms:ui/scripts/tooltip";
+</script>

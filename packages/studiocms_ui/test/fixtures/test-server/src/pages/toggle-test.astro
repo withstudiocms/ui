@@ -1,0 +1,32 @@
+---
+import { Toggle } from 'studiocms:ui/components/toggle';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Toggle name="test-toggle" label="Label" color="primary" />
+    </div>
+
+    <br />
+    <br />
+
+    <div id="color-test">
+        <Toggle label="Default" defaultChecked />
+        <br />
+        <Toggle label="Primary" color="primary" defaultChecked />
+        <br />
+        <Toggle label="Success" color="success" defaultChecked />
+        <br />
+        <Toggle label="Warning" color="warning" defaultChecked />
+        <br />
+        <Toggle label="Danger" color="danger" defaultChecked />
+        <br />
+        <Toggle label="Info" color="info" defaultChecked />
+        <br />
+        <Toggle label="Monochrome" color="mono" defaultChecked />
+    </div>
+</Layout>

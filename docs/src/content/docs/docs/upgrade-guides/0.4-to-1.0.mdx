@@ -1,0 +1,45 @@
+---
+title: From v0.4 to v1.0
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+Version 1.0 of StudioCMS UI brings a lot of upgrades for a better user experience, such as better code splitting to reduce file sizes and load times, a new way to define custom colors and improved accessibility across the board. Here's what you'll have to do to migrate your existing projects:
+
+## Color Definitions
+In previous versions of StudioCMS, we used a system of defining colors which was advantageous for us to quickly derive new colors with opacity values from existing ones. This system made it impossible to customize the colors with anything other than raw HSL values. In StudioCMS v1.0, you can now define colors however you want:
+
+```css del={2} ins={3} showLinenumbers title="custom.css"
+:root {
+	--primary-base: 0 0% 100%;
+	--primary-base: hsl(0 0% 100%);
+}
+```
+
+## Using StudioCMS Colors
+Since we now define colors as HSL values by default, if you were using our color variables for any custom CSS, you need to update those definitions as well. To do so, use the regular expression below in combination with your IDE's "Search & Replace" feature:
+
+**Search**: `hsl[a]?\((var\([A-Za-z-\d]+\))\)`
+**Replace**: `$1`
+
+## Theme Toggle Removed
+Previous versions of StudioCMS UI exposed a `ThemeToggle` component which you could use to let users quickly toggle between light and dark mode. This component has now been removed. Please refer to the [Theme Helper](https://ui.studiocms.dev/docs/utilities/theme-helper/) for making your own version of this component.
+
+## Icons
+StudioCMS exports an `Icon` component which can be used to quickly add SVG icons to your site. In v1.0 we've added support for any icons from [Iconify](https://iconify.design/). If you were previously using any of the build-in icons, you now need to prefix their names with `heroicons:`:
+
+```astro del={1} ins={2} showLinenumbers title="page.astro"
+<Badge label="Badge" icon="sparkles-16-solid" />
+<Badge label="Badge" icon="heroicons:sparkles-16-solid" />
+```
+
+## Updated Imports
+Previous versions of StudioCMS UI were known to sometimes have issues with proper tree shaking. To combat this, we've added new imports for individual components, which we recommend using to reduce the overall bundle size of your final build:
+
+```astro del={2} ins={3} showLinenumbers title="page.astro"
+---
+import { Button } from "studiocms:ui/components";
+import { Button } from "studiocms:ui/components/button";
+---
+```

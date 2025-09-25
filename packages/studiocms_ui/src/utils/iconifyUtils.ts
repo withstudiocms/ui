@@ -452,7 +452,6 @@ export function replaceIDs(
 	const suffix = `suffix${((Math.random() * 0x1000000) | Date.now()).toString(16)}`;
 
 	// Replace with unique ids
-	// biome-ignore lint/complexity/noForEach: <explanation>
 	ids.forEach((id) => {
 		const newID = typeof prefix === 'function' ? prefix(id) : prefix + (counter++).toString();
 
@@ -505,7 +504,6 @@ export function iconToSVG(
 	let body = fullIcon.body;
 
 	// Apply transformations
-	// biome-ignore lint/complexity/noForEach: <explanation>
 	[fullIcon, fullCustomisations].forEach((props) => {
 		const transformations: string[] = [];
 		const hFlip = props.hFlip;

@@ -1,0 +1,61 @@
+---
+import type { z } from 'astro/zod';
+import './skeleton.css';
+import { SkeletonSchema } from './skeleton.js';
+
+type Props = z.infer<typeof SkeletonSchema>;
+
+const {
+	variant,
+	width,
+	height,
+	radius = 'lg',
+	animation = 'slide',
+	class: className,
+} = Astro.props;
+
+const gap = variant === 'card' ? (Astro.props.gap ?? '0.5rem') : undefined;
+
+const styles = [width && `width: ${width};`, height && `height: ${height};`, gap && `gap: ${gap};`]
+	.filter(Boolean)
+	.join(' ');
+
+function getClasses() {
+	const classes = ['sui-skeleton'];
+
+	if (variant) {
+		classes.push(`sui-skeleton-${variant}`);
+
+		if (variant === 'card') {
+			const direction = Astro.props.direction ?? 'column';
+			const hAlign = Astro.props.hAlign ?? 'center';
+			const vAlign = Astro.props.vAlign ?? 'center';
+
+			classes.push(`sui-skeleton-${direction}`);
+
+			const hAlignProp = direction === 'row' ? 'justify' : 'align';
+			const vAlignProp = direction === 'row' ? 'items' : 'justify';
+
+			classes.push(`sui-skeleton-${hAlignProp}-${hAlign}`);
+			classes.push(`sui-skeleton-${vAlignProp}-${vAlign}`);
+		}
+	}
+
+	if (radius !== 'none' && variant !== 'circle') {
+		classes.push(`sui-skeleton-radii-${radius}`);
+	}
+
+	if (animation !== 'none' && variant !== 'card') {
+		classes.push(`sui-skeleton-anim-${animation}`);
+	}
+	if (className) {
+		classes.push(className);
+	}
+
+	return classes;
+}
+---
+
+<div class:list={getClasses()} style={styles}>
+	<slot />
+</div>

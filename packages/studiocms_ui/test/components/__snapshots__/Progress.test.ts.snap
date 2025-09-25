@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Progress Component > renders Progress component correctly 1`] = `"<div class="sui-progress primary" role="progressbar" id="progress-test" data-max="100" data-value="50"> <div class="sui-progress-slider"></div> </div> <script type="module" src="/mock/path/Progress.astro?astro&type=script&index=0&lang.ts"></script>"`;

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>withstudiocms/renovate-config"],
+  "packageRules": [
+    {
+      "groupName": "UI Library Dependencies",
+      "matchManagers": ["npm"],
+      "matchFileNames": ["packages/studiocms_ui/**"]
+    },
+    {
+      "groupName": "Docs Dependencies",
+      "matchManagers": ["npm"],
+      "matchFileNames": ["docs/**"]
+    }
+  ],
+  "ignoreDeps": ["@types/node", "sharp", "node", "npm", "pnpm", "vite"]
+}

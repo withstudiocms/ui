@@ -1,6 +1,6 @@
 form {
 	padding: 1.5rem;
-	background: hsl(var(--background-base));
+	background: var(--background-base);
 }
 
 form > span {

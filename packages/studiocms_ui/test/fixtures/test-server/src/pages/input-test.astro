@@ -1,0 +1,34 @@
+---
+import { Input } from 'studiocms:ui/components/input';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Input
+            label="Basic Input"
+            placeholder="Type something..."
+            description="This is some text to help the user understand the input!"
+        />
+    </div>
+
+    <br />
+    <br />
+
+    <div id="icon-test">
+        <Input
+            label="Left Icon"
+            placeholder="Placeholder"
+            icon="heroicons:bolt-20-solid"
+        />
+        <br />
+        <Input
+            label="Right Icon"
+            placeholder="Placeholder"
+            icon={{ name: "heroicons:bolt-20-solid", position: "right" }}
+        />
+    </div>
+</Layout>

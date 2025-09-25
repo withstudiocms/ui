@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tooltip Component > renders Tooltip component correctly 1`] = `"<div class="sui-tooltip-container" data-sui-tooltip data-sui-tooltip-options="{&#34;position&#34;:&#34;auto&#34;,&#34;defaultOpen&#34;:false,&#34;gap&#34;:8,&#34;enterDelay&#34;:0,&#34;exitDelay&#34;:0,&#34;hoverOnly&#34;:false,&#34;animate&#34;:true,&#34;pointer&#34;:true}"> <div class="sui-tooltip-anchor-wrapper" data-sui-tooltip-anchor> Hover me </div> <div class="sui-tooltip-popup color-default variant-default animate" data-sui-tooltip-popup role="tooltip"> <div class="sui-tooltip-pointer"></div> This is a tooltip </div> </div> <script type="module" src="/mock/path/Tooltip.astro?astro&type=script&index=0&lang.ts"></script>"`;

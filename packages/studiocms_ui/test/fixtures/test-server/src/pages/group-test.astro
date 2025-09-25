@@ -1,0 +1,30 @@
+---
+import { Badge } from 'studiocms:ui/components/badge';
+import { Button } from 'studiocms:ui/components/button';
+import { Group } from 'studiocms:ui/components/group';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Group>
+            <Badge label="Badge 1" />
+            <Badge label="Badge 2" variant="outlined" />
+            <Badge label="Badge 3" />
+        </Group>
+    </div>
+
+    <br />
+    <br />
+
+    <div id="button-group-test">
+        <Group>
+            <Button>Button 1</Button>
+            <Button color="primary" variant="outlined">Button 2</Button>
+            <Button>Button 3</Button>
+        </Group>
+    </div>
+</Layout>

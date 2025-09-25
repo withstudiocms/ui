@@ -9,7 +9,7 @@
 }
 
 .sui-breadcrumbs a {
-	color: hsl(var(--primary-base));
+	color: var(--primary-base);
 	text-decoration: none;
 }
 

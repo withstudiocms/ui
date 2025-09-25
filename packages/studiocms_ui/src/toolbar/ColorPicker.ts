@@ -4,14 +4,14 @@ type Color = [number, number, number];
  * Convert a hex color to an RGB color.
  * @param hex - The hex color to convert.
  */
-function hex2rgb(hex: string): Color {
+export function hex2rgb(hex: string): Color {
 	const r = Number.parseInt(hex.slice(1, 3), 16);
 	const g = Number.parseInt(hex.slice(3, 5), 16);
 	const b = Number.parseInt(hex.slice(5, 7), 16);
 	return [r, g, b];
 }
 
-function hueToRgb(p: number, q: number, t: number): number {
+export function hueToRgb(p: number, q: number, t: number): number {
 	if (t < 0) t += 1;
 	if (t > 1) t -= 1;
 	if (t < 1 / 6) return p + (q - p) * 6 * t;
@@ -24,7 +24,7 @@ function hueToRgb(p: number, q: number, t: number): number {
  * Convert an HSL color to an RGB color.
  * @param hsl - The HSL color to convert.
  */
-function hsl2rgb(hsl: number[]): Color {
+export function hsl2rgb(hsl: number[]): Color {
 	const [h, sPercent, lPercent] = hsl as Color;
 
 	// Convert percentages to fractions
@@ -52,7 +52,7 @@ function hsl2rgb(hsl: number[]): Color {
  * Convert an RGB color to a hex color.
  * @param rgb - The RGB color to convert.
  */
-function rgb2hex(rgb: Color): string {
+export function rgb2hex(rgb: Color): string {
 	const [r, g, b] = rgb;
 	return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 }
@@ -61,7 +61,7 @@ function rgb2hex(rgb: Color): string {
  * Convert an RGB color to an HSL color.
  * @param rgb - The RGB color to convert.
  */
-function rgb2hsl(rgb: Color): Color {
+export function rgb2hsl(rgb: Color): Color {
 	const [r, g, b] = rgb.map((v) => v / 255) as Color;
 	const max = Math.max(r, g, b);
 	const min = Math.min(r, g, b);

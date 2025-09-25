@@ -19,7 +19,7 @@ const { background = 'background-base' } = Astro.props;
   <hr class="sui-divider-line" />
   <div 
     class="sui-divider-content" 
-    style={`background-color: hsl(var(--${background})); padding: ${hasDefaultSlot ? '.25rem .5rem;' : '0'}`}
+    style={`background-color: var(--${background}); padding: ${hasDefaultSlot ? '.25rem .5rem;' : '0'}`}
   >
     <slot />
   </div>
