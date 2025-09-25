@@ -23,17 +23,23 @@ interface Props {
 	 * Whether the tab should be active by default.
 	 */
 	active?: boolean;
+
+	/**
+	 * The unique ID of the tab. If not provided, a random ID will be generated.
+	 */
+	id?: string;
 }
 
 const id = generateID('tab');
 
-const { icon, label, color = 'primary', active = false } = Astro.props;
+const { icon, label, color = 'primary', active = false, id: customId } = Astro.props;
 ---
 <sui-tab-item
+	id={customId ?? id}
 	data-icon={icon}
 	data-label={label}
 	data-color={color}
-	data-tab-id={id}
+	data-tab-id={customId ?? id}
 	data-active={active ? 'true' : undefined}
 >
 	<slot />

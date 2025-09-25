@@ -34,6 +34,11 @@ interface Props {
 	 * The alignment of the tabs. Defaults to `left`.
 	 */
 	align?: 'left' | 'center' | 'right';
+
+	/**
+	 * The ID of the tab.
+	 */
+	id?: string;
 }
 
 /**
@@ -133,6 +138,7 @@ const markTabAsActive = (tabId: string, html: string): string => {
 const uniqueId = generateID('sui-tabs-container');
 
 const {
+	id: customId,
 	syncKey: originalSyncKey,
 	storage = 'session',
 	variant = 'default',
@@ -150,9 +156,9 @@ const containerId = generateID('sui-tabs-container');
 
 <div 
   class="sui-tabs-container"
-  id={containerId}
+  id={customId ?? containerId}
   data-sync-key={syncKey}
-  data-unique-id={uniqueId}
+  data-unique-id={customId ?? uniqueId}
   data-storage-strategy={storage}
   class:list={[variant, align]}
 >
