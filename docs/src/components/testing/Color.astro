@@ -1,0 +1,286 @@
+---
+interface Props {
+  bgColor: string;
+  textColor: string;
+  text: string;
+  style?: 'default' | 'border' | 'shadow';
+}
+
+const { bgColor, textColor, text, style = 'default' } = Astro.props;
+---
+
+<div class={`testing-square testing-square--${style}`} style={`--bgColor:${bgColor}; --textColor:${textColor}; --shadowColor:${textColor}; --borderColor:${textColor};`}>
+  <p><b>{text}</b></p>
+  <p>{text}</p>
+</div>
+
+<script>
+  // WCAG AAA Color Contrast Algorithm
+  function hslToRgb(h: number, s: number, l: number): [number, number, number] {
+    h = h / 360;
+    s = s / 100;
+    l = l / 100;
+
+    const hue2rgb = (p: number, q: number, t: number): number => {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    };
+
+    let r: number, g: number, b: number;
+
+    if (s === 0) {
+      r = g = b = l;
+    } else {
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1/3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1/3);
+    }
+
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+  }
+
+  function getPageBackground(): [number, number, number] {
+    const bodyStyles = getComputedStyle(document.body);
+    const htmlStyles = getComputedStyle(document.documentElement);
+
+    // Try body background first, then html, then default to white
+    const bgColor = bodyStyles.backgroundColor !== 'rgba(0, 0, 0, 0)'
+      ? bodyStyles.backgroundColor
+      : htmlStyles.backgroundColor !== 'rgba(0, 0, 0, 0)'
+      ? htmlStyles.backgroundColor
+      : 'rgb(255, 255, 255)';
+
+    console.log('Detected page background:', bgColor);
+    return parseColorToRgb(bgColor);
+  }
+
+  function parseColorToRgb(color: string): [number, number, number] {
+    color = color.trim().toLowerCase();
+
+    if (color.startsWith('rgb')) {
+      const match = color.match(/rgba?\(([^)]+)\)/);
+      if (match) {
+        const values = match[1].split(',').map(v => parseFloat(v.trim()));
+        return [values[0] || 0, values[1] || 0, values[2] || 0];
+      }
+    }
+
+    // Fallback to white for unknown formats
+    return [255, 255, 255];
+  }
+
+  function blendWithBackground(r: number, g: number, b: number, alpha: number): [number, number, number] {
+    // Get actual page background color
+    const [bgR, bgG, bgB] = getPageBackground();
+
+    // Alpha blending formula: result = (foreground * alpha) + (background * (1 - alpha))
+    return [
+      Math.round((r * alpha) + (bgR * (1 - alpha))),
+      Math.round((g * alpha) + (bgG * (1 - alpha))),
+      Math.round((b * alpha) + (bgB * (1 - alpha)))
+    ];
+  }
+
+  function parseColor(color: string): [number, number, number] {
+    color = color.trim().toLowerCase();
+
+    // Handle hex colors
+    if (color.startsWith('#')) {
+      const hex = color.replace('#', '');
+      if (hex.length === 3) {
+        return [
+          parseInt(hex[0] + hex[0], 16),
+          parseInt(hex[1] + hex[1], 16),
+          parseInt(hex[2] + hex[2], 16)
+        ];
+      }
+      return [
+        parseInt(hex.substring(0, 2), 16),
+        parseInt(hex.substring(2, 4), 16),
+        parseInt(hex.substring(4, 6), 16)
+      ];
+    }
+
+    // Handle rgb/rgba colors
+    if (color.startsWith('rgb')) {
+      const match = color.match(/rgba?\(([^)]+)\)/);
+      if (match) {
+        const values = match[1].split(',').map(v => parseFloat(v.trim()));
+        const alpha = values[3] !== undefined ? values[3] : 1;
+
+        if (alpha < 1) {
+          // Blend with white background for transparent colors
+          return blendWithBackground(values[0], values[1], values[2], alpha);
+        }
+        return [values[0], values[1], values[2]];
+      }
+    }
+
+    // Handle hsl/hsla colors
+    if (color.startsWith('hsl')) {
+      const match = color.match(/hsla?\(([^)]+)\)/);
+      if (match) {
+        const parts = match[1].split(/[,\/]/).map(v => v.trim());
+        const h = parseFloat(parts[0]);
+        const s = parts[1].includes('%') ? parseFloat(parts[1].replace('%', '')) : parseFloat(parts[1]);
+        const l = parts[2].includes('%') ? parseFloat(parts[2].replace('%', '')) : parseFloat(parts[2]);
+        const alpha = parts[3] !== undefined ? parseFloat(parts[3]) : 1;
+
+        const [r, g, b] = hslToRgb(h, s, l);
+
+        if (alpha < 1) {
+          // Blend with white background for transparent colors
+          return blendWithBackground(r, g, b, alpha);
+        }
+        return [r, g, b];
+      }
+    }
+
+    // Fallback for unknown formats - assume black
+    return [0, 0, 0];
+  }
+
+  function getRelativeLuminance(r: number, g: number, b: number): number {
+    const [rs, gs, bs] = [r, g, b].map(c => {
+      c = c / 255;
+      return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+  }
+
+  function getContrastRatio(color1: string, color2: string): number {
+    const [r1, g1, b1] = parseColor(color1);
+    const [r2, g2, b2] = parseColor(color2);
+
+    const l1 = getRelativeLuminance(r1, g1, b1);
+    const l2 = getRelativeLuminance(r2, g2, b2);
+
+    const lighter = Math.max(l1, l2);
+    const darker = Math.min(l1, l2);
+
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+
+  function meetsWCAGAAA(bgColor: string, textColor: string, isLargeText: boolean = false): boolean {
+    const contrastRatio = getContrastRatio(bgColor, textColor);
+    return isLargeText ? contrastRatio >= 4.5 : contrastRatio >= 7.0;
+  }
+
+  function updateAccessibilityBorder(element: HTMLDivElement) {
+    // Only check accessibility for default style (no border or shadow variants)
+    if (element.classList.contains('testing-square--border') ||
+        element.classList.contains('testing-square--shadow')) {
+      return;
+    }
+
+    // Get actual computed colors instead of CSS variables
+    const computedStyles = getComputedStyle(element);
+    const bgColor = computedStyles.backgroundColor;
+    const textColor = computedStyles.color;
+
+    // Debug logging
+    console.log('Original background color:', bgColor);
+    console.log('Original text color:', textColor);
+
+    const parsedBg = parseColor(bgColor);
+    const parsedText = parseColor(textColor);
+    console.log('Parsed background RGB:', parsedBg);
+    console.log('Parsed text RGB:', parsedText);
+
+    const isAccessible = meetsWCAGAAA(bgColor, textColor);
+    const contrastRatio = getContrastRatio(bgColor, textColor);
+
+    console.log('Contrast ratio:', contrastRatio);
+    console.log('Is accessible:', isAccessible);
+
+    if (isAccessible) {
+      element.classList.remove('accessibility-fail');
+    } else {
+      element.classList.add('accessibility-fail');
+    }
+
+    // Update contrast ratio display
+    const existingRatio = element.querySelector('.contrast-ratio');
+    if (existingRatio) {
+      existingRatio.textContent = `${contrastRatio.toFixed(2)}:1 ${isAccessible ? '✓' : '✗'}`;
+    } else {
+      const ratioElement = document.createElement('p');
+      ratioElement.className = 'contrast-ratio';
+      ratioElement.textContent = `${contrastRatio.toFixed(2)}:1 ${isAccessible ? '✓' : '✗'}`;
+      element.appendChild(ratioElement);
+    }
+  }
+
+  function swapColors(element: HTMLDivElement) {
+    const currentBg = getComputedStyle(element).getPropertyValue('--bgColor').trim();
+    const currentText = getComputedStyle(element).getPropertyValue('--textColor').trim();
+    element.style.setProperty('--bgColor', currentText);
+    element.style.setProperty('--textColor', currentBg);
+
+    // Recheck accessibility after swap
+    setTimeout(() => updateAccessibilityBorder(element), 0);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const squares = document.querySelectorAll('.testing-square');
+    for (const square of squares) {
+      const squareElement = square as HTMLDivElement;
+
+      // Initial accessibility check
+      updateAccessibilityBorder(squareElement);
+
+      // Add click handler for color swapping
+      squareElement.addEventListener('click', () => swapColors(squareElement));
+    }
+  });
+</script>
+
+<style>
+  .testing-square {
+    width: 160px;
+    height: 160px;
+    background-color: var(--bgColor);
+    color: var(--textColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    gap: 8px;
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      text-align: center;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      user-select: none;
+    }
+
+    &.testing-square--border {
+      border: 2px solid var(--borderColor);
+    }
+
+    &.testing-square--shadow {
+      box-shadow: 0 4px 8px var(--shadowColor);
+    }
+
+    &.accessibility-fail {
+      border: 3px solid #dc2626;
+      outline: 2px solid #ffffff;
+      outline-offset: -5px;
+    }
+
+    .contrast-ratio {
+      font-size: 12px;
+      font-weight: bold;
+      opacity: 0.8;
+      margin-top: 8px;
+    }
+  }
+</style>

@@ -1,0 +1,519 @@
+---
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import Color from '~/components/testing/Color.astro';
+
+const getColorsCSSFile = async () => {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const filePath = path.join(__dirname, "../../../packages/studiocms_ui/src/css/colors-test.css");
+  const colors = await readFile(filePath, 'utf-8');
+  return colors;
+}
+
+interface ColorData {
+  name: string;
+  value: string;
+  theme: 'dark' | 'light' | 'both';
+  position: 'background' | 'text' | 'shadow' | 'border' | 'flat';
+}
+
+const parseColorsFromString = async (colorsString: string): Promise<ColorData[]> => {
+  const colorRegex = /--([\w-]+)\s*:\s*([^;]+);\s*\/\*\s*(\w+)-(background|text|shadow|border|flat)\s*\*\//g;
+  const colors: ColorData[] = [];
+  let match: RegExpExecArray | null;
+  
+  // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+  while ((match = colorRegex.exec(colorsString)) !== null) {
+    const colorName = match[1];
+    const colorValue = match[2].trim();
+    const theme = match[3] as 'dark' | 'light' | 'both';
+    const position = match[4] as 'background' | 'text' | 'shadow' | 'border' | 'flat';
+    
+    colors.push({
+      name: colorName,
+      value: colorValue,
+      theme: theme,
+      position: position
+    });
+  }
+  
+  return colors;
+}
+
+const cssContent = await getColorsCSSFile();
+const colors = await parseColorsFromString(cssContent);
+
+// Simple color classification by position and theme
+const backgrounds = colors.filter(c => c.position === 'background');
+const textColors = colors.filter(c => c.position === 'text');
+const shadowColors = colors.filter(c => c.position === 'shadow');
+const borderColors = colors.filter(c => c.position === 'border');
+const flatColors = colors.filter(c => c.position === 'flat');
+
+// Separate by theme for organized display
+const lightBackgrounds = backgrounds.filter(c => c.theme === 'light');
+const darkBackgrounds = backgrounds.filter(c => c.theme === 'dark');
+const lightTextColors = textColors.filter(c => c.theme === 'light');
+const darkTextColors = textColors.filter(c => c.theme === 'dark');
+const bothTextColors = textColors.filter(c => c.theme === 'both');
+
+// For flat colors testing: we need specific inverted and normal text colors
+const textInverted = textColors.find(c => c.name === 'text-inverted');
+const textNormal = textColors.find(c => c.name === 'text-normal');
+const fallbackInvertedText = { name: 'text-inverted', value: 'hsl(0 0% 0%)', theme: 'both' as const, position: 'text' as const };
+const fallbackNormalText = { name: 'text-normal', value: 'hsl(0 0% 100%)', theme: 'both' as const, position: 'text' as const };
+
+const invertedTextForTesting = textInverted || fallbackInvertedText;
+const normalTextForTesting = textNormal || fallbackNormalText;
+---
+
+<div class="testing-page">
+  <div class="content">
+    <h1>Color Contrast Testing</h1>
+
+    <div class="stats">
+      <p><strong>Backgrounds:</strong> {backgrounds.length} solid ({lightBackgrounds.length} light, {darkBackgrounds.length} dark)</p>
+      <p><strong>Flat Colors:</strong> {flatColors.length} universal (semi-transparent)</p>
+      <p><strong>Text Colors:</strong> {textColors.length} total ({lightTextColors.length} light, {darkTextColors.length} dark, {bothTextColors.length} neutral)</p>
+      <p><strong>Other:</strong> {shadowColors.length} shadows, {borderColors.length} borders</p>
+    </div>
+    
+    <section class="contrast-testing">
+      <h2>Solid Backgrounds: Proper Text Contrast</h2>
+      <p>Light backgrounds with dark text, dark backgrounds with light text</p>
+
+      <div class="contrast-grid">
+        <div class="theme-section" data-theme="light">
+          <h3>Light Backgrounds ({lightBackgrounds.length})</h3>
+          {lightBackgrounds.map(bg => (
+            <div class="background-section">
+              <h4>Background: {bg.name}</h4>
+              <div class="color-row">
+                {[...darkTextColors, ...bothTextColors.filter(t => t.name.includes('dark'))].map(text => (
+                  <Color
+                    bgColor={`var(--${bg.name})`}
+                    textColor={`var(--${text.name})`}
+                    text={`${text.name}`}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="theme-section dark" data-theme="dark">
+          <h3>Dark Backgrounds ({darkBackgrounds.length})</h3>
+          {darkBackgrounds.map(bg => (
+            <div class="background-section dark">
+              <h4>Background: {bg.name}</h4>
+              <div class="color-row">
+                {[...lightTextColors, ...bothTextColors.filter(t => t.name.includes('light'))].map(text => (
+                  <Color
+                    bgColor={`var(--${bg.name})`}
+                    textColor={`var(--${text.name})`}
+                    text={`${text.name}`}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="flat-testing">
+      <h2>Flat Colors: Semi-Transparent Backgrounds</h2>
+      <p>Testing {flatColors.length} flat colors as backgrounds with appropriate text colors</p>
+
+      <div class="flat-grid">
+        <div class="flat-test-section">
+          <h3>Flat Colors as Backgrounds (on White Base)</h3>
+          <p>Flat colors over white with light and dark text</p>
+          <div class="flat-comparison-grid">
+            {flatColors.map(flat => (
+              <div class="flat-color-group">
+                <h4>{flat.name}</h4>
+                <div class="flat-text-tests">
+                  <Color
+                    bgColor={`var(--${flat.name})`}
+                    textColor={`var(--${invertedTextForTesting.name})`}
+                    text="Inverted text"
+                  />
+                  <Color
+                    bgColor={`var(--${flat.name})`}
+                    textColor={`var(--${normalTextForTesting.name})`}
+                    text="Normal text"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="flat-test-section dark-base" data-theme="dark">
+          <h3>Flat Colors as Backgrounds (on Dark Base)</h3>
+          <p>Flat colors over dark backgrounds with light and dark text</p>
+          <div class="flat-comparison-grid">
+            {flatColors.map(flat => (
+              <div class="flat-color-group dark-base-inner">
+                <h4>{flat.name}</h4>
+                <div class="flat-text-tests">
+                  <Color
+                    bgColor={`var(--${flat.name})`}
+                    textColor={`var(--${normalTextForTesting.name})`}
+                    text="Normal text"
+                  />
+                  <Color
+                    bgColor={`var(--${flat.name})`}
+                    textColor={`var(--${invertedTextForTesting.name})`}
+                    text="Inverted text"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="color-reference">
+      <h2>Color Reference</h2>
+
+      <div class="reference-theme-sections">
+        <div class="reference-theme-section light-base" data-theme="light">
+          <h3>Light Theme Reference</h3>
+
+          <div class="reference-grid">
+            <div class="reference-section shadow-section">
+              <h4>Shadow Colors</h4>
+              <div class="color-row">
+                {shadowColors.map(color => (
+                  <Color
+                    bgColor="#ffffff"
+                    textColor={`var(--${color.name})`}
+                    text={`${color.name} (${color.theme})`}
+                    style="shadow"
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div class="reference-section border-section">
+              <h4>Border Colors</h4>
+              <div class="color-row">
+                {borderColors.map(color => (
+                  <Color
+                    bgColor="#ffffff"
+                    textColor={`var(--${color.name})`}
+                    text={`${color.name} (${color.theme})`}
+                    style="border"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reference-theme-section dark-base" data-theme="dark">
+          <h3>Dark Theme Reference</h3>
+
+          <div class="reference-grid">
+            <div class="reference-section shadow-section dark">
+              <h4>Shadow Colors</h4>
+              <div class="color-row">
+                {shadowColors.map(color => (
+                  <Color
+                    bgColor="#000000"
+                    textColor={`var(--${color.name})`}
+                    text={`${color.name} (${color.theme})`}
+                    style="shadow"
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div class="reference-section border-section dark">
+              <h4>Border Colors</h4>
+              <div class="color-row">
+                {borderColors.map(color => (
+                  <Color
+                    bgColor="#000000"
+                    textColor={`var(--${color.name})`}
+                    text={`${color.name} (${color.theme})`}
+                    style="border"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<style>
+@import '../../../packages/studiocms_ui/src/css/colors-test.css';
+
+.testing-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f5f5f5;
+
+  .content {
+    max-width: 1450px;
+    margin: 0 auto;
+  }
+}
+
+.stats {
+  background: #f5f5f5;
+  padding: 20px;
+  
+  margin-bottom: 30px;
+  border-left: 4px solid #007acc;
+
+  p {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+}
+
+.contrast-grid {
+  margin: 20px 0;
+}
+
+.theme-section {
+  margin-bottom: 40px;
+  padding-block: 20px;
+  
+  background: #f5f5f5;
+
+  &.dark {
+    background: #0F0F0F;
+    color: #eee;
+  }
+}
+
+.theme-section h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-block: 12px;
+  background: #007acc;
+  color: #fff;
+  
+  text-align: center;
+  font-size: 18px;
+}
+
+.background-section {
+  margin-bottom: 30px;
+  
+  padding-block: 15px;
+  background: #f5f5f5;
+
+  &.dark {
+    background: #0F0F0F;
+    color: #eee;
+  }
+}
+
+.background-section h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: #0F0F0F;
+  color: #fff;
+  
+  text-align: center;
+  font-size: 14px;
+}
+
+.flat-grid {
+  margin: 20px 0;
+}
+
+.flat-test-section {
+  margin-bottom: 40px;
+  padding-block: 20px;
+  
+  background: #f5f5f5;
+
+  &.dark-base {
+    background: #0F0F0F;
+    color: #eee;
+    padding-inline: 20px;
+  }
+}
+
+.flat-test-section h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  padding-block: 12px;
+  background: #6a5acd;
+  color: #fff;
+  
+  text-align: center;
+  font-size: 16px;
+}
+
+.flat-test-section p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.flat-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.flat-color-group {
+  background: #f5f5f5;
+  
+  padding-block: 15px;
+
+  .dark-base & {
+    background: #0F0F0F;
+  }
+
+  &.dark-base-inner {
+    background: #0F0F0F;
+  }
+}
+
+.flat-color-group h4 {
+  margin: 0 0 12px 0;
+  padding-block: 8px;
+  background: #0F0F0F;
+  color: #fff;
+  
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  .dark-base-inner & {
+    background: #666;
+    color: #eee;
+  }
+}
+
+.flat-text-tests {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.flat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.color-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.reference-theme-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.reference-theme-section {
+  padding: 30px;
+
+  &.light-base {
+    background: #f5f5f5;
+    color: #333;
+  }
+
+  &.dark-base {
+    background: #0F0F0F;
+    color: #eee;
+  }
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+
+    .light-base & {
+      background: #007acc;
+      color: #fff;
+    }
+
+    .dark-base & {
+      background: #4169E1;
+      color: #fff;
+    }
+  }
+}
+
+.reference-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.reference-section {
+  padding: 20px;
+
+  &.shadow-section {
+    background: #f5f5f5;
+
+    &.dark {
+      background: #0F0F0F;
+    }
+  }
+
+  &.border-section {
+    background: #f5f5f5;
+
+    &.dark {
+      background: #0F0F0F;
+    }
+  }
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ddd;
+    font-size: 16px;
+    text-align: center;
+
+    .dark-base & {
+      color: #eee;
+      border-bottom-color: #555;
+    }
+  }
+}
+
+section {
+  margin: 40px 0;
+  padding-block: 30px;
+  
+  background: #f5f5f5;
+}
+
+section h2 {
+  margin-top: 0;
+  color: #222;
+  border-bottom: 3px solid #007acc;
+  padding-bottom: 12px;
+  font-size: 24px;
+}
+</style>
