@@ -72,7 +72,7 @@ const iconSizes = {
     class="sui-checkmark-container"
     tabindex="0"
     role="checkbox"
-    aria-checked={defaultChecked}
+    aria-checked={defaultChecked || "false"}
     aria-labelledby={`label-${name}`}
   >
     <Checkmark
@@ -90,7 +90,7 @@ const iconSizes = {
       class="sui-checkbox"
       value={value}
       hidden
-      aria-checked={defaultChecked}
+      aria-checked={defaultChecked || "false"}
     />
   </div>
   <span id={`label-${name}`}>
