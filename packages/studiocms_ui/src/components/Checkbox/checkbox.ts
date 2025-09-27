@@ -27,6 +27,7 @@ function loadCheckboxes() {
 
 		box.addEventListener('change', (e) => {
 			box.parentElement!.ariaChecked = (e.target as HTMLInputElement).checked ? 'true' : 'false';
+			box.ariaChecked = (e.target as HTMLInputElement).checked ? 'true' : 'false';
 		});
 	}
 }
