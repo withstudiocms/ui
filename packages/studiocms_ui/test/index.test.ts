@@ -2,7 +2,7 @@ import type { IconifyJSON } from '@iconify/types';
 import type { AstroIntegration } from 'astro';
 import { describe, expect, expectTypeOf, test } from 'vitest';
 import integration from '../src/index';
-import { createIconifyPrefixCollection } from '../src/index';
+import { createIconifyCollection } from '../src/index';
 
 describe('Astro Integration', () => {
 	test('should correctly setup integration for Astro', () => {
@@ -24,10 +24,11 @@ describe('Astro Integration', () => {
 
 describe('createIconifyPrefixCollection', () => {
 	test('returns empty arrays when no icons are provided', () => {
-		const result = createIconifyPrefixCollection();
-		expect(result.iconCollections).toEqual([]);
-		expect(result.integrationCollections).toEqual([]);
+		const result = createIconifyCollection();
+		expect(result.collections).toEqual({});
+		expect(result.integrationCollections).toEqual(undefined);
 		expect(result.availableIcons).toEqual([]);
+		expect(result.collectionNames).toEqual([]);
 	});
 
 	test('returns correct collections for a single icon set', () => {
@@ -44,10 +45,10 @@ describe('createIconifyPrefixCollection', () => {
 				height: 24,
 			},
 		};
-		const result = createIconifyPrefixCollection(icons);
+		const result = createIconifyCollection(icons);
 
-		expect(result.iconCollections).toEqual(['testicons']);
-		expect(result.integrationCollections[0]).toContain('export const testicons');
+		expect(result.collections).toEqual({ testicons: icons.testicons });
+		expect(result.integrationCollections).toContain('export const collections = {"testicons"');
 		expect(result.availableIcons).toEqual(['testicons:foo', 'testicons:bar']);
 	});
 
@@ -68,19 +69,21 @@ describe('createIconifyPrefixCollection', () => {
 				height: 32,
 			},
 		};
-		const result = createIconifyPrefixCollection(icons);
+		const result = createIconifyCollection(icons);
 
-		expect(result.iconCollections).toEqual(['set1', 'set2']);
-		expect(result.integrationCollections.length).toBe(2);
+		expect(result.collections).toEqual({
+			set1: icons.set1,
+			set2: icons.set2,
+		});
 		expect(result.availableIcons).toEqual(['set1:a', 'set1:b', 'set2:x', 'set2:y', 'set2:z']);
 	});
 
 	test('handles empty icons object', () => {
 		const icons: Record<string, IconifyJSON> = {};
-		const result = createIconifyPrefixCollection(icons);
+		const result = createIconifyCollection(icons);
 
-		expect(result.iconCollections).toEqual([]);
-		expect(result.integrationCollections).toEqual([]);
+		expect(result.collections).toEqual({});
+		expect(result.integrationCollections).toEqual('export const collections = {};');
 		expect(result.availableIcons).toEqual([]);
 	});
 });

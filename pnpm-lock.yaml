@@ -21,9 +21,6 @@ catalogs:
     astro:
       specifier: ^5.13.8
       version: 5.13.8
-    pathe:
-      specifier: ^1.1.2
-      version: 1.1.2
     typescript:
       specifier: ^5.7.2
       version: 5.7.2
@@ -204,12 +201,12 @@ importers:
       '@iconify/types':
         specifier: ^2.0.0
         version: 2.0.0
+      astro-integration-kit:
+        specifier: ^0.19.0
+        version: 0.19.0(astro@5.13.8(@types/node@24.5.2)(jiti@2.4.2)(rollup@4.50.2)(typescript@5.7.2)(yaml@2.6.1))
       astro-transition-event-polyfill:
         specifier: ^1.1.0
         version: 1.1.0(astro@5.13.8(@types/node@24.5.2)(jiti@2.4.2)(rollup@4.50.2)(typescript@5.7.2)(yaml@2.6.1))
-      pathe:
-        specifier: 'catalog:'
-        version: 1.1.2
       vite:
         specifier: catalog:peers
         version: 6.3.6(@types/node@24.5.2)(jiti@2.4.2)(yaml@2.6.1)
@@ -1651,6 +1648,11 @@ packages:
     resolution: {integrity: sha512-Tvdc7RV0G92BbtyEOsfJtXU35w41CkM94fOAzxbQP67Wj5jArfserJ321FO4XA7WG9QMV0GIBmQq77NBIRDzpQ==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0
+
+  astro-integration-kit@0.19.0:
+    resolution: {integrity: sha512-ftDrem91kJZoenhpJJfRtB29D/bmNglEp2oOXqF1uL5yODZauGIy3tDgIbec0UEMp6tNuky4tfWseUXpej5Dng==}
+    peerDependencies:
+      astro: ^4.14.0 || ^5.0.0
 
   astro-transition-event-polyfill@1.1.0:
     resolution: {integrity: sha512-DhR5MAcNl6zsTu5bU60vAe+nBZLTW61zNFUU6DX1gNSiFDQbQiRC7ft322kAMRDRir7MJIQ5/hCMcEWx3jDNWA==}
@@ -5715,6 +5717,11 @@ snapshots:
     dependencies:
       astro: 5.13.8(@types/node@24.5.2)(jiti@2.4.2)(rollup@4.50.2)(typescript@5.7.2)(yaml@2.6.1)
       rehype-expressive-code: 0.38.3
+
+  astro-integration-kit@0.19.0(astro@5.13.8(@types/node@24.5.2)(jiti@2.4.2)(rollup@4.50.2)(typescript@5.7.2)(yaml@2.6.1)):
+    dependencies:
+      astro: 5.13.8(@types/node@24.5.2)(jiti@2.4.2)(rollup@4.50.2)(typescript@5.7.2)(yaml@2.6.1)
+      pathe: 1.1.2
 
   astro-transition-event-polyfill@1.1.0(astro@5.13.8(@types/node@24.5.2)(jiti@2.4.2)(rollup@4.50.2)(typescript@5.7.2)(yaml@2.6.1)):
     dependencies:

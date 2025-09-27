@@ -1,6 +1,8 @@
 // This file contains the default types for 'studiocms:ui/icons' module
 
 declare module 'studiocms:ui/icons' {
+	export type Collections = { heroicons: import('@studiocms/ui/types').IconifyJSON };
+	export const collections: Collections;
 	export const availableIcons: (
 		| 'heroicons:academic-cap'
 		| 'heroicons:academic-cap-16-solid'
@@ -1292,8 +1294,6 @@ declare module 'studiocms:ui/icons' {
 		| 'heroicons:x-mark-solid'
 	)[];
 	export const iconCollections: 'heroicons'[];
-
-	export const heroicons: import('@studiocms/ui/types').IconifyJSON;
 
 	export type AvailableIcons = (typeof availableIcons)[number];
 	export type IconCollections = (typeof iconCollections)[number];

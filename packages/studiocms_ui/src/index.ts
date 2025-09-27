@@ -5,9 +5,10 @@ import fs from 'node:fs';
 import { icons as heroicons } from '@iconify-json/heroicons';
 import type { IconifyJSON } from '@iconify/types';
 import type { AstroIntegration } from 'astro';
+import { addVirtualImports, createResolver } from 'astro-integration-kit';
 import transitionEventPolyfill from 'astro-transition-event-polyfill';
 import { studiocmsLogo } from './toolbar/icon.js';
-import { addVirtualImports, createResolver } from './utils/integration-utils.js';
+import { generateIconTypes } from './utils/typegen.js';
 const pkgJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf-8'));
 
 type Options = {
@@ -46,49 +47,34 @@ type Options = {
 	icons?: Record<string, IconifyJSON>;
 };
 
-/**
- * Creates a collection of icon prefixes, integration collections, and available icons from the provided IconifyJSON records.
- *
- * @param {Record<string, IconifyJSON>} [icons] - An optional record of icon collections keyed by their prefix.
- * @returns {object} An object containing:
- * - `iconCollections`: An array of icon collection prefixes.
- * - `integrationCollections`: An array of strings representing the export statements for each icon collection.
- * - `availableIcons`: An array of strings representing the available icons in the format `prefix:icon`.
- */
-export function createIconifyPrefixCollection(icons?: Record<string, IconifyJSON>): {
-	iconCollections: string[];
-	integrationCollections: string[];
+type IconifyCollections = {
+	collections: Record<string, IconifyJSON>;
+	collectionNames: string[];
+	integrationCollections: string | undefined;
 	availableIcons: string[];
-} {
-	const iconCollections: string[] = [];
+};
 
-	const integrationCollections: string[] = [];
-
+export function createIconifyCollection(icons?: Record<string, IconifyJSON>): IconifyCollections {
+	const collections: Record<string, IconifyJSON> = {};
+	const collectionNames: string[] = [];
 	const availableIcons: string[] = [];
 
 	if (!icons) {
-		return {
-			iconCollections,
-			integrationCollections,
-			availableIcons,
-		};
+		return { collections, collectionNames, integrationCollections: undefined, availableIcons };
 	}
 
 	for (const [prefix, collection] of Object.entries(icons)) {
-		iconCollections.push(prefix);
-
-		integrationCollections.push(`export const ${prefix} = ${JSON.stringify(collection)};`);
+		collections[prefix] = collection;
+		collectionNames.push(prefix);
 
 		for (const icon of Object.keys(collection.icons)) {
 			availableIcons.push(`${prefix}:${icon}`);
 		}
 	}
 
-	return {
-		iconCollections,
-		integrationCollections,
-		availableIcons,
-	};
+	const integrationCollections = `export const collections = ${JSON.stringify(collections)};`;
+
+	return { collections, collectionNames, integrationCollections, availableIcons };
 }
 
 /**
@@ -106,13 +92,10 @@ export default function integration(options: Options = {}): AstroIntegration {
 		heroicons,
 	};
 
-	let icons: {
-		iconCollections: string[];
-		integrationCollections: string[];
-		availableIcons: string[];
-	} = {
-		iconCollections: [],
-		integrationCollections: [],
+	let icons: IconifyCollections = {
+		collections: {},
+		collectionNames: [],
+		integrationCollections: undefined,
 		availableIcons: [],
 	};
 
@@ -137,7 +120,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 					}
 				}
 
-				icons = createIconifyPrefixCollection(optIcons);
+				icons = createIconifyCollection(optIcons);
 
 				const componentMap: Record<string, string> = {
 					'studiocms:ui/components/button': `export { default as Button } from '${resolve('./components/Button/Button.astro')}';`,
@@ -231,11 +214,9 @@ export default function integration(options: Options = {}): AstroIntegration {
 						`,
 
 						'studiocms:ui/icons': `
-							${icons.integrationCollections.join('\n')}
-
+							${icons.integrationCollections ? icons.integrationCollections : ''}
 							export const availableIcons = ${JSON.stringify(icons.availableIcons)};
-
-							export const iconCollections = ${JSON.stringify(icons.iconCollections)};
+							export const iconCollections = ${JSON.stringify(icons.collectionNames)};
 						`,
 					},
 				});
@@ -258,24 +239,20 @@ export default function integration(options: Options = {}): AstroIntegration {
 				});
 			},
 			'astro:config:done': ({ injectTypes }) => {
-				injectTypes({
-					filename: 'icons.d.ts',
-					content: `
-						declare module 'studiocms:ui/icons' {
-							export const availableIcons: ('${icons.availableIcons.join("'\n | '")}')[];
-							export const iconCollections: ('${icons.iconCollections.join("'\n | '")}')[];
-
-							${icons.iconCollections
-								.map((collection) => {
-									return `export const ${collection}: import('@studiocms/ui/types').IconifyJSON;`;
-								})
-								.join('\n')}
-
-							export type AvailableIcons = (typeof availableIcons)[number];
-							export type IconCollections = (typeof iconCollections)[number];
-						}
-					`,
-				});
+				injectTypes(
+					generateIconTypes('icons.d.ts', {
+						collections:
+							icons.collections && Object.keys(icons.collections).length > 0
+								? `${Object.keys(icons.collections)
+										.map((collection) => {
+											return `'${collection}': import('@studiocms/ui/types').IconifyJSON;`;
+										})
+										.join('\n')}`
+								: 'export const collections: Record<string, import("@studiocms/ui/types").IconifyJSON>;',
+						availableIcons: `('${icons.availableIcons.join("'\n | '")}')[]`,
+						iconCollections: `('${icons.collectionNames.join("'\n | '")}')[]`,
+					})
+				);
 			},
 			/* v8 ignore stop */
 		},
