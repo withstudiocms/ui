@@ -12,121 +12,108 @@
 	/* Default Styles (Dark Mode) */
 	--background-base: hsl(0 0% 6%);
 	--background-step-1: hsl(0 0% 8%);
-	--background-step-2: hsl(0 0% 10%);
-	--background-step-3: hsl(0 0% 14%);
-
+	--background-step-2: hsl(0, 0%, 9%);
+	--background-step-3: hsl(0, 0%, 12%);
 	--text-normal: hsl(0 0% 100%);
-	--text-dimmed: hsl(0 0% 80%);
-	--text-muted: hsl(0 0% 54%);
+	--text-dimmed: hsl(0 0% 100% / 0.8);
+	--text-muted: hsl(0 0% 100% / 0.75);
 	--text-inverted: hsl(0 0% 0%);
-
-	--border: hsl(240 5% 17%);
-
-	--shadow: hsl(0 0% 0% / 0.5);
-
-	--default-base: hsl(0 0% 14%);
-	--default-hover: hsl(0 0% 21%);
-	--default-active: hsl(0 0% 15%);
-
-	--primary-base: hsl(259 83% 73%);
-	--primary-hover: hsl(259 77% 78%);
-	--primary-active: hsl(259 73% 67%);
-
-	--success-base: hsl(142 71% 46%);
-	--success-hover: hsl(142 72% 61%);
-	--success-active: hsl(142 87% 52%);
-
-	--warning-base: hsl(48 96% 53%);
-	--warning-hover: hsl(48 97% 70%);
-	--warning-active: hsl(48 100% 61%);
-
-	--danger-base: hsl(339 97% 31%);
-	--danger-hover: hsl(337 98% 37%);
-	--danger-active: hsl(337 88% 32%);
-
-	--info-base: hsl(217 92% 52%);
-	--info-hover: hsl(214 95% 58%);
-	--info-active: hsl(214 85% 52%);
-
+	--text-inverted-dimmed: hsl(0 0% 0% / 0.7);
+	--text-inverted-muted: hsl(0 0% 0% / 0.65);
+	--border: hsl(240 5% 17%); 
+	--shadow: hsl(0 0% 0% / 0.6);
+	--default-base: hsl(0, 0%, 12%);
+	--default-hover: hsl(0, 0%, 17%);
+	--default-active: hsl(0, 0%, 14%);
+	--primary-base: hsl(259, 60%, 71%);
+	--primary-hover: hsl(259, 71%, 79%);
+	--primary-active: hsl(259, 75%, 74%);
+	/* Meant for borders, not for use as text or background colors */
+	--primary-vibrant: hsl(259, 75%, 74%);
+	--success-base: hsl(142, 69%, 46%);
+	--success-hover: hsl(142, 67%, 59%);
+	--success-active: hsl(142, 84%, 55%);
+	--warning-base: hsl(48, 92%, 55%);
+	--warning-hover: hsl(48, 95%, 66%);
+	--warning-active: hsl(48, 93%, 58%);
+	--danger-base: hsl(339, 91%, 22%);
+	--danger-hover: hsl(337, 90%, 27%);
+	--danger-active: hsl(337, 90%, 25%);
+	/* Meant for borders, not for use as text or background colors */
+	--danger-vibrant: hsl(339, 91%, 42%);
+	--info-base: hsl(214, 96%, 22%);
+	--info-hover: hsl(214, 92%, 26%);
+	--info-active: hsl(214, 94%, 24%);
+	/* Meant for borders, not for use as text or background colors */
+	--info-vibrant: hsl(214, 84%, 49%);
 	--mono-base: hsl(0 0% 100%);
 	--mono-hover: hsl(0 0% 90%);
 	--mono-active: hsl(0 0% 95%);
-
 	/* Non-specific variables */
 	--text-light: hsl(0 0% 100%);
-	--text-dark: hsl(0 0% 0%);
-
+	--text-dark: hsl(0 0% 0%); 
 	/* Flat colorways since they use variables */
 	--default-flat: hsl(0 0% 14% / 0.5);
 	--default-flat-hover: hsl(0 0% 14% / 0.75);
 	--default-flat-active: hsl(0 0% 14% / 0.85);
-
 	--primary-flat: hsl(259 83% 73% / 0.1);
 	--primary-flat-hover: hsl(259 83% 73% / 0.25);
 	--primary-flat-active: hsl(259 83% 73% / 0.35);
-
 	--success-flat: hsl(142 71% 46% / 0.1);
 	--success-flat-hover: hsl(142 71% 46% / 0.25);
 	--success-flat-active: hsl(142 71% 46% / 0.35);
-
 	--warning-flat: hsl(48 96% 53% / 0.1);
 	--warning-flat-hover: hsl(48 96% 53% / 0.25);
 	--warning-flat-active: hsl(48 96% 53% / 0.35);
-
 	--danger-flat: hsl(339 97% 31% / 0.1);
 	--danger-flat-hover: hsl(339 97% 31% / 0.25);
 	--danger-flat-active: hsl(339 97% 31% / 0.35);
-
 	--info-flat: hsl(217 92% 52% / 0.1);
 	--info-flat-hover: hsl(217 92% 52% / 0.25);
 	--info-flat-active: hsl(217 92% 52% / 0.35);
-
-	--mono-flat: hsl(0 0% 100% / 0.1);
-	--mono-flat-hover: hsl(0 0% 100% / 0.25);
-	--mono-flat-active: hsl(0 0% 100% / 0.35);
+	--mono-flat: hsla(0, 0%, 70%, 0.1);
+	--mono-flat-hover: hsl(0 0% 70% / 0.25);
+	--mono-flat-active: hsl(0 0% 70% / 0.35);
 }
-
 [data-theme="light"] {
 	/* Light Mode Styles */
 	--background-base: hsl(0 0% 97%);
-	--background-step-1: hsl(0 0% 90%);
-	--background-step-2: hsl(0 0% 85%);
-	--background-step-3: hsl(0 0% 80%);
-
+	--background-step-1: hsl(0 0% 92%);
+	--background-step-2: hsl(0 0% 87%);
+	--background-step-3: hsl(0 0% 83%);
 	--text-normal: hsl(0 0% 0%);
-	--text-dimmed: hsl(0 0% 12%);
-	--text-muted: hsl(0 0% 24%);
+	--text-dimmed: hsl(0 0% 0% / 0.8);
+	--text-muted: hsl(0 0% 0% / 0.75);
 	--text-inverted: hsl(0 0% 100%);
-
-	--border: hsl(263 5% 68%);
-
-	--shadow: hsl(0 0% 65% / 0.5);
-
-	--default-base: hsl(0 0% 74%);
-	--default-hover: hsl(0 0% 81%);
-	--default-active: hsl(0 0% 91%);
-
-	--primary-base: hsl(259 85% 61%);
-	--primary-hover: hsl(259 78% 56%);
-	--primary-active: hsl(259 71% 50%);
-
-	--success-base: hsl(142 59% 47%);
-	--success-hover: hsl(142 62% 56%);
-	--success-active: hsl(142 87% 59%);
-
-	--warning-base: hsl(48 92% 46%);
-	--warning-hover: hsl(48 88% 43%);
-	--warning-active: hsl(48 85% 40%);
-
-	--danger-base: hsl(339 97% 31%);
-	--danger-hover: hsl(337 98% 37%);
-	--danger-active: hsl(337 88% 45%);
-
-	--info-base: hsl(217 92% 52%);
-	--info-hover: hsl(214 95% 58%);
-	--info-active: hsl(214 85% 52%);
-
-	--mono-base: hsl(0 0% 0%);
-	--mono-hover: hsl(0 0% 10%);
-	--mono-active: hsl(0 0% 5%);
+	--text-inverted-dimmed: hsl(0 0% 100% / 0.85);
+	--text-inverted-muted: hsl(0 0% 100% / 0.75);
+	--border: hsl(263 5% 68%); 
+	--shadow: hsl(0 0% 65% / 0.6);
+	--default-base: hsl(0, 0%, 82%);
+	--default-hover: hsl(0, 0%, 91%);
+	--default-active: hsl(0, 0%, 86%);
+	--primary-base: hsl(259, 74%, 25%);
+	--primary-hover: hsl(259, 76%, 35%);
+	--primary-active: hsl(259, 76%, 32%);
+	/* Meant for borders, not for use as text or background colors */
+	--primary-vibrant: hsl(259, 75%, 45%);
+	--success-base: hsl(142, 60%, 44%);
+	--success-hover: hsl(142, 60%, 55%);
+	--success-active: hsl(142 60% 50%);
+	--warning-base: hsl(48, 84%, 42%);
+	--warning-hover: hsl(48, 85%, 49%);
+	--warning-active: hsl(48, 86%, 45%);
+	--danger-base: hsl(339, 93%, 15%);
+	--danger-hover: hsl(337, 88%, 22%);
+	--danger-active: hsl(337, 89%, 19%);
+	/* Meant for borders, not for use as text or background colors */
+	--danger-vibrant: hsl(339, 86%, 38%);
+	--info-base: hsl(214, 96%, 22%);
+	--info-hover: hsl(214, 92%, 26%);
+	--info-active: hsl(214, 94%, 24%);
+	/* Meant for borders, not for use as text or background colors */
+	--info-vibrant: hsl(214, 88%, 39%);
+	--mono-base: hsl(0 0% 10%);
+	--mono-hover: hsl(0 0% 16%);
+	--mono-active: hsl(0 0% 14%);
 }

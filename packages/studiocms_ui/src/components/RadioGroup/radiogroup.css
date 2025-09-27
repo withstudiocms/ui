@@ -16,7 +16,7 @@
 }
 
 .req-star {
-	color: var(--danger-base);
+	color: var(--danger-vibrant);
 	font-weight: 700;
 }
 
@@ -68,13 +68,13 @@
 }
 
 .sui-radio-container.danger .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
-	background-color: var(--danger-base);
-	outline-color: var(--danger-base);
+	background-color: var(--danger-vibrant);
+	outline-color: var(--danger-vibrant);
 }
 
 .sui-radio-container.info .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
-	background-color: var(--info-base);
-	outline-color: var(--info-base);
+	background-color: var(--info-vibrant);
+	outline-color: var(--info-vibrant);
 }
 
 .sui-radio-container.mono .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {

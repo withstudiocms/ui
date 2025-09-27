@@ -59,7 +59,7 @@ const iconSizes = {
 	lg: 24,
 };
 ---
-<label 
+<label
   class="sui-checkmark-label"
   for={name}
   class:list={[
@@ -72,9 +72,9 @@ const iconSizes = {
     class="sui-checkmark-container"
     tabindex="0"
     role="checkbox"
-    aria-checked={defaultChecked} 
+    aria-checked={defaultChecked || "false"}
     aria-labelledby={`label-${name}`}
-    >
+  >
     <Checkmark
       class={'sui-checkmark'}
       width={iconSizes[size]}
@@ -88,8 +88,9 @@ const iconSizes = {
       disabled={disabled}
       required={isRequired}
       class="sui-checkbox"
-	  value={value}
+      value={value}
       hidden
+      aria-checked={defaultChecked || "false"}
     />
   </div>
   <span id={`label-${name}`}>
@@ -97,5 +98,5 @@ const iconSizes = {
   </span>
 </label>
 <script>
-import "studiocms:ui/scripts/checkbox"
+import "studiocms:ui/scripts/checkbox";
 </script>

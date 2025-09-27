@@ -28,6 +28,10 @@ footer.sui-footer {
 	padding: 0 !important;
 }
 
+.links ul > li {
+	margin-bottom: .5rem;
+}
+
 .links ul li,
 .links ul li * {
 	color: var(--text-normal) !important;
@@ -41,6 +45,7 @@ footer.sui-footer {
 .sui-footer-link-label {
 	font-size: 1.125em;
 	font-weight: 700;
+	margin-bottom: .75rem !important;
 }
 
 .separator {
