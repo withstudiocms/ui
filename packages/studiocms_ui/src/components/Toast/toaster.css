@@ -70,11 +70,11 @@
 }
 
 .sui-toast-container.danger .sui-toast-header-left-side svg {
-	color: var(--danger-base);
+	color: var(--danger-vibrant);
 }
 
 .sui-toast-container.info .sui-toast-header-left-side svg {
-	color: var(--info-base);
+	color: var(--info-vibrant);
 }
 
 .sui-toast-container.mono .sui-toast-header-left-side svg {
@@ -104,11 +104,11 @@
 }
 
 .sui-toast-container.danger .sui-toast-progress-bar {
-	background-color: var(--danger-base);
+	background-color: var(--danger-vibrant);
 }
 
 .sui-toast-container.info .sui-toast-progress-bar {
-	background-color: var(--info-base);
+	background-color: var(--info-vibrant);
 }
 
 .close-icon-container {

@@ -22,7 +22,7 @@
 }
 
 .req-star {
-	color: var(--danger-base);
+	color: var(--danger-vibrant);
 	font-weight: 700;
 }
 
@@ -165,7 +165,6 @@
 	cursor: default;
 	position: relative;
 	padding-right: 2rem;
-	border-block: 1.5px solid rgba(0, 0, 0, 0);
 }
 
 .sui-search-select-badge-container .sui-search-select-badge.sui-badge svg {
