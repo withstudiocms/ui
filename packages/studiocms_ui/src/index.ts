@@ -139,7 +139,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 					'studiocms:ui/components/card': `export { default as Card } from '${resolve('./components/Card/Card.astro')}';`,
 					'studiocms:ui/components/modal': `
 						export { default as Modal } from '${resolve('./components/Modal/Modal.astro')}';
-						export { ModalHelper } from '${resolve('./components/Modal/modal.js')}';	
+						export { ModalHelper } from '${resolve('./components/Modal/modal.js')}';
 					`,
 					'studiocms:ui/components/select': `
 						export { default as Select } from '${resolve('./components/Select/Select.astro')}';
@@ -147,7 +147,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 					`,
 					'studiocms:ui/components/dropdown': `
 						export { default as Dropdown } from '${resolve('./components/Dropdown/Dropdown.astro')}';
-						export { DropdownHelper } from '${resolve('./components/Dropdown/dropdown.js')}';	
+						export { DropdownHelper } from '${resolve('./components/Dropdown/dropdown.js')}';
 					`,
 					'studiocms:ui/components/user': `export { default as User } from '${resolve('./components/User/User.astro')}';`,
 					'studiocms:ui/components/tabs': `
@@ -229,8 +229,6 @@ export default function integration(options: Options = {}): AstroIntegration {
 					injectScript('page-ssr', `import 'studiocms:ui/custom-css';`);
 				}
 
-				// TODO: @louisescher this needs a different icon please...
-				// UI Should not be confused with StudioCMS itself
 				addDevToolbarApp({
 					id: 'studiocms-ui-toolbar',
 					name: 'StudioCMS/UI',
