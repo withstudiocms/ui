@@ -184,7 +184,7 @@
 }
 
 .sui-dropdown-option.danger {
-	color: var(--danger-base);
+	color: var(--danger-vibrant);
 }
 
 .sui-dropdown-option.danger:hover {
@@ -193,7 +193,7 @@
 }
 
 .sui-dropdown-option.info {
-	color: var(--info-base);
+	color: var(--info-vibrant);
 }
 
 .sui-dropdown-option.info:hover {

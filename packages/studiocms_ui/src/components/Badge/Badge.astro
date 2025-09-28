@@ -5,6 +5,15 @@ import type { AvailableIcons } from 'studiocms:ui/icons';
 import type { HTMLAttributes } from 'astro/types';
 import Icon from '../Icon/Icon.astro';
 
+/**
+ * The variant of the badge.
+ */
+type BadgeVariant = 'flat' | 'outlined';
+/**
+ * @deprecated The `default` variant is deprecated and will be removed in a future release. Use `flat` or `outlined` instead.
+ */
+type DeprecatedBadgeVariants = 'default';
+
 interface Props extends Omit<HTMLAttributes<'span'>, 'color'> {
 	/**
 	 * The color of the badge. Defaults to `primary`.
@@ -23,9 +32,9 @@ interface Props extends Omit<HTMLAttributes<'span'>, 'color'> {
 	 */
 	size?: 'sm' | 'md' | 'lg';
 	/**
-	 * The variant of the badge. Defaults to `default`.
+	 * The variant of the badge. Defaults to `outlined`. The `default` variant is deprecated and will be removed in a future release.
 	 */
-	variant?: 'default' | 'flat' | 'outlined';
+	variant?: BadgeVariant | DeprecatedBadgeVariants;
 	/**
 	 * The rounding of the badge. Full is a half-circle, semi is a quarter-circle. Defaults to `full`.
 	 */
@@ -40,7 +49,7 @@ const {
 	color = 'primary',
 	icon,
 	size = 'md',
-	variant = 'default',
+	variant = 'outlined',
 	rounding = 'full',
 	iconPosition = 'left',
 	label,

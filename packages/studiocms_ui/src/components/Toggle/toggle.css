@@ -83,11 +83,11 @@
 }
 
 .sui-toggle-label.danger .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
-	background-color: var(--danger-base);
+	background-color: var(--danger-vibrant);
 }
 
 .sui-toggle-label.info .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
-	background-color: var(--info-base);
+	background-color: var(--info-vibrant);
 }
 
 .sui-toggle-label.mono .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
@@ -99,7 +99,7 @@
 }
 
 .req-star {
-	color: var(--danger-base);
+	color: var(--danger-vibrant);
 	font-weight: 700;
 }
 

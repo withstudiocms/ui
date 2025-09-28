@@ -12,102 +12,64 @@
 	border-radius: var(--radius-md);
 }
 
-.sui-badge.primary {
-	background-color: var(--primary-base);
-	color: var(--text-inverted);
-}
-
 .sui-badge.primary.flat,
 .sui-badge.primary.outlined {
 	background-color: var(--primary-flat);
-	color: var(--primary-base);
+	color: var(--text-normal);
 }
 
 .sui-badge.primary.outlined {
-	border: 1px solid var(--primary-base);
-}
-
-.sui-badge.success {
-	background-color: var(--success-base);
-	color: var(--text-inverted);
+	border: 1px solid var(--primary-vibrant);
 }
 
 .sui-badge.success.flat,
 .sui-badge.success.outlined {
 	background-color: var(--success-flat);
-	color: var(--success-base);
+	color: var(--text-normal);
 }
 
 .sui-badge.success.outlined {
 	border: 1px solid var(--success-base);
 }
 
-.sui-badge.warning {
-	background-color: var(--warning-base);
-	color: var(--text-inverted);
-}
-
 .sui-badge.warning.flat,
 .sui-badge.warning.outlined {
 	background-color: var(--warning-flat);
-	color: var(--warning-base);
+	color: var(--text-normal);
 }
 
 .sui-badge.warning.outlined {
 	border: 1px solid var(--warning-base);
 }
 
-.sui-badge.danger {
-	background-color: var(--danger-base);
-	color: var(--text-normal);
-}
-
 .sui-badge.danger.flat,
 .sui-badge.danger.outlined {
 	background-color: var(--danger-flat);
-	color: var(--danger-base);
+	color: var(--text-normal);
 }
 
 .sui-badge.danger.outlined {
-	border: 1px solid var(--danger-base);
-}
-
-.sui-badge.info {
-	background-color: var(--info-base);
-	color: var(--text-normal);
+	border: 1px solid var(--danger-vibrant);
 }
 
 .sui-badge.info.flat,
 .sui-badge.info.outlined {
 	background-color: var(--info-flat);
-	color: var(--info-base);
+	color: var(--text-normal);
 }
 
 .sui-badge.info.outlined {
-	border: 1px solid var(--info-base);
-}
-
-.sui-badge.mono {
-	background-color: var(--mono-base);
-	color: var(--text-inverted);
+	border: 1px solid var(--info-vibrant);
 }
 
 .sui-badge.mono.flat,
 .sui-badge.mono.outlined {
 	background-color: var(--mono-flat);
-	color: var(--mono-base);
+	color: var(--text-normal);
 }
 
 .sui-badge.mono.outlined {
 	border: 1px solid var(--mono-base);
-}
-
-[data-theme="light"] .sui-badge.danger {
-	color: var(--text-inverted);
-}
-
-[data-theme="light"] .sui-badge.info {
-	color: var(--text-inverted);
 }
 
 .sui-badge.sm {

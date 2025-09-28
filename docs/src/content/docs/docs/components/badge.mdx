@@ -60,10 +60,15 @@ The badge component has support for the following colors:
 
 ### Variants
 
+:::caution[Deprecated value]
+The `default` value for the `variant` prop is deprecated and will be removed in a future release.
+Please use `outlined` instead.
+:::
+
+
 <Tabs>
   <TabItem label="Preview">
     <PreviewCard>
-      <Badge label="Default" variant="default" />
       <Badge label="Outlined" variant="outlined" />
       <Badge label="Flat" variant="flat" />
     </PreviewCard>
@@ -74,7 +79,6 @@ The badge component has support for the following colors:
     import { Badge } from 'studiocms:ui/components/badge';
     ---
 
-    <Badge label="Default" variant="default" />
     <Badge label="Outlined" variant="outlined" />
     <Badge label="Flat" variant="flat" />
     ```
