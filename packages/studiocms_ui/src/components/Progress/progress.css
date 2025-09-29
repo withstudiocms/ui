@@ -9,7 +9,7 @@
 .sui-progress-slider {
 	height: 100%;
 	width: 0;
-	transition: all .75s ease;
+	transition: all 0.75s ease;
 	border-radius: var(--radius-sm);
 	background-color: var(--primary-base);
 }

@@ -20,7 +20,7 @@
 	--text-inverted: hsl(0 0% 0%);
 	--text-inverted-dimmed: hsl(0 0% 0% / 0.7);
 	--text-inverted-muted: hsl(0 0% 0% / 0.65);
-	--border: hsl(240 5% 17%); 
+	--border: hsl(240 5% 17%);
 	--shadow: hsl(0 0% 0% / 0.6);
 	--default-base: hsl(0, 0%, 12%);
 	--default-hover: hsl(0, 0%, 17%);
@@ -51,7 +51,7 @@
 	--mono-active: hsl(0 0% 95%);
 	/* Non-specific variables */
 	--text-light: hsl(0 0% 100%);
-	--text-dark: hsl(0 0% 0%); 
+	--text-dark: hsl(0 0% 0%);
 	/* Flat colorways since they use variables */
 	--default-flat: hsl(0 0% 14% / 0.5);
 	--default-flat-hover: hsl(0 0% 14% / 0.75);
@@ -87,7 +87,7 @@
 	--text-inverted: hsl(0 0% 100%);
 	--text-inverted-dimmed: hsl(0 0% 100% / 0.85);
 	--text-inverted-muted: hsl(0 0% 100% / 0.75);
-	--border: hsl(263 5% 68%); 
+	--border: hsl(263 5% 68%);
 	--shadow: hsl(0 0% 65% / 0.6);
 	--default-base: hsl(0, 0%, 82%);
 	--default-hover: hsl(0, 0%, 91%);

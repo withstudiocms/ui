@@ -1,13 +1,13 @@
 ---
 import {
 	type AvailableIcons,
-	type IconCollections,
 	collections,
+	type IconCollections,
 	iconCollections,
 } from 'studiocms:ui/icons';
 import type { HTMLAttributes } from 'astro/types';
+import { errorHintBuilder, StudioCMS_UI_IconError } from './errors.js';
 import IconBase from './IconBase.astro';
-import { StudioCMS_UI_IconError, errorHintBuilder } from './errors.js';
 
 /**
  * Props interface for the Icon component.

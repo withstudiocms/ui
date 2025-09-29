@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+// biome-ignore lint/correctness/noUnusedImports: Tests
 import { type Theme, ThemeHelper } from '../../src/utils/ThemeHelper';
 
 function createThemeProvider() {

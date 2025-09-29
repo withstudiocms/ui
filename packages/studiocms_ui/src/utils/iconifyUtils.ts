@@ -296,7 +296,6 @@ export function getIconsTree(data: IconifyJSON, names?: string[]): ParentIconsTr
 
 	function resolve(name: string): ParentIconsList | null {
 		if (icons[name]) {
-			// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 			return (resolved[name] = []);
 		}
 
@@ -440,7 +439,6 @@ export function replaceIDs(
 	// Find all IDs
 	const ids: string[] = [];
 	let match: RegExpExecArray | null;
-	// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 	while ((match = regex.exec(body))) {
 		ids.push(match[1]!);
 	}

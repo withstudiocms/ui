@@ -2,9 +2,8 @@
 import '@fontsource-variable/onest/index.css';
 import '@fontsource-variable/fira-code/index.css';
 
-import { Footer, Modal, Toaster } from 'studiocms:ui/components';
-
 import { getCollection } from 'astro:content';
+import { Footer, Modal, Toaster } from 'studiocms:ui/components';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import BlueSkyLogo from '~/assets/bsky.svg';
 import DiscordLogo from '~/assets/discord.svg';
@@ -12,11 +11,11 @@ import GitHubLogo from '~/assets/github.svg';
 import LogoAdaptive from '~/assets/logo-adaptive.svg';
 import PatreonLogo from '~/assets/patreon.svg';
 import TwitterLogo from '~/assets/twitter.svg';
-import Newsletter from '~/components/Newsletter.astro';
 import EcosystemSection from '~/components/landing/EcosystemSection.astro';
 import HeroSection from '~/components/landing/HeroSection.astro';
 import ShowcaseSection from '~/components/landing/ShowcaseSection.astro';
 import SocialProofSection from '~/components/landing/SocialProofSection.astro';
+import Newsletter from '~/components/Newsletter.astro';
 
 const socialProofEntries = await getCollection('socialproof');
 

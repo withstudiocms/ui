@@ -1,8 +1,7 @@
 import type { IconifyJSON } from '@iconify/types';
 import type { AstroIntegration } from 'astro';
 import { describe, expect, expectTypeOf, test } from 'vitest';
-import integration from '../src/index';
-import { createIconifyCollection } from '../src/index';
+import integration, { createIconifyCollection } from '../src/index';
 
 describe('Astro Integration', () => {
 	test('should correctly setup integration for Astro', () => {

@@ -2,9 +2,9 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: .5rem;
+	gap: 0.5rem;
 	position: relative;
-	margin: .25rem 0;
+	margin: 0.25rem 0;
 }
 
 .sui-toggle-label.disabled {
@@ -23,7 +23,7 @@
 	display: flex;
 	align-items: center;
 	cursor: pointer;
-	transition: all .15s ease;
+	transition: all 0.15s ease;
 	background-color: var(--default-base);
 	width: var(--toggle-width);
 	height: var(--toggle-height);
@@ -38,7 +38,7 @@
 	border-radius: var(--radius-full);
 	position: relative;
 	left: 0;
-	transition: all .15s ease;
+	transition: all 0.15s ease;
 	will-change: transform;
 }
 

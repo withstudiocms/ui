@@ -240,7 +240,7 @@ function loadSelects() {
 			`.sui-select-option[value='${id}']`
 		) as HTMLOptionElement;
 
-		const max = Number.parseInt(container?.dataset.multipleMax as string);
+		const max = Number.parseInt(container?.dataset.multipleMax as string, 10);
 		const selectedCount = container?.querySelectorAll('.sui-select-option.selected').length ?? 0;
 
 		const selectedCountEl = container?.querySelector(
@@ -274,7 +274,7 @@ function loadSelects() {
 		) as NodeListOf<HTMLLIElement>;
 
 		for (const entry of optionElements) {
-			if (Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex) {
+			if (Number.parseInt(entry.dataset.optionIndex!, 10) === state.focusIndex) {
 				entry.classList.add('focused');
 			} else {
 				entry.classList.remove('focused');

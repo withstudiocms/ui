@@ -2,7 +2,7 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: .25rem;
+	gap: 0.25rem;
 	position: relative;
 }
 
@@ -17,12 +17,12 @@
 }
 
 .sui-input {
-	padding: .5rem 1rem;
+	padding: 0.5rem 1rem;
 	border-radius: var(--radius-md);
 	border: 1px solid var(--border);
 	background: var(--background-step-2);
 	color: var(--text-normal);
-	transition: all .15s ease;
+	transition: all 0.15s ease;
 	width: 100%;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .sui-input-desc {
-	font-size: .825rem;
+	font-size: 0.825rem;
 }
 
 .input-icon {
