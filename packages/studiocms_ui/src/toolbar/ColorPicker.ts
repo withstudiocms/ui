@@ -23,6 +23,7 @@ export default class DevToolbarColorPicker extends HTMLElement {
 	}
 
 	setColor(color: string) {
+		this.dataset.color = color;
 		this.input.value = color;
 	}
 }
