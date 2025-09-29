@@ -1,13 +1,26 @@
 // @vitest-environment jsdom
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import {
-	type default as DevToolbarColorPicker,
+	default as DevToolbarColorPicker,
 } from '../../src/toolbar/ColorPicker';
 
-// TODO @louisescher please do this
-describe.todo('DevToolbarColorPicker', () => {
-	let colorPicker: DevToolbarColorPicker;
-	it.todo('sets and gets color correctly', (props) => {
+describe('DevToolbarColorPicker', () => {
+	let devToolbarColorPicker: DevToolbarColorPicker;
 
+	beforeAll(() => {
+		customElements.define('dev-toolbar-color-picker', DevToolbarColorPicker);
+	});
+
+	it('sets and gets color correctly', () => {
+		devToolbarColorPicker = new DevToolbarColorPicker();
+		devToolbarColorPicker.setColor("#bd0249");
+
+		expect(devToolbarColorPicker.getColor()).toBe("#bd0249");
+	});
+
+	it('gets a color even when not set beforehand', () => {
+		devToolbarColorPicker = new DevToolbarColorPicker();
+
+		expect(devToolbarColorPicker.getColor()).toBe("#000000");
 	});
 });
