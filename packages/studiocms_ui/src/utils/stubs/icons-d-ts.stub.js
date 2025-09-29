@@ -1,9 +1,0 @@
-declare module 'studiocms:ui/icons' {
-    export type Collections = { $$COLLECTIONS$$ };
-    export const collections: Collections;
-    export const availableIcons: $$AVAILABLE_ICONS$$;
-    export const iconCollections: $$ICON_COLLECTIONS$$;
-
-    export type AvailableIcons = (typeof availableIcons)[number];
-    export type IconCollections = (typeof iconCollections)[number];
-}

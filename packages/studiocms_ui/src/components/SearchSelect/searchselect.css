@@ -38,13 +38,10 @@
 .sui-search-select-dropdown {
 	position: absolute;
 	width: 100%;
-	border: 1px solid var(--border);
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	flex-direction: column;
-	border-radius: var(--radius-md);
-	background-color: var(--background-step-2);
 	overflow: hidden;
 	top: calc(100% + 0.25rem);
 	left: 0;
@@ -134,8 +131,8 @@
 
 .sui-search-select-indicator {
 	position: absolute;
-	bottom: .675rem;
-	right: .675rem;
+	bottom: 0.675rem;
+	right: 0.675rem;
 }
 
 .sui-search-input-wrapper:has(input:focus) + .sui-search-select-dropdown {
@@ -177,7 +174,9 @@
 	border-radius: 999px;
 	cursor: pointer;
 	outline: 1px solid transparent;
-	transition: background-color 0.15s ease, outline 0.15s ease;
+	transition:
+		background-color 0.15s ease,
+		outline 0.15s ease;
 }
 
 .sui-search-select-badge-container .sui-search-select-badge.sui-badge svg:hover {

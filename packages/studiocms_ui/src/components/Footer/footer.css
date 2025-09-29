@@ -29,7 +29,7 @@ footer.sui-footer {
 }
 
 .links ul > li {
-	margin-bottom: .5rem;
+	margin-bottom: 0.5rem;
 }
 
 .links ul li,
@@ -45,7 +45,7 @@ footer.sui-footer {
 .sui-footer-link-label {
 	font-size: 1.125em;
 	font-weight: 700;
-	margin-bottom: .75rem !important;
+	margin-bottom: 0.75rem !important;
 }
 
 .separator {

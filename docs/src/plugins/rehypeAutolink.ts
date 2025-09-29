@@ -1,8 +1,8 @@
 import { toString as toStr } from 'hast-util-to-string';
 import { h } from 'hastscript';
 import { escape as esc } from 'html-escaper';
-import rehypeAutoLink from 'rehype-autolink-headings';
 import type { Options as rehypeAutolinkHeadingsOptions } from 'rehype-autolink-headings';
+import rehypeAutoLink from 'rehype-autolink-headings';
 import type { RehypePlugin } from './rehype.types';
 
 const AnchorLinkIcon = h(

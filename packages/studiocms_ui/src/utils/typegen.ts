@@ -12,7 +12,7 @@ export function generateIconTypes(
 		iconCollections: string;
 	}
 ): InjectedType {
-	const stubFile = fs.readFileSync(resolve('./stubs/icons-d-ts.stub.js'), 'utf-8');
+	const stubFile = fs.readFileSync(resolve('./stubs/icons-d-ts.stub'), 'utf-8');
 	const outputFile = stubFile
 		.replace('$$COLLECTIONS$$', replacers.collections)
 		.replace('$$AVAILABLE_ICONS$$', replacers.availableIcons)

@@ -2,13 +2,14 @@
 /// <reference path="./virtuals.d.ts" preserve="true" />
 
 import fs from 'node:fs';
-import { icons as heroicons } from '@iconify-json/heroicons';
 import type { IconifyJSON } from '@iconify/types';
+import { icons as heroicons } from '@iconify-json/heroicons';
 import type { AstroIntegration } from 'astro';
 import { addVirtualImports, createResolver } from 'astro-integration-kit';
 import transitionEventPolyfill from 'astro-transition-event-polyfill';
 import { studiocmsLogo } from './toolbar/icon.js';
 import { generateIconTypes } from './utils/typegen.js';
+
 const pkgJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf-8'));
 
 type Options = {

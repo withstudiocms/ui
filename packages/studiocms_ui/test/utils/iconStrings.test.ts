@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { type ValidIconString, getIconString } from '../../src/utils/iconStrings';
+import { getIconString, type ValidIconString } from '../../src/utils/iconStrings';
 
 const icons: ValidIconString[] = [
 	'check-circle',
@@ -25,7 +25,6 @@ describe('getIconString', () => {
 	});
 
 	it('should return correct SVG for each ValidIconString', () => {
-		// biome-ignore lint/complexity/noForEach: this is okay in tests
 		icons.forEach((icon) => {
 			const result = getIconString(icon, 'cls', 24, 24);
 			expect(result).toContain(`class="cls"`);

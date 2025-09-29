@@ -8,7 +8,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["**/.astro/**", "**/package.json", "**/dist/**"]
+    "includes": ["**", "!**/.astro", "!**/package.json", "!**/dist"]
   },
   "formatter": {
     "lineWidth": 100,
@@ -25,32 +25,37 @@
       "indentStyle": "space"
     }
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "suspicious": {
         "noExplicitAny": "warn",
-        "noImplicitAnyLet": "info"
+        "noImplicitAnyLet": "info",
+        "noAssignInExpressions": "off"
       },
       "style": {
         "noNonNullAssertion": "off",
-        "noParameterAssign": "info",
-        "useSingleVarDeclarator": "info"
+        "noParameterAssign": "off",
+        "useSingleVarDeclarator": "info",
+        "noDescendingSpecificity": "off"
       },
       "complexity": {
-        "noForEach": "off"
+        "noForEach": "off",
+        "noImportantStyles": "off"
       }
     }
   },
   "overrides": [
     {
-      "include": ["*.astro"],
+      "includes": ["**/*.astro"],
       "linter": {
         "rules": {
+          "correctness": {
+            "noUnusedImports": "off",
+            "noUnusedVariables": "off"
+          },
           "style": {
             "useConst": "off",
             "useImportType": "off"

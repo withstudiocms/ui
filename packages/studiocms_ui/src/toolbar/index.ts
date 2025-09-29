@@ -68,9 +68,9 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
 	});
 
 	const observer = new MutationObserver((mutations) => {
-		mutations.map((m) => {
+		mutations.forEach((m) => {
 			if (m.type !== 'attributes' || m.attributeName !== 'data-theme') return;
-			rows.map((row) => {
+			rows.forEach((row) => {
 				const theme = document.documentElement.dataset.theme ?? 'dark';
 				const picker = row.children[1]?.firstElementChild as DevToolbarColorPicker;
 				const variable = picker.dataset.variable!;
@@ -269,7 +269,7 @@ function createRadiiTable(): TableAndVariables {
 			numberInput.value = (
 				initialValue.includes('rem')
 					? Number.parseFloat(initialValue.split('rem')[0]!) * 16
-					: Number.parseInt(initialValue.split('px')[0]!)
+					: Number.parseInt(initialValue.split('px')[0]!, 10)
 			).toString();
 			delete map.dark![variable];
 			resetButton.disabled = true;
@@ -284,7 +284,7 @@ function createRadiiTable(): TableAndVariables {
 		numberInput.value = (
 			initialValue.includes('rem')
 				? Number.parseFloat(initialValue.split('rem')[0]!) * 16
-				: Number.parseInt(initialValue.split('px')[0]!)
+				: Number.parseInt(initialValue.split('px')[0]!, 10)
 		).toString();
 
 		numberInput.addEventListener('input', () => {

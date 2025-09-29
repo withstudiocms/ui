@@ -91,7 +91,9 @@
 	background-color: var(--default-base);
 }
 .sui-tooltip-popup.animate {
-	transition: opacity 0.2s ease-out, visibility 0.2s;
+	transition:
+		opacity 0.2s ease-out,
+		visibility 0.2s;
 }
 
 .sui-tooltip-pointer {

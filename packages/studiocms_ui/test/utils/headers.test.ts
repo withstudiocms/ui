@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
+	createHead,
+	getAttr,
 	type HeadConfig,
 	HeadConfigSchema,
 	type HeadUserConfig,
-	createHead,
-	getAttr,
 	hasOneOf,
 	hasTag,
 	headDefaults,

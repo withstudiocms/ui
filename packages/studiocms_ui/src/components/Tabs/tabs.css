@@ -32,7 +32,7 @@
 	margin-top: 0 !important;
 	display: flex;
 	flex-direction: row;
-	gap: .5rem;
+	gap: 0.5rem;
 	cursor: pointer;
 	position: relative;
 	min-width: fit-content;
@@ -42,7 +42,7 @@
 	border-radius: var(--radius-md);
 	height: 40px;
 	padding: 0.5rem 0.75rem;
-	transition: all .15s ease;
+	transition: all 0.15s ease;
 	font-size: 0.875em;
 	outline: 2px solid transparent;
 	outline-offset: 2px;

@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: allowed for tests */
 import { describe, expect, it } from 'vitest';
 import {
 	calculateSize,

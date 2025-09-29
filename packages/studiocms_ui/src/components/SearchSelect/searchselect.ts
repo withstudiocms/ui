@@ -56,7 +56,14 @@ function loadSearchSelects() {
 	const createSelectBadge = (value: string, label: string): HTMLSpanElement => {
 		const badge = document.createElement('span');
 
-		badge.classList.add('sui-badge', 'primary', 'sm', 'outlined', 'full', 'sui-search-select-badge');
+		badge.classList.add(
+			'sui-badge',
+			'primary',
+			'sm',
+			'outlined',
+			'full',
+			'sui-search-select-badge'
+		);
 		badge.setAttribute('data-value', value);
 		badge.innerHTML = `${label} <svg style='min-width: 8px' xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24' role="button" tabindex="0"><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 18L18 6M6 6l12 12'></path></svg>`;
 
@@ -79,8 +86,8 @@ function loadSearchSelects() {
 		}
 
 		for (const value of selectedValues.sort((a, b) => {
-			const numA = Number.parseInt(a.match(/\d+/)?.[0] || '0');
-			const numB = Number.parseInt(b.match(/\d+/)?.[0] || '0');
+			const numA = Number.parseInt(a.match(/\d+/)?.[0] || '0', 10);
+			const numB = Number.parseInt(b.match(/\d+/)?.[0] || '0', 10);
 			return numA - numB;
 		})) {
 			const option = allOptions.find((opt) => opt.value === value);
@@ -123,7 +130,7 @@ function loadSearchSelects() {
 	): boolean => {
 		const currentSelected = state.selectedOptionsMap[container.dataset.id as string] || [];
 		const isCurrentlySelected = currentSelected.includes(value);
-		const max = Number.parseInt(container.dataset.multipleMax as string);
+		const max = Number.parseInt(container.dataset.multipleMax as string, 10);
 
 		if (!isCurrentlySelected && !Number.isNaN(max) && currentSelected.length >= max) {
 			return false;
@@ -176,7 +183,7 @@ function loadSearchSelects() {
 		) as NodeListOf<HTMLLIElement>;
 
 		for (const entry of optionElements) {
-			if (Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex) {
+			if (Number.parseInt(entry.dataset.optionIndex!, 10) === state.focusIndex) {
 				entry.classList.add('focused');
 			} else {
 				entry.classList.remove('focused');
@@ -420,7 +427,7 @@ function loadSearchSelects() {
 			) as NodeListOf<HTMLLIElement>;
 
 			const focusedOption = Array.from(optionElements).find(
-				(entry) => Number.parseInt(entry.dataset.optionIndex!) === state.focusIndex
+				(entry) => Number.parseInt(entry.dataset.optionIndex!, 10) === state.focusIndex
 			);
 
 			if (
