@@ -5,6 +5,6 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	integrations: [ui()],
 	devToolbar: {
-		enabled: true,
+		enabled: false,
 	},
 });
