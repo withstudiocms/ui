@@ -28,6 +28,6 @@ describe('DevToolbarColorPicker', () => {
 		devToolbarColorPicker = new DevToolbarColorPicker();
 		devToolbarColorPicker.setColor("#bd0249");
 
-		expect(devToolbarColorPicker.dataset.color).toBe("devToolbarColorPicker");
+		expect(devToolbarColorPicker.dataset.color).toBe("#bd0249");
 	});
 });
