@@ -39,7 +39,9 @@ describe('DevToolbarColorPicker', () => {
 		const wrapper = makeWrapper();
 		wrapper.innerHTML = `<dev-toolbar-color-picker data-color="#bd0249"></dev-toolbar-color-picker>`;
 
-		const inputValue = (wrapper.firstElementChild?.shadowRoot?.firstElementChild as HTMLInputElement).value;
-		expect(inputValue).toBe("#bd0249");
+		const inputValue = (
+			wrapper.firstElementChild?.shadowRoot?.firstElementChild as HTMLInputElement
+		).value;
+		expect(inputValue).toBe('#bd0249');
 	});
 });
