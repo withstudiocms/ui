@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../.astro/collections/socialproof.schema.json",
+  "avatar": "/socialproof/k16e.jpg",
+  "name": "k16e",
+  "handle": "@k16e",
+  "message": "This is so satisfying... to think we could do it on vanilla js and all html inside of Astro without any frontend frameworks, is just amazing! Let's keep going!"
+}

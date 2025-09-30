@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../.astro/collections/socialproof.schema.json",
+  "avatar": "/socialproof/trueberryless.jpg",
+  "name": "Felix Schneider",
+  "handle": "@trueberryless",
+  "message": "Once upon a time, there was only Astro — beautiful, but lonely, with no UI library to share its light. Then, out of nowhere, a divine whisper reached me: StudioCMS UI. It opened the gates to a paradise of components and elegance… and they’ve been the best ever since 🍍🪸"
+}
