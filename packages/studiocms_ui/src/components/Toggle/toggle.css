@@ -34,7 +34,7 @@
 	--switch: calc(var(--toggle-height) * 1.75);
 	height: var(--switch);
 	width: var(--switch);
-	background-color: var(--text-muted);
+	background-color: var(--background-gray);
 	border-radius: var(--radius-full);
 	position: relative;
 	left: 0;
@@ -71,7 +71,7 @@
 }
 
 .sui-toggle-label.primary .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
-	background-color: var(--primary-base);
+	background-color: var(--primary-vibrant);
 }
 
 .sui-toggle-label.success .sui-toggle-container:has(.sui-toggle-checkbox:checked) {
