@@ -52,7 +52,7 @@
 .sl-link-button {
 	background-color: var(--sl-color-accent-bleached) !important;
 	color: white !important;
-	transition: all .15s ease !important;
+	transition: all 0.15s ease !important;
 	gap: 1rem !important;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .sl-link-button:first-of-type:not(.discord-button) svg {
-	transition: transform .15s ease !important;
+	transition: transform 0.15s ease !important;
 }
 
 .sl-link-button:first-of-type:hover:not(.discord-button) > svg {

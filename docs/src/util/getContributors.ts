@@ -1,6 +1,6 @@
 import type { AstroGlobal } from 'astro';
 import { cachedFetch } from '../util-server';
-import { StudioCMSServiceAccounts, contributorConfig } from './contributors.config';
+import { contributorConfig, StudioCMSServiceAccounts } from './contributors.config';
 
 export interface Contributor {
 	login: string;
@@ -37,7 +37,7 @@ const printError = (e: Error) =>
  * @throws {Error} - Throws an error if the request to the endpoint fails.
  */
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: Reasons
 async function recursiveFetch(endpoint: string, page?: number): Promise<any[]> {
 	const pageNumber = page || 1;
 

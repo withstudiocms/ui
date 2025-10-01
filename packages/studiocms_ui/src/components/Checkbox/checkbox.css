@@ -2,45 +2,48 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: .5rem;
+	gap: 0.5rem;
 	position: relative;
-	margin: .25rem 0;
+	margin: 0.25rem 0;
 }
 
 .sui-checkmark-label.disabled {
 	opacity: 0.5;
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .sui-checkmark-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: hsl(var(--default-base));
-	border: 2px solid hsl(var(--default-base));
+	background-color: var(--default-base);
+	border: 2px solid var(--default-base);
 	border-radius: var(--radius-md);
 	cursor: pointer;
-	transition: background-color .15s, border .15s, transform .15s;
+	transition:
+		background-color 0.15s,
+		border 0.15s,
+		transform 0.15s;
 	transition-timing-function: ease;
 }
 
 .sui-checkmark-container:focus-visible {
-	outline: 2px solid hsl(var(--text-normal));
+	outline: 2px solid var(--text-normal);
 	outline-offset: 2px;
 }
 
 .sui-checkmark-label:hover .sui-checkmark-container {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-checkmark-label:active .sui-checkmark-container {
-	background-color: hsl(var(--default-active));
+	background-color: var(--default-active);
 	scale: 0.9;
 }
 
 .sui-checkmark-label.sm {
-	font-size: .875em;
+	font-size: 0.875em;
 }
 
 .sui-checkmark-label.sm .sui-checkmark-container {
@@ -60,41 +63,41 @@
 .sui-checkmark-label.lg .sui-checkmark-container {
 	width: 1.75rem;
 	height: 1.75rem;
-	padding: .125rem;
+	padding: 0.125rem;
 }
 
 .primary .sui-checkmark-container:has(.sui-checkbox:checked) {
-	border-color: hsl(var(--primary-base));
-	background-color: hsl(var(--primary-base));
+	border-color: var(--primary-base);
+	background-color: var(--primary-base);
 }
 
 .success .sui-checkmark-container:has(.sui-checkbox:checked) {
-	border-color: hsl(var(--success-base));
-	background-color: hsl(var(--success-base));
+	border-color: var(--success-base);
+	background-color: var(--success-base);
 }
 
 .warning .sui-checkmark-container:has(.sui-checkbox:checked) {
-	border-color: hsl(var(--warning-base));
-	background-color: hsl(var(--warning-base));
+	border-color: var(--warning-base);
+	background-color: var(--warning-base);
 }
 
 .danger .sui-checkmark-container:has(.sui-checkbox:checked) {
-	border-color: hsl(var(--danger-base));
-	background-color: hsl(var(--danger-base));
+	border-color: var(--danger-base);
+	background-color: var(--danger-base);
 }
 
 .info .sui-checkmark-container:has(.sui-checkbox:checked) {
-	border-color: hsl(var(--info-base));
-	background-color: hsl(var(--info-base));
+	border-color: var(--info-base);
+	background-color: var(--info-base);
 }
 
 .mono .sui-checkmark-container:has(.sui-checkbox:checked) {
-	border-color: hsl(var(--mono-base));
-	background-color: hsl(var(--mono-base));
+	border-color: var(--mono-base);
+	background-color: var(--mono-base);
 }
 
 .req-star {
-	color: hsl(var(--danger-base));
+	color: var(--danger-vibrant);
 	font-weight: 700;
 }
 
@@ -107,32 +110,32 @@
 }
 
 .sui-checkmark polyline {
-	transition: all .15s ease;
-	color: hsl(var(--text-normal));
+	transition: all 0.15s ease;
+	color: var(--text-normal);
 }
 
 .primary .sui-checkmark polyline {
-	color: hsl(var(--text-inverted));
+	color: var(--text-inverted);
 }
 
 .success .sui-checkmark polyline {
-	color: hsl(var(--text-dark));
+	color: var(--text-dark);
 }
 
 .warning .sui-checkmark polyline {
-	color: hsl(var(--text-dark));
+	color: var(--text-dark);
 }
 
 .danger .sui-checkmark polyline {
-	color: hsl(var(--text-light));
+	color: var(--text-light);
 }
 
 .info .sui-checkmark polyline {
-	color: hsl(var(--text-light));
+	color: var(--text-light);
 }
 
 .mono .sui-checkmark polyline {
-	color: hsl(var(--text-inverted));
+	color: var(--text-inverted);
 }
 
 .sui-checkmark-container:has(.sui-checkbox:checked) {

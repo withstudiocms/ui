@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Skeleton Component > renders Skeleton component correctly 1`] = `"<div class="sui-skeleton sui-skeleton-card sui-skeleton-column sui-skeleton-align-center sui-skeleton-justify-center sui-skeleton-radii-lg" style="gap: 0.5rem;">  </div>"`;
+
+exports[`Skeleton Component > renders Skeleton component with variant: 'block' 1`] = `"<div class="sui-skeleton sui-skeleton-block sui-skeleton-radii-lg sui-skeleton-anim-slide" style="width: 100px; height: 100px;">  </div>"`;
+
+exports[`Skeleton Component > renders Skeleton component with variant: 'circle' 1`] = `"<div class="sui-skeleton sui-skeleton-circle sui-skeleton-anim-slide" style="width: 50%; height: 8rem;">  </div>"`;
+
+exports[`Skeleton Component > renders Skeleton component with variant: 'text' 1`] = `"<div class="sui-skeleton sui-skeleton-text sui-skeleton-radii-lg sui-skeleton-anim-slide" style>  </div>"`;

@@ -99,7 +99,7 @@ export default function getThumURL(options: IThumURLOptions) {
 					break;
 				case 'md5': {
 					// Add 300 seconds to the current time for a 5 minute expiry
-					const expires = new Date().getTime() + 1000 * 300;
+					const expires = Date.now() + 1000 * 300;
 
 					const hash = md5(auth.secret + expires + url);
 					thumUrl += `/auth/${auth.keyId}-${expires}-${hash}`;

@@ -1,0 +1,29 @@
+---
+import { Button } from 'studiocms:ui/components/button';
+import { Dropdown } from 'studiocms:ui/components/dropdown';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Dropdown
+            id="dropdown"
+            options={[
+                { label: "Option 1", value: "opt-1" },
+                { label: "Option 2", value: "opt-2" },
+            ]}
+            align="start"
+        >
+            <Button> Trigger Dropdown </Button>
+        </Dropdown>
+    </div>
+
+    <script>
+        import { DropdownHelper } from "studiocms:ui/components/dropdown";
+
+        new DropdownHelper("dropdown");
+    </script>
+</Layout>

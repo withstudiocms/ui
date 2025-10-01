@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Group Component > renders Group component correctly 1`] = `
+"<div class="sui-group"> <button tabindex="0" class="sui-button md primary solid">  Button 1  </button>
+<button tabindex="0" class="sui-button md primary solid">  Button 2  </button>
+<button tabindex="0" class="sui-button md primary solid">  Button 3  </button> </div>"
+`;

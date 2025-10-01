@@ -29,6 +29,7 @@ function loadToggles() {
 			(box.previousSibling as HTMLDivElement).ariaChecked = (e.target as HTMLInputElement).checked
 				? 'true'
 				: 'false';
+			box.ariaChecked = (e.target as HTMLInputElement).checked ? 'true' : 'false';
 		});
 	}
 }

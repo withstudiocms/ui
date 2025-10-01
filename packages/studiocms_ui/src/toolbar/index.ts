@@ -1,3 +1,8 @@
+/* v8 ignore start */
+/**
+ * Astro dev toolbar app, ignored by v8 for coverage purposes as it requires
+ * the Astro dev environment to run properly.
+ */
 import { defineToolbarApp } from 'astro/toolbar';
 import DevToolbarColorPicker from './ColorPicker.js';
 
@@ -63,9 +68,9 @@ function createRows(variables: string[]): HTMLTableRowElement[] {
 	});
 
 	const observer = new MutationObserver((mutations) => {
-		mutations.map((m) => {
+		mutations.forEach((m) => {
 			if (m.type !== 'attributes' || m.attributeName !== 'data-theme') return;
-			rows.map((row) => {
+			rows.forEach((row) => {
 				const theme = document.documentElement.dataset.theme ?? 'dark';
 				const picker = row.children[1]?.firstElementChild as DevToolbarColorPicker;
 				const variable = picker.dataset.variable!;
@@ -97,9 +102,9 @@ function createStyles(): HTMLStyleElement {
       transition: transform 0.15s, background-color 0.15s, border-color 0.15s, color 0.15s;
       transition-timing-function: ease;
       cursor: pointer;
-      background-color: hsl(var(--primary-base));
-      border-color: hsl(var(--primary-base));
-      color: hsl(var(--text-inverted));
+      background-color: var(--primary-base);
+      border-color: var(--primary-base);
+      color: var(--text-inverted);
       min-width: fit-content;
       will-change: transform;
       text-decoration: none;
@@ -110,11 +115,11 @@ function createStyles(): HTMLStyleElement {
     }
 
     button:hover {
-      background-color: hsl(var(--primary-hover));
+      background-color: var(--primary-hover);
     }
 
     button:active {
-      background-color: hsl(var(--primary-active));
+      background-color: var(--primary-active);
     }
 
     button:disabled {
@@ -264,7 +269,7 @@ function createRadiiTable(): TableAndVariables {
 			numberInput.value = (
 				initialValue.includes('rem')
 					? Number.parseFloat(initialValue.split('rem')[0]!) * 16
-					: Number.parseInt(initialValue.split('px')[0]!)
+					: Number.parseInt(initialValue.split('px')[0]!, 10)
 			).toString();
 			delete map.dark![variable];
 			resetButton.disabled = true;
@@ -279,7 +284,7 @@ function createRadiiTable(): TableAndVariables {
 		numberInput.value = (
 			initialValue.includes('rem')
 				? Number.parseFloat(initialValue.split('rem')[0]!) * 16
-				: Number.parseInt(initialValue.split('px')[0]!)
+				: Number.parseInt(initialValue.split('px')[0]!, 10)
 		).toString();
 
 		numberInput.addEventListener('input', () => {
@@ -359,3 +364,4 @@ export default defineToolbarApp({
 });
 
 customElements.define('dev-toolbar-color-picker', DevToolbarColorPicker);
+/* v8 ignore stop */

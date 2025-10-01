@@ -1,6 +1,6 @@
 import type { ToastProps } from '../../types/index.js';
 import { generateID } from '../../utils/generateID.js';
-import { type ValidIconString, getIconString } from '../../utils/iconStrings.js';
+import { getIconString, type ValidIconString } from '../../utils/iconStrings.js';
 
 let activeToasts: string[] = [];
 
@@ -46,7 +46,7 @@ class Timer {
 
 		this.running = false;
 		clearTimeout(this.id);
-		this.remaining -= new Date().getTime() - this.started.getTime();
+		this.remaining -= Date.now() - this.started.getTime();
 	};
 
 	getTimeLeft = () => {
@@ -105,12 +105,16 @@ function createToast(props: ToastProps) {
 
 	if (props.type === 'success') {
 		iconString = 'check-circle';
+		toastContainer.classList.add('success');
 	} else if (props.type === 'danger') {
 		iconString = 'exclamation-circle';
+		toastContainer.classList.add('danger');
 	} else if (props.type === 'warning') {
 		iconString = 'exclamation-triangle';
+		toastContainer.classList.add('warning');
 	} else {
 		iconString = 'information-circle';
+		toastContainer.classList.add('info');
 	}
 
 	const toastIcon = getIconString(iconString, 'toast-icon', 24, 24);
@@ -158,7 +162,7 @@ function createToast(props: ToastProps) {
 		const timer = new Timer(
 			() => removeToast(toastID),
 			props.duration ||
-				(toastParent.dataset.duration ? Number.parseInt(toastParent.dataset.duration) : 4000)
+				(toastParent.dataset.duration ? Number.parseInt(toastParent.dataset.duration, 10) : 4000)
 		);
 
 		const timerPauseWrapper = () => {

@@ -1,0 +1,29 @@
+---
+import { Button } from 'studiocms:ui/components/button';
+import { Toaster } from 'studiocms:ui/components/toaster';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <Toaster />
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Button id="trigger"> Show Toast </Button>
+    </div>
+
+    <script>
+        import { toast } from "studiocms:ui/components/toaster";
+
+        const trigger = document.getElementById("trigger")!;
+        trigger.addEventListener("click", () => {
+            toast({
+                title: "This is a toast!",
+                description: "Hi there!",
+                type: "info",
+                persistent: true
+            });
+        });
+    </script>
+</Layout>

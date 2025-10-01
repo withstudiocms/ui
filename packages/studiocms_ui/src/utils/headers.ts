@@ -91,7 +91,7 @@ export const headDefaults = (
 	return headDefaults;
 };
 
-const HeadSchema = HeadConfigSchema();
+export const HeadSchema = HeadConfigSchema();
 
 export type HeadUserConfig = z.input<ReturnType<typeof HeadConfigSchema>>;
 export type HeadConfig = z.output<ReturnType<typeof HeadConfigSchema>>;
@@ -104,14 +104,16 @@ export type HeadConfig = z.output<ReturnType<typeof HeadConfigSchema>>;
  * is `<meta name="description" content="B">`. Tests against `name`,
  * `property`, and `http-equiv` attributes for `<meta>` tags.
  */
-function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
+export function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
 	switch (entry.tag) {
 		case 'title':
 			return head.some(({ tag }) => tag === 'title');
 		case 'meta':
 			return hasOneOf(head, entry, ['name', 'property', 'http-equiv']);
 		default:
+			/* v8 ignore start */
 			return false;
+		/* v8 ignore stop */
 	}
 }
 
@@ -119,7 +121,7 @@ function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
  * Test if a head config object contains a tag of the same type
  * as `entry` and a matching attribute for one of the passed `keys`.
  */
-function hasOneOf(head: HeadConfig, entry: HeadConfig[number], keys: string[]): boolean {
+export function hasOneOf(head: HeadConfig, entry: HeadConfig[number], keys: string[]): boolean {
 	const attr = getAttr(keys, entry);
 	if (!attr) return false;
 	const [key, val] = attr;
@@ -127,7 +129,7 @@ function hasOneOf(head: HeadConfig, entry: HeadConfig[number], keys: string[]): 
 }
 
 /** Find the first matching key–value pair in a head entry’s attributes. */
-function getAttr(
+export function getAttr(
 	keys: string[],
 	entry: HeadConfig[number]
 ): [key: string, value: string | boolean] | undefined {
@@ -143,12 +145,12 @@ function getAttr(
 }
 
 /** Merge two heads, overwriting entries in the first head that exist in the second. */
-function mergeHead(oldHead: HeadConfig, newHead: HeadConfig) {
+export function mergeHead(oldHead: HeadConfig, newHead: HeadConfig) {
 	return [...oldHead.filter((tag) => !hasTag(newHead, tag)), ...newHead];
 }
 
 /** Sort head tags to place important tags first and relegate “SEO” meta tags. */
-function sortHead(head: HeadConfig) {
+export function sortHead(head: HeadConfig) {
 	return head.sort((a, b) => {
 		const aImportance = getImportance(a);
 		const bImportance = getImportance(b);
@@ -157,7 +159,7 @@ function sortHead(head: HeadConfig) {
 }
 
 /** Get the relative importance of a specific head tag. */
-function getImportance(entry: HeadConfig[number]) {
+export function getImportance(entry: HeadConfig[number]) {
 	// 1. Important meta tags.
 	if (
 		entry.tag === 'meta' &&
@@ -175,7 +177,9 @@ function getImportance(entry: HeadConfig[number]) {
 		if (entry.tag === 'link' && 'rel' in entry.attrs && entry.attrs.rel === 'shortcut icon') {
 			return 70;
 		}
+		/* v8 ignore start */
 		return 80;
+		/* v8 ignore stop */
 	}
 	// 4. SEO meta tags.
 	return 0;

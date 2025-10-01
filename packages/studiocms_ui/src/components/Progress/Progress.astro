@@ -5,15 +5,16 @@ import type { HTMLAttributes } from 'astro/types';
 
 type Props = {
 	id: string;
+	label: string;
 	value?: number;
 	max?: number;
 	color?: Omit<StudioCMSColorway, 'default'>;
 } & HTMLAttributes<'div'>;
 
-const { id, value = 0, max = 100, color = 'primary' } = Astro.props;
+const { id, label, value = 0, max = 100, color = 'primary' } = Astro.props;
 ---
 
-<div class="sui-progress" class:list={[color]} role="progressbar" id={id} data-max={max} data-value={value}>
+<div class="sui-progress" class:list={[color]} role="progressbar" aria-label={label} id={id} data-max={max} data-value={value}>
   <div class="sui-progress-slider" />
 </div>
 <script>

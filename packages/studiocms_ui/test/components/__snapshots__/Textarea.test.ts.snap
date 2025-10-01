@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Textarea Component > renders Textarea component correctly 1`] = `"<label for="textarea" class="sui-textarea-label"> <span class="label">  <span class="req-star"></span> </span> <textarea name="textarea" id="textarea" class="sui-textarea"></textarea> </label>"`;
+
+exports[`Textarea Component > renders Textarea with different props "{ name: 'textarea', disabled: true, label: 'Disabled Textarea' }" 1`] = `"<label for="textarea" class="sui-textarea-label disabled"> <span class="label"> Disabled Textarea <span class="req-star"></span> </span> <textarea name="textarea" id="textarea" class="sui-textarea" disabled></textarea> </label>"`;
+
+exports[`Textarea Component > renders Textarea with different props "{ name: 'textarea', isRequired: true, label: 'Required Textarea' }" 1`] = `"<label for="textarea" class="sui-textarea-label"> <span class="label"> Required Textarea <span class="req-star">*</span> </span> <textarea name="textarea" id="textarea" class="sui-textarea" required></textarea> </label>"`;
+
+exports[`Textarea Component > renders Textarea with different props "{ name: 'textarea', label: 'Textarea Label' }" 1`] = `"<label for="textarea" class="sui-textarea-label"> <span class="label"> Textarea Label <span class="req-star"></span> </span> <textarea name="textarea" id="textarea" class="sui-textarea"></textarea> </label>"`;
+
+exports[`Textarea Component > renders Textarea with different props "{ name: 'textarea', placeholder: 'Enter text here...' }" 1`] = `"<label for="textarea" class="sui-textarea-label"> <span class="label">  <span class="req-star"></span> </span> <textarea placeholder="Enter text here..." name="textarea" id="textarea" class="sui-textarea"></textarea> </label>"`;

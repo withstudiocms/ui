@@ -1,29 +1,29 @@
 .sui-radio-container {
 	display: flex;
 	flex-direction: column;
-	gap: .5rem;
+	gap: 0.5rem;
 }
 
 .sui-radio-container.disabled {
 	opacity: 0.5;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .sui-radio-label.disabled {
 	opacity: 0.5;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 	pointer-events: none;
 }
 
 .req-star {
-	color: hsl(var(--danger-base));
+	color: var(--danger-vibrant);
 	font-weight: 700;
 }
 
 .sui-radio-inputs {
 	display: flex;
 	flex-direction: column;
-	gap: .75rem;
+	gap: 0.75rem;
 }
 
 .sui-radio-container.horizontal .sui-radio-inputs {
@@ -33,53 +33,53 @@
 .sui-radio-label {
 	display: flex;
 	flex-direction: row;
-	gap: .5rem;
+	gap: 0.5rem;
 	position: relative;
 	align-items: center;
 }
 
 .sui-radio-label:hover .sui-radio-box {
-	outline-color: hsl(var(--default-hover));
+	outline-color: var(--default-hover);
 }
 
 .sui-radio-container:not(.disabled) .sui-radio-label:active .sui-radio-box {
-	outline-color: hsl(var(--default-active));
+	outline-color: var(--default-active);
 	scale: 0.9;
 }
 
 .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
-	background-color: hsl(var(--text-normal));
-	outline-color: hsl(var(--text-normal));
+	background-color: var(--text-normal);
+	outline-color: var(--text-normal);
 }
 
 .sui-radio-container.primary .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
-	background-color: hsl(var(--primary-base));
-	outline-color: hsl(var(--primary-base));
+	background-color: var(--primary-base);
+	outline-color: var(--primary-base);
 }
 
 .sui-radio-container.success .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
-	background-color: hsl(var(--success-base));
-	outline-color: hsl(var(--success-base));
+	background-color: var(--success-base);
+	outline-color: var(--success-base);
 }
 
 .sui-radio-container.warning .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
-	background-color: hsl(var(--warning-base));
-	outline-color: hsl(var(--warning-base));
+	background-color: var(--warning-base);
+	outline-color: var(--warning-base);
 }
 
 .sui-radio-container.danger .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
-	background-color: hsl(var(--danger-base));
-	outline-color: hsl(var(--danger-base));
+	background-color: var(--danger-vibrant);
+	outline-color: var(--danger-vibrant);
 }
 
 .sui-radio-container.info .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
-	background-color: hsl(var(--info-base));
-	outline-color: hsl(var(--info-base));
+	background-color: var(--info-vibrant);
+	outline-color: var(--info-vibrant);
 }
 
 .sui-radio-container.mono .sui-radio-label:has(.sui-radio-toggle:checked) .sui-radio-box {
-	background-color: hsl(var(--mono-base));
-	outline-color: hsl(var(--mono-base));
+	background-color: var(--mono-base);
+	outline-color: var(--mono-base);
 }
 
 .sui-radio-box-container {
@@ -96,13 +96,13 @@
 	width: 12px;
 	height: 12px;
 	border-radius: var(--radius-full);
-	outline: 1px solid hsl(var(--default-base));
+	outline: 1px solid var(--default-base);
 	outline-offset: 4px;
-	transition: all .15s ease;
+	transition: all 0.15s ease;
 }
 
 .sui-radio-box:focus-visible {
-	outline-color: hsl(var(--text-normal)) !important;
+	outline-color: var(--text-normal) !important;
 }
 
 .sui-radio-toggle {

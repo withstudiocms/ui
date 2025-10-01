@@ -15,7 +15,9 @@ you can provide callbacks for when the theme gets changed!
 The `ThemeHelper` can only be used client-side (in `<script>` tags).
 :::
 ```ts title="script.ts" twoslash showLinenumbers
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// @lib: dom
+// ---cut---
 import { ThemeHelper } from 'studiocms:ui/utils';
 
 // Instanciate a new helper
@@ -45,7 +47,9 @@ whenever the color scheme changes, for example in a `three.js` canvas where you 
 (*\*cough cough\* our login page \*cough\**).
 
 ```ts title="script.ts" twoslash showLinenumbers
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// @lib: dom
+// ---cut---
 import { ThemeHelper } from 'studiocms:ui/utils';
 
 // Instanciate a new helper
@@ -75,7 +79,9 @@ open the navbar and scroll all the way down. After you've changed the theme, che
     </span>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
+    /// <reference types="@studiocms/ui/v/types" />
+    // @lib: dom
+    // ---cut---
     import { ThemeHelper, type Theme } from 'studiocms:ui/utils';
 
     // Instanciate a new helper
@@ -101,7 +107,9 @@ One of the few things the `ThemeHelper` does not do is saving the users theme pr
 As a starting point, here's a barebones example of how to implement this:
 
 ```ts twoslash showLinenumbers title="Script Tag"
-// @noErrors
+/// <reference types="@studiocms/ui/v/types" />
+// @lib: dom
+// ---cut---
 import { ThemeHelper, type Theme } from 'studiocms:ui/utils';
 
 const themeHelper = new ThemeHelper();
