@@ -7,15 +7,15 @@ to match your brand. You can customize the colors, typography, radii, and more. 
 with a custom CSS file that you can provide to the UI integration:
 
 ```ts showLinenumbers title="astro.config.mjs" {7}
-import { defineConfig } from 'astro/config';
-import ui from '@studiocms/ui';
+import { defineConfig } from "astro/config";
+import ui from "@studiocms/ui";
 
 export default defineConfig({
   integrations: [
     ui({
-      customCss: './path/to/custom.css'
-    })
-  ]
+      customCss: "./path/to/custom.css",
+    }),
+  ],
 });
 ```
 
@@ -24,21 +24,21 @@ the primary color, it'd look like this:
 
 ```css showLinenumbers title="custom.css"
 :root {
-	--primary-base: hsl(0 0% 100%);
-	--primary-hover: hsl(0 0% 80%);
-	--primary-active: hsl(0 0% 90%);
+  --primary-base: hsl(0 0% 100%);
+  --primary-hover: hsl(0 0% 80%);
+  --primary-active: hsl(0 0% 90%);
 }
 
-[data-theme='light'] :root {
-	--primary-base: hsl(0 0% 0%);
-	--primary-hover: hsl(0 0% 20%);
-	--primary-active: hsl(0 0% 10%);
+[data-theme="light"] :root {
+  --primary-base: hsl(0 0% 0%);
+  --primary-hover: hsl(0 0% 20%);
+  --primary-active: hsl(0 0% 10%);
 }
 ```
 
 If you make significant changes to the colors, remember to also adjust the light theme.
 
-Below, you will find all the CSS variables used in StudioCMS UI. Always make sure to provide them as 
+Below, you will find all the CSS variables used in StudioCMS UI. Always make sure to provide them as
 HSL values without commas. You can use them in your CSS like this: `background-color: var(--background-base);`.
 
 ## Disabling CSS Injection
@@ -46,15 +46,15 @@ HSL values without commas. You can use them in your CSS like this: `background-c
 If you want to disable the CSS injection, you can do so by setting the `noInjectCSS` option to `true`:
 
 ```ts twoslash showLinenumbers title="astro.config.mjs" {7}
-import { defineConfig } from 'astro/config';
-import ui from '@studiocms/ui';
+import { defineConfig } from "astro/config";
+import ui from "@studiocms/ui";
 
 export default defineConfig({
   integrations: [
     ui({
       noInjectCSS: true,
-    })
-  ]
+    }),
+  ],
 });
 ```
 
@@ -72,11 +72,11 @@ import "@studiocms/ui/css/global.css";
 
 ## Interactive Editing
 
-You can edit the colors in your own project during development using the dev toolbar. In the toolbar, you will find a 
-tab with the StudioCMS logo on it. Once clicked it will reveal a few color pickers and inputs you can use to adjust various 
+You can edit the colors in your own project during development using the dev toolbar. In the toolbar, you will find a
+tab with the StudioCMS logo on it. Once clicked it will reveal a few color pickers and inputs you can use to adjust various
 variables. You can copy your changes to your clipboard after you are done.
 
-import { Accordion, AccordionItem } from 'studiocms:ui/components';
+import { Accordion, AccordionItem } from "studiocms:ui/components";
 
 ## Color Variables
 
@@ -85,38 +85,41 @@ import { Accordion, AccordionItem } from 'studiocms:ui/components';
 		<div slot="summary">Dark Mode</div>
 		<div>
 
-| Variable              | Description             | Default                |
-| ---                   | ---                     | ---                    |
-| `--background-base`   | Base background color   | `hsl(0, 0%, 6%)`       |
-| `--background-step-1` | Background color step 1 | `hsl(0, 0%, 8%)`       |
-| `--background-step-2` | Background color step 2 | `hsl(0, 0%, 10%)`      |
-| `--background-step-3` | Background color step 3 | `hsl(0, 0%, 14%)`      |
-| `--text-normal`       | Normal text color       | `hsl(0, 0%, 100%)`     |
-| `--text-muted`        | Muted text color        | `hsl(0, 0%, 54%)`      |
-| `--text-inverted`     | Inverted text color     | `hsl(0, 0%, 0%)`       | 
-| `--border`            | Border color            | `hsl(240, 5%, 17%)`    |
-| `--shadow`            | Shadow color            | `hsl(0, 0%, 0% / 0.5)` |
-| `--default-base`      | Default color base      | `hsl(0, 0%, 14%)`      |
-| `--default-hover`     | Default color hover     | `hsl(0, 0%, 21%)`      |
-| `--default-active`    | Default color active    | `hsl(0, 0%, 15%)`      |
-| `--primary-base`      | Primary color base      | `hsl(259, 83%, 73%)`   |
-| `--primary-hover`     | Primary color hover     | `hsl(259, 77%, 78%)`   |
-| `--primary-active`    | Primary color active    | `hsl(259, 73%, 67%)`   |
-| `--success-base`      | Success color base      | `hsl(142, 71%, 46%)`   |
-| `--success-hover`     | Success color hover     | `hsl(142, 72%, 61%)`   |
-| `--success-active`    | Success color active    | `hsl(142, 87%, 52%)`   |   
-| `--warning-base`      | Warning color base      | `hsl(48, 96%, 53%)`    |
-| `--warning-hover`     | Warning color hover     | `hsl(48, 97%, 70%)`    |
-| `--warning-active`    | Warning color active    | `hsl(48, 100%, 61%)`   |
-| `--danger-base`       | Danger color base       | `hsl(339, 97%, 31%)`   |
-| `--danger-hover`      | Danger color hover      | `hsl(337, 98%, 37%)`   |
-| `--danger-active`     | Danger color active     | `hsl(337, 88%, 32%)`   |
-| `--info-base`         | Info color base         | `hsl(217, 92%, 52%)`   |
-| `--info-hover`        | Info color hover        | `hsl(214, 95%, 58%)`   |
-| `--info-active`       | Info color active       | `hsl(214, 85%, 52%)`   |
-| `--mono-base`         | Mono color base         | `hsl(0, 0%, 100%)`     |
-| `--mono-hover`        | Mono color hover        | `hsl(0, 0%, 90%)`      |
-| `--mono-active`       | Mono color active       | `hsl(0, 0%, 95%)`      |
+| Variable                | Description               | Default                |
+| ----------------------- | ------------------------- | ---------------------- |
+| `--background-base`     | Base background color     | `hsl(0, 0%, 6%)`       |
+| `--background-step-1`   | Background color step 1   | `hsl(0, 0%, 8%)`       |
+| `--background-step-2`   | Background color step 2   | `hsl(0, 0%, 10%)`      |
+| `--background-step-3`   | Background color step 3   | `hsl(0, 0%, 14%)`      |
+| `--text-normal`         | Normal text color         | `hsl(0, 0%, 100%)`     |
+| `--text-muted`          | Muted text color          | `hsl(0, 0%, 54%)`      |
+| `--text-inverted`       | Inverted text color       | `hsl(0, 0%, 0%)`       |
+| `--border`              | Border color              | `hsl(240, 5%, 17%)`    |
+| `--shadow`              | Shadow color              | `hsl(0, 0%, 0% / 0.5)` |
+| `--default-base`        | Default color base        | `hsl(0, 0%, 14%)`      |
+| `--default-hover`       | Default color hover       | `hsl(0, 0%, 21%)`      |
+| `--default-active`      | Default color active      | `hsl(0, 0%, 15%)`      |
+| `--primary-base`        | Primary color base        | `hsl(259, 83%, 73%)`   |
+| `--primary-hover`       | Primary color hover       | `hsl(259, 77%, 78%)`   |
+| `--primary-active`      | Primary color active      | `hsl(259, 73%, 67%)`   |
+| `--success-base`        | Success color base        | `hsl(142, 71%, 46%)`   |
+| `--success-hover`       | Success color hover       | `hsl(142, 72%, 61%)`   |
+| `--success-active`      | Success color active      | `hsl(142, 87%, 52%)`   |
+| `--warning-base`        | Warning color base        | `hsl(48, 96%, 53%)`    |
+| `--warning-hover`       | Warning color hover       | `hsl(48, 97%, 70%)`    |
+| `--warning-active`      | Warning color active      | `hsl(48, 100%, 61%)`   |
+| `--danger-base`         | Danger color base         | `hsl(339, 97%, 31%)`   |
+| `--danger-hover`        | Danger color hover        | `hsl(337, 98%, 37%)`   |
+| `--danger-active`       | Danger color active       | `hsl(337, 88%, 32%)`   |
+| `--info-base`           | Info color base           | `hsl(217, 92%, 52%)`   |
+| `--info-hover`          | Info color hover          | `hsl(214, 95%, 58%)`   |
+| `--info-active`         | Info color active         | `hsl(214, 85%, 52%)`   |
+| `--mono-base`           | Mono color base           | `hsl(0, 0%, 100%)`     |
+| `--mono-hover`          | Mono color hover          | `hsl(0, 0%, 90%)`      |
+| `--mono-active`         | Mono color active         | `hsl(0, 0%, 95%)`      |
+| `--default-flat`        | Default flat color        | `hsl(0 0% 14% / 0.5)`  |
+| `--default-flat-hover`  | Default flat hover color  | `hsl(0 0% 14% / 0.85)` |
+| `--default-flat-active` | Default flat active color | `hsl(0 0% 14% / 0.75)` |
 
 		</div>
 	</AccordionItem>
@@ -125,38 +128,41 @@ import { Accordion, AccordionItem } from 'studiocms:ui/components';
 		<div slot="summary">Light Mode</div>
 		<div>
 
-| Variable              | Description             | Default                 |
-| ---                   | ---                     | ---                     |
-| `--background-base`   | Base background color   | `hsl(0, 0%, 97%)`       |
-| `--background-step-1` | Background color step 1 | `hsl(0, 0%, 90%)`       |
-| `--background-step-2` | Background color step 2 | `hsl(0, 0%, 85%)`       |
-| `--background-step-3` | Background color step 3 | `hsl(0, 0%, 80%)`       |
-| `--text-normal`       | Normal text color       | `hsl(0, 0%, 0%)`        |
-| `--text-muted`        | Muted text color        | `hsl(0, 0%, 24%)`       |
-| `--text-inverted`     | Inverted text color     | `hsl(0, 0%, 100%)`      |
-| `--border`            | Border color            | `hsl(263, 5%, 68%)`     |
-| `--shadow`            | Shadow color            | `hsl(0, 0%, 65% / 0.5)` |
-| `--default-base`      | Default color base      | `hsl(0, 0%, 74%)`       |
-| `--default-hover`     | Default color hover     | `hsl(0, 0%, 81%)`       |
-| `--default-active`    | Default color active    | `hsl(0, 0%, 91%)`       |
-| `--primary-base`      | Primary color base      | `hsl(259, 85%, 61%)`    |
-| `--primary-hover`     | Primary color hover     | `hsl(259, 78%, 56%)`    |
-| `--primary-active`    | Primary color active    | `hsl(259, 71%, 50%)`    |
-| `--success-base`      | Success color base      | `hsl(142, 59%, 47%)`    |
-| `--success-hover`     | Success color hover     | `hsl(142, 62%, 56%)`    |
-| `--success-active`    | Success color active    | `hsl(142, 87%, 59%)`    |
-| `--warning-base`      | Warning color base      | `hsl(48, 92%, 46%)`     |
-| `--warning-hover`     | Warning color hover     | `hsl(48, 88%, 43%)`     |
-| `--warning-active`    | Warning color active    | `hsl(48, 85%, 40%)`     |
-| `--danger-base`       | Danger color base       | `hsl(339, 97%, 31%)`    |
-| `--danger-hover`      | Danger color hover      | `hsl(337, 98%, 37%)`    |
-| `--danger-active`     | Danger color active     | `hsl(337, 88%, 45%)`    |
-| `--info-base`         | Info color base         | `hsl(217, 92%, 52%)`    |
-| `--info-hover`        | Info color hover        | `hsl(214, 95%, 58%)`    |
-| `--info-active`       | Info color active       | `hsl(214, 85%, 52%)`    |
-| `--mono-base`         | Mono color base         | `hsl(0, 0%, 0%)`        |
-| `--mono-hover`        | Mono color hover        | `hsl(0, 0%, 10%)`       |
-| `--mono-active`       | Mono color active       | `hsl(0, 0%, 5%)`        |
+| Variable                | Description               | Default                 |
+| ----------------------- | ------------------------- | ----------------------- |
+| `--background-base`     | Base background color     | `hsl(0, 0%, 97%)`       |
+| `--background-step-1`   | Background color step 1   | `hsl(0, 0%, 90%)`       |
+| `--background-step-2`   | Background color step 2   | `hsl(0, 0%, 85%)`       |
+| `--background-step-3`   | Background color step 3   | `hsl(0, 0%, 80%)`       |
+| `--text-normal`         | Normal text color         | `hsl(0, 0%, 0%)`        |
+| `--text-muted`          | Muted text color          | `hsl(0, 0%, 24%)`       |
+| `--text-inverted`       | Inverted text color       | `hsl(0, 0%, 100%)`      |
+| `--border`              | Border color              | `hsl(263, 5%, 68%)`     |
+| `--shadow`              | Shadow color              | `hsl(0, 0%, 65% / 0.5)` |
+| `--default-base`        | Default color base        | `hsl(0, 0%, 74%)`       |
+| `--default-hover`       | Default color hover       | `hsl(0, 0%, 81%)`       |
+| `--default-active`      | Default color active      | `hsl(0, 0%, 91%)`       |
+| `--primary-base`        | Primary color base        | `hsl(259, 85%, 61%)`    |
+| `--primary-hover`       | Primary color hover       | `hsl(259, 78%, 56%)`    |
+| `--primary-active`      | Primary color active      | `hsl(259, 71%, 50%)`    |
+| `--success-base`        | Success color base        | `hsl(142, 59%, 47%)`    |
+| `--success-hover`       | Success color hover       | `hsl(142, 62%, 56%)`    |
+| `--success-active`      | Success color active      | `hsl(142, 87%, 59%)`    |
+| `--warning-base`        | Warning color base        | `hsl(48, 92%, 46%)`     |
+| `--warning-hover`       | Warning color hover       | `hsl(48, 88%, 43%)`     |
+| `--warning-active`      | Warning color active      | `hsl(48, 85%, 40%)`     |
+| `--danger-base`         | Danger color base         | `hsl(339, 97%, 31%)`    |
+| `--danger-hover`        | Danger color hover        | `hsl(337, 98%, 37%)`    |
+| `--danger-active`       | Danger color active       | `hsl(337, 88%, 45%)`    |
+| `--info-base`           | Info color base           | `hsl(217, 92%, 52%)`    |
+| `--info-hover`          | Info color hover          | `hsl(214, 95%, 58%)`    |
+| `--info-active`         | Info color active         | `hsl(214, 85%, 52%)`    |
+| `--mono-base`           | Mono color base           | `hsl(0, 0%, 0%)`        |
+| `--mono-hover`          | Mono color hover          | `hsl(0, 0%, 10%)`       |
+| `--mono-active`         | Mono color active         | `hsl(0, 0%, 5%)`        |
+| `--default-flat`        | Default flat color        | `hsl(0 0% 70% / 0.5)`   |
+| `--default-flat-hover`  | Default flat hover color  | `hsl(0 0% 70% / 0.85)`  |
+| `--default-flat-active` | Default flat active color | `hsl(0 0% 70% / 0.75)`  |
 
 		</div>
 	</AccordionItem>
@@ -165,31 +171,28 @@ import { Accordion, AccordionItem } from 'studiocms:ui/components';
 		<div slot="summary">Non-Themed Color Variables</div>
 		<div>
 
-| Variable | Description | Default |
-| --- | --- | --- |
-| `--text-light` | Light text color | `hsl(0 0% 100%)` |
-| `--text-dark` | Dark text color | `hsl(0 0% 0%)` |
-| `--default-flat` | Default flat color | `hsl(0 0% 14% / 0.5)` |
-| `--default-flat-hover` | Default flat hover color | `hsl(0 0% 14% / 0.75)` |
-| `--default-flat-active` | Default flat active color | `hsl(0 0% 14% / 0.85)` |
-| `--primary-flat` | Primary flat color | `hsl(259 83% 73% / 0.1)` |
-| `--primary-flat-hover` | Primary flat hover color | `hsl(259 83% 73% / 0.25)` |
-| `--primary-flat-active` | Primary flat active color | `hsl(259 83% 73% / 0.35)` |
-| `--success-flat` | Success flat color | `hsl(142 71% 46% / 0.1)` |
-| `--success-flat-hover` | Success flat hover color | `hsl(142 71% 46% / 0.25)` |
-| `--success-flat-active` | Success flat active color | `hsl(142 71% 46% / 0.35)` |
-| `--warning-flat` | Warning flat color | `hsl(48 96% 53% / 0.1)` |
-| `--warning-flat-hover` | Warning flat hover color | `hsl(48 96% 53% / 0.25)` |
-| `--warning-flat-active` | Warning flat active color | `hsl(48 96% 53% / 0.35)` |
-| `--danger-flat` | Danger flat color | `hsl(339 97% 31% / 0.1)` |
-| `--danger-flat-hover` | Danger flat hover color | `hsl(339 97% 31% / 0.25)` |
-| `--danger-flat-active` | Danger flat active color | `hsl(339 97% 31% / 0.35)` |
-| `--info-flat` | Info flat color | `hsl(217 92% 52% / 0.1)` |
-| `--info-flat-hover` | Info flat hover color | `hsl(217 92% 52% / 0.25)` |
-| `--info-flat-active` | Info flat active color | `hsl(217 92% 52% / 0.35)` |
-| `--mono-flat` | Info flat color | `hsl(0 0% 100% / 0.1)` |
-| `--mono-flat-hover` | Info flat hover color | `hsl(0 0% 100% / 0.25)` |
-| `--mono-flat-active` | Info flat active color | `hsl(0 0% 100% / 0.35)` |
+| Variable                | Description               | Default                   |
+| ----------------------- | ------------------------- | ------------------------- |
+| `--text-light`          | Light text color          | `hsl(0 0% 100%)`          |
+| `--text-dark`           | Dark text color           | `hsl(0 0% 0%)`            |
+| `--primary-flat`        | Primary flat color        | `hsl(259 83% 73% / 0.1)`  |
+| `--primary-flat-hover`  | Primary flat hover color  | `hsl(259 83% 73% / 0.35)` |
+| `--primary-flat-active` | Primary flat active color | `hsl(259 83% 73% / 0.25)` |
+| `--success-flat`        | Success flat color        | `hsl(142 71% 46% / 0.1)`  |
+| `--success-flat-hover`  | Success flat hover color  | `hsl(142 71% 46% / 0.35)` |
+| `--success-flat-active` | Success flat active color | `hsl(142 71% 46% / 0.25)` |
+| `--warning-flat`        | Warning flat color        | `hsl(48 96% 53% / 0.1)`   |
+| `--warning-flat-hover`  | Warning flat hover color  | `hsl(48 96% 53% / 0.35)`  |
+| `--warning-flat-active` | Warning flat active color | `hsl(48 96% 53% / 0.25)`  |
+| `--danger-flat`         | Danger flat color         | `hsl(339 97% 31% / 0.1)`  |
+| `--danger-flat-hover`   | Danger flat hover color   | `hsl(339 97% 31% / 0.35)` |
+| `--danger-flat-active`  | Danger flat active color  | `hsl(339 97% 31% / 0.25)` |
+| `--info-flat`           | Info flat color           | `hsl(217 92% 52% / 0.1)`  |
+| `--info-flat-hover`     | Info flat hover color     | `hsl(217 92% 52% / 0.35)` |
+| `--info-flat-active`    | Info flat active color    | `hsl(217 92% 52% / 0.25)` |
+| `--mono-flat`           | Info flat color           | `hsl(0 0% 100% / 0.1)`    |
+| `--mono-flat-hover`     | Info flat hover color     | `hsl(0 0% 100% / 0.35)`   |
+| `--mono-flat-active`    | Info flat active color    | `hsl(0 0% 100% / 0.25)`   |
 
 		</div>
 	</AccordionItem>
@@ -198,13 +201,14 @@ import { Accordion, AccordionItem } from 'studiocms:ui/components';
 		<div slot="summary">Radius Variables</div>
 		<div>
 
-| Variable | Description | Default |
-| --- | --- | --- |
-| `--radius-sm` | Small radius | `.25rem` |
-| `--radius-md` | Medium radius | `.5rem` |
-| `--radius-lg` | Large radius | `1rem` |
-| `--radius-full` | Full radius | `999px` |
+| Variable        | Description   | Default  |
+| --------------- | ------------- | -------- |
+| `--radius-sm`   | Small radius  | `.25rem` |
+| `--radius-md`   | Medium radius | `.5rem`  |
+| `--radius-lg`   | Large radius  | `1rem`   |
+| `--radius-full` | Full radius   | `999px`  |
 
 		</div>
 	</AccordionItem>
+
 </Accordion>
