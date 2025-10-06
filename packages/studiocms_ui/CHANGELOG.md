@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 1.0.0-beta.3
+
+### Patch Changes
+
+- [#130](https://github.com/withstudiocms/ui/pull/130) [`57f900d`](https://github.com/withstudiocms/ui/commit/57f900d40d37ae64ce1aaf984509d646b401a16b) Thanks [@RATIU5](https://github.com/RATIU5)! - Fixes toggle colors, adds new "gray" color for toggle circles, and adds a light variant for the default flat colors.
+
 ## 1.0.0-beta.2
 
 ### Minor Changes
