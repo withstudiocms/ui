@@ -17,16 +17,20 @@
 
 	border-radius: var(--radius-md);
 
-	transition: transform 0.15s, background-color 0.15s, border-color 0.15s, color 0.15s;
+	transition:
+		transform 0.15s,
+		background-color 0.15s,
+		border-color 0.15s,
+		color 0.15s;
 	transition-timing-function: ease;
 
 	cursor: pointer;
 
 	/* Default colorway */
 
-	background-color: hsl(var(--default-base));
-	border-color: hsl(var(--border));
-	color: hsl(var(--text-normal));
+	background-color: var(--default-base);
+	border-color: var(--border);
+	color: var(--text-normal);
 
 	min-width: fit-content;
 
@@ -46,32 +50,32 @@
 }
 
 .sui-button.outlined:hover {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-button.outlined:active {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-button:hover {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-button:active {
-	background-color: hsl(var(--default-active));
+	background-color: var(--default-active);
 	transform: scale(0.95);
 }
 
 .sui-button.flat {
-	background: hsla(var(--default-flat));
+	background: var(--default-flat);
 }
 
 .sui-button.flat:hover {
-	background: hsla(var(--default-flat-hover));
+	background: var(--default-flat-hover);
 }
 
 .sui-button.flat:active {
-	background: hsla(var(--default-flat-active));
+	background: var(--default-flat-active);
 }
 
 /* Sizes */
@@ -97,254 +101,254 @@
 }
 
 .sui-button:focus-visible {
-	outline: 2px solid hsl(var(--text-normal));
+	outline: 2px solid var(--text-normal);
 	outline-offset: 2px;
 }
 
 /* Primary Colorway */
 .sui-button.primary {
-	background-color: hsl(var(--primary-base));
-	border-color: hsl(var(--primary-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--primary-base);
+	border-color: var(--primary-base);
+	color: var(--text-inverted);
 }
 
 .sui-button.primary:hover {
-	background-color: hsl(var(--primary-hover));
+	background-color: var(--primary-hover);
 }
 
 .sui-button.primary:active {
-	background-color: hsl(var(--primary-active));
+	background-color: var(--primary-active);
 }
 
 .sui-button.primary.outlined {
-	background-color: hsl(var(--default-base));
-	color: hsl(var(--text-normal));
+	background-color: var(--default-base);
+	color: var(--text-normal);
 }
 
 .sui-button.primary.outlined:hover {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-button.primary.outlined:active {
-	background-color: hsl(var(--default-active));
+	background-color: var(--default-active);
 }
 
 .sui-button.primary.flat {
-	background-color: hsla(var(--primary-flat));
+	background-color: var(--primary-flat);
 	color: hsl(259, 96%, 79%);
 }
 
 .sui-button.primary.flat:hover {
-	background-color: hsla(var(--primary-flat-hover));
+	background-color: var(--primary-flat-hover);
 }
 
 .sui-button.primary.flat:active {
-	background-color: hsla(var(--primary-flat-active));
+	background-color: var(--primary-flat-active);
 }
 
 /* Success Colorway */
 .sui-button.success {
-	background-color: hsl(var(--success-base));
-	border-color: hsl(var(--success-base));
-	color: hsl(var(--text-dark));
+	background-color: var(--success-base);
+	border-color: var(--success-base);
+	color: var(--text-dark);
 }
 
 .sui-button.success:hover {
-	background-color: hsl(var(--success-hover));
+	background-color: var(--success-hover);
 }
 
 .sui-button.success:active {
-	background-color: hsl(var(--success-active));
+	background-color: var(--success-active);
 }
 
 .sui-button.success.outlined {
-	background-color: hsl(var(--default-base));
-	color: hsl(var(--text-normal));
+	background-color: var(--default-base);
+	color: var(--text-normal);
 }
 
 .sui-button.success.outlined:hover {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-button.success.outlined:active {
-	background-color: hsl(var(--default-active));
+	background-color: var(--default-active);
 }
 
 .sui-button.success.flat {
-	background-color: hsla(var(--success-flat));
-	color: hsl(var(--success-base));
+	background-color: var(--success-flat);
+	color: var(--success-base);
 }
 
 .sui-button.success.flat:hover {
-	background-color: hsla(var(--success-flat-hover));
+	background-color: var(--success-flat-hover);
 }
 
 .sui-button.success.flat:active {
-	background-color: hsla(var(--success-flat-active));
+	background-color: var(--success-flat-active);
 }
 
 /* Warning Colorway */
 .sui-button.warning {
-	background-color: hsl(var(--warning-base));
-	border-color: hsl(var(--warning-base));
-	color: hsl(var(--text-dark));
+	background-color: var(--warning-base);
+	border-color: var(--warning-base);
+	color: var(--text-dark);
 }
 
 .sui-button.warning:hover {
-	background-color: hsl(var(--warning-hover));
+	background-color: var(--warning-hover);
 }
 
 .sui-button.warning:active {
-	background-color: hsl(var(--warning-active));
+	background-color: var(--warning-active);
 }
 
 .sui-button.warning.outlined {
-	background-color: hsl(var(--default-base));
-	color: hsl(var(--text-normal));
+	background-color: var(--default-base);
+	color: var(--text-normal);
 }
 
 .sui-button.warning.outlined:hover {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-button.warning.outlined:active {
-	background-color: hsl(var(--default-active));
+	background-color: var(--default-active);
 }
 
 .sui-button.warning.flat {
-	background-color: hsla(var(--warning-flat));
-	color: hsl(var(--warning-base));
+	background-color: var(--warning-flat);
+	color: var(--warning-base);
 }
 
 .sui-button.warning.flat:hover {
-	background-color: hsla(var(--warning-flat-hover));
+	background-color: var(--warning-flat-hover);
 }
 
 .sui-button.warning.flat:active {
-	background-color: hsla(var(--warning-flat-active));
+	background-color: var(--warning-flat-active);
 }
 
 /* Danger Colorway */
 .sui-button.danger {
-	background-color: hsl(var(--danger-base));
-	border-color: hsl(var(--danger-base));
-	color: hsl(var(--text-light));
+	background-color: var(--danger-base);
+	border-color: var(--danger-base);
+	color: var(--text-light);
 }
 
 .sui-button.danger:hover {
-	background-color: hsl(var(--danger-hover));
+	background-color: var(--danger-hover);
 }
 
 .sui-button.danger:active {
-	background-color: hsl(var(--danger-active));
+	background-color: var(--danger-active);
 }
 
 .sui-button.danger.outlined {
-	background-color: hsl(var(--default-base));
-	color: hsl(var(--text-normal));
+	background-color: var(--default-base);
+	color: var(--text-normal);
 }
 
 .sui-button.danger.outlined:hover {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-button.danger.outlined:active {
-	background-color: hsl(var(--default-active));
+	background-color: var(--default-active);
 }
 
 .sui-button.danger.flat {
-	background-color: hsla(var(--danger-flat));
+	background-color: var(--danger-flat);
 	color: hsl(337, 92%, 71%);
 }
 
 .sui-button.danger.flat:hover {
-	background-color: hsla(var(--danger-flat-hover));
+	background-color: var(--danger-flat-hover);
 }
 
 .sui-button.danger.flat:active {
-	background-color: hsla(var(--danger-flat-active));
+	background-color: var(--danger-flat-active);
 }
 
 /* Info Colorway */
 .sui-button.info {
-	background-color: hsl(var(--info-base));
-	border-color: hsl(var(--info-base));
-	color: hsl(var(--text-light));
+	background-color: var(--info-base);
+	border-color: var(--info-base);
+	color: var(--text-light);
 }
 
 .sui-button.info:hover {
-	background-color: hsl(var(--info-hover));
+	background-color: var(--info-hover);
 }
 
 .sui-button.info:active {
-	background-color: hsl(var(--info-active));
+	background-color: var(--info-active);
 }
 
 .sui-button.info.outlined {
-	background-color: hsl(var(--default-base));
-	color: hsl(var(--text-normal));
+	background-color: var(--default-base);
+	color: var(--text-normal);
 }
 
 .sui-button.info.outlined:hover {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-button.info.outlined:active {
-	background-color: hsl(var(--default-active));
+	background-color: var(--default-active);
 }
 
 .sui-button.info.flat {
-	background-color: hsla(var(--info-flat));
-	color: hsl(var(--info-base));
+	background-color: var(--info-flat);
+	color: var(--info-base);
 }
 
 .sui-button.info.flat:hover {
-	background-color: hsla(var(--info-flat-hover));
+	background-color: var(--info-flat-hover);
 }
 
 .sui-button.info.flat:active {
-	background-color: hsla(var(--info-flat-active));
+	background-color: var(--info-flat-active);
 }
 
 /* Mono Colorway */
 .sui-button.mono {
-	background-color: hsl(var(--mono-base));
-	border-color: hsl(var(--mono-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--mono-base);
+	border-color: var(--mono-base);
+	color: var(--text-inverted);
 }
 
 .sui-button.mono:hover {
-	background-color: hsl(var(--mono-hover));
+	background-color: var(--mono-hover);
 }
 
 .sui-button.mono:active {
-	background-color: hsl(var(--mono-active));
+	background-color: var(--mono-active);
 }
 
 .sui-button.mono.outlined {
-	background-color: hsl(var(--default-base));
-	color: hsl(var(--text-normal));
+	background-color: var(--default-base);
+	color: var(--text-normal);
 }
 
 .sui-button.mono.outlined:hover {
-	background-color: hsl(var(--default-hover));
+	background-color: var(--default-hover);
 }
 
 .sui-button.mono.outlined:active {
-	background-color: hsl(var(--default-active));
+	background-color: var(--default-active);
 }
 
 .sui-button.mono.flat {
-	background-color: hsla(var(--mono-flat));
-	color: hsl(var(--mono-base));
+	background-color: var(--mono-flat);
+	color: var(--mono-base);
 }
 
 .sui-button.mono.flat:hover {
-	background-color: hsla(var(--mono-flat-hover));
+	background-color: var(--mono-flat-hover);
 }
 
 .sui-button.mono.flat:active {
-	background-color: hsla(var(--mono-flat-active));
+	background-color: var(--mono-flat-active);
 }
 
 .sui-button.full {
@@ -358,29 +362,29 @@
 	}
 
 	.sui-button.success.flat {
-		background-color: hsla(var(--success-base) / 0.2);
+		background-color: var(--success-flat);
 		color: hsl(143, 59%, 20%);
 	}
 
 	.sui-button.success.flat:hover {
-		background-color: hsla(var(--success-flat-hover));
+		background-color: var(--success-flat-hover);
 	}
 
 	.sui-button.success.flat:active {
-		background-color: hsla(var(--success-flat-active));
+		background-color: var(--success-flat-active);
 	}
 
 	.sui-button.warning.flat {
-		background-color: hsla(var(--warning-base) / 0.2);
+		background-color: var(--warning-flat);
 		color: hsl(48, 78%, 20%);
 	}
 
 	.sui-button.warning.flat:hover {
-		background-color: hsla(var(--warning-base) / 0.25);
+		background-color: var(--warning-flat-hover);
 	}
 
 	.sui-button.warning.flat:active {
-		background-color: hsla(var(--warning-base) / 0.4);
+		background-color: var(--warning-flat-active);
 	}
 
 	.sui-button.danger.flat {

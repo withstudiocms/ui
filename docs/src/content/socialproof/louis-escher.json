@@ -2,6 +2,6 @@
   "$schema": "../../../.astro/collections/socialproof.schema.json",
   "avatar": "/socialproof/louis-escher.jpg",
   "name": "Louis Escher",
-  "handle": "@louisescher.dev",
+  "handle": "@lou.gg",
   "message": "It's funny how things come to be sometimes. One day, you're browsing GitHub and the next day you're writing a UI library for a project you discovered at 11pm on a Tuesday. Now go install StudioCMS UI."
 }

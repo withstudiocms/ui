@@ -1,0 +1,20 @@
+---
+import { Button } from 'studiocms:ui/components/button';
+import { Sidebar } from 'studiocms:ui/components/sidebar';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <div id="basic-test">
+        <Sidebar>
+            <p>This is some sidebar content.</p>
+        </Sidebar>
+        <Button id="my-toggle"> Toggle Sidebar </Button>
+    </div>
+
+    <script>
+        import { SingleSidebarHelper } from "studiocms:ui/components";
+
+        new SingleSidebarHelper("my-toggle");
+    </script>
+</Layout>

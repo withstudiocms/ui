@@ -6,17 +6,20 @@ import PageHeader from './PageHeader.astro';
 
 const socialProofEntries = await getCollection('socialproof');
 
-const chunkSize = socialProofEntries.length / 3;
-const chunkedSocialProofEntries = [];
+const chunkedSocialProofEntries: [
+	typeof socialProofEntries,
+	typeof socialProofEntries,
+	typeof socialProofEntries,
+] = [[], [], []];
 
-for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
-	const chunk = socialProofEntries.slice(i, i + chunkSize);
-	chunkedSocialProofEntries.push(chunk);
+for (let i = 0; i < socialProofEntries.length; i++) {
+	let modIndex = i % 3;
+	chunkedSocialProofEntries[modIndex].push(socialProofEntries[i]);
 }
 ---
 <section class="social-proof not-content">
     <PageHeader
-        icon="hand-thumb-up"
+        icon="heroicons:hand-thumb-up"
         title="Patting ourselves on the back"
         subtitle="(Until we have actual opinions)"
     />

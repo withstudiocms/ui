@@ -1,0 +1,96 @@
+---
+import { Card } from 'studiocms:ui/components/card';
+import { Divider } from 'studiocms:ui/components/divider';
+import { TabItem, Tabs } from 'studiocms:ui/components/tabs';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Tabs>
+            <TabItem label="Tab #1">
+                <Card fullWidth> Content #1 </Card>
+            </TabItem>
+            <TabItem label="Tab #2">
+                <Card fullWidth> Content #2 </Card>
+            </TabItem>
+            <TabItem label="Tab #3">
+                <Card fullWidth> Content #3 </Card>
+            </TabItem>
+        </Tabs>
+    </div>
+
+    <br />
+    <br />
+
+    <div id="sync-test">
+        <Tabs syncKey="sync-example">
+            <TabItem label="Tab #1 (Sync 1)" icon="heroicons:bolt">
+                <Card fullWidth> Tab Contents #1 (Sync 1) </Card>
+            </TabItem>
+            <TabItem
+                label="Tab #2 (Sync 2)"
+                icon="heroicons:bolt-slash"
+                color="success"
+            >
+                <Card fullWidth> Tab Contents #2 (Sync 2) </Card>
+            </TabItem>
+        </Tabs>
+        <Divider>Different Element</Divider>
+        <Tabs syncKey="sync-example">
+            <TabItem label="Tab #3 (Sync 1)" icon="heroicons:bolt">
+                <Card fullWidth> Tab Contents #3 (Sync 1) </Card>
+            </TabItem>
+            <TabItem
+                label="Tab #4 (Sync 2)"
+                icon="heroicons:bolt-slash"
+                color="success"
+            >
+                <Card fullWidth> Tab Contents #4 (Sync 2) </Card>
+            </TabItem>
+        </Tabs>
+    </div>
+
+    <br />
+    <br />
+
+    <div id="nested-test">
+        <Tabs>
+            <TabItem label="Tab #1 (Normal)">
+                <Card fullWidth> Tab Contents #1 (Normal) </Card>
+            </TabItem>
+            <TabItem label="Tab #2 (Nested)">
+                <Card fullWidth>
+                    <Tabs>
+                        <TabItem label="Nested Tab #1">
+                            <Card fullWidth> Nested Tab Contents #1 </Card>
+                        </TabItem>
+                        <TabItem label="Nested Tab #2">
+                            <Card fullWidth> Nested Tab Contents #2 </Card>
+                        </TabItem>
+                    </Tabs>
+                </Card>
+            </TabItem>
+        </Tabs>
+    </div>
+
+    <br />
+    <br />
+
+    <div id="variant-test">
+        <Tabs variant="starlight">
+            <TabItem label="Tab #1">
+                <Card fullWidth> Content #1 </Card>
+            </TabItem>
+            <TabItem label="Tab #2">
+                <Card fullWidth> Content #2 </Card>
+            </TabItem>
+            <TabItem label="Tab #3">
+                <Card fullWidth> Content #3 </Card>
+            </TabItem>
+        </Tabs>
+    </div>
+</Layout>

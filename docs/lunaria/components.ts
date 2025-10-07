@@ -1,9 +1,9 @@
 import type {
+	createLunaria,
 	Locale,
 	LunariaConfig,
 	LunariaStatus,
 	StatusEntry,
-	createLunaria,
 } from '@lunariajs/core';
 import { BaseStyles, CustomStyles } from './styles';
 
@@ -142,7 +142,6 @@ export const LocaleDetails = (
 					? html`<h3 class="capitalize">Missing</h3>
 						<ul>
 							${missingFiles.map((file) => {
-								// biome-ignore lint/style/noNonNullAssertion: <explanation>
 								const localization = file.localizations.find(
 									(localization) => localization.lang === lang
 								)!;
@@ -157,7 +156,7 @@ export const LocaleDetails = (
 					: ''
 			}
 			${
-				// biome-ignore lint/suspicious/noDoubleEquals: <explanation>
+				// biome-ignore lint/suspicious/noDoubleEquals: Lunaria
 				missingFiles.length == 0 && outdatedFiles.length == 0
 					? html`<p>This translation is complete, amazing job! 🎉</p>`
 					: ''
@@ -175,7 +174,6 @@ export const OutdatedFiles = (
 		<h3 class="capitalize">Outdated</h3>
 		<ul>
 			${outdatedFiles.map((file) => {
-				// biome-ignore lint/style/noNonNullAssertion: <explanation>
 				const localization = file.localizations.find((localization) => localization.lang === lang)!;
 
 				const isMissingKeys =
@@ -256,7 +254,6 @@ export const TableContentStatus = (
 	lang: string,
 	lunaria: LunariaInstance
 ): string => {
-	// biome-ignore lint/style/noNonNullAssertion: <explanation>
 	const localization = localizations.find((localization) => localization.lang === lang)!;
 	const isMissingKeys = 'missingKeys' in localization && localization.missingKeys.length > 0;
 	const status = isMissingKeys ? 'outdated' : localization.status;
@@ -271,7 +268,6 @@ export const ContentDetailsLinks = (
 	lang: string,
 	lunaria: LunariaInstance
 ): string => {
-	// biome-ignore lint/style/noNonNullAssertion: <explanation>
 	const localization = fileStatus.localizations.find((localization) => localization.lang === lang)!;
 	const isMissingKeys =
 		localization.status !== 'missing' &&

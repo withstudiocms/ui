@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Badge Component > renders Badge component correctly 1`] = `"<span class="sui-badge primary md outlined full">  Test Badge  </span>"`;
+
+exports[`Badge Component > renders Badge component with different colors 1`] = `"<span class="sui-badge primary md outlined full">  Badge primary  </span>"`;
+
+exports[`Badge Component > renders Badge component with different colors 2`] = `"<span class="sui-badge success md outlined full">  Badge success  </span>"`;
+
+exports[`Badge Component > renders Badge component with different colors 3`] = `"<span class="sui-badge warning md outlined full">  Badge warning  </span>"`;
+
+exports[`Badge Component > renders Badge component with different colors 4`] = `"<span class="sui-badge danger md outlined full">  Badge danger  </span>"`;
+
+exports[`Badge Component > renders Badge component with different colors 5`] = `"<span class="sui-badge info md outlined full">  Badge info  </span>"`;
+
+exports[`Badge Component > renders Badge component with different colors 6`] = `"<span class="sui-badge mono md outlined full">  Badge mono  </span>"`;
+
+exports[`Badge Component > renders Badge component with different rounding 1`] = `"<span class="sui-badge primary md outlined full">  Badge default  </span>"`;
+
+exports[`Badge Component > renders Badge component with different rounding 2`] = `"<span class="sui-badge primary md outlined full">  Badge full  </span>"`;
+
+exports[`Badge Component > renders Badge component with different rounding 3`] = `"<span class="sui-badge primary md outlined semi">  Badge semi  </span>"`;
+
+exports[`Badge Component > renders Badge component with different sizes 1`] = `"<span class="sui-badge primary sm outlined full">  Badge sm  </span>"`;
+
+exports[`Badge Component > renders Badge component with different sizes 2`] = `"<span class="sui-badge primary md outlined full">  Badge md  </span>"`;
+
+exports[`Badge Component > renders Badge component with different sizes 3`] = `"<span class="sui-badge primary lg outlined full">  Badge lg  </span>"`;
+
+exports[`Badge Component > renders Badge component with different variants 1`] = `"<span class="sui-badge primary md default full">  Badge default  </span>"`;
+
+exports[`Badge Component > renders Badge component with different variants 2`] = `"<span class="sui-badge primary md flat full">  Badge flat  </span>"`;
+
+exports[`Badge Component > renders Badge component with different variants 3`] = `"<span class="sui-badge primary md outline full">  Badge outline  </span>"`;
+
+exports[`Badge Component > renders Badge component with icon 1`] = `"<span class="sui-badge primary md outlined full"> <svg style="min-width: 16px" xmlns="http://www.w3.org/2000/svg" prefix="heroicons" height="16" width="16" viewbox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60 60 0 0 0-.491 6.347A48.6 48.6 0 0 1 12 20.904a48.6 48.6 0 0 1 8.232-4.41a61 61 0 0 0-.491-6.347m-15.482 0a51 51 0 0 0-2.658-.813A60 60 0 0 1 12 3.493a60 60 0 0 1 10.399 5.84q-1.345.372-2.658.814m-15.482 0A51 51 0 0 1 12 13.489a50.7 50.7 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55 55 0 0 1 12 8.443m-7.007 11.55A5.98 5.98 0 0 0 6.75 15.75v-1.5"/></svg> Badge with Icon default  </span>"`;
+
+exports[`Badge Component > renders Badge component with icon 2`] = `"<span class="sui-badge primary md outlined full"> <svg style="min-width: 16px" xmlns="http://www.w3.org/2000/svg" prefix="heroicons" height="16" width="16" viewbox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60 60 0 0 0-.491 6.347A48.6 48.6 0 0 1 12 20.904a48.6 48.6 0 0 1 8.232-4.41a61 61 0 0 0-.491-6.347m-15.482 0a51 51 0 0 0-2.658-.813A60 60 0 0 1 12 3.493a60 60 0 0 1 10.399 5.84q-1.345.372-2.658.814m-15.482 0A51 51 0 0 1 12 13.489a50.7 50.7 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55 55 0 0 1 12 8.443m-7.007 11.55A5.98 5.98 0 0 0 6.75 15.75v-1.5"/></svg> Badge with Icon left  </span>"`;
+
+exports[`Badge Component > renders Badge component with icon 3`] = `"<span class="sui-badge primary md outlined full">  Badge with Icon right <svg style="min-width: 16px" xmlns="http://www.w3.org/2000/svg" prefix="heroicons" height="16" width="16" viewbox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60 60 0 0 0-.491 6.347A48.6 48.6 0 0 1 12 20.904a48.6 48.6 0 0 1 8.232-4.41a61 61 0 0 0-.491-6.347m-15.482 0a51 51 0 0 0-2.658-.813A60 60 0 0 1 12 3.493a60 60 0 0 1 10.399 5.84q-1.345.372-2.658.814m-15.482 0A51 51 0 0 1 12 13.489a50.7 50.7 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55 55 0 0 1 12 8.443m-7.007 11.55A5.98 5.98 0 0 0 6.75 15.75v-1.5"/></svg> </span>"`;

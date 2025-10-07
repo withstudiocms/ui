@@ -2,9 +2,9 @@ footer.sui-footer {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	background-color: hsl(var(--background-step-1));
+	background-color: var(--background-step-1);
 	padding: 2rem 10vw;
-	color: hsl(var(--text-normal)) !important;
+	color: var(--text-normal) !important;
 }
 
 .upper,
@@ -28,9 +28,13 @@ footer.sui-footer {
 	padding: 0 !important;
 }
 
+.links ul > li {
+	margin-bottom: 0.5rem;
+}
+
 .links ul li,
 .links ul li * {
-	color: hsl(var(--text-normal)) !important;
+	color: var(--text-normal) !important;
 	width: fit-content;
 }
 
@@ -41,13 +45,14 @@ footer.sui-footer {
 .sui-footer-link-label {
 	font-size: 1.125em;
 	font-weight: 700;
+	margin-bottom: 0.75rem !important;
 }
 
 .separator {
 	height: 1px;
 	width: 100%;
 	border: none;
-	background: hsl(var(--border));
+	background: var(--border);
 }
 
 .lower {

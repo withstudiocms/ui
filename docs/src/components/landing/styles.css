@@ -1,10 +1,10 @@
 form {
 	padding: 1.5rem;
-	background: hsl(var(--background-base));
+	background: var(--background-base);
 }
 
 form > span {
 	font-size: 1.5em;
 	font-weight: 700;
-	margin-bottom: .75rem;
+	margin-bottom: 0.75rem;
 }

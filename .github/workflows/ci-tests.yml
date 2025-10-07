@@ -1,0 +1,140 @@
+name: Run Tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-testing-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  
+jobs:
+  codecov:
+    name: Code Coverage (Vitest)
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+    steps:
+      - name: Check out code using Git
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+  
+      - name: Install Tools & Dependencies
+        uses: withstudiocms/automations/.github/actions/install@885437ef4376e64fc295161092b8a165bc5efd39 # main
+
+      - name: Build packages
+        run: pnpm ci:build
+
+      - name: Run Tests & Code Coverage
+        run: pnpm ci:coverage
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+
+      - name: Upload coverage results to Codecov
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
+        with:
+          slug: withstudiocms/ui
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@47f89e9acb64b76debcd5ea40642d25a4adced9f
+        with:
+          slug: withstudiocms/ui
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  playwright:
+    name: E2E (Playwright)
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+    steps:
+      - name: Check out code using Git
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+    
+      - name: Install Tools & Dependencies
+        uses: withstudiocms/automations/.github/actions/install@885437ef4376e64fc295161092b8a165bc5efd39 # main
+
+      - name: Install Playwright Browsers
+        run: pnpm ci:setup:playwright
+
+      - name: Build Package
+        run: pnpm ci:build
+
+      - name: Run Playwright tests
+        run: pnpm ci:e2e --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        continue-on-error: true
+
+      - name: Upload blob report to GitHub Actions Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: blob-report-${{ matrix.shardIndex }}
+          path: packages/studiocms_ui/blob-report
+          retention-days: 1
+
+  playwright-test-report:
+    name: E2E Report (Playwright)
+    if: ${{ !cancelled() }}
+    needs: [playwright]
+    permissions: 
+      actions: read
+      contents: read
+      pull-requests: write
+      checks: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code using Git
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+
+      - name: Install Tools & Dependencies
+        uses: withstudiocms/automations/.github/actions/install@885437ef4376e64fc295161092b8a165bc5efd39 # main
+
+      - name: Download blob reports from GitHub Actions Artifacts
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          path: all-blob-reports
+          pattern: blob-report-*
+          merge-multiple: true
+
+      - name: Merge into HTML Report
+        run: pnpm exec playwright merge-reports --reporter html,playwright-ctrf-json-reporter ./all-blob-reports
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: html-report
+          path: playwright-report
+          retention-days: 30
+
+      - name: Publish Test Report
+        uses: ctrf-io/github-test-reporter@646f98cfc16c6f7a0e1f6100cabe2deb95dd2eef # v1
+        if: always()
+        with:
+          report-path: './ctrf/*.json'
+          pull-request: ${{ github.event_name == 'pull_request' }}
+          github-report: true
+          suite-folded-report: true
+          overwrite-comment: true
+          use-suite-name: true
+          report-order: 'github-report,suite-folded-report'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

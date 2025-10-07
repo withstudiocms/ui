@@ -16,7 +16,7 @@
 .sui-select-label.disabled {
 	opacity: 0.5;
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .label {
@@ -24,17 +24,19 @@
 }
 
 .req-star {
-	color: hsl(var(--danger-base));
+	color: var(--danger-vibrant);
 	font-weight: 700;
 }
 
 .sui-select-button {
 	padding: 0.5rem 0.75rem 0.5rem 0.75rem;
 	border-radius: var(--radius-md);
-	border: 1px solid hsl(var(--border));
-	background: hsl(var(--background-step-2));
-	color: hsl(var(--text-normal));
-	transition: background, border 0.15s ease;
+	border: 1px solid var(--border);
+	background: var(--background-step-2);
+	color: var(--text-normal);
+	transition:
+		background,
+		border 0.15s ease;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -44,19 +46,19 @@
 }
 
 .sui-select-button:focus {
-	border: 1px solid hsl(var(--primary-base));
+	border: 1px solid var(--primary-base);
 }
 
 .sui-select-button:hover,
 .sui-select-button:focus {
-	background: hsl(var(--background-step-3));
+	background: var(--background-step-3);
 }
 
 .sui-select-button.active,
 .sui-select-button:active,
 .sui-select-button:has(+ .sui-select-dropdown.active) {
-	border: 1px solid hsl(var(--primary-base));
-	background: hsl(var(--background-step-2));
+	border: 1px solid var(--primary-base);
+	background: var(--background-step-2);
 }
 
 .sui-select-button:has(.sui-select-badge-container) {
@@ -82,26 +84,20 @@
 .sui-select-dropdown {
 	position: absolute;
 	width: 100%;
-	top: calc(100% + 0.25rem);
-	left: 0;
-	display: none;
-	max-height: 300px;
-	border: 1px solid hsl(var(--border));
-	border-radius: var(--radius-md);
-	background-color: hsl(var(--background-step-2));
-	z-index: 90;
-	box-shadow: 0px 4px 8px hsl(var(--shadow), 0.5);
-	overflow: hidden;
-}
-
-.sui-select-dropdown-list {
-	width: 100%;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	flex-direction: column;
-	overflow-y: auto;
-	scrollbar-color: hsl(var(--border)) hsl(var(--background-step-2));
+	overflow: hidden;
+	top: calc(100% + 0.25rem);
+	left: 0;
+	display: none;
+	max-height: 300px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	background-color: var(--background-step-2);
+	z-index: 90;
+	box-shadow: 0px 4px 8px var(--shadow);
 }
 
 .sui-select-dropdown.active {
@@ -113,6 +109,15 @@
 	bottom: calc(100% + 0.25rem);
 }
 
+.sui-select-dropdown-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
 .sui-select-option {
 	padding: 0.5rem;
 	cursor: pointer;
@@ -122,19 +127,19 @@
 
 .sui-select-option.disabled {
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .sui-select-option:hover,
 .sui-select-option:focus,
 .sui-select-option.focused {
-	background-color: hsl(var(--background-step-3));
+	background-color: var(--background-step-3);
 }
 
 .sui-select-label[data-multiple="true"] .sui-select-option.selected:hover,
 .sui-select-label[data-multiple="true"] .sui-select-option.selected:focus,
 .sui-select-label[data-multiple="true"] .sui-select-option.selected.focused {
-	background-color: hsl(var(--primary-hover));
+	background-color: var(--primary-hover);
 }
 
 .sui-select-option:focus {
@@ -143,8 +148,8 @@
 }
 
 .sui-select-option.selected {
-	background-color: hsl(var(--primary-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--primary-base);
+	color: var(--text-inverted);
 	cursor: default;
 }
 
@@ -188,7 +193,6 @@
 	cursor: default;
 	position: relative;
 	padding-right: 2rem;
-	border-block: 1.5px solid rgba(0, 0, 0, 0);
 }
 
 .sui-select-badge-container .sui-select-badge.sui-badge svg {
@@ -200,8 +204,10 @@
 	aspect-ratio: 1 / 1;
 	border-radius: 999px;
 	cursor: pointer;
-	outline: 1px solid hsla(var(--border), 0);
-	transition: background-color 0.15s ease, outline 0.15s ease;
+	outline: 1px solid transparent;
+	transition:
+		background-color 0.15s ease,
+		outline 0.15s ease;
 }
 
 .sui-select-badge-container .sui-select-badge.sui-badge svg:hover {
@@ -211,10 +217,10 @@
 .sui-select-badge-container .sui-select-badge.sui-badge svg:active,
 .sui-select-badge-container .sui-select-badge.sui-badge svg:focus {
 	background-color: hsla(100, 100%, 95%, 0.2);
-	outline: 1px solid hsl(var(--border));
+	outline: 1px solid var(--border);
 }
 
 .sui-select-max-span {
 	font-size: 0.875em;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }

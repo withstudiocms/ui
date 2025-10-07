@@ -1,7 +1,7 @@
 ---
+import type { AvailableIcons } from 'studiocms:ui/icons';
 import type { StudioCMSColorway } from '../../utils/colors.js';
 import Icon from '../Icon/Icon.astro';
-import type { HeroIconName } from '../Icon/iconType.js';
 import './dropdown.css';
 
 /**
@@ -27,7 +27,7 @@ interface Option {
 	/**
 	 * The icon to display next to the option.
 	 */
-	icon?: HeroIconName;
+	icon?: AvailableIcons;
 	/**
 	 * The href to link to when the option is clicked. When given, the option will be rendered as an anchor tag.
 	 */

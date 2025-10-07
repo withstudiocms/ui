@@ -14,7 +14,7 @@
 .sui-search-select-label.disabled {
 	opacity: 0.5;
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .label {
@@ -22,7 +22,7 @@
 }
 
 .req-star {
-	color: hsl(var(--danger-base));
+	color: var(--danger-vibrant);
 	font-weight: 700;
 }
 
@@ -38,31 +38,34 @@
 .sui-search-select-dropdown {
 	position: absolute;
 	width: 100%;
-	top: calc(100% + 0.25rem);
-	left: 0;
-	display: none;
-	max-height: 300px;
-	border: 1px solid hsl(var(--border));
-	border-radius: var(--radius-md);
-	background-color: hsl(var(--background-step-2));
-	z-index: 90;
-	box-shadow: 0px 4px 8px hsl(var(--shadow), 0.5);
-	overflow: hidden;
-}
-
-.sui-search-select-dropdown-list {
-	width: 100%;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	flex-direction: column;
-	overflow-y: auto;
-	scrollbar-color: hsl(var(--border)) hsl(var(--background-step-2));
+	overflow: hidden;
+	top: calc(100% + 0.25rem);
+	left: 0;
+	display: none;
+	max-height: 300px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	background-color: var(--background-step-2);
+	z-index: 90;
+	box-shadow: 0px 4px 8px var(--shadow);
 }
 
 .sui-search-select-dropdown.above {
 	top: auto;
 	bottom: calc(100% - 1.5rem);
+}
+
+.sui-search-select-dropdown-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 .sui-search-select-option,
@@ -74,29 +77,29 @@
 }
 
 .empty-search-results:hover {
-	background-color: hsl(var(--background-step-2));
+	background-color: var(--background-step-2);
 	cursor: default;
 }
 
 .sui-search-select-option.disabled {
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .sui-search-select-option:hover,
 .sui-search-select-option.focused {
-	background-color: hsl(var(--background-step-3));
+	background-color: var(--background-step-3);
 }
 
 .sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected:hover,
 .sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected:focus,
 .sui-search-select-label[data-multiple="true"] .sui-search-select-option.selected.focused {
-	background-color: hsl(var(--primary-hover));
+	background-color: var(--primary-hover);
 }
 
 .sui-search-select-option.selected {
-	background-color: hsl(var(--primary-base));
-	color: hsl(var(--text-inverted));
+	background-color: var(--primary-base);
+	color: var(--text-inverted);
 	cursor: default;
 }
 
@@ -128,8 +131,8 @@
 
 .sui-search-select-indicator {
 	position: absolute;
-	bottom: .675rem;
-	right: .675rem;
+	bottom: 0.675rem;
+	right: 0.675rem;
 }
 
 .sui-search-input-wrapper:has(input:focus) + .sui-search-select-dropdown {
@@ -159,7 +162,6 @@
 	cursor: default;
 	position: relative;
 	padding-right: 2rem;
-	border-block: 1.5px solid rgba(0, 0, 0, 0);
 }
 
 .sui-search-select-badge-container .sui-search-select-badge.sui-badge svg {
@@ -171,8 +173,10 @@
 	aspect-ratio: 1 / 1;
 	border-radius: 999px;
 	cursor: pointer;
-	outline: 1px solid hsla(var(--border), 0);
-	transition: background-color 0.15s ease, outline 0.15s ease;
+	outline: 1px solid transparent;
+	transition:
+		background-color 0.15s ease,
+		outline 0.15s ease;
 }
 
 .sui-search-select-badge-container .sui-search-select-badge.sui-badge svg:hover {
@@ -182,10 +186,10 @@
 .sui-search-select-badge-container .sui-search-select-badge.sui-badge svg:active,
 .sui-search-select-badge-container .sui-search-select-badge.sui-badge svg:focus {
 	background-color: hsla(100, 100%, 95%, 0.2);
-	outline: 1px solid hsl(var(--border));
+	outline: 1px solid var(--border);
 }
 
 .sui-search-select-max-span {
 	font-size: 0.875em;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }

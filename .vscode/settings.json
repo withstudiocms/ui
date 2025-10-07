@@ -1,15 +1,17 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
+    "source.fixAll.biome": "explicit"
   },
   "editor.defaultFormatter": "biomejs.biome",
   "editor.gotoLocation.multipleDefinitions": "goto",
   "cSpell.words": [
     "astrojs",
+    "automations",
+    "buildkit",
     "checkmark",
     "createtoast",
+    "ctrf",
     "dismissable",
     "Eleventy",
     "fira",
@@ -17,19 +19,31 @@
     "frontmatter",
     "heroicons",
     "iconify",
+    "kevinzunigacuellar",
+    "Knip",
     "louisescher",
     "Matthiesen",
+    "mergebot",
     "onest",
     "pathe",
     "polyline",
+    "roundings",
     "searchselect",
     "socialproof",
+    "stefanzweifel",
     "studiocms",
     "themetoggle",
     "Thum",
     "tsconfigs",
     "twoslash",
+    "viewbox",
+    "virtuals",
     "vite",
+    "Vitest",
     "withstudiocms"
-  ]
+  ],
+  "material-icon-theme.files.associations": {
+    "*.e2e.ts": "playwright",
+    "*.test.ts": "vitest"
+  }
 }

@@ -8,8 +8,6 @@ function loadRadioGroups() {
 
 		const radioBoxes = element.querySelectorAll<HTMLDivElement>('.sui-radio-box');
 
-		let i = 0;
-
 		for (const radioBox of radioBoxes) {
 			radioBox.addEventListener('keydown', (e) => {
 				if (e.key === 'Enter' || e.key === ' ') {
@@ -58,8 +56,6 @@ function loadRadioGroups() {
 					previousRadioBox.click();
 				}
 			});
-
-			i++;
 		}
 		element.addEventListener('keydown', (e) => {
 			if (e.key !== 'Enter') return;

@@ -296,7 +296,6 @@ export function getIconsTree(data: IconifyJSON, names?: string[]): ParentIconsTr
 
 	function resolve(name: string): ParentIconsList | null {
 		if (icons[name]) {
-			// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 			return (resolved[name] = []);
 		}
 
@@ -440,7 +439,6 @@ export function replaceIDs(
 	// Find all IDs
 	const ids: string[] = [];
 	let match: RegExpExecArray | null;
-	// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 	while ((match = regex.exec(body))) {
 		ids.push(match[1]!);
 	}
@@ -452,7 +450,6 @@ export function replaceIDs(
 	const suffix = `suffix${((Math.random() * 0x1000000) | Date.now()).toString(16)}`;
 
 	// Replace with unique ids
-	// biome-ignore lint/complexity/noForEach: <explanation>
 	ids.forEach((id) => {
 		const newID = typeof prefix === 'function' ? prefix(id) : prefix + (counter++).toString();
 
@@ -505,7 +502,6 @@ export function iconToSVG(
 	let body = fullIcon.body;
 
 	// Apply transformations
-	// biome-ignore lint/complexity/noForEach: <explanation>
 	[fullIcon, fullCustomisations].forEach((props) => {
 		const transformations: string[] = [];
 		const hFlip = props.hFlip;
