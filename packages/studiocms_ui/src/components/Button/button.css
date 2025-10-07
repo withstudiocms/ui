@@ -362,7 +362,7 @@
 	}
 
 	.sui-button.success.flat {
-		background-color: var(--success-flat-base);
+		background-color: var(--success-flat);
 		color: hsl(143, 59%, 20%);
 	}
 
@@ -375,7 +375,7 @@
 	}
 
 	.sui-button.warning.flat {
-		background-color: var(--warning-flat-base);
+		background-color: var(--warning-flat);
 		color: hsl(48, 78%, 20%);
 	}
 
