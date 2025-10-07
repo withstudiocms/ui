@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 1.0.0-beta.4
+
+### Patch Changes
+
+- [#133](https://github.com/withstudiocms/ui/pull/133) [`8e2172d`](https://github.com/withstudiocms/ui/commit/8e2172d3e108924c5b2d680d5bc795716e5a7078) Thanks [@RATIU5](https://github.com/RATIU5)! - Fixed undeclared css variables for flat button style
+
 ## 1.0.0-beta.3
 
 ### Patch Changes
