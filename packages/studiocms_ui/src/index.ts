@@ -146,6 +146,9 @@ export default function integration(options: Options = {}): AstroIntegration {
 						export { default as Select } from '${resolve('./components/Select/Select.astro')}';
 						export { default as SearchSelect } from '${resolve('./components/SearchSelect/SearchSelect.astro')}';
 					`,
+					'studiocms:ui/components/select/script': `
+						export { SUISelectElement } from '${resolve('./components/Select/select.js')}';
+					`,
 					'studiocms:ui/components/dropdown': `
 						export { default as Dropdown } from '${resolve('./components/Dropdown/Dropdown.astro')}';
 						export { DropdownHelper } from '${resolve('./components/Dropdown/dropdown.js')}';

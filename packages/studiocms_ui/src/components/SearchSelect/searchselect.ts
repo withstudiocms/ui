@@ -1,87 +1,98 @@
+import { type SelectOption, SUISelectElement } from "studiocms:ui/components/select/script";
+
 type SearchSelectOption = {
 	label: string;
 	value: string;
 	disabled?: boolean;
-};
+}
 
-type SearchSelectContainer = HTMLDivElement & {
-	input: HTMLInputElement | null;
-	dropdown: Element | null;
-	select: HTMLSelectElement | null;
-};
-
-type SearchSelectState = {
-	optionsMap: Record<string, SelectOption[]>;
-	isMultipleMap: Record<string, boolean>;
-	selectedOptionsMap: Record<string, string[]>;
-	placeholderMap: Record<string, string>;
+interface SearchSelectState {
+	options: SelectOption[];
+	isMultiple: boolean;
 	focusIndex: number;
+	placeholder: string;
+	selectedOptions: string[];
 	isSelectingOption: boolean;
-};
+}
 
-function loadSearchSelects() {
-	const CONSTANTS = {
-		OPTION_HEIGHT: 36,
-		BORDER_SIZE: 2,
-		MARGIN: 4,
-		BADGE_PADDING: 80,
-	} as const;
+class SUIComboboxElement extends SUISelectElement {
+	private input: HTMLInputElement | undefined;
 
-	const getDropdownPosition = (input: HTMLInputElement, optionsCount: number) => {
-		const rect = input.getBoundingClientRect();
-		const dropdownHeight =
-			optionsCount * CONSTANTS.OPTION_HEIGHT + CONSTANTS.BORDER_SIZE + CONSTANTS.MARGIN;
-
-		const customRect = {
-			top: rect.bottom + CONSTANTS.MARGIN,
-			bottom: rect.bottom + CONSTANTS.MARGIN + dropdownHeight,
-			left: rect.left,
-			right: rect.right,
-			width: rect.width,
-			x: rect.x,
-			y: rect.y + rect.height + CONSTANTS.MARGIN,
-			height: dropdownHeight,
-		};
-
-		return {
-			isAbove:
-				customRect.top >= 0 &&
-				customRect.left >= 0 &&
-				customRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-				customRect.right <= (window.innerWidth || document.documentElement.clientWidth),
-			customRect,
-		};
+	public state: SearchSelectState = {
+		options: [],
+		isMultiple: false,
+		focusIndex: -1,
+		placeholder: '',
+		selectedOptions: [],
+		isSelectingOption: false,
 	};
 
-	const createSelectBadge = (value: string, label: string): HTMLSpanElement => {
-		const badge = document.createElement('span');
+	constructor() {
+		super();
+	}
 
-		badge.classList.add(
-			'sui-badge',
-			'primary',
-			'sm',
-			'outlined',
-			'full',
-			'sui-search-select-badge'
+	connectedCallback(): void {
+		this.input = this.querySelector<HTMLInputElement>("input")!;
+		this.dropdown = this.querySelector<HTMLInputElement>(".sui-search-select-dropdown-list")!;
+
+		const selectedOptions = Array.from(
+			this.dropdown?.querySelectorAll('.sui-search-select-option.selected') ?? []
 		);
-		badge.setAttribute('data-value', value);
-		badge.innerHTML = `${label} <svg style='min-width: 8px' xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24' role="button" tabindex="0"><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 18L18 6M6 6l12 12'></path></svg>`;
+
+		this.state.placeholder = this.input?.placeholder ?? '';
+		this.state.options = JSON.parse(this.dataset.options ?? '{}');
+		this.state.isMultiple = this.dataset.multiple === 'true';
+		this.state.selectedOptions = selectedOptions.map((x) => x.getAttribute('data-value') ?? '');
+
+		this.input?.addEventListener('focusin', () =>
+			this.handleContainerFocusIn()
+		);
+
+		this.addEventListener('focusout', () =>
+			this.handleContainerFocusOut()
+		);
+
+		this.addEventListener('keydown', (e) =>
+			this.handleSelectKeyDown(e)
+		);
+
+		this.input?.addEventListener('keyup', (e) =>
+			this.handleInputKeyup(e)
+		);
+
+		// In order to ensure the blur/focusout event is triggered before the click event, we need to set a timeout
+		// to set the isSelectingOption state to false after the click event has been handled
+		// If we don't want to do this, we need to set a 100-200ms timeout to ensure the blur/focusout event is triggered
+		this.addEventListener('mousedown', (e) =>
+			this.handleContainerMouseDown(e)
+		);
+
+		if (this.state.isMultiple) {
+			this.recalculateBadges();
+		}
+	}
+
+	public createSearchSelectBadge = (value: string, label: string): HTMLSpanElement => {
+		const badge = this.createSelectBadge(value, label);
+
+		badge.classList.remove("sui-select-badge");
+		badge.classList.add("sui-search-select-badge");
 
 		return badge;
 	};
 
-	const recalculateBadges = (state: SearchSelectState, container: SearchSelectContainer) => {
-		const badgeContainer = container.querySelector('.sui-search-select-badge-container');
+	public recalculateBadges = () => {
+		const badgeContainer = this.querySelector('.sui-search-select-badge-container');
 
-		if (!badgeContainer || !container.input) return;
+		if (!badgeContainer || !this.input) return;
 
 		badgeContainer.innerHTML = '';
 
-		const selectedValues = state.selectedOptionsMap[container.dataset.id as string] || [];
-		const allOptions = state.optionsMap[container.dataset.id as string] || [];
+		const selectedValues = this.state.selectedOptions;
+		const allOptions = this.state.options;
 
 		if (selectedValues.length === 0) {
-			container.input.placeholder = state.placeholderMap[container.dataset.id as string] ?? '';
+			this.input.placeholder = this.state.placeholder ?? '';
 			return;
 		}
 
@@ -92,27 +103,23 @@ function loadSearchSelects() {
 		})) {
 			const option = allOptions.find((opt) => opt.value === value);
 			if (option) {
-				const newBadge = createSelectBadge(value, option.label);
+				const newBadge = this.createSearchSelectBadge(value, option.label);
 				badgeContainer.appendChild(newBadge);
 			}
 		}
 	};
 
-	const updateLabel = (
-		isMultiple: boolean,
-		state: SearchSelectState,
-		container: SearchSelectContainer
-	) => {
-		const selectedInput = container?.input;
+	public updateLabel = () => {
+		const selectedInput = this.input;
 
-		if (isMultiple) {
-			recalculateBadges(state, container);
+		if (this.state.isMultiple) {
+			this.recalculateBadges();
 
 			if (selectedInput) {
-				selectedInput.placeholder = state.placeholderMap[container.dataset.id as string] ?? '';
+				selectedInput.placeholder = this.state.placeholder;
 			}
 		} else {
-			const selected = container.querySelector(
+			const selected = this.querySelector(
 				'.sui-search-select-option.selected'
 			) as HTMLLIElement;
 
@@ -122,15 +129,13 @@ function loadSearchSelects() {
 		}
 	};
 
-	const updateOptionSelection = (
+	private updateOptionSelection = (
 		value: string,
-		container: SearchSelectContainer,
-		state: SearchSelectState,
 		forceState?: boolean
 	): boolean => {
-		const currentSelected = state.selectedOptionsMap[container.dataset.id as string] || [];
+		const currentSelected = this.state.selectedOptions;
 		const isCurrentlySelected = currentSelected.includes(value);
-		const max = Number.parseInt(container.dataset.multipleMax as string, 10);
+		const max = Number.parseInt(this.dataset.multipleMax as string, 10);
 
 		if (!isCurrentlySelected && !Number.isNaN(max) && currentSelected.length >= max) {
 			return false;
@@ -140,21 +145,21 @@ function loadSearchSelects() {
 			? currentSelected.filter((v) => v !== value)
 			: [...currentSelected, value];
 
-		state.selectedOptionsMap[container.dataset.id as string] = newSelected;
+		this.state.selectedOptions = newSelected;
 
-		const option = container.dropdown?.querySelector(
+		const option = this.dropdown?.querySelector(
 			`.sui-search-select-option[data-value='${value}']`
 		) as HTMLLIElement;
 
 		if (option) {
 			option.classList.toggle('selected', forceState ?? !isCurrentlySelected);
 
-			if (container?.select) {
-				container.select.value = option.getAttribute('value') as string;
+			if (this.select) {
+				this.select.value = option.getAttribute('value') as string;
 			}
 		}
 
-		const selectedCountEl = container.querySelector(
+		const selectedCountEl = this.querySelector(
 			'.sui-search-select-max-span .sui-search-select-select-count'
 		) as HTMLSpanElement;
 
@@ -165,25 +170,23 @@ function loadSearchSelects() {
 		return true;
 	};
 
-	const toggleMultiOption = (
-		id: string,
-		container: SearchSelectContainer,
-		state: SearchSelectState
+	private toggleMultiOption = (
+		id: string
 	) => {
-		const success = updateOptionSelection(id, container, state);
+		const success = this.updateOptionSelection(id);
 
 		if (success) {
-			recalculateBadges(state, container);
+			this.recalculateBadges();
 		}
 	};
 
-	const recomputeOptions = (state: SearchSelectState, container: SearchSelectContainer): void => {
-		const optionElements = container?.dropdown?.querySelectorAll(
+	public recomputeOptions = (): void => {
+		const optionElements = this.dropdown?.querySelectorAll(
 			'.sui-search-select-option'
 		) as NodeListOf<HTMLLIElement>;
 
 		for (const entry of optionElements) {
-			if (Number.parseInt(entry.dataset.optionIndex!, 10) === state.focusIndex) {
+			if (Number.parseInt(entry.dataset.optionIndex!, 10) === this.state.focusIndex) {
 				entry.classList.add('focused');
 			} else {
 				entry.classList.remove('focused');
@@ -191,17 +194,15 @@ function loadSearchSelects() {
 		}
 	};
 
-	const reconstructOptions = (
-		filteredOptions: SearchSelectOption[],
-		state: SearchSelectState,
-		container: SearchSelectContainer
+	private reconstructOptions = (
+		filteredOptions: SearchSelectOption[]
 	): void => {
-		container.dropdown!.innerHTML = '';
+		this.dropdown!.innerHTML = '';
 
-		const selectedValues = state.selectedOptionsMap[container.dataset.id as string] || [];
+		const selectedValues = this.state.selectedOptions;
 
 		if (filteredOptions.length === 0) {
-			container.dropdown!.innerHTML = '<li class="empty-search-results">No results found</li>';
+			this.dropdown!.innerHTML = '<li class="empty-search-results">No results found</li>';
 			return;
 		}
 
@@ -220,13 +221,13 @@ function loadSearchSelects() {
 			element.dataset.optionIndex = i.toString();
 			element.dataset.value = option.value;
 			element.textContent = option.label;
-			container.dropdown?.appendChild(element);
+			this.dropdown?.appendChild(element);
 			i++;
 		}
 	};
 
-	const getInteractiveOptions = (container: SearchSelectContainer): HTMLLIElement[] => {
-		const allOptions = container?.dropdown?.querySelectorAll(
+	public getInteractiveOptions = (): HTMLLIElement[] => {
+		const allOptions = this.dropdown?.querySelectorAll(
 			'.sui-search-select-option'
 		) as NodeListOf<HTMLLIElement>;
 
@@ -238,10 +239,8 @@ function loadSearchSelects() {
 		);
 	};
 
-	const handleContainerMouseDown = (
-		e: MouseEvent,
-		state: SearchSelectState,
-		container: SearchSelectContainer
+	private handleContainerMouseDown = (
+		e: MouseEvent
 	) => {
 		const target = e.target as HTMLElement;
 
@@ -249,33 +248,33 @@ function loadSearchSelects() {
 			e.preventDefault();
 		}
 
-		if (container.input?.value.length === 0) {
-			reconstructOptions(state.optionsMap[container.dataset.id as string] ?? [], state, container);
+		if (this.input?.value.length === 0) {
+			this.reconstructOptions(this.state.options);
 		}
 
 		if (target.closest('.sui-search-select-indicator')) {
-			if (container.dropdown?.parentElement?.classList.contains('active')) {
-				container.dropdown?.parentElement?.classList.remove('active', 'above');
-				container.input?.blur();
-				container.input!.value = '';
+			if (this.dropdown?.parentElement?.classList.contains('active')) {
+				this.dropdown?.parentElement?.classList.remove('active', 'above');
+				this.input?.blur();
+				this.input!.value = '';
 			} else {
-				container.dropdown?.parentElement?.classList.add('active');
-				container.input?.focus();
-				container.input!.value = '';
+				this.dropdown?.parentElement?.classList.add('active');
+				this.input?.focus();
+				this.input!.value = '';
 			}
 			return;
 		}
 
 		if (target.closest('.sui-search-select-badge-container')) {
-			container.dropdown?.parentElement?.classList.remove('active', 'above');
-			container.input?.blur();
-			container.input!.value = '';
+			this.dropdown?.parentElement?.classList.remove('active', 'above');
+			this.input?.blur();
+			this.input!.value = '';
 		}
 
-		state.isSelectingOption = true;
+		this.state.isSelectingOption = true;
 
 		setTimeout(() => {
-			state.isSelectingOption = false;
+			this.state.isSelectingOption = false;
 		}, 0);
 
 		if (target.closest('.sui-search-select-badge svg')) {
@@ -283,10 +282,10 @@ function loadSearchSelects() {
 				.closest('.sui-search-select-badge')
 				?.getAttribute('data-value') as string;
 
-			const success = updateOptionSelection(value, container, state);
+			const success = this.updateOptionSelection(value);
 
 			if (success) {
-				recalculateBadges(state, container);
+				this.recalculateBadges();
 			}
 
 			return;
@@ -297,52 +296,50 @@ function loadSearchSelects() {
 		if (!opt?.dataset.value) return;
 
 		if (opt.classList.contains('disabled') || opt.hasAttribute('disabled')) {
-			container.input?.focus();
+			this.input?.focus();
 			return;
 		}
 
-		const isMultiple = state.isMultipleMap[container.dataset.id as string];
+		const isMultiple = this.state.isMultiple;
 
 		if (isMultiple) {
-			const success = updateOptionSelection(opt.dataset.value, container, state);
+			const success = this.updateOptionSelection(opt.dataset.value);
 
 			if (success) {
-				updateLabel(true, state, container);
-				recalculateBadges(state, container);
+				this.updateLabel();
+				this.recalculateBadges();
 			}
 		} else {
-			const currentSelected = state.selectedOptionsMap[container.dataset.id as string] || [];
+			const currentSelected = this.state.selectedOptions;
 
 			for (const value of currentSelected) {
-				updateOptionSelection(value, container, state, false);
+				this.updateOptionSelection(value, false);
 			}
 
-			updateOptionSelection(opt.dataset.value, container, state, true);
-			updateLabel(false, state, container);
+			this.updateOptionSelection(opt.dataset.value, true);
+			this.updateLabel();
 
-			container.dropdown?.parentElement?.classList.remove('active', 'above');
-			container.input?.blur();
-			container.input!.value = '';
+			this.dropdown?.parentElement?.classList.remove('active', 'above');
+			this.input?.blur();
+			this.input!.value = '';
 		}
 	};
 
-	const handleSelectKeyDown = (
-		e: KeyboardEvent,
-		state: SearchSelectState,
-		container: SearchSelectContainer
+	public handleSelectKeyDown = (
+		e: KeyboardEvent
 	): void => {
 		const focusedElement = document.activeElement;
 
 		if (e.key === 'Escape' || e.key === 'Tab') {
-			container.input?.blur();
-			container.dropdown?.parentElement?.classList.remove('active', 'above');
+			this.input?.blur();
+			this.dropdown?.parentElement?.classList.remove('active', 'above');
 			return;
 		}
 
 		if ((e.key === 'Enter' || e.key === ' ') && focusedElement?.tagName.toLowerCase() === 'svg') {
 			const badgeElement = focusedElement?.closest('.sui-search-select-badge');
 
-			if (badgeElement && state.isMultipleMap[container?.dataset.id as string]) {
+			if (badgeElement && this.state.isMultiple) {
 				const badgeValue = badgeElement.getAttribute('data-value');
 				let nextBadge = badgeElement.previousElementSibling as HTMLElement;
 
@@ -352,12 +349,12 @@ function loadSearchSelects() {
 
 				const nextBadgeValue = nextBadge?.getAttribute('data-value');
 
-				toggleMultiOption(badgeValue as string, container, state);
-				recalculateBadges(state, container);
+				this.toggleMultiOption(badgeValue as string);
+				this.recalculateBadges();
 
 				setTimeout(() => {
 					if (nextBadgeValue) {
-						const badgeToFocus = container?.querySelector(
+						const badgeToFocus = this.querySelector(
 							`.sui-search-select-badge[data-value="${nextBadgeValue}"] svg`
 						) as HTMLElement;
 						if (badgeToFocus) {
@@ -373,47 +370,47 @@ function loadSearchSelects() {
 			}
 		}
 
-		const interactiveOptions = getInteractiveOptions(container);
+		const interactiveOptions = this.getInteractiveOptions();
 		const currentInteractiveIndex = interactiveOptions.findIndex((option) =>
 			option.classList.contains('focused')
 		);
 
 		if (e.key === 'ArrowUp' && currentInteractiveIndex > 0) {
-			state.focusIndex = Array.from(
-				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
+			this.state.focusIndex = Array.from(
+				this.dropdown?.querySelectorAll('.sui-search-select-option') || []
 			).indexOf(interactiveOptions[currentInteractiveIndex - 1] as Element);
 
-			recomputeOptions(state, container);
+			this.recomputeOptions();
 
 			return;
 		}
 
 		if (e.key === 'ArrowDown' && currentInteractiveIndex < interactiveOptions.length - 1) {
-			state.focusIndex = Array.from(
-				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
+			this.state.focusIndex = Array.from(
+				this.dropdown?.querySelectorAll('.sui-search-select-option') || []
 			).indexOf(interactiveOptions[currentInteractiveIndex + 1] as Element);
 
-			recomputeOptions(state, container);
+			this.recomputeOptions();
 
 			return;
 		}
 
 		if (e.key === 'PageUp') {
-			state.focusIndex = Array.from(
-				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
+			this.state.focusIndex = Array.from(
+				this.dropdown?.querySelectorAll('.sui-search-select-option') || []
 			).indexOf(interactiveOptions[0] as Element);
 
-			recomputeOptions(state, container);
+			this.recomputeOptions();
 
 			return;
 		}
 
 		if (e.key === 'PageDown') {
-			state.focusIndex = Array.from(
-				container?.dropdown?.querySelectorAll('.sui-search-select-option') || []
+			this.state.focusIndex = Array.from(
+				this.dropdown?.querySelectorAll('.sui-search-select-option') || []
 			).indexOf(interactiveOptions[interactiveOptions.length - 1] as Element);
 
-			recomputeOptions(state, container);
+			this.recomputeOptions();
 
 			return;
 		}
@@ -422,12 +419,12 @@ function loadSearchSelects() {
 			e.preventDefault();
 			e.stopImmediatePropagation();
 
-			const optionElements = container?.dropdown?.querySelectorAll(
+			const optionElements = this.dropdown?.querySelectorAll(
 				'.sui-search-select-option'
 			) as NodeListOf<HTMLLIElement>;
 
 			const focusedOption = Array.from(optionElements).find(
-				(entry) => Number.parseInt(entry.dataset.optionIndex!, 10) === state.focusIndex
+				(entry) => Number.parseInt(entry.dataset.optionIndex!, 10) === this.state.focusIndex
 			);
 
 			if (
@@ -439,27 +436,27 @@ function loadSearchSelects() {
 
 				if (!value) return;
 
-				const isMultiple = state.isMultipleMap[container.dataset.id as string];
+				const isMultiple = this.state.isMultiple;
 
 				if (isMultiple) {
-					const success = updateOptionSelection(value, container, state);
+					const success = this.updateOptionSelection(value);
 
 					if (success) {
-						updateLabel(true, state, container);
-						recalculateBadges(state, container);
+						this.updateLabel();
+						this.recalculateBadges();
 					}
 				} else {
-					const currentSelected = state.selectedOptionsMap[container.dataset.id as string] || [];
+					const currentSelected = this.state.selectedOptions;
 
 					for (const existingValue of currentSelected) {
-						updateOptionSelection(existingValue, container, state, false);
+						this.updateOptionSelection(existingValue, false);
 					}
 
-					updateOptionSelection(value, container, state, true);
-					updateLabel(false, state, container);
+					this.updateOptionSelection(value, true);
+					this.updateLabel();
 
-					container.dropdown?.parentElement?.classList.remove('active', 'above');
-					container.input!.value = '';
+					this.dropdown?.parentElement?.classList.remove('active', 'above');
+					this.input!.value = '';
 				}
 			}
 
@@ -467,116 +464,52 @@ function loadSearchSelects() {
 		}
 	};
 
-	const handleInputKeyup = (
-		e: KeyboardEvent,
-		state: SearchSelectState,
-		container: SearchSelectContainer
+	private handleInputKeyup = (
+		e: KeyboardEvent
 	): void => {
 		if (['Enter', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
 
-		const value = (container.input as HTMLInputElement).value.trim().toLowerCase();
-		const allOptions = state.optionsMap[container.dataset.id as string];
+		const value = (this.input as HTMLInputElement).value.trim().toLowerCase();
+		const allOptions = this.state.options;
 
 		// If input is empty, show all options
 		if (value.length === 0) {
-			reconstructOptions(allOptions!, state, container);
+			this.reconstructOptions(allOptions);
 			return;
 		}
 
 		// Otherwise filter options
 		const filteredOptions =
-			allOptions?.filter((option) => option.label.toLowerCase().includes(value)) ?? [];
+			allOptions.filter((option) => option.label.toLowerCase().includes(value)) ?? [];
 
-		state.focusIndex = 0;
+		this.state.focusIndex = 0;
 
-		reconstructOptions(filteredOptions, state, container);
+		this.reconstructOptions(filteredOptions);
 	};
 
-	const handleContainerFocusOut = (state: SearchSelectState, container: SearchSelectContainer) => {
-		if (state.isSelectingOption) return;
+	private handleContainerFocusOut = () => {
+		if (this.state.isSelectingOption) return;
 
-		container.input!.value = '';
-		reconstructOptions(state.optionsMap[container.dataset.id as string] ?? [], state, container);
-		container.dropdown?.parentElement?.classList.remove('active', 'above');
+		this.input!.value = '';
+		this.reconstructOptions(this.state.options);
+		this.dropdown?.parentElement?.classList.remove('active', 'above');
 	};
 
-	const handleContainerFocusIn = (state: SearchSelectState, container: SearchSelectContainer) => {
+	private handleContainerFocusIn = () => {
 		const allDropdowns = document.querySelectorAll('.sui-search-select-dropdown-list');
 
 		for (const dropdown of allDropdowns) {
-			if (dropdown !== container.dropdown) {
+			if (dropdown !== this.dropdown) {
 				dropdown.parentElement?.classList.remove('active', 'above');
 			}
 		}
 
-		const { isAbove } = getDropdownPosition(
-			container.input as HTMLInputElement,
-			state.optionsMap[container.dataset.id as string]?.length ?? 0
+		const { isAbove } = this.getDropdownPosition(
+			this.input as HTMLInputElement,
 		);
 
-		container.dropdown?.parentElement?.classList.add('active', ...(isAbove ? [] : ['above']));
+		this.dropdown?.parentElement?.classList.add('active', ...(isAbove ? [] : ['above']));
 	};
-
-	const state: SearchSelectState = {
-		optionsMap: {},
-		isMultipleMap: {},
-		placeholderMap: {},
-		selectedOptionsMap: {},
-		focusIndex: 0,
-		isSelectingOption: false,
-	};
-
-	const selects = document.querySelectorAll<HTMLDivElement>('.sui-search-select-label');
-
-	for (const container of selects) {
-		if (container.dataset.initialized === 'true') continue;
-
-		const id = container.dataset.id as string;
-
-		const specialContainer = Object.assign(container, {
-			input: container.querySelector('input'),
-			dropdown: container.querySelector('.sui-search-select-dropdown-list'),
-			select: container.querySelector('select'),
-		});
-
-		const selectedOptions = Array.from(
-			specialContainer.dropdown?.querySelectorAll('.sui-search-select-option.selected') ?? []
-		);
-
-		state.placeholderMap[id] = specialContainer.input?.placeholder ?? '';
-		state.optionsMap[id] = JSON.parse(container.dataset.options ?? '{}');
-		state.isMultipleMap[id] = container.dataset.multiple === 'true';
-		state.selectedOptionsMap[id] = selectedOptions.map((x) => x.getAttribute('data-value') ?? '');
-
-		specialContainer.input?.addEventListener('focusin', () =>
-			handleContainerFocusIn(state, specialContainer)
-		);
-
-		specialContainer.addEventListener('focusout', () =>
-			handleContainerFocusOut(state, specialContainer)
-		);
-
-		specialContainer.addEventListener('keydown', (e) =>
-			handleSelectKeyDown(e, state, specialContainer)
-		);
-
-		specialContainer.input?.addEventListener('keyup', (e) =>
-			handleInputKeyup(e, state, specialContainer)
-		);
-
-		// In order to ensure the blur/focusout event is triggered before the click event, we need to set a timeout
-		// to set the isSelectingOption state to false after the click event has been handled
-		// If we don't want to do this, we need to set a 100-200ms timeout to ensure the blur/focusout event is triggered
-		specialContainer.addEventListener('mousedown', (e) =>
-			handleContainerMouseDown(e, state, specialContainer)
-		);
-
-		if (state.isMultipleMap[id]) {
-			recalculateBadges(state, specialContainer);
-		}
-
-		container.dataset.initialized = 'true';
-	}
 }
 
-document.addEventListener('astro:page-load', loadSearchSelects);
+customElements.define("sui-combobox", SUIComboboxElement);
