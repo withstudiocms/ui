@@ -172,10 +172,18 @@ export default function integration(options: Options = {}): AstroIntegration {
 					'studiocms:ui/components/tooltip': `export { default as Tooltip } from '${resolve('./components/Tooltip/Tooltip.astro')}';`,
 				};
 
+				const ServerComponents = Object.entries(componentMap).filter(
+					([key]) => !key.endsWith('/client')
+				);
+
+				const ClientComponents = Object.entries(componentMap).filter(([key]) =>
+					key.endsWith('/client')
+				);
+
 				const virtualComponents: Record<string, string> = {
 					...componentMap,
-					'studiocms:ui/components': Object.values(componentMap).filter((entry) => !entry.endsWith('/client')).join('\n'),
-					'studiocms:ui/components/client': Object.values(componentMap).filter((entry) => entry.endsWith('/client')).join('\n'),
+					'studiocms:ui/components': ServerComponents.map(([_, value]) => value).join('\n'),
+					'studiocms:ui/components/client': ClientComponents.map(([_, value]) => value).join('\n'),
 				};
 
 				addVirtualImports(params, {
