@@ -47,6 +47,9 @@ declare module 'studiocms:ui/components/radiogroup' {
 
 declare module 'studiocms:ui/components/toaster' {
 	export const Toaster: typeof import('./components/Toast/Toaster.astro').default;
+}
+
+declare module 'studiocms:ui/components/toaster/client' {
 	export const toast: typeof import('./components/Toast/toast.js').toast;
 }
 
@@ -56,7 +59,9 @@ declare module 'studiocms:ui/components/card' {
 
 declare module 'studiocms:ui/components/modal' {
 	export const Modal: typeof import('./components/Modal/Modal.astro').default;
+}
 
+declare module 'studiocms:ui/components/modal/client' {
 	export class ModalHelper {
 		private element;
 		private cancelButton;
@@ -113,7 +118,9 @@ declare module 'studiocms:ui/components/select' {
 
 declare module 'studiocms:ui/components/dropdown' {
 	export const Dropdown: typeof import('./components/Dropdown/Dropdown.astro').default;
+}
 
+declare module 'studiocms:ui/components/dropdown/client' {
 	export class DropdownHelper {
 		private container;
 		private toggleEl;
@@ -178,7 +185,9 @@ declare module 'studiocms:ui/components/footer' {
 
 declare module 'studiocms:ui/components/progress' {
 	export const Progress: typeof import('./components/Progress/Progress.astro').default;
+}
 
+declare module 'studiocms:ui/components/progress/client' {
 	export class ProgressHelper {
 		private bar;
 		private progress;
@@ -205,7 +214,9 @@ declare module 'studiocms:ui/components/accordion' {
 declare module 'studiocms:ui/components/sidebar' {
 	export const Sidebar: typeof import('./components/Sidebar/Single.astro').default;
 	export const DoubleSidebar: typeof import('./components/Sidebar/Double.astro').default;
+}
 
+declare module 'studiocms:ui/components/sidebar/client' {
 	export class SingleSidebarHelper {
 		private sidebar;
 		private sidebarToggle?;
@@ -326,10 +337,12 @@ declare module 'studiocms:ui/components' {
 	export const Textarea: typeof import('./components/Textarea/Textarea.astro').default;
 	export const Toaster: typeof import('./components/Toast/Toaster.astro').default;
 	export const Tooltip: typeof import('./components/Tooltip/Tooltip.astro').default;
-	export const toast: typeof import('./components/Toast/toast.js').toast;
 	export const Toggle: typeof import('./components/Toggle/Toggle.astro').default;
 	export const User: typeof import('./components/User/User.astro').default;
+}
 
+declare module 'studiocms:ui/components/client' {
+	export const toast: typeof import('./components/Toast/toast.js').toast;
 	export class ModalHelper {
 		private element;
 		private cancelButton;
