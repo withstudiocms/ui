@@ -1,5 +1,5 @@
-/// <reference path="./events.d.ts" preserve="true" />
-/// <reference path="./virtuals.d.ts" preserve="true" />
+/// <reference path="../dist/events.d.ts" preserve="true" />
+/// <reference path="../dist/virtuals.d.ts" preserve="true" />
 
 import fs from 'node:fs';
 import type { IconifyJSON } from '@iconify/types';
@@ -133,23 +133,17 @@ export default function integration(options: Options = {}): AstroIntegration {
 					'studiocms:ui/components/checkbox': `export { default as Checkbox } from '${resolve('./components/Checkbox/Checkbox.astro')}';`,
 					'studiocms:ui/components/toggle': `export { default as Toggle } from '${resolve('./components/Toggle/Toggle.astro')}';`,
 					'studiocms:ui/components/radiogroup': `export { default as RadioGroup } from '${resolve('./components/RadioGroup/RadioGroup.astro')}';`,
-					'studiocms:ui/components/toaster': `
-						export { default as Toaster } from '${resolve('./components/Toast/Toaster.astro')}';
-						export { toast } from '${resolve('./components/Toast/toast.js')}';
-					`,
+					'studiocms:ui/components/toaster': `export { default as Toaster } from '${resolve('./components/Toast/Toaster.astro')}';`,
+					'studiocms:ui/components/toaster/client': `export { toast } from '${resolve('./components/Toast/toast.js')}';`,
 					'studiocms:ui/components/card': `export { default as Card } from '${resolve('./components/Card/Card.astro')}';`,
-					'studiocms:ui/components/modal': `
-						export { default as Modal } from '${resolve('./components/Modal/Modal.astro')}';
-						export { ModalHelper } from '${resolve('./components/Modal/modal.js')}';
-					`,
+					'studiocms:ui/components/modal': `export { default as Modal } from '${resolve('./components/Modal/Modal.astro')}';`,
+					'studiocms:ui/components/modal/client': `export { ModalHelper } from '${resolve('./components/Modal/modal.js')}';`,
 					'studiocms:ui/components/select': `
 						export { default as Select } from '${resolve('./components/Select/Select.astro')}';
 						export { default as SearchSelect } from '${resolve('./components/SearchSelect/SearchSelect.astro')}';
 					`,
-					'studiocms:ui/components/dropdown': `
-						export { default as Dropdown } from '${resolve('./components/Dropdown/Dropdown.astro')}';
-						export { DropdownHelper } from '${resolve('./components/Dropdown/dropdown.js')}';
-					`,
+					'studiocms:ui/components/dropdown': `export { default as Dropdown } from '${resolve('./components/Dropdown/Dropdown.astro')}';`,
+					'studiocms:ui/components/dropdown/client': `export { DropdownHelper } from '${resolve('./components/Dropdown/dropdown.js')}';`,
 					'studiocms:ui/components/user': `export { default as User } from '${resolve('./components/User/User.astro')}';`,
 					'studiocms:ui/components/tabs': `
 						export { default as Tabs } from '${resolve('./components/Tabs/Tabs.astro')}';
@@ -160,15 +154,13 @@ export default function integration(options: Options = {}): AstroIntegration {
 						export { default as AccordionItem } from '${resolve('./components/Accordion/Item.astro')}';
 					`,
 					'studiocms:ui/components/footer': `export { default as Footer } from '${resolve('./components/Footer/Footer.astro')}';`,
-					'studiocms:ui/components/progress': `
-						export { default as Progress } from '${resolve('./components/Progress/Progress.astro')}';
-						export { ProgressHelper } from '${resolve('./components/Progress/helper.js')}';
-					`,
+					'studiocms:ui/components/progress': `export { default as Progress } from '${resolve('./components/Progress/Progress.astro')}';`,
+					'studiocms:ui/components/progress/client': `export { ProgressHelper } from '${resolve('./components/Progress/helper.js')}';`,
 					'studiocms:ui/components/sidebar': `
 						export { default as Sidebar } from '${resolve('./components/Sidebar/Single.astro')}';
 						export { default as DoubleSidebar } from '${resolve('./components/Sidebar/Double.astro')}';
-						export { SingleSidebarHelper, DoubleSidebarHelper } from '${resolve('./components/Sidebar/helpers.js')}';
 					`,
+					'studiocms:ui/components/sidebar/client': `export { SingleSidebarHelper, DoubleSidebarHelper } from '${resolve('./components/Sidebar/helpers.js')}';`,
 					'studiocms:ui/components/breadcrumbs': `export { default as Breadcrumbs } from '${resolve('./components/Breadcrumbs/Breadcrumbs.astro')}';`,
 					'studiocms:ui/components/group': `export { default as Group } from '${resolve('./components/Group/Group.astro')}';`,
 					'studiocms:ui/components/badge': `export { default as Badge } from '${resolve('./components/Badge/Badge.astro')}';`,
@@ -180,9 +172,18 @@ export default function integration(options: Options = {}): AstroIntegration {
 					'studiocms:ui/components/tooltip': `export { default as Tooltip } from '${resolve('./components/Tooltip/Tooltip.astro')}';`,
 				};
 
+				const ServerComponents = Object.entries(componentMap).filter(
+					([key]) => !key.endsWith('/client')
+				);
+
+				const ClientComponents = Object.entries(componentMap).filter(([key]) =>
+					key.endsWith('/client')
+				);
+
 				const virtualComponents: Record<string, string> = {
 					...componentMap,
-					'studiocms:ui/components': Object.values(componentMap).join('\n'),
+					'studiocms:ui/components': ServerComponents.map(([_, value]) => value).join('\n'),
+					'studiocms:ui/components/client': ClientComponents.map(([_, value]) => value).join('\n'),
 				};
 
 				addVirtualImports(params, {
