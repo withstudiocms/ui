@@ -40,7 +40,7 @@ This component requires a **helper**. Make sure to read the documentation carefu
     /// <reference types="@studiocms/ui/v/types" />
     // @lib: dom
     // ---cut---
-    import { toast } from 'studiocms:ui/components/toaster';
+    import { toast } from 'studiocms:ui/components/toaster/client';
 
     const trigger = document.getElementById('trigger')!;
     trigger.addEventListener('click', () => {
@@ -90,7 +90,7 @@ Or you can set it individually for every toast like this:
 ```ts "duration: 10000" twoslash showLinenumbers title="ToastDuration.ts"
 /// <reference types="@studiocms/ui/v/types" />
 // ---cut---
-import { toast } from 'studiocms:ui/components/toaster';
+import { toast } from 'studiocms:ui/components/toaster/client';
 
 toast({
   title: 'This is a toast!',
@@ -108,7 +108,7 @@ to be persistent by setting `persistent` to `true`:
 ```ts "persistent: true" twoslash showLinenumbers title="ToastPersistence.ts"
 /// <reference types="@studiocms/ui/v/types" />
 // ---cut---
-import { toast } from 'studiocms:ui/components/toaster';
+import { toast } from 'studiocms:ui/components/toaster/client';
 
 toast({
   title: 'This is a toast!',
@@ -125,7 +125,7 @@ Unless a toast is persistent, you can choose to hide the close button by setting
 ```ts "closeButton: false" twoslash showLinenumbers title="ToastCloseButton.ts"
 /// <reference types="@studiocms/ui/v/types" />
 // ---cut---
-import { toast } from 'studiocms:ui/components/toaster';
+import { toast } from 'studiocms:ui/components/toaster/client';
 
 toast({
   title: 'This is a toast!',

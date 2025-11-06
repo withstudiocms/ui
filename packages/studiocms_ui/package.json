@@ -36,7 +36,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "buildkit build 'src/**/*.{ts,d.ts,css,astro,stub}' --tsconfig=tsconfig.build.json",
+    "delete:dist": "node -e \"import { rmSync } from 'fs'; rmSync('./dist', { recursive: true, force: true });\"",
+    "build": "pnpm delete:dist && buildkit build 'src/**/*.{ts,d.ts,css,astro,stub}' --tsconfig=tsconfig.build.json",
     "dev": "buildkit dev 'src/**/*.{ts,d.ts,css,astro,stub}' --tsconfig=tsconfig.build.json",
     "playwright:setup": "pnpm exec playwright install --with-deps",
     "test-server": "pnpm --filter @test-fixture/server dev",

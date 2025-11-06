@@ -9,7 +9,8 @@ sidebar:
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PreviewCard from '~/components/PreviewCard.astro';
 import ProgressScript from '~/components/ProgressScript.astro';
-import { Progress, ProgressHelper } from 'studiocms:ui/components/progress';
+import { Progress } from 'studiocms:ui/components/progress';
+import { ProgressHelper } from 'studiocms:ui/components/progress/client';
 
 :::caution[Helper required]
 This component requires a **helper**. Make sure to read the documentation carefully so you know how to use it.
@@ -56,7 +57,7 @@ The value and max can be adjusted after the component has been initialized by us
 
     <Progress label="Example Progress Bar" id="progress" max={100} value={50} />
     <script>
-      import { ProgressHelper } from 'studiocms:ui/components/progress';
+      import { ProgressHelper } from 'studiocms:ui/components/progress/client';
 
       const progress = new ProgressHelper('progress');
       progress.setValue(75);
