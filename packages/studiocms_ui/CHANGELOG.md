@@ -1,5 +1,23 @@
 # @studiocms/ui
 
+## 1.0.0-beta.4
+
+### Major Changes
+
+- [#137](https://github.com/withstudiocms/ui/pull/137) [`dee51eb`](https://github.com/withstudiocms/ui/commit/dee51ebcf063a6bcdfca25a69d20d2d1447409b8) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Moves the following helpers into their own virtual modules:
+
+  - `studiocms:ui/components/toaster/client` - `toast`
+  - `studiocms:ui/components/modal/client` - `ModalHelper`
+  - `studiocms:ui/components/dropdown/client` - `DropdownHelper`
+  - `studiocms:ui/components/progress/client` - `ProgressHelper`
+  - `studiocms:ui/components/sidebar/client` - `SingleSidebarHelper, DoubleSidebarHelper`
+
+  There is also a new `studiocms:ui/components/client` joined module that contains all the above component helpers.
+
+### Patch Changes
+
+- [#133](https://github.com/withstudiocms/ui/pull/133) [`8e2172d`](https://github.com/withstudiocms/ui/commit/8e2172d3e108924c5b2d680d5bc795716e5a7078) Thanks [@RATIU5](https://github.com/RATIU5)! - Fixed undeclared css variables for flat button style
+
 ## 1.0.0-beta.3
 
 ### Patch Changes
