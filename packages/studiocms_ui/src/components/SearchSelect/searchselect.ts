@@ -1,10 +1,10 @@
-import { type SelectOption, SUISelectElement } from "studiocms:ui/components/select/script";
+import { type SelectOption, SUISelectElement } from 'studiocms:ui/components/select/script';
 
 type SearchSelectOption = {
 	label: string;
 	value: string;
 	disabled?: boolean;
-}
+};
 
 interface SearchSelectState {
 	options: SelectOption[];
@@ -32,8 +32,8 @@ class SUIComboboxElement extends SUISelectElement {
 	}
 
 	connectedCallback(): void {
-		this.input = this.querySelector<HTMLInputElement>("input")!;
-		this.dropdown = this.querySelector<HTMLInputElement>(".sui-search-select-dropdown-list")!;
+		this.input = this.querySelector<HTMLInputElement>('input')!;
+		this.dropdown = this.querySelector<HTMLInputElement>('.sui-search-select-dropdown-list')!;
 
 		const selectedOptions = Array.from(
 			this.dropdown?.querySelectorAll('.sui-search-select-option.selected') ?? []
@@ -44,28 +44,18 @@ class SUIComboboxElement extends SUISelectElement {
 		this.state.isMultiple = this.dataset.multiple === 'true';
 		this.state.selectedOptions = selectedOptions.map((x) => x.getAttribute('data-value') ?? '');
 
-		this.input?.addEventListener('focusin', () =>
-			this.handleContainerFocusIn()
-		);
+		this.input?.addEventListener('focusin', () => this.handleContainerFocusIn());
 
-		this.addEventListener('focusout', () =>
-			this.handleContainerFocusOut()
-		);
+		this.addEventListener('focusout', () => this.handleContainerFocusOut());
 
-		this.addEventListener('keydown', (e) =>
-			this.handleSelectKeyDown(e)
-		);
+		this.addEventListener('keydown', (e) => this.handleSelectKeyDown(e));
 
-		this.input?.addEventListener('keyup', (e) =>
-			this.handleInputKeyup(e)
-		);
+		this.input?.addEventListener('keyup', (e) => this.handleInputKeyup(e));
 
 		// In order to ensure the blur/focusout event is triggered before the click event, we need to set a timeout
 		// to set the isSelectingOption state to false after the click event has been handled
 		// If we don't want to do this, we need to set a 100-200ms timeout to ensure the blur/focusout event is triggered
-		this.addEventListener('mousedown', (e) =>
-			this.handleContainerMouseDown(e)
-		);
+		this.addEventListener('mousedown', (e) => this.handleContainerMouseDown(e));
 
 		if (this.state.isMultiple) {
 			this.recalculateBadges();
@@ -75,8 +65,8 @@ class SUIComboboxElement extends SUISelectElement {
 	public createSearchSelectBadge = (value: string, label: string): HTMLSpanElement => {
 		const badge = this.createSelectBadge(value, label);
 
-		badge.classList.remove("sui-select-badge");
-		badge.classList.add("sui-search-select-badge");
+		badge.classList.remove('sui-select-badge');
+		badge.classList.add('sui-search-select-badge');
 
 		return badge;
 	};
@@ -119,9 +109,7 @@ class SUIComboboxElement extends SUISelectElement {
 				selectedInput.placeholder = this.state.placeholder;
 			}
 		} else {
-			const selected = this.querySelector(
-				'.sui-search-select-option.selected'
-			) as HTMLLIElement;
+			const selected = this.querySelector('.sui-search-select-option.selected') as HTMLLIElement;
 
 			if (selected && selectedInput) {
 				selectedInput.placeholder = selected.innerText.trim();
@@ -129,10 +117,7 @@ class SUIComboboxElement extends SUISelectElement {
 		}
 	};
 
-	private updateOptionSelection = (
-		value: string,
-		forceState?: boolean
-	): boolean => {
+	private updateOptionSelection = (value: string, forceState?: boolean): boolean => {
 		const currentSelected = this.state.selectedOptions;
 		const isCurrentlySelected = currentSelected.includes(value);
 		const max = Number.parseInt(this.dataset.multipleMax as string, 10);
@@ -170,9 +155,7 @@ class SUIComboboxElement extends SUISelectElement {
 		return true;
 	};
 
-	private toggleMultiOption = (
-		id: string
-	) => {
+	private toggleMultiOption = (id: string) => {
 		const success = this.updateOptionSelection(id);
 
 		if (success) {
@@ -194,9 +177,7 @@ class SUIComboboxElement extends SUISelectElement {
 		}
 	};
 
-	private reconstructOptions = (
-		filteredOptions: SearchSelectOption[]
-	): void => {
+	private reconstructOptions = (filteredOptions: SearchSelectOption[]): void => {
 		this.dropdown!.innerHTML = '';
 
 		const selectedValues = this.state.selectedOptions;
@@ -239,9 +220,7 @@ class SUIComboboxElement extends SUISelectElement {
 		);
 	};
 
-	private handleContainerMouseDown = (
-		e: MouseEvent
-	) => {
+	private handleContainerMouseDown = (e: MouseEvent) => {
 		const target = e.target as HTMLElement;
 
 		if (!target.closest('input')) {
@@ -325,9 +304,7 @@ class SUIComboboxElement extends SUISelectElement {
 		}
 	};
 
-	public handleSelectKeyDown = (
-		e: KeyboardEvent
-	): void => {
+	public handleSelectKeyDown = (e: KeyboardEvent): void => {
 		const focusedElement = document.activeElement;
 
 		if (e.key === 'Escape' || e.key === 'Tab') {
@@ -464,9 +441,7 @@ class SUIComboboxElement extends SUISelectElement {
 		}
 	};
 
-	private handleInputKeyup = (
-		e: KeyboardEvent
-	): void => {
+	private handleInputKeyup = (e: KeyboardEvent): void => {
 		if (['Enter', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
 
 		const value = (this.input as HTMLInputElement).value.trim().toLowerCase();
@@ -504,12 +479,10 @@ class SUIComboboxElement extends SUISelectElement {
 			}
 		}
 
-		const { isAbove } = this.getDropdownPosition(
-			this.input as HTMLInputElement,
-		);
+		const { isAbove } = this.getDropdownPosition(this.input as HTMLInputElement);
 
 		this.dropdown?.parentElement?.classList.add('active', ...(isAbove ? [] : ['above']));
 	};
 }
 
-customElements.define("sui-combobox", SUIComboboxElement);
+customElements.define('sui-combobox', SUIComboboxElement);

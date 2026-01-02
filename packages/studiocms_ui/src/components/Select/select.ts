@@ -2,13 +2,13 @@ export type SelectOption = {
 	value: string;
 	label: string;
 	disabled?: boolean;
-}
+};
 
 type SelectContainer = HTMLDivElement & {
 	button: HTMLButtonElement | null;
 	dropdown: HTMLUListElement | null;
 	select: HTMLSelectElement | null;
-}
+};
 
 interface SelectState {
 	options: SelectOption[];
@@ -68,19 +68,14 @@ export class SUISelectElement extends HTMLElement {
 		});
 
 		this.state.placeholder =
-			(this.button?.querySelector('.sui-select-value-span') as HTMLSpanElement)
-				?.innerText ?? '';
+			(this.button?.querySelector('.sui-select-value-span') as HTMLSpanElement)?.innerText ?? '';
 
 		this.state.options = JSON.parse(this.dataset.options as string);
 		this.state.isMultiple = this.dataset.multiple === 'true';
 
-		this.addEventListener('click', (e) =>
-			this.handleContainerClick(e)
-		);
+		this.addEventListener('click', (e) => this.handleContainerClick(e));
 
-		this.addEventListener('keydown', (e) =>
-			this.handleSelectKeyDown(e)
-		);
+		this.addEventListener('keydown', (e) => this.handleSelectKeyDown(e));
 
 		if (this.state.isMultiple) {
 			this.observeResize(this.button!, () => {
@@ -90,7 +85,7 @@ export class SUISelectElement extends HTMLElement {
 		}
 	}
 
-	private observeResize = (element: Element, callback: ResizeCallback): () => void => {
+	private observeResize = (element: Element, callback: ResizeCallback): (() => void) => {
 		// Clean up any existing observer for this element
 		if (this.observerMap.has(element)) {
 			this.unobserveResize(element);
@@ -127,8 +122,7 @@ export class SUISelectElement extends HTMLElement {
 
 		const { OPTION_HEIGHT, BORDER_SIZE, MARGIN } = this.CONSTANTS;
 
-		const dropdownHeight =
-			optionsCount * OPTION_HEIGHT + BORDER_SIZE + MARGIN;
+		const dropdownHeight = optionsCount * OPTION_HEIGHT + BORDER_SIZE + MARGIN;
 
 		const customRect = {
 			top: rect.bottom + MARGIN,
@@ -216,9 +210,7 @@ export class SUISelectElement extends HTMLElement {
 
 	private handleBadgeOverflow = (): void => {
 		const buttonContainer = this.button?.parentElement?.parentElement;
-		const buttonValueSpan = this.button?.querySelector(
-			'.sui-select-value-span'
-		) as HTMLSpanElement;
+		const buttonValueSpan = this.button?.querySelector('.sui-select-value-span') as HTMLSpanElement;
 		const activeSelects = this.dropdown?.querySelectorAll('.sui-select-option.selected');
 		const overflowContainer = this.querySelector('.sui-select-badge-container-below');
 
@@ -285,9 +277,7 @@ export class SUISelectElement extends HTMLElement {
 		}
 	};
 
-	private deselectMultiOption = (
-		id: string
-	): void => {
+	private deselectMultiOption = (id: string): void => {
 		const selectOpt = this.dropdown?.querySelector(
 			`.sui-select-option[value='${id}']`
 		) as HTMLOptionElement;
@@ -347,9 +337,7 @@ export class SUISelectElement extends HTMLElement {
 		);
 	};
 
-	private handleOptionSelect = (
-		target: HTMLElement
-	): void => {
+	private handleOptionSelect = (target: HTMLElement): void => {
 		const option = target.closest('.sui-select-option') as HTMLLIElement | null;
 		const lastActive = this.dropdown?.querySelector('.sui-select-option.selected');
 		const isMultiple = this.state.isMultiple;
@@ -375,9 +363,7 @@ export class SUISelectElement extends HTMLElement {
 		}
 	};
 
-	private handleContainerClick = (
-		e: MouseEvent
-	): void => {
+	private handleContainerClick = (e: MouseEvent): void => {
 		const target = e.target as HTMLElement;
 
 		if (target.closest('.sui-select-badge svg')) {
@@ -401,9 +387,7 @@ export class SUISelectElement extends HTMLElement {
 		}
 	};
 
-	public handleSelectKeyDown = (
-		e: KeyboardEvent
-	): void => {
+	public handleSelectKeyDown = (e: KeyboardEvent): void => {
 		const active = !!this.dropdown?.classList.contains('active');
 		const focusedElement = document.activeElement;
 
@@ -510,4 +494,4 @@ export class SUISelectElement extends HTMLElement {
 	};
 }
 
-customElements.define("sui-select", SUISelectElement);
+customElements.define('sui-select', SUISelectElement);

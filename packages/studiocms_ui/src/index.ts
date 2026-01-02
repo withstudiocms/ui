@@ -247,10 +247,10 @@ export default function integration(options: Options = {}): AstroIntegration {
 						collections:
 							icons.collections && Object.keys(icons.collections).length > 0
 								? `${Object.keys(icons.collections)
-									.map((collection) => {
-										return `'${collection}': import('@studiocms/ui/types').IconifyJSON;`;
-									})
-									.join('\n')}`
+										.map((collection) => {
+											return `'${collection}': import('@studiocms/ui/types').IconifyJSON;`;
+										})
+										.join('\n')}`
 								: 'export const collections: Record<string, import("@studiocms/ui/types").IconifyJSON>;',
 						availableIcons: `('${icons.availableIcons.join("'\n | '")}')[]`,
 						iconCollections: `('${icons.collectionNames.join("'\n | '")}')[]`,
