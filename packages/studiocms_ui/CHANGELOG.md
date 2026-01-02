@@ -1,5 +1,13 @@
 # @studiocms/ui
 
+## 1.0.0-beta.5
+
+### Patch Changes
+
+- [#136](https://github.com/withstudiocms/ui/pull/136) [`4cdc396`](https://github.com/withstudiocms/ui/commit/4cdc3960fe804feef040e3a09ae046ae72a3eb5d) Thanks [@louisescher](https://github.com/louisescher)! - Refactors the select components into web components
+
+- [#138](https://github.com/withstudiocms/ui/pull/138) [`deec8e5`](https://github.com/withstudiocms/ui/commit/deec8e5e7bcc1fdfcdeefe78c4002fdda9d93d86) Thanks [@louisescher](https://github.com/louisescher)! - Changes the inputs icon color to var(--text-muted)
+
 ## 1.0.0-beta.4
 
 ### Major Changes
