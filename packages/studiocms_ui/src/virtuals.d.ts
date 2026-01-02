@@ -116,6 +116,16 @@ declare module 'studiocms:ui/components/select' {
 	export const SearchSelect: typeof import('./components/SearchSelect/SearchSelect.astro').default;
 }
 
+declare module 'studiocms:ui/components/select/script' {
+	export type SelectOption = {
+		value: string;
+		label: string;
+		disabled?: boolean;
+	};
+
+	export const SUISelectElement: typeof import('./components/Select/select.js').SUISelectElement;
+}
+
 declare module 'studiocms:ui/components/dropdown' {
 	export const Dropdown: typeof import('./components/Dropdown/Dropdown.astro').default;
 }
