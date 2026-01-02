@@ -142,9 +142,6 @@ export default function integration(options: Options = {}): AstroIntegration {
 						export { default as Select } from '${resolve('./components/Select/Select.astro')}';
 						export { default as SearchSelect } from '${resolve('./components/SearchSelect/SearchSelect.astro')}';
 					`,
-					'studiocms:ui/components/select/script': `
-						export { SUISelectElement } from '${resolve('./components/Select/select.js')}';
-					`,
 					'studiocms:ui/components/dropdown': `export { default as Dropdown } from '${resolve('./components/Dropdown/Dropdown.astro')}';`,
 					'studiocms:ui/components/dropdown/client': `export { DropdownHelper } from '${resolve('./components/Dropdown/dropdown.js')}';`,
 					'studiocms:ui/components/user': `export { default as User } from '${resolve('./components/User/User.astro')}';`,
@@ -211,6 +208,9 @@ export default function integration(options: Options = {}): AstroIntegration {
 						'studiocms:ui/scripts/tooltip': `import '${resolve('./components/Tooltip/tooltip.js')}';`,
 						'studiocms:ui/scripts/accordion': `import '${resolve('./components/Accordion/accordion.js')}';`,
 						'studiocms:ui/scripts/progress': `import '${resolve('./components/Progress/progress.js')}';`,
+						'studiocms:ui/components/select/script': `
+							export { SUISelectElement } from '${resolve('./components/Select/select.js')}';
+						`,
 						// Components
 						...virtualComponents,
 
@@ -247,10 +247,10 @@ export default function integration(options: Options = {}): AstroIntegration {
 						collections:
 							icons.collections && Object.keys(icons.collections).length > 0
 								? `${Object.keys(icons.collections)
-										.map((collection) => {
-											return `'${collection}': import('@studiocms/ui/types').IconifyJSON;`;
-										})
-										.join('\n')}`
+									.map((collection) => {
+										return `'${collection}': import('@studiocms/ui/types').IconifyJSON;`;
+									})
+									.join('\n')}`
 								: 'export const collections: Record<string, import("@studiocms/ui/types").IconifyJSON>;',
 						availableIcons: `('${icons.availableIcons.join("'\n | '")}')[]`,
 						iconCollections: `('${icons.collectionNames.join("'\n | '")}')[]`,
