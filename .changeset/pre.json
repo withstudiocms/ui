@@ -7,8 +7,10 @@
     "@test-fixture/server": "0.0.1"
   },
   "changesets": [
+    "calm-teachers-shop",
     "clean-zoos-invite",
     "cuddly-donuts-move",
+    "dull-tomatoes-peel",
     "eighty-planes-judge",
     "famous-cycles-sell",
     "fifty-apricots-beam",
