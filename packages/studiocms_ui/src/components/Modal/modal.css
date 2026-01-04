@@ -8,6 +8,7 @@
 	margin: auto;
 	z-index: 50;
 	max-width: calc(100% - 4rem);
+	background-color: var(--background-base);
 }
 
 .sui-modal.sm {
