@@ -1,0 +1,91 @@
+---
+i18nReady: true
+title: 行（Row）
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Row } from 'studiocms:ui/components';
+
+一个小的 `flex: row` 包装器。将所有 flex 的怪异之处抽象为一个组件。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Row>
+        <span>行项目 1</span>
+        <span>行项目 2</span>
+        <span>行项目 3</span>
+      </Row>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="RowExample.astro"
+    ---
+    import { Row } from 'studiocms:ui/components';
+    ---
+
+    <Row>
+      <span>行项目 1</span>
+      <span>行项目 2</span>
+      <span>行项目 3</span>
+    </Row>
+    ```
+  </TabItem>
+</Tabs>
+
+### `align-items: center`
+
+您可以传递 `alignCenter` 属性以向该行添加 `align-items: center` CSS 属性。
+
+```astro "alignCenter" showLinenumbers title="RowAlignCenterExample.astro"
+---
+import { Row } from 'studiocms:ui/components';
+---
+
+<Row alignCenter>
+  <!-- 内容 -->
+</Row>
+```
+
+### 间距大小
+
+您可以通过 `gapSize` 属性更改行的间距大小，该属性可以设置为 `sm`、`md` 或 `lg` 之一。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard vertical gapSize="lg">
+      <Row gapSize="sm">
+        <span>小行</span>
+        <span>小行</span>
+        <span>小行</span>
+      </Row>
+      <Row gapSize="md">
+        <span>中行</span>
+        <span>中行</span>
+        <span>中行</span>
+      </Row>
+      <Row gapSize="lg">
+        <span>大行</span>
+        <span>大行</span>
+        <span>大行</span>
+      </Row>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "gapSize='sm'" showLinenumbers title="RowGapSizeExample.astro"
+    ---
+    import { Row } from 'studiocms:ui/components';
+    ---
+
+    <Row gapSize='sm'>
+      <span>小行</span>
+      <span>小行</span>
+      <span>小行</span>
+    </Row>
+    <!-- 为简洁起见，省略了其他示例 -->
+    ```
+  </TabItem>
+</Tabs>

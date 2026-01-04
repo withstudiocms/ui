@@ -1,0 +1,139 @@
+---
+title: 折叠
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Accordion, AccordionItem } from 'studiocms:ui/components';
+
+一个折叠块。用于创建小块的附加信息。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Accordion>
+        <AccordionItem open>
+          <div slot="summary">这是摘要</div>
+          <div>这是详细信息</div>
+        </AccordionItem>
+        <AccordionItem>
+          <div slot="summary">这是第二个摘要</div>
+          <div>这是第二个详细信息</div>
+        </AccordionItem>
+      </Accordion>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="AccordionExample.astro"
+    ---
+    import { Accordion, AccordionItem } from 'studiocms:ui/components';
+    ---
+
+    <Accordion>
+      <AccordionItem open>
+        <div slot="summary">这是摘要</div>
+        <div>这是详细信息</div>
+      </AccordionItem>
+      <AccordionItem>
+        <div slot="summary">这是第二个摘要</div>
+        <div>这是第二个详细信息</div>
+      </AccordionItem>
+    </Accordion>
+    ```
+  </TabItem>
+</Tabs>
+
+### 默认打开某一项
+
+你可以将 `open` 属性传递给任何 `<AccordionItem>`，以使其默认打开，如上例所示。
+
+### 样式
+
+折叠块有多种不同的样式：
+
+- `outlined`（默认）
+- `separated`
+- `filled`
+- `blank`
+
+它们可以通过折叠块父元素上的 `style` 属性使用。以下是一个使用 `filled` 样式的折叠块：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Accordion style="filled">
+        <AccordionItem open>
+          <div slot="summary">这是摘要</div>
+          <div>这是详细信息</div>
+        </AccordionItem>
+        <AccordionItem>
+          <div slot="summary">这是第二个摘要</div>
+          <div>这是第二个详细信息</div>
+        </AccordionItem>
+      </Accordion>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="AccordionStyleExample.astro"
+    ---
+    import { Accordion, AccordionItem } from 'studiocms:ui/components';
+    ---
+
+    <Accordion style="filled">
+      <AccordionItem open>
+        <div slot="summary">这是摘要</div>
+        <div>这是详细信息</div>
+      </AccordionItem>
+      <AccordionItem>
+        <div slot="summary">这是第二个摘要</div>
+        <div>这是第二个详细信息</div>
+      </AccordionItem>
+    </Accordion>
+    ```
+  </TabItem>
+</Tabs>
+
+### 多项同时打开
+
+默认情况下，用户可以同时打开折叠块中的多项。你可以通过在 `<Accordion>` 元素上设置 `multipleOpen` 属性为 false 来更改此行为：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Accordion multipleOpen={false}>
+        <AccordionItem open>
+          <div slot="summary">这是摘要</div>
+          <div>这是详细信息</div>
+        </AccordionItem>
+        <AccordionItem>
+          <div slot="summary">这是第二个摘要</div>
+          <div>这是第二个详细信息</div>
+        </AccordionItem>
+      </Accordion>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="AccordionStyleExample.astro"
+    ---
+    import { Accordion, AccordionItem } from 'studiocms:ui/components';
+    ---
+
+    <Accordion multipleOpen={false}>
+      <AccordionItem open>
+        <div slot="summary">这是摘要</div>
+        <div>这是详细信息</div>
+      </AccordionItem>
+      <AccordionItem>
+        <div slot="summary">这是第二个摘要</div>
+        <div>这是第二个详细信息</div>
+      </AccordionItem>
+    </Accordion>
+    ```
+  </TabItem>
+</Tabs>

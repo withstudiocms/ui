@@ -1,0 +1,314 @@
+---
+i18nReady: true
+title: 弹窗
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import ModalScript from '~/components/ModalScript.astro';
+import { Modal, Button, Row } from 'studiocms:ui/components';
+
+:::caution[需要辅助函数]
+此组件需要使用**辅助函数**。请务必仔细阅读文档，以了解如何使用它。
+:::
+
+一个弹窗组件，为您处理所有繁琐的细节，并额外支持编程式触发。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Modal id="usage-modal">
+        <h2 slot="header">标题内容</h2>
+        <div>弹窗内容</div>
+      </Modal>
+      <Button color="primary" id="usage-modal-trigger">
+        触发弹窗
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ModalExample.astro"
+    ---
+    import { Modal, Button } from 'studiocms:ui/components';
+    ---
+
+    <Modal id='modal'>
+      <h2 slot='header'>标题内容</h2>
+      <div>弹窗内容</div>
+    </Modal>
+    <Button color='primary' id='modal-trigger'>
+      触发弹窗
+    </Button>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { ModalHelper } from 'studiocms:ui/components';
+
+    const modal = new ModalHelper('modal', 'modal-trigger');
+    ```
+  </TabItem>
+</Tabs>
+
+### 尺寸
+
+您可以将弹窗的尺寸更改为三种预设之一。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Modal id="sizes-modal-sm" size="sm">
+        <h2 slot="header">小型弹窗</h2>
+        <div>
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
+        </div>
+      </Modal>
+      <Modal id="sizes-modal-md">
+        <h2 slot="header">中等内容</h2>
+        <div>
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
+        </div>
+      </Modal>
+      <Modal id="sizes-modal-lg" size="lg">
+        <h2 slot="header">大型内容</h2>
+        <div>
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
+        </div>
+      </Modal>
+
+      <Row alignCenter>
+        <Button color="primary" id="sm-modal-trigger">
+          小型
+        </Button>
+        <Button color="primary" id="md-modal-trigger">
+          中型
+        </Button>
+        <Button color="primary" id="lg-modal-trigger">
+          大型
+        </Button>
+      </Row>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /size='[a-z]+'/ showLinenumbers title="ModalSizesExample.astro"
+    ---
+    import { Modal, Button } from 'studiocms:ui/components';
+    ---
+
+    <Modal id='modal' size='sm'>
+      <h2 slot='header'>小型弹窗</h2>
+      <div>
+        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+        nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+        aliquam nam consectetur dolorum et unde optio At delectus alias.
+      </div>
+    </Modal>
+    <Button color='primary' id='modal-trigger'>
+      小型
+    </Button>
+
+    <!-- 为简洁起见，省略了其他弹窗和触发器 -->
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { ModalHelper } from 'studiocms:ui/components';
+
+    const modal = new ModalHelper('modal', 'modal-trigger');
+    ```
+  </TabItem>
+</Tabs>
+
+### 可关闭性
+
+您可以通过 `dismissable` 属性更改弹窗是否可以通过点击其外部来关闭。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Modal id="dismissable-modal" dismissable={false}>
+        <h2 slot="header">不可关闭</h2>
+        <div>
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
+        </div>
+      </Modal>
+
+      <Button color="primary" id="dismissable-modal-trigger">
+        不可关闭
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "dismissable={false}" showLinenumbers title="ModalDismissableExample.astro"
+    ---
+    import { Modal, Button } from 'studiocms:ui/components';
+    ---
+
+    <Modal id='modal' dismissable={false}>
+      <h2 slot='header'>不可关闭</h2>
+      <div>
+        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+        nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+        aliquam nam consectetur dolorum et unde optio At delectus alias.
+      </div>
+    </Modal>
+    <Button color='primary' id='modal-trigger'>
+      不可关闭
+    </Button>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { ModalHelper } from 'studiocms:ui/components';
+
+    const modal = new ModalHelper('modal', 'modal-trigger');
+    ```
+  </TabItem>
+</Tabs>
+
+如果弹窗有按钮（见下文），右上角的 `x` 按钮也将消失。
+
+### 按钮
+
+弹窗支持“取消”和“确认”两种按钮。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Modal id="buttons-modal" cancelButton="取消" actionButton="确认" class="not-content">
+        <h2 slot="header">按钮</h2>
+        <div>
+          Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+          nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+          aliquam nam consectetur dolorum et unde optio At delectus alias.
+        </div>
+      </Modal>
+
+      <Button color="primary" id="buttons-modal-trigger">
+        按钮
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "cancelButton='Cancel' actionButton='Confirm'" showLinenumbers title="ModalButtonsExample.astro"
+    ---
+    import { Modal, Button } from 'studiocms:ui/components';
+    ---
+
+    <Modal id='modal' cancelButton='取消' actionButton='确认'>
+      <h2 slot='header'>按钮</h2>
+      <div>
+        Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+        nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+        aliquam nam consectetur dolorum et unde optio At delectus alias.
+      </div>
+    </Modal>
+    <Button color='primary' id='modal-trigger'>
+      按钮
+    </Button>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { ModalHelper } from 'studiocms:ui/components';
+
+    const modal = new ModalHelper('modal', 'modal-trigger');
+    ```
+  </TabItem>
+</Tabs>
+
+如果您愿意，可以将定义了 `label` 和 `color` 键的对象传递给属性，而不是将标签作为字符串传递，从而更改按钮的外观：
+
+```astro "cancelButton={{ label: 'Cancel', color: 'default' }} actionButton={{ label: 'Confirm', color: 'danger' }}" showLinenumbers title="ModalButtonsExample.astro"
+---
+import { Modal, Button } from 'studiocms:ui/components';
+---
+
+<Modal
+  id='modal'
+  cancelButton={{ label: '取消', color: 'default' }}
+  actionButton={{ label: '确认', color: 'danger' }}
+>
+  <h2 slot='header'>按钮</h2>
+  <div>
+    Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit 
+    nesciunt qui quibusdam quam non totam quia. Et porro unde et rerum 
+    aliquam nam consectetur dolorum et unde optio At delectus alias.
+  </div>
+</Modal>
+<Button color='primary' id='modal-trigger'>
+  按钮
+</Button>
+```
+
+### 注册回调
+
+如果您想根据点击哪个按钮来实现功能，可以分别为它们注册回调。
+
+```ts twoslash ins={5-7,9-11} showLinenumbers title="Script Tag"
+// @noErrors
+import { ModalHelper } from 'studiocms:ui/components';
+
+const modal = new ModalHelper('modal', 'modal-trigger');
+
+modal.registerCancelCallback(() => {
+  // 您的逻辑写在这里
+});
+
+modal.registerConfirmCallback(() => {
+  // 您的逻辑写在这里
+});
+```
+
+### 表单支持
+
+您可以通过提供 `isForm` 属性将弹窗变为表单！这会将“取消”按钮变为重置按钮，将“确认”按钮变为提交按钮。
+这只会改变它们的类型，而不会改变它们的文本。
+
+通过使用 `registerConfirmCallback` 函数，您可以在点击“确认”按钮后获取 `FormData`。弹窗中的任何输入都将包含在内。
+
+```ts twoslash "formData" showLinenumbers title="Script Tag"
+// @noErrors
+import { ModalHelper } from 'studiocms:ui/components';
+
+const modal = new ModalHelper('modal', 'modal-trigger');
+
+modal.registerConfirmCallback((formData) => {
+  // 您的逻辑写在这里
+});
+```
+
+### 绑定触发器
+
+您可以通过结合使用元素的 ID 和 `bindTrigger` 函数为弹窗添加多个触发器。
+
+```ts twoslash ins={4-5} showLinenumbers title="Script Tag"
+// @noErrors
+import { ModalHelper } from 'studiocms:ui/components';
+
+const modal = new ModalHelper('modal', 'modal-trigger');
+modal.bindTrigger('modal-trigger-two');
+modal.bindTrigger('modal-trigger-three');
+```
+
+### 编程控制弹窗
+
+与[下拉菜单](/customizing/studiocms-ui/components/dropdown)类似，弹窗也可以通过编程方式显示和隐藏：
+
+```ts twoslash ins={5-6} showLinenumbers title="Script Tag"
+// @noErrors
+import { ModalHelper } from 'studiocms:ui/components';
+
+const modal = new ModalHelper('modal', 'modal-trigger');
+
+modal.show();
+modal.hide();
+```
+
+<ModalScript />

@@ -1,0 +1,49 @@
+---
+i18nReady: true
+title: 主题切换
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { ThemeToggle, Icon } from 'studiocms:ui/components';
+
+一个简单但实用的辅助组件，您可以将其用作主题切换器。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <ThemeToggle>
+        <Icon name='moon' width={24} height={24} slot="dark" />
+        <Icon name='sun' width={24} height={24} slot="light" />
+      </ThemeToggle>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ThemeToggleExample.astro"
+    ---
+    import { ThemeToggle, Icon } from 'studiocms:ui/components';
+    ---
+
+    <ThemeToggle>
+      <div slot='dark'>
+        {/* 当主题为深色模式时将显示此处的内容！ */}
+        <Icon name='moon' width={24} height={24} slot="dark" />
+      </div>
+      <div slot='light'>
+        {/* 当主题为浅色模式时将显示此处的内容！ */}
+        <Icon name='sun' width={24} height={24} slot="light" />
+      </div>
+    </ThemeToggle>
+    ```
+  </TabItem>
+</Tabs>
+
+### 扩展切换器
+
+`<ThemeToggle />` 组件实际上只是一个带有两个插槽的按钮。您可以传递来自 <a href="/customizing/studiocms-ui/components/button/">`<Button />` 组件</a> 的所有属性，它们将应用于切换器。
+
+:::danger
+`<ThemeToggle />` 元素具有唯一的 ID，应在整个页面上仅使用一次，例如在导航栏中。
+如果您需要多个切换器，请考虑使用 <a href="/customizing/studiocms-ui/components/theme-helper/">`ThemeHelper`</a> 创建您自己的切换器。
+:::

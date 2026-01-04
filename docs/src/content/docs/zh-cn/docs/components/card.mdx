@@ -1,0 +1,169 @@
+---
+i18nReady: true
+title: 卡片
+---
+
+import { Card } from 'studiocms:ui/components';
+import { Tabs, TabItem, Badge } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+
+一个用于包装其他内容的简单卡片组件！ 
+
+## 使用方法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Card>
+        内容
+      </Card>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="CardExample.astro"
+    ---
+    import { Card } from 'studiocms:ui/components';
+    ---
+
+    <Card>
+      内容
+    </Card>
+    ```
+  </TabItem>
+</Tabs>
+
+### 变体 <Badge text="New！" variant="tip" />
+
+不仅仅是带边框的卡片，您可以使用 `variant` 属性来更改卡片的外观。将其设置为
+`filled` 可以拥有一个带有填充背景的卡片：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Card variant="filled">
+        内容
+      </Card>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "variant='filled'" showLinenumbers title="FullVariantExample.astro"
+    ---
+    import { Card } from 'studiocms:ui/components';
+    ---
+
+    <Card variant='filled'>
+      内容
+    </Card>
+    ```
+  </TabItem>
+</Tabs>
+
+### 全宽与全高
+
+您可以使用 `fullWidth` 参数将卡片设置为扩展至其父容器的宽度：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Card fullWidth>
+        内容
+      </Card>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "fullWidth" showLinenumbers title="FullVariantExample.astro"
+    ---
+    import { Card } from 'studiocms:ui/components';
+    ---
+
+    <Card fullWidth>
+      内容
+    </Card>
+    ```
+  </TabItem>
+</Tabs>
+
+此外，您可以使用 `fullHeight` 参数将卡片设置为扩展至其父容器的高度：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Card fullHeight>
+        内容
+      </Card>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "fullHeight" showLinenumbers title="FullHeightCardExample.astro"
+    ---
+    import { Card } from 'studiocms:ui/components';
+    ---
+
+    <Card fullHeight>
+      内容
+    </Card>
+    ```
+  </TabItem>
+</Tabs>
+
+### 页眉与页脚 <Badge text="新增！" variant="tip" />
+
+卡片组件支持页眉和页脚插槽：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Card>
+        <h4 slot='header'>页眉内容</h4>
+        <p>
+          Lorem ipsum dolor sit amet. Et nulla cumque et suscipit molestiae est quam eaque et placeat iste est 
+          velit dignissimos aut totam voluptatum qui eveniet nostrum. Aut neque reprehenderit est vero debitis 
+          in inventore voluptas ut dolores facilis et voluptatibus quibusdam aut dolorum sunt non vitae sequi.
+        </p>
+        <span slot='footer'>页脚内容</span>
+      </Card>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /slot='(?:header|footer)'/ showLinenumbers title="CardSlotsExample.astro"
+    ---
+    import { Card } from 'studiocms:ui/components';
+    ---
+
+    <Card>
+      <h4 slot='header'>页眉内容</h4>
+      <p>
+        Lorem ipsum dolor sit amet. Et nulla cumque et suscipit molestiae est quam eaque et placeat iste est 
+        velit dignissimos aut totam voluptatum qui eveniet nostrum. Aut neque reprehenderit est vero debitis 
+        in inventore voluptas ut dolores facilis et voluptatibus quibusdam aut dolorum sunt non vitae sequi.
+      </p>
+      <span slot='footer'>页脚内容</span>
+    </Card>
+    ```
+  </TabItem>
+</Tabs>
+
+### Polymorphic
+
+卡片可以变成您想要的任何东西，字面意思就是这样！卡片支持 Astro 的 `Polymorphic` 类型，这意味着您可以通过传递 `as` 属性将卡片渲染为您想要的任何元素。这是一个渲染为 `<a>` 标签而不是 `<div>` 的卡片： 
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Card as="a" href="https://studiocms.dev">
+        studiocms.dev
+      </Card>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "as='a'" showLinenumbers title="CardPolymorphicExample.astro"
+    ---
+    import { Card } from 'studiocms:ui/components';
+    ---
+
+    <Card as='a' href='https://studiocms.dev'>
+      studiocms.dev
+    </Card>
+    ```
+  </TabItem>
+</Tabs>

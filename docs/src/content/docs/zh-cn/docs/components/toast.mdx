@@ -1,0 +1,155 @@
+---
+i18nReady: true
+title: Toast
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import ToasterScript from '~/components/ToasterScript.astro';
+import { Toaster, Button, Row } from 'studiocms:ui/components';
+
+:::caution[需要辅助函数]
+此组件需要使用**辅助函数**。请务必仔细阅读文档，以了解如何使用它。
+:::
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Button color="primary" id="usage-trigger">
+        显示 Toast
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ToastExample.astro"
+    ---
+    import { Toaster, Button } from 'studiocms:ui/components';
+    ---
+
+    <!-- 将此添加到页面根目录： -->
+    <Toaster />
+    
+    <Button color='primary' id='trigger'>
+      显示 Toast
+    </Button>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { toast } from 'studiocms:ui/components';
+
+    const trigger = document.getElementById('usage-trigger')!;
+    trigger.addEventListener('click', () => {
+      toast({
+        title: '这是一个 Toast！',
+        description: '你好！',
+        type: 'info',
+      });
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+### 位置
+
+您可以通过 `<Toaster />` 组件上的 `position` 属性更改所有 Toast 的显示位置：
+
+```astro /position='[a-z-]+'/ showLinenumbers title="ToastPosition.astro"
+---
+import { Toaster } from 'studiocms:ui/components';
+---
+
+<Toaster position='top-left' />
+<Toaster position='top-center' />
+<Toaster position='top-right' />
+<Toaster position='bottom-left' />
+<Toaster position='bottom-center' />
+<Toaster position='bottom-right' />
+```
+
+### 持续时间
+
+设置 Toast 持续时间有两种方法：通过 `<Toaster />` 组件上的默认值，或通过 `toast({ ... })` 函数。
+
+您可以像这样设置默认持续时间：
+
+```astro "duration={10000}" showLinenumbers title="ToastDuration.astro"
+---
+import { Toaster } from 'studiocms:ui/components';
+---
+
+<Toaster duration={10000} />
+```
+
+或者，您可以为每个 Toast 单独设置：
+
+```ts "duration: 10000" twoslash showLinenumbers title="ToastDuration.ts"
+// @noErrors
+import { toast } from 'studiocms:ui/components';
+
+toast({
+  title: '这是一个 Toast！',
+  description: '你好！',
+  type: 'info',
+  duration: 10000
+});
+```
+
+### 持久化
+
+有时，您不需要 Toast 在设定的时间后消失。与其将 Toast 设置为 31 天后过期，不如通过将 `persistent` 设置为 `true` 使其持久化：
+
+```ts "persistent: true" twoslash showLinenumbers title="ToastPersistence.ts"
+// @noErrors
+import { toast } from 'studiocms:ui/components';
+
+toast({
+  title: '这是一个 Toast！',
+  description: '你好！',
+  type: 'info',
+  persistent: true
+});
+```
+
+### 关闭按钮
+
+除非 Toast 是持久化的，否则您可以通过将 `closeButton` 选项设置为 `false` 来隐藏关闭按钮：
+
+```ts "closeButton: false" twoslash showLinenumbers title="ToastCloseButton.ts"
+// @noErrors
+import { toast } from 'studiocms:ui/components';
+
+toast({
+  title: '这是一个 Toast！',
+  description: '你好！',
+  type: 'info',
+  closeButton: false
+});
+```
+
+### 偏移量和间距
+
+您可以通过更改 `<Toaster />` 上的 `offset` 属性来调整 Toast 距离屏幕边缘的距离：
+
+```astro showLinenumbers title="ToastOffset.astro"
+---
+import { Toaster } from 'studiocms:ui/components';
+---
+
+<!-- 以像素为单位的偏移量 -->
+<Toaster offset={64} />
+```
+
+您还可以通过 `<Toaster />` 上的 `gap` 属性更改 Toast 之间的间距：
+
+```astro showLinenumbers title="ToastGap.astro"
+---
+import { Toaster } from 'studiocms:ui/components';
+---
+
+<!-- 以像素为单位的间距 -->
+<Toaster gap={32} />
+```
+
+<ToasterScript />

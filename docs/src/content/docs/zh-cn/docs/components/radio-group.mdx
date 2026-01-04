@@ -1,0 +1,184 @@
+---
+i18nReady: true
+title: 单选组
+sidebar:
+  badge:
+    text: New Colors！
+    variant: tip
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { RadioGroup, Row } from 'studiocms:ui/components';
+
+一个支持大小和颜色的自定义单选按钮组组件。兼容表单。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <RadioGroup label="标签" options={[{label: '选项 1', value: 'opt-1'}, {label: '选项 2', value: 'opt-2'}]} />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="RadioGroupExample.astro"
+    ---
+    import { RadioGroup } from 'studiocms:ui/components';
+    ---
+
+    <RadioGroup 
+      label='标签'
+      options={[
+        { label: '选项 1', value: 'opt-1' },
+        { label: '选项 2', value: 'opt-2' }
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+### 方向
+
+你可以通过使用 `horizontal` 属性将单选按钮组更改为水平显示：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <RadioGroup label="标签" horizontal options={[{label: '选项 1', value: 'opt-1-h'}, {label: '选项 2', value: 'opt-2-h'}]} />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "horizontal" showLinenumbers title="RadioGroupHorizontalExample.astro"
+    ---
+    import { RadioGroup } from 'studiocms:ui/components';
+    ---
+
+    <RadioGroup 
+      label='标签'
+      horizontal
+      options={[
+        { label: '选项 1', value: 'opt-1-h' },
+        { label: '选项 2', value: 'opt-2-h' }
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+### 默认值
+
+你可以通过 `defaultValue` 属性设置一个默认选中的选项。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <RadioGroup label="默认选中" defaultValue='opt-1-def' options={[{ label: '选项 1', value: 'opt-1-def' }]} />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "defaultValue='opt-1'" showLinenumbers title="RadioGroupDefaultValueExample.astro"
+    ---
+    import { RadioGroup } from 'studiocms:ui/components';
+    ---
+
+    <RadioGroup 
+      label='默认选中'
+      defaultValue='opt-1'
+      options={[
+        { label: '选项 1', value: 'opt-1' }
+      ]} 
+    />
+    <!-- 为简洁起见省略了其他颜色 -->
+    ```
+  </TabItem>
+</Tabs>
+
+### 颜色
+
+单选按钮组组件支持所有默认配色。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>  
+      <RadioGroup label="主要" defaultValue='opt-1-p' options={[{ label: '选项 1', value: 'opt-1-p' }]} color='primary' />
+      <RadioGroup label="成功" defaultValue='opt-1-s' options={[{ label: '选项 1', value: 'opt-1-s' }]} color='success' />
+      <RadioGroup label="警告" defaultValue='opt-1-w' options={[{ label: '选项 1', value: 'opt-1-w' }]} color='warning' />
+      <RadioGroup label="危险" defaultValue='opt-1-da' options={[{ label: '选项 1', value: 'opt-1-da' }]} color='danger' />
+      <RadioGroup label="信息" defaultValue='opt-1-info' options={[{ label: '选项 1', value: 'opt-1-info' }]} color='info' />
+      <RadioGroup label="单色" defaultValue='opt-1-mono' options={[{ label: '选项 1', value: 'opt-1-mono' }]} color='mono' />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "color='primary'" showLinenumbers title="RadioGroupColorExample.astro"
+    ---
+    import { RadioGroup } from 'studiocms:ui/components';
+    ---
+
+    <RadioGroup 
+      label='默认选中'
+      defaultValue='opt-1'
+      options={[
+        { label: '选项 1', value: 'opt-1' }
+      ]}
+      color='primary'
+    />
+    <!-- 为简洁起见省略了其他颜色 -->
+    ```
+  </TabItem>
+</Tabs>
+
+### 禁用
+
+你可以禁用整个单选按钮组（通过传递 `disabled` 属性）或通过选项禁用单个选项。下面的示例展示了如何执行后者：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <RadioGroup label="禁用一个选项" options={[{ label: '选项 1', value: 'opt-1-dis' }, { label: '选项 2', value: 'opt-2-dis', disabled: true }]} />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "disabled: true" showLinenumbers title="RadioGroupDisabledExample.astro"
+    ---
+    import { RadioGroup } from 'studiocms:ui/components';
+    ---
+
+    <RadioGroup 
+      label='默认'
+      options={[
+        { label: '选项 1', value: 'opt-1', disabled: true },
+        { label: '选项 1', value: 'opt-2' }
+      ]}
+      color='primary' 
+    />
+    <!-- 为简洁起见省略了其他颜色 -->
+    ```
+  </TabItem>
+</Tabs>
+
+### 表单支持
+
+输入控件具有完整的表单支持。你可以根据需要使用 `isRequired` 和 `name` 属性。
+
+前者如其名所示，后者设置 `name` 属性，以便你可以访问输入，例如，在提交返回的 `FormData` 中。以下是一个展示如何设置这两个属性的示例：
+
+```astro "isRequired" "name='required-radio'" showLinenumbers title="RadioGroupFormExample.astro"
+---
+import { RadioGroup } from 'studiocms:ui/components';
+---
+
+<RadioGroup 
+  label='必填 & 自定义名称'
+  isRequired
+  name='required-radio'
+  options={[
+    { label: '选项 1', value: 'opt-1' },
+    { label: '选项 2', value: 'opt-2' }
+  ]}
+/>
+```
+
+:::note
+如果未设置名称，则会为该组件生成一个随机名称。
+:::

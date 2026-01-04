@@ -1,0 +1,277 @@
+---
+i18nReady: true
+title: 按钮
+sidebar:
+  badge:
+    text: New Colors!
+    variant: tip
+---
+
+import { Button } from 'studiocms:ui/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+
+一个按钮组件，开箱即用支持不同的颜色、尺寸和状态。您还可以根据需要自定义它！
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Button color='primary'>
+        按钮
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ButtonExample.astro"
+    ---
+    import { Button } from 'studiocms:ui/components';
+    ---
+
+    <Button color='primary'>
+      按钮
+    </Button>
+    ```
+  </TabItem>
+</Tabs>
+
+### 禁用
+
+您可以通过 `disabled` 属性禁用按钮组件：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Button color='primary' disabled>
+        按钮
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "disabled" showLinenumbers title="DisabledButtonExample.astro"
+    ---
+    import { Button } from 'studiocms:ui/components';
+    ---
+
+    <Button color='primary' disabled>
+      按钮
+    </Button>
+    ```
+  </TabItem>
+</Tabs>
+
+### 尺寸
+
+按钮组件支持三种不同的默认尺寸：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Button color='primary' size='sm'>
+        按钮 (小)
+      </Button>
+      <Button color='primary'>
+        按钮 (默认)
+      </Button>
+      <Button color='primary' size='lg'>
+        按钮 (大)
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /size='(?:sm|lg)'/ showLinenumbers title="ButtonSizesExample.astro"
+    ---
+    import { Button } from 'studiocms:ui/components';
+    ---
+
+    <Button color='primary' size='sm'>
+      按钮 (小)
+    </Button>
+    <Button color='primary'>
+      按钮 (默认)
+    </Button>
+    <Button color='primary' size='lg'>
+      按钮 (大)
+    </Button>
+    ```
+  </TabItem>
+</Tabs>
+
+### 颜色
+
+按钮组件支持以下七种默认颜色：
+- 默认
+- 主要
+- 成功
+- 警告
+- 危险
+- 信息
+- 单色
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Button color='default'>
+        默认
+      </Button>
+      <Button color='primary'>
+        主要
+      </Button>
+      <Button color='success'>
+        成功
+      </Button>
+      <Button color='warning'>
+        警告
+      </Button>
+      <Button color='danger'>
+        危险
+      </Button>
+      <Button color='info'>
+        信息
+      </Button>
+      <Button color='mono'>
+        单色
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /color='[a-z]+'/ showLinenumbers title="ButtonColorsExample.astro"
+    ---
+    import { Button } from 'studiocms:ui/components';
+    ---
+
+    <Button color='default'>
+      默认
+    </Button>
+    <Button color='primary'>
+      主要
+    </Button>
+    <Button color='success'>
+      成功
+    </Button>
+    <Button color='warning'>
+      警告
+    </Button>
+    <Button color='danger'>
+      危险
+    </Button>
+    <Button color='info'>
+      信息
+    </Button>
+    <Button color='mono'>
+      单色
+    </Button>
+    ```
+  </TabItem>
+</Tabs>
+
+### 变体
+
+除了颜色外，按钮组件还支持三种不同的变体：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Button color='primary'>
+        默认
+      </Button>
+      <Button color='primary' variant="outlined">
+        描边
+      </Button>
+      <Button color='primary' variant="flat">
+        扁平
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /variant=\"[a-z]+\"/ showLinenumbers title="ButtonVariantsExample.astro"
+    ---
+    import { Button } from 'studiocms:ui/components';
+    ---
+
+    <Button color='primary'>
+      默认
+    </Button>
+    <Button color='primary' variant="outlined">
+      描边
+    </Button>
+    <Button color='primary' variant="flat">
+      扁平
+    </Button>
+    ```
+  </TabItem>
+</Tabs>
+
+### Polymorphic（渲染为锚标签）
+
+得益于 Astro 的 `Polymorphic` 类型，您可以将按钮的父组件更改为任何所需的 HTML 标签！
+以下是一个将按钮渲染为 `<a>` 标签的示例：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Button color='primary' target="_blank" as='a' href="https://studiocms.dev">
+        studiocms.dev
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "as='a'" showLinenumbers title="ButtonPolymorphicExample.astro"
+    ---
+    import { Button } from 'studiocms:ui/components';
+    ---
+  
+    <Button color='primary' target="_blank" as='a' href="https://studiocms.dev">
+      studiocms.dev
+    </Button>
+    ```
+  </TabItem>
+</Tabs>
+
+### 自定义样式
+
+如前所述，您可以为按钮组件应用自定义样式！以下是一个渐变按钮的示例，展示如何实现：
+
+:::danger[生产环境中的自定义样式]
+由于 Astro 以一种很奇怪的方式打包 CSS，您的自定义样式在生产环境中会被覆盖，**除非您使用 `!important` 或将其设置为内联样式！**
+:::
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Button style="background-image: linear-gradient(to top right, #a07cee, #4ff8d2); color: black; font-weight: 600;">
+        自定义按钮
+      </Button>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码（内联样式）">
+    ```astro /style="(?:[^"]*)"/ showLinenumbers title="ButtonCustomStylesExample.astro"
+    ---
+    import { Button } from 'studiocms:ui/components';
+    ---
+  
+    <Button style="background-image: linear-gradient(to top right, #a07cee, #4ff8d2); color: black; font-weight: 600;">
+      自定义按钮
+    </Button>
+    ```
+  </TabItem>
+  <TabItem label="代码（使用 !important）">
+    ```astro ins={9-13} showLinenumbers title="ButtonCustomStylesExample.astro"
+    ---
+    import { Button } from 'studiocms:ui/components';
+    ---
+  
+    <Button class="custom-btn">
+      自定义按钮
+    </Button>
+    <style>
+      .custom-btn {
+        background-image: linear-gradient(to top right, #a07cee, #4ff8d2) !important;
+        color: black !important;
+        font-weight: 600 !important;
+      }
+    </style>
+    ```
+  </TabItem>
+</Tabs>

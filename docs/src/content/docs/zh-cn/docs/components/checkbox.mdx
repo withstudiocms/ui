@@ -1,0 +1,127 @@
+---
+i18nReady: true
+title: 复选框
+sidebar:
+  badge:
+    text: New Colors!
+    variant: tip
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Checkbox, Row } from 'studiocms:ui/components';
+
+支持多种尺寸和颜色的自定义复选框组件。兼容表单。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Checkbox label="标签" color="primary" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="CheckboxExample.astro"
+    ---
+    import { Checkbox } from 'studiocms:ui/components';
+    ---
+
+    <Checkbox label="标签" color='primary' />
+    ```
+  </TabItem>
+</Tabs>
+
+### 尺寸
+
+复选框有三种不同的尺寸：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Row>
+        <Checkbox label="小" color="primary" size="sm" defaultChecked />
+        <Checkbox label="中" color="primary" defaultChecked />
+        <Checkbox label="大" color="primary" size="lg" defaultChecked />
+      </Row>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /size='[a-z]+'/ showLinenumbers title="CheckboxSizesExample.astro"
+    ---
+    import { Checkbox } from 'studiocms:ui/components';
+    ---
+
+    <Checkbox label='小' color='primary' size='sm' defaultChecked />
+    <Checkbox label='中' color='primary' defaultChecked />
+    <Checkbox label='大' color='primary' size='lg' defaultChecked />
+    ```
+  </TabItem>
+</Tabs>
+
+### 颜色
+
+复选框组件支持所有默认颜色。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Row>
+        <Checkbox label="默认" defaultChecked />
+        <Checkbox label="主要" color="primary" defaultChecked />
+        <Checkbox label="成功" color="success" defaultChecked />
+        <Checkbox label="警告" color="warning" defaultChecked />
+        <Checkbox label="危险" color="danger" defaultChecked />
+        <Checkbox label="信息" color="info" defaultChecked />
+        <Checkbox label="单色" color="mono" defaultChecked />
+      </Row>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /color='[a-z]+'/ showLinenumbers title="CheckboxColorsExample.astro"
+    ---
+    import { Checkbox } from 'studiocms:ui/components';
+    ---
+
+    <Checkbox label='默认' defaultChecked />
+    <Checkbox label='主要' color='primary' defaultChecked />
+    <Checkbox label='成功' color='success' defaultChecked />
+    <Checkbox label='警告' color='warning' defaultChecked />
+    <Checkbox label='危险' color='danger' defaultChecked />
+    <Checkbox label="信息" color="info" defaultChecked />
+    <Checkbox label="单色" color="mono" defaultChecked />
+    ```
+  </TabItem>
+</Tabs>
+
+### 表单支持
+
+如果您想在表单中使用此组件，您很幸运！您可以传递两个属性：`isRequired` 和 `name`。
+
+第一个属性的作用如其名，而后者设置 `name` 属性，以便您可以访问复选框，例如，在提交返回的 `FormData` 中。以下是一个演示如何同时设置这两个属性的示例：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Checkbox label="必填 & 自定义名称" color="primary" isRequired name='required-checkbox' />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro ins={8-9} showLinenumbers title="CheckboxFormExample.astro"
+    ---
+    import { Checkbox } from 'studiocms:ui/components';
+    ---
+
+    <Checkbox 
+      label='必填 & 自定义名称'
+      color='primary'
+      name='required-checkbox'
+      isRequired
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+:::note
+如果未设置名称，则会为该组件生成一个随机名称。
+:::

@@ -1,0 +1,154 @@
+---
+title: 徽章
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Badge } from 'studiocms:ui/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+
+一个徽章组件，开箱即用支持不同的颜色、尺寸和状态。您还可以根据需要自定义它！
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Badge label="徽章" icon="sparkles-16-solid" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="BadgeExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="徽章" icon="sparkles-16-solid" />
+    ```
+  </TabItem>
+</Tabs>
+
+### 颜色
+
+徽章组件支持以下颜色：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Badge label="主要" color="primary" />
+      <Badge label="成功" color="success" />
+      <Badge label="警告" color="warning" />
+      <Badge label="危险" color="danger" />
+      <Badge label="信息" color="info" />
+      <Badge label="单色" color="mono" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="BadgeColorExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="主要" color="primary" />
+    <Badge label="成功" color="success" />
+    <Badge label="警告" color="warning" />
+    <Badge label="危险" color="danger" />
+    <Badge label="信息" color="info" />
+    <Badge label="单色" color="mono" />
+    ```
+  </TabItem>
+</Tabs>
+
+### 变体
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Badge label="默认" variant="default" />
+      <Badge label="描边" variant="outlined" />
+      <Badge label="扁平" variant="flat" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="BadgeSizeExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="默认" variant="default" />
+    <Badge label="描边" variant="outlined" />
+    <Badge label="扁平" variant="flat" />
+    ```
+  </TabItem>
+</Tabs>
+
+### 圆角
+
+您可以通过设置 `rounding` 属性来更改徽章的边框半径：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Badge label="全圆" rounding="full" />
+      <Badge label="半圆" rounding="semi" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="BadgeSizeExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="全圆" rounding="full" />
+    <Badge label="半圆" rounding="semi" />
+    ```
+  </TabItem>
+</Tabs>
+
+### 尺寸
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Badge label="小" size="sm" />
+      <Badge label="中" size="md" />
+      <Badge label="大" size="lg" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="BadgeSizeExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="小" size="sm" />
+    <Badge label="中" size="md" />
+    <Badge label="大" size="lg" />
+    ```
+  </TabItem>
+</Tabs>
+
+### 图标
+
+您可以通过传递 `icon` 属性，在徽章中使用 [HeroIcons](https://heroicons.com/) 的内置图标：
+
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Badge label="带图标的徽章" icon="sparkles-16-solid" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="IconExample.astro"
+    ---
+    import { Badge } from 'studiocms:ui/components';
+    ---
+
+    <Badge label="带图标的徽章" icon="sparkles-16-solid" />
+    ```
+  </TabItem>
+</Tabs>

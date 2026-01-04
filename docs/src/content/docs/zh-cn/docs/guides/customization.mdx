@@ -1,0 +1,202 @@
+---
+i18nReady: true
+title: 自定义 StudioCMS UI
+---
+
+StudioCMS UI 基于 CSS 变量设计，这使得自定义组件的外观以匹配你的项目变得非常简单。你可以自定义颜色、排版、圆角等。所有的自定义都通过一个自定义 CSS 文件完成，你可以将其提供给 UI 集成：
+
+```ts showLinenumbers title="astro.config.mjs" {7}
+import { defineConfig } from 'astro/config';
+import ui from '@studiocms/ui';
+
+export default defineConfig({
+  integrations: [
+    ui({
+      customCss: './path/to/custom.css'
+    })
+  ]
+});
+```
+
+在该文件中，你可以覆盖 CSS 变量以更改组件的外观。如果你想覆盖主色，它看起来像这样：
+
+```css showLinenumbers title="custom.css"
+:root {
+	--primary-base: 0 0% 100%;
+	--primary-hover: 0 0% 80%;
+	--primary-active: 0 0% 90%;
+}
+
+[data-theme='light'] :root {
+	--primary-base: 0 0% 0%;
+	--primary-hover: 0 0% 20%;
+	--primary-active: 0 0% 10%;
+}
+```
+
+如果你对颜色进行了重大更改，请记得同时调整浅色主题。
+
+下面，你会找到 StudioCMS UI 中使用的所有 CSS 变量。请务必以不带逗号的 HSL 值提供它们。你可以像这样在 CSS 中使用它们：`background-color: hsl(var(--background-base));`。
+
+## 禁用 CSS 注入
+
+如果你想禁用 CSS 注入，可以通过将 `noInjectCSS` 选项设置为 `true` 来实现：
+
+```ts twoslash showLinenumbers title="astro.config.mjs" {7}
+import { defineConfig } from 'astro/config';
+import ui from '@studiocms/ui';
+
+export default defineConfig({
+  integrations: [
+    ui({
+      noInjectCSS: true,
+    })
+  ]
+});
+```
+
+然后你可以手动将 CSS 包含到你的项目中。如果你想将 StudioCMS UI 与其他 CSS 框架混合使用，或者你仅在部分组件中使用 UI 样式，这将非常有用。
+
+```astro showLinenumbers title="src/layouts/SUILayout.astro"
+---
+// 使用虚拟模块导入 CSS 文件（推荐）
+import "studiocms:ui/global-css";
+
+// 或者，直接从包中导入 CSS 文件
+import "@studiocms/ui/css/global.css";
+---
+```
+
+## 交互式编辑
+
+在开发过程中，你可以使用开发工具栏在自己的项目中编辑颜色。在工具栏中，你会找到一个带有 StudioCMS 标志的标签。点击后，它会显示一些颜色选择器和输入框，你可以用它们来调整各种变量。完成后，你可以将更改复制到剪贴板。
+
+import { Accordion, AccordionItem } from 'studiocms:ui/components';
+
+## 颜色变量
+
+<Accordion>
+	<AccordionItem>
+		<div slot="summary">深色模式</div>
+		<div>
+
+| 变量 | 描述 | 默认值 |
+| --- | --- | --- |
+| `--background-base` | 基础背景色 | `0 0% 6%` |
+| `--background-step-1` | 背景色步骤 1 | `0 0% 8%` |
+| `--background-step-2` | 背景色步骤 2 | `0 0% 10%` |
+| `--background-step-3` | 背景色步骤 3 | `0 0% 14%` |
+| `--text-normal` | 正常文本颜色 | `0 0% 100%` |
+| `--text-muted` | 弱化文本颜色 | `0 0% 54%` |
+| `--text-inverted` | 反转文本颜色 | `0 0% 0%` |
+| `--border` | 边框颜色 | `240 5% 17%` |
+| `--shadow` | 阴影颜色 | `0 0% 0%` |
+| `--default-base` | 默认颜色基础 | `0 0% 14%` |
+| `--default-hover` | 默认颜色悬停 | `0 0% 21%` |
+| `--default-active` | 默认颜色激活 | `0 0% 15%` |
+| `--primary-base` | 主色基础 | `259 83% 73%` |
+| `--primary-hover` | 主色悬停 | `259 77% 78%` |
+| `--primary-active` | 主色激活 | `259 73% 67%` |
+| `--success-base` | 成功颜色基础 | `142 71% 46%` |
+| `--success-hover` | 成功颜色悬停 | `142 72% 61%` |
+| `--success-active` | 成功颜色激活 | `142 87% 52%` |
+| `--warning-base` | 警告颜色基础 | `48 96% 53%` |
+| `--warning-hover` | 警告颜色悬停 | `48 97% 70%` |
+| `--warning-active` | 警告颜色激活 | `48 100% 61%` |
+| `--danger-base` | 危险颜色基础 | `339 97% 31%` |
+| `--danger-hover` | 危险颜色悬停 | `337 98% 37%` |
+| `--danger-active` | 危险颜色激活 | `337 88% 32%` |
+| `--info-base` | 信息颜色基础 | `217 92% 52%` |
+| `--info-hover` | 信息颜色悬停 | `214 95% 58%` |
+| `--info-active` | 信息颜色激活 | `214 85% 52%` |
+| `--mono-base` | 单色基础 | `0 0% 100%` |
+| `--mono-hover` | 单色悬停 | `0 0% 90%` |
+| `--mono-active` | 单色激活 | `0 0% 95%` |
+
+		</div>
+	</AccordionItem>
+
+	<AccordionItem>
+		<div slot="summary">浅色模式</div>
+		<div>
+
+| 变量 | 描述 | 默认值 |
+| --- | --- | --- |
+| `--background-base` | 基础背景色 | `0 0% 97%` |
+| `--background-step-1` | 背景色步骤 1 | `0 0% 90%` |
+| `--background-step-2` | 背景色步骤 2 | `0 0% 85%` |
+| `--background-step-3` | 背景色步骤 3 | `0 0% 80%` |
+| `--text-normal` | 正常文本颜色 | `0 0% 0%` |
+| `--text-muted` | 弱化文本颜色 | `0 0% 24%` |
+| `--text-inverted` | 反转文本颜色 | `0 0% 100%` |
+| `--border` | 边框颜色 | `263 5% 68%` |
+| `--shadow` | 阴影颜色 | `0 0% 65%` |
+| `--default-base` | 默认颜色基础 | `0 0% 74%` |
+| `--default-hover` | 默认颜色悬停 | `0 0% 81%` |
+| `--default-active` | 默认颜色激活 | `0 0% 91%` |
+| `--primary-base` | 主色基础 | `259 85% 61%` |
+| `--primary-hover` | 主色悬停 | `259 78% 56%` |
+| `--primary-active` | 主色激活 | `259 71% 50%` |
+| `--success-base` | 成功颜色基础 | `142 59% 47%` |
+| `--success-hover` | 成功颜色悬停 | `142 62% 56%` |
+| `--success-active` | 成功颜色激活 | `142 87% 59%` |
+| `--warning-base` | 警告颜色基础 | `48 92% 46%` |
+| `--warning-hover` | 警告颜色悬停 | `48 88% 43%` |
+| `--warning-active` | 警告颜色激活 | `48 85% 40%` |
+| `--danger-base` | 危险颜色基础 | `339 97% 31%` |
+| `--danger-hover` | 危险颜色悬停 | `337 98% 37%` |
+| `--danger-active` | 危险颜色激活 | `337 88% 45%` |
+| `--info-base` | 信息颜色基础 | `217 92% 52%` |
+| `--info-hover` | 信息颜色悬停 | `214 95% 58%` |
+| `--info-active` | 信息颜色激活 | `214 85% 52%` |
+| `--mono-base` | 单色基础 | `0 0% 0%` |
+| `--mono-hover` | 单色悬停 | `0 0% 10%` |
+| `--mono-active` | 单色激活 | `0 0% 5%` |
+
+		</div>
+	</AccordionItem>
+
+	<AccordionItem>
+		<div slot="summary">非主题颜色变量</div>
+		<div>
+
+| 变量 | 描述 | 默认值 |
+| --- | --- | --- |
+| `--text-light` | 浅色文本颜色 | `0 0% 100%` |
+| `--text-dark` | 深色文本颜色 | `0 0% 0%` |
+| `--default-flat` | 默认平面颜色 | `var(--default-base) / 0.5` |
+| `--default-flat-hover` | 默认平面悬停颜色 | `var(--default-base) / 0.75` |
+| `--default-flat-active` | 默认平面激活颜色 | `var(--default-base) / 0.85` |
+| `--primary-flat` | 主色平面颜色 | `var(--primary-base) / 0.1` |
+| `--primary-flat-hover` | 主色平面悬停颜色 | `var(--primary-base) / 0.25` |
+| `--primary-flat-active` | 主色平面激活颜色 | `var(--primary-base) / 0.35` |
+| `--success-flat` | 成功平面颜色 | `var(--success-base) / 0.1` |
+| `--success-flat-hover` | 成功平面悬停颜色 | `var(--success-base) / 0.25` |
+| `--success-flat-active` | 成功平面激活颜色 | `var(--success-base) / 0.35` |
+| `--warning-flat` | 警告平面颜色 | `var(--warning-base) / 0.1` |
+| `--warning-flat-hover` | 警告平面悬停颜色 | `var(--warning-base) / 0.25` |
+| `--warning-flat-active` | 警告平面激活颜色 | `var(--warning-base) / 0.35` |
+| `--danger-flat` | 危险平面颜色 | `var(--danger-base) / 0.1` |
+| `--danger-flat-hover` | 危险平面悬停颜色 | `var(--danger-base) / 0.25` |
+| `--danger-flat-active` | 危险平面激活颜色 | `var(--danger-base) / 0.35` |
+| `--info-flat` | 信息平面颜色 | `var(--info-base) / 0.1` |
+| `--info-flat-hover` | 信息平面悬停颜色 | `var(--info-base) / 0.25` |
+| `--info-flat-active` | 信息平面激活颜色 | `var(--info-base) / 0.35` |
+
+		</div>
+	</AccordionItem>
+
+	<AccordionItem>
+		<div slot="summary">圆角变量</div>
+		<div>
+
+| 变量 | 描述 | 默认值 |
+| --- | --- | --- |
+| `--radius-sm` | 小圆角 | `.25rem` |
+| `--radius-md` | 中圆角 | `.5rem` |
+| `--radius-lg` | 大圆角 | `1rem` |
+| `--radius-full` | 全圆角 | `999px` |
+
+		</div>
+	</AccordionItem>
+</Accordion>

@@ -1,0 +1,306 @@
+---
+i18nReady: true
+title: 下拉菜单
+sidebar:
+  badge:
+    text: New Colors!
+    variant: tip
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import DropdownScript from '~/components/DropdownScript.astro';
+import { Dropdown, Button, Row } from 'studiocms:ui/components';
+
+:::caution[需要辅助函数]
+此组件需要使用**辅助函数**。请务必仔细阅读文档，以了解如何使用它。
+:::
+
+一个下拉菜单组件，为您处理所有繁琐的细节，并额外增加了对程序化触发的支持。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Dropdown id='usage-dropdown' options={[{ label: '选项 1', value: 'opt-1'},{ label: '选项 2', value: 'opt-2'}]}>
+        <Button color="primary">
+          触发下拉菜单
+        </Button>
+      </Dropdown>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="DropdownExample.astro"
+    ---
+    import { Dropdown, Button } from 'studiocms:ui/components';
+    ---
+
+    <Dropdown 
+      id='dropdown' 
+      options={[
+        { label: '选项 1', value: 'opt-1'},
+        { label: '选项 2', value: 'opt-2'},
+      ]}
+    >
+      <Button color='primary'>
+        触发下拉菜单
+      </Button>
+    </Dropdown>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { DropdownHelper } from 'studiocms:ui/components';
+
+    const dropdown = new DropdownHelper('dropdown');
+    ```
+  </TabItem>
+</Tabs>
+
+### 下拉菜单位置
+
+您可以通过提供 `align` 属性来更改下拉菜单位置。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Row>
+        <Dropdown id='align-start-dropdown' align='start' options={[{ label: '选项 1', value: 'opt-1'},{ label: '选项 2', value: 'opt-2'}]}>
+          <Button color="primary">
+            靠左对齐
+          </Button>
+        </Dropdown>
+        <Dropdown id='align-center-dropdown' options={[{ label: '选项 1', value: 'opt-1'},{ label: '选项 2', value: 'opt-2'}]}>
+          <Button color="primary">
+            居中对齐
+          </Button>
+        </Dropdown>
+        <Dropdown id='align-end-dropdown' align='end' options={[{ label: '选项 1', value: 'opt-1'},{ label: '选项 2', value: 'opt-2'}]}>
+          <Button color="primary">
+            靠右对齐
+          </Button>
+        </Dropdown>
+      </Row>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "align='start'" showLinenumbers title="DropdownAlignStartExample.astro"
+    ---
+    import { Dropdown, Button } from 'studiocms:ui/components';
+    ---
+
+    <Dropdown 
+      id='dropdown'
+      options={[
+        { label: '选项 1', value: 'opt-1'},
+        { label: '选项 2', value: 'opt-2'},
+      ]}
+      align='start'
+    >
+      <Button color='primary'>
+        起始对齐
+      </Button>
+    </Dropdown>
+    
+    <!-- 为简洁起见，省略了其他按钮 -->
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { DropdownHelper } from 'studiocms:ui/components';
+
+    const dropdown = new DropdownHelper('dropdown');
+    ```
+  </TabItem>
+</Tabs>
+
+### 右键触发
+
+您可以指示下拉菜单包装器仅在其子元素被右键单击时显示下拉菜单：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Dropdown id='right-click-dropdown' triggerOn='right' options={[{ label: '选项 1', value: 'opt-1'},{ label: '选项 2', value: 'opt-2'}]}>
+        <Button color="primary">
+          右键点击
+        </Button>
+      </Dropdown>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "triggerOn='right'" showLinenumbers title="DropdownRightClickExample.astro"
+    ---
+    import { Dropdown, Button } from 'studiocms:ui/components';
+    ---
+
+    <Dropdown
+      id='dropdown'
+      options={[
+        { label: '选项 1', value: 'opt-1'},
+        { label: '选项 2', value: 'opt-2'},
+      ]}
+      triggerOn='right'
+    >
+      <Button color='primary'>
+        右键点击
+      </Button>
+    </Dropdown>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { DropdownHelper } from 'studiocms:ui/components';
+
+    const dropdown = new DropdownHelper('dropdown');
+    ```
+  </TabItem>
+</Tabs>
+
+:::note
+您也可以通过使用 `triggerOn='both'` 属性来指示下拉菜单在左键和右键单击时都触发。
+:::
+
+### 禁用
+
+您可以通过传递 `disabled` 属性来禁用下拉菜单。
+
+```astro "disabled" showLinenumbers title="DropdownDisabledExample.astro"
+<Dropdown disabled {/* ... */}>
+  <!-- ... -->
+</Dropdown>
+```
+
+### 选项选项
+
+没错，您没看错。您也可以自定义选项。您可以单独禁用它们，将它们变成链接，甚至将它们的颜色更改为任何默认颜色：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Dropdown 
+        id='options-dropdown' 
+        options={[
+          { label: '默认', value: 'default', color: 'default' },
+          { label: '主要', value: 'primary', color: 'primary' },
+          { label: '成功', value: 'success', color: 'success' },
+          { label: '警告', value: 'warning', color: 'warning' },
+          { label: '危险', value: 'danger', color: 'danger' },
+          { label: '信息', value: 'info', color: 'info' },
+          { label: '单色', value: 'mono', color: 'mono' },
+          { label: '已禁用', value: 'disabled', disabled: true },
+          { label: '作为链接', value: 'custom-href', href: '/' },
+        ]}
+      >
+        <Button color='primary'>
+          自定义选项
+        </Button>
+      </Dropdown>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro ins={7-14} showLinenumbers title="DropdownOptionsExample.astro"
+    ---
+    import { Dropdown, Button } from 'studiocms:ui/components';
+    ---
+
+    <Dropdown 
+      id='dropdown' 
+      options={[
+        { label: '默认', value: 'default', color: 'default' },
+        { label: '主要', value: 'primary', color: 'primary' },
+        { label: '成功', value: 'success', color: 'success' },
+        { label: '警告', value: 'warning', color: 'warning' },
+        { label: '危险', value: 'danger', color: 'danger' },
+        { label: '信息', value: 'info', color: 'info' },
+        { label: '单色', value: 'mono', color: 'mono' },
+        { label: '已禁用', value: 'disabled', disabled: true },
+        { label: '作为链接', value: 'custom-href', href: '/' },
+      ]}
+    >
+      <Button color='primary'>
+        自定义选项
+      </Button>
+    </Dropdown>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { DropdownHelper } from 'studiocms:ui/components';
+
+    const dropdown = new DropdownHelper('dropdown');
+    ```
+  </TabItem>
+</Tabs>
+
+#### 图标
+
+下拉菜单项也支持图标。您可以将图标名称传递给选项对象：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Dropdown 
+        id='icons-dropdown' 
+        options={[
+          { label: '通知', value: 'notifications', icon: 'bell' },
+          { label: '设置', value: 'settings', icon: 'cog-6-tooth' },
+          { label: '个人资料', value: 'profile', icon: 'user' },
+        ]}
+      >
+        <Button color='primary'>
+          自定义图标
+        </Button>
+      </Dropdown>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro ins={7-14} showLinenumbers title="DropdownIconsExample.astro"
+    ---
+    import { Dropdown, Button } from 'studiocms:ui/components';
+    ---
+
+    <Dropdown 
+      id='dropdown' 
+      options={[
+        { label: '通知', value: 'notifications', icon: 'bell' },
+        { label: '设置', value: 'settings', icon: 'cog-6-tooth' },
+        { label: '个人资料', value: 'profile', icon: 'user' },
+      ]}
+    >
+      <Button color='primary'>
+        自定义图标
+      </Button>
+    </Dropdown>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { DropdownHelper } from 'studiocms:ui/components';
+
+    const dropdown = new DropdownHelper('dropdown');
+    ```
+  </TabItem>
+</Tabs>
+
+### 以编程方式控制下拉菜单
+
+您知道吗，在整个页面中，我们一直将 `DropdownHelper` 分配给一个变量？这是有原因的。DropdownHelper 允许您访问一些内置函数，用于以编程方式切换、显示和隐藏下拉菜单。您甚至可以注册一个回调，当下拉菜单的某个选项被点击时触发！
+
+```ts twoslash showLinenumbers title="Script Tag"
+// @noErrors
+import { DropdownHelper } from 'studiocms:ui/components';
+
+const dropdown = new DropdownHelper('dropdown');
+
+dropdown.registerClickCallback((value) => {
+  // `value` 将是您在下拉菜单包装器中为选项指定的值。
+  console.log(value);
+});
+
+// 您可以像这样切换下拉菜单：
+dropdown.toggle();
+
+// 除了切换，您也可以简单地显示或隐藏下拉菜单：
+dropdown.show();
+dropdown.hide();
+```
+
+{/* 所有辅助函数都在这里 🥲 */}
+<DropdownScript />

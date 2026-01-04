@@ -1,0 +1,112 @@
+---
+title: 进度条
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import ProgressScript from '~/components/ProgressScript.astro';
+import { Progress, ProgressHelper } from 'studiocms:ui/components';
+
+:::caution[需要辅助函数]
+此组件需要使用**辅助函数**。请务必仔细阅读文档，以了解如何使用它。
+:::
+
+进度条，用于显示任务的进度。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Progress id="prog-1" max={100} value={50} />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ProgressExample.astro"
+    ---
+    import { Progress } from 'studiocms:ui/components';
+    ---
+
+    <Progress id="progress" max={100} value={50} />
+    ```
+  </TabItem>
+</Tabs>
+
+### Value 和 Max
+
+与原生 HTML `<progress>` 元素类似，`Progress` 组件接受两个属性：`value` 和 `max`。`value` 属性表示当前进度，而 `max` 属性表示进度条的最大值。
+
+可以使用 `ProgressHelper` 在组件初始化后调整 value 和 max，它以进度条的 ID 作为唯一参数：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Progress id="prog-2" max={100} value={50} />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ProgressExample.astro"
+    ---
+    import { Progress } from 'studiocms:ui/components';
+    ---
+
+    <Progress id="progress" max={100} value={50} />
+    <script>
+      import { ProgressHelper } from 'studiocms:ui/components';
+
+      const progress = new ProgressHelper('progress');
+      progress.setValue(75);
+      progress.setMax(150);
+      
+      // 您可以获取进度条的 value、max 和 percentage
+      progress.getValue(); // 75
+      progress.getMax(); // 150
+      progress.getPercentage(); // 50
+    </script>
+    ```
+  </TabItem>
+</Tabs>
+
+### 颜色
+
+通过将 `color` 属性设置为以下值之一，可以为进度组件使用主题中所有可用的颜色进行着色：
+
+- `primary`
+- `success`
+- `warning`
+- `danger`
+- `info`
+- `monochrome`
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Progress id="prog-3" max={100} value={50} color="primary" />
+      <Progress id="prog-3" max={100} value={50} color="success" />
+      <Progress id="prog-4" max={100} value={50} color="warning" />
+      <Progress id="prog-3" max={100} value={50} color="danger" />
+      <Progress id="prog-4" max={100} value={50} color="info" />
+      <Progress id="prog-3" max={100} value={50} color="monochrome" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ProgressExample.astro"
+    ---
+    import { Progress } from 'studiocms:ui/components';
+    ---
+
+    <Progress id="progress-1" max={100} value={50} color="primary" />
+    <Progress id="progress-2" max={100} value={50} color="success" />
+    <Progress id="progress-3" max={100} value={50} color="warning" />
+    <Progress id="progress-4" max={100} value={50} color="danger" />
+    <Progress id="progress-5" max={100} value={50} color="info" />
+    <Progress id="progress-6" max={100} value={50} color="monochrome" />
+    ```
+  </TabItem>
+</Tabs>
+
+<ProgressScript />

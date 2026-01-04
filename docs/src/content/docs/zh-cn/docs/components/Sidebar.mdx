@@ -1,0 +1,117 @@
+---
+title: 侧边栏
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+:::caution[需要辅助函数]
+此组件需要使用**辅助函数**。请务必仔细阅读文档，以了解如何使用它。
+:::
+
+我们在 StudioCMS 中使用的侧边栏组件，旨在实现最大的可定制性。由于篇幅限制，本页面仅展示代码，而不展示组件本身。请查看 StudioCMS 仪表板以了解它们的外观。
+
+## 用法
+
+### 单侧边栏
+
+两者中较简单的一个。一个带有内置移动端断点的侧边栏。
+
+```astro title="SingleSidebarExample.astro"
+---
+import { Sidebar, Button } from 'studiocms:ui/components';
+---
+
+<Sidebar>
+  {/* 您的侧边栏内容放在这里 */}
+</Sidebar>
+<Button id="my-toggle">
+切换侧边栏
+</Button>
+<script>
+import { SingleSidebarHelper } from 'studiocms:ui/components';
+
+new SingleSidebarHelper('my-toggle');
+</script>
+```
+
+由您来创建一个切换组件。一旦侧边栏可以被隐藏（断点为 `840px`），就应该显示该组件。
+
+辅助工具提供了一些有用的方法来与侧边栏交互：
+
+```ts title="SingleSidebarHelperExample.ts"
+import { SingleSidebarHelper } from 'studiocms:ui/components';
+
+const sidebar = new SingleSidebarHelper('my-toggle');
+
+// 向指定元素（通过其 ID 指定）添加事件监听器，
+// 在点击时隐藏侧边栏。仅适用于移动端视口。
+sidebar.hideSidebarOnClick('my-element');
+
+// 向指定元素（通过其 ID 指定）添加事件监听器，
+// 在点击时显示侧边栏。仅适用于移动端视口。
+sidebar.showSidebarOnClick('my-element');
+
+// 隐藏侧边栏。
+sidebar.hideSidebar();
+
+// 显示侧边栏。
+sidebar.showSidebar();
+```
+
+### 双侧边栏
+
+一个更复杂的版本，包含两个窗格，且具有不同的断点。
+
+```astro title="DoubleSidebarExample.astro"
+---
+import { DoubleSidebar } from 'studiocms:ui/components';
+---
+
+<DoubleSidebar>
+  <div slot="outer">
+    {/* 您的外部侧边栏内容放在这里 */}
+  </div>
+  <div slot="inner">
+    {/* 您的内部侧边栏内容放在这里 */}
+  </div>
+</DoubleSidebar>
+<script>
+import { DoubleSidebarHelper } from 'studiocms:ui/components';
+
+const sidebar = new DoubleSidebarHelper();
+</script>
+```
+
+由于双侧边栏的性质更为复杂，最好采用以下设置：
+
+- 在大于 `1200px` 的屏幕上，不显示任何切换按钮，并完整显示侧边栏。
+- 在小于 `1200px` 且大于 `840px` 的屏幕上，仅显示一个切换按钮，用于在内部和外部侧边栏之间切换。
+- 在小于 `840px` 的屏幕上，当外部导航栏隐藏时显示一个切换按钮以显示它，当它显示时显示一个切换按钮以在外部和内部之间切换。
+
+为了帮助您管理侧边栏状态，辅助工具提供了以下方法：
+
+```ts title="DoubleSidebarHelperExample.astro"
+import { DoubleSidebarHelper } from 'studiocms:ui/components';
+
+const sidebar = new DoubleSidebarHelper();
+
+// 注册一个元素，在点击时将完全隐藏侧边栏
+sidebar.hideSidebarOnClick('my-element');
+
+// 注册一个元素，在点击时将显示外部侧边栏
+sidebar.showOuterOnClick('my-element');
+
+// 注册一个元素，在点击时将显示内部侧边栏
+sidebar.showInnerOnClick('my-element');
+
+// 注册一个元素，在点击时将在内部和外部侧边栏之间切换
+sidebar.toggleStateOnClick('my-element');
+
+// 所有其他功能懂得都懂：
+sidebar.showInnerSidebar();
+sidebar.showOuterSidebar();
+sidebar.toggleSidebarState();
+sidebar.hideSidebar();
+```

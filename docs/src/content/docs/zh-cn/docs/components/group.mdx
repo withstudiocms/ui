@@ -1,0 +1,47 @@
+---
+title: 组
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Group, Button, Badge } from 'studiocms:ui/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+
+组组件是一个容器组件，用于将其子元素分组在一起。
+它非常适合对按钮、徽章、输入框和其他组件进行分组，
+从而更轻松地管理它们的布局。它还会改变它们的样式，使它们看起来像是一个条形。
+
+组组件支持以下组件：
+
+- Button（按钮）
+- Badge（徽章）
+
+## 使用方法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Group>
+        <Button color="primary">按钮 1</Button>
+        <Button color="primary">按钮 2</Button>
+        <Button color="primary">按钮 3</Button>
+      </Group>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="GroupExample.astro"
+    ---
+    import { Group, Button } from 'studiocms:ui/components';
+    ---
+
+    <Group>
+      <Button color="primary">按钮 1</Button>
+      <Button color="primary">按钮 2</Button>
+      <Button color="primary">按钮 3</Button>
+    </Group>
+    ```
+  </TabItem>
+</Tabs>

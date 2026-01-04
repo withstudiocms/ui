@@ -1,0 +1,53 @@
+---
+i18nReady: true
+title: 用户
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { User } from 'studiocms:ui/components';
+import Avatar from '~/assets/avatar.png'
+
+用于显示用户信息的组件。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <User name="John Doe" description="A cool dude" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="UserExample.astro"
+    ---
+    import { User } from 'studiocms:ui/components';
+    ---
+
+    <User name='John Doe' description='A cool dude' />
+    ```
+  </TabItem>
+</Tabs>
+
+### 头像
+
+您可以按照与 [`Image`](https://docs.astro.build/en/guides/images/#src-required) 组件相同的规则提供 `avatar`。
+要更改加载行为，您可以传递 `loading` 属性。该属性会被传递给 `<Image />` 组件。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <User name="John Doe" loading='eager' description="A cool dude" avatar={Avatar} />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "avatar={ProfileImage}" "loading='eager'" showLinenumbers title="UserAvatarExample.astro"
+    ---
+    import { User } from 'studiocms:ui/components';
+    import ProfileImage from '~/assets/profile.png'
+    ---
+
+    <User name='John Doe' loading='eager' description='A cool dude' avatar={ProfileImage} />
+    ```
+  </TabItem>
+</Tabs>

@@ -1,0 +1,112 @@
+---
+i18nReady: true
+title: Theme Helper
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import ThemeHelperScript from '~/components/ThemeHelperScript.astro';
+
+为了更轻松地管理活动主题，我们提供了一个辅助类来获取、设置和切换主题。此外，您还可以提供主题更改时的回调！
+
+## 用法
+
+:::caution
+`ThemeHelper` 只能在客户端使用（在 `<script>` 标签中）。
+:::
+```ts title="script.ts" twoslash showLinenumbers
+// @noErrors
+import { ThemeHelper } from 'studiocms:ui/utils';
+
+// 实例化一个新的辅助器
+const themeHelper = new ThemeHelper();
+
+// 获取当前主题。（`dark`、`light` 或 `system` 之一）
+const theme = themeHelper.getTheme();
+
+// 获取当前主题，但如果选择了 `system`，则解析实际主题
+const resolvedTheme = themeHelper.getTheme(true);
+
+// 将主题设置为亮色
+themeHelper.setTheme('light');
+
+// 切换主题
+themeHelper.toggleTheme();
+
+// 注册一个应作为切换开关的元素
+const toggleButton = document.querySelector<HTMLButtonElement>('#toggle-button');
+themeHelper.registerToggle(toggleButton);
+```
+
+### 监听主题更改
+
+使用 `ThemeHelper` 类，您可以监听主题更改！当您的逻辑需要在颜色方案更改时运行时，这很有用，例如在 `three.js` 画布中，您需要更改图像（*咳咳*，我们的登录页面 *咳咳*）。
+
+```ts title="script.ts" twoslash showLinenumbers
+// @noErrors
+import { ThemeHelper } from 'studiocms:ui/utils';
+
+// 实例化一个新的辅助器
+const themeHelper = new ThemeHelper();
+
+// 添加一个主题更改时调用的回调
+themeHelper.onThemeChange((newTheme) => {
+  // 您的逻辑放在这里！
+});
+```
+
+这是一个实时示例：通过屏幕右上角的选项更改主题。如果您使用的是移动设备，请打开导航栏并滚动到底部。更改主题后，请检查下面的文本：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <span id="theme-listener-output">
+        主题尚未更改。
+      </span>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```html showLinenumbers
+    <span id='theme-listener-output'>
+      主题尚未更改。
+    </span>
+    ```
+    ```ts twoslash showLinenumbers title="Script Tag"
+    // @noErrors
+    import { ThemeHelper, type Theme } from 'studiocms:ui/utils';
+
+    // 实例化一个新的辅助器
+    const themeHelper = new ThemeHelper();
+
+    const outputSpan = document.querySelector<HTMLSpanElement>('#theme-listener-output')!;
+
+    // 添加一个主题更改时调用的回调
+    themeHelper.onThemeChange((newTheme: Theme, oldTheme: Theme) => {
+      // 您的逻辑放在这里！
+      outputSpan.textContent = `主题现在是：${newTheme}！（之前：${oldTheme}）`;
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+由于 `@studiocms/ui` 与 Starlight 的主题系统兼容，这甚至可以检测到这些更改。
+
+### 记住用户的主题选择
+
+`ThemeHelper` 唯一不做的几件事之一就是保存用户的主题偏好。这是有意为之的，因为我们不想迫使在欧盟（和其他执行 GDPR 的国家）运营的网站仅仅为了一个 UI 库就必须添加 cookie 通知。相反，此功能的实现由开发者自己决定。
+
+作为起点，这是一个如何实现此功能的简单示例：
+
+```ts twoslash showLinenumbers title="Script Tag"
+// @noErrors
+import { ThemeHelper, type Theme } from 'studiocms:ui/utils';
+
+const themeHelper = new ThemeHelper();
+
+themeHelper.onThemeChange((newTheme: Theme) => {
+  localStorage.setItem('theme-selection', newTheme);
+});
+```
+
+如果您想进一步，可以将此信息存储在 cookie 中，以便在服务器端检索它。
+
+<ThemeHelperScript />

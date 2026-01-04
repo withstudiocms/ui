@@ -1,0 +1,93 @@
+---
+title: "页脚"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Footer } from 'studiocms:ui/components';
+
+一个具有大量自定义选项的页脚组件！
+
+:::note
+要查看此页脚的实际效果，请访问[落地页](/)！由于尺寸限制，我们无法在常规预览框中展示它。
+:::
+
+## 用法
+
+页脚组件有四种不同的自定义方式：
+
+1. `link` 属性，用于在各个类别中添加链接
+2. `copyright` 属性，用于显示版权或许可信息
+3. `brand` 插槽，可用于 logo 或不同的品牌文本
+4. `socials` 插槽，可用于社交图标（当然也可以是其他任何内容）
+
+```astro showLinenumbers title="FooterExample.astro"
+---
+import { Footer } from 'studiocms:ui/components';
+---
+
+<Footer
+  links={{
+    'Resources': [
+      { label: 'Docs', href: '/docs' },
+      { label: 'Support', href: '/support' },
+    ],
+    'Legal': [
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms of Service', href: '/tos' },
+    ],
+  }}
+  copyright='MIT License © 2024 - Acme Inc.'
+>
+  <div slot="brand">
+    Acme, Inc.
+  </div>
+</Footer>
+```
+
+以下是我们在 StudioCMS UI 落地页上实现此页脚的示例：
+
+```astro showLinenumbers title="FooterExample.astro"
+---
+import { Footer } from 'studiocms:ui/components';
+// Different imports for icons & logos...
+---
+<!-- Other page content -->
+<Footer
+  links={{
+    'StudioCMS Ecosystem': [
+      { label: 'StudioCMS', href: 'https://studiocms.dev' },
+      { label: 'Apollo', href: 'https://github.com/withstudiocms/apollo' }
+    ],
+    'Resources': [
+      { label: 'Docs', href: '/docs' },
+    ],
+  }}
+  copyright='MIT License © 2024 - StudioCMS'
+>
+  <div slot='brand' class='footer-brand'>
+    <LogoAdaptive height={48} width={45.76} />
+    <span class='studiocms-footer-text'>
+      <span>StudioCMS</span>
+      <span>UI</span>
+    </span>
+  </div>
+  <div slot='socials' class='socials'>
+    <a href='https://github.com/withstudiocms'>
+      <GitHubLogo width={28} height={28} />
+    </a>
+    <a href='https://chat.studiocms.dev'>
+      <DiscordLogo width={32} height={32} />
+    </a>
+    <a href='https://patreon.com/studiocms'>
+      <PatreonLogo width={24} height={24} />
+    </a>
+    <a href='https://bsky.app/profile/studiocms.dev'>
+      <BlueSkyLogo width={24} height={24} />
+    </a>
+    <a href='https://twitter.com/withstudiocms'>
+      <TwitterLogo width={22} height={22} />
+    </a>
+  </div>
+</Footer>
+```

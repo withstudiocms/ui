@@ -1,0 +1,96 @@
+---
+i18nReady: true
+title: "快速开始"
+description: 安装 @studiocms/ui 到你的项目中并使用我们的组件！
+type: integration
+integration:
+  name: "@studiocms/ui"
+  githubURL: "https://github.com/withstudiocms/ui/tree/main/packages/studiocms_ui"
+---
+
+import { PackageManagers } from 'starlight-package-managers'
+
+:::danger[无障碍]
+`@studiocms/ui` 尚未经过无障碍审计。你可以在 GitHub 上的[无障碍性问题跟踪器](https://github.com/withstudiocms/ui/issues/19)中查看我们的进展。
+:::
+
+`@studiocms/ui` 是我们用来构建 StudioCMS 的 UI 库。该库是无框架依赖的，这意味着你可以在自己的 Astro 项目中使用它！
+
+要开始使用，请将该集成添加到你的项目中。
+
+<PackageManagers type="exec" pkg="astro add @studiocms/ui" />
+
+<details>
+<summary>在 Astro 4 中使用 `@studiocms/ui`</summary>
+
+StudioCMS UI 可以在 Astro 5 中直接使用，无需额外配置。而在 Astro v4 中，`@studiocms/ui` 需要版本 `v4.5.0` 或更高，并启用 `experimental.directRenderScript` 标志。
+</details>
+
+## 手动安装
+
+使用你喜欢的包管理器安装 `@studiocms/ui` 包。
+
+<PackageManagers type="add" pkg="@studiocms/ui" />
+
+在你的 Astro 配置中导入并使用 `@studiocms/ui` 集成。
+
+```ts showLinenumbers title="astro.config.mjs" {2,6}
+import { defineConfig } from 'astro/config';
+import ui from '@studiocms/ui';
+
+export default defineConfig({
+  integrations: [
+    ui()
+  ]
+});
+```
+
+## 导入组件
+
+该库中的所有组件都从 `@studiocms/ui/components` 导出。你可以像下面这样导入并使用这些组件：
+
+```astro showLinenumbers title="ButtonExample.astro"
+---
+import { Button } from 'studiocms:ui/components';
+---
+
+<Button />
+```
+
+## 配合 Tailwind 使用 `@studiocms/ui`
+
+如果你还没有这样做，请将 Astro 的 Tailwind 集成添加到你的项目中。
+
+<PackageManagers type="exec" pkg="astro add tailwind" />
+
+通过 `applyBaseStyles: false` 禁用 [Tailwind 的预设样式](https://tailwindcss.com/docs/preflight)。
+
+```ts showLinenumbers title="astro.config.mjs" "applyBaseStyles: false"
+import { defineConfig } from 'astro/config';
+import ui from '@studiocms/ui';
+
+export default defineConfig({
+  integrations: [
+    ui(),
+    tailwind({ applyBaseStyles: false })
+  ]
+});
+```
+
+为 Tailwind 的基础样式创建一个 CSS 文件。例如 `src/styles/tailwind.css`。
+
+```css showLinenumbers title="src/styles/tailwind.css"
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+在任何使用 Tailwind 的布局或页面中导入此 CSS 文件。
+
+```astro showLinenumbers title="src/layouts/Base.astro"
+---
+import '../styles/tailwind.css';
+
+// ...
+---
+```

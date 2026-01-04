@@ -1,0 +1,45 @@
+---
+i18nReady: true
+title: 分隔符
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Divider } from 'studiocms:ui/components';
+
+一个简单的分隔符。允许在中间显示标签，这有助于分隔侧边栏或其他结构化内容。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Divider>
+        分隔符
+      </Divider>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="DividerExample.astro"
+    ---
+    import { Divider } from 'studiocms:ui/components';
+    ---
+
+    <Divider>
+      分隔符
+    </Divider>
+    ```
+  </TabItem>
+</Tabs>
+
+## 更改标签背景颜色
+
+在某些情况下，您的分隔符可能位于一个不使用默认页面背景颜色的元素上。在这种情况下，您可以使用 `background` 属性将其更改为正确的颜色。
+
+```astro "background='background-step-1'" showLinenumbers title="DividerBackgroundExample.astro"
+---
+import { Divider } from 'studiocms:ui/components';
+---
+
+<Divider background='background-step-1'>
+  分隔符
+</Divider>
+```

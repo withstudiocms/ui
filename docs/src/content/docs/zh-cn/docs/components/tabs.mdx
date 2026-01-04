@@ -1,0 +1,285 @@
+---
+title: "标签页"
+sidebar:
+  badge:
+    text: New Colors!
+    variant: tip
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs as SuiTabs, TabItem as SuiTabItem, Card, Divider } from 'studiocms:ui/components';
+
+import PreviewCard from '~/components/PreviewCard.astro';
+
+您可以在 [StudioCMS UI 落地页](https://ui.studiocms.dev) 上看到的标签页，现在作为组件提供！
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard fullWidth>
+      <SuiTabs>
+        <SuiTabItem label="标签 #1">
+          <Card fullWidth>
+            内容 #1
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="标签 #2">
+          <Card fullWidth>
+            内容 #2
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="标签 #3">
+          <Card fullWidth>
+            内容 #3
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="TabsExample.astro"
+    ---
+    import { Tabs, TabItem, Card } from 'studiocms:ui/components';
+    ---
+
+    <Tabs>
+      <TabItem label='标签 #1'>
+        <Card fullWidth>
+          内容 #1
+        </Card>
+      </TabItem>
+      <TabItem label='标签 #2'>
+        <Card fullWidth>
+          内容 #2
+        </Card>
+      </TabItem>
+      <TabItem label='标签 #3'>
+        <Card fullWidth>
+          内容 #3
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>
+
+### 自定义标签页
+
+您可以添加图标，甚至更改标签页的颜色：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard fullWidth>
+      <SuiTabs>
+        <SuiTabItem label="黄色 + 星星" icon="star" color="warning">
+          <Card fullWidth>
+            黄色 + 星星
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="绿色 + 箭头" icon="arrows-right-left" color="success">
+          <Card fullWidth>
+            绿色 + 箭头
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="红色 + 铃铛" icon="bell" color="danger">
+          <Card fullWidth>
+            红色 + 铃铛
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /icon='[A-Za-z-]+' color='[A-Za-z]+'/ showLinenumbers title="TabsCustomizationExample.astro"
+    ---
+    import { Tabs, TabItem, Card } from 'studiocms:ui/components';
+    ---
+
+    <Tabs>
+      <TabItem label='黄色 + 星星' icon='star' color='warning'>
+        <Card fullWidth>
+          黄色 + 星星
+        </Card>
+      </TabItem>
+      <TabItem label='绿色 + 箭头' icon='arrows-right-left' color='success'>
+        <Card fullWidth>
+          绿色 + 箭头
+        </Card>
+      </TabItem>
+      <TabItem label='红色 + 铃铛' icon='bell' color='danger'>
+        <Card fullWidth>
+          红色 + 铃铛
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>
+
+### 变体
+
+对于那些不喜欢默认标签页外观的用户，您可以将 `variant` 属性更改为 `starlight`。这将赋予标签页与 Starlight 相同的外观，也就是您在本页预览卡片上看到的那种外观。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard fullWidth>
+      <SuiTabs variant="starlight">
+        <SuiTabItem label="标签 #1">
+          <Card fullWidth>
+            内容 #1
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="标签 #2">
+          <Card fullWidth>
+            内容 #2
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="标签 #3">
+          <Card fullWidth>
+            内容 #3
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "variant='starlight'" showLinenumbers title="TabsVariantsExample.astro"
+    ---
+    import { Tabs, TabItem, Card } from 'studiocms:ui/components';
+    ---
+
+    <Tabs variant='starlight'>
+      <TabItem label='标签 #1'>
+        <Card fullWidth>
+          内容 #1
+        </Card>
+      </TabItem>
+      <TabItem label='标签 #2'>
+        <Card fullWidth>
+          内容 #2
+        </Card>
+      </TabItem>
+      <TabItem label='标签 #3'>
+        <Card fullWidth>
+          内容 #3
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>
+
+### 对齐
+
+在某些情况下，您可能想要更改标签页的对齐方式。您可以通过将 `align` 属性设置为 `left`（左对齐）、`center`（居中）或 `right`（右对齐）来实现这一点，默认为左对齐。下面是一个标签页右对齐的示例：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard fullWidth>
+      <SuiTabs align="right">
+        <SuiTabItem label="标签 #1">
+          <Card fullWidth>
+            内容 #1
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="标签 #2">
+          <Card fullWidth>
+            内容 #2
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "align='right'" showLinenumbers title="TabsAlignmentExample.astro"
+    ---
+    import { Tabs, TabItem, Card } from 'studiocms:ui/components';
+    ---
+
+    <Tabs align='right'>
+      <TabItem label='标签 #1'>
+        <Card fullWidth>
+          内容 #1
+        </Card>
+      </TabItem>
+      <TabItem label='标签 #2'>
+        <Card fullWidth>
+          内容 #2
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>
+
+这甚至适用于 `starlight` 变体！
+
+### 同步与存储
+
+为了保存用户的选择，甚至在多个不同的标签页容器之间同步它们，您可以设置一个 `syncKey`。默认情况下，为了符合 GDPR 指南，此值将存储在 sessionStorage 中，但是如果您愿意，您可以将 `storage` 属性设置为 `persistent` 以将值存储在 localStorage 中。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard fullWidth vertical>
+      <SuiTabs syncKey="sync-example">
+        <SuiTabItem label="标签 #1 (同步 1)" icon="bolt">
+          <Card fullWidth>
+            标签内容 #1 (同步 1)
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="标签 #2 (同步 2)" icon="bolt-slash" color="success">
+          <Card fullWidth>
+            标签内容 #2 (同步 2)
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+      <Divider>不同元素</Divider>
+      <SuiTabs syncKey="sync-example">
+        <SuiTabItem label="标签 #3 (同步 1)" icon="bolt">
+          <Card fullWidth>
+            标签内容 #3 (同步 1)
+          </Card>
+        </SuiTabItem>
+        <SuiTabItem label="标签 #4 (同步 2)" icon="bolt-slash" color="success">
+          <Card fullWidth>
+            标签内容 #4 (同步 2)
+          </Card>
+        </SuiTabItem>
+      </SuiTabs>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro "syncKey='sync-example'" showLinenumbers title="TabsSyncExample.astro"
+    ---
+    import { Tabs, TabItem, Card, Divider } from 'studiocms:ui/components';
+    ---
+
+    <Tabs syncKey='sync-example'>
+      <TabItem label='标签 #1 (同步 1)' icon='bolt'>
+        <Card fullWidth>
+          标签内容 #1 (同步 1)
+        </Card>
+      </TabItem>
+      <TabItem label='标签 #2 (同步 2)' icon='bolt-slash' color='success'>
+        <Card fullWidth>
+          标签内容 #2 (同步 2)
+        </Card>
+      </TabItem>
+    </Tabs>
+    <Divider>不同元素</Divider>
+    <Tabs syncKey='sync-example'>
+      <TabItem label='标签 #3 (同步 1)' icon='bolt'>
+        <Card fullWidth>
+          标签内容 #3 (同步 1)
+        </Card>
+      </TabItem>
+      <TabItem label='标签 #4 (同步 2)' icon='bolt-slash' color='success'>
+        <Card fullWidth>
+          标签内容 #4 (同步 2)
+        </Card>
+      </TabItem>
+    </Tabs>
+    ```
+  </TabItem>
+</Tabs>

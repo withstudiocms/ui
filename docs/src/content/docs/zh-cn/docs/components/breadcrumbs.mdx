@@ -1,0 +1,83 @@
+---
+title: 路径
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Breadcrumbs } from 'studiocms:ui/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+
+一个简单的路径组件！用于指示当前页面在导航层级中的位置。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Breadcrumbs 
+        segments={[
+          { label: "首页", segment: "" },
+          { label: "文档", segment: "docs" },
+          { label: "组件", segment: "components" },
+          { label: "路径", segment: "breadcrumbs" },
+        ]}
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ButtonExample.astro"
+    ---
+    import { Breadcrumbs } from 'studiocms:ui/components';
+    ---
+
+    <Breadcrumbs 
+      segments={[
+        { label: "首页", segment: "" },
+        { label: "文档", segment: "docs" },
+        { label: "组件", segment: "components" },
+        { label: "路径", segment: "breadcrumbs" },
+      ]}
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+### 更改分隔符
+
+您可以通过传递 `separator` 属性来更改分隔符。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Breadcrumbs 
+        segments={[
+          { label: "首页", segment: "" },
+          { label: "文档", segment: "docs" },
+          { label: "组件", segment: "components" },
+          { label: "路径", segment: "breadcrumbs" },
+        ]}
+        separator="/"
+      />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ButtonExample.astro"
+    ---
+    import { Breadcrumbs } from 'studiocms:ui/components';
+    ---
+
+    <Breadcrumbs 
+      segments={[
+        { label: "首页", segment: "" },
+        { label: "文档", segment: "docs" },
+        { label: "组件", segment: "components" },
+        { label: "路径", segment: "breadcrumbs" },
+      ]}
+      separator="/"
+    />
+    ```
+  </TabItem>
+</Tabs>

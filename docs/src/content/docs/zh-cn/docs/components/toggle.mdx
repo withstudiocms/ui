@@ -1,0 +1,125 @@
+---
+i18nReady: true
+title: 开关
+sidebar:
+  badge:
+    text: New Colors！
+    variant: tip
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Toggle, Row } from 'studiocms:ui/components';
+
+一个支持多种尺寸和颜色的开关组件。与表单兼容。
+
+## 用法
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Toggle label="标签" color="primary" />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro showLinenumbers title="ToggleExample.astro"
+    ---
+    import { Toggle } from 'studiocms:ui/components';
+    ---
+
+    <Toggle label='标签' color='primary' />
+    ```
+  </TabItem>
+</Tabs>
+
+### 尺寸
+
+开关有三种不同的尺寸：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Row>
+        <Toggle label="小" color="primary" size="sm" defaultChecked />
+        <Toggle label="中" color="primary" defaultChecked />
+        <Toggle label="大" color="primary" size="lg" defaultChecked />
+      </Row>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /size='[a-z]+'/ showLinenumbers title="ToggleSizesExample.astro"
+    ---
+    import { Toggle } from 'studiocms:ui/components';
+    ---
+
+    <Toggle label='小' color='primary' size='sm' defaultChecked />
+    <Toggle label='中' color='primary' defaultChecked />
+    <Toggle label='大' color='primary' size='lg' defaultChecked />
+    ```
+  </TabItem>
+</Tabs>
+
+### 颜色
+
+开关组件支持所有默认配色方案。
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Toggle label="默认" defaultChecked />
+      <Toggle label="主色" color="primary" defaultChecked />
+      <Toggle label="成功" color="success" defaultChecked />
+      <Toggle label="警告" color="warning" defaultChecked />
+      <Toggle label="危险" color="danger" defaultChecked />
+      <Toggle label="信息" color="info" defaultChecked />
+      <Toggle label="单色" color="mono" defaultChecked />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro /color="[a-z]+"/ showLinenumbers title="ToggleColorsExample.astro"
+    ---
+    import { Toggle } from 'studiocms:ui/components';
+    ---
+
+    <Toggle label='默认' defaultChecked />
+    <Toggle label='主色' color='primary' defaultChecked />
+    <Toggle label='成功' color='success' defaultChecked />
+    <Toggle label='警告' color='warning' defaultChecked />
+    <Toggle label='危险' color='danger' defaultChecked />
+    <Toggle label="信息" color="info" defaultChecked />
+    <Toggle label="单色" color="mono" defaultChecked />
+    ```
+  </TabItem>
+</Tabs>
+
+### 表单支持
+
+如果您想在表单中使用此组件，您很幸运！您可以传递两个属性：`isRequired` 和 `name`。
+
+前者如其名所示会执行相应的操作，后者则设置 `name` 属性，以便您可以访问该开关，例如在提交返回的 `FormData` 中。以下是一个展示如何设置这两个属性的示例：
+
+<Tabs>
+  <TabItem label="预览">
+    <PreviewCard>
+      <Toggle label="必填 & 自定义名称" color="primary" isRequired name='example' />
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="代码">
+    ```astro ins={8-9} showLinenumbers title="ToggleFormExample.astro"
+    ---
+    import { Toggle } from 'studiocms:ui/components';
+    ---
+
+    <Toggle 
+      label='必填 & 自定义名称'
+      color='primary'
+      isRequired
+      name='example'
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+:::note
+如果未设置名称，则会为该组件生成一个随机名称。
+:::
