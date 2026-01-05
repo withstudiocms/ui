@@ -46,6 +46,7 @@ export class SUISelectElement extends HTMLElement {
 	public dropdown: HTMLDivElement | undefined;
 	public select: HTMLSelectElement | undefined;
 
+	// biome-ignore lint/complexity/noUselessConstructor: custom element requirement
 	constructor() {
 		super();
 	}

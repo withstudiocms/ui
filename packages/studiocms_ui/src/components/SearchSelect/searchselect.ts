@@ -27,6 +27,7 @@ class SUIComboboxElement extends SUISelectElement {
 		isSelectingOption: false,
 	};
 
+	// biome-ignore lint/complexity/noUselessConstructor: custom element requirement
 	constructor() {
 		super();
 	}
