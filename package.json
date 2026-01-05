@@ -26,7 +26,7 @@
 
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "ci:lint": "biome ci --formatter-enabled=true --organize-imports-enabled=true  --reporter=github",
+    "ci:lint": "biome ci --reporter=github",
 
     "ci:install": "pnpm install --frozen-lockfile",
     "ci:prepublish": "pnpm build",
