@@ -18,12 +18,12 @@ const splitCodeBasedOnComment = (code: string): string => {
 
 <section class="showcase not-content">
     <PageHeader
-        icon="square-3-stack-3d"
+        icon="heroicons:square-3-stack-3d"
         title="Modular by design"
         subtitle="StudioCMS UI components are reusable, flexible, and composable, helping you build incredible interfaces with ease."
     />
     <Tabs>
-        <TabItem label='Forms' icon='pencil'>
+        <TabItem label='Forms' icon='heroicons:pencil'>
             <div class="preview-code-container">
                 <div class="preview-container">
                     <FormExample />
@@ -38,7 +38,7 @@ const splitCodeBasedOnComment = (code: string): string => {
                 />
             </div>
         </TabItem>
-        <TabItem label='Dropdowns' icon='square-2-stack'>
+        <TabItem label='Dropdowns' icon='heroicons:square-2-stack'>
             <div class="preview-code-container">
                 <div class="preview-container">
                     <DropdownExample />
@@ -53,7 +53,7 @@ const splitCodeBasedOnComment = (code: string): string => {
                 />
             </div>
         </TabItem>
-        <TabItem label='Modals' icon='arrows-pointing-out'>
+        <TabItem label='Modals' icon='heroicons:arrows-pointing-out'>
             <div class="preview-code-container">
                 <div class="preview-container">
                     <ModalExample />
@@ -75,7 +75,7 @@ const splitCodeBasedOnComment = (code: string): string => {
         margin-top: 4rem !important;
         padding: 4rem 10vw;
         width: 100%;
-        background: hsl(var(--background-step-1));
+        background: var(--background-step-1);
     }
 
     @media screen and (max-width: 1500px) {
@@ -98,7 +98,7 @@ const splitCodeBasedOnComment = (code: string): string => {
     }
 
     .preview-container {
-        background-color: hsl(var(--background-base));
+        background-color: var(--background-base);
         padding: 2rem;
         border-radius: 1rem;
         display: flex;

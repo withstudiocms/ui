@@ -28,9 +28,6 @@ export const locales = {
 
 export default defineConfig({
 	site,
-	experimental: {
-		svg: true,
-	},
 	image: {
 		remotePatterns: [{ protocol: 'https' }],
 	},

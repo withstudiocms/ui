@@ -1,15 +1,16 @@
 ---
+import type { AvailableIcons } from 'studiocms:ui/icons';
 import type { StudioCMSColorway } from '../../utils/colors.js';
 import { generateID } from '../../utils/generateID.js';
 import Icon from '../Icon/Icon.astro';
-import type { HeroIconName } from '../Icon/iconType.js';
 import './tabs.css';
 
 interface Tab {
-	icon?: HeroIconName;
+	icon?: AvailableIcons;
 	label: string;
 	color: Exclude<StudioCMSColorway, 'default'>;
 	tabId: string;
+	active?: boolean;
 }
 
 /**
@@ -33,65 +34,101 @@ interface Props {
 	 * The alignment of the tabs. Defaults to `left`.
 	 */
 	align?: 'left' | 'center' | 'right';
+
+	/**
+	 * The ID of the tab.
+	 */
+	id?: string;
 }
 
-const extractTabInfoWithRegex = (input: string) => {
-	const tabItemRegex = /<sui-tab-item([^>]*)>/g;
-
+/**
+ * Parses data attributes from an HTML tag string.
+ * @param tagContent The string content of the HTML tag.
+ * @returns An object of key-value pairs for the parsed attributes.
+ */
+const getAttributes = (tagContent: string) => {
+	const attributes: { [key: string]: string | boolean } = {};
 	const attributeRegex = /data-([\w-]+)="([^"]*)"/g;
+	for (const match of tagContent.matchAll(attributeRegex)) {
+		const [, key, value] = match;
+		if (!key || !value) continue;
+		if (key === 'icon' || key === 'label' || key === 'color') {
+			attributes[key] = value;
+		} else if (key === 'tab-id') {
+			attributes.tabId = value;
+		} else if (key === 'active') {
+			attributes.active = value === 'true';
+		}
+	}
+	return attributes;
+};
 
-	const tabs: Tab[] = [];
-	let tabMatch: RegExpExecArray | null;
-
-	// biome-ignore lint/suspicious/noAssignInExpressions: Nop
-	while ((tabMatch = tabItemRegex.exec(input)) !== null) {
-		let attributes: { [key: string]: string } = {};
-
-		let attributeMatch: RegExpExecArray | null;
-
-		if (!tabMatch[1]) continue;
-
-		// biome-ignore lint/suspicious/noAssignInExpressions: Nop
-		while ((attributeMatch = attributeRegex.exec(tabMatch[1])) !== null) {
-			if (!attributeMatch[1] || !attributeMatch[2]) continue;
-
-			if (
-				attributeMatch[1] === 'icon' ||
-				attributeMatch[1] === 'label' ||
-				attributeMatch[1] === 'color'
-			) {
-				attributes[attributeMatch[1]] = attributeMatch[2];
+/**
+ * Extracts direct child Tab info from an HTML string, ignoring nested tabs.
+ * This function uses a two-pass approach to handle nesting.
+ * 1. It first scans for all nested `sui-tabs-container` elements and records their start and end positions.
+ * 2. It then finds all `sui-tab-item` elements and includes only those that do not fall within the nested ranges.
+ * @param html The raw HTML string from the rendered slot.
+ * @returns An array of Tab objects for direct children only.
+ */
+const extractTabInfoWithRegex = (html: string): Tab[] => {
+	const nestedContainerRanges: { start: number; end: number }[] = [];
+	const containerRegex = /<div[^>]*?class="[^"]*?\bsui-tabs-container\b[^"]*?".*?>/gi;
+	for (const containerMatch of html.matchAll(containerRegex)) {
+		const startIndex = containerMatch.index;
+		let openCount = 0;
+		const searchArea = html.substring(startIndex);
+		const tagRegex = /<\/?div/gi;
+		for (const tagMatch of searchArea.matchAll(tagRegex)) {
+			if (tagMatch[0].toLowerCase() === '<div') {
+				openCount++;
+			} else {
+				openCount--;
 			}
-
-			if (attributeMatch[1] === 'tab-id') {
-				attributes.tabId = attributeMatch[2];
+			if (openCount === 0) {
+				const endIndex = startIndex + tagMatch.index + tagMatch[0].length;
+				nestedContainerRanges.push({ start: startIndex, end: endIndex });
+				break;
 			}
 		}
-
-		tabs.push(attributes as unknown as Tab);
 	}
 
+	const tabs: Tab[] = [];
+	const tabItemRegex = /<sui-tab-item([^>]*?)>/gi;
+	for (const tabMatch of html.matchAll(tabItemRegex)) {
+		const tabIndex = tabMatch.index;
+		const isNested = nestedContainerRanges.some(
+			(range) => tabIndex > range.start && tabIndex < range.end
+		);
+		if (!isNested) {
+			const attributes = getAttributes(tabMatch[1]);
+			if (attributes.tabId) {
+				tabs.push(attributes as unknown as Tab);
+			}
+		}
+	}
 	return tabs;
 };
 
+/**
+ * Injects the `active` class into the specified tab item in an HTML string.
+ * @param tabId The `data-tab-id` of the tab to mark as active.
+ * @param html The raw HTML string to modify.
+ * @returns The modified HTML string with the active tab.
+ */
 const markTabAsActive = (tabId: string, html: string): string => {
 	if (!tabId) return html;
 
 	const updatedHtml = html.replace(
 		/<sui-tab-item[^>]*data-tab-id="([^"]*)"[^>]*>/g,
 		(match, tabIdValue) => {
-			// Check if the tabId matches
 			if (tabIdValue === tabId) {
-				// Check if the element already has a class attribute
 				if (match.includes('class="')) {
-					// If class attribute exists, add 'active' to the class attribute
 					return match.replace(/(class="[^"]*)"/, '$1 active"');
 				}
-
-				// If class attribute does not exist, add it
 				return match.replace(/(<sui-tab-item[^>]*data-tab-id="[^"]*")/, '$1 class="active"');
 			}
-			return match; // Return original if the tabId does not match
+			return match;
 		}
 	);
 
@@ -101,6 +138,7 @@ const markTabAsActive = (tabId: string, html: string): string => {
 const uniqueId = generateID('sui-tabs-container');
 
 const {
+	id: customId,
 	syncKey: originalSyncKey,
 	storage = 'session',
 	variant = 'default',
@@ -111,40 +149,45 @@ const syncKey = originalSyncKey ? `sui-tabs-${originalSyncKey}` : undefined;
 
 const tabContents = await Astro.slots.render('default');
 const tabs = extractTabInfoWithRegex(tabContents);
-const finalizedTabContents = markTabAsActive(tabs[0]?.tabId || '', tabContents);
+const defaultActiveTab = tabs.find((tab) => tab.active) ?? tabs[0];
+const finalizedTabContents = markTabAsActive(defaultActiveTab?.tabId || '', tabContents);
 const containerId = generateID('sui-tabs-container');
 ---
 
 <div 
   class="sui-tabs-container"
-  id={containerId}
+  id={customId ?? containerId}
   data-sync-key={syncKey}
-  data-unique-id={uniqueId}
+  data-unique-id={customId ?? uniqueId}
   data-storage-strategy={storage}
   class:list={[variant, align]}
 >
   <div class="sui-tabs-list" role="tablist">
-    {tabs.map((tab, i) => (
-      <button 
-        role="tab"
-		type="button"
-        class="sui-tab-header"
-        id={syncKey ? `${syncKey}-${i}` : undefined}
-        tabindex={i === 0 ? 0 : -1}
-        data-tab-child={tab.tabId}
-        class:list={[i === 0 && "active", tab.color, syncKey && `${syncKey}:${i}`]}
-      >
-        {tab.icon && (
-          <Icon name={tab.icon} width={24} height={24} />
-        )}
-        <span>{tab.label}</span>
-      </button>
-    ))}
+    {tabs.map((tab, i) => {
+		const isActive = tab.tabId === defaultActiveTab?.tabId;
+		return (
+			<button 
+				role="tab"
+				type="button"
+				class="sui-tab-header"
+				id={syncKey ? `${syncKey}-${i}` : undefined}
+				tabindex={isActive ? 0 : -1}
+				data-tab-child={tab.tabId}
+				class:list={[isActive && "active", tab.color, syncKey && `${syncKey}:${i}`]}
+			>
+				{tab.icon && (
+				<Icon name={tab.icon} width={24} height={24} />
+				)}
+				<span>{tab.label}</span>
+			</button>
+		)
+	})}
   </div>
   <div class="sui-tabs-content">
     <Fragment set:html={finalizedTabContents} />
   </div>
 </div>
+
 <script>
 import "studiocms:ui/scripts/tabs"
 </script>

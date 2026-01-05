@@ -1,14 +1,14 @@
 .sui-textarea-label {
 	display: flex;
 	flex-direction: column;
-	gap: .25rem;
+	gap: 0.25rem;
 	max-width: 80ch;
 }
 
 .sui-textarea-label.disabled {
 	opacity: 0.5;
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .sui-textarea-label.full-width {
@@ -25,12 +25,12 @@
 }
 
 .sui-textarea {
-	padding: .65rem;
+	padding: 0.65rem;
 	border-radius: var(--radius-md);
-	border: 1px solid hsl(var(--border));
-	background: hsl(var(--background-step-2));
-	color: hsl(var(--text-normal));
-	transition: all .15s ease;
+	border: 1px solid var(--border);
+	background: var(--background-step-2);
+	color: var(--text-normal);
+	transition: all 0.15s ease;
 	resize: none;
 	min-height: 12ch;
 	width: 100%;
@@ -38,7 +38,7 @@
 }
 
 .sui-textarea:hover {
-	background: hsl(var(--background-step-3));
+	background: var(--background-step-3);
 }
 
 .resize .sui-textarea {
@@ -47,12 +47,12 @@
 
 .sui-textarea:active,
 .sui-textarea:focus {
-	border: 1px solid hsl(var(--primary-base));
+	border: 1px solid var(--primary-base);
 	outline: none;
-	background: hsl(var(--background-step-2));
+	background: var(--background-step-2);
 }
 
 .req-star {
-	color: hsl(var(--danger-base));
+	color: var(--danger-vibrant);
 	font-weight: 700;
 }

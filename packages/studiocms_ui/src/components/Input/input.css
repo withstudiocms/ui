@@ -2,13 +2,14 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: .25rem;
+	gap: 0.25rem;
+	position: relative;
 }
 
 .sui-input-label.disabled {
 	opacity: 0.5;
 	pointer-events: none;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .label {
@@ -16,30 +17,63 @@
 }
 
 .sui-input {
-	padding: .5rem 1rem;
+	padding: 0.5rem 1rem;
 	border-radius: var(--radius-md);
-	border: 1px solid hsl(var(--border));
-	background: hsl(var(--background-step-2));
-	color: hsl(var(--text-normal));
-	transition: all .15s ease;
+	border: 1px solid var(--border);
+	background: var(--background-step-2);
+	color: var(--text-normal);
+	transition: all 0.15s ease;
+	width: 100%;
 }
 
 .sui-input:hover {
-	background: hsl(var(--background-step-3));
+	background: var(--background-step-3);
 }
 
 .sui-input:active,
 .sui-input:focus {
-	border: 1px solid hsl(var(--primary-base));
+	border: 1px solid var(--primary-base);
 	outline: none;
-	background: hsl(var(--background-step-2));
+	background: var(--background-step-2);
 }
 
 .disabled .sui-input:active {
-	border: 1px solid hsl(var(--border));
+	border: 1px solid var(--border);
 }
 
 .req-star {
-	color: hsl(var(--danger-base));
+	color: var(--danger-vibrant);
 	font-weight: 700;
+}
+
+.sui-input-desc {
+	font-size: 0.825rem;
+}
+
+.input-icon {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--text-muted);
+}
+
+.input-icon.icon-left {
+	left: 0.5rem;
+}
+
+.input-icon.icon-right {
+	right: 0.5rem;
+}
+
+.sui-input.icon-left {
+	padding-left: calc(1.25rem + 20px);
+}
+
+.sui-input.icon-right {
+	padding-right: calc(1.25rem + 20px);
+}
+
+.sui-input-wrapper {
+	position: relative;
+	width: 100%;
 }

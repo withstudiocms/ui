@@ -1,0 +1,383 @@
+---
+title: Skeleton
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Skeleton } from 'studiocms:ui/components/skeleton';
+
+An extremely customizable skeleton loading component.
+
+## Usage
+
+<Tabs>
+  <TabItem label='Preview'>
+    <PreviewCard>
+      <Skeleton variant='card'>
+        <Skeleton variant='block' width='50%' height='8rem' />
+        <Skeleton variant='text' />
+        <Skeleton variant='text' />
+      </Skeleton>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label='Code'>
+    ```astro showLinenumbers title='SkeletonExample.astro'
+    ---
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
+    ---
+
+    <Skeleton variant='card'>
+      <Skeleton variant='block' width='50%' height='8rem' />
+      <Skeleton variant='text' />
+      <Skeleton variant='text' />
+    </Skeleton>
+    ```
+  </TabItem>
+</Tabs>
+
+### Variant
+
+You can use the `variant` prop to change the skeleton's appearance. The following variants are available:
+
+- `card`
+- `text`
+- `block`
+- `circle`
+
+<Tabs>
+  <TabItem label='Preview'>
+    <PreviewCard>
+        <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
+          <Skeleton variant='card'></Skeleton>
+          <Skeleton variant='text'></Skeleton>
+          <Skeleton variant='block' width='50%' height='8rem'></Skeleton>
+          <Skeleton variant='circle' width='100px' height='100px'></Skeleton>
+        </div>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label='Code'>
+    ```astro "variant='card'" "variant='text'" "variant='block'" "variant='circle'" showLinenumbers title='SkeletonExample.astro'
+    ---
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
+    ---
+
+    <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
+      <Skeleton variant='card'></Skeleton>
+      <Skeleton variant='text'></Skeleton>
+      <Skeleton variant='block' width='50%' height='8rem'></Skeleton>
+      <Skeleton variant='circle' width='100px' height='100px'></Skeleton>
+    </div>
+    ```
+  </TabItem>
+</Tabs>
+
+### Width/Height
+
+The `width` and `height` props can be used to set the width and height of the skeleton. The value can be a string ending in `%` or `px` or `rem` to specify the size in percentage, pixels or rem respectively.
+
+<Tabs>
+  <TabItem label='Preview'>
+    <PreviewCard>
+        <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='50%' height='10rem'></Skeleton>
+          <Skeleton variant='block' width='25%' height='1rem'></Skeleton>
+        </div>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label='Code'>
+    ```astro "width='100px' height='100px'" "width='50%' height='10rem'" "width='25%' height='1rem'" showLinenumbers title='SkeletonExample.astro'
+    ---
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
+    ---
+
+    <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='50%' height='10rem'></Skeleton>
+      <Skeleton variant='block' width='25%' height='1rem'></Skeleton>
+    </div>
+    ```
+  </TabItem>
+</Tabs>
+
+### Radius
+
+You can use the `radius` prop to change the border radius of the skeleton. The following radius sizes are available:
+
+- `none`
+- `sm`
+- `md`
+- `lg`
+
+The default value is `lg`.
+
+<Tabs>
+  <TabItem label='Preview'>
+    <PreviewCard>
+        <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
+          <Skeleton variant='block' radius='none' height="2rem"></Skeleton>
+          <Skeleton variant='block' radius='sm' height="2rem"></Skeleton>
+          <Skeleton variant='block' radius='md' height="2rem"></Skeleton>
+          <Skeleton variant='block' radius='lg' height="2rem"></Skeleton>
+        </div>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label='Code'>
+    ```astro "radius='none'" "radius='sm'" "radius='md'" "radius='lg'" showLinenumbers title='SkeletonExample.astro'
+    ---
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
+    ---
+
+    <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
+      <Skeleton variant='block' radius='none' height="2rem"></Skeleton>
+      <Skeleton variant='block' radius='sm' height="2rem"></Skeleton>
+      <Skeleton variant='block' radius='md' height="2rem"></Skeleton>
+      <Skeleton variant='block' radius='lg' height="2rem"></Skeleton>
+    </div>
+    ```
+  </TabItem>
+</Tabs>
+
+### Animation
+
+You can use the `animation` prop to change the animation of the skeleton. The following animations are available:
+
+- `none`
+- `slide`
+- `pulse`
+
+The default value is `slide`.
+
+<Tabs>
+  <TabItem label='Preview'>
+    <PreviewCard>
+        <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
+          <Skeleton variant='text' animation='none'></Skeleton>
+          <Skeleton variant='text' animation='slide'></Skeleton>
+          <Skeleton variant='text' animation='pulse'></Skeleton>
+        </div>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label='Code'>
+    ```astro "animation='none'" "animation='slide'" "animation='pulse'" showLinenumbers title='SkeletonExample.astro'
+    ---
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
+    ---
+
+    <div style='width: 100%; display: flex; flex-direction: column; gap: 1rem;'>
+      <Skeleton variant='text' animation='none'></Skeleton>
+      <Skeleton variant='block' animation='slide'></Skeleton>
+      <Skeleton variant='text' animation='pulse'></Skeleton>
+    </div>
+    ```
+  </TabItem>
+</Tabs>
+
+## Card Variant
+
+The `Skeleton` component is meant to be used as a container for other `Skeleton` components.
+There is no animation state for the `card` variant. By default, the `card` variant will take up the full width of its container.
+
+The `Skeleton` component also supports the following props for the `card` variant:
+
+- `direction`
+- `hAlign`
+- `vAlign`
+- `gap`
+
+### Direction
+
+You can use the `direction` prop to change the direction of the skeleton. The following directions are available:
+
+- `row`
+- `column`
+
+The default value is `column`.
+
+<Tabs>
+  <TabItem label='Preview'>
+    <PreviewCard>
+        <Skeleton variant='card' direction='row'>
+          <Skeleton variant='text'></Skeleton>
+          <Skeleton variant='text'></Skeleton>
+        </Skeleton>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label='Code'>
+    ```astro "direction='row'" showLinenumbers title='SkeletonExample.astro'
+    ---
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
+    ---
+
+    <Skeleton variant='card' direction='row'>
+      <Skeleton variant='text'></Skeleton>
+      <Skeleton variant='text'></Skeleton>
+    </Skeleton>
+    ```
+  </TabItem>
+</Tabs>
+
+### Horizontal Alignment
+
+You can use the `hAlign` prop to change the horizontal alignment of the skeleton. The following alignments are available:
+
+- `start`
+- `center`
+- `end`
+
+The default value is `center`.
+
+<Tabs>
+  <TabItem label='Preview'>
+    <PreviewCard>
+        <Skeleton variant='card' hAlign='start' direction='row'>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+        </Skeleton>
+
+        <br />
+
+        <Skeleton variant='card' hAlign='center' direction='row'>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+        </Skeleton>
+
+        <br />
+
+        <Skeleton variant='card' hAlign='end' direction='row'>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+        </Skeleton>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label='Code'>
+    ```astro "hAlign='start'" "hAlign='center'" "hAlign='end'" showLinenumbers title='SkeletonExample.astro'
+    ---
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
+    ---
+
+    <Skeleton variant='card' hAlign='start' direction='row'>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+    </Skeleton>
+
+    <br />
+
+    <Skeleton variant='card' hAlign='center' direction='row'>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+    </Skeleton>
+
+    <br />
+
+    <Skeleton variant='card' hAlign='end' direction='row'>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+    </Skeleton>
+    ```
+  </TabItem>
+</Tabs>
+
+### Vertical Alignment
+
+You can use the `vAlign` prop to change the vertical alignment of the skeleton. The following alignments are available:
+
+- `start`
+- `center`
+- `end`
+
+The default value is `center`.
+
+<Tabs>
+  <TabItem label='Preview'>
+    <PreviewCard>
+        <Skeleton variant='card' vAlign='start' direction='column'>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+        </Skeleton>
+
+        <br />
+
+        <Skeleton variant='card' vAlign='center' direction='column'>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+        </Skeleton>
+
+        <br />
+
+        <Skeleton variant='card' vAlign='end' direction='column'>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+          <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+        </Skeleton>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label='Code'>
+    ```astro "vAlign='start'" "vAlign='center'" "vAlign='end'" showLinenumbers title='SkeletonExample.astro'
+    ---
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
+    ---
+
+    <Skeleton variant='card' vAlign='start' direction='column'>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+    </Skeleton>
+
+    <br />
+
+    <Skeleton variant='card' vAlign='center' direction='column'>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+    </Skeleton>
+
+    <br />
+
+    <Skeleton variant='card' vAlign='end' direction='column'>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+      <Skeleton variant='block' width='100px' height='100px'></Skeleton>
+    </Skeleton>
+    ```
+  </TabItem>
+</Tabs>
+
+### Gap
+
+You can use the `gap` prop to change the gap between the skeletons. The default value is `0.5rem`.
+
+<Tabs>
+  <TabItem label='Preview'>
+    <PreviewCard>
+        <Skeleton variant='card' gap='1rem'>
+          <Skeleton variant='text'></Skeleton>
+          <Skeleton variant='text'></Skeleton>
+        </Skeleton>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label='Code'>
+    ```astro "gap='1rem'" showLinenumbers title='SkeletonExample.astro'
+    ---
+    import { Skeleton } from 'studiocms:ui/components/skeleton';
+    ---
+
+    <Skeleton variant='card' gap='1rem'>
+      <Skeleton variant='text'></Skeleton>
+      <Skeleton variant='text'></Skeleton>
+    </Skeleton>
+    ```
+  </TabItem>
+</Tabs>

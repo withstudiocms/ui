@@ -32,7 +32,7 @@
 	margin-top: 0 !important;
 	display: flex;
 	flex-direction: row;
-	gap: .5rem;
+	gap: 0.5rem;
 	cursor: pointer;
 	position: relative;
 	min-width: fit-content;
@@ -42,7 +42,7 @@
 	border-radius: var(--radius-md);
 	height: 40px;
 	padding: 0.5rem 0.75rem;
-	transition: all .15s ease;
+	transition: all 0.15s ease;
 	font-size: 0.875em;
 	outline: 2px solid transparent;
 	outline-offset: 2px;
@@ -56,36 +56,36 @@
 }
 
 .sui-tabs-container.default .sui-tab-header:focus-visible {
-	outline: 2px solid hsl(var(--text-normal));
+	outline: 2px solid var(--text-normal);
 	outline-offset: 2px;
 }
 
 .sui-tabs-container.default .sui-tab-header:hover {
-	background-color: hsla(var(--default-flat-active)) !important;
+	background-color: var(--default-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.active {
-	background-color: hsla(var(--primary-flat-active)) !important;
+	background-color: var(--primary-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.success.active {
-	background-color: hsla(var(--success-flat-active)) !important;
+	background-color: var(--success-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.warning.active {
-	background-color: hsla(var(--warning-flat-active)) !important;
+	background-color: var(--warning-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.danger.active {
-	background-color: hsla(var(--danger-flat-active)) !important;
+	background-color: var(--danger-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.danger.info {
-	background-color: hsla(var(--info-flat-active)) !important;
+	background-color: var(--info-flat-active) !important;
 }
 
 .sui-tabs-container.default .sui-tab-header.danger.mono {
-	background-color: hsla(var(--mono-flat-active)) !important;
+	background-color: var(--mono-flat-active) !important;
 }
 
 .sui-tabs-container.starlight .sui-tabs-list {
@@ -100,24 +100,24 @@
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background-color: hsl(var(--border));
+	background-color: var(--border);
 }
 
 .sui-tabs-container.starlight .sui-tab-header {
 	padding: 0.25rem 1.25rem;
-	color: hsl(var(--text-muted));
+	color: var(--text-muted);
 }
 
 .sui-tabs-container.starlight .sui-tab-header.active {
 	font-weight: 600;
-	color: hsl(var(--text-normal));
+	color: var(--text-normal);
 }
 
 .sui-tabs-container.starlight .sui-tab-header.active::after {
 	content: "";
 	width: 100%;
 	height: 2px;
-	background-color: hsl(var(--primary-base));
+	background-color: var(--primary-base);
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -129,9 +129,9 @@
 	width: calc(100% - 2px);
 	bottom: 1px;
 	left: 1px;
-	border: 2px solid hsl(var(--primary-base));
+	border: 2px solid var(--primary-base);
 	background-color: transparent;
-	outline: 1px solid hsl(var(--text-normal));
+	outline: 1px solid var(--text-normal);
 }
 
 .sui-tabs-content {

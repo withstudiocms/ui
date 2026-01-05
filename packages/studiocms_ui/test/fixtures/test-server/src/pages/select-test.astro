@@ -1,0 +1,39 @@
+---
+import { Select } from 'studiocms:ui/components/select';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Select
+            label="Select Element"
+            defaultValue="opt-1"
+            options={[
+                { label: "Option 1", value: "opt-1" },
+                { label: "Option 2", value: "opt-2" },
+                { label: "Option 3", value: "opt-3" },
+            ]}
+        />
+    </div>
+
+    <br />
+    <br />
+
+    <div id="multiple-test">
+        <Select
+            label="Select Element (Multiple)"
+            defaultValue={["opt-1", "opt-3"]}
+            multiple
+            options={[
+                { label: "Option 1", value: "opt-1" },
+                { label: "Option 2", value: "opt-2" },
+                { label: "Option 3", value: "opt-3" },
+                { label: "Option 4", value: "opt-4" },
+                { label: "Option 5", value: "opt-5" },
+            ]}
+        />
+    </div>
+</Layout>

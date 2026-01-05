@@ -1,9 +1,5 @@
 ---
 title: Sidebar
-sidebar:
-  badge:
-    text: New!
-    variant: success
 ---
 
 :::caution[Helper required]
@@ -20,7 +16,8 @@ The simpler version of the two. A sidebar with built-in mobile breakpoints.
 
 ```astro title="SingleSidebarExample.astro"
 ---
-import { Sidebar, Button } from 'studiocms:ui/components';
+import { Sidebar } from 'studiocms:ui/components/sidebar';
+import { Button } from 'studiocms:ui/components/button';
 ---
 
 <Sidebar>
@@ -30,7 +27,7 @@ import { Sidebar, Button } from 'studiocms:ui/components';
 Toggle Sidebar
 </Button>
 <script>
-import { SingleSidebarHelper } from 'studiocms:ui/components';
+import { SingleSidebarHelper } from 'studiocms:ui/components/client';
 
 new SingleSidebarHelper('my-toggle');
 </script>
@@ -41,7 +38,7 @@ It is up to you to create a toggle component. It should be shown once the sideba
 The helper exposes a few helpful methods to interact with the sidebar:
 
 ```ts title="SingleSidebarHelperExample.ts"
-import { SingleSidebarHelper } from 'studiocms:ui/components';
+import { SingleSidebarHelper } from 'studiocms:ui/components/sidebar/client';
 
 const sidebar = new SingleSidebarHelper('my-toggle');
 
@@ -68,7 +65,7 @@ A more complex version with two panes, both with different breakpoints.
 
 ```astro title="DoubleSidebarExample.astro"
 ---
-import { DoubleSidebar } from 'studiocms:ui/components';
+import { DoubleSidebar } from 'studiocms:ui/components/sidebar';
 ---
 
 <DoubleSidebar>
@@ -80,7 +77,7 @@ import { DoubleSidebar } from 'studiocms:ui/components';
   </div>
 </DoubleSidebar>
 <script>
-import { DoubleSidebarHelper } from 'studiocms:ui/components';
+import { DoubleSidebarHelper } from 'studiocms:ui/components/client';
 
 const sidebar = new DoubleSidebarHelper();
 </script>
@@ -95,7 +92,7 @@ Due to the more complex nature of the double sidebar, it's best to have the foll
 To help you with managing the sidebar state, the following methods are exposed from the helper:
 
 ```ts title="DoubleSidebarHelperExample.astro"
-import { DoubleSidebarHelper } from 'studiocms:ui/components';
+import { DoubleSidebarHelper } from 'studiocms:ui/components/sidebar/client';
 
 const sidebar = new DoubleSidebarHelper();
 

@@ -1,0 +1,41 @@
+---
+import { Button } from 'studiocms:ui/components/button';
+import { Modal } from 'studiocms:ui/components/modal';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <br />
+    <br />
+
+    <div id="basic-test">
+        <Modal
+            id="modal"
+            cancelButton={{ label: "Cancel", color: "default" }}
+            actionButton={{ label: "Confirm", color: "danger" }}
+        >
+            <h2 slot="header">Modal Test</h2>
+            <div>
+                Lorem ipsum dolor sit amet. Est corporis rerum est reprehenderit
+                nesciunt qui quibusdam quam non totam quia. Et porro unde et
+                rerum aliquam nam consectetur dolorum et unde optio At delectus
+                alias.
+            </div>
+        </Modal>
+        <Button color="default" id="modal-trigger"> Modal Trigger </Button>
+    </div>
+
+    <script>
+        import { ModalHelper } from "studiocms:ui/components/modal/client";
+
+        const modal = new ModalHelper("modal", "modal-trigger");
+
+        modal.registerCancelCallback(() => {
+            // Your logic here
+        });
+
+        modal.registerConfirmCallback(() => {
+            // Your logic here
+        });
+    </script>
+</Layout>

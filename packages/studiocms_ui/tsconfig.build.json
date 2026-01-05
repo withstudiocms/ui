@@ -3,6 +3,7 @@
   "include": ["src"],
   "compilerOptions": {
     "outDir": "./dist",
+    "baseUrl": ".",
     "emitDeclarationOnly": true,
     "resolveJsonModule": true,
     "rootDir": "./src",

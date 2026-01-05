@@ -1,7 +1,11 @@
 ---
+// @ts-expect-error - This is a TypeGenerated Module, available in dev thanks to manual d.ts file - This comment is here because this causes a type-error during build
+import { type AvailableIcons } from 'studiocms:ui/icons';
 import type { HTMLAttributes } from 'astro/types';
 import { generateID } from '../../utils/generateID.js';
 import './input.css';
+import { AstroError } from 'astro/errors';
+import Icon from '../Icon/Icon.astro';
 
 /**
  * The props for the input component.
@@ -39,6 +43,19 @@ interface Props extends HTMLAttributes<'input'> {
 	 * Additional classes to apply to the input.
 	 */
 	class?: string;
+	/**
+	 * An optional icon to be shown in the input.
+	 */
+	icon?:
+		| AvailableIcons
+		| {
+				name: AvailableIcons;
+				position: 'left' | 'right';
+		  };
+	/**
+	 * A description to be shown below the input
+	 */
+	description?: string;
 }
 
 const {
@@ -50,26 +67,53 @@ const {
 	isRequired = false,
 	disabled = false,
 	class: className,
+	icon,
+	description,
 	...props
 } = Astro.props;
+
+if (typeof icon === 'object') {
+	if (!icon.name) throw new AstroError('Missing icon name for input!');
+	if (!icon.position) throw new AstroError('Missing icon position for input!');
+
+	if (!['left', 'right'].includes(icon.position))
+		throw new AstroError('Invalid icon position for input!');
+}
+
+const iconPos = icon
+	? typeof icon === 'string' || (typeof icon === 'object' && icon.position === 'left')
+		? 'left'
+		: 'right'
+	: undefined;
 ---
 
 <label for={name} class="sui-input-label" class:list={[disabled && "disabled"]}>
-  {label && (
+	{label && (
 		<span class="label">
 			{label} <span class="req-star">{isRequired && "*"}</span>
 		</span>
 	)}
-  <input
-    placeholder={placeholder}
-    name={name}
-    id={name}
-    type={type}
-    class="sui-input"
-		class:list={[className]}
-    required={isRequired}
-    disabled={disabled}
-    value={defaultValue}
-		{...props}
-  />
+	<div class="sui-input-wrapper">
+		{typeof icon === "object" && (
+			<Icon name={icon.name} width={20} height={20} class="input-icon" class:list={[`icon-${iconPos}`]} />
+		)}
+		{typeof icon === "string" && (
+			<Icon name={icon} width={20} height={20} class="input-icon icon-left" />
+		)}
+		<input
+			placeholder={placeholder}
+			name={name}
+			id={name}
+			type={type}
+			class="sui-input"
+			class:list={[className, iconPos && `icon-${iconPos}`]}
+			required={isRequired}
+			disabled={disabled}
+			value={defaultValue}
+			{...props}
+		/>
+	</div>
+	{description && (
+		<span class="sui-input-desc">{description}</span>
+	)}
 </label>

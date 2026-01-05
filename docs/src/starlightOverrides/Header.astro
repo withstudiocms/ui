@@ -1,7 +1,4 @@
 ---
-import config from 'virtual:starlight/user-config';
-import type { Props } from '@astrojs/starlight/props';
-
 // @ts-expect-error - This is a virtual module
 import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
 // @ts-expect-error - This is a virtual module
@@ -12,6 +9,8 @@ import SiteTitle from 'virtual:starlight/components/SiteTitle';
 import SocialIcons from 'virtual:starlight/components/SocialIcons';
 // @ts-expect-error - This is a virtual module
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import config from 'virtual:starlight/user-config';
+import type { Props } from '@astrojs/starlight/props';
 
 const { data } = Astro.props.entry;
 

@@ -1,10 +1,6 @@
 ---
 i18nReady: true
 title: Dropdown
-sidebar:
-  badge:
-    text: New Colors!
-    variant: tip
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -33,7 +29,8 @@ A dropdown component that takes care of all the annoying bits for you, with adde
   <TabItem label="Code">
     ```astro showLinenumbers title="DropdownExample.astro"
     ---
-    import { Dropdown, Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
+    import { Dropdown } from 'studiocms:ui/components/dropdown';
     ---
 
     <Dropdown 
@@ -48,9 +45,11 @@ A dropdown component that takes care of all the annoying bits for you, with adde
       </Button>
     </Dropdown>
     ```
+
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
-    import { DropdownHelper } from 'studiocms:ui/components';
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
+    import { DropdownHelper } from 'studiocms:ui/components/dropdown/client';
 
     const dropdown = new DropdownHelper('dropdown');
     ```
@@ -86,7 +85,8 @@ You can change the dropdowns position by supplying the `align` prop.
   <TabItem label="Code">
     ```astro "align='start'" showLinenumbers title="DropdownAlignStartExample.astro"
     ---
-    import { Dropdown, Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
+    import { Dropdown } from 'studiocms:ui/components/dropdown';
     ---
 
     <Dropdown 
@@ -105,8 +105,9 @@ You can change the dropdowns position by supplying the `align` prop.
     <!-- Other buttons omitted for simplicity -->
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
-    import { DropdownHelper } from 'studiocms:ui/components';
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
+    import { DropdownHelper } from 'studiocms:ui/components/dropdown/client';
 
     const dropdown = new DropdownHelper('dropdown');
     ```
@@ -130,7 +131,8 @@ You can tell the dropdown wrapper to only show the dropdown when it's children a
   <TabItem label="Code">
     ```astro "triggerOn='right'" showLinenumbers title="DropdownRightClickExample.astro"
     ---
-    import { Dropdown, Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
+    import { Dropdown } from 'studiocms:ui/components/dropdown';
     ---
 
     <Dropdown
@@ -147,8 +149,9 @@ You can tell the dropdown wrapper to only show the dropdown when it's children a
     </Dropdown>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
-    import { DropdownHelper } from 'studiocms:ui/components';
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
+    import { DropdownHelper } from 'studiocms:ui/components/dropdown/client';
 
     const dropdown = new DropdownHelper('dropdown');
     ```
@@ -199,7 +202,8 @@ No, you read that right. You can customize the options too. You can individually
   <TabItem label="Code">
     ```astro ins={7-14} showLinenumbers title="DropdownOptionsExample.astro"
     ---
-    import { Dropdown, Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
+    import { Dropdown } from 'studiocms:ui/components/dropdown';
     ---
 
     <Dropdown 
@@ -222,8 +226,9 @@ No, you read that right. You can customize the options too. You can individually
     </Dropdown>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
-    import { DropdownHelper } from 'studiocms:ui/components';
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
+    import { DropdownHelper } from 'studiocms:ui/components/dropdown/client';
 
     const dropdown = new DropdownHelper('dropdown');
     ```
@@ -240,9 +245,9 @@ The dropdown items also support icons. You can pass an icon name to the option o
       <Dropdown 
         id='icons-dropdown' 
         options={[
-          { label: 'Notifications', value: 'notifications', icon: 'bell' },
-          { label: 'Settings', value: 'settings', icon: 'cog-6-tooth' },
-          { label: 'Profile', value: 'profile', icon: 'user' },
+          { label: 'Notifications', value: 'notifications', icon: 'heroicons:bell' },
+          { label: 'Settings', value: 'settings', icon: 'heroicons:cog-6-tooth' },
+          { label: 'Profile', value: 'profile', icon: 'heroicons:user' },
         ]}
       >
         <Button color='primary'>
@@ -254,15 +259,16 @@ The dropdown items also support icons. You can pass an icon name to the option o
   <TabItem label="Code">
     ```astro ins={7-14} showLinenumbers title="DropdownIconsExample.astro"
     ---
-    import { Dropdown, Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
+    import { Dropdown } from 'studiocms:ui/components/dropdown';
     ---
 
     <Dropdown 
       id='dropdown' 
       options={[
-        { label: 'Notifications', value: 'notifications', icon: 'bell' },
-        { label: 'Settings', value: 'settings', icon: 'cog-6-tooth' },
-        { label: 'Profile', value: 'profile', icon: 'user' },
+        { label: 'Notifications', value: 'notifications', icon: 'heroicons:bell' },
+        { label: 'Settings', value: 'settings', icon: 'heroicons:cog-6-tooth' },
+        { label: 'Profile', value: 'profile', icon: 'heroicons:user' },
       ]}
     >
       <Button color='primary'>
@@ -271,8 +277,9 @@ The dropdown items also support icons. You can pass an icon name to the option o
     </Dropdown>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
-    import { DropdownHelper } from 'studiocms:ui/components';
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
+    import { DropdownHelper } from 'studiocms:ui/components/dropdown/client';
 
     const dropdown = new DropdownHelper('dropdown');
     ```
@@ -286,8 +293,9 @@ you to access some built-in functions for programmatically toggling, showing and
 dropdowns options has been clicked!
 
 ```ts twoslash showLinenumbers title="Script Tag"
-// @noErrors
-import { DropdownHelper } from 'studiocms:ui/components';
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
+import { DropdownHelper } from 'studiocms:ui/components/dropdown/client';
 
 const dropdown = new DropdownHelper('dropdown');
 

@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Center Component > renders Center component correctly 1`] = `"<div class="sui-center"> Centered Content </div>"`;

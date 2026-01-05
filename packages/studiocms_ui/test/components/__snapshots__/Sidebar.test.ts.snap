@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Sidebar Component > renders DoubleSidebar component correctly 1`] = `"<div id="sui-sidebars" class="active inner"> <div id="sui-sidebar-outer"> <p>This is some sidebar content.</p> </div> <div id="sui-sidebar-inner"> <p>This is some sidebar content.</p> </div> </div> "`;
+
+exports[`Sidebar Component > renders SingleSidebar component correctly 1`] = `"<aside id="sui-sidebar" class="astro-visbj6pb"> <p>This is some sidebar content.</p> </aside> "`;

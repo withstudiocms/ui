@@ -131,14 +131,13 @@ const defaultLabel = selected
 	: placeholder;
 ---
 
-<div
+<sui-select
 	id={`${name}-container`}
 	class="sui-select-label"
 	class:list={[disabled && "disabled", className, fullWidth && "full"]}
 	data-options={JSON.stringify(options)}
 	data-multiple={multiple ? "true" : undefined}
 	data-multiple-max={multiple && max !== undefined ? max : undefined}
-	data-id={name}
 >
 	{label && (
 		<label class="label" for={`${name}-select-btn`}>
@@ -160,11 +159,11 @@ const defaultLabel = selected
 		>
 			<span class="sui-select-value-span" id={`${name}-value-span`}>
 				{Array.isArray(selected)
-					? <div class="sui-select-badge-container">{selected.map((s) => s && <Badge class="sui-select-badge" data-value={s.value} size="sm" label={s.label} iconPosition="right" icon="x-mark" />)}</div>
+					? <div class="sui-select-badge-container">{selected.map((s) => s && <Badge class="sui-select-badge" data-value={s.value} size="sm" label={s.label} iconPosition="right" icon="heroicons:x-mark" />)}</div>
 					: selected?.label ?? defaultLabel
 				}
 			</span>
-			<Icon name="chevron-up-down" width={24} height={24} class="sui-select-chevron" />
+			<Icon name="heroicons:chevron-up-down" width={24} height={24} class="sui-select-chevron" />
 		</button>
 		<div class="sui-select-dropdown">
 			<ul class="sui-select-dropdown-list" role="listbox" id={`${name}-dropdown`}>
@@ -200,7 +199,7 @@ const defaultLabel = selected
 				const isSelected = Array.isArray(selected)
 					? selected.map((y) => y && y.value).includes(x.value)
 					: selected?.value === x.value;
-					
+
 				return (
 					<option
 						value={x.value}
@@ -219,11 +218,11 @@ const defaultLabel = selected
 		</span>
 	)}
 	{
-		multiple && Array.isArray(selected ?? []) && (		
+		multiple && Array.isArray(selected ?? []) && (
 			<div class="sui-select-badge-container-below"></div>
 		)
 	}
-</div>
+</sui-select>
 <script>
 import "studiocms:ui/scripts/select"
 </script>

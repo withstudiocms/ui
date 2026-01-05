@@ -1,0 +1,446 @@
+---
+i18nReady: false
+title: Tooltip
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PreviewCard from "~/components/PreviewCard.astro";
+import { Tooltip } from "studiocms:ui/components/tooltip";
+
+A tooltip component that will show on hover (desktop) or tap (mobile). It's used to provide additional information about an element.
+
+:::note[Note]
+Only one tooltip can be open at a time. If you open another tooltip, the previous one will close.
+:::
+
+## Usage
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip>
+        <button tabindex="0">
+          Hover or tap me
+        </button>
+        <Fragment slot="tooltip">
+          <p>This contains the tooltip information that will be shown.</p>
+        </Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip>
+      <button>
+        Hover or tap me
+      </button>
+      <Fragment slot="tooltip">
+        <p>This contains the tooltip information that will be shown.</p>
+      </Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Position
+
+The tooltip can be positioned in various ways in relation to the anchor element. The default is `auto`.
+
+The values for the position prop are:
+
+- `auto`: The tooltip will resort to the positions in this order: 'top', 'bottom', 'right', 'left'.
+- `top`: The tooltip will be positioned *above* the anchor element, otherwise fall back on this order: 'bottom', 'right', 'left'.
+- `bottom`: The tooltip will be positioned *below* the anchor element, otherwise fall back on this order: 'top', 'right', 'left'.
+- `left`: The tooltip will be positioned to the *left* of the anchor element, otherwise fall back on this order: 'right', 'top', 'bottom'.
+- `right`: The tooltip will be positioned to the *right* of the anchor element, otherwise fall back on this order: 'left', 'top', 'bottom'.
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip position="top">
+        <button>Top</button>
+        <Fragment slot="tooltip">This is a tooltip on top.</Fragment>
+      </Tooltip>
+      <Tooltip position="bottom">
+        <button>Bottom</button>
+        <Fragment slot="tooltip">This is a tooltip on bottom.</Fragment>
+      </Tooltip>
+      <Tooltip position="left">
+        <button>Left</button>
+        <Fragment slot="tooltip">This is a tooltip on left.</Fragment>
+      </Tooltip>
+      <Tooltip position="right">
+        <button>Right</button>
+        <Fragment slot="tooltip">This is a tooltip on right.</Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipPositionExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip position='top'>
+      <button>Top</button>
+      <Fragment slot="tooltip">This is a tooltip on top.</Fragment>
+    </Tooltip>
+    <Tooltip position='bottom'>
+      <button>Bottom</button>
+      <Fragment slot="tooltip">This is a tooltip on bottom.</Fragment>
+    </Tooltip>
+    <Tooltip position='left'>
+      <button>Left</button>
+      <Fragment slot="tooltip">This is a tooltip on left.</Fragment>
+    </Tooltip>
+    <Tooltip position='right'>
+      <button>Right</button>
+      <Fragment slot="tooltip">This is a tooltip on right.</Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Default State
+
+The tooltip can be set to be open by default. This is useful for debugging or when you want the tooltip to be visible without user interaction.
+
+Keep in mind, if a user interacts with another tooltip, the `defaultOpen` tooltip will close, even if it was not in view.
+
+:::note[Note]
+The `defaultOpen` prop can only be used on one tooltip at a time per page. If you set it on multiple tooltips, only the last one will be open by default.
+:::
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip defaultOpen={true}>
+        <button>Open by default</button>
+        <Fragment slot="tooltip">This tooltip is open by default.</Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipDefaultStateExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip defaultOpen={true}>
+      <button>Open by default</button>
+      <Fragment slot="tooltip">This tooltip is open by default.</Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Colors
+
+The tooltip can be styled with different colors. The default is `default`. The available colors are:
+
+- `default`
+- `primary`
+- `success`
+- `warning`
+- `danger`
+- `info`
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip color="default">
+        <button>Default</button>
+        <Fragment slot="tooltip">This is a default tooltip.</Fragment>
+      </Tooltip>
+      <Tooltip color="primary">
+        <button>Primary</button>
+        <Fragment slot="tooltip">This is a primary tooltip.</Fragment>
+      </Tooltip>
+      <Tooltip color="success">
+        <button>Success</button>
+        <Fragment slot="tooltip">This is a success tooltip.</Fragment>
+      </Tooltip>
+      <Tooltip color="warning">
+        <button>Warning</button>
+        <Fragment slot="tooltip">This is a warning tooltip.</Fragment>
+      </Tooltip>
+      <Tooltip color="danger">
+        <button>Danger</button>
+        <Fragment slot="tooltip">This is a danger tooltip.</Fragment>
+      </Tooltip>
+      <Tooltip color="info">
+        <button>Info</button>
+        <Fragment slot="tooltip">This is an info tooltip.</Fragment>
+      </Tooltip>
+      <Tooltip color="mono">
+        <button>Monochrome</button>
+        <Fragment slot="tooltip">This is an monochrome tooltip.</Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipColorsExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip color='default'>
+      <button>Default</button>
+      <Fragment slot="tooltip">This is a default tooltip.</Fragment>
+    </Tooltip>
+    <Tooltip color='primary'>
+      <button>Primary</button>
+      <Fragment slot="tooltip">This is a primary tooltip.</Fragment>
+    </Tooltip>
+    <Tooltip color='success'>
+      <button>Success</button>
+      <Fragment slot="tooltip">This is a success tooltip.</Fragment>
+    </Tooltip>
+    <Tooltip color='warning'>
+      <button>Warning</button>
+      <Fragment slot="tooltip">This is a warning tooltip.</Fragment>
+    </Tooltip>
+    <Tooltip color='danger'>
+      <button>Danger</button>
+      <Fragment slot="tooltip">This is a danger tooltip.</Fragment>
+    </Tooltip>
+    <Tooltip color='info'>
+      <button>Info</button>
+      <Fragment slot="tooltip">This is an info tooltip.</Fragment>
+    </Tooltip>
+    <Tooltip color="mono">
+      <button>Monochrome</button>
+      <Fragment slot="tooltip">This is an monochrome tooltip.</Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Variants
+
+The tooltip can be styled with different variants. The default is `default`. The available variants are:
+
+- `default`
+- `outlined`
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip variant="default">
+        <button>Default</button>
+        <Fragment slot="tooltip">This is a default tooltip.</Fragment>
+      </Tooltip>
+      <Tooltip variant="outlined">
+        <button>Outlined</button>
+        <Fragment slot="tooltip">This is an outlined tooltip.</Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipVariantsExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip variant='default'>
+      <button>Default</button>
+      <Fragment slot="tooltip">This is a default tooltip.</Fragment>
+    </Tooltip>
+    <Tooltip variant='outlined'>
+      <button>Outlined</button>
+      <Fragment slot="tooltip">This is an outlined tooltip.</Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Gap
+
+The tooltip can be configured to have a gap between the anchor element and the tooltip. The default is 8px.
+
+(Yes, this works with negative values too!)
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip gap={24}>
+        <button>Gap: 24px</button>
+        <Fragment slot="tooltip">This tooltip has a 24px gap.</Fragment>
+      </Tooltip>
+      <Tooltip>
+        <button>Default Gap</button>
+        <Fragment slot="tooltip">This tooltip has the default 8px gap.</Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipGapExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip gap={24}>
+      <button>Gap: 24px</button>
+      <Fragment slot="tooltip">This tooltip has a 24px gap.</Fragment>
+    </Tooltip>
+    <Tooltip>
+      <button>Default Gap</button>
+      <Fragment slot="tooltip">This tooltip has the default 8px gap.</Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Delays
+
+The tooltip can be configured to have delays for showing and hiding. The default is 0ms for showing and 0ms for hiding.
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip enterDelay={500} exitDelay={0}>
+        <button>Enter Delay: 500ms</button>
+        <Fragment slot="tooltip">This tooltip has a 500ms enter delay.</Fragment>
+      </Tooltip>
+      <Tooltip enterDelay={0} exitDelay={500}>
+        <button>Exit Delay: 500ms</button>
+        <Fragment slot="tooltip">This tooltip has a 500ms exit delay.</Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipDelaysExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip enterDelay={500} exitDelay={0}>
+      <button>Enter Delay: 500ms</button>
+      <Fragment slot="tooltip">This tooltip has a 500ms enter delay.</Fragment>
+    </Tooltip>
+    <Tooltip enterDelay={0} exitDelay={500}>
+      <button>Exit Delay: 500ms</button>
+      <Fragment slot="tooltip">This tooltip has a 500ms exit delay.</Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Hover Activation Only
+
+By default, the tooltip will show on hover or tap. You can disable the tap activation by setting the `hoverOnly` prop to `true`.
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip hoverOnly>
+        <button>Hover Only</button>
+        <Fragment slot="tooltip">This tooltip will only show on hover.</Fragment>
+      </Tooltip>
+      <Tooltip>
+        <button>Hover or Tap</button>
+        <Fragment slot="tooltip">This tooltip will show on hover or tap.</Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipHoverOnlyExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip hoverOnly>
+      <button>Hover Only</button>
+      <Fragment slot="tooltip">This tooltip will only show on hover.</Fragment>
+    </Tooltip>
+    <Tooltip>
+      <button>Hover or Tap</button>
+      <Fragment slot="tooltip">This tooltip will show on hover or tap.</Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Animation
+
+By default, the tooltip will fade in when shown and out when hidden. You can disable this by setting the `animate` prop to `false`.
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip animate={false}>
+        <button>Animate: false</button>
+        <Fragment slot="tooltip">This tooltip will not animate.</Fragment>
+      </Tooltip>
+      <Tooltip>
+        <button>Animate: true</button>
+        <Fragment slot="tooltip">This tooltip will animate.</Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipAnimateExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip animate={false}>
+      <button>Animate: false</button>
+      <Fragment slot="tooltip">This tooltip will not animate.</Fragment>
+    </Tooltip>
+    <Tooltip>
+      <button>Animate: true</button>
+      <Fragment slot="tooltip">This tooltip will animate.</Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Pointer
+
+By default, the tooltip will show a pointer to indicate where the tooltip is pointing. You can disable this by setting the `pointer` prop to `false`.
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Tooltip pointer={false}>
+        <button>Pointer: false</button>
+        <Fragment slot="tooltip">This tooltip will not show a pointer.</Fragment>
+      </Tooltip>
+      <Tooltip>
+        <button>Pointer: true</button>
+        <Fragment slot="tooltip">This tooltip will show a pointer.</Fragment>
+      </Tooltip>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="TooltipPointerExample.astro"
+    ---
+    import { Tooltip } from 'studiocms:ui/components/tooltip';
+    ---
+
+    <Tooltip pointer={false}>
+      <button>Pointer: false</button>
+      <Fragment slot="tooltip">This tooltip will not show a pointer.</Fragment>
+    </Tooltip>
+    <Tooltip>
+      <button>Pointer: true</button>
+      <Fragment slot="tooltip">This tooltip will show a pointer.</Fragment>
+    </Tooltip>
+    ```
+  </TabItem>
+</Tabs>
+
+### Programmatic Control
+
+You can control the tooltip programmatically by accessing the `sui.tooltips` object on the window. The following methods are available:
+
+- `sui.tooltips.get(tooltipId: string)`: Get the tooltip instance by its ID, if it exists.
+- `sui.tooltips.show(tooltipId: string)`: Opens the tooltip with the given ID, if it exists.
+- `sui.tooltips.hide(tooltipId: string)`: Closes the tooltip with the given ID.

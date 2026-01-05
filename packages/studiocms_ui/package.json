@@ -1,6 +1,6 @@
 {
   "name": "@studiocms/ui",
-  "version": "0.4.17",
+  "version": "1.0.0-beta.6",
   "description": "The UI library for StudioCMS. Includes the layouts & components we use to build StudioCMS.",
   "repository": {
     "type": "git",
@@ -36,8 +36,18 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "build-scripts build 'src/**/*.{ts,css}' --build-tsconfig",
-    "dev": "build-scripts dev 'src/**/*.{ts,css}' --build-tsconfig"
+    "delete:dist": "node -e \"import { rmSync } from 'fs'; rmSync('./dist', { recursive: true, force: true });\"",
+    "build": "pnpm delete:dist && buildkit build 'src/**/*.{ts,d.ts,css,astro,stub}' --tsconfig=tsconfig.build.json",
+    "dev": "buildkit dev 'src/**/*.{ts,d.ts,css,astro,stub}' --tsconfig=tsconfig.build.json",
+    "playwright:setup": "pnpm exec playwright install --with-deps",
+    "test-server": "pnpm --filter @test-fixture/server dev",
+    "test:vitest": "vitest",
+    "test:vitest:run": "vitest run",
+    "test:vitest:ui": "vitest --ui",
+    "test:vitest:coverage": "vitest run --coverage",
+    "test:playwright": "pnpm exec playwright test",
+    "view:playwright": "pnpm exec playwright show-report",
+    "ci:coverage": "pnpm test:vitest:coverage"
   },
   "exports": {
     ".": {
@@ -54,19 +64,25 @@
     "./types": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/types/index.js"
+    },
+    "./v/types": {
+      "types": "./dist/virtuals.d.ts",
+      "default": "./dist/virtuals.d.js"
     }
   },
   "dependencies": {
     "@iconify-json/heroicons": "catalog:",
     "@iconify/types": "^2.0.0",
     "astro-transition-event-polyfill": "^1.1.0",
-    "pathe": "catalog:"
+    "astro-integration-kit": "^0.19.0"
   },
   "peerDependencies": {
     "astro": "catalog:peers",
     "vite": "catalog:peers"
   },
   "devDependencies": {
-    "typescript": "catalog:"
+    "astro": "catalog:",
+    "typescript": "catalog:",
+    "@types/node": "catalog:"
   }
 }

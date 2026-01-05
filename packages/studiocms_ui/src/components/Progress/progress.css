@@ -1,7 +1,7 @@
 .sui-progress {
 	width: 100%;
 	height: 1rem;
-	border: 1px solid hsl(var(--border));
+	border: 1px solid var(--border);
 	border-radius: var(--radius-sm);
 	overflow: hidden;
 }
@@ -9,27 +9,27 @@
 .sui-progress-slider {
 	height: 100%;
 	width: 0;
-	transition: all .75s ease;
+	transition: all 0.75s ease;
 	border-radius: var(--radius-sm);
-	background-color: hsl(var(--primary-base));
+	background-color: var(--primary-base);
 }
 
 .sui-progress.success .sui-progress-slider {
-	background-color: hsl(var(--success-base));
+	background-color: var(--success-base);
 }
 
 .sui-progress.warning .sui-progress-slider {
-	background-color: hsl(var(--warning-base));
+	background-color: var(--warning-base);
 }
 
 .sui-progress.danger .sui-progress-slider {
-	background-color: hsl(var(--danger-base));
+	background-color: var(--danger-base);
 }
 
 .sui-progress.info .sui-progress-slider {
-	background-color: hsl(var(--info-base));
+	background-color: var(--info-base);
 }
 
 .sui-progress.monochrome .sui-progress-slider {
-	background-color: hsl(var(--mono-base));
+	background-color: var(--mono-base);
 }

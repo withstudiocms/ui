@@ -31,7 +31,8 @@ A dropdown component that takes care of all the annoying bits for you, with adde
   <TabItem label="Code">
     ```astro showLinenumbers title="ModalExample.astro"
     ---
-    import { Modal, Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
+    import { Modal } from 'studiocms:ui/components/modal';
     ---
 
     <Modal id='modal'>
@@ -43,8 +44,9 @@ A dropdown component that takes care of all the annoying bits for you, with adde
     </Button>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
-    import { ModalHelper } from 'studiocms:ui/components';
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
+    import { ModalHelper } from 'studiocms:ui/components/modal/client';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
     ```
@@ -99,7 +101,8 @@ You can change the modal's size to one of three presets.
   <TabItem label="Code">
     ```astro /size='[a-z]+'/ showLinenumbers title="ModalSizesExample.astro"
     ---
-    import { Modal, Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
+    import { Modal } from 'studiocms:ui/components/modal';
     ---
 
     <Modal id='modal' size='sm'>
@@ -117,8 +120,9 @@ You can change the modal's size to one of three presets.
     <!-- Other modals and triggers omitted for simplicity -->
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
-    import { ModalHelper } from 'studiocms:ui/components';
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
+    import { ModalHelper } from 'studiocms:ui/components/modal/client';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
     ```
@@ -149,7 +153,8 @@ You can change whether a modal can be dismissed by clicking outside of it via th
   <TabItem label="Code">
     ```astro "dismissable={false}" showLinenumbers title="ModalDismissableExample.astro"
     ---
-    import { Modal, Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
+    import { Modal } from 'studiocms:ui/components/modal';
     ---
 
     <Modal id='modal' dismissable={false}>
@@ -165,8 +170,9 @@ You can change whether a modal can be dismissed by clicking outside of it via th
     </Button>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
-    import { ModalHelper } from 'studiocms:ui/components';
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
+    import { ModalHelper } from 'studiocms:ui/components/modal/client';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
     ```
@@ -199,7 +205,8 @@ Modals support both a "cancel" and a "confirm" button.
   <TabItem label="Code">
     ```astro "cancelButton='Cancel' actionButton='Confirm'" showLinenumbers title="ModalButtonsExample.astro"
     ---
-    import { Modal, Button } from 'studiocms:ui/components';
+    import { Button } from 'studiocms:ui/components/button';
+    import { Modal } from 'studiocms:ui/components/modal';
     ---
 
     <Modal id='modal' cancelButton='Cancel' actionButton='Confirm'>
@@ -215,8 +222,9 @@ Modals support both a "cancel" and a "confirm" button.
     </Button>
     ```
     ```ts twoslash showLinenumbers title="Script Tag"
-    // @noErrors
-    import { ModalHelper } from 'studiocms:ui/components';
+    /// <reference types="@studiocms/ui/v/types" />
+    // ---cut---
+    import { ModalHelper } from 'studiocms:ui/components/modal/client';
 
     const modal = new ModalHelper('modal', 'modal-trigger');
     ```
@@ -228,7 +236,8 @@ and `color` keys defined to change the way the buttons look:
 
 ```astro "cancelButton={{ label: 'Cancel', color: 'default' }} actionButton={{ label: 'Confirm', color: 'danger' }}" showLinenumbers title="ModalButtonsExample.astro"
 ---
-import { Modal, Button } from 'studiocms:ui/components';
+import { Button } from 'studiocms:ui/components/button';
+import { Modal } from 'studiocms:ui/components/modal';
 ---
 
 <Modal
@@ -253,8 +262,9 @@ import { Modal, Button } from 'studiocms:ui/components';
 If you want to implement functionality based on which of the buttons is clicked, you can register a callback on each of them. 
 
 ```ts twoslash ins={5-7,9-11} showLinenumbers title="Script Tag"
-// @noErrors
-import { ModalHelper } from 'studiocms:ui/components';
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
+import { ModalHelper } from 'studiocms:ui/components/modal/client';
 
 const modal = new ModalHelper('modal', 'modal-trigger');
 
@@ -275,8 +285,9 @@ This only changes their types, not their text.
 By using the `registerConfirmCallback` function, you can retrieve the `FormData` after the `Confirm` button is clicked. Any inputs in the modal will be included.
 
 ```ts twoslash "formData" showLinenumbers title="Script Tag"
-// @noErrors
-import { ModalHelper } from 'studiocms:ui/components';
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
+import { ModalHelper } from 'studiocms:ui/components/modal/client';
 
 const modal = new ModalHelper('modal', 'modal-trigger');
 
@@ -290,8 +301,9 @@ modal.registerConfirmCallback((formData) => {
 You can add multiple triggers to your modal by using the `bindTrigger` function in combination with an element's ID.
 
 ```ts twoslash ins={4-5} showLinenumbers title="Script Tag"
-// @noErrors
-import { ModalHelper } from 'studiocms:ui/components';
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
+import { ModalHelper } from 'studiocms:ui/components/modal/client';
 
 const modal = new ModalHelper('modal', 'modal-trigger');
 modal.bindTrigger('modal-trigger-two');
@@ -303,8 +315,9 @@ modal.bindTrigger('modal-trigger-three');
 Similar to [dropdowns](/customizing/studiocms-ui/components/dropdown), modals can be shown and hidden programatically:
 
 ```ts twoslash ins={5-6} showLinenumbers title="Script Tag"
-// @noErrors
-import { ModalHelper } from 'studiocms:ui/components';
+/// <reference types="@studiocms/ui/v/types" />
+// ---cut---
+import { ModalHelper } from 'studiocms:ui/components/modal/client';
 
 const modal = new ModalHelper('modal', 'modal-trigger');
 

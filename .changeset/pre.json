@@ -1,0 +1,35 @@
+{
+  "mode": "exit",
+  "tag": "beta",
+  "initialVersions": {
+    "docs": "0.0.1",
+    "@studiocms/ui": "0.4.17",
+    "@test-fixture/server": "0.0.1"
+  },
+  "changesets": [
+    "calm-teachers-shop",
+    "clean-zoos-invite",
+    "cuddly-donuts-move",
+    "dull-tomatoes-peel",
+    "eighty-planes-judge",
+    "famous-cycles-sell",
+    "fifty-apricots-beam",
+    "fifty-pumpkins-help",
+    "flat-icons-drive",
+    "gentle-elephants-raise",
+    "green-bags-rhyme",
+    "honest-days-hammer",
+    "khaki-mayflies-act",
+    "mean-carrots-accept",
+    "moody-seas-perform",
+    "nice-ants-visit",
+    "silver-poets-fetch",
+    "sixty-rice-peel",
+    "slow-fishes-remain",
+    "sour-readers-drum",
+    "spotty-keys-tickle",
+    "thirty-snails-do",
+    "twelve-otters-pull",
+    "witty-yaks-guess"
+  ]
+}

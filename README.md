@@ -4,9 +4,7 @@
 [![Formatted with Biome](https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev/)
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
 
-This is the UI library that we use to build StudioCMS.
-
-To see how to get started, check out [the documentation](https://ui.studiocms.dev).
+This is the UI library that we use to build StudioCMS. To see how to get started, check out [the documentation](https://ui.studiocms.dev).
 
 ## Contributing
 
