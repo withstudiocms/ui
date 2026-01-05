@@ -1,3 +1,14 @@
+/**
+ * Triple slash references for ambient types
+ * 
+ * @remarks
+ * The references are duplicated here to ensure that they are included in the
+ * emitted declaration files. as well as available in the source code for IDEs
+ * during development.
+ */
+
+/// <reference path="./events.d.ts" />
+/// <reference path="./virtuals.d.ts" />
 /// <reference path="../dist/events.d.ts" preserve="true" />
 /// <reference path="../dist/virtuals.d.ts" preserve="true" />
 
@@ -247,10 +258,10 @@ export default function integration(options: Options = {}): AstroIntegration {
 						collections:
 							icons.collections && Object.keys(icons.collections).length > 0
 								? `${Object.keys(icons.collections)
-										.map((collection) => {
-											return `'${collection}': import('@studiocms/ui/types').IconifyJSON;`;
-										})
-										.join('\n')}`
+									.map((collection) => {
+										return `'${collection}': import('@studiocms/ui/types').IconifyJSON;`;
+									})
+									.join('\n')}`
 								: 'export const collections: Record<string, import("@studiocms/ui/types").IconifyJSON>;',
 						availableIcons: `('${icons.availableIcons.join("'\n | '")}')[]`,
 						iconCollections: `('${icons.collectionNames.join("'\n | '")}')[]`,
