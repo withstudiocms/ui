@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 1.0.0-beta.6
+
+### Patch Changes
+
+- [#140](https://github.com/withstudiocms/ui/pull/140) [`e70e8b4`](https://github.com/withstudiocms/ui/commit/e70e8b425454b9276bb7fe22905ef40724f36e67) Thanks [@louisescher](https://github.com/louisescher)! - Adds a missing background color to modals
+
 ## 1.0.0-beta.5
 
 ### Patch Changes
