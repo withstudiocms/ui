@@ -1,11 +1,10 @@
-name: CI - Push (main, v1.0.0)
+name: CI - Push main
 
 on:
   workflow_dispatch:
   push:
     branches:
       - main
-      - v1.0.0
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
