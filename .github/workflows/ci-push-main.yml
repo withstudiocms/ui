@@ -8,76 +8,54 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-permissions:
-  issues: write
-  repository-projects: read
-  contents: write
-  pull-requests: write
-  pages: write
-  id-token: write
+permissions: {}
 
 jobs:
-    format:
-      runs-on: ubuntu-latest
-      env:
-        NODE_OPTIONS: "--max_old_space_size=4096"
-      steps:
-        - name: Check out code using Git
-          uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-          with:
-            ref: ${{ github.head_ref || github.ref_name }}
-            token: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
-  
-        - name: Install Tools & Dependencies
-          uses: withstudiocms/automations/.github/actions/install@main
-  
-        - name: Format code
-          run: pnpm run lint:fix
-  
-        - name: Commit changes
-          uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5058a842 # v5
-          with:
-            commit_message: '[ci] lint'
-            branch: ${{ github.head_ref || github.ref_name }}
-            commit_user_name: studiocms-no-reply
-            commit_user_email: no-reply@studiocms.dev
-            commit_author: StudioCMS <no-reply@studiocms.dev>
+  format:
+    name: Format
+    permissions:
+      contents: write
+      id-token: write
+      issues: write
+      pull-requests: write
+    secrets: inherit
+    uses: withstudiocms/automations/.github/workflows/format.yml@fe2d43b13c8a63e34ba8b0b9e16008149d8af55f # main
 
-    changeset-release:
-      name: Changeset Release
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Repo
-          uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+  todo:
+    name: TODOs
+    permissions:
+      contents: write
+      issues: write
+    secrets: inherit
+    uses: withstudiocms/automations/.github/workflows/todo.yml@fe2d43b13c8a63e34ba8b0b9e16008149d8af55f # main
 
-        - name: Install Tools & Dependencies
-          uses: withstudiocms/automations/.github/actions/install@main
+  release:
+    name: Release
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    secrets: inherit
+    uses: withstudiocms/automations/.github/workflows/release.yml@fe2d43b13c8a63e34ba8b0b9e16008149d8af55f # main
+    with:
+      build-cmd: "pnpm ci:build"
+      RoleMentionId: '1309310416362537020'
 
-        - name: Build packages
-          run: pnpm ci:prepublish
+  mergebot:
+    name: CI - Merge Bot
+    if: github.repository_owner == 'withstudiocms' && github.event.head_commit.message != '[ci] lint'
+    uses: withstudiocms/automations/.github/workflows/mergebot.yml@fe2d43b13c8a63e34ba8b0b9e16008149d8af55f # main
+    secrets:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_MERGEBOT }}
 
-        - name: Create Release Pull Request or Publish to npm
-          id: changesets
-          uses: changesets/action@v1
-          with:
-            setupGitUser: true
-            commit: "👷 [ci]: Version Packages"
-            title: "👷 [ci]: Ready for Release"
-            version: pnpm ci:version
-            publish: pnpm ci:publish
-          env:
-            GITHUB_TOKEN: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
-            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-        - name: Add Label to CI PR
-          if: ${{ steps.changesets.outputs.hasChangesets == 'true' }}
-          run: gh pr edit "$PR_URL" --add-label "ci"
-          env:
-            PR_URL: ${{ steps.changesets.outputs.pull_request_url }}
-            GITHUB_TOKEN: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
-          
-    mergebot:
-      if: ${{ github.repository_owner == 'withstudiocms' && github.event_name == 'push' && github.event.head_commit.message != '[ci] lint' && !contains(github.event.head_commit.message, 'Version Packages') && github.actor != 'dependabot[bot]' }}
-      uses: withstudiocms/automations/.github/workflows/mergebot.yml@main
-      secrets:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_MERGEBOT }}
+  preview-main:
+    name: Continuous Deployment Snapshot
+    permissions:
+      contents: read
+      id-token: write
+      issues: write
+      pull-requests: write
+    secrets: inherit
+    uses: withstudiocms/automations/.github/workflows/preview.yml@fe2d43b13c8a63e34ba8b0b9e16008149d8af55f # main
+    with:
+      build-cmd: "pnpm ci:build"
