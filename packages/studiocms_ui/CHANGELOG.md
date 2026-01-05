@@ -1,5 +1,103 @@
 # @studiocms/ui
 
+## 1.0.0
+
+### Major Changes
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Moves the following helpers into their own virtual modules:
+
+  - `studiocms:ui/components/toaster/client` - `toast`
+  - `studiocms:ui/components/modal/client` - `ModalHelper`
+  - `studiocms:ui/components/dropdown/client` - `DropdownHelper`
+  - `studiocms:ui/components/progress/client` - `ProgressHelper`
+  - `studiocms:ui/components/sidebar/client` - `SingleSidebarHelper, DoubleSidebarHelper`
+
+  There is also a new `studiocms:ui/components/client` joined module that contains all the above component helpers.
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Update Icon component to utilize all iconifyJSON icons that have been passed through into the config
+
+  ### Breaking Changes
+
+  - Default Icon names are now prefixed with `heroicons:` instead of just the icons name. This allows user-defined icons to be used without conflicting with the pre-shipped icons.
+
+### Minor Changes
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Colors have been adjusted to look better for all components. Badge variants now default to "outlined" and the "default" value has been deprecated. The deprecation was due to the badges failing WGAG AAA guidelines. All projects using the "default" variant should be updated to use "outlined" instead.
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Introduce individual component virtual exports alongside the bundled barrel virtual export `'studiocms:ui/components'`
+
+  You can now import for example `Button` component from `studiocms:ui/components/button`
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Updates the Tabs components to optionally use a custom ID
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Migrate from injected types to ambient types for static virtual modules
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Adds a skeleton loading state component
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Removes ThemeToggle as it was causing a error when added to the virtual module, it is now recommended to use the ThemeHelper directly
+
+### Patch Changes
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Refactors the select components into web components
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Changes the inputs icon color to var(--text-muted)
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Fixes #91, alert type is respected and shows appropriate colors
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Fixes the focus outline of buttons within groups sometimes being hidden behind other buttons in the same group.
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Fixes toggle colors, adds new "gray" color for toggle circles, and adds a light variant for the default flat colors.
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Fixes Select components UI bug, where list items had no background and showed bullet points
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - - Refactored the accordion component so it works with the Tabs component, and with nested accordions
+
+  - Refactored the Tabs component to support nested tabs
+  - Added a new `active` prop to the Tabs component to set the initial active tab
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Fixes an issue where the toaster HTML Element would have an unnecessary comma attribute due to a typo.
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Changes the way colors are declared to allow for a better customization experience.
+
+  Before, we would use raw HSL values in order to be able to modify them later on:
+
+  ```css
+  :root {
+    --background-base: 0 0% 6%;
+  }
+  ```
+
+  This introduces an unnecessary hurdle to customization, since most other libraries ship with either their own color values and spaces or a different approach entirely. Thus, the goal of this PR is to replace this approach with a simpler one. We will now default to HSL functions instead of the raw values:
+
+  ```css
+  :root {
+    --background-base: hsl(0 0% 6%);
+  }
+  ```
+
+  Migrating from this can be a little tedious if the old system was used in custom components. You can use this regular expression with VSCode's (or any other IDE's) search & replace feature to replace all instances of the old syntax with the new:
+
+  **Search Value**: `hsl[a]?\((var\([A-Za-z-\d]+\))\)`
+  **Replace Value**: `$1`
+
+  Please make sure to manually search for `hsl(var(` and `hsla(var(` after running the above to make sure all previous values have been replaced.
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Fixes buttons within dropdowns not displaying properly within a group
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - adds the tooltip component
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Adds optional icons and help texts to inputs
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Improve icon handling and processing, allowing icon sets defined in the config to also use `-` in their name (e.g. 'simple-icons')
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Fixed undeclared css variables for flat button style
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Fixes ambient type declarations
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Adds StudioCMS Typography using a `.prose` class
+
+- [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Adds a missing background color to modals
+
 ## 1.0.0-beta.6
 
 ### Patch Changes
