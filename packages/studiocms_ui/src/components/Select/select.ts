@@ -56,8 +56,6 @@ export class SUISelectElement extends HTMLElement {
 		this.dropdown = this.querySelector<HTMLDivElement>('.sui-select-dropdown')!;
 		this.select = this.querySelector<HTMLSelectElement>('select')!;
 
-		// TODO(louisescher): This adds one listener per select at the moment.
-		// I'm unsure if this makes sense to keep for the full release, will need testing.
 		document.addEventListener('click', ({ target }) => {
 			if (this.dropdown?.classList.contains('active') || !target) {
 				return;
