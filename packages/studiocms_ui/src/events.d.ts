@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/correctness/noUnusedVariables: Global augments */
+
 /**
  * CustomEventMap defines the custom events used in the application.
  *
@@ -37,6 +39,18 @@ interface SuiTooltipApi {
 	 * @param id The ID of the tooltip container element.
 	 */
 	hide: (id: string) => void;
+}
+
+interface Window {
+	/**
+	 * The StudioCMS UI API, which includes various tools and utilities for the UI.
+	 */
+	sui: {
+		/**
+		 * The tooltip API, which provides methods for managing tooltips in the UI.
+		 */
+		tooltips: SuiTooltipApi;
+	};
 }
 
 /**
@@ -88,17 +102,5 @@ declare global {
 		 * @param ev - The custom event to be dispatched.
 		 */
 		dispatchEvent<K extends keyof CustomEventMap>(ev: CustomEventMap[K]): void;
-	}
-
-	interface Window {
-		/**
-		 * The StudioCMS UI API, which includes various tools and utilities for the UI.
-		 */
-		sui: {
-			/**
-			 * The tooltip API, which provides methods for managing tooltips in the UI.
-			 */
-			tooltips: SuiTooltipApi;
-		};
 	}
 }

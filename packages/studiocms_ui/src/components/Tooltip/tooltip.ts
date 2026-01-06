@@ -327,7 +327,6 @@ function loadTooltips() {
 		const anchor = tooltipInstance.getAnchor();
 		const popup = tooltipInstance.tooltip;
 
-		// @ts-expect-error
 		window.sui.tooltips.instances.set(tooltipInstance.container.id, tooltipInstance);
 
 		anchor.addEventListener('mouseenter', () => {
@@ -394,11 +393,8 @@ function loadTooltips() {
 	});
 }
 
-// TODO: Investigate why global type definitions are not being recognized
-// @ts-expect-error
 window.sui = window.sui ?? {};
 
-// @ts-expect-error
 window.sui.tooltips = {
 	instances: new Map<string, Tooltip>(),
 
