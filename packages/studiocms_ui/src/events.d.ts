@@ -39,6 +39,19 @@ interface SuiTooltipApi {
 	hide: (id: string) => void;
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: This is being used as a global augmentation
+interface Window {
+	/**
+	 * The StudioCMS UI API, which includes various tools and utilities for the UI.
+	 */
+	sui: {
+		/**
+		 * The tooltip API, which provides methods for managing tooltips in the UI.
+		 */
+		tooltips: SuiTooltipApi;
+	};
+}
+
 /**
  * Extends the global `Document` interface to include custom event handling methods.
  *
@@ -88,17 +101,5 @@ declare global {
 		 * @param ev - The custom event to be dispatched.
 		 */
 		dispatchEvent<K extends keyof CustomEventMap>(ev: CustomEventMap[K]): void;
-	}
-
-	interface Window {
-		/**
-		 * The StudioCMS UI API, which includes various tools and utilities for the UI.
-		 */
-		sui: {
-			/**
-			 * The tooltip API, which provides methods for managing tooltips in the UI.
-			 */
-			tooltips: SuiTooltipApi;
-		};
 	}
 }
