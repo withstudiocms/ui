@@ -56,7 +56,7 @@ class Tooltip {
 		try {
 			const parsedOptions = jsonOptions ? (JSON.parse(jsonOptions) as Record<string, string>) : {};
 			options = { ...options, ...parsedOptions };
-		} catch { }
+		} catch {}
 
 		return options;
 	}
