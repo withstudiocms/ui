@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/correctness/noUnusedVariables: Global augments */
+
 /**
  * CustomEventMap defines the custom events used in the application.
  *
@@ -39,7 +41,6 @@ interface SuiTooltipApi {
 	hide: (id: string) => void;
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: This is being used as a global augmentation
 interface Window {
 	/**
 	 * The StudioCMS UI API, which includes various tools and utilities for the UI.
