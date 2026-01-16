@@ -11,68 +11,59 @@ describe("Alert Component", () => {
     expect(result).toMatchSnapshot();
   });
 
-  test.for([
-    { variant: "default" },
-    { variant: "success" },
-    { variant: "danger" },
-    { variant: "info" },
-    { variant: "warning" },
-    { variant: "mono" },
-  ])("renders Alert with variant", async (props, { renderComponent }) => {
-    const result = await renderComponent(Alert, "Alert", {
-      props: { title: "Test Alert", ...props },
-      slots: { default: "Test alert content" },
+  test("renders Alert component with different variants", async ({ renderComponent }) => {
+    const variants = ["default", "success", "danger", "info", "warning", "mono"];
+    for (const variant of variants) {
+      const result = await renderComponent(Alert, `Alert-${variant}`, {
+        props: { title: `${variant} Alert`, variant },
+        slots: { default: `This is a ${variant} alert message.` },
+      });
+      expect(result).toMatchSnapshot();
+    }
+  });
+
+  test("renders Alert with custom title", async ({ renderComponent }) => {
+    const titles = ["Important Notice", "Warning!", "Success Message"];
+    for (const title of titles) {
+      const result = await renderComponent(Alert, `Alert-title-${title.replace(/\s+/g, "-")}`, {
+        props: { title },
+        slots: { default: "Alert content" },
+      });
+      expect(result).toMatchSnapshot();
+    }
+  });
+
+  test("renders Alert with content slot", async ({ renderComponent }) => {
+    const result = await renderComponent(Alert, "Alert-with-content", {
+      props: { title: "Alert Title" },
+      slots: { default: "This is the alert message content with details." },
     });
     expect(result).toMatchSnapshot();
   });
 
-  test("renders Alert with default variant when not specified", async ({ renderComponent }) => {
-    const result = await renderComponent(Alert, "Alert", {
-      props: { title: "Test Alert" },
-      slots: { default: "Test alert content" },
+  test("renders Alert with rich HTML content", async ({ renderComponent }) => {
+    const richContent =
+      "<p>Paragraph text</p><ul><li>Item 1</li><li>Item 2</li></ul><strong>Bold text</strong>";
+    const result = await renderComponent(Alert, "Alert-rich-content", {
+      props: { title: "Alert with Rich Content", variant: "info" },
+      slots: { default: richContent },
     });
-    expect(result).toContain('data-variant="default"');
+    expect(result).toMatchSnapshot();
   });
 
-  test("renders Alert with custom title", async ({ renderComponent }) => {
-    const customTitle = "Important Notification";
-    const result = await renderComponent(Alert, "Alert", {
-      props: { title: customTitle },
-      slots: { default: "Test alert content" },
-    });
-    expect(result).toContain(customTitle);
-  });
-
-  test("renders Alert with content slot", async ({ renderComponent }) => {
-    const contentText = "This is the alert message content";
-    const result = await renderComponent(Alert, "Alert", {
-      props: { title: "Test Alert" },
-      slots: { default: contentText },
-    });
-    expect(result).toContain(contentText);
-  });
-
-  test("includes correct icon based on variant", async ({ renderComponent }) => {
-    const variants = [
-      { variant: "default", icon: "heroicons:information-circle" },
-      { variant: "success", icon: "heroicons:check-circle" },
-      { variant: "danger", icon: "heroicons:exclamation-circle" },
-      { variant: "info", icon: "heroicons:information-circle" },
-      { variant: "warning", icon: "heroicons:exclamation-triangle" },
-      { variant: "mono", icon: "heroicons:information-circle" },
-    ];
-
-    for (const { variant, icon } of variants) {
-      const result = await renderComponent(Alert, "Alert", {
-        props: { title: "Test Alert", variant: variant as any },
+  test("renders Alert with correct data-variant attribute", async ({ renderComponent }) => {
+    const variants = ["default", "success", "danger", "info", "warning", "mono"];
+    for (const variant of variants) {
+      const result = await renderComponent(Alert, `Alert-data-variant-${variant}`, {
+        props: { title: "Test Alert", variant },
         slots: { default: "Test content" },
       });
-      expect(result).toContain("sui-alert-icon");
+      expect(result).toContain(`data-variant="${variant}"`);
     }
   });
 
-  test("has proper CSS classes", async ({ renderComponent }) => {
-    const result = await renderComponent(Alert, "Alert", {
+  test("renders Alert with correct CSS classes", async ({ renderComponent }) => {
+    const result = await renderComponent(Alert, "Alert-css-classes", {
       props: { title: "Test Alert" },
       slots: { default: "Test content" },
     });
@@ -81,5 +72,13 @@ describe("Alert Component", () => {
     expect(result).toContain("sui-alert-icon");
     expect(result).toContain("sui-alert-title");
     expect(result).toContain("sui-alert-content");
+  });
+
+  test("renders Alert with default variant when not specified", async ({ renderComponent }) => {
+    const result = await renderComponent(Alert, "Alert-default-variant", {
+      props: { title: "Test Alert" },
+      slots: { default: "Test content" },
+    });
+    expect(result).toContain('data-variant="default"');
   });
 });

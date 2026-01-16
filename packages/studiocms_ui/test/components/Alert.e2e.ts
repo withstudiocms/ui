@@ -7,52 +7,69 @@ test.describe("Alert Component", () => {
   });
 
   test("Basic functionality", async ({ page }) => {
-    const alert = page.locator(".sui-alert").first();
+    const alert = page.locator("#basic-test .sui-alert");
     await expect(alert).toBeVisible();
-    await expect(page.getByText("Alert Component Test")).toBeVisible();
-    await expect(page.getByText("This is a basic alert component test.")).toBeVisible();
+    await expect(alert.locator(".sui-alert-title")).toHaveText("Alert Component Test");
+    await expect(alert.locator(".sui-alert-content")).toContainText(
+      "This is a basic alert component test.",
+    );
+  });
+
+  test("Renders all variant alerts", async ({ page }) => {
+    const variantSection = page.locator("#variant-test");
+
+    await expect(variantSection.locator('[data-variant="default"] .sui-alert-title')).toHaveText(
+      "Default Alert",
+    );
+    await expect(variantSection.locator('[data-variant="success"] .sui-alert-title')).toHaveText(
+      "Success Alert",
+    );
+    await expect(variantSection.locator('[data-variant="danger"] .sui-alert-title')).toHaveText(
+      "Danger Alert",
+    );
+    await expect(variantSection.locator('[data-variant="info"] .sui-alert-title')).toHaveText(
+      "Info Alert",
+    );
+    await expect(variantSection.locator('[data-variant="warning"] .sui-alert-title')).toHaveText(
+      "Warning Alert",
+    );
+    await expect(variantSection.locator('[data-variant="mono"] .sui-alert-title')).toHaveText(
+      "Monochrome Alert",
+    );
+  });
+
+  test("Renders alert content correctly", async ({ page }) => {
+    const variantSection = page.locator("#variant-test");
+
+    await expect(
+      variantSection.locator('[data-variant="default"] .sui-alert-content'),
+    ).toContainText("This is a default alert message.");
+    await expect(
+      variantSection.locator('[data-variant="success"] .sui-alert-content'),
+    ).toContainText("This is a success alert message.");
+    await expect(
+      variantSection.locator('[data-variant="danger"] .sui-alert-content'),
+    ).toContainText("This is a danger alert message.");
+    await expect(variantSection.locator('[data-variant="info"] .sui-alert-content')).toContainText(
+      "This is an info alert message.",
+    );
+    await expect(
+      variantSection.locator('[data-variant="warning"] .sui-alert-content'),
+    ).toContainText("This is a warning alert message.");
+    await expect(variantSection.locator('[data-variant="mono"] .sui-alert-content')).toContainText(
+      "This is a monochrome alert message.",
+    );
   });
 
   test("Renders with correct variant icons", async ({ page }) => {
-    const defaultAlert = page.locator('[data-variant="default"]');
-    const successAlert = page.locator('[data-variant="success"]');
-    const dangerAlert = page.locator('[data-variant="danger"]');
-    const infoAlert = page.locator('[data-variant="info"]');
-    const warningAlert = page.locator('[data-variant="warning"]');
-    const monoAlert = page.locator('[data-variant="mono"]');
+    const variantSection = page.locator("#variant-test");
 
-    await expect(defaultAlert).toBeVisible();
-    await expect(successAlert).toBeVisible();
-    await expect(dangerAlert).toBeVisible();
-    await expect(infoAlert).toBeVisible();
-    await expect(warningAlert).toBeVisible();
-    await expect(monoAlert).toBeVisible();
-
-    // Verify icons are present
-    await expect(defaultAlert.locator(".sui-alert-icon")).toBeVisible();
-    await expect(successAlert.locator(".sui-alert-icon")).toBeVisible();
-    await expect(dangerAlert.locator(".sui-alert-icon")).toBeVisible();
-    await expect(infoAlert.locator(".sui-alert-icon")).toBeVisible();
-    await expect(warningAlert.locator(".sui-alert-icon")).toBeVisible();
-    await expect(monoAlert.locator(".sui-alert-icon")).toBeVisible();
-  });
-
-  test("Renders title correctly", async ({ page }) => {
-    await expect(page.getByText("Default Alert")).toBeVisible();
-    await expect(page.getByText("Success Alert")).toBeVisible();
-    await expect(page.getByText("Danger Alert")).toBeVisible();
-    await expect(page.getByText("Info Alert")).toBeVisible();
-    await expect(page.getByText("Warning Alert")).toBeVisible();
-    await expect(page.getByText("Monochrome Alert")).toBeVisible();
-  });
-
-  test("Renders content correctly", async ({ page }) => {
-    await expect(page.getByText("This is a default alert message.")).toBeVisible();
-    await expect(page.getByText("This is a success alert message.")).toBeVisible();
-    await expect(page.getByText("This is a danger alert message.")).toBeVisible();
-    await expect(page.getByText("This is an info alert message.")).toBeVisible();
-    await expect(page.getByText("This is a warning alert message.")).toBeVisible();
-    await expect(page.getByText("This is a monochrome alert message.")).toBeVisible();
+    await expect(variantSection.locator('[data-variant="default"] .sui-alert-icon')).toBeVisible();
+    await expect(variantSection.locator('[data-variant="success"] .sui-alert-icon')).toBeVisible();
+    await expect(variantSection.locator('[data-variant="danger"] .sui-alert-icon')).toBeVisible();
+    await expect(variantSection.locator('[data-variant="info"] .sui-alert-icon')).toBeVisible();
+    await expect(variantSection.locator('[data-variant="warning"] .sui-alert-icon')).toBeVisible();
+    await expect(variantSection.locator('[data-variant="mono"] .sui-alert-icon')).toBeVisible();
   });
 
   [
@@ -69,27 +86,30 @@ test.describe("Alert Component", () => {
       takeScreenshot,
     }) => {
       await takeScreenshot(`Alert - ${key} (Dark Mode)`, elmKey);
+
       await bestPractice(elmKey);
       await wcagA(elmKey);
       await wcagAA(elmKey);
       await wcagAAA(elmKey);
     });
 
-    // test(`Test Accessibility - ${label} Styling (Light Mode)`, async ({
-    //   bestPractice,
-    //   wcagA,
-    //   wcagAA,
-    //   wcagAAA,
-    //   takeScreenshot,
-    //   switchToLightMode,
-    // }) => {
-    //   // Ensure we are in light mode
-    //   await switchToLightMode();
-    //   await takeScreenshot(`Alert - ${key} (Light Mode)`, elmKey);
-    //   await bestPractice(elmKey);
-    //   await wcagA(elmKey);
-    //   await wcagAA(elmKey);
-    //   await wcagAAA(elmKey);
-    // });
+    test(`Test Accessibility - ${label} Styling (Light Mode)`, async ({
+      bestPractice,
+      wcagA,
+      wcagAA,
+      wcagAAA,
+      takeScreenshot,
+      switchToLightMode,
+    }) => {
+      // Ensure we are in light mode
+      await switchToLightMode();
+
+      await takeScreenshot(`Alert - ${key} (Light Mode)`, elmKey);
+
+      await bestPractice(elmKey);
+      await wcagA(elmKey);
+      await wcagAA(elmKey);
+      await wcagAAA(elmKey);
+    });
   });
 });
