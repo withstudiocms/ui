@@ -1,0 +1,30 @@
+---
+import "./alert.css";
+import Icon from "../Icon/Icon.astro";
+
+interface Props {
+    title: string;
+    variant?: "default" | "success" | "danger" | "info" | "warning" | "mono";
+}
+
+const { title, variant = "default" } = Astro.props;
+
+const variantToIcon: Record<NonNullable<Props["variant"]>, string> = {
+    default: "heroicons:information-circle",
+    success: "heroicons:check-circle",
+    danger: "heroicons:exclamation-circle",
+    info: "heroicons:information-circle",
+    warning: "heroicons:exclamation-triangle",
+    mono: "heroicons:information-circle",
+};
+---
+
+<div class="sui-alert" data-variant={variant}>
+    <div class="sui-alert-header">
+        <Icon class="sui-alert-icon" width={24} height={24} name={variantToIcon[variant]} />
+        <span class="sui-alert-title">{title}</span>
+    </div>
+    <div class="sui-alert-content">
+        <slot />
+    </div>
+</div>
