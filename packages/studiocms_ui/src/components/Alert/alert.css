@@ -8,9 +8,6 @@
 
 	border-left: 4px solid var(--alert-accent);
 	border-radius: var(--radius-sm) var(--radius-md) var(--radius-md) var(--radius-sm);
-
-	/* only for testing */
-	margin: 0.75rem 3rem;
 }
 
 .sui-alert-header {
