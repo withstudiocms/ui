@@ -39,11 +39,11 @@
 	--danger-base: hsl(339, 91%, 22%);
 	--danger-hover: hsl(337, 90%, 27%);
 	--danger-active: hsl(337, 90%, 25%);
-	--danger-vibrant: hsl(348.21 100% 71%);
+	--danger-vibrant: hsl(339, 91%, 42%);
 	--info-base: hsl(214, 96%, 22%);
 	--info-hover: hsl(214, 92%, 26%);
 	--info-active: hsl(214, 94%, 24%);
-	--info-vibrant: hsl(213.75 100% 69%);
+	--info-vibrant: hsl(214, 84%, 49%);
 	--mono-base: hsl(0 0% 100%);
 	--mono-hover: hsl(0 0% 90%);
 	--mono-active: hsl(0 0% 95%);
@@ -63,7 +63,7 @@
 	--warning-flat: hsl(48 96% 53% / 0.1);
 	--warning-flat-hover: hsl(48 96% 53% / 0.35);
 	--warning-flat-active: hsl(48 96% 53% / 0.25);
-	--danger-flat: hsl(338.2 28% 12%);
+	--danger-flat: hsl(339 97% 31% / 0.1);
 	--danger-flat-hover: hsl(339 97% 31% / 0.35);
 	--danger-flat-active: hsl(339 97% 31% / 0.25);
 	--info-flat: hsl(217 92% 52% / 0.1);
