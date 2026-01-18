@@ -1,27 +1,36 @@
 ---
-import "./alert.css";
-import Icon from "../Icon/Icon.astro";
+import './alert.css';
+import type { AvailableIcons } from 'studiocms:ui/icons';
+import type { StudioCMSColorway } from 'src/utils/colors';
+import Icon from '../Icon/Icon.astro';
 
 interface Props {
-    title: string;
-    variant?: "default" | "success" | "danger" | "info" | "warning" | "mono";
+	/** The title/heading text displayed in the alert header */
+	title: string;
+	/** The visual style variant of the alert. Each variant has a default icon. @default "default" */
+	variant?: StudioCMSColorway;
+	/** Custom icon to display. Overrides the default variant icon when provided */
+	icon?: AvailableIcons;
 }
 
-const { title, variant = "default" } = Astro.props;
+const { title, variant = 'default', icon } = Astro.props;
 
-const variantToIcon: Record<NonNullable<Props["variant"]>, string> = {
-    default: "heroicons:information-circle",
-    success: "heroicons:check-circle",
-    danger: "heroicons:exclamation-circle",
-    info: "heroicons:information-circle",
-    warning: "heroicons:exclamation-triangle",
-    mono: "heroicons:information-circle",
+const variantToIcon: Record<StudioCMSColorway, AvailableIcons> = {
+	default: 'heroicons:information-circle',
+	primary: 'heroicons:light-bulb-solid',
+	success: 'heroicons:check-circle',
+	danger: 'heroicons:shield-exclamation-solid',
+	info: 'heroicons:information-circle',
+	warning: 'heroicons:exclamation-triangle',
+	mono: 'heroicons:information-circle',
 };
+
+const iconName = icon || variantToIcon[variant];
 ---
 
 <div class="sui-alert" data-variant={variant}>
     <div class="sui-alert-header">
-        <Icon class="sui-alert-icon" width={24} height={24} name={variantToIcon[variant]} />
+        <Icon class="sui-alert-icon" width={24} height={24} name={iconName} />
         <span class="sui-alert-title">{title}</span>
     </div>
     <div class="sui-alert-content">
