@@ -1,5 +1,13 @@
 # @studiocms/ui
 
+## 1.0.1
+
+### Patch Changes
+
+- [#148](https://github.com/withstudiocms/ui/pull/148) [`36d994d`](https://github.com/withstudiocms/ui/commit/36d994d7689391588539358d114d7bcad24c79e0) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Fixes global window augmentation for tooltips (no user-facing changes, just better types!)
+
+- [#150](https://github.com/withstudiocms/ui/pull/150) [`c7e6f2d`](https://github.com/withstudiocms/ui/commit/c7e6f2d5efe6c50dc852ff5602992f4ccf1540c0) Thanks [@louisescher](https://github.com/louisescher)! - Removes a leftover TODO comment
+
 ## 1.0.0
 
 ### Major Changes
