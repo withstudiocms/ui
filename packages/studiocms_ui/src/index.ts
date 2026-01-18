@@ -135,6 +135,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 				icons = createIconifyCollection(optIcons);
 
 				const componentMap: Record<string, string> = {
+					'studiocms:ui/components/alert': `export { default as Alert } from '${resolve('./components/Alert/Alert.astro')}';`,
 					'studiocms:ui/components/button': `export { default as Button } from '${resolve('./components/Button/Button.astro')}';`,
 					'studiocms:ui/components/divider': `export { default as Divider } from '${resolve('./components/Divider/Divider.astro')}';`,
 					'studiocms:ui/components/input': `export { default as Input } from '${resolve('./components/Input/Input.astro')}';`,
