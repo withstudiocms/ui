@@ -28,43 +28,43 @@
 	font-size: 1.125em;
 }
 
-[data-variant="default"] {
+.sui-alert[data-variant="default"] {
 	--alert-accent: var(--text-normal);
 	color: var(--text-dimmed);
 	background-color: var(--default-base);
 }
 
-[data-variant="primary"] {
+.sui-alert[data-variant="primary"] {
 	--alert-accent: var(--primary-base);
 	color: var(--text-dimmed);
 	background-color: var(--primary-flat);
 }
 
-[data-variant="success"] {
+.sui-alert[data-variant="success"] {
 	--alert-accent: var(--success-base);
 	color: var(--text-dimmed);
 	background-color: var(--success-flat);
 }
 
-[data-variant="warning"] {
+.sui-alert[data-variant="warning"] {
 	--alert-accent: var(--warning-base);
 	color: var(--text-dimmed);
 	background-color: var(--warning-flat);
 }
 
-[data-variant="danger"] {
+.sui-alert[data-variant="danger"] {
 	--alert-accent: var(--danger-vibrant);
 	color: var(--text-dimmed);
 	background-color: var(--danger-flat);
 }
 
-[data-variant="info"] {
+.sui-alert[data-variant="info"] {
 	--alert-accent: var(--info-vibrant);
 	color: var(--text-dimmed);
 	background-color: var(--info-flat);
 }
 
-[data-variant="mono"] {
+.sui-alert[data-variant="mono"] {
 	--alert-accent: var(--mono-base);
 	color: var(--text-dimmed);
 	background-color: var(--mono-flat);
