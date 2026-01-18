@@ -63,7 +63,7 @@
 	--warning-flat: hsl(48 96% 53% / 0.1);
 	--warning-flat-hover: hsl(48 96% 53% / 0.35);
 	--warning-flat-active: hsl(48 96% 53% / 0.25);
-	--danger-flat: hsl(338.2 28.000000000000004% 12%);
+	--danger-flat: hsl(338.2 28% 12%);
 	--danger-flat-hover: hsl(339 97% 31% / 0.35);
 	--danger-flat-active: hsl(339 97% 31% / 0.25);
 	--info-flat: hsl(217 92% 52% / 0.1);
