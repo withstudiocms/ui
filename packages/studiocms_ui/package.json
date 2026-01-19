@@ -1,6 +1,6 @@
 {
   "name": "@studiocms/ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The UI library for StudioCMS. Includes the layouts & components we use to build StudioCMS.",
   "repository": {
     "type": "git",
