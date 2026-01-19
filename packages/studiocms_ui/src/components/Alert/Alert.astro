@@ -1,0 +1,47 @@
+---
+import './alert.css';
+import type { AvailableIcons } from 'studiocms:ui/icons';
+import type { HTMLAttributes } from 'astro/types';
+import type { StudioCMSColorway } from 'src/utils/colors';
+import Icon from '../Icon/Icon.astro';
+
+interface Props extends HTMLAttributes<'div'> {
+	/**
+	 * The title/heading text displayed in the alert header
+	 */
+	title: string;
+	/**
+	 * The visual style variant of the alert. Each variant has a default icon.
+	 * @default "default"
+	 */
+	variant?: StudioCMSColorway;
+	/**
+	 * Custom icon to display. Overrides the default variant icon when provided
+	 */
+	icon?: AvailableIcons;
+}
+
+const { title, variant = 'default', icon, class: className, ...props } = Astro.props;
+
+const variantToIcon: Record<StudioCMSColorway, AvailableIcons> = {
+	default: 'heroicons:information-circle',
+	primary: 'heroicons:light-bulb',
+	success: 'heroicons:check-circle',
+	danger: 'heroicons:shield-exclamation',
+	info: 'heroicons:information-circle',
+	warning: 'heroicons:exclamation-triangle',
+	mono: 'heroicons:information-circle',
+};
+
+const iconName = icon || variantToIcon[variant];
+---
+
+<div class:list={["sui-alert", className]} data-variant={variant} {...props}>
+    <div class="sui-alert-header">
+        <Icon class="sui-alert-icon" width={24} height={24} name={iconName} />
+        <span class="sui-alert-title">{title}</span>
+    </div>
+    <div class="sui-alert-content">
+        <slot />
+    </div>
+</div>

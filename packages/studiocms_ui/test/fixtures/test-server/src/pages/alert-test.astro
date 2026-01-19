@@ -1,0 +1,29 @@
+---
+import { Alert } from 'studiocms:ui/components/alert';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <div id="basic-test">
+        <Alert title="Alert Component Test"> This is a basic alert component test. </Alert>
+    </div>
+    <br />
+    <br />
+    <div id="variant-test">
+        <Alert title="Default Alert" variant="default"> This is a default alert message. </Alert>
+        <br />
+        <Alert title="Primary Alert" variant="primary"> This is a primary alert message. </Alert>
+        <br />
+        <Alert title="Success Alert" variant="success"> This is a success alert message. </Alert>
+        <br />
+        <Alert title="Danger Alert" variant="danger" icon="heroicons:academic-cap">
+            This is a danger alert message.
+        </Alert>
+        <br />
+        <Alert title="Info Alert" variant="info"> This is an info alert message. </Alert>
+        <br />
+        <Alert title="Warning Alert" variant="warning"> This is a warning alert message. </Alert>
+        <br />
+        <Alert title="Monochrome Alert" variant="mono"> This is a monochrome alert message. </Alert>
+    </div>
+</Layout>

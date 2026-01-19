@@ -1,0 +1,136 @@
+---
+title: Alert
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PreviewCard from '~/components/PreviewCard.astro';
+import { Alert } from 'studiocms:ui/components/alert';
+
+An alert component. Used to display important messages and notifications to users.
+
+## Usage
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Alert title="Alert Component Test">
+        This is a basic alert component test.
+      </Alert>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="AlertExample.astro"
+    ---
+    import { Alert } from 'studiocms:ui/components/alert';
+    ---
+    <Alert title="Alert Component Test">
+      This is a basic alert component test.
+    </Alert>
+    ```
+  </TabItem>
+</Tabs>
+
+## Variants
+
+The alert component supports multiple variants to convey different types of messages:
+
+- `default` (Default)
+- `primary`
+- `success`
+- `danger`
+- `info`
+- `warning`
+- `mono`
+
+They can be used via the `variant` prop on the alert component.
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Alert title="Default Alert" variant="default">
+        This is a default alert message.
+      </Alert>
+      <br />
+      <Alert title="Primary Alert" variant="primary">
+        This is a primary alert message.
+      </Alert>
+      <br />
+      <Alert title="Success Alert" variant="success">
+        This is a success alert message.
+      </Alert>
+      <br />
+      <Alert title="Danger Alert" variant="danger">
+        This is a danger alert message.
+      </Alert>
+      <br />
+      <Alert title="Info Alert" variant="info">
+        This is an info alert message.
+      </Alert>
+      <br />
+      <Alert title="Warning Alert" variant="warning">
+        This is a warning alert message.
+      </Alert>
+      <br />
+      <Alert title="Monochrome Alert" variant="mono">
+        This is a monochrome alert message.
+      </Alert>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="AlertVariantExample.astro"
+    ---
+    import { Alert } from 'studiocms:ui/components/alert';
+    ---
+    <Alert title="Default Alert" variant="default">
+      This is a default alert message.
+    </Alert>
+
+    <Alert title="Primary Alert" variant="primary">
+      This is a primary alert message.
+    </Alert>
+
+    <Alert title="Success Alert" variant="success">
+      This is a success alert message.
+    </Alert>
+
+    <Alert title="Danger Alert" variant="danger">
+      This is a danger alert message.
+    </Alert>
+
+    <Alert title="Info Alert" variant="info">
+      This is an info alert message.
+    </Alert>
+
+    <Alert title="Warning Alert" variant="warning">
+      This is a warning alert message.
+    </Alert>
+
+    <Alert title="Monochrome Alert" variant="mono">
+      This is a monochrome alert message.
+    </Alert>
+    ```
+  </TabItem>
+</Tabs>
+
+### Custom Icons
+
+You can customize the icon displayed in the alert using the `icon` prop:
+
+<Tabs>
+  <TabItem label="Preview">
+    <PreviewCard>
+      <Alert title="Danger Alert" variant="danger" icon="heroicons:academic-cap">
+        This is a danger alert message with a custom icon.
+      </Alert>
+    </PreviewCard>
+  </TabItem>
+  <TabItem label="Code">
+    ```astro showLinenumbers title="AlertIconExample.astro"
+    ---
+    import { Alert } from 'studiocms:ui/components/alert';
+    ---
+    <Alert title="Danger Alert" variant="danger" icon="heroicons:academic-cap">
+      This is a danger alert message with a custom icon.
+    </Alert>
+    ```
+  </TabItem>
+</Tabs>
