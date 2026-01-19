@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 1.1.0
+
+### Minor Changes
+
+- [#152](https://github.com/withstudiocms/ui/pull/152) [`9b89906`](https://github.com/withstudiocms/ui/commit/9b89906974fbb513737cc5de0f02af9742c5b955) Thanks [@jellydeck](https://github.com/jellydeck)! - adds "Alert" component, used to display important message, tip, information and warning to the user.
+
 ## 1.0.1
 
 ### Patch Changes
