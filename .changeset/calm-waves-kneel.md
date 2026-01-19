@@ -2,4 +2,4 @@
 "@studiocms/ui": minor
 ---
 
-add "Alert" component
+adds "Alert" component, used to display important message, tip, information and warning to the user.
