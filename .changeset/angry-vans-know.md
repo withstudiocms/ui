@@ -2,4 +2,4 @@
 "@studiocms/ui": patch
 ---
 
-center Alert icon in header
+Fixes Alert component icon and header alignment
