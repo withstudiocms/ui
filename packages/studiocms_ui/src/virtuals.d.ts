@@ -9,6 +9,10 @@ declare module 'studiocms:ui/custom-css' {}
 
 declare module 'studiocms:ui/scripts/*' {}
 
+declare module 'studiocms:ui/components/alert' {
+	export const Alert: typeof import('./components/Alert/Alert.astro').default;
+}
+
 declare module 'studiocms:ui/components/button' {
 	export const Button: typeof import('./components/Button/Button.astro').default;
 }
@@ -320,6 +324,7 @@ declare module 'studiocms:ui/components/tooltip' {
 declare module 'studiocms:ui/components' {
 	export const Accordion: typeof import('./components/Accordion/Accordion.astro').default;
 	export const AccordionItem: typeof import('./components/Accordion/Item.astro').default;
+	export const Alert: typeof import('./components/Alert/Alert.astro').default;
 	export const Badge: typeof import('./components/Badge/Badge.astro').default;
 	export const Breadcrumbs: typeof import('./components/Breadcrumbs/Breadcrumbs.astro').default;
 	export const Button: typeof import('./components/Button/Button.astro').default;
