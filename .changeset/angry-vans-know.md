@@ -2,5 +2,4 @@
 "@studiocms/ui": patch
 ---
 
-Fixes Alert component icon and header alignment
-Adds missing type declaration
+Fixes Alert component icon, header alignment and missing virtual type declaration
