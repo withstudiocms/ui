@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 1.1.1
+
+### Patch Changes
+
+- [#154](https://github.com/withstudiocms/ui/pull/154) [`0115293`](https://github.com/withstudiocms/ui/commit/01152938f81ccaeb2ee05684483cad610d1eae96) Thanks [@jellydeck](https://github.com/jellydeck)! - Fixes Alert component icon, header alignment and missing virtual type declaration
+
 ## 1.1.0
 
 ### Minor Changes
