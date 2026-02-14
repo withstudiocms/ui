@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 1.1.2
+
+### Patch Changes
+
+- [#156](https://github.com/withstudiocms/ui/pull/156) [`6efe380`](https://github.com/withstudiocms/ui/commit/6efe3804cdc50062ef5fd8872bb3e4a1d6926126) Thanks [@louisescher](https://github.com/louisescher)! - Adjusts footer CSS to no longer display mobile version on devices with a 13" screen
+
 ## 1.1.1
 
 ### Patch Changes
