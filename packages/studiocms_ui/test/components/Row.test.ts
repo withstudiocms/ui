@@ -10,11 +10,13 @@ describe('Row Component', () => {
 		expect(result).toMatchSnapshot();
 	});
 
-	test.for([{ alignCenter: true }, { gap: 'sm' }, { gap: 'md' }, { gap: 'lg' }])(
-		'renders Row with props: "%s"',
-		async (props, { renderComponent }) => {
-			const result = await renderComponent(Row, 'Row', { props, slots: { default: mockContent } });
-			expect(result).toMatchSnapshot();
-		}
-	);
+	test.for([
+		{ alignCenter: true },
+		{ gap: 'sm' },
+		{ gap: 'md' },
+		{ gap: 'lg' },
+	])('renders Row with props: "%s"', async (props, { renderComponent }) => {
+		const result = await renderComponent(Row, 'Row', { props, slots: { default: mockContent } });
+		expect(result).toMatchSnapshot();
+	});
 });
