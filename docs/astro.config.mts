@@ -90,9 +90,9 @@ export default defineConfig({
 					label: 'BlueSky',
 				},
 				{
-					href: 'https://patreon.com/StudioCMS',
-					icon: 'patreon',
-					label: 'Patreon',
+					href: 'https://opencollective.com/StudioCMS',
+					icon: 'openCollective',
+					label: 'Open Collective',
 				},
 			],
 			customCss: [
