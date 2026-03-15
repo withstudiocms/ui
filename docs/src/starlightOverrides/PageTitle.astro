@@ -1,43 +1,62 @@
 ---
-import { Icon } from '@astrojs/starlight/components';
-import Default from '@astrojs/starlight/components/PageTitle.astro';
-import type { Props } from '@astrojs/starlight/props';
-import Version from '~/components/Version.astro';
+import { Icon } from "@astrojs/starlight/components";
+import Default from "@astrojs/starlight/components/PageTitle.astro";
+import type { Props } from "@astrojs/starlight/props";
+import Version from "~/components/Version.astro";
 
-const { data } = Astro.props.entry;
+const { data } = Astro.locals.starlightRoute.entry;
 
 function ensureTrailingSlash(url: string) {
-	return url.endsWith('/') ? url : `${url}/`;
+	return url.endsWith("/") ? url : `${url}/`;
 }
 ---
+
 {
-	data.type === 'integration' ? (
+	data.type === "integration" ? (
 		<div class="wrapper">
 			<h1 id="_top">
 				<span class="scope">@studiocms/</span>
-				<span>{data.integration.name.replace('@studiocms/', '')}</span>
+				<span>{data.integration.name.replace("@studiocms/", "")}</span>
 			</h1>
 			<div class="integration-metadata">
-				{ data.integration.released ? <Version pkgName={data.integration.name} /> : <code>N/A</code>}
+				{data.integration.released ? (
+					<Version pkgName={data.integration.name} />
+				) : (
+					<code>N/A</code>
+				)}
 				<a href={data.integration.githubURL}>
 					<Icon size="1rem" name="github" /> GitHub
 				</a>
-				<a href={'https://www.npmjs.com/package/' + data.integration.name}>
-					<svg width="16" height="16" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true">
+				<a href={"https://www.npmjs.com/package/" + data.integration.name}>
+					<svg
+						width="16"
+						height="16"
+						viewBox="0 0 576 512"
+						fill="currentColor"
+						aria-hidden="true"
+					>
 						<path d="M288 288h-32v-64h32v64zm288-128v192H288v32H160v-32H0V160h576zm-416 32H32v128h64v-96h32v96h32V192zm160 0H192v160h64v-32h64V192zm224 0H352v128h64v-96h32v96h32v-96h32v96h32V192z" />
 					</svg>
 					npm
 				</a>
-				<a href={ensureTrailingSlash(data.integration.githubURL) + 'CHANGELOG.md'}>
-					<Icon size="1rem" name="list-format" /> {Astro.locals.t('integration-labels.changelog')}
+				<a
+					href={
+						ensureTrailingSlash(data.integration.githubURL) + "CHANGELOG.md"
+					}
+				>
+					<Icon size="1rem" name="list-format" />{" "}
+					{Astro.locals.t("integration-labels.changelog")}
 				</a>
 			</div>
 		</div>
-	) : data.template !== 'splash' && (
-	<Default {...Astro.props}>
-		<slot />
-	</Default>
-)}
+	) : (
+		data.template !== "splash" && (
+			<Default {...Astro.props}>
+				<slot />
+			</Default>
+		)
+	)
+}
 
 <style>
 	.wrapper {

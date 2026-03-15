@@ -1,15 +1,15 @@
-import starlight from '@astrojs/starlight';
-import onestWoff2 from '@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url';
-import ui from '@studiocms/ui';
-import { defineConfig, envField } from 'astro/config';
-import rehypePluginKit from './src/plugins/rehypePluginKit';
+import starlight from "@astrojs/starlight";
+import onestWoff2 from "@fontsource-variable/onest/files/onest-latin-wght-normal.woff2?url";
+import ui from "@studiocms/ui";
+import { defineConfig, envField } from "astro/config";
+import rehypePluginKit from "./src/plugins/rehypePluginKit";
 
 // Define the Site URL
-const site = 'https://ui.studiocms.dev/';
+const site = "https://ui.studiocms.dev/";
 
 export const locales = {
-	root: { label: 'English', lang: 'en' },
-	es: { label: 'Español', lang: 'es' },
+	root: { label: "English", lang: "en" },
+	es: { label: "Español", lang: "es" },
 	// de: { label: 'Deutsch', lang: 'de' },
 	// ja: { label: '日本語', lang: 'ja' },
 	// fr: { label: 'Français', lang: 'fr' },
@@ -29,169 +29,199 @@ export const locales = {
 export default defineConfig({
 	site,
 	image: {
-		remotePatterns: [{ protocol: 'https' }],
+		remotePatterns: [{ protocol: "https" }],
 	},
 	markdown: {
 		rehypePlugins: rehypePluginKit,
 	},
 	env: {
 		schema: {
-			THUM_SECRET_KEY: envField.string({ access: 'secret', context: 'server', optional: true }),
+			THUM_SECRET_KEY: envField.string({
+				access: "secret",
+				context: "server",
+				optional: true,
+			}),
 		},
 	},
 	integrations: [
 		starlight({
-			title: 'StudioCMS UI',
-			description: 'The UI library for StudioCMS, available for Astro for all to use.',
+			title: "StudioCMS UI",
+			description:
+				"The UI library for StudioCMS, available for Astro for all to use.",
 			lastUpdated: true,
 			credits: false,
-			tagline: 'The UI library for StudioCMS, available for Astro for all to use.',
+			tagline:
+				"The UI library for StudioCMS, available for Astro for all to use.",
 			components: {
-				SiteTitle: './src/starlightOverrides/SiteTitle.astro',
-				PageTitle: './src/starlightOverrides/PageTitle.astro',
-				Sidebar: './src/starlightOverrides/Sidebar.astro',
-				Head: './src/starlightOverrides/Head.astro',
-				Header: './src/starlightOverrides/Header.astro',
+				SiteTitle: "./src/starlightOverrides/SiteTitle.astro",
+				PageTitle: "./src/starlightOverrides/PageTitle.astro",
+				Sidebar: "./src/starlightOverrides/Sidebar.astro",
+				Head: "./src/starlightOverrides/Head.astro",
+				Header: "./src/starlightOverrides/Header.astro",
 			},
 			logo: {
-				dark: '../assets/logo-light.svg',
-				light: '../assets/logo-dark.svg',
+				dark: "../assets/logo-light.svg",
+				light: "../assets/logo-dark.svg",
 			},
-			defaultLocale: 'root',
+			defaultLocale: "root",
 			locales,
-			social: {
-				github: 'https://github.com/withstudiocms/ui',
-				discord: 'https://chat.studiocms.dev',
-				youtube: 'https://www.youtube.com/@StudioCMS',
-				'x.com': 'https://x.com/withstudiocms',
-				blueSky: 'https://bsky.app/profile/studiocms.dev',
-				patreon: 'https://patreon.com/StudioCMS',
-			},
+			social: [
+				{
+					href: "https://github.com/withstudiocms/ui",
+					icon: "github",
+					label: "GitHub",
+				},
+				{
+					href: "https://chat.studiocms.dev",
+					icon: "discord",
+					label: "Discord",
+				},
+				{
+					href: "https://www.youtube.com/@StudioCMS",
+					icon: "youtube",
+					label: "YouTube",
+				},
+				{
+					href: "https://x.com/withstudiocms",
+					icon: "x.com",
+					label: "X/Twitter",
+				},
+				{
+					href: "https://bsky.app/profile/studiocms.dev",
+					icon: "blueSky",
+					label: "BlueSky",
+				},
+				{
+					href: "https://patreon.com/StudioCMS",
+					icon: "patreon",
+					label: "Patreon",
+				},
+			],
 			customCss: [
-				'@studiocms/ui/css/global.css',
-				'./src/styles/sponsorcolors.css',
-				'./src/styles/starlight.css',
+				"@studiocms/ui/css/global.css",
+				"./src/styles/sponsorcolors.css",
+				"./src/styles/starlight.css",
 			],
 			editLink: {
-				baseUrl: 'https://github.com/withstudiocms/ui/tree/main/docs',
+				baseUrl: "https://github.com/withstudiocms/ui/tree/main/docs",
 			},
 			head: [
 				{
-					tag: 'script',
+					tag: "script",
 					attrs: {
-						src: 'https://analytics.studiocms.cloud/script.js',
-						'data-website-id': 'd30566ce-efae-4096-95e5-037378c8d2cb',
+						src: "https://analytics.studiocms.cloud/script.js",
+						"data-website-id": "d30566ce-efae-4096-95e5-037378c8d2cb",
 						defer: true,
 					},
 				},
 				{
-					tag: 'meta',
+					tag: "meta",
 					attrs: {
-						property: 'og:image',
+						property: "og:image",
 						content: `${site}og.png`,
 					},
 				},
 				{
-					tag: 'meta',
+					tag: "meta",
 					attrs: {
-						property: 'twitter:image',
+						property: "twitter:image",
 						content: `${site}og.png`,
 					},
 				},
 				{
-					tag: 'meta',
+					tag: "meta",
 					attrs: {
-						property: 'twitter:site',
-						content: 'withstudiocms',
+						property: "twitter:site",
+						content: "withstudiocms",
 					},
 				},
 				{
-					tag: 'meta',
+					tag: "meta",
 					attrs: {
-						property: 'twitter:creator',
-						content: 'withstudiocms',
+						property: "twitter:creator",
+						content: "withstudiocms",
 					},
 				},
 				{
-					tag: 'link',
+					tag: "link",
 					attrs: {
-						rel: 'preload',
-						as: 'font',
-						type: 'font/woff2',
+						rel: "preload",
+						as: "font",
+						type: "font/woff2",
 						href: onestWoff2,
-						crossorigin: 'anonymous',
+						crossorigin: "anonymous",
 					},
 				},
 				{
-					tag: 'link',
+					tag: "link",
 					attrs: {
-						rel: 'icon',
-						href: '/favicon.svg',
-						type: 'image/svg+xml',
+						rel: "icon",
+						href: "/favicon.svg",
+						type: "image/svg+xml",
 					},
 				},
 				{
-					tag: 'link',
+					tag: "link",
 					attrs: {
-						rel: 'icon',
-						href: '/favicon-light.png',
-						type: 'image/png',
-						media: '(prefers-color-scheme: dark)',
+						rel: "icon",
+						href: "/favicon-light.png",
+						type: "image/png",
+						media: "(prefers-color-scheme: dark)",
 					},
 				},
 				{
-					tag: 'link',
+					tag: "link",
 					attrs: {
-						rel: 'icon',
-						href: '/favicon-dark.png',
-						type: 'image/png',
-						media: '(prefers-color-scheme: light)',
+						rel: "icon",
+						href: "/favicon-dark.png",
+						type: "image/png",
+						media: "(prefers-color-scheme: light)",
 					},
 				},
 			],
 			sidebar: [
 				{
-					label: 'Getting Started',
+					label: "Getting Started",
 					items: [
 						{
-							label: 'Installation',
-							link: 'docs/',
+							label: "Installation",
+							link: "docs/",
 						},
 						{
-							label: 'Release Notes',
-							link: 'docs/changelog',
+							label: "Release Notes",
+							link: "docs/changelog",
 						},
 						{
-							label: 'Site Showcase',
-							link: 'docs/showcase',
+							label: "Site Showcase",
+							link: "docs/showcase",
 						},
 					],
 				},
 				{
-					label: 'Guides',
+					label: "Guides",
 					autogenerate: {
-						directory: 'docs/guides',
+						directory: "docs/guides",
 						collapsed: true,
 					},
 				},
 				{
-					label: 'Upgrading StudioCMS',
+					label: "Upgrading StudioCMS",
 					autogenerate: {
-						directory: 'docs/upgrade-guides',
+						directory: "docs/upgrade-guides",
 						collapsed: true,
 					},
 				},
 				{
-					label: 'Components',
+					label: "Components",
 					autogenerate: {
-						directory: 'docs/components',
+						directory: "docs/components",
 						collapsed: true,
 					},
 				},
 				{
-					label: 'Utilities',
+					label: "Utilities",
 					autogenerate: {
-						directory: 'docs/utilities',
+						directory: "docs/utilities",
 						collapsed: true,
 					},
 				},

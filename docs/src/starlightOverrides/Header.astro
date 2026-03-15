@@ -12,7 +12,7 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 import config from 'virtual:starlight/user-config';
 import type { Props } from '@astrojs/starlight/props';
 
-const { data } = Astro.props.entry;
+const { data } = Astro.locals.starlightRoute.entry;
 
 /**
  * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
