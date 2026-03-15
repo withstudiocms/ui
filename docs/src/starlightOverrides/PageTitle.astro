@@ -1,13 +1,13 @@
 ---
-import { Icon } from "@astrojs/starlight/components";
-import Default from "@astrojs/starlight/components/PageTitle.astro";
-import type { Props } from "@astrojs/starlight/props";
-import Version from "~/components/Version.astro";
+import { Icon } from '@astrojs/starlight/components';
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import type { Props } from '@astrojs/starlight/props';
+import Version from '~/components/Version.astro';
 
 const { data } = Astro.locals.starlightRoute.entry;
 
 function ensureTrailingSlash(url: string) {
-	return url.endsWith("/") ? url : `${url}/`;
+	return url.endsWith('/') ? url : `${url}/`;
 }
 ---
 
