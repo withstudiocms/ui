@@ -1,88 +1,88 @@
 {
-  "name": "@studiocms/ui",
-  "version": "1.1.2",
-  "description": "The UI library for StudioCMS. Includes the layouts & components we use to build StudioCMS.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/withstudiocms/ui.git"
-  },
-  "author": {
-    "name": "Louis Escher",
-    "url": "https://studiocms.dev"
-  },
-  "contributors": [
-    "louisescher",
-    "TheOtterlord",
-    "Adammatthiesen",
-    "JusticeMatthew"
-  ],
-  "keywords": [
-    "withastro",
-    "astro-ui-library",
-    "astro-components",
-    "studiocms",
-    "ui-library",
-    "astro-integration"
-  ],
-  "homepage": "https://ui.studiocms.dev",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
-  "sideEffects": false,
-  "files": [
-    "dist"
-  ],
-  "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "delete:dist": "node -e \"import { rmSync } from 'fs'; rmSync('./dist', { recursive: true, force: true });\"",
-    "build": "pnpm delete:dist && buildkit build 'src/**/*.{ts,d.ts,css,astro,stub}' --tsconfig=tsconfig.build.json",
-    "dev": "buildkit dev 'src/**/*.{ts,d.ts,css,astro,stub}' --tsconfig=tsconfig.build.json",
-    "playwright:setup": "pnpm exec playwright install --with-deps",
-    "test-server": "pnpm --filter @test-fixture/server dev",
-    "test:vitest": "vitest",
-    "test:vitest:run": "vitest run",
-    "test:vitest:ui": "vitest --ui",
-    "test:vitest:coverage": "vitest run --coverage",
-    "test:playwright": "pnpm exec playwright test",
-    "view:playwright": "pnpm exec playwright show-report",
-    "ci:coverage": "pnpm test:vitest:coverage"
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./toolbar": {
-      "types": "./dist/toolbar/index.d.ts",
-      "default": "./dist/toolbar/index.js"
-    },
-    "./components/*": "./dist/components/*",
-    "./css/*": "./dist/css/*",
-    "./utils/*": "./dist/utils/*",
-    "./types": {
-      "types": "./dist/types/index.d.ts",
-      "default": "./dist/types/index.js"
-    },
-    "./v/types": {
-      "types": "./dist/virtuals.d.ts",
-      "default": "./dist/virtuals.d.js"
-    }
-  },
-  "dependencies": {
-    "@iconify-json/heroicons": "catalog:",
-    "@iconify/types": "^2.0.0",
-    "astro-transition-event-polyfill": "^1.1.0",
-    "astro-integration-kit": "^0.19.0"
-  },
-  "peerDependencies": {
-    "astro": "catalog:peers",
-    "vite": "catalog:peers"
-  },
-  "devDependencies": {
-    "astro": "catalog:",
-    "typescript": "catalog:",
-    "@types/node": "catalog:"
-  }
+	"name": "@studiocms/ui",
+	"version": "1.1.2",
+	"description": "The UI library for StudioCMS. Includes the layouts & components we use to build StudioCMS.",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/withstudiocms/ui.git"
+	},
+	"author": {
+		"name": "Louis Escher",
+		"url": "https://studiocms.dev"
+	},
+	"contributors": [
+		"louisescher",
+		"TheOtterlord",
+		"Adammatthiesen",
+		"JusticeMatthew"
+	],
+	"keywords": [
+		"withastro",
+		"astro-ui-library",
+		"astro-components",
+		"studiocms",
+		"ui-library",
+		"astro-integration"
+	],
+	"homepage": "https://ui.studiocms.dev",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"sideEffects": false,
+	"files": [
+		"dist"
+	],
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"delete:dist": "node -e \"import { rmSync } from 'fs'; rmSync('./dist', { recursive: true, force: true });\"",
+		"build": "pnpm delete:dist && buildkit build 'src/**/*.{ts,d.ts,css,astro,stub}' --tsconfig=tsconfig.build.json",
+		"dev": "buildkit dev 'src/**/*.{ts,d.ts,css,astro,stub}' --tsconfig=tsconfig.build.json",
+		"playwright:setup": "pnpm exec playwright install --with-deps",
+		"test-server": "pnpm --filter @test-fixture/server dev",
+		"test:vitest": "vitest",
+		"test:vitest:run": "vitest run",
+		"test:vitest:ui": "vitest --ui",
+		"test:vitest:coverage": "vitest run --coverage",
+		"test:playwright": "pnpm exec playwright test",
+		"view:playwright": "pnpm exec playwright show-report",
+		"ci:coverage": "pnpm test:vitest:coverage"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./toolbar": {
+			"types": "./dist/toolbar/index.d.ts",
+			"default": "./dist/toolbar/index.js"
+		},
+		"./components/*": "./dist/components/*",
+		"./css/*": "./dist/css/*",
+		"./utils/*": "./dist/utils/*",
+		"./types": {
+			"types": "./dist/types/index.d.ts",
+			"default": "./dist/types/index.js"
+		},
+		"./v/types": {
+			"types": "./dist/virtuals.d.ts",
+			"default": "./dist/virtuals.d.js"
+		}
+	},
+	"dependencies": {
+		"@iconify-json/heroicons": "catalog:",
+		"@iconify/types": "^2.0.0",
+		"astro-transition-event-polyfill": "^1.2.0",
+		"astro-integration-kit": "^0.20.0"
+	},
+	"peerDependencies": {
+		"astro": "catalog:peers",
+		"vite": "catalog:peers"
+	},
+	"devDependencies": {
+		"astro": "catalog:",
+		"typescript": "catalog:",
+		"@types/node": "catalog:"
+	}
 }
