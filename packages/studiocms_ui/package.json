@@ -73,7 +73,7 @@
 	"dependencies": {
 		"@iconify-json/heroicons": "catalog:",
 		"@iconify/types": "^2.0.0",
-		"astro-transition-event-polyfill": "^1.2.0",
+		"astro-transition-event-polyfill": "^1.2.1",
 		"astro-integration-kit": "^0.20.0"
 	},
 	"peerDependencies": {

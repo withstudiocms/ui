@@ -64,8 +64,8 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(vitest@3.2.4)
       '@withstudiocms/buildkit':
-        specifier: https://pkg.pr.new/withstudiocms/studiocms/@withstudiocms/buildkit@60360f5
-        version: https://pkg.pr.new/withstudiocms/studiocms/@withstudiocms/buildkit@60360f5
+        specifier: ^0.2.1
+        version: 0.2.1
       jest-extended:
         specifier: ^6.0.0
         version: 6.0.0(typescript@5.9.3)
@@ -205,8 +205,8 @@ importers:
         specifier: ^0.20.0
         version: 0.20.0(astro@6.0.4(@types/node@24.5.2)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.7.2)(yaml@2.8.2))
       astro-transition-event-polyfill:
-        specifier: ^1.2.0
-        version: 1.2.0(astro@6.0.4(@types/node@24.5.2)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.7.2)(yaml@2.8.2))
+        specifier: ^1.2.1
+        version: 1.2.1(astro@6.0.4(@types/node@24.5.2)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.7.2)(yaml@2.8.2))
       vite:
         specifier: catalog:peers
         version: 6.3.6(@types/node@24.5.2)(jiti@2.6.1)(yaml@2.8.2)
@@ -2185,9 +2185,8 @@ packages:
   '@vue/shared@3.5.30':
     resolution: {integrity: sha512-YXgQ7JjaO18NeK2K9VTbDHaFy62WrObMa6XERNfNOkAhD1F1oDSf3ZJ7K6GqabZ0BvSDHajp8qfS5Sa2I9n8uQ==}
 
-  '@withstudiocms/buildkit@https://pkg.pr.new/withstudiocms/studiocms/@withstudiocms/buildkit@60360f5':
-    resolution: {tarball: https://pkg.pr.new/withstudiocms/studiocms/@withstudiocms/buildkit@60360f5}
-    version: 0.1.0-beta.6
+  '@withstudiocms/buildkit@0.2.1':
+    resolution: {integrity: sha512-vwbfHCk15+wL3A70L+4hmOQYpwwoSbNna5nAcGYhFMrAE72RMh4MFaug5IN2GGQUVdDaLFXe0i5MOMAqe1oc1w==}
     hasBin: true
 
   acorn-jsx@5.3.2:
@@ -2301,8 +2300,8 @@ packages:
     peerDependencies:
       astro: ^4.14.0 || ^5.0.0 || ^6.0.0
 
-  astro-transition-event-polyfill@1.2.0:
-    resolution: {integrity: sha512-2YHRVPxe1+t+iJclna4o2CZSR8dAQ34JuPPAfhDy8ynqCWpFbcgzWoC05FovxNEI3LhqCloeW/zKCUfvo7Af6g==}
+  astro-transition-event-polyfill@1.2.1:
+    resolution: {integrity: sha512-EVQ03YyOwBFDAFJdnZs2ypTBAEM+TbjJxGa0k1bUcqn99r+/Y2YNHN5eIsvJAAvrjBnmHDhlcbO0YDB74b95ZA==}
     peerDependencies:
       astro: ^4.5 || ^5.1.0 || ^6.0.0
 
@@ -2388,10 +2387,6 @@ packages:
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
-
-  chalk@5.6.2:
-    resolution: {integrity: sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==}
-    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
   character-entities-html4@2.1.0:
     resolution: {integrity: sha512-1v7fgQRj6hnSwFpq1Eu0ynr/CDEw0rXo2B61qXrLNdHZmPKgb7fqS1a2JwF0rISo9q77jDI8VMEHoApn8qDoZA==}
@@ -6866,9 +6861,8 @@ snapshots:
 
   '@vue/shared@3.5.30': {}
 
-  '@withstudiocms/buildkit@https://pkg.pr.new/withstudiocms/studiocms/@withstudiocms/buildkit@60360f5':
+  '@withstudiocms/buildkit@0.2.1':
     dependencies:
-      chalk: 5.6.2
       esbuild: 0.25.12
       tinyglobby: 0.2.15
 
@@ -6971,9 +6965,8 @@ snapshots:
       astro: 6.0.4(@types/node@24.5.2)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.7.2)(yaml@2.8.2)
       pathe: 2.0.3
 
-  astro-transition-event-polyfill@1.2.0(astro@6.0.4(@types/node@24.5.2)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.7.2)(yaml@2.8.2)):
+  astro-transition-event-polyfill@1.2.1(astro@6.0.4(@types/node@24.5.2)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.7.2)(yaml@2.8.2)):
     dependencies:
-      '@types/node': 24.12.0
       astro: 6.0.4(@types/node@24.5.2)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.7.2)(yaml@2.8.2)
       pathe: 2.0.3
 
@@ -7239,8 +7232,6 @@ snapshots:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
-
-  chalk@5.6.2: {}
 
   character-entities-html4@2.1.0: {}
 
