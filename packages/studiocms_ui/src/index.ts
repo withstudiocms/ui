@@ -269,7 +269,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 					},
 				});
 
-				if (!options.noInjectResetCSS) {
+				if (!options.noInjectResetCSS || !options.noInjectCSS) {
 					injectScript("page-ssr", `import 'studiocms:ui/reset-css';`);
 				}
 
