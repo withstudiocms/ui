@@ -1,10 +1,6 @@
 ---
 i18nReady: false
 title: Tooltip
-sidebar:
-  badge:
-    text: New!
-    variant: success
 ---
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
@@ -47,6 +43,7 @@ Only one tooltip can be open at a time. If you open another tooltip, the previou
       </Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -57,10 +54,10 @@ The tooltip can be positioned in various ways in relation to the anchor element.
 The values for the position prop are:
 
 - `auto`: The tooltip will resort to the positions in this order: 'top', 'bottom', 'right', 'left'.
-- `top`: The tooltip will be positioned *above* the anchor element, otherwise fall back on this order: 'bottom', 'right', 'left'.
-- `bottom`: The tooltip will be positioned *below* the anchor element, otherwise fall back on this order: 'top', 'right', 'left'.
-- `left`: The tooltip will be positioned to the *left* of the anchor element, otherwise fall back on this order: 'right', 'top', 'bottom'.
-- `right`: The tooltip will be positioned to the *right* of the anchor element, otherwise fall back on this order: 'left', 'top', 'bottom'.
+- `top`: The tooltip will be positioned _above_ the anchor element, otherwise fall back on this order: 'bottom', 'right', 'left'.
+- `bottom`: The tooltip will be positioned _below_ the anchor element, otherwise fall back on this order: 'top', 'right', 'left'.
+- `left`: The tooltip will be positioned to the _left_ of the anchor element, otherwise fall back on this order: 'right', 'top', 'bottom'.
+- `right`: The tooltip will be positioned to the _right_ of the anchor element, otherwise fall back on this order: 'left', 'top', 'bottom'.
 
 <Tabs>
   <TabItem label="Preview">
@@ -106,6 +103,7 @@ The values for the position prop are:
       <Fragment slot="tooltip">This is a tooltip on right.</Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -139,6 +137,7 @@ The `defaultOpen` prop can only be used on one tooltip at a time per page. If yo
       <Fragment slot="tooltip">This tooltip is open by default.</Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -221,6 +220,7 @@ The tooltip can be styled with different colors. The default is `default`. The a
       <Fragment slot="tooltip">This is an monochrome tooltip.</Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -259,6 +259,7 @@ The tooltip can be styled with different variants. The default is `default`. The
       <Fragment slot="tooltip">This is an outlined tooltip.</Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -296,6 +297,7 @@ The tooltip can be configured to have a gap between the anchor element and the t
       <Fragment slot="tooltip">This tooltip has the default 8px gap.</Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -331,6 +333,7 @@ The tooltip can be configured to have delays for showing and hiding. The default
       <Fragment slot="tooltip">This tooltip has a 500ms exit delay.</Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -366,12 +369,14 @@ By default, the tooltip will show on hover or tap. You can disable the tap activ
       <Fragment slot="tooltip">This tooltip will show on hover or tap.</Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 
 ### Animation
 
 By default, the tooltip will fade in when shown and out when hidden. You can disable this by setting the `animate` prop to `false`.
+
 <Tabs>
   <TabItem label="Preview">
     <PreviewCard>
@@ -400,12 +405,14 @@ By default, the tooltip will fade in when shown and out when hidden. You can dis
       <Fragment slot="tooltip">This tooltip will animate.</Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 
 ### Pointer
 
 By default, the tooltip will show a pointer to indicate where the tooltip is pointing. You can disable this by setting the `pointer` prop to `false`.
+
 <Tabs>
   <TabItem label="Preview">
     <PreviewCard>
@@ -434,6 +441,7 @@ By default, the tooltip will show a pointer to indicate where the tooltip is poi
       <Fragment slot="tooltip">This tooltip will show a pointer.</Fragment>
     </Tooltip>
     ```
+
   </TabItem>
 </Tabs>
 

@@ -1,0 +1,26 @@
+---
+title: From v1.1 to v1.2
+sidebar:
+  badge:
+    text: New!
+    variant: success
+---
+
+Version 1.2 of StudioCMS UI brings support for Astro v6 and a new option to disable the CSS resets it introduces. **No changes are required to make the components with with v6.**
+
+## Disabling CSS resets
+
+StudioCMS UI v1.2 introduces a new option to disable the reset styles, which you can enable via `noInjectResetCSS` in the integration options:
+
+```ts showLinenumbers title="astro.config.mjs" {7}
+import { defineConfig } from "astro/config";
+import ui from "@studiocms/ui";
+
+export default defineConfig({
+	integrations: [
+		ui({
+			noInjectResetCSS: true,
+		}),
+	],
+});
+```

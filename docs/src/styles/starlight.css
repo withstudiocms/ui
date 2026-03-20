@@ -112,7 +112,8 @@ button[aria-label="Menu"][aria-controls="starlight__sidebar"] {
 	padding: 0.5rem;
 }
 
-[data-theme="light"] button[aria-label="Menu"][aria-controls="starlight__sidebar"] {
+[data-theme="light"]
+	button[aria-label="Menu"][aria-controls="starlight__sidebar"] {
 	background-color: var(--sl-color-black) !important;
 	padding: 0.5rem;
 }
@@ -131,7 +132,9 @@ button[aria-label="Menu"][aria-controls="starlight__sidebar"] {
 }
 
 /* Headings after non-headings have more spacing. */
-.sl-markdown-content :not(.heading-wrapper) + :is(.heading-wrapper):not(:where(.not-content *)) {
+.sl-markdown-content
+	:not(.heading-wrapper)
+	+ :is(.heading-wrapper):not(:where(.not-content *)) {
 	margin-top: 1.5em;
 }
 
@@ -156,7 +159,8 @@ button[aria-label="Menu"][aria-controls="starlight__sidebar"] {
 	height: var(--icon-size) !important;
 }
 
-.sl-markdown-content :is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *)) {
+.sl-markdown-content
+	:is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *)) {
 	display: block;
 	height: auto;
 }

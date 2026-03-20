@@ -1,14 +1,10 @@
 ---
 title: Skeleton
-sidebar:
-  badge:
-    text: New!
-    variant: success
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import PreviewCard from '~/components/PreviewCard.astro';
-import { Skeleton } from 'studiocms:ui/components/skeleton';
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PreviewCard from "~/components/PreviewCard.astro";
+import { Skeleton } from "studiocms:ui/components/skeleton";
 
 An extremely customizable skeleton loading component.
 
@@ -36,6 +32,7 @@ An extremely customizable skeleton loading component.
       <Skeleton variant='text' />
     </Skeleton>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -72,6 +69,7 @@ You can use the `variant` prop to change the skeleton's appearance. The followin
       <Skeleton variant='circle' width='100px' height='100px'></Skeleton>
     </div>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -101,6 +99,7 @@ The `width` and `height` props can be used to set the width and height of the sk
       <Skeleton variant='block' width='25%' height='1rem'></Skeleton>
     </div>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -139,6 +138,7 @@ The default value is `lg`.
       <Skeleton variant='block' radius='lg' height="2rem"></Skeleton>
     </div>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -174,6 +174,7 @@ The default value is `slide`.
       <Skeleton variant='text' animation='pulse'></Skeleton>
     </div>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -218,6 +219,7 @@ The default value is `column`.
       <Skeleton variant='text'></Skeleton>
     </Skeleton>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -256,6 +258,7 @@ The default value is `center`.
           <Skeleton variant='block' width='100px' height='100px'></Skeleton>
         </Skeleton>
     </PreviewCard>
+
   </TabItem>
   <TabItem label='Code'>
     ```astro "hAlign='start'" "hAlign='center'" "hAlign='end'" showLinenumbers title='SkeletonExample.astro'
@@ -285,6 +288,7 @@ The default value is `center`.
       <Skeleton variant='block' width='100px' height='100px'></Skeleton>
     </Skeleton>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -323,6 +327,7 @@ The default value is `center`.
           <Skeleton variant='block' width='100px' height='100px'></Skeleton>
         </Skeleton>
     </PreviewCard>
+
   </TabItem>
   <TabItem label='Code'>
     ```astro "vAlign='start'" "vAlign='center'" "vAlign='end'" showLinenumbers title='SkeletonExample.astro'
@@ -352,6 +357,7 @@ The default value is `center`.
       <Skeleton variant='block' width='100px' height='100px'></Skeleton>
     </Skeleton>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -379,5 +385,6 @@ You can use the `gap` prop to change the gap between the skeletons. The default 
       <Skeleton variant='text'></Skeleton>
     </Skeleton>
     ```
+
   </TabItem>
 </Tabs>
