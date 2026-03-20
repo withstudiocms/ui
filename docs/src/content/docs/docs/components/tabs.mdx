@@ -1,15 +1,16 @@
 ---
 title: "Tabs"
-sidebar:
-  badge:
-    text: Updated!
-    variant: tip
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Tabs as SuiTabs, TabItem as SuiTabItem, Card, Divider } from 'studiocms:ui/components';
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import {
+	Tabs as SuiTabs,
+	TabItem as SuiTabItem,
+	Card,
+	Divider,
+} from "studiocms:ui/components";
 
-import PreviewCard from '~/components/PreviewCard.astro';
+import PreviewCard from "~/components/PreviewCard.astro";
 
 The tabs you can see on [the StudioCMS UI landing page](https://ui.studiocms.dev), as a component!
 
@@ -62,6 +63,7 @@ The tabs you can see on [the StudioCMS UI landing page](https://ui.studiocms.dev
       </TabItem>
     </Tabs>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -116,6 +118,7 @@ You can add icons and even change the color of the tabs:
       </TabItem>
     </Tabs>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -172,12 +175,13 @@ this page.
       </TabItem>
     </Tabs>
     ```
+
   </TabItem>
 </Tabs>
 
 ### Alignment
 
-In certain cases, you might want to change the alignment of the tabs. You can do this by setting the `align` prop to 
+In certain cases, you might want to change the alignment of the tabs. You can do this by setting the `align` prop to
 `left`, `center` or `right`, with left being the default. Here's an example of the tabs being aligned to the right:
 
 <Tabs>
@@ -217,6 +221,7 @@ In certain cases, you might want to change the alignment of the tabs. You can do
       </TabItem>
     </Tabs>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -292,6 +297,7 @@ set the `storage` prop to `persistent` to store the value in localStorage.
       </TabItem>
     </Tabs>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -346,6 +352,7 @@ You can set a default active tab to be selected when the tabs are first rendered
       </TabItem>
     </Tabs>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -413,5 +420,6 @@ You can nest tabs inside of other tabs, allowing for complex tab structures. Her
       </TabItem>
     </Tabs>
     ```
+
   </TabItem>
 </Tabs>

@@ -1,16 +1,12 @@
 ---
 title: Progress
-sidebar:
-  badge:
-    text: Updated!
-    variant: tip
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import PreviewCard from '~/components/PreviewCard.astro';
-import ProgressScript from '~/components/ProgressScript.astro';
-import { Progress } from 'studiocms:ui/components/progress';
-import { ProgressHelper } from 'studiocms:ui/components/progress/client';
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import PreviewCard from "~/components/PreviewCard.astro";
+import ProgressScript from "~/components/ProgressScript.astro";
+import { Progress } from "studiocms:ui/components/progress";
+import { ProgressHelper } from "studiocms:ui/components/progress/client";
 
 :::caution[Helper required]
 This component requires a **helper**. Make sure to read the documentation carefully so you know how to use it.
@@ -34,6 +30,7 @@ A progress bar, used to show the progress of a task.
 
     <Progress label="Example Progress Bar" id="progress" max={100} value={50} />
     ```
+
   </TabItem>
 </Tabs>
 
@@ -69,6 +66,7 @@ The value and max can be adjusted after the component has been initialized by us
       progress.getPercentage(); // 50
     </script>
     ```
+
   </TabItem>
 </Tabs>
 
@@ -107,6 +105,7 @@ The progress component can be colored with all the colors available in the theme
     <Progress label="Example Progress Bar - Info" id="progress-5" max={100} value={50} color="info" />
     <Progress label="Example Progress Bar - Monochrome" id="progress-6" max={100} value={50} color="monochrome" />
     ```
+
   </TabItem>
 </Tabs>
 

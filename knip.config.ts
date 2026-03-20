@@ -4,7 +4,6 @@ const config: KnipConfig = {
 	exclude: ['duplicates', 'optionalPeerDependencies'],
 	workspaces: {
 		'.': {
-			ignoreBinaries: ['preview', 'astro', 'playwright:setup', 'test:vitest:run'],
 			ignoreDependencies: ['@changesets/config', 'playwright-ctrf-json-reporter'],
 			entry: ['.github/workflows/*.yml', '.changeset/config.json', 'biome.json'],
 			project: ['.github/workflows/*.yml', '.changeset/config.json', 'biome.json'],
@@ -14,7 +13,6 @@ const config: KnipConfig = {
 			entry: [
 				'src/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}',
 				'test/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}',
-				'vite.config.{js,ts}',
 				'playwright.config.{js,ts}',
 			],
 			project: ['**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}'],
@@ -38,7 +36,6 @@ const config: KnipConfig = {
 				'src/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}',
 				'scripts/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}',
 				'lunaria/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}',
-				'ec.config.mjs',
 				'lunaria.config.ts',
 				'starlight-types.ts',
 				'hostUtils.ts',

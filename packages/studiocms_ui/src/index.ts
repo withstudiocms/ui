@@ -43,6 +43,16 @@ type Options = {
 	noInjectCSS?: boolean;
 
 	/**
+	 * Disables the CSS reset. Can be manually included.
+	 *
+	 * @example
+	 * ```ts
+	 * import 'studiocms:ui/reset-css';
+	 * ```
+	 */
+	noInjectResetCSS?: boolean;
+
+	/**
 	 * Allows the ability to add custom icons to the Icon component.
 	 *
 	 * @example:
@@ -72,7 +82,12 @@ export function createIconifyCollection(icons?: Record<string, IconifyJSON>): Ic
 	const availableIcons: string[] = [];
 
 	if (!icons) {
-		return { collections, collectionNames, integrationCollections: undefined, availableIcons };
+		return {
+			collections,
+			collectionNames,
+			integrationCollections: undefined,
+			availableIcons,
+		};
 	}
 
 	for (const [prefix, collection] of Object.entries(icons)) {
@@ -86,7 +101,12 @@ export function createIconifyCollection(icons?: Record<string, IconifyJSON>): Ic
 
 	const integrationCollections = `export const collections = ${JSON.stringify(collections)};`;
 
-	return { collections, collectionNames, integrationCollections, availableIcons };
+	return {
+		collections,
+		collectionNames,
+		integrationCollections,
+		availableIcons,
+	};
 }
 
 /**
@@ -205,6 +225,7 @@ export default function integration(options: Options = {}): AstroIntegration {
 						'studiocms:ui/version': `export default '${pkgJson.version}';`,
 						// Styles
 						'studiocms:ui/global-css': `import '${resolve('./css/global.css')}';`,
+						'studiocms:ui/reset-css': `import '${resolve('./css/resets.css')}';`,
 						'studiocms:ui/prose': `import '${resolve('./css/prose.css')}';`,
 						'studiocms:ui/custom-css': `import '${rootResolve(options.customCss ? options.customCss : '')}';`,
 						// Scripts
@@ -237,6 +258,10 @@ export default function integration(options: Options = {}): AstroIntegration {
 						`,
 					},
 				});
+
+				if (!options.noInjectResetCSS || !options.noInjectCSS) {
+					injectScript('page-ssr', `import 'studiocms:ui/reset-css';`);
+				}
 
 				if (!options.noInjectCSS) {
 					injectScript('page-ssr', `import 'studiocms:ui/global-css';`);

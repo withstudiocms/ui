@@ -37,6 +37,9 @@ export default defineConfig(
 		},
 		{
 			integrations: [ui()],
+			image: {
+				domains: ['seccdn.libravatar.org'],
+			},
 		}
 	)
 );

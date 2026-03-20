@@ -36,10 +36,17 @@ export default defineConfig({
 	},
 	env: {
 		schema: {
-			THUM_SECRET_KEY: envField.string({ access: 'secret', context: 'server', optional: true }),
+			THUM_SECRET_KEY: envField.string({
+				access: 'secret',
+				context: 'server',
+				optional: true,
+			}),
 		},
 	},
 	integrations: [
+		ui({
+			noInjectResetCSS: true,
+		}),
 		starlight({
 			title: 'StudioCMS UI',
 			description: 'The UI library for StudioCMS, available for Astro for all to use.',
@@ -59,14 +66,38 @@ export default defineConfig({
 			},
 			defaultLocale: 'root',
 			locales,
-			social: {
-				github: 'https://github.com/withstudiocms/ui',
-				discord: 'https://chat.studiocms.dev',
-				youtube: 'https://www.youtube.com/@StudioCMS',
-				'x.com': 'https://x.com/withstudiocms',
-				blueSky: 'https://bsky.app/profile/studiocms.dev',
-				patreon: 'https://patreon.com/StudioCMS',
-			},
+			social: [
+				{
+					href: 'https://github.com/withstudiocms/ui',
+					icon: 'github',
+					label: 'GitHub',
+				},
+				{
+					href: 'https://chat.studiocms.dev',
+					icon: 'discord',
+					label: 'Discord',
+				},
+				{
+					href: 'https://www.youtube.com/@StudioCMS',
+					icon: 'youtube',
+					label: 'YouTube',
+				},
+				{
+					href: 'https://x.com/withstudiocms',
+					icon: 'x.com',
+					label: 'X/Twitter',
+				},
+				{
+					href: 'https://bsky.app/profile/studiocms.dev',
+					icon: 'blueSky',
+					label: 'BlueSky',
+				},
+				{
+					href: 'https://opencollective.com/StudioCMS',
+					icon: 'openCollective',
+					label: 'Open Collective',
+				},
+			],
 			customCss: [
 				'@studiocms/ui/css/global.css',
 				'./src/styles/sponsorcolors.css',
@@ -197,6 +228,5 @@ export default defineConfig({
 				},
 			],
 		}),
-		ui(),
 	],
 });

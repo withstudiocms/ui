@@ -18,14 +18,15 @@ describe('Modal Component', () => {
 		expect(result).toMatchSnapshot();
 	});
 
-	test.for([{ size: 'sm' }, { size: 'md' }, { size: 'lg' }])(
-		'renders Modal with size "%s"',
-		async (props, { renderComponent }) => {
-			const result = await renderComponent(Modal, 'Modal', {
-				props: { ...mockProps, ...props },
-				slots: { default: loremIpsum },
-			});
-			expect(result).toMatchSnapshot();
-		}
-	);
+	test.for([
+		{ size: 'sm' },
+		{ size: 'md' },
+		{ size: 'lg' },
+	])('renders Modal with size "%s"', async (props, { renderComponent }) => {
+		const result = await renderComponent(Modal, 'Modal', {
+			props: { ...mockProps, ...props },
+			slots: { default: loremIpsum },
+		});
+		expect(result).toMatchSnapshot();
+	});
 });

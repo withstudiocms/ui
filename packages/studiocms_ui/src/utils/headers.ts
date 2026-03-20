@@ -1,4 +1,4 @@
-import type { AstroGlobalPartial } from 'astro';
+import type { AstroGlobal } from 'astro';
 import { z } from 'astro/zod';
 
 export const HeadConfigSchema = () =>
@@ -8,7 +8,7 @@ export const HeadConfigSchema = () =>
 				/** Name of the HTML tag to add to `<head>`, e.g. `'meta'`, `'link'`, or `'script'`. */
 				tag: z.enum(['title', 'base', 'link', 'style', 'meta', 'script', 'noscript', 'template']),
 				/** Attributes to set on the tag, e.g. `{ rel: 'stylesheet', href: '/custom.css' }`. */
-				attrs: z.record(z.union([z.string(), z.boolean(), z.undefined()])).default({}),
+				attrs: z.record(z.string(), z.union([z.string(), z.boolean(), z.undefined()])).default({}),
 				/** Content to place inside the tag (optional). */
 				content: z.string().default(''),
 			})
@@ -30,7 +30,7 @@ export const HeadConfigSchema = () =>
 export const headDefaults = (
 	title: string,
 	description: string,
-	Astro: AstroGlobalPartial,
+	Astro: AstroGlobal,
 	ogImage: string | undefined,
 	canonical: URL | undefined
 ) => {
@@ -38,7 +38,10 @@ export const headDefaults = (
 		{ tag: 'meta', attrs: { charset: 'utf-8' } },
 		{
 			tag: 'meta',
-			attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+			attrs: {
+				name: 'viewport',
+				content: 'width=device-width, initial-scale=1',
+			},
 		},
 		{ tag: 'title', content: `${title}` },
 		{ tag: 'meta', attrs: { name: 'title', content: title } },
@@ -48,28 +51,61 @@ export const headDefaults = (
 		// Favicon
 		{
 			tag: 'link',
-			attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
+			attrs: {
+				rel: 'apple-touch-icon',
+				href: '/apple-touch-icon.png',
+				sizes: '180x180',
+			},
 		},
 		{
 			tag: 'link',
-			attrs: { rel: 'icon', href: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+			attrs: {
+				rel: 'icon',
+				href: '/favicon-32x32.png',
+				type: 'image/png',
+				sizes: '32x32',
+			},
 		},
 		{
 			tag: 'link',
-			attrs: { rel: 'icon', href: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+			attrs: {
+				rel: 'icon',
+				href: '/favicon-16x16.png',
+				type: 'image/png',
+				sizes: '16x16',
+			},
 		},
-		{ tag: 'link', attrs: { rel: 'icon', href: '/favicon.png', type: 'image/png' } },
+		{
+			tag: 'link',
+			attrs: { rel: 'icon', href: '/favicon.png', type: 'image/png' },
+		},
 		{ tag: 'link', attrs: { rel: 'manifest', href: '/site.webmanifest' } },
-		{ tag: 'link', attrs: { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5' } },
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'mask-icon',
+				href: '/safari-pinned-tab.svg',
+				color: '#5bbad5',
+			},
+		},
 		{ tag: 'link', attrs: { rel: 'shortcut icon', href: '/favicon.ico' } },
-		{ tag: 'meta', attrs: { name: 'msapplication-TileColor', content: '#da532c' } },
-		{ tag: 'meta', attrs: { name: 'msapplication-config', content: '/browserconfig.xml' } },
+		{
+			tag: 'meta',
+			attrs: { name: 'msapplication-TileColor', content: '#da532c' },
+		},
+		{
+			tag: 'meta',
+			attrs: { name: 'msapplication-config', content: '/browserconfig.xml' },
+		},
 		{ tag: 'meta', attrs: { name: 'theme-color', content: '#aa87f4' } },
 		// OpenGraph Tags
 		{ tag: 'meta', attrs: { property: 'og:title', content: title } },
 		{ tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
 		{ tag: 'meta', attrs: { property: 'og:url', content: canonical?.href } },
-		{ tag: 'meta', attrs: { property: 'og:description', content: description } },
+		{
+			tag: 'meta',
+			attrs: { property: 'og:description', content: description },
+		},
 		{ tag: 'meta', attrs: { property: 'og:site_name', content: title } },
 		// Twitter Tags
 		{
@@ -78,7 +114,10 @@ export const headDefaults = (
 		},
 		{ tag: 'meta', attrs: { name: 'twitter:url', content: canonical?.href } },
 		{ tag: 'meta', attrs: { name: 'twitter:title', content: title } },
-		{ tag: 'meta', attrs: { name: 'twitter:description', content: description } },
+		{
+			tag: 'meta',
+			attrs: { name: 'twitter:description', content: description },
+		},
 	];
 
 	if (ogImage) {
