@@ -1,5 +1,15 @@
 # @studiocms/ui
 
+## 1.2.0
+
+### Minor Changes
+
+- [#158](https://github.com/withstudiocms/ui/pull/158) [`b62de6c`](https://github.com/withstudiocms/ui/commit/b62de6cb0e982030749f2819ffdb9d6966844685) Thanks [@louisescher](https://github.com/louisescher)! - Adds support for Astro v6.
+
+### Patch Changes
+
+- [#158](https://github.com/withstudiocms/ui/pull/158) [`b62de6c`](https://github.com/withstudiocms/ui/commit/b62de6cb0e982030749f2819ffdb9d6966844685) Thanks [@louisescher](https://github.com/louisescher)! - Adds a new `noInjectResetCSS` option to disable the reset styles
+
 ## 1.1.2
 
 ### Patch Changes
@@ -31,7 +41,6 @@
 ### Major Changes
 
 - [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Moves the following helpers into their own virtual modules:
-
   - `studiocms:ui/components/toaster/client` - `toast`
   - `studiocms:ui/components/modal/client` - `ModalHelper`
   - `studiocms:ui/components/dropdown/client` - `DropdownHelper`
@@ -43,7 +52,6 @@
 - [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Update Icon component to utilize all iconifyJSON icons that have been passed through into the config
 
   ### Breaking Changes
-
   - Default Icon names are now prefixed with `heroicons:` instead of just the icons name. This allows user-defined icons to be used without conflicting with the pre-shipped icons.
 
 ### Minor Changes
@@ -77,7 +85,6 @@
 - [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - Fixes Select components UI bug, where list items had no background and showed bullet points
 
 - [#85](https://github.com/withstudiocms/ui/pull/85) [`a7e37a5`](https://github.com/withstudiocms/ui/commit/a7e37a5ca91cf1d485aa3a8dc6c0b34aab18cca1) Thanks [@louisescher](https://github.com/louisescher)! - - Refactored the accordion component so it works with the Tabs component, and with nested accordions
-
   - Refactored the Tabs component to support nested tabs
   - Added a new `active` prop to the Tabs component to set the initial active tab
 
@@ -143,7 +150,6 @@
 ### Major Changes
 
 - [#137](https://github.com/withstudiocms/ui/pull/137) [`dee51eb`](https://github.com/withstudiocms/ui/commit/dee51ebcf063a6bcdfca25a69d20d2d1447409b8) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Moves the following helpers into their own virtual modules:
-
   - `studiocms:ui/components/toaster/client` - `toast`
   - `studiocms:ui/components/modal/client` - `ModalHelper`
   - `studiocms:ui/components/dropdown/client` - `DropdownHelper`
@@ -193,7 +199,6 @@
 - [#88](https://github.com/withstudiocms/ui/pull/88) [`b96fe4d`](https://github.com/withstudiocms/ui/commit/b96fe4d7b88fced72a65c96a4aa893f9bc164af8) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update Icon component to utilize all iconifyJSON icons that have been passed through into the config
 
   ### Breaking Changes
-
   - Default Icon names are now prefixed with `heroicons:` instead of just the icons name. This allows user-defined icons to be used without conflicting with the pre-shipped icons.
 
 ### Minor Changes
@@ -215,7 +220,6 @@
 - [#103](https://github.com/withstudiocms/ui/pull/103) [`111e685`](https://github.com/withstudiocms/ui/commit/111e685e622e61d0549b9d2e2344dd16dfea2259) Thanks [@RATIU5](https://github.com/RATIU5)! - Fixes Select components UI bug, where list items had no background and showed bullet points
 
 - [#104](https://github.com/withstudiocms/ui/pull/104) [`f708d9d`](https://github.com/withstudiocms/ui/commit/f708d9d17ecf72fc9821901c0e8c41516025c992) Thanks [@RATIU5](https://github.com/RATIU5)! - - Refactored the accordion component so it works with the Tabs component, and with nested accordions
-
   - Refactored the Tabs component to support nested tabs
   - Added a new `active` prop to the Tabs component to set the initial active tab
 
@@ -341,11 +345,9 @@
 - [#48](https://github.com/withstudiocms/ui/pull/48) [`4a43e03`](https://github.com/withstudiocms/ui/commit/4a43e031b2395ca1cf72c8343638f5836178944e) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Fix Icon component requiring functions from Iconify Utils lib during runtime as well as extend usage possibilities.
 
   NEW:
-
   - `IconBase` component exported from `studiocms:ui/components` which allows passing custom image collections from Iconify.
 
   Updated:
-
   - `Icon` component to use this new system.
 
 ## 0.4.3
@@ -377,7 +379,6 @@
   For more information see https://ui.studiocms.dev
 
 - [#36](https://github.com/withstudiocms/ui/pull/36) [`07e2d9e`](https://github.com/withstudiocms/ui/commit/07e2d9e5a473bdcd516bf4d43e8274988ec796e6) Thanks [@louisescher](https://github.com/louisescher)! - Add a few new components:
-
   - Accordion
   - Badge
   - Breadcrumbs
@@ -386,7 +387,6 @@
   - Sidebar
 
   Add two new colors
-
   - `info` (Blue)
   - `monochrome` (Black/White)
 
@@ -414,16 +414,13 @@
   an integration-based system and a massive keyboard accessibility overhaul (thanks to [HiDeoo](https://github.com/HiDeoo) for the feedback on this)!
 
   ### Components
-
   - Added a new `<Tabs />` component based on the tabs on the homepage.
   - Updated the `<Card />` component to include a new "filled" style.
 
   ### Utilities
-
   - Moved the `ThemeHelper` class to its own category in the docs.
 
   ### Accessibility
-
   - Overhauled the keyboard accessibility on all components to make them adhere to the ARIA standards.
 
 ## 0.1.0
