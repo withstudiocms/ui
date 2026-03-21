@@ -8,20 +8,21 @@ integration:
   githubURL: "https://github.com/withstudiocms/ui/tree/main/packages/studiocms_ui"
 ---
 
-import { PackageManagers } from 'starlight-package-managers'
+import { PackageManagers } from "starlight-package-managers";
 
 `@studiocms/ui` is the UI library that we use to build StudioCMS. The library is agnostic, meaning that you can use it
-in your own Astro projects! 
+in your own Astro projects!
 
 To get started, add the integration to your project.
 
 <PackageManagers type="exec" pkg="astro add @studiocms/ui" />
 
 <details>
-<summary>Using `@studiocms/ui` with Astro 4</summary>
+<summary>Using `@studiocms/ui` with Astro 4 or 5</summary>
 
-StudioCMS UI can be used in Astro 5 without any additional configuration. As for Astro v4, `@studiocms/ui` requires version `v4.5.0` or higher, with the 
+StudioCMS UI can be used in Astro 5 without any additional configuration. As for Astro v4, `@studiocms/ui` requires version `v4.5.0` or higher, with the
 `experimental.directRenderScript` flag turned on.
+
 </details>
 
 ## Manual Installation
@@ -33,13 +34,11 @@ Install the `@studiocms/ui` package with your preferred package manager.
 Import and use the `@studiocms/ui` integration in your Astro config.
 
 ```ts twoslash showLinenumbers title="astro.config.mjs" {2,6}
-import { defineConfig } from 'astro/config';
-import ui from '@studiocms/ui';
+import { defineConfig } from "astro/config";
+import ui from "@studiocms/ui";
 
 export default defineConfig({
-  integrations: [
-    ui()
-  ]
+	integrations: [ui()],
 });
 ```
 
@@ -78,14 +77,11 @@ If you haven't already, add Astro's Tailwind integration to your project.
 Disable [Tailwind's preflight](https://tailwindcss.com/docs/preflight) styles with `applyBaseStyles: false`.
 
 ```ts showLinenumbers title="astro.config.mjs" "applyBaseStyles: false"
-import { defineConfig } from 'astro/config';
-import ui from '@studiocms/ui';
+import { defineConfig } from "astro/config";
+import ui from "@studiocms/ui";
 
 export default defineConfig({
-  integrations: [
-    ui(),
-    tailwind({ applyBaseStyles: false })
-  ]
+	integrations: [ui(), tailwind({ applyBaseStyles: false })],
 });
 ```
 

@@ -44,9 +44,6 @@ export default defineConfig({
 		},
 	},
 	integrations: [
-		ui({
-			noInjectResetCSS: true,
-		}),
 		starlight({
 			title: 'StudioCMS UI',
 			description: 'The UI library for StudioCMS, available for Astro for all to use.',
@@ -99,9 +96,9 @@ export default defineConfig({
 				},
 			],
 			customCss: [
-				'@studiocms/ui/css/global.css',
 				'./src/styles/sponsorcolors.css',
 				'./src/styles/starlight.css',
+				'studiocms:ui/global-css',
 			],
 			editLink: {
 				baseUrl: 'https://github.com/withstudiocms/ui/tree/main/docs',
@@ -227,6 +224,10 @@ export default defineConfig({
 					},
 				},
 			],
+		}),
+		ui({
+			noInjectCSS: true,
+			noInjectResetCSS: true,
 		}),
 	],
 });
