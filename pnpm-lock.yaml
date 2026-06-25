@@ -96,9 +96,6 @@ importers:
       '@astrojs/check':
         specifier: 'catalog:'
         version: 0.9.9(prettier@3.8.1)(typescript@5.7.2)
-      '@astrojs/markdown-remark':
-        specifier: ^7.2.0
-        version: 7.2.0
       '@astrojs/starlight':
         specifier: ^0.40.0
         version: 0.40.0(astro@6.4.8(@types/node@24.5.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.59.0)(yaml@2.9.0))(typescript@5.7.2)
