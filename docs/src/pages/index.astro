@@ -1,23 +1,23 @@
 ---
-import '@fontsource-variable/onest/index.css';
-import '@fontsource-variable/fira-code/index.css';
+import "@fontsource-variable/onest/index.css";
+import "@fontsource-variable/fira-code/index.css";
 
-import { getCollection } from 'astro:content';
-import { Footer, Modal, Toaster } from 'studiocms:ui/components';
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import BlueSkyLogo from '~/assets/bsky.svg';
-import DiscordLogo from '~/assets/discord.svg';
-import GitHubLogo from '~/assets/github.svg';
-import LogoAdaptive from '~/assets/logo-adaptive.svg';
-import PatreonLogo from '~/assets/patreon.svg';
-import TwitterLogo from '~/assets/twitter.svg';
-import EcosystemSection from '~/components/landing/EcosystemSection.astro';
-import HeroSection from '~/components/landing/HeroSection.astro';
-import ShowcaseSection from '~/components/landing/ShowcaseSection.astro';
-import SocialProofSection from '~/components/landing/SocialProofSection.astro';
-import Newsletter from '~/components/Newsletter.astro';
+import { getCollection } from "astro:content";
+import { Footer, Modal, Toaster } from "studiocms:ui/components";
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import BlueSkyLogo from "~/assets/bsky.svg";
+import DiscordLogo from "~/assets/discord.svg";
+import GitHubLogo from "~/assets/github.svg";
+import LogoAdaptive from "~/assets/logo-adaptive.svg";
+import PatreonLogo from "~/assets/patreon.svg";
+import TwitterLogo from "~/assets/twitter.svg";
+import EcosystemSection from "~/components/landing/EcosystemSection.astro";
+import HeroSection from "~/components/landing/HeroSection.astro";
+import ShowcaseSection from "~/components/landing/ShowcaseSection.astro";
+import SocialProofSection from "~/components/landing/SocialProofSection.astro";
+import Newsletter from "~/components/Newsletter.astro";
 
-const socialProofEntries = await getCollection('socialproof');
+const socialProofEntries = await getCollection("socialproof");
 
 const chunkSize = socialProofEntries.length / 3;
 const chunkedSocialProofEntries = [];
@@ -27,163 +27,164 @@ for (let i = 0; i < socialProofEntries.length; i += chunkSize) {
 	chunkedSocialProofEntries.push(chunk);
 }
 ---
-<StarlightPage frontmatter={{ title: 'StudioCMS UI', template: 'splash' }}>
-    <Toaster />
-    <Modal id='hero-example-modal' actionButton='Okay'>
-        <h2 slot="header">Modal</h2>
-        <p set:html={"Countless stars scattered,<br />across obsidian skies,<br />frosty breath lingers."}></p>
-    </Modal>
-    
-    <HeroSection />
-    <SocialProofSection />
-    <ShowcaseSection />
-    <EcosystemSection />
-    <Footer
-        class='not-content'
-        links={{
-            'StudioCMS Ecosystem': [
-                { label: 'StudioCMS', href: 'https://studiocms.dev' },
-                { label: 'Apollo', href: 'https://github.com/withstudiocms/apollo' }
-            ],
-            'Resources': [
-                { label: 'Docs', href: '/docs' },
-            ],
-        }}
-        copyright={'MIT License \u00A9 2024 - StudioCMS'}
-    >
-        <div slot="brand" class="footer-brand">
-            <div class="brand-newsletter">
-                <div class="brand-logo">
-                    <LogoAdaptive height={48} width={45.76} />
-                    <span class="studiocms-footer-text">
-                        <span>StudioCMS</span>
-                        <span>UI</span>
-                    </span>
-                </div>
-                <Newsletter />
-            </div>
-        </div>
-        <div slot="socials" class="socials">
-            <a href="https://github.com/withstudiocms" aria-label="GitHub">
-                <GitHubLogo width={28} height={28} aria-label="GitHub Logo" />
-            </a>
-            <a href="https://chat.studiocms.dev" aria-label="Discord">
-                <DiscordLogo width={32} height={32} aria-label="Discord Logo" />
-            </a>
-            <a href="https://patreon.com/studiocms" aria-label="Patreon">
-                <PatreonLogo width={24} height={24} aria-label="Patreon Logo" />
-            </a>
-            <a href="https://bsky.app/profile/studiocms.dev" aria-label="BlueSky">
-                <BlueSkyLogo width={24} height={24} aria-label="BlueSky Logo" />
-            </a>
-            <a href="https://twitter.com/withstudiocms" aria-label="Twitter / X">
-                <TwitterLogo width={22} height={22} aria-label="X Logo" />
-            </a>
-        </div>
-    </Footer>
+
+<StarlightPage frontmatter={{ title: "StudioCMS UI", template: "splash" }}>
+	<Toaster />
+	<Modal id="hero-example-modal" actionButton="Okay">
+		<h2 slot="header">Modal</h2>
+		<p
+			set:html={"Countless stars scattered,<br />across obsidian skies,<br />frosty breath lingers."}
+		/>
+	</Modal>
+
+	<HeroSection />
+	<SocialProofSection />
+	<ShowcaseSection />
+	<EcosystemSection />
+	<Footer
+		class="not-content"
+		links={{
+			"StudioCMS Ecosystem": [
+				{ label: "StudioCMS", href: "https://studiocms.dev" },
+				{ label: "Apollo", href: "https://github.com/withstudiocms/apollo" },
+			],
+			Resources: [{ label: "Docs", href: "/docs" }],
+		}}
+		copyright={"MIT License \u00A9 2024 - StudioCMS"}
+	>
+		<div slot="brand" class="footer-brand">
+			<div class="brand-newsletter">
+				<div class="brand-logo">
+					<LogoAdaptive height={48} width={45.76} />
+					<span class="studiocms-footer-text">
+						<span>StudioCMS</span>
+						<span>UI</span>
+					</span>
+				</div>
+				<Newsletter />
+			</div>
+		</div>
+		<div slot="socials" class="socials">
+			<a href="https://github.com/withstudiocms" aria-label="GitHub">
+				<GitHubLogo width={28} height={28} aria-label="GitHub Logo" />
+			</a>
+			<a href="https://chat.studiocms.dev" aria-label="Discord">
+				<DiscordLogo width={32} height={32} aria-label="Discord Logo" />
+			</a>
+			<a href="https://patreon.com/studiocms" aria-label="Patreon">
+				<PatreonLogo width={24} height={24} aria-label="Patreon Logo" />
+			</a>
+			<a href="https://bsky.app/profile/studiocms.dev" aria-label="BlueSky">
+				<BlueSkyLogo width={24} height={24} aria-label="BlueSky Logo" />
+			</a>
+			<a href="https://twitter.com/withstudiocms" aria-label="Twitter / X">
+				<TwitterLogo width={22} height={22} aria-label="X Logo" />
+			</a>
+		</div>
+	</Footer>
 </StarlightPage>
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-    }
+	* {
+		box-sizing: border-box;
+		margin: 0;
+	}
 
-    main {
-        padding: min(8rem, 10vh) 0;
-    }
+	main {
+		padding: min(8rem, 10vh) 0;
+	}
 
-    .footer-brand {
-        display: flex;
-        flex-direction: row;
-        gap: 1.5rem;
-        align-items: center;
-        white-space: nowrap;
-    }
+	.footer-brand {
+		display: flex;
+		flex-direction: row;
+		gap: 1.5rem;
+		align-items: center;
+		white-space: nowrap;
+	}
 
-    @media screen and (max-width: 768px) {
-        .footer-brand {
-            flex-direction: column;
-            gap: 1rem;
-            width: 100%;
-        }
-    }
+	@media screen and (max-width: 768px) {
+		.footer-brand {
+			flex-direction: column;
+			gap: 1rem;
+			width: 100%;
+		}
+	}
 
-    .studiocms-footer-text {
-        font-size: 2em;
-        font-weight: bold;
-    }
+	.studiocms-footer-text {
+		font-size: 2em;
+		font-weight: bold;
+	}
 
-    .studiocms-footer-text span:last-of-type {
-        color: var(--text-muted);
-    }
+	.studiocms-footer-text span:last-of-type {
+		color: var(--text-muted);
+	}
 
-    .socials {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 1.25rem;
-    }
+	.socials {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 1.25rem;
+	}
 
-    .socials a {
-        color: var(--text-muted);
-        transition: all .15s ease;
-        display: flex;
-    }
+	.socials a {
+		color: var(--text-muted);
+		transition: all 0.15s ease;
+		display: flex;
+	}
 
-    .socials a:hover {
-        color: var(--text-normal);
-    }
+	.socials a:hover {
+		color: var(--text-normal);
+	}
 
-    .brand-newsletter {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-    }
+	.brand-newsletter {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		width: 100%;
+	}
 
-    .brand-logo {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        align-items: center;
-    }
+	.brand-logo {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		align-items: center;
+	}
 </style>
 <style is:global>
-    .showcase header {
-        margin-top: 0 !important;
-    }
+	.showcase header {
+		margin-top: 0 !important;
+	}
 
-    main {
-        padding-bottom: 0 !important;
-    }
+	main {
+		padding-bottom: 0 !important;
+	}
 
-    main > .content-panel:first-of-type {
-        display: none !important;
-    }
+	main > .content-panel:first-of-type {
+		display: none !important;
+	}
 
-    .content-panel {
-        border: none !important;
-        padding: 0 !important;
-    }
+	.content-panel {
+		border: none !important;
+		padding: 0 !important;
+	}
 
-    .sl-container {
-        margin: 0 !important;
-        max-width: 100% !important;
-    }
+	.sl-container {
+		margin: 0 !important;
+		max-width: 100% !important;
+	}
 
-    section {
-        color: var(--text-normal) !important;
-    }
+	section {
+		color: var(--text-normal) !important;
+	}
 
-    footer.sl-flex {
-        display: none;
-    }
+	footer.sl-flex {
+		display: none;
+	}
 
-    #hero-example-modal {
-        margin-top: auto !important;
-    }
-    
-    #hero-example-modal button {
-        margin-top: 0 !important;
-    }
+	#hero-example-modal {
+		margin-top: auto !important;
+	}
+
+	#hero-example-modal button {
+		margin-top: 0 !important;
+	}
 </style>

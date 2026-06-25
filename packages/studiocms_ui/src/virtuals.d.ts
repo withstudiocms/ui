@@ -1,71 +1,73 @@
-declare module 'studiocms:ui/version' {
+declare module "studiocms:ui/version" {
 	const version: string;
 	export default version;
 }
 
-declare module 'studiocms:ui/global-css' {}
+declare module "studiocms:ui/global-css" {}
 
-declare module 'studiocms:ui/custom-css' {}
+declare module "studiocms:ui/reset-css" {}
 
-declare module 'studiocms:ui/scripts/*' {}
+declare module "studiocms:ui/custom-css" {}
 
-declare module 'studiocms:ui/components/alert' {
-	export const Alert: typeof import('./components/Alert/Alert.astro').default;
+declare module "studiocms:ui/scripts/*" {}
+
+declare module "studiocms:ui/components/alert" {
+	export const Alert: typeof import("./components/Alert/Alert.astro").default;
 }
 
-declare module 'studiocms:ui/components/button' {
-	export const Button: typeof import('./components/Button/Button.astro').default;
+declare module "studiocms:ui/components/button" {
+	export const Button: typeof import("./components/Button/Button.astro").default;
 }
 
-declare module 'studiocms:ui/components/divider' {
-	export const Divider: typeof import('./components/Divider/Divider.astro').default;
+declare module "studiocms:ui/components/divider" {
+	export const Divider: typeof import("./components/Divider/Divider.astro").default;
 }
 
-declare module 'studiocms:ui/components/input' {
-	export const Input: typeof import('./components/Input/Input.astro').default;
+declare module "studiocms:ui/components/input" {
+	export const Input: typeof import("./components/Input/Input.astro").default;
 }
 
-declare module 'studiocms:ui/components/textarea' {
-	export const Textarea: typeof import('./components/Textarea/Textarea.astro').default;
+declare module "studiocms:ui/components/textarea" {
+	export const Textarea: typeof import("./components/Textarea/Textarea.astro").default;
 }
 
-declare module 'studiocms:ui/components/row' {
-	export const Row: typeof import('./components/Row/Row.astro').default;
+declare module "studiocms:ui/components/row" {
+	export const Row: typeof import("./components/Row/Row.astro").default;
 }
 
-declare module 'studiocms:ui/components/center' {
-	export const Center: typeof import('./components/Center/Center.astro').default;
+declare module "studiocms:ui/components/center" {
+	export const Center: typeof import("./components/Center/Center.astro").default;
 }
 
-declare module 'studiocms:ui/components/checkbox' {
-	export const Checkbox: typeof import('./components/Checkbox/Checkbox.astro').default;
+declare module "studiocms:ui/components/checkbox" {
+	export const Checkbox: typeof import("./components/Checkbox/Checkbox.astro").default;
 }
 
-declare module 'studiocms:ui/components/toggle' {
-	export const Toggle: typeof import('./components/Toggle/Toggle.astro').default;
+declare module "studiocms:ui/components/toggle" {
+	export const Toggle: typeof import("./components/Toggle/Toggle.astro").default;
 }
 
-declare module 'studiocms:ui/components/radiogroup' {
-	export const RadioGroup: typeof import('./components/RadioGroup/RadioGroup.astro').default;
+declare module "studiocms:ui/components/radiogroup" {
+	export const RadioGroup: typeof import("./components/RadioGroup/RadioGroup.astro").default;
 }
 
-declare module 'studiocms:ui/components/toaster' {
-	export const Toaster: typeof import('./components/Toast/Toaster.astro').default;
+declare module "studiocms:ui/components/toaster" {
+	export const Toaster: typeof import("./components/Toast/Toaster.astro").default;
 }
 
-declare module 'studiocms:ui/components/toaster/client' {
-	export const toast: typeof import('./components/Toast/toast.js').toast;
+declare module "studiocms:ui/components/toaster/client" {
+	export const toast: typeof import("./components/Toast/toast.js").toast;
 }
 
-declare module 'studiocms:ui/components/card' {
-	export const Card: typeof import('./components/Card/Card.astro').default;
+declare module "studiocms:ui/components/card" {
+	export const Card: typeof import("./components/Card/Card.astro").default;
 }
 
-declare module 'studiocms:ui/components/modal' {
-	export const Modal: typeof import('./components/Modal/Modal.astro').default;
+declare module "studiocms:ui/components/modal" {
+	export const Modal: typeof import("./components/Modal/Modal.astro").default;
 }
 
-declare module 'studiocms:ui/components/modal/client' {
+declare module "studiocms:ui/components/modal/client" {
 	export class ModalHelper {
 		private element;
 		private cancelButton;
@@ -111,30 +113,32 @@ declare module 'studiocms:ui/components/modal/client' {
 		 * @param func The callback function. If the modal is a form, the function will be called with
 		 * the form data as the first argument.
 		 */
-		registerConfirmCallback: (func: (data?: FormData | undefined) => void) => void;
+		registerConfirmCallback: (
+			func: (data?: FormData | undefined) => void,
+		) => void;
 	}
 }
 
-declare module 'studiocms:ui/components/select' {
-	export const Select: typeof import('./components/Select/Select.astro').default;
-	export const SearchSelect: typeof import('./components/SearchSelect/SearchSelect.astro').default;
+declare module "studiocms:ui/components/select" {
+	export const Select: typeof import("./components/Select/Select.astro").default;
+	export const SearchSelect: typeof import("./components/SearchSelect/SearchSelect.astro").default;
 }
 
-declare module 'studiocms:ui/components/select/script' {
+declare module "studiocms:ui/components/select/script" {
 	export type SelectOption = {
 		value: string;
 		label: string;
 		disabled?: boolean;
 	};
 
-	export const SUISelectElement: typeof import('./components/Select/select.js').SUISelectElement;
+	export const SUISelectElement: typeof import("./components/Select/select.js").SUISelectElement;
 }
 
-declare module 'studiocms:ui/components/dropdown' {
-	export const Dropdown: typeof import('./components/Dropdown/Dropdown.astro').default;
+declare module "studiocms:ui/components/dropdown" {
+	export const Dropdown: typeof import("./components/Dropdown/Dropdown.astro").default;
 }
 
-declare module 'studiocms:ui/components/dropdown/client' {
+declare module "studiocms:ui/components/dropdown/client" {
 	export class DropdownHelper {
 		private container;
 		private toggleEl;
@@ -184,24 +188,24 @@ declare module 'studiocms:ui/components/dropdown/client' {
 	}
 }
 
-declare module 'studiocms:ui/components/user' {
-	export const User: typeof import('./components/User/User.astro').default;
+declare module "studiocms:ui/components/user" {
+	export const User: typeof import("./components/User/User.astro").default;
 }
 
-declare module 'studiocms:ui/components/tabs' {
-	export const Tabs: typeof import('./components/Tabs/Tabs.astro').default;
-	export const TabItem: typeof import('./components/Tabs/TabItem.astro').default;
+declare module "studiocms:ui/components/tabs" {
+	export const Tabs: typeof import("./components/Tabs/Tabs.astro").default;
+	export const TabItem: typeof import("./components/Tabs/TabItem.astro").default;
 }
 
-declare module 'studiocms:ui/components/footer' {
-	export const Footer: typeof import('./components/Footer/Footer.astro').default;
+declare module "studiocms:ui/components/footer" {
+	export const Footer: typeof import("./components/Footer/Footer.astro").default;
 }
 
-declare module 'studiocms:ui/components/progress' {
-	export const Progress: typeof import('./components/Progress/Progress.astro').default;
+declare module "studiocms:ui/components/progress" {
+	export const Progress: typeof import("./components/Progress/Progress.astro").default;
 }
 
-declare module 'studiocms:ui/components/progress/client' {
+declare module "studiocms:ui/components/progress/client" {
 	export class ProgressHelper {
 		private bar;
 		private progress;
@@ -216,21 +220,21 @@ declare module 'studiocms:ui/components/progress/client' {
 	}
 }
 
-declare module 'studiocms:ui/components/badge' {
-	export const Badge: typeof import('./components/Badge/Badge.astro').default;
+declare module "studiocms:ui/components/badge" {
+	export const Badge: typeof import("./components/Badge/Badge.astro").default;
 }
 
-declare module 'studiocms:ui/components/accordion' {
-	export const Accordion: typeof import('./components/Accordion/Accordion.astro').default;
-	export const AccordionItem: typeof import('./components/Accordion/Item.astro').default;
+declare module "studiocms:ui/components/accordion" {
+	export const Accordion: typeof import("./components/Accordion/Accordion.astro").default;
+	export const AccordionItem: typeof import("./components/Accordion/Item.astro").default;
 }
 
-declare module 'studiocms:ui/components/sidebar' {
-	export const Sidebar: typeof import('./components/Sidebar/Single.astro').default;
-	export const DoubleSidebar: typeof import('./components/Sidebar/Double.astro').default;
+declare module "studiocms:ui/components/sidebar" {
+	export const Sidebar: typeof import("./components/Sidebar/Single.astro").default;
+	export const DoubleSidebar: typeof import("./components/Sidebar/Double.astro").default;
 }
 
-declare module 'studiocms:ui/components/sidebar/client' {
+declare module "studiocms:ui/components/sidebar/client" {
 	export class SingleSidebarHelper {
 		private sidebar;
 		private sidebarToggle?;
@@ -300,64 +304,64 @@ declare module 'studiocms:ui/components/sidebar/client' {
 	}
 }
 
-declare module 'studiocms:ui/components/breadcrumbs' {
-	export const Breadcrumbs: typeof import('./components/Breadcrumbs/Breadcrumbs.astro').default;
+declare module "studiocms:ui/components/breadcrumbs" {
+	export const Breadcrumbs: typeof import("./components/Breadcrumbs/Breadcrumbs.astro").default;
 }
 
-declare module 'studiocms:ui/components/group' {
-	export const Group: typeof import('./components/Group/Group.astro').default;
+declare module "studiocms:ui/components/group" {
+	export const Group: typeof import("./components/Group/Group.astro").default;
 }
 
-declare module 'studiocms:ui/components/icon' {
-	export const Icon: typeof import('./components/Icon/Icon.astro').default;
-	export const IconBase: typeof import('./components/Icon/IconBase.astro').default;
+declare module "studiocms:ui/components/icon" {
+	export const Icon: typeof import("./components/Icon/Icon.astro").default;
+	export const IconBase: typeof import("./components/Icon/IconBase.astro").default;
 }
 
-declare module 'studiocms:ui/components/skeleton' {
-	export const Skeleton: typeof import('./components/Skeleton/Skeleton.astro').default;
+declare module "studiocms:ui/components/skeleton" {
+	export const Skeleton: typeof import("./components/Skeleton/Skeleton.astro").default;
 }
 
-declare module 'studiocms:ui/components/tooltip' {
-	export const Tooltip: typeof import('./components/Tooltip/Tooltip.astro').default;
+declare module "studiocms:ui/components/tooltip" {
+	export const Tooltip: typeof import("./components/Tooltip/Tooltip.astro").default;
 }
 
-declare module 'studiocms:ui/components' {
-	export const Accordion: typeof import('./components/Accordion/Accordion.astro').default;
-	export const AccordionItem: typeof import('./components/Accordion/Item.astro').default;
-	export const Alert: typeof import('./components/Alert/Alert.astro').default;
-	export const Badge: typeof import('./components/Badge/Badge.astro').default;
-	export const Breadcrumbs: typeof import('./components/Breadcrumbs/Breadcrumbs.astro').default;
-	export const Button: typeof import('./components/Button/Button.astro').default;
-	export const Card: typeof import('./components/Card/Card.astro').default;
-	export const Center: typeof import('./components/Center/Center.astro').default;
-	export const Checkbox: typeof import('./components/Checkbox/Checkbox.astro').default;
-	export const Divider: typeof import('./components/Divider/Divider.astro').default;
-	export const Dropdown: typeof import('./components/Dropdown/Dropdown.astro').default;
-	export const Footer: typeof import('./components/Footer/Footer.astro').default;
-	export const Group: typeof import('./components/Group/Group.astro').default;
-	export const Icon: typeof import('./components/Icon/Icon.astro').default;
-	export const IconBase: typeof import('./components/Icon/IconBase.astro').default;
-	export const Input: typeof import('./components/Input/Input.astro').default;
-	export const Modal: typeof import('./components/Modal/Modal.astro').default;
-	export const Progress: typeof import('./components/Progress/Progress.astro').default;
-	export const RadioGroup: typeof import('./components/RadioGroup/RadioGroup.astro').default;
-	export const Row: typeof import('./components/Row/Row.astro').default;
-	export const SearchSelect: typeof import('./components/SearchSelect/SearchSelect.astro').default;
-	export const Select: typeof import('./components/Select/Select.astro').default;
-	export const Sidebar: typeof import('./components/Sidebar/Single.astro').default;
-	export const DoubleSidebar: typeof import('./components/Sidebar/Double.astro').default;
-	export const Skeleton: typeof import('./components/Skeleton/Skeleton.astro').default;
-	export const Tabs: typeof import('./components/Tabs/Tabs.astro').default;
-	export const TabItem: typeof import('./components/Tabs/TabItem.astro').default;
-	export const Textarea: typeof import('./components/Textarea/Textarea.astro').default;
-	export const Toaster: typeof import('./components/Toast/Toaster.astro').default;
-	export const Tooltip: typeof import('./components/Tooltip/Tooltip.astro').default;
-	export const Toggle: typeof import('./components/Toggle/Toggle.astro').default;
-	export const User: typeof import('./components/User/User.astro').default;
+declare module "studiocms:ui/components" {
+	export const Accordion: typeof import("./components/Accordion/Accordion.astro").default;
+	export const AccordionItem: typeof import("./components/Accordion/Item.astro").default;
+	export const Alert: typeof import("./components/Alert/Alert.astro").default;
+	export const Badge: typeof import("./components/Badge/Badge.astro").default;
+	export const Breadcrumbs: typeof import("./components/Breadcrumbs/Breadcrumbs.astro").default;
+	export const Button: typeof import("./components/Button/Button.astro").default;
+	export const Card: typeof import("./components/Card/Card.astro").default;
+	export const Center: typeof import("./components/Center/Center.astro").default;
+	export const Checkbox: typeof import("./components/Checkbox/Checkbox.astro").default;
+	export const Divider: typeof import("./components/Divider/Divider.astro").default;
+	export const Dropdown: typeof import("./components/Dropdown/Dropdown.astro").default;
+	export const Footer: typeof import("./components/Footer/Footer.astro").default;
+	export const Group: typeof import("./components/Group/Group.astro").default;
+	export const Icon: typeof import("./components/Icon/Icon.astro").default;
+	export const IconBase: typeof import("./components/Icon/IconBase.astro").default;
+	export const Input: typeof import("./components/Input/Input.astro").default;
+	export const Modal: typeof import("./components/Modal/Modal.astro").default;
+	export const Progress: typeof import("./components/Progress/Progress.astro").default;
+	export const RadioGroup: typeof import("./components/RadioGroup/RadioGroup.astro").default;
+	export const Row: typeof import("./components/Row/Row.astro").default;
+	export const SearchSelect: typeof import("./components/SearchSelect/SearchSelect.astro").default;
+	export const Select: typeof import("./components/Select/Select.astro").default;
+	export const Sidebar: typeof import("./components/Sidebar/Single.astro").default;
+	export const DoubleSidebar: typeof import("./components/Sidebar/Double.astro").default;
+	export const Skeleton: typeof import("./components/Skeleton/Skeleton.astro").default;
+	export const Tabs: typeof import("./components/Tabs/Tabs.astro").default;
+	export const TabItem: typeof import("./components/Tabs/TabItem.astro").default;
+	export const Textarea: typeof import("./components/Textarea/Textarea.astro").default;
+	export const Toaster: typeof import("./components/Toast/Toaster.astro").default;
+	export const Tooltip: typeof import("./components/Tooltip/Tooltip.astro").default;
+	export const Toggle: typeof import("./components/Toggle/Toggle.astro").default;
+	export const User: typeof import("./components/User/User.astro").default;
 }
 
-declare module 'studiocms:ui/components/client' {
-	export const toast: typeof import('./components/Toast/toast.js').toast;
+declare module "studiocms:ui/components/client" {
+	export const toast: typeof import("./components/Toast/toast.js").toast;
 	export class ModalHelper {
 		private element;
 		private cancelButton;
@@ -403,7 +407,9 @@ declare module 'studiocms:ui/components/client' {
 		 * @param func The callback function. If the modal is a form, the function will be called with
 		 * the form data as the first argument.
 		 */
-		registerConfirmCallback: (func: (data?: FormData | undefined) => void) => void;
+		registerConfirmCallback: (
+			func: (data?: FormData | undefined) => void,
+		) => void;
 	}
 
 	export class DropdownHelper {
@@ -536,8 +542,8 @@ declare module 'studiocms:ui/components/client' {
 	}
 }
 
-declare module 'studiocms:ui/utils' {
-	export type Theme = import('./utils/ThemeHelper.js').Theme;
+declare module "studiocms:ui/utils" {
+	export type Theme = import("./utils/ThemeHelper.js").Theme;
 
 	type ThemeChangeCallback = (newTheme: Theme, oldTheme: Theme) => void;
 
@@ -559,8 +565,8 @@ declare module 'studiocms:ui/utils' {
 		 * @returns {Theme} The current theme.
 		 */
 		getTheme: <T extends boolean>(
-			resolveSystemTheme?: T
-		) => T extends true ? 'dark' | 'light' : Theme;
+			resolveSystemTheme?: T,
+		) => T extends true ? "dark" | "light" : Theme;
 		/**
 		 * Sets the current theme.
 		 * @param theme The new theme. One of \`dark\`, \`light\` or \`system\`.
