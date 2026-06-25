@@ -15,7 +15,6 @@
 	"dependencies": {
 		"@11ty/eleventy-fetch": "^5.0.1",
 		"@astrojs/check": "catalog:",
-		"@astrojs/markdown-remark": "^7.2.0",
 		"@astrojs/starlight": "^0.40.0",
 		"@expressive-code/plugin-line-numbers": "^0.41.7",
 		"@fontsource-variable/fira-code": "^5.1.0",
