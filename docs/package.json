@@ -20,7 +20,7 @@
 		"@expressive-code/plugin-line-numbers": "^0.41.7",
 		"@fontsource-variable/fira-code": "^5.1.0",
 		"@fontsource-variable/onest": "catalog:",
-		"@lunariajs/core": "https://pkg.pr.new/lunariajs/lunaria/@lunariajs/core@4c8b9b0",
+		"@lunariajs/core": "https://pkg.pr.new/lunariajs/lunaria/@lunariajs/core@722c34c",
 		"@shikijs/colorized-brackets": "^1.24.0",
 		"@studiocms/ui": "workspace:*",
 		"@types/hast": "^3.0.4",
