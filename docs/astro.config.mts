@@ -31,6 +31,7 @@ export default defineConfig({
 	image: {
 		remotePatterns: [{ protocol: 'https' }],
 	},
+
 	markdown: {
 		rehypePlugins: rehypePluginKit,
 	},
@@ -197,31 +198,47 @@ export default defineConfig({
 				},
 				{
 					label: 'Guides',
-					autogenerate: {
-						directory: 'docs/guides',
-						collapsed: true,
-					},
+					items: [
+						{
+							autogenerate: {
+								directory: 'docs/guides',
+								collapsed: true,
+							},
+						},
+					],
 				},
 				{
 					label: 'Upgrading StudioCMS',
-					autogenerate: {
-						directory: 'docs/upgrade-guides',
-						collapsed: true,
-					},
+					items: [
+						{
+							autogenerate: {
+								directory: 'docs/upgrade-guides',
+								collapsed: true,
+							},
+						},
+					],
 				},
 				{
 					label: 'Components',
-					autogenerate: {
-						directory: 'docs/components',
-						collapsed: true,
-					},
+					items: [
+						{
+							autogenerate: {
+								directory: 'docs/components',
+								collapsed: true,
+							},
+						},
+					],
 				},
 				{
 					label: 'Utilities',
-					autogenerate: {
-						directory: 'docs/utilities',
-						collapsed: true,
-					},
+					items: [
+						{
+							autogenerate: {
+								directory: 'docs/utilities',
+								collapsed: true,
+							},
+						},
+					],
 				},
 			],
 		}),

@@ -5,6 +5,8 @@ declare module 'studiocms:ui/version' {
 
 declare module 'studiocms:ui/global-css' {}
 
+declare module 'studiocms:ui/reset-css' {}
+
 declare module 'studiocms:ui/custom-css' {}
 
 declare module 'studiocms:ui/scripts/*' {}

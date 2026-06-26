@@ -1,8 +1,5 @@
 import fs from 'node:fs';
 import type { InjectedType } from 'astro';
-import { createResolver } from 'astro-integration-kit';
-
-const { resolve } = createResolver(import.meta.url);
 
 export function generateIconTypes(
 	filename: string,
@@ -12,7 +9,7 @@ export function generateIconTypes(
 		iconCollections: string;
 	}
 ): InjectedType {
-	const stubFile = fs.readFileSync(resolve('./stubs/icons-d-ts.stub'), 'utf-8');
+	const stubFile = fs.readFileSync(new URL('./stubs/icons-d-ts.stub', import.meta.url), 'utf-8');
 	const outputFile = stubFile
 		.replace('$$COLLECTIONS$$', replacers.collections)
 		.replace('$$AVAILABLE_ICONS$$', replacers.availableIcons)
