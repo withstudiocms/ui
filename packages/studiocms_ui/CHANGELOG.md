@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 1.2.1
+
+### Patch Changes
+
+- [#161](https://github.com/withstudiocms/ui/pull/161) [`4217cb4`](https://github.com/withstudiocms/ui/commit/4217cb46b7baaa0709bb645fc752ecb7948024e0) Thanks [@louisescher](https://github.com/louisescher)! - Adds support for Astro v7
+
 ## 1.2.0
 
 ### Minor Changes
