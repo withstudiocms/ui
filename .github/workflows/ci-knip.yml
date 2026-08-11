@@ -31,7 +31,7 @@ jobs:
             token: ${{ secrets.STUDIOCMS_SERVICE_TOKEN }}
   
         - name: Install Tools & Dependencies
-          uses: withstudiocms/automations/.github/actions/install@main
+          uses: withstudiocms/automations/.github/actions/install@f32588d80ce35d57905264f7fa473b0f6e297c0a # main
 
         - name: Build Project
           run: pnpm build

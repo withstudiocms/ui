@@ -31,7 +31,7 @@ jobs:
           persist-credentials: false
   
       - name: Install Tools & Dependencies
-        uses: withstudiocms/automations/.github/actions/install@885437ef4376e64fc295161092b8a165bc5efd39 # main
+        uses: withstudiocms/automations/.github/actions/install@f32588d80ce35d57905264f7fa473b0f6e297c0a # main
 
       - name: Build packages
         run: pnpm ci:build
@@ -69,7 +69,7 @@ jobs:
           persist-credentials: false
     
       - name: Install Tools & Dependencies
-        uses: withstudiocms/automations/.github/actions/install@885437ef4376e64fc295161092b8a165bc5efd39 # main
+        uses: withstudiocms/automations/.github/actions/install@f32588d80ce35d57905264f7fa473b0f6e297c0a # main
 
       - name: Install Playwright Browsers
         run: pnpm ci:setup:playwright
@@ -106,7 +106,7 @@ jobs:
           persist-credentials: false
 
       - name: Install Tools & Dependencies
-        uses: withstudiocms/automations/.github/actions/install@885437ef4376e64fc295161092b8a165bc5efd39 # main
+        uses: withstudiocms/automations/.github/actions/install@f32588d80ce35d57905264f7fa473b0f6e297c0a # main
 
       - name: Download blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
