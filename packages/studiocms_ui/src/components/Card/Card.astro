@@ -24,9 +24,9 @@ type Props<As extends HTMLTag = 'div'> = Omit<Polymorphic<{ as: As }>, 'as'> & {
 	variant?: 'default' | 'filled';
 };
 
-const { as: As = 'div', fullWidth, fullHeight, variant = 'default', class, ...props } = Astro.props;
+const { as: As = 'div', fullWidth, fullHeight, variant = 'default', class: className, ...props } = Astro.props;
 ---
-<As class:list={["sui-card", fullWidth && "full-w", fullHeight && "full-h", variant, class]} {...props}>
+<As class:list={["sui-card", fullWidth && "full-w", fullHeight && "full-h", variant, className]} {...props}>
   <div class="sui-card-header">
     <slot name="header" />
   </div>
