@@ -1,5 +1,11 @@
 # @studiocms/ui
 
+## 1.2.2
+
+### Patch Changes
+
+- [#163](https://github.com/withstudiocms/ui/pull/163) [`904696f`](https://github.com/withstudiocms/ui/commit/904696fc452070c7c96fec13c7937a73febd5497) Thanks [@louisescher](https://github.com/louisescher)! - Fixes custom classes on Cards overriding the default styles
+
 ## 1.2.1
 
 ### Patch Changes
